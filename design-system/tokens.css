@@ -1,0 +1,318 @@
+/* Juan Silva Portfolio — authoritative design tokens
+ *
+ * Consumed directly by src/styles/clone.css. This is the hand-edited source;
+ * design-tokens.json, tailwind-v4.css, and components.manifest.json are derived
+ * caches if they are ever emitted and must not become parallel sources.
+ *
+ * Evidence: production v2 CSS plus the Figma Style Guide and Desktop frames
+ * inspected through channel r3momw0k on 2026-08-05. The Figma primary swatch
+ * captions still show retired purple hex values; the cyan values below come
+ * from the swatches' actual fill paints and the live desktop frames.
+ */
+
+:root {
+  /* ─── Color primitives — neutral ─────────────────────────────── */
+  --color-black: #000000;
+  --color-neutral-1000: #0c0e12;
+  --color-neutral-950: #0f1217;
+  --color-neutral-900: #13161b;
+  --color-neutral-850: #181d27;
+  --color-neutral-800: #1a1d24;
+  --color-neutral-750: #22262f;
+  --color-neutral-650: #344054;
+  --color-neutral-600: #373a41;
+  --color-neutral-500: #85888e;
+  --color-neutral-400: #94979c;
+  --color-neutral-200: #cecfd2;
+  --color-neutral-50: #f7f7f7;
+  --color-white: #ffffff;
+
+  /* Framework palette values that are visible in the production v2 source. */
+  --color-gray-900: hsl(0 0% 9%);
+  --color-gray-300: #d1d5db;
+  --color-gray-50: hsl(0 0% 98%);
+  --color-slate-950: hsl(222 84% 5%);
+  --color-slate-800: hsl(217 33% 17%);
+  --color-slate-500: hsl(215 16% 47%);
+  --color-slate-400: hsl(215 20% 65%);
+  --color-slate-200: hsl(214 32% 91%);
+  --color-slate-100: hsl(210 40% 96%);
+  --color-slate-50: hsl(210 40% 98%);
+  --color-slate-border: hsl(222 8% 24%);
+
+  /* ─── Color primitives — Figma primary cyan ─────────────────── */
+  --color-cyan-100: #b6eeff;
+  --color-cyan-300: #2cd6ff;
+  --color-cyan-400: #00c8ff;
+  --color-cyan-500: #009cd4;
+  --color-cyan-700: #007cab;
+  --color-cyan-900: #065674;
+
+  /* ─── Color primitives — Figma secondary pink ───────────────── */
+  --color-pink-100: #ffc6d5;
+  --color-pink-300: #ff5d8b;
+  --color-pink-500: #ff0059;
+  --color-pink-700: #d7004b;
+  --color-pink-900: #990244;
+
+  /* ─── Color primitives — supporting brand & stack palettes ──── */
+  --color-violet-500: #625df5;
+  --color-blue-950: #102a56;
+  --color-blue-800: #1849a9;
+  --color-blue-700: #065986;
+  --color-blue-200: #84caff;
+  --color-blue-100: hsl(212 97% 87%);
+  --color-amber-950: #542c0d;
+  --color-amber-800: #854a0e;
+  --color-amber-200: #fde272;
+  --color-green-1000: #052e1c;
+  --color-green-950: #062c41;
+  --color-green-800: #095c37;
+  --color-green-500: #22c55e;
+  --color-green-400: #4ade80;
+  --color-green-300: #73e2a3;
+  --color-red-900: hsl(0 62% 30%);
+  --color-red-500-hsl: hsl(0 84% 60%);
+  --color-red-500: #ef4444;
+  --color-red-400: #f87171;
+  --color-success: #17b26a;
+  --color-danger: var(--color-red-500);
+  --color-danger-soft: var(--color-red-400);
+
+  /* ─── Color primitives — Google Drive project gradient ──────── */
+  --color-google-green-dark: #188038;
+  --color-google-green: #34a853;
+  --color-google-blue-dark: #1967d1;
+  --color-google-blue: #4285f3;
+  --color-google-red: #e94335;
+  --color-google-yellow: #fbbc05;
+
+  /* ─── Translucent paints from production ────────────────────── */
+  --color-transparent: rgb(255 255 255 / 0%);
+  --color-white-a02: rgb(255 255 255 / 2%);
+  --color-white-a06: rgb(255 255 255 / 6%);
+  --color-white-a10: rgb(255 255 255 / 10%);
+  --color-white-a12: rgb(255 255 255 / 12%);
+  --color-white-a25: rgb(255 255 255 / 25%);
+  --color-cyan-a00: rgb(0 200 255 / 0%);
+  --color-cyan-a12: rgb(0 200 255 / 12%);
+  --color-cyan-a50: rgb(0 200 255 / 50%);
+  --color-green-500-a20: rgb(34 197 94 / 20%);
+
+  /* ─── Semantic colors ────────────────────────────────────────── */
+  --background: var(--color-neutral-950);
+  --background-deep: var(--color-neutral-1000);
+  --surface: var(--color-neutral-900);
+  --surface-hover: var(--color-neutral-800);
+  --surface-interactive: var(--color-white-a10);
+  --surface-interactive-hover: var(--color-white-a25);
+  --text-heading: var(--color-neutral-50);
+  --text-primary: var(--color-neutral-200);
+  --text-secondary: var(--color-neutral-400);
+  --text-placeholder: var(--color-neutral-500);
+  --border-subtle: var(--color-neutral-750);
+  --border-default: var(--color-neutral-600);
+  --border-interactive: var(--color-white-a12);
+  --primary: var(--color-cyan-400);
+  --primary-light: var(--color-cyan-300);
+  --primary-dark: var(--color-cyan-700);
+  --secondary: var(--color-pink-500);
+  --focus-ring: var(--color-cyan-300);
+  --status-success: var(--color-success);
+  --status-danger: var(--color-danger);
+  --nav-gradient-rest: var(--color-white-a02);
+  --nav-gradient-hover: var(--color-white-a06);
+
+  /* ─── Typography — families (confirmed in Figma Desktop) ─────── */
+  --font-display: "Spectral", Georgia, serif;
+  --font-body: "Lora", Georgia, serif;
+  --font-ui: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-meta: "Roboto", var(--font-ui);
+  --font-logo: "Playfair Display", var(--font-display);
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  /* ─── Typography — weight ────────────────────────────────────── */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ─── Typography — size ramp ─────────────────────────────────── */
+  --text-12: 0.75rem;
+  --text-14: 0.875rem;
+  --text-16: 1rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
+  --text-24: 1.5rem;
+  --text-28: 1.75rem;
+  --text-32: 2rem;
+  --text-36: 2.25rem;
+  --text-44: 2.75rem;
+  --text-48: 3rem;
+  --text-56: 3.5rem;
+  --text-64: 4rem;
+
+  /* ─── Typography — leading ramp ──────────────────────────────── */
+  --leading-14: 0.875rem;
+  --leading-16: 1rem;
+  --leading-20: 1.25rem;
+  --leading-22: 1.4;
+  --leading-24: 1.5rem;
+  --leading-28: 1.75rem;
+  --leading-30: 1.875rem;
+  --leading-32: 2rem;
+  --leading-40: 2.5rem;
+  --leading-44: 2.75rem;
+  --leading-46: 2.875rem;
+  --leading-48: 3rem;
+  --leading-60: 3.75rem;
+  --leading-68: 4.25rem;
+  --leading-90: 5.625rem;
+
+  /* ─── Semantic type styles ───────────────────────────────────── */
+  --type-display-size: var(--text-56);
+  --type-display-leading: var(--leading-90);
+  --type-display-mobile-size: var(--text-32);
+  --type-display-mobile-leading: var(--leading-48);
+  --type-heading-size: var(--text-48);
+  --type-heading-leading: var(--leading-68);
+  --type-heading-mobile-size: var(--text-32);
+  --type-heading-mobile-leading: var(--leading-48);
+  --type-subheading-size: var(--text-32);
+  --type-subheading-leading: var(--leading-46);
+  --type-body-size: var(--text-18);
+  --type-body-leading: var(--leading-30);
+  --type-body-mobile-size: var(--text-16);
+  --type-body-mobile-leading: var(--leading-24);
+  --type-nav-size: var(--text-18);
+  --type-nav-leading: var(--leading-32);
+  --type-label-size: var(--text-14);
+  --type-label-leading: var(--leading-20);
+  --type-meta-size: var(--text-12);
+  --type-meta-leading: var(--leading-14);
+
+  /* ─── Spacing — every production step ───────────────────────── */
+  --space-0: 0;
+  --space-px-1: 1px;
+  --space-px-2: 2px;
+  --space-px-2-5: 2.5px;
+  --space-px-4: 4px;
+  --space-px-6: 6px;
+  --space-px-8: 8px;
+  --space-px-10: 10px;
+  --space-px-12: 12px;
+  --space-px-14: 14px;
+  --space-px-15: 15px;
+  --space-px-16: 16px;
+  --space-px-18: 18px;
+  --space-px-20: 20px;
+  --space-px-24: 24px;
+  --space-px-25: 25px;
+  --space-px-27: 27px;
+  --space-px-28: 28px;
+  --space-px-32: 32px;
+  --space-px-40: 40px;
+  --space-px-45: 45px;
+  --space-px-48: 48px;
+  --space-px-56: 56px;
+  --space-px-64: 64px;
+  --space-px-72: 72px;
+  --space-px-80: 80px;
+  --space-px-82: 82px;
+  --space-px-90: 90px;
+  --space-px-96: 96px;
+  --space-px-104: 104px;
+  --space-px-112: 112px;
+  --space-px-120: 120px;
+  --space-px-128: 128px;
+  --space-px-140: 140px;
+  --space-px-160: 160px;
+  --space-px-170: 170px;
+  --space-px-200: 200px;
+  --space-px-204: 204px;
+  --space-px-252: 252px;
+
+  /* ─── Semantic spacing ───────────────────────────────────────── */
+  --control-gap: var(--space-px-6);
+  --control-padding-block: var(--space-px-12);
+  --control-padding-inline: var(--space-px-18);
+  --stack-gap: var(--space-px-12);
+  --section-gap: var(--space-px-24);
+  --section-gap-large: var(--space-px-48);
+  --section-padding-mobile: var(--space-px-24);
+  --section-padding-tablet: var(--space-px-48);
+  --section-padding-desktop: var(--space-px-170);
+  --section-padding-wide: var(--space-px-252);
+
+  /* ─── Shape ──────────────────────────────────────────────────── */
+  --radius-none: 0;
+  --radius-xs: 4px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-control: 8px;
+  --radius-control-figma: 9px;
+  --radius-media: 12px;
+  --radius-panel: 16px;
+  --radius-round: 56px;
+  --radius-pill: 9999px;
+
+  /* ─── Border & elevation ─────────────────────────────────────── */
+  --border-width-none: 0;
+  --border-width: 1px;
+  --border-width-strong: 2px;
+  --shadow-dropdown: 0 20px 25px -5px rgb(0 0 0 / 30%), 0 8px 10px -6px rgb(0 0 0 / 30%);
+  --shadow-focus: 0 0 0 3px rgb(44 214 255 / 35%);
+
+  /* ─── Motion ─────────────────────────────────────────────────── */
+  --motion-fast: 200ms;
+  --motion-base: 300ms;
+  --motion-decorative: 2400ms;
+  --motion-reduced: 1ms;
+  --ease-standard: ease;
+  --ease-sweep: ease-in-out;
+
+  /* ─── Layout — Figma grid plus production bounds ─────────────── */
+  --viewport-min: 320px;
+  --viewport-height: 100dvh;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --grid-mobile-width: 360px;
+  --grid-mobile-columns: 4;
+  --grid-mobile-margin: 16px;
+  --grid-mobile-gutter: 16px;
+  --grid-desktop-width: 1280px;
+  --grid-desktop-columns: 12;
+  --grid-desktop-margin: 56px;
+  --grid-desktop-gutter: 32px;
+  --brand-column: 210px;
+  --hero-media-mobile: 300px;
+  --nav-glow-width: 240px;
+  --container-content: 1440px;
+  --container-production: 1400px;
+  --container-page: 1920px;
+  --content-copy: 610px;
+  --content-project: 550px;
+  --content-form: 576px;
+  --content-form-wide: 570px;
+  --footer-column: 330px;
+  --footer-control-mobile: 154px;
+  --footer-control-tablet: 224px;
+  --control-primary-width: 340px;
+  --decorative-line-length: 400px;
+  --decorative-line-band: 60%;
+
+  /* ─── Reusable gradients ─────────────────────────────────────── */
+  --gradient-nav-rest: linear-gradient(to bottom, var(--nav-gradient-rest), var(--color-transparent));
+  --gradient-nav-hover: linear-gradient(to bottom, var(--nav-gradient-hover), var(--color-transparent));
+  --gradient-line-horizontal: linear-gradient(90deg, var(--color-cyan-a00) 0%, var(--primary) 50%, var(--color-cyan-a00) 100%);
+  --gradient-line-vertical: linear-gradient(180deg, var(--color-cyan-a00) 0%, var(--primary) 50%, var(--color-cyan-a00) 100%);
+  --gradient-stack-tailwind: linear-gradient(90deg, var(--color-green-950) 0%, var(--color-green-1000) 100%);
+  --gradient-stack-tailwind-border: linear-gradient(90deg, var(--color-blue-700) 0%, var(--color-green-800) 100%);
+  --gradient-stack-python: linear-gradient(90deg, var(--color-blue-950) 0%, var(--color-amber-950) 100%);
+  --gradient-stack-python-border: linear-gradient(90deg, var(--color-blue-800) 0%, var(--color-amber-800) 100%);
+  --gradient-google-drive: linear-gradient(270deg, var(--color-google-green-dark) 0%, var(--color-google-green) 20%, var(--color-google-blue-dark) 40%, var(--color-google-blue) 60%, var(--color-google-red) 80%, var(--color-google-yellow) 100%);
+}
