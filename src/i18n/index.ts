@@ -10,14 +10,19 @@ export const localeInfo = {
   en: {
     htmlLang: "en",
     hreflang: "en",
+    openGraphLocale: "en_US",
     pathPrefix: "",
   },
   pt: {
     htmlLang: "pt-BR",
     hreflang: "pt-BR",
+    openGraphLocale: "pt_BR",
     pathPrefix: "/pt",
   },
-} as const satisfies Record<Locale, { htmlLang: string; hreflang: string; pathPrefix: string }>;
+} as const satisfies Record<
+  Locale,
+  { htmlLang: string; hreflang: string; openGraphLocale: string; pathPrefix: string }
+>;
 
 export const hreflangPair = locales.map((locale) => ({
   locale,
@@ -48,6 +53,19 @@ export function localizedPath(pathname: string, lang: Locale): string {
   return normalizedPath === "/"
     ? `${localeInfo[lang].pathPrefix}/`
     : `${localeInfo[lang].pathPrefix}${normalizedPath}`;
+}
+
+export function localeStaticPaths({ includeDefault = true }: { includeDefault?: boolean } = {}) {
+  return locales
+    .filter((lang) => includeDefault || lang !== defaultLocale)
+    .map((lang) => ({
+      params: { lang: lang === defaultLocale ? undefined : lang },
+      props: { lang },
+    }));
+}
+
+export function pageTitle(title: string, lang: Locale): string {
+  return `${title} | ${t(lang).meta.siteName}`;
 }
 
 export { en, pt };

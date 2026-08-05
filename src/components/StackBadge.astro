@@ -1,0 +1,92 @@
+---
+import type { ProjectData } from "../content.config";
+
+type StackId = ProjectData["stack"][number];
+
+interface Props {
+  id: StackId;
+}
+
+const { id } = Astro.props;
+
+const stackPresentation = {
+  typescript: { name: "TypeScript", icon: "/assets/icons/typescript.svg" },
+  javascript: { name: "JavaScript", icon: "/assets/icons/javascript.svg" },
+  tailwind: { name: "Tailwind", icon: "/assets/icons/tailwind.svg" },
+  figma: { name: "Figma", icon: "/assets/icons/figma.svg" },
+  python: { name: "Python", icon: "/assets/icons/python.svg" },
+  opensource: { name: "Open Source", icon: "/assets/icons/open-source.svg" },
+} as const satisfies Record<StackId, { name: string; icon: string }>;
+
+const stack = stackPresentation[id];
+---
+
+<span class:list={["technology", `technology--${id}`]} role="listitem">
+  <span class="technology__inner">
+    <img src={stack.icon} alt="" width="16" height="16" aria-hidden="true" />
+    <span>{stack.name}</span>
+  </span>
+</span>
+
+<style>
+  .technology {
+    display: inline-flex;
+    padding: var(--space-px-1);
+    border-radius: var(--radius-pill);
+    background: var(--stack-border-background, var(--border-default));
+    color: var(--stack-foreground, var(--text-primary));
+    font-family: var(--font-ui);
+    font-size: var(--type-label-size);
+    line-height: var(--type-label-leading);
+  }
+
+  .technology__inner {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-px-4);
+    padding: var(--space-px-4) var(--space-px-12) var(--space-px-4) var(--space-px-10);
+    border-radius: var(--radius-pill);
+    background: var(--stack-background, var(--surface));
+  }
+
+  img {
+    width: var(--space-px-16);
+    height: var(--space-px-16);
+  }
+
+  .technology--typescript {
+    --stack-background: var(--color-blue-950);
+    --stack-border-background: var(--color-blue-700);
+    --stack-foreground: var(--color-blue-200);
+  }
+
+  .technology--javascript {
+    --stack-background: var(--color-amber-950);
+    --stack-border-background: var(--color-amber-800);
+    --stack-foreground: var(--color-amber-200);
+  }
+
+  .technology--tailwind {
+    --stack-background: var(--gradient-stack-tailwind);
+    --stack-border-background: var(--gradient-stack-tailwind-border);
+    --stack-foreground: var(--color-green-300);
+  }
+
+  .technology--figma {
+    --stack-background: var(--surface);
+    --stack-border-background: var(--border-default);
+    --stack-foreground: var(--text-primary);
+  }
+
+  .technology--python {
+    --stack-background: var(--gradient-stack-python);
+    --stack-border-background: var(--gradient-stack-python-border);
+    --stack-foreground: var(--color-amber-200);
+  }
+
+  .technology--opensource {
+    --stack-background: var(--color-green-1000);
+    --stack-border-background: var(--color-green-800);
+    --stack-foreground: var(--color-green-300);
+  }
+</style>

@@ -1,0 +1,5 @@
+# Copy to .dev.vars for local Pages Function development. Never commit real values.
+TURNSTILE_SECRET_KEY=
+RATE_LIMIT_SECRET=
+GMAIL_USER=
+GMAIL_PASS=

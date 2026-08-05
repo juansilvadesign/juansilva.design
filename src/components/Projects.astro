@@ -1,0 +1,120 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+const projects = (await getCollection("projects", ({ data }) => data.featured)).sort((a, b) =>
+  a.data.dates.start.localeCompare(b.data.dates.start),
+);
+---
+
+<section class="projects" aria-label={copy.projects.sectionAriaLabel}>
+  <div class="projects__list">
+    {
+      projects.map((project) => (
+        <article class="projects__item">
+          <div class="projects__card">
+            <ProjectCard {lang} {project} />
+          </div>
+          <div class="projects__media">
+            <img
+              src={project.data.preview}
+              alt={project.data.copy[lang].previewAlt}
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .projects {
+    padding: var(--space-px-96) var(--space-px-24) var(--space-px-64);
+  }
+
+  .projects__list {
+    display: flex;
+    max-width: var(--container-content);
+    flex-direction: column;
+    gap: var(--space-px-64);
+    margin: 0 auto;
+  }
+
+  .projects__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-24);
+  }
+
+  .projects__card,
+  .projects__media {
+    width: 100%;
+  }
+
+  .projects__media img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-media);
+  }
+
+  @media (min-width: 768px) {
+    .projects {
+      padding-top: var(--space-px-112);
+      padding-right: var(--space-px-48);
+      padding-left: var(--space-px-48);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects__item {
+      gap: var(--space-px-48);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .projects {
+      padding-top: var(--space-px-160);
+    }
+
+    .projects__list {
+      gap: var(--space-px-96);
+    }
+
+    .projects__item {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .projects__card {
+      max-width: var(--content-project);
+    }
+
+    .projects__media {
+      flex: 1 1 0;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .projects {
+      padding-right: var(--section-padding-desktop);
+      padding-left: var(--section-padding-desktop);
+    }
+
+    .projects__item {
+      gap: var(--space-px-104);
+    }
+  }
+</style>

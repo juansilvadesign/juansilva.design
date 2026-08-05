@@ -51,6 +51,37 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.skip-link {
+  position: fixed;
+  z-index: calc(var(--z-navigation) + 1);
+  top: var(--space-px-8);
+  left: var(--space-px-8);
+  padding: var(--space-px-8) var(--space-px-12);
+  background: var(--text-heading);
+  color: var(--background-deep);
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-semibold);
+  transform: translateY(calc(-100% - var(--space-px-16)));
+  transition: transform var(--motion-fast) var(--ease-standard);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: var(--space-px-1) !important;
+  height: var(--space-px-1) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 0 !important;
+  margin: calc(var(--space-px-1) * -1) !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
 ::selection {
   background: var(--primary-dark);
   color: var(--text-heading);

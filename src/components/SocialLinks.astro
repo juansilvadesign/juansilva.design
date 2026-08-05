@@ -1,0 +1,154 @@
+---
+import { socialLinks } from "../data/links";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+  variant?: "hero" | "footer";
+}
+
+const { lang, variant = "hero" } = Astro.props;
+const copy = t(lang);
+
+interface SocialItem {
+  href: string;
+  label: string;
+  icon: string;
+  hoverIcon?: string;
+}
+
+const socialItems: Record<"linkedIn" | "github" | "x" | "figma" | "dribbble", SocialItem> = {
+  linkedIn: {
+    href: socialLinks.linkedIn,
+    label: copy.navigation.linkedInProfile,
+    icon: "/assets/icons/linkedin.svg",
+  },
+  github: {
+    href: socialLinks.github,
+    label: copy.hero.githubAriaLabel,
+    icon: "/assets/icons/github.svg",
+  },
+  x: {
+    href: socialLinks.x,
+    label: copy.hero.xAriaLabel,
+    icon: "/assets/icons/twitter.svg",
+    hoverIcon: "/assets/icons/twitter-hover.svg",
+  },
+  figma: {
+    href: socialLinks.figma,
+    label: copy.hero.figmaAriaLabel,
+    icon: "/assets/icons/figma-outlined.svg",
+    hoverIcon: "/assets/icons/figma-outlined-hover.svg",
+  },
+  dribbble: {
+    href: socialLinks.dribbble,
+    label: copy.hero.dribbbleAriaLabel,
+    icon: "/assets/icons/dribbble.svg",
+    hoverIcon: "/assets/icons/dribbble-hover.svg",
+  },
+};
+
+const items = variant === "hero"
+  ? [socialItems.github, socialItems.x, socialItems.figma, socialItems.dribbble]
+  : [socialItems.linkedIn, socialItems.x, socialItems.github, socialItems.figma, socialItems.dribbble];
+---
+
+<div class:list={["social-links", `social-links--${variant}`]}>
+  {
+    items.map((item) => (
+      <a href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.label}>
+        <span class="social-links__icon" aria-hidden="true">
+          <img
+            class:list={["social-links__image", item.hoverIcon && "social-links__image--rest"]}
+            src={item.icon}
+            alt=""
+            width={variant === "hero" ? "28" : "16"}
+            height={variant === "hero" ? "28" : "16"}
+          />
+          {item.hoverIcon && (
+            <img
+              class="social-links__image social-links__image--hover"
+              src={item.hoverIcon}
+              alt=""
+              width={variant === "hero" ? "28" : "16"}
+              height={variant === "hero" ? "28" : "16"}
+            />
+          )}
+        </span>
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    align-items: center;
+  }
+
+  .social-links--hero {
+    width: 100%;
+    justify-content: center;
+    gap: var(--space-px-8);
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .social-links--hero a {
+    width: var(--space-px-48);
+    height: var(--space-px-48);
+  }
+
+  .social-links--footer a {
+    width: var(--space-px-28);
+    height: var(--space-px-48);
+  }
+
+  .social-links__icon {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .social-links--hero .social-links__icon {
+    width: var(--space-px-28);
+    height: var(--space-px-28);
+  }
+
+  .social-links--footer .social-links__icon {
+    width: var(--space-px-16);
+    height: var(--space-px-16);
+  }
+
+  .social-links__image {
+    position: absolute;
+    inset: 0;
+    transition: opacity var(--motion-fast) var(--ease-standard);
+  }
+
+  .social-links__image--hover {
+    opacity: 0;
+  }
+
+  a:hover .social-links__image--rest {
+    opacity: 0;
+  }
+
+  a:hover .social-links__image--hover {
+    opacity: 1;
+  }
+
+  a:hover .social-links__image:not(.social-links__image--rest, .social-links__image--hover) {
+    opacity: 0.7;
+  }
+
+  @media (min-width: 1024px) {
+    .social-links--hero,
+    .social-links--footer {
+      justify-content: flex-start;
+    }
+  }
+</style>

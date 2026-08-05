@@ -1,0 +1,210 @@
+---
+import LanguageSwitch from "./LanguageSwitch.astro";
+import ProfileLink from "./ProfileLink.astro";
+import { localizedPath, t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const copy = t(lang);
+const navigation = [
+  { path: "/", label: copy.navigation.home, className: "navbar__item--home" },
+  { path: "/projects/", label: copy.navigation.projects },
+  { path: "/contact/", label: copy.navigation.contact },
+];
+---
+
+<nav class="navbar" aria-label={copy.navigation.ariaLabel}>
+  <div class="navbar__inner">
+    <a class="navbar__brand" href={localizedPath("/", lang)} aria-label={copy.navigation.logoAlt}>
+      <img src="/assets/logo/logo-full.svg" alt="" width="143" height="32" />
+    </a>
+
+    <ul class="navbar__links">
+      {
+        navigation.map(({ path, label, className }) => (
+          <li class={className}>
+            <a
+              class="navbar__link"
+              href={localizedPath(path, lang)}
+              aria-current={currentPath === path ? "page" : undefined}
+            >
+              {label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="navbar__locale">
+        <LanguageSwitch {lang} {currentPath} />
+      </li>
+    </ul>
+
+    <div class="navbar__profile">
+      <ProfileLink {lang} />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: fixed;
+    z-index: var(--z-navigation);
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: var(--space-px-8) var(--space-px-16);
+    border-bottom: var(--border-width-strong) solid var(--color-transparent);
+    background: var(--gradient-nav-rest);
+    transition:
+      background var(--motion-base) var(--ease-standard),
+      border-color var(--motion-base) var(--ease-standard);
+  }
+
+  .navbar__inner {
+    display: grid;
+    max-width: var(--container-content);
+    align-items: center;
+    margin: 0 auto;
+    grid-template-columns: auto 1fr;
+  }
+
+  .navbar__brand {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    width: fit-content;
+    opacity: 1;
+    transition: opacity var(--motion-fast) var(--ease-standard);
+  }
+
+  .navbar__brand:hover {
+    opacity: 0.8;
+  }
+
+  .navbar__brand img {
+    width: auto;
+    height: var(--space-px-24);
+  }
+
+  .navbar__links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-px-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .navbar__link {
+    position: relative;
+    display: flex;
+    padding: var(--space-px-8);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: var(--type-label-size);
+    line-height: var(--leading-32);
+    transition: color var(--motion-base) var(--ease-standard);
+  }
+
+  .navbar__link::after {
+    position: absolute;
+    right: var(--space-px-8);
+    bottom: var(--space-px-4);
+    left: var(--space-px-8);
+    height: var(--border-width-strong);
+    border-radius: var(--radius-pill);
+    background: var(--text-heading);
+    content: "";
+    opacity: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition:
+      opacity var(--motion-base) var(--ease-standard),
+      transform var(--motion-base) var(--ease-standard);
+  }
+
+  .navbar__link:hover,
+  .navbar__link[aria-current="page"] {
+    color: var(--text-heading);
+  }
+
+  .navbar__link:hover::after,
+  .navbar__link[aria-current="page"]::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .navbar__locale {
+    display: flex;
+    margin-left: var(--space-px-4);
+  }
+
+  .navbar__profile {
+    display: none;
+  }
+
+  @media (max-width: 639px) {
+    .navbar__item--home {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .navbar {
+      padding-right: var(--space-px-48);
+      padding-left: var(--space-px-48);
+    }
+
+    .navbar__brand img {
+      height: var(--space-px-32);
+    }
+
+    .navbar__link {
+      font-size: var(--type-nav-size);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .navbar {
+      padding: var(--space-px-16) var(--space-px-56);
+    }
+
+    .navbar:hover {
+      border-bottom-color: var(--border-interactive);
+      background: var(--gradient-nav-hover);
+    }
+
+    .navbar__inner {
+      grid-template-columns: var(--brand-column) 1fr var(--brand-column);
+    }
+
+    .navbar__links {
+      justify-content: center;
+      gap: var(--space-px-8);
+    }
+
+    .navbar__link {
+      padding: var(--space-px-16);
+    }
+
+    .navbar__link::after {
+      right: var(--space-px-16);
+      bottom: var(--space-px-8);
+      left: var(--space-px-16);
+    }
+
+    .navbar__profile {
+      display: flex;
+      width: var(--brand-column);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .navbar {
+      padding: var(--space-px-24) var(--space-px-72);
+    }
+  }
+</style>

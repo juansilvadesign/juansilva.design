@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { pageTitle, t, type Locale } from "../i18n";
+
+type LegalKind = "privacy" | "terms" | "cookies";
+
+interface Props {
+  lang: Locale;
+  kind: LegalKind;
+}
+
+const { lang, kind } = Astro.props;
+const copy = t(lang);
+const pageMetadata = {
+  privacy: {
+    title: copy.meta.pages.privacyTitle,
+    description: copy.meta.pages.privacyDescription,
+    canonicalPath: "/privacy-policy/",
+  },
+  terms: {
+    title: copy.meta.pages.termsTitle,
+    description: copy.meta.pages.termsDescription,
+    canonicalPath: "/terms-of-use/",
+  },
+  cookies: {
+    title: copy.meta.pages.cookiesTitle,
+    description: copy.meta.pages.cookiesDescription,
+    canonicalPath: "/cookies/",
+  },
+} as const;
+const metadata = pageMetadata[kind];
+---
+
+<BaseLayout
+  {lang}
+  title={pageTitle(metadata.title, lang)}
+  description={metadata.description}
+  canonicalPath={metadata.canonicalPath}
+>
+  <main id="main-content" class="legal-page">
+    <article class="legal-page__document">
+      <h1>{metadata.title}</h1>
+      <p class="legal-page__updated">
+        {copy.legal.lastUpdated}: <time datetime="2026-08-05">{copy.legal.lastUpdatedDate}</time>
+      </p>
+
+      {
+        kind === "privacy" && (
+          <div class="legal-page__content">
+            <section>
+              <h2>{copy.legal.privacy.introduction.title}</h2>
+              <p>{copy.legal.privacy.introduction.body}</p>
+            </section>
+            <section>
+              <h2>{copy.legal.privacy.data.title}</h2>
+              <p>{copy.legal.privacy.data.body}</p>
+              <ul>
+                <li>{copy.legal.privacy.data.identity}</li>
+                <li>{copy.legal.privacy.data.contact}</li>
+                <li>{copy.legal.privacy.data.technical}</li>
+              </ul>
+            </section>
+            <section>
+              <h2>{copy.legal.privacy.use.title}</h2>
+              <p>{copy.legal.privacy.use.body}</p>
+              <ul>
+                <li>{copy.legal.privacy.use.contract}</li>
+                <li>{copy.legal.privacy.use.interests}</li>
+                <li>{copy.legal.privacy.use.obligation}</li>
+              </ul>
+            </section>
+            <section>
+              <h2>{copy.legal.privacy.contact.title}</h2>
+              <p>{copy.legal.privacy.contact.body}</p>
+            </section>
+          </div>
+        )
+      }
+
+      {
+        kind === "terms" && (
+          <div class="legal-page__content">
+            <section>
+              <h2>{copy.legal.terms.agreement.title}</h2>
+              <p>{copy.legal.terms.agreement.body}</p>
+            </section>
+            <section>
+              <h2>{copy.legal.terms.intellectualProperty.title}</h2>
+              <p>{copy.legal.terms.intellectualProperty.body}</p>
+            </section>
+            <section>
+              <h2>{copy.legal.terms.restrictions.title}</h2>
+              <p>{copy.legal.terms.restrictions.introduction}</p>
+              <ul>
+                <li>{copy.legal.terms.restrictions.publishing}</li>
+                <li>{copy.legal.terms.restrictions.commercializing}</li>
+                <li>{copy.legal.terms.restrictions.performing}</li>
+                <li>{copy.legal.terms.restrictions.damaging}</li>
+                <li>{copy.legal.terms.restrictions.access}</li>
+              </ul>
+            </section>
+            <section>
+              <h2>{copy.legal.terms.liability.title}</h2>
+              <p>{copy.legal.terms.liability.body}</p>
+            </section>
+          </div>
+        )
+      }
+
+      {
+        kind === "cookies" && (
+          <div class="legal-page__content">
+            <section>
+              <h2>{copy.legal.cookies.what.title}</h2>
+              <p>{copy.legal.cookies.what.body}</p>
+            </section>
+            <section>
+              <h2>{copy.legal.cookies.use.title}</h2>
+              <p>{copy.legal.cookies.use.body}</p>
+            </section>
+            <section>
+              <h2>{copy.legal.cookies.types.title}</h2>
+              <ul>
+                <li>{copy.legal.cookies.types.essential}</li>
+                <li>{copy.legal.cookies.types.analytics}</li>
+                <li>{copy.legal.cookies.types.functionality}</li>
+              </ul>
+            </section>
+            <section>
+              <h2>{copy.legal.cookies.disabling.title}</h2>
+              <p>{copy.legal.cookies.disabling.body}</p>
+            </section>
+          </div>
+        )
+      }
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    min-height: var(--viewport-height);
+    padding: var(--space-px-128) var(--space-px-24) var(--space-px-64);
+  }
+
+  .legal-page__document {
+    max-width: var(--content-legal);
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin-bottom: var(--space-px-32);
+    font-size: var(--text-36);
+    line-height: var(--leading-48);
+  }
+
+  .legal-page__updated {
+    margin-bottom: var(--space-px-24);
+    color: var(--text-secondary);
+  }
+
+  .legal-page__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-px-24);
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-px-12);
+  }
+
+  h2 {
+    font-size: var(--text-24);
+    line-height: var(--leading-32);
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-px-8);
+    padding-left: var(--space-px-24);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+  }
+
+  @media (min-width: 768px) {
+    .legal-page {
+      padding-right: var(--space-px-96);
+      padding-left: var(--space-px-96);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .legal-page {
+      padding-right: var(--space-px-128);
+      padding-left: var(--space-px-128);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .legal-page {
+      padding-right: var(--section-padding-wide);
+      padding-left: var(--section-padding-wide);
+    }
+  }
+</style>

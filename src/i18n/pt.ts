@@ -14,8 +14,11 @@ export const pt = {
       contactTitle: "Contato",
       contactDescription: "Fale com Juan Silva sobre apoio para agências e projetos de engenharia por contrato.",
       privacyTitle: "Política de Privacidade",
+      privacyDescription: "Como o portfólio de Juan Silva trata dados pessoais e técnicos.",
       termsTitle: "Termos de Uso",
+      termsDescription: "Os termos aplicáveis ao uso do site de portfólio de Juan Silva.",
       cookiesTitle: "Política de Cookies",
+      cookiesDescription: "Como cookies são utilizados no site de portfólio de Juan Silva.",
     },
   },
   locale: {
@@ -25,6 +28,7 @@ export const pt = {
   },
   navigation: {
     ariaLabel: "Navegação principal",
+    skipToContent: "Pular para o conteúdo",
     home: "Início",
     projects: "Projetos",
     contact: "Contato",
@@ -87,9 +91,17 @@ export const pt = {
       privacy: "Política de Privacidade",
       suffix: ".",
     },
+    security: {
+      label: "Verificação de segurança",
+      javascriptRequired: "A verificação de segurança requer JavaScript.",
+      configurationMissing: "O formulário de contato está temporariamente indisponível.",
+      emailFallback: "Envie um e-mail diretamente.",
+    },
     feedback: {
       fixErrors: "Corrija os erros do formulário.",
       consentRequired: "Você deve concordar com os Termos de Uso e a Política de Privacidade.",
+      turnstileFailure: "A verificação de segurança falhou. Atualize a página e tente novamente.",
+      rateLimited: "Muitas tentativas. Tente novamente em 15 minutos.",
       sendFailure: "Não foi possível enviar sua mensagem. Tente novamente.",
       sentToast: "Mensagem enviada com sucesso!",
       submit: "Enviar",
@@ -125,6 +137,7 @@ export const pt = {
   },
   legal: {
     lastUpdated: "Última atualização",
+    lastUpdatedDate: "5 de agosto de 2026",
     privacy: {
       title: "Política de Privacidade",
       introduction: {

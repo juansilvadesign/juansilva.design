@@ -1,0 +1,89 @@
+---
+import { siteConfig } from "../config/site";
+import {
+  defaultLocale,
+  hreflangPair,
+  localeInfo,
+  localizedPath,
+  t,
+  type Locale,
+} from "../i18n";
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonicalPath,
+  image = siteConfig.defaultOgImage,
+  noindex = false,
+} = Astro.props;
+
+if (!Astro.site) {
+  throw new Error("astro.config.mjs must define `site` so canonical URLs can be absolute.");
+}
+
+const copy = t(lang);
+const canonicalUrl = new URL(localizedPath(canonicalPath, lang), Astro.site);
+const imageUrl = URL.canParse(image) ? new URL(image) : new URL(image, Astro.site);
+const defaultUrl = new URL(localizedPath(canonicalPath, defaultLocale), Astro.site);
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta
+  name="robots"
+  content={noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"}
+/>
+<link rel="canonical" href={canonicalUrl} />
+
+{
+  hreflangPair.map(({ locale, hreflang }) => (
+    <link
+      rel="alternate"
+      hreflang={hreflang}
+      href={new URL(localizedPath(canonicalPath, locale), Astro.site)}
+    />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={defaultUrl} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={copy.meta.siteName} />
+<meta property="og:locale" content={localeInfo[lang].openGraphLocale} />
+{
+  hreflangPair
+    .filter(({ locale }) => locale !== lang)
+    .map(({ locale }) => (
+      <meta property="og:locale:alternate" content={localeInfo[locale].openGraphLocale} />
+    ))
+}
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={copy.meta.ogImageAlt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={`@${siteConfig.twitterHandle}`} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={copy.meta.ogImageAlt} />
+
+<link rel="manifest" href={new URL("/site.webmanifest", Astro.site)} />
+<link rel="icon" type="image/png" sizes="32x32" href={new URL("/favicon-32x32.png", Astro.site)} />
+<link rel="icon" type="image/png" sizes="16x16" href={new URL("/favicon-16x16.png", Astro.site)} />
+<link rel="apple-touch-icon" href={new URL("/apple-touch-icon.png", Astro.site)} />

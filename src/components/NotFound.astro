@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { localizedPath, pageTitle, t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+---
+
+<BaseLayout
+  {lang}
+  title={pageTitle(copy.notFound.title, lang)}
+  description={copy.notFound.description}
+  canonicalPath="/404"
+  noindex
+>
+  <main id="main-content" class="not-found">
+    <h1>{copy.notFound.title}</h1>
+    <p>{copy.notFound.description}</p>
+    <a class="button" href={localizedPath("/", lang)}>{copy.notFound.returnHome}</a>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    min-height: var(--viewport-height);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-16);
+    padding: var(--space-px-96) var(--space-px-24) var(--space-px-48);
+    text-align: center;
+  }
+
+  h1 {
+    font-size: var(--text-36);
+    line-height: var(--leading-48);
+  }
+
+  p {
+    margin-bottom: var(--space-px-8);
+    color: var(--text-secondary);
+  }
+</style>

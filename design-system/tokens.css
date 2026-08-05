@@ -290,6 +290,7 @@
   --grid-desktop-gutter: 32px;
   --brand-column: 210px;
   --hero-media-mobile: 300px;
+  --hero-media-tablet: 400px;
   --nav-glow-width: 240px;
   --container-content: 1440px;
   --container-production: 1400px;
@@ -298,12 +299,16 @@
   --content-project: 550px;
   --content-form: 576px;
   --content-form-wide: 570px;
+  --content-legal: 896px;
   --footer-column: 330px;
   --footer-control-mobile: 154px;
   --footer-control-tablet: 224px;
   --control-primary-width: 340px;
   --decorative-line-length: 400px;
   --decorative-line-band: 60%;
+  --z-background: 0;
+  --z-content: 20;
+  --z-navigation: 50;
 
   /* ─── Reusable gradients ─────────────────────────────────────── */
   --gradient-nav-rest: linear-gradient(to bottom, var(--nav-gradient-rest), var(--color-transparent));

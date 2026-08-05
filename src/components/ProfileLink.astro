@@ -1,0 +1,147 @@
+---
+import { socialLinks } from "../data/links";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+  placement?: "navbar" | "footer";
+}
+
+const { lang, placement = "navbar" } = Astro.props;
+const copy = t(lang);
+---
+
+<a
+  class:list={["profile-link", `profile-link--${placement}`]}
+  href={socialLinks.linkedIn}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={copy.navigation.linkedInProfile}
+>
+  <span class="profile-link__portrait" aria-hidden="true">
+    <img
+      class="profile-link__image profile-link__image--rest"
+      src="/assets/images/profile.webp"
+      alt=""
+      width="56"
+      height="56"
+    />
+    <img
+      class="profile-link__image profile-link__image--hover"
+      src="/assets/images/profile-hover.webp"
+      alt=""
+      width="56"
+      height="56"
+    />
+  </span>
+
+  <span class="profile-link__identity">
+    <span class="profile-link__copy">
+      <span class="profile-link__name">{copy.meta.siteName}</span>
+      <span class="profile-link__handle">{copy.footer.handle}</span>
+    </span>
+
+    <span class="profile-link__chevron" aria-hidden="true">
+      <img
+        class="profile-link__chevron-image profile-link__chevron-image--rest"
+        src="/assets/icons/chevron-right.svg"
+        alt=""
+        width="24"
+        height="24"
+      />
+      <img
+        class="profile-link__chevron-image profile-link__chevron-image--hover"
+        src="/assets/icons/chevron-right-hover.svg"
+        alt=""
+        width="24"
+        height="24"
+      />
+    </span>
+  </span>
+</a>
+
+<style>
+  .profile-link {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-12);
+    border-radius: var(--radius-md);
+  }
+
+  .profile-link--footer {
+    justify-content: flex-start;
+  }
+
+  .profile-link__portrait,
+  .profile-link__chevron {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+
+  .profile-link__portrait {
+    width: var(--space-px-56);
+    height: var(--space-px-56);
+  }
+
+  .profile-link__image,
+  .profile-link__chevron-image {
+    position: absolute;
+    inset: 0;
+    transition: opacity var(--motion-fast) var(--ease-standard);
+  }
+
+  .profile-link__image--hover,
+  .profile-link__chevron-image--hover {
+    opacity: 0;
+  }
+
+  .profile-link:hover .profile-link__image--rest,
+  .profile-link:hover .profile-link__chevron-image--rest {
+    opacity: 0;
+  }
+
+  .profile-link:hover .profile-link__image--hover,
+  .profile-link:hover .profile-link__chevron-image--hover {
+    opacity: 1;
+  }
+
+  .profile-link__identity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-8);
+  }
+
+  .profile-link__copy {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-link__name {
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--text-20);
+    line-height: var(--leading-24);
+  }
+
+  .profile-link__handle {
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: var(--type-meta-size);
+    line-height: var(--type-meta-leading);
+  }
+
+  .profile-link__chevron {
+    width: var(--space-px-24);
+    height: var(--space-px-24);
+  }
+
+  @media (max-width: 1023px) {
+    .profile-link--footer {
+      justify-content: center;
+    }
+  }
+</style>

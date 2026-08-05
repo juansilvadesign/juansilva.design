@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from "astro:content";
+import StackBadge from "./StackBadge.astro";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+  project: CollectionEntry<"projects">;
+}
+
+const { lang, project } = Astro.props;
+const copy = t(lang);
+const projectCopy = project.data.copy[lang];
+const evidenceIcon = project.data.evidenceLink.includes("github.com")
+  ? "/assets/icons/github.svg"
+  : "/assets/icons/link-external-02.svg";
+---
+
+<div class="project-card">
+  <div class="project-card__copy">
+    <h2>{projectCopy.title}</h2>
+    <p>{projectCopy.description}</p>
+  </div>
+
+  <div class="project-card__stacks" role="list">
+    {project.data.stack.map((stack) => <StackBadge id={stack} />)}
+  </div>
+
+  <div class="project-card__actions">
+    <a
+      class="button project-card__primary"
+      href={project.data.liveUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={projectCopy.liveLabel || copy.projects.liveProjectFallback}
+    >
+      <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
+      {projectCopy.liveLabel || copy.projects.liveProjectFallback}
+    </a>
+
+    <a
+      class="button button--secondary project-card__secondary"
+      href={project.data.evidenceLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={projectCopy.evidenceLabel || copy.projects.evidenceFallback}
+    >
+      {projectCopy.evidenceLabel || copy.projects.evidenceFallback}
+      <img src={evidenceIcon} alt="" width="16" height="16" />
+    </a>
+  </div>
+</div>
+
+<style>
+  .project-card,
+  .project-card__copy {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .project-card {
+    max-width: var(--content-project);
+    gap: var(--space-px-24);
+  }
+
+  .project-card__copy {
+    gap: var(--space-px-8);
+  }
+
+  .project-card__stacks {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: var(--stack-gap);
+  }
+
+  .project-card__actions {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .project-card__actions .button {
+    width: 100%;
+  }
+
+  .project-card__actions img {
+    width: var(--space-px-16);
+    height: var(--space-px-16);
+  }
+
+  @media (min-width: 768px) {
+    .project-card__actions {
+      flex-direction: row;
+    }
+
+    .project-card__primary {
+      flex: 0 0 var(--control-primary-width);
+    }
+
+    .project-card__secondary {
+      flex: 1 1 auto;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .project-card {
+      padding-top: var(--space-px-27);
+    }
+  }
+</style>

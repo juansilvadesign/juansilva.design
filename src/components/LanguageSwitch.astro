@@ -1,0 +1,58 @@
+---
+import { locales, localeInfo, localizedPath, t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const copy = t(lang);
+const alternatives = locales.filter((locale) => locale !== lang);
+---
+
+<div class="language-switch" role="group" aria-label={copy.locale.switchLabel}>
+  {
+    alternatives.map((locale) => (
+      <a
+        href={localizedPath(currentPath, locale)}
+        lang={localeInfo[locale].htmlLang}
+        hreflang={localeInfo[locale].hreflang}
+        aria-label={`${copy.locale.switchLabel}: ${locale.toUpperCase()}`}
+      >
+        {locale.toUpperCase()}
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .language-switch {
+    display: flex;
+    align-items: center;
+    font-family: var(--font-ui);
+    font-size: var(--type-label-size);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--type-label-leading);
+  }
+
+  a {
+    display: inline-flex;
+    min-width: var(--space-px-40);
+    min-height: var(--space-px-40);
+    align-items: center;
+    justify-content: center;
+    border: var(--border-width) solid var(--border-subtle);
+    border-radius: var(--radius-pill);
+    background: var(--background-deep);
+    color: var(--text-primary);
+    transition:
+      background-color var(--motion-fast) var(--ease-standard),
+      color var(--motion-fast) var(--ease-standard);
+  }
+
+  a:hover {
+    background: var(--surface-hover);
+    color: var(--text-heading);
+  }
+</style>

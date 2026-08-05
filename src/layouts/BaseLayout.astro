@@ -1,0 +1,35 @@
+---
+import Navbar from "../components/Navbar.astro";
+import SEOHead from "../components/SEOHead.astro";
+import { localeInfo, t, type Locale } from "../i18n";
+import "../styles/clone.css";
+
+interface Props {
+  lang: Locale;
+  title: string;
+  description: string;
+  canonicalPath: string;
+  image?: string;
+  noindex?: boolean;
+}
+
+const { lang, title, description, canonicalPath, image, noindex } = Astro.props;
+const copy = t(lang);
+---
+
+<!doctype html>
+<html lang={localeInfo[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="dark" />
+    <SEOHead {lang} {title} {description} {canonicalPath} {image} {noindex} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{copy.navigation.skipToContent}</a>
+    <Navbar {lang} currentPath={canonicalPath} />
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,192 @@
+---
+import SocialLinks from "./SocialLinks.astro";
+import { socialLinks } from "../data/links";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__inner">
+    <img
+      class="hero__portrait"
+      src="/assets/images/hero.webp"
+      alt={copy.hero.portraitAlt}
+      width="452"
+      height="651"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
+
+    <div class="hero__content">
+      <div class="hero__copy">
+        <p class="hero__location">
+          {copy.hero.location}
+          <img src="/assets/icons/BR.svg" alt={copy.hero.flagAlt} width="14" height="14" />
+        </p>
+        <h1 id="hero-title">{copy.hero.title}</h1>
+        <p>{copy.hero.introduction}</p>
+      </div>
+
+      <div class="hero__actions">
+        <a class="button" href={socialLinks.mailCta} aria-label={copy.hero.emailAriaLabel}>
+          {copy.hero.emailCta}
+        </a>
+        <a
+          class="button button--secondary"
+          href={socialLinks.linkedIn}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={copy.hero.linkedInAriaLabel}
+        >
+          {copy.hero.linkedInCta}
+          <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
+        </a>
+      </div>
+
+      <SocialLinks {lang} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: var(--space-px-24) var(--space-px-16);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--section-gap-large);
+    margin: 0 auto;
+  }
+
+  .hero__portrait {
+    width: var(--hero-media-mobile);
+    height: auto;
+  }
+
+  .hero__content,
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__content {
+    max-width: var(--content-copy);
+    align-items: center;
+    gap: var(--space-px-32);
+    text-align: center;
+  }
+
+  .hero__copy {
+    gap: var(--space-px-8);
+    padding: 0 var(--space-px-12);
+  }
+
+  .hero__location {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-4);
+    color: var(--text-secondary);
+  }
+
+  .hero__location img {
+    width: var(--space-px-14);
+    height: var(--space-px-14);
+  }
+
+  h1 {
+    font-size: var(--text-32);
+    line-height: var(--leading-44);
+  }
+
+  .hero__actions {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--space-px-12);
+    padding: 0 var(--space-px-12);
+  }
+
+  .hero__actions .button {
+    width: 100%;
+  }
+
+  .hero__actions img {
+    width: var(--space-px-16);
+    height: var(--space-px-16);
+  }
+
+  @media (min-width: 768px) {
+    .hero {
+      padding-top: var(--space-px-32);
+      padding-bottom: var(--space-px-32);
+    }
+
+    .hero__actions {
+      flex-direction: row;
+    }
+
+    .hero__actions .button {
+      width: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero {
+      padding-top: var(--space-px-96);
+      padding-bottom: var(--space-px-96);
+    }
+
+    .hero__inner {
+      flex-direction: row;
+      gap: var(--space-px-104);
+    }
+
+    .hero__portrait {
+      width: var(--hero-media-tablet);
+    }
+
+    .hero__content {
+      align-items: flex-start;
+      padding-top: var(--space-px-96);
+      text-align: left;
+    }
+
+    .hero__copy {
+      gap: var(--space-px-16);
+    }
+
+    .hero__location,
+    .hero__actions {
+      justify-content: flex-start;
+    }
+
+    h1 {
+      font-size: var(--text-44);
+      line-height: var(--leading-60);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .hero {
+      padding-top: var(--space-px-120);
+      padding-bottom: var(--space-px-120);
+    }
+
+    .hero__portrait {
+      width: auto;
+    }
+  }
+</style>

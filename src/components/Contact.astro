@@ -1,0 +1,361 @@
+---
+import { localizedPath, t, type Locale } from "../i18n";
+import { socialLinks } from "../data/links";
+
+interface Props {
+  lang: Locale;
+  turnstileSiteKey?: string;
+}
+
+const { lang, turnstileSiteKey } = Astro.props;
+const copy = t(lang);
+---
+
+<section class="contact" aria-labelledby="contact-title">
+  <img
+    class="contact__background"
+    src="/assets/logo/contact-bg.png"
+    alt=""
+    width="2484"
+    height="1080"
+    aria-hidden="true"
+  />
+
+  <div class="contact__inner">
+    <div class="contact__content">
+      <div class="contact__heading">
+        <h1 id="contact-title">{copy.contact.title}</h1>
+        <p id="contact-introduction">{copy.contact.introduction}</p>
+      </div>
+
+      <form
+        class="contact-form"
+        action="/api/send"
+        method="post"
+        accept-charset="UTF-8"
+        aria-label={copy.contact.formAriaLabel}
+        aria-describedby="contact-introduction"
+      >
+        <input type="hidden" name="lang" value={lang} />
+
+        <p
+          id="sent"
+          class="contact-form__notice contact-form__notice--success"
+          role="status"
+          aria-live="polite"
+        >
+          {copy.contact.feedback.sentToast}
+        </p>
+        <p id="form-error" class="contact-form__notice" role="alert">
+          {copy.contact.feedback.fixErrors}
+        </p>
+        <p id="turnstile-error" class="contact-form__notice" role="alert">
+          {copy.contact.feedback.turnstileFailure}
+        </p>
+        <p id="rate-limited" class="contact-form__notice" role="alert">
+          {copy.contact.feedback.rateLimited}
+        </p>
+        <p id="send-error" class="contact-form__notice" role="alert">
+          {copy.contact.feedback.sendFailure}
+        </p>
+
+        <div class="contact-form__field">
+          <input
+            class="field"
+            id="fname"
+            name="fname"
+            type="text"
+            placeholder=" "
+            minlength="2"
+            maxlength="80"
+            autocomplete="given-name"
+            required
+          />
+          <label for="fname">{copy.contact.fields.firstName.label}</label>
+        </div>
+
+        <div class="contact-form__field">
+          <input
+            class="field"
+            id="lname"
+            name="lname"
+            type="text"
+            placeholder=" "
+            minlength="2"
+            maxlength="80"
+            autocomplete="family-name"
+            required
+          />
+          <label for="lname">{copy.contact.fields.lastName.label}</label>
+        </div>
+
+        <div class="contact-form__field">
+          <input
+            class="field"
+            id="email"
+            name="email"
+            type="email"
+            placeholder=" "
+            autocomplete="email"
+            inputmode="email"
+            maxlength="254"
+            required
+          />
+          <label for="email">{copy.contact.fields.email.label}</label>
+        </div>
+
+        <div class="contact-form__field">
+          <textarea
+            class="field contact-form__message"
+            id="message"
+            name="message"
+            placeholder=" "
+            minlength="10"
+            maxlength="4000"
+            rows="1"
+            required></textarea>
+          <label for="message">{copy.contact.fields.message.label}</label>
+        </div>
+
+        <div class="contact-form__consent">
+          <input id="terms" name="terms" type="checkbox" required />
+          <label for="terms">
+            {copy.contact.consent.prefix}{" "}
+            <a href={localizedPath("/terms-of-use/", lang)}>{copy.contact.consent.terms}</a>{" "}
+            {copy.contact.consent.connector}{" "}
+            <a href={localizedPath("/privacy-policy/", lang)}>{copy.contact.consent.privacy}</a>{copy.contact.consent.suffix}
+          </label>
+        </div>
+
+        {
+          turnstileSiteKey ? (
+            <>
+              <div
+                class="cf-turnstile contact-form__turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-action="turnstile-spin-v1"
+                data-theme="dark"
+                data-language={lang === "pt" ? "pt-BR" : "en"}
+                aria-label={copy.contact.security.label}
+              />
+              <noscript>
+                <p class="contact-form__notice contact-form__notice--static">
+                  {copy.contact.security.javascriptRequired}{" "}
+                  <a href={socialLinks.mail}>{copy.contact.security.emailFallback}</a>
+                </p>
+              </noscript>
+            </>
+          ) : (
+            <p class="contact-form__notice contact-form__notice--static" role="alert">
+              {copy.contact.security.configurationMissing}{" "}
+              <a href={socialLinks.mail}>{copy.contact.security.emailFallback}</a>
+            </p>
+          )
+        }
+
+        <button
+          class="button contact-form__submit"
+          type="submit"
+          disabled={!turnstileSiteKey}
+        >
+          {copy.contact.feedback.submit}
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    position: relative;
+    min-height: var(--viewport-height);
+    overflow: hidden;
+  }
+
+  .contact__background {
+    position: absolute;
+    z-index: var(--z-background);
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .contact__inner {
+    position: relative;
+    z-index: var(--z-content);
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: var(--space-px-96) var(--space-px-24) var(--space-px-24);
+  }
+
+  .contact__content,
+  .contact__heading,
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact__content {
+    max-width: var(--content-form);
+    gap: var(--space-px-24);
+  }
+
+  .contact__heading {
+    gap: var(--space-px-16);
+  }
+
+  .contact-form {
+    gap: var(--space-px-24);
+  }
+
+  .contact-form__notice {
+    display: none;
+    padding: var(--space-px-12) var(--space-px-16);
+    border: var(--border-width) solid var(--status-danger);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--type-label-size);
+    line-height: var(--leading-20);
+  }
+
+  .contact-form__notice:target,
+  .contact-form__notice--static {
+    display: block;
+  }
+
+  .contact-form__notice--success {
+    border-color: var(--status-success);
+  }
+
+  .contact-form__notice a {
+    color: var(--text-heading);
+    text-decoration: underline;
+    text-underline-offset: var(--space-px-2);
+  }
+
+  .contact-form__field {
+    position: relative;
+  }
+
+  .field {
+    min-height: var(--space-px-56);
+    padding-top: var(--space-px-20);
+    transition:
+      border-color var(--motion-fast) var(--ease-standard),
+      height var(--motion-fast) var(--ease-standard);
+  }
+
+  .field::placeholder {
+    color: var(--color-transparent);
+  }
+
+  .contact-form__field > label {
+    position: absolute;
+    top: var(--space-px-16);
+    left: var(--space-px-8);
+    color: var(--text-placeholder);
+    font-family: var(--font-body);
+    font-size: var(--text-16);
+    line-height: var(--leading-20);
+    pointer-events: none;
+    transition:
+      top var(--motion-fast) var(--ease-standard),
+      font-size var(--motion-fast) var(--ease-standard);
+  }
+
+  .field:focus + label,
+  .field:not(:placeholder-shown) + label {
+    top: var(--space-px-1);
+    font-size: var(--type-meta-size);
+  }
+
+  .contact-form__message {
+    min-height: var(--space-px-56);
+    resize: vertical;
+  }
+
+  .contact-form__message:focus,
+  .contact-form__message:not(:placeholder-shown) {
+    min-height: var(--space-px-128);
+  }
+
+  .contact-form__consent {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-px-12);
+  }
+
+  .contact-form__consent input {
+    width: var(--space-px-20);
+    height: var(--space-px-20);
+    flex: 0 0 auto;
+    margin-top: var(--space-px-2);
+    accent-color: var(--primary);
+  }
+
+  .contact-form__consent label {
+    color: var(--text-placeholder);
+    font-family: var(--font-body);
+    font-size: var(--type-label-size);
+    line-height: var(--leading-20);
+  }
+
+  .contact-form__consent a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: var(--space-px-2);
+    transition: color var(--motion-fast) var(--ease-standard);
+  }
+
+  .contact-form__consent a:hover {
+    color: var(--text-heading);
+  }
+
+  .contact-form__submit {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  .contact-form__submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+
+  .contact-form__turnstile {
+    min-height: 65px;
+  }
+
+  @media (min-width: 768px) {
+    .contact__inner {
+      padding-top: var(--space-px-112);
+      padding-right: var(--space-px-96);
+      padding-left: var(--space-px-96);
+    }
+
+    .contact-form__consent {
+      align-items: center;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .contact__inner {
+      padding-top: var(--space-px-128);
+      padding-right: var(--space-px-128);
+      padding-left: var(--space-px-128);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .contact__inner {
+      padding: var(--space-px-200) var(--section-padding-wide) var(--space-px-24);
+    }
+
+    .contact__content {
+      max-width: var(--content-form-wide);
+      gap: var(--space-px-48);
+    }
+  }
+</style>

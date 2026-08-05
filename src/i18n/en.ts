@@ -12,8 +12,11 @@ export const en = {
       contactTitle: "Contact",
       contactDescription: "Contact Juan Silva about agency overflow and contract engineering work.",
       privacyTitle: "Privacy Policy",
+      privacyDescription: "How Juan Silva's portfolio handles personal and technical data.",
       termsTitle: "Terms of Use",
+      termsDescription: "The terms that apply when using Juan Silva's portfolio website.",
       cookiesTitle: "Cookies Policy",
+      cookiesDescription: "How cookies are used on Juan Silva's portfolio website.",
     },
   },
   locale: {
@@ -23,6 +26,7 @@ export const en = {
   },
   navigation: {
     ariaLabel: "Primary navigation",
+    skipToContent: "Skip to content",
     home: "Home",
     projects: "Projects",
     contact: "Contact",
@@ -85,9 +89,17 @@ export const en = {
       privacy: "Privacy Policy",
       suffix: ".",
     },
+    security: {
+      label: "Security check",
+      javascriptRequired: "The security check requires JavaScript.",
+      configurationMissing: "The contact form is temporarily unavailable.",
+      emailFallback: "Email me instead.",
+    },
     feedback: {
       fixErrors: "Please fix the errors in the form.",
       consentRequired: "You must agree to the Terms of Use and Privacy Policy.",
+      turnstileFailure: "The security check failed. Refresh the page and try again.",
+      rateLimited: "Too many attempts. Please try again in 15 minutes.",
       sendFailure: "I couldn't send your message. Please try again.",
       sentToast: "Message sent successfully!",
       submit: "Submit",
@@ -123,6 +135,7 @@ export const en = {
   },
   legal: {
     lastUpdated: "Last updated",
+    lastUpdatedDate: "August 5, 2026",
     privacy: {
       title: "Privacy Policy",
       introduction: {
