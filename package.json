@@ -1,44 +1,23 @@
 {
-  "name": "juansilva.is-a.dev",
+  "name": "juansilva.design",
   "private": true,
   "version": "0.1.0",
+  "type": "module",
+  "description": "Juan Silva's bilingual design engineer portfolio.",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=24"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "npm run clean && next build",
-    "build:export": "npm run clean && next build",
-    "clean": "powershell -ExecutionPolicy Bypass -File build-clean.ps1",
-    "clean:fallback": "node -e \"try { require('fs').rmSync('dist', { recursive: true, force: true }); } catch (e) { console.log('Clean completed'); }\"",
-    "start": "npx -y serve dist",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check && astro build"
   },
   "dependencies": {
-    "@radix-ui/react-label": "^2.1.8",
-    "@radix-ui/react-slot": "^1.1.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "lucide-react": "^0.462.0",
-    "next": "^14.1.0",
-    "next-themes": "^0.2.1",
-    "nodemailer": "^7.0.10",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sonner": "^2.0.7",
-    "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "astro": "^7.1.3"
   },
   "devDependencies": {
-    "@types/node": "^22.5.5",
-    "@types/nodemailer": "^7.0.4",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "autoprefixer": "^10.4.21",
-    "eslint": "^9.9.0",
-    "eslint-config-next": "^15.4.6",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.5.3"
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
   }
 }

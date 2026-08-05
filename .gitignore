@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-node_modules
+node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -24,6 +24,7 @@ backup.yaml
 
 # production
 /build
+.astro/
 
 # misc
 .DS_Store
@@ -46,8 +47,7 @@ yarn-error.log*
 next-env.d.ts
 
 # other settings
-/dist
-dist
+dist/
 dist-ssr
 dist.zip
 *.local
