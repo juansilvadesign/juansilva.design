@@ -1,0 +1,21 @@
+{
+  "name": "Juan Silva — Design Engineer",
+  "short_name": "Juan Silva",
+  "description": "Design Engineer for US agency overflow and contract engineering — Next.js/TypeScript frontends, Python/FastAPI backends, and n8n growth automation.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#00c8ff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}
