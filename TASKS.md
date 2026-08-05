@@ -154,7 +154,7 @@ replaces this build anyway. Fold into the next deploy rather than forcing one.
 
 ## Milestone B — New repo + Astro scaffold + submodule swap 🟢
 
-B1 and B3 shipped 2026-08-05; **B2 is the next thing to do.** Rationale:
+B1–B3 shipped 2026-08-05; the B1 README handoff and B4 remain. Rationale:
 [ROADMAP](ROADMAP.md#b--new-repo--astro-scaffold--submodule-swap-).
 
 ### B1 — Create the repo ✅ 2026-08-05
@@ -167,16 +167,19 @@ B1 and B3 shipped 2026-08-05; **B2 is the next thing to do.** Rationale:
 - [ ] Rewrite `README.md` — it is still the old site's. State what this is, how to
       run it, and the route table (fecoelho's README is the shape to copy).
 
-### B2 — Scaffold Astro
+### B2 — Scaffold Astro ✅ 2026-08-05
 
-- [ ] Astro **7**, `output: "static"`, Node **24** (`.nvmrc`), matching
+- [x] Astro **7**, `output: "static"`, Node **24** (`.nvmrc`), matching
       [`fecoelho-com-br-clone`](../../../../knowledge/projects/fecoelho-com-br-clone/).
-- [ ] `astro.config.mjs`: `site: "https://juanpablosilva.com.br"` — the H gate
+- [x] `astro.config.mjs`: `site: "https://juanpablosilva.com.br"` — the H gate
       changes this to `https://juansilva.design` and nothing else.
-- [ ] i18n block: `defaultLocale: "en"`, `locales: ["en", "pt"]`,
+- [x] i18n block: `defaultLocale: "en"`, `locales: ["en", "pt"]`,
       `routing: { prefixDefaultLocale: false }` → `/` is EN, `/pt/` is PT.
-- [ ] Scripts: `dev`, `build`, `preview`, and `check` = `astro check && astro build`.
-- [ ] `.gitignore` covering `dist/`, `.astro/`, `node_modules/`.
+- [x] Scripts: `dev`, `build`, `preview`, and `check` = `astro check && astro build`.
+- [x] `.gitignore` covering `dist/`, `.astro/`, `node_modules/`.
+- [x] Verified under Node `v24.18.0`: Astro `7.1.6`, zero check diagnostics,
+      static build complete, and `npm audit` reports zero vulnerabilities. The
+      build intentionally emits zero pages until milestones C and D add routes.
 
 ### B3 — Swap this folder to a submodule ✅ 2026-08-05
 
