@@ -6,9 +6,10 @@ pipeline lives in **[`../../MEMORY.md`](../../MEMORY.md)**.
 
 _Last reviewed: 2026-08-05_
 
-> **The repo split is done. The job now is the Astro refactor — milestones C and
-> D.** The current Next site is already live and stays live; it is not a thing to
-> keep rescuing. Milestone **A** is closed except for one asset handoff, and **A4
+> **The repo split, Astro scaffold, and content architecture are done. Milestone
+> D is next on the critical path.** The current Next site is already live and
+> stays live; it is not a thing to keep rescuing. Milestone **A** is closed except
+> for one asset handoff, and **A4
 > was deleted outright** — see below.
 >
 > ⛔ **`juansilvadesign/juansilva.is-a.dev` is off limits.** Juan's instruction is
@@ -213,45 +214,59 @@ They describe the old arrangement and will actively mislead the next session.
 
 ---
 
-## Milestone C — Content architecture ⬜ *(keystone)*
+## Milestone C — Content architecture ✅ 2026-08-05 *(keystone)*
 
 The milestone the rebuild exists for. Rationale, and the full spaceapps-vs-psiativa
 comparison: [ROADMAP](ROADMAP.md#c--content-architecture--keystone).
 
 ### C1 — i18n
 
-- [ ] `src/i18n/en.ts` — the **base** language. `export type TranslationKeys = typeof en`.
-- [ ] `src/i18n/pt.ts` — typed `satisfies TranslationKeys`, so a missing key is a
+- [x] `src/i18n/en.ts` — the **base** language. `export type TranslationKeys = typeof en`.
+- [x] `src/i18n/pt.ts` — typed `satisfies TranslationKeys`, so a missing key is a
       **build error**. This is the single mechanism that prevents translation
       drift; neither reference project has it on both sides.
-- [ ] `src/i18n/index.ts` — locale list, `t(lang)` lookup, and the `hreflang` pair.
+- [x] `src/i18n/index.ts` — locale list, `t(lang)` lookup, and the `hreflang` pair.
       Resolution happens at **build time** in `.astro` components. No hook, no
       `"use client"`, no client JS.
-- [ ] ⛔ Do **not** port psiativa's `data-i18n` DOM-swap engine or its
+- [x] ⛔ Did **not** port psiativa's `data-i18n` DOM-swap engine or its
       `useSiteLang`/`pick()` island bridge. Both are excluded on the record in the
       roadmap — the copy would not exist in the served HTML.
-- [ ] Verify: delete one key from `pt.ts` and confirm `npm run check` **fails**.
+- [x] Verified: temporarily removed `hero.dribbbleAriaLabel` from `pt.ts`;
+      `npm run check` failed with the missing property, then the key was restored.
       An i18n layer that cannot fail this test is not providing the guarantee.
 
 ### C2 — Content collections
 
-- [ ] `src/content/config.ts` with Zod schemas. `projects` first: title, role,
+- [x] `src/content.config.ts` with a strict Zod schema. Astro 7's Content Layer
+      loads collection config from this root path; the former
+      `src/content/config.ts` convention is legacy. `projects` includes title, role,
       **attribution** (required — see F), dates, stack, impact string, live URL,
       evidence link, `featured`, and per-locale copy.
-- [ ] Migrate the three live proof cards out of `components/sections/Projects.tsx`
+- [x] Migrated the three live proof cards out of `components/sections/Projects.tsx`
       into content entries — PsiAtiva funnel, PsiAtiva AI agents, Spaceapps.
-- [ ] Verify: a project's copy can be edited without opening a `.astro` file. If
-      it cannot, the schema is wrong.
+- [x] Verified: each project's EN/PT copy lives in its JSON entry and can be
+      edited without opening a `.astro` file. Temporarily removing Spaceapps'
+      required `attribution` made Astro fail with `attribution: Required`; it was
+      restored immediately.
 
 ### C3 — Design tokens
 
-- [ ] `design-system/tokens.css` as the consumed file, `src/styles/clone.css`
-      importing it — the fecoelho package shape.
-- [ ] Extract every colour, spacing step, radius and type ramp from the current
-      production CSS into tokens. Components reference tokens only.
-- [ ] ⛔ `design-tokens.json`, `tailwind-v4.css` and `components.manifest.json` are
+- [x] `design-system/tokens.css` is the consumed source, with
+      `src/styles/clone.css` importing it — the fecoelho package shape.
+- [x] Extracted the production colour, spacing, radius, type, motion, and layout
+      values, reconciled against Figma channel `r3momw0k`. New component-facing
+      CSS references tokens only; the legacy Next/Tailwind files remain migration
+      evidence until D replaces them.
+- [x] ⛔ `design-tokens.json`, `tailwind-v4.css` and `components.manifest.json` are
       **derived caches** if emitted — never hand-edited.
-- [ ] Verify: changing one token value visibly changes every surface that uses it.
+- [x] Verified with a temporary Astro smoke route: changing `--text-heading` from
+      neutral to pink propagated into all four compiled consumers. The original
+      neutral value was restored and the temporary route removed.
+
+> Figma inspection found one important source-of-truth mismatch: the primary
+> swatch captions still show retired purple hex values, while their actual fill
+> paints and the Desktop frames use cyan. The token source follows the paints
+> (`#B6EEFF`, `#2CD6FF`, `#00C8FF`, `#009CD4`, `#007CAB`, `#065674`), not the stale labels.
 
 ---
 

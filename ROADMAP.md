@@ -71,15 +71,15 @@ Three facts that shape every milestone below:
 | | Milestone | State | Gate / evidence |
 | --- | --- | --- | --- |
 | **A** | Preserve + repair the current site | ✅ | Source in a repo (`93dd7a9`); 4 defects fixed. Open: `og-image.jpg` (Juan's Figma export) |
-| **B** | New repo + Astro scaffold + submodule swap | 🟢 | B1 + B3 ✅ 08-05. **B2 (Astro scaffold) is next** |
-| **C** | Content architecture *(keystone)* | ⬜ | Needs B2 |
-| **D** | Port the v2 pages to Astro | ⬜ | Needs C |
-| **E** | vCard | ⬜ | Needs C |
-| **F** | Master-portfolio evidence store | ⬜ | Needs C |
+| **B** | New repo + Astro scaffold + submodule swap | 🟢 | B2 + B3 ✅ 08-05; B1 README handoff + B4 routing docs remain |
+| **C** | Content architecture *(keystone)* | ✅ | Typed i18n, 3 schema-validated projects, Figma-backed consumed tokens — 08-05 |
+| **D** | Port the v2 pages to Astro | ⬜ | C ✅; next on the critical path |
+| **E** | vCard | ⬜ | C ✅; ready to parallel D |
+| **F** | Master-portfolio evidence store | ⬜ | C ✅; ready to parallel D |
 | **G** | Contact form on Cloudflare Pages Functions | ⬜ | Needs D. **Now the form's only path** — the Render service does not exist |
 | **H** | Cutover to `juansilva.design` | 🔒 | Gated on the domain purchase — deliberately deferred |
 
-Critical path is now **B2 → C → D**. **E** and **F** parallel D once C lands.
+Critical path is now **D → G**. **E** and **F** can parallel D now that C has landed.
 **G** closes the inbound loop. **H** waits on a purchase decision.
 
 > **Scope correction, 2026-08-05.** A carried a Render step (A4) to keep the old
@@ -140,7 +140,7 @@ clone of `juansilva.is-a.dev`. That becomes false the moment this milestone land
 so [`CONTEXT.md`](../../CONTEXT.md) and [`CLAUDE.md`](../../CLAUDE.md) are edited
 in the same change — a routing table that lies is worse than none.
 
-### C — Content architecture ⬜ *(keystone)*
+### C — Content architecture ✅ *(keystone)*
 
 **This is the milestone the whole rebuild exists for.** Juan's stated goal is two
 properties: *easy to update the content*, and *easy to replace the UI next year*.
