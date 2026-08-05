@@ -1,0 +1,31 @@
+{
+  "title": "PsiAtiva AI Acquisition Operations",
+  "role": "Founder & Automation Engineer",
+  "attribution": "PsiAtiva is Juan Silva's own business. Juan designed and operates the workflows represented here; this is own-business capability evidence, not a paid client result.",
+  "dates": {
+    "start": "2026-05-27",
+    "end": null
+  },
+  "stack": ["javascript", "python"],
+  "impact": "Connected lead capture, evidence-based enrichment, qualification, routing, Postgres memory, and WhatsApp handoff through production n8n workflows.",
+  "liveUrl": "https://psiativa.com.br/",
+  "evidenceLink": "/assets/images/n8n.webp",
+  "featured": true,
+  "preview": "/assets/images/n8n.webp",
+  "copy": {
+    "en": {
+      "title": "AI Agent Orchestration & Sales Automation",
+      "description": "Built PsiAtiva's own acquisition operations with n8n orchestration, a WhatsApp SDR, Postgres and pgvector memory, evidence-based lead qualification, and AI-assisted routing.",
+      "previewAlt": "PsiAtiva n8n agent-orchestration workflow",
+      "liveLabel": "PsiAtiva in production",
+      "evidenceLabel": "View workflow evidence"
+    },
+    "pt": {
+      "title": "Orquestração de agentes e automação comercial",
+      "description": "Construí a operação de aquisição da própria PsiAtiva com orquestração no n8n, SDR no WhatsApp, memória em Postgres e pgvector, qualificação baseada em evidências e roteamento assistido por IA.",
+      "previewAlt": "Workflow de orquestração de agentes da PsiAtiva no n8n",
+      "liveLabel": "PsiAtiva em produção",
+      "evidenceLabel": "Ver evidência do workflow"
+    }
+  }
+}

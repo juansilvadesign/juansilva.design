@@ -1,0 +1,31 @@
+{
+  "title": "PsiAtiva Acquisition Funnel",
+  "role": "Founder & Design Engineer",
+  "attribution": "PsiAtiva is Juan Silva's own business. Juan owns the strategy, design, engineering, and automation represented by this project; it is capability evidence, not client work.",
+  "dates": {
+    "start": "2026-04-12",
+    "end": null
+  },
+  "stack": ["typescript", "tailwind"],
+  "impact": "Shipped an Astro marketing site, self-diagnosis quiz, ROI calculator, hCaptcha-protected capture, and automated WhatsApp handoff for PsiAtiva's acquisition operation.",
+  "liveUrl": "https://psiativa.com.br/",
+  "evidenceLink": "https://psiativa.com.br/quiz/",
+  "featured": true,
+  "preview": "/assets/images/calculadora.webp",
+  "copy": {
+    "en": {
+      "title": "High-Conversion Funnel Engineering",
+      "description": "Built PsiAtiva's production marketing site in Astro, with React islands for a self-diagnosis quiz and ROI calculator, protected capture, and an automated WhatsApp follow-up handoff.",
+      "previewAlt": "PsiAtiva ROI calculator funnel",
+      "liveLabel": "Live project",
+      "evidenceLabel": "Try the quiz funnel"
+    },
+    "pt": {
+      "title": "Engenharia de funil de conversão",
+      "description": "Construí o site de produção da PsiAtiva em Astro, com islands React para um quiz de autodiagnóstico e uma calculadora de ROI, captura protegida e passagem automatizada para o acompanhamento no WhatsApp.",
+      "previewAlt": "Funil da calculadora de ROI da PsiAtiva",
+      "liveLabel": "Projeto no ar",
+      "evidenceLabel": "Testar o quiz"
+    }
+  }
+}

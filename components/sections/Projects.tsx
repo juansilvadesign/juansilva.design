@@ -1,5 +1,10 @@
 import ProjectCard from '../ui/ProjectCard'
 import { StackId } from '../ui/Stacks'
+import psiativaAiOperations from '../../src/content/projects/psiativa-ai-operations.json'
+import psiativaFunnel from '../../src/content/projects/psiativa-funnel.json'
+import spaceapps from '../../src/content/projects/spaceapps.json'
+
+const projectEntries = [spaceapps, psiativaFunnel, psiativaAiOperations]
 
 const projects: {
   title: string
@@ -8,34 +13,27 @@ const projects: {
   primaryLink?: { href: string; label?: string; icon?: string }
   secondaryLink?: { href: string; label?: string; icon?: string }
   preview: { src: string; alt: string }
-}[] = [
-    {
-      title: 'High-Performance Next.js Architecture',
-      description:
-        'Engineered a fully custom Next.js frontend to bypass the limitations of standard no-code builders, delivered in 3 days, replacing a 1-month no-code development bottleneck.',
-      stacks: ['typescript', 'tailwind', 'figma'],
-      primaryLink: { href: 'https://spaceapps.com.br/', label: 'Live Project', icon: '/assets/icons/link-external-02.svg' },
-      secondaryLink: { href: 'https://github.com/ZokuWebDesign/spaceapps', label: 'Source on GitHub', icon: '/assets/icons/github.svg' },
-      preview: { src: 'https://i.ibb.co/0jbN3VkW/spaceapps-preview.webp', alt: 'SpaceApps landing page preview' },
-    },
-    {
-      title: 'High-Conversion Funnel Engineering',
-      description:
-        'Production marketing site for a Brazilian healthcare-growth consultancy. Astro with React islands, an interactive self-diagnosis quiz and ROI-calculator funnels, bot-protected capture wired straight into an automated WhatsApp follow-up pipeline.',
-      stacks: ['typescript', 'tailwind'],
-      primaryLink: { href: 'https://psiativa.com.br/', label: 'Live Project', icon: '/assets/icons/link-external-02.svg' },
-      secondaryLink: { href: 'https://psiativa.com.br/quiz/', label: 'Try the quiz funnel', icon: '/assets/icons/link-external-02.svg' },
-      preview: { src: '/assets/images/calculadora.webp', alt: 'PsiAtiva ROI-calculator funnel — live interactive tool' },
-    },
-    {
-      title: 'AI Agent Orchestration & Sales Automation',
-      description:
-        'Engineered an AI-powered acquisition engine: n8n orchestration, a WhatsApp SDR agent with RAG memory on Postgres + pgvector, and Claude-driven lead enrichment and routing. Replacing ~15 hours of manual qualification work per week.',
-      stacks: ['javascript', 'python'],
-      primaryLink: { href: 'https://psiativa.com.br/', label: 'In production — PsiAtiva', icon: '/assets/icons/link-external-02.svg' },
-      preview: { src: '/assets/images/n8n.webp', alt: 'n8n agent-orchestration canvas — AI sales automation in production' },
-    },
-  ]
+}[] = projectEntries.map((project) => ({
+  title: project.copy.en.title,
+  description: project.copy.en.description,
+  stacks: project.stack as StackId[],
+  primaryLink: {
+    href: project.liveUrl,
+    label: project.copy.en.liveLabel,
+    icon: '/assets/icons/link-external-02.svg',
+  },
+  secondaryLink: {
+    href: project.evidenceLink,
+    label: project.copy.en.evidenceLabel,
+    icon: project.evidenceLink.includes('github.com')
+      ? '/assets/icons/github.svg'
+      : '/assets/icons/link-external-02.svg',
+  },
+  preview: {
+    src: project.preview,
+    alt: project.copy.en.previewAlt,
+  },
+}))
 
 export default function Projects() {
   return (
