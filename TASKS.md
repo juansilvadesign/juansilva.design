@@ -4,13 +4,18 @@ The living checklist. Strategy, gates and the reasoning behind each milestone
 live in **[`ROADMAP.md`](ROADMAP.md)**; operational truth about domains and
 pipeline lives in **[`../../MEMORY.md`](../../MEMORY.md)**.
 
-_Last reviewed: 2026-08-04_
+_Last reviewed: 2026-08-05_
 
-> **Nothing is shipped yet.** Milestone **A** is the only one that can start
-> immediately — it is independent of the Astro rebuild and repairs the live site.
-> **Do not start B until A2 is pushed:** the working tree in this folder is
-> currently the only copy of what is serving `juanpablosilva.com.br`, and B
-> replaces this folder with a submodule.
+> **The repo split is done. The job now is the Astro refactor — milestones C and
+> D.** The current Next site is already live and stays live; it is not a thing to
+> keep rescuing. Milestone **A** is closed except for one asset handoff, and **A4
+> was deleted outright** — see below.
+>
+> ⛔ **`juansilvadesign/juansilva.is-a.dev` is off limits.** Juan's instruction is
+> that it stays the dev/v1 site and nothing lands in it. An earlier draft of this
+> file had A2 push a `v2-next-production` branch there; that was wrong, the branch
+> has been deleted, and the repo is back to `main` + `gh-pages` exactly as before.
+> The v2 code lives in **this** repo instead, which is where it should have gone.
 
 ---
 
@@ -27,47 +32,55 @@ _Last reviewed: 2026-08-04_
 - **A dev-only Astro endpoint must not live in `src/pages/`** — the static build
   prerenders it anyway and emits a `dist/api/…` artifact. Inject it from
   `astro.config.mjs` when `command === "dev"` instead.
-- `gh` is authenticated as `juansilvadesign` with `repo` scope (verified
-  2026-08-04). `juansilvadesign/juansilva.design` does **not** exist yet.
+- `gh` is authenticated as `juansilvadesign` with `repo` scope.
+  `juansilvadesign/juansilva.design` **exists** (public, created 2026-08-05).
+- **`git submodule add` also hangs on the credential manager** — it clones over
+  HTTPS. It leaves a stale `.git/index.lock` behind when it wedges, which then
+  makes every later git command fail with a misleading "another git process seems
+  to be running". Use the same `-c credential.helper=` bypass for `submodule add`,
+  not just `push`.
 
 ---
 
-## Milestone A — Rescue production 🟢
+## Milestone A — Preserve + repair the current site ✅ closed 2026-08-05
 
-Two unrelated problems, both cheap. Ships in an evening, independent of
-everything below. Rationale: [ROADMAP](ROADMAP.md#a--rescue-production-).
+Closed except for one asset handoff. The current Next site is live and stays
+live; it is not the project. Rationale:
+[ROADMAP](ROADMAP.md#a--rescue-production-).
 
-### A1 — Find out how production actually deploys
+### A1 — How production deploys — ⬜ superseded
 
-- [ ] Open the Cloudflare dashboard → Pages → the project serving
-      `juanpablosilva.com.br`. Record **git-connected or direct upload**, the
-      build command, the output directory, and every environment variable set at
-      build time.
-- [ ] Record the same for `dev.juanpablosilva.com.br`.
-- [ ] Write both into [`../../MEMORY.md`](../../MEMORY.md) under *Domain &
-      hosting* — they are currently unknown, and A4/A6 cannot be done safely
-      without them.
+Originally: read the Cloudflare project's deploy method before touching it.
+Overtaken by the repo split — the question that matters now is where **this**
+repo's Workers Build points, not how the old direct-upload deploy worked.
 
-> **Expectation, not an assumption to act on:** because the live code was never
-> committed, this cannot be a git-connected build — a connected build can only
-> build committed code. Confirm it. If it *is* git-connected, then something
-> other than this working tree is the real source and A2 changes shape entirely.
+- [ ] When wiring Cloudflare Workers Builds, connect it to
+      `juansilvadesign/juansilva.design`, branch `main`. ⛔ **Never** to
+      `juansilva.is-a.dev` — its `main` is the v1 site and a build from it would
+      replace the live site with the old one.
+- [ ] Before the first git-connected build, fix `package.json`: `build` runs
+      `npm run clean`, which is `powershell -File build-clean.ps1`. **There is no
+      PowerShell on Cloudflare's Linux builder.** `clean:fallback` already does
+      the same job in Node — make it the default.
+- [ ] Delete `.github/workflows/pages.yml`. It deploys `main` to GitHub Pages and
+      uploads `./out`, a directory `next.config.js` does not produce (`distDir`
+      is `dist`). It has been silently broken and is now actively misleading.
 
-### A2 — Commit the live site before touching anything ✅ 2026-08-04
+### A2 — Get the v2 source into a repo ✅ 2026-08-05
 
-- [x] Branch `v2-next-production` created off `c064588`.
-- [x] Committed the v2 working tree as **`767c764`** — **18 paths**: 12 modified,
-      3 deleted (`LandingQuiz.tsx`, `app/context/LandingContext.tsx`,
-      `app/layout-client.tsx`), 3 new images (`calculadora.webp`, `n8n.webp`,
-      `quiz.webp`). *(An earlier draft of this file said "15 modified … 21 paths";
-      the real diff is 18.)*
-- [x] Pushed to `juansilvadesign/juansilva.is-a.dev`. **`main` untouched at
-      `c064588`** — still the v1 site behind `dev.juanpablosilva.com.br`.
-- [x] Verified: `origin/v2-next-production` resolves; `git diff origin/main
-      origin/v2-next-production --stat` = 18 files, +132 / −668.
-
-> ✅ **The 8-week single-copy risk is closed.** The live site's source now exists
-> somewhere other than one laptop's working tree, and B3 is unblocked.
+- [x] Committed the v2 working tree — **18 paths**: 12 modified, 3 deleted
+      (`LandingQuiz.tsx`, `app/context/LandingContext.tsx`, `app/layout-client.tsx`),
+      3 new images (`calculadora.webp`, `n8n.webp`, `quiz.webp`).
+      *(An earlier draft said "15 modified … 21 paths"; the real diff is 18.)*
+- [x] **Landed in `juansilvadesign/juansilva.design` as `93dd7a9`** — the initial
+      commit of this repo, fresh history, plus `ROADMAP.md` and `TASKS.md`.
+- [x] ⛔ **Correction.** The first attempt pushed this to a `v2-next-production`
+      branch on `juansilva.is-a.dev`, against Juan's instruction to leave that
+      repo alone. The branch was deleted; that repo is back to `main` (`c064588`)
+      + `gh-pages` (`edd7508`), byte-identical to before. Nothing was lost —
+      the commits were re-seeded here.
+- [x] Verified: new repo `main` = 125 files; `git ls-remote` on the old repo shows
+      exactly two branches again.
 
 ### A3 — Fix the OG card + the broken asset references ⚠️ mostly done 2026-08-04
 
@@ -92,18 +105,26 @@ not one, and the footer's version switcher was dead too. All committed in `3ea45
       returns **200**, and the `og:image` in the served HTML resolves to it. Then
       re-scrape once in LinkedIn's Post Inspector.
 
-### A4 — Unblock the contact form (minimal fix only) ⚠️ code done, deploy pending
+### A4 — ~~Unblock the contact form via Render~~ ❌ DELETED 2026-08-05
 
-- [x] `server/index.js` — added `https://juanpablosilva.com.br` and
-      `https://www.juanpablosilva.com.br` to the production CORS allowlist. The
-      `.design` pair stays so the H cutover needs no server change.
-- [ ] Set `NEXT_PUBLIC_API_URL` to the Render service origin **at build time** in
-      the Cloudflare Pages project (needs A1). Unset, `Contact.tsx:123` falls back
-      to `''` and posts to a relative `/api/send` — a 404 on a static host.
-- [ ] Redeploy the Render service so the new allowlist is live.
+**This task should never have existed.** Juan chose Cloudflare Pages Functions for
+the contact form on 2026-08-04 — Render is being retired. A4 was work to wire a
+service back up that was already scheduled for deletion.
 
-> ⛔ **Do not refactor `server/`.** Milestone G deletes it. This is a two-line
-> change to stop the bleeding, nothing more.
+Then the probe made it moot anyway:
+
+```
+https://juansilva-backend.onrender.com  →  404, x-render-routing: no-server
+```
+
+`no-server` is Render saying **no service exists at that hostname** — not that a
+free instance is asleep. So there is no backend to point `NEXT_PUBLIC_API_URL` at,
+and the CORS allowlist edit that shipped in `93dd7a9` is inert. Harmless, and it
+disappears with `server/` at milestone G.
+
+⛔ **Do not set `NEXT_PUBLIC_API_URL`. Do not recreate the Render service.** The
+contact form's only remaining path is **[G](#milestone-g--contact-form-on-cloudflare-pages-functions-)**
+— a same-origin route needing no env var, no allowlist, and no second host.
 
 ### A5 — Point every visible address at something that receives mail ✅ 2026-08-04
 
@@ -117,32 +138,34 @@ not one, and the footer's version switcher was dead too. All committed in `3ea45
 - [x] Verified: `next build` green, **zero `contact@juansilva.design` in `dist/`**,
       11 `mailto:` occurrences all resolving to the working address. `67a7ce9`.
 
-### A6 — Verify the rescue end to end
+### A6 — Verify, whenever the current site is next deployed
 
-- [ ] Rebuild and redeploy production.
-- [ ] `curl` the live HTML and confirm: `og:url` and `og:image` on
-      `juanpablosilva.com.br`, `og-image.jpg` → 200, no `is-a.dev` reference
-      anywhere in the served output.
-- [ ] Submit the contact form against production from a browser and confirm the
-      mail arrives — not that the request returns 200. Two separate defects were
-      hiding behind that form; only a delivered email proves both are gone.
-- [ ] Update [`../../MEMORY.md`](../../MEMORY.md): mark all three defects closed
-      with the date, and record the deploy method from A1.
+Not urgent: the fixes are committed, the live site works, and the Astro rebuild
+replaces this build anyway. Fold into the next deploy rather than forcing one.
+
+- [ ] `curl` the live HTML and confirm `og:url` / `og:image` on
+      `juanpablosilva.com.br`, `og-image.jpg` → 200, and no `is-a.dev` anywhere in
+      the served output. ⛔ Read the **body**, not the status code — `is-a.dev`
+      answered 200 for weeks while serving an empty directory listing.
+- [ ] Update [`../../MEMORY.md`](../../MEMORY.md): mark the defects closed.
+- ~~Contact-form submission test~~ — moved to **G**. There is no backend to test.
 
 ---
 
-## Milestone B — New repo + Astro scaffold + submodule swap ⬜
+## Milestone B — New repo + Astro scaffold + submodule swap 🟢
 
-**Blocked on A2 being pushed.** Rationale:
+B1 and B3 shipped 2026-08-05; **B2 is the next thing to do.** Rationale:
 [ROADMAP](ROADMAP.md#b--new-repo--astro-scaffold--submodule-swap-).
 
-### B1 — Create the repo
+### B1 — Create the repo ✅ 2026-08-05
 
-- [ ] `gh repo create juansilvadesign/juansilva.design --public` with a
-      description matching the positioning line. **Public** — the repo is itself
+- [x] `juansilvadesign/juansilva.design` created **public** — the repo is itself
       portfolio evidence.
-- [ ] Add `LICENSE` and a `README.md` stating what the site is, how to run it, and
-      the route table (fecoelho's README is the shape to copy).
+- [x] Seeded at `93dd7a9` with the v2 Next site + `ROADMAP.md` + `TASKS.md`
+      (125 files, fresh history). Per Juan: start as the Next site, Astro replaces
+      it in place.
+- [ ] Rewrite `README.md` — it is still the old site's. State what this is, how to
+      run it, and the route table (fecoelho's README is the shape to copy).
 
 ### B2 — Scaffold Astro
 
@@ -155,20 +178,21 @@ not one, and the footer's version switcher was dead too. All committed in `3ea45
 - [ ] Scripts: `dev`, `build`, `preview`, and `check` = `astro check && astro build`.
 - [ ] `.gitignore` covering `dist/`, `.astro/`, `node_modules/`.
 
-### B3 — Swap this folder to a submodule
+### B3 — Swap this folder to a submodule ✅ 2026-08-05
 
-The risky step. Order matters.
+- [x] Confirmed the code was on the new remote before deleting anything on disk.
+- [x] Removed the stray full clone; added the submodule pointing at
+      `juansilvadesign/juansilva.design`.
+- [x] Committed `.gitmodules` + both gitlinks in the notes repo (`590af1d`).
+- [x] Verified: `git submodule status` lists both portfolio submodules, and
+      `projects/juansilva-is-a-dev/` **still pins `c064588`** — the freeze held.
 
-- [ ] Confirm A2's branch exists on the remote. If this folder is lost now, the
-      live site's source is lost with it.
-- [ ] From the notes repo root, remove `projects/juansilva-design/` from the index
-      and delete the working folder.
-- [ ] `git submodule add https://github.com/juansilvadesign/juansilva.design.git
-      workspace/juansilva.design/projects/juansilva-design`
-- [ ] Commit the new `.gitmodules` entry and the submodule pointer.
-- [ ] Verify `git submodule status` lists **both** portfolio submodules, and that
-      `projects/juansilva-is-a-dev/` still pins **`c064588`** — unchanged. ⛔ If
-      that SHA moved, the freeze was broken; reset it before continuing.
+> Two traps hit here, both now in *Environment notes*: `git submodule add` clones
+> over HTTPS and so **hangs on the Windows credential manager** exactly like
+> `push` does, and when it wedges it leaves a stale `.git/index.lock` that makes
+> every subsequent git command fail with a misleading "another git process seems
+> to be running". Check `pgrep -a git` and the lock's timestamp before believing
+> that message.
 
 ### B4 — Fix the workspace routing documents
 

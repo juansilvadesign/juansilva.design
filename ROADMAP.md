@@ -70,17 +70,26 @@ Three facts that shape every milestone below:
 
 | | Milestone | State | Gate / evidence |
 | --- | --- | --- | --- |
-| **A** | Rescue production — commit it, then fix the three live defects | 🟢 | Independent of everything else. Ships in one evening |
-| **B** | New repo + Astro scaffold + submodule swap | ⬜ | Needs A's rescue branch pushed first |
-| **C** | Content architecture *(keystone)* | ⬜ | Needs B |
+| **A** | Preserve + repair the current site | ✅ | Source in a repo (`93dd7a9`); 4 defects fixed. Open: `og-image.jpg` (Juan's Figma export) |
+| **B** | New repo + Astro scaffold + submodule swap | 🟢 | B1 + B3 ✅ 08-05. **B2 (Astro scaffold) is next** |
+| **C** | Content architecture *(keystone)* | ⬜ | Needs B2 |
 | **D** | Port the v2 pages to Astro | ⬜ | Needs C |
 | **E** | vCard | ⬜ | Needs C |
 | **F** | Master-portfolio evidence store | ⬜ | Needs C |
-| **G** | Contact form on Cloudflare Pages Functions | ⬜ | Needs D |
+| **G** | Contact form on Cloudflare Pages Functions | ⬜ | Needs D. **Now the form's only path** — the Render service does not exist |
 | **H** | Cutover to `juansilva.design` | 🔒 | Gated on the domain purchase — deliberately deferred |
 
-Critical path is **A → B → C → D**. **E** and **F** parallel D once C lands.
+Critical path is now **B2 → C → D**. **E** and **F** parallel D once C lands.
 **G** closes the inbound loop. **H** waits on a purchase decision.
+
+> **Scope correction, 2026-08-05.** A carried a Render step (A4) to keep the old
+> contact-form backend alive as a stopgap. That contradicted the decision to move
+> to Cloudflare — and the service turned out not to exist (`x-render-routing:
+> no-server`). **A4 is deleted. There is no Render work in this plan.**
+>
+> A also pushed the rescue to a branch on `juansilva.is-a.dev`, the repo Juan
+> fenced off. That branch was deleted and the code re-seeded here; the old repo is
+> back to `main` + `gh-pages` exactly as it was. ⛔ Nothing lands in that repo.
 
 ---
 
