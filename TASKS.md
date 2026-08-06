@@ -4,7 +4,7 @@ The living checklist. Strategy, gates and the reasoning behind each milestone
 live in **[`ROADMAP.md`](ROADMAP.md)**; operational truth about domains and
 pipeline lives in **[`../../MEMORY.md`](../../MEMORY.md)**.
 
-_Last reviewed: 2026-08-05_
+_Last reviewed: 2026-08-06_
 
 > **The repo split, content architecture, and Astro page port are done. Milestone
 > G is active on the critical path.** The current Next site is already live and
@@ -362,6 +362,16 @@ the production inbox-delivery gate above has not happened yet.
 Turnstile is the one justified exception to D's zero-JS baseline. The contact page
 loads Cloudflare's hosted widget script only when a public sitekey exists; there
 is still no custom client-side submission bundle or Astro island.
+
+Cloudflare account inventory (authenticated MCP, 2026-08-06): the account has one
+unrelated Pages project (`moemail`), two existing KV namespaces
+(`moemail-moemail-kv` and `sink`), and zero Turnstile widgets. None is a Milestone
+G resource to reuse. The next infrastructure step is a dedicated Pages project
+for `juansilvadesign/juansilva.design` on `main`, a `CONTACT_RATE_LIMIT` KV
+namespace/binding, and a production Turnstile widget after confirming whether the
+allowed hostname set is only `juanpablosilva.com.br` or also `www`. Wrangler OAuth
+remains expired; the authenticated Cloudflare MCP completed the inventory without
+mutating the account.
 
 ---
 
