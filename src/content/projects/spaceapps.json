@@ -1,30 +1,39 @@
 {
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/spaceapps.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
   "title": "Spaceapps Trilingual Marketing Site",
-  "role": "Design Engineer — design remediation, implementation, and integrations",
-  "attribution": "Spaceapps owned the project and its client relationship. Thiago designed the homepage; Juan Silva remediated that handoff, implemented the site, authored the legal, 404, and localized routes, and built the lead-capture service.",
+  "role": "Design Engineer — fixed the supplied homepage design, then coded it; authored the legal, 404 and localized routes outright",
+  "attribution": "Spaceapps owned the project and the client relationship — this was the agency's own marketing site. Thiago designed the homepage; Juan Silva remediated that handoff and implemented it, then authored the three Portuguese legal pages, the custom 404 and the /en-us + /es-ar route tree with no design input, and built the lead-capture service. The homepage design is not Juan's.",
   "dates": {
     "start": "2025-08-06",
     "end": "2025-09-06"
   },
-  "stack": ["typescript", "tailwind", "figma"],
-  "impact": "Implemented 11 homepage sections, three legal pages, a custom 404, three locale routes, and a lead-capture service with isolated writes to two Google Sheets plus Mailgun notifications.",
-  "liveUrl": "https://spaceapps.com.br/",
+  "stack": [
+    "typescript",
+    "tailwind",
+    "figma"
+  ],
+  "impact": "Shipped and served the agency's site from ~September 2025. The lead-capture service Juan wrote is still answering today — GET /health returned HTTP 200 with both integrations reporting configured, eleven months after the last commit and long after the frontend went dark.",
+  "liveUrl": "https://spaceapps.juanpablosilva.com.br/",
   "evidenceLink": "https://github.com/ZokuWebDesign/Spaceapps",
   "featured": true,
   "preview": "/assets/images/spaceapps-preview.webp",
   "copy": {
     "en": {
       "title": "Trilingual Marketing Site & Lead Capture",
-      "description": "Remediated the supplied homepage design and implemented the static Next.js site. Authored the legal pages, custom 404 and PT/EN/ES routing, then built the Google Sheets and Mailgun lead-capture service.",
+      "description": "Remediated the supplied homepage design and implemented the static Next.js site. Authored the legal pages, custom 404 and PT/EN/ES routing outright, then built the Google Sheets and Mailgun lead-capture service that is still answering today.",
       "previewAlt": "Spaceapps trilingual marketing site",
-      "liveLabel": "Project URL",
+      "liveLabel": "View the build (self-hosted copy)",
       "evidenceLabel": "Source and evidence"
     },
     "pt": {
       "title": "Site trilíngue e captura de leads",
-      "description": "Corrigi o design recebido para a página inicial e implementei o site estático em Next.js. Criei as páginas legais, o 404 personalizado e as rotas PT/EN/ES, além do serviço de captura com Google Sheets e Mailgun.",
+      "description": "Corrigi o design recebido para a página inicial e implementei o site estático em Next.js. Criei do zero as páginas legais, o 404 personalizado e as rotas PT/EN/ES, além do serviço de captura com Google Sheets e Mailgun, que segue respondendo até hoje.",
       "previewAlt": "Site de marketing trilíngue da Spaceapps",
-      "liveLabel": "URL do projeto",
+      "liveLabel": "Ver o build (cópia própria)",
       "evidenceLabel": "Código e evidências"
     }
   }

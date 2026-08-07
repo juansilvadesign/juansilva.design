@@ -1,13 +1,21 @@
 {
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/psiativa-ai-operations.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
   "title": "PsiAtiva AI Acquisition Operations",
   "role": "Founder & Automation Engineer",
-  "attribution": "PsiAtiva is Juan Silva's own business. Juan designed and operates the workflows represented here; this is own-business capability evidence, not a paid client result.",
+  "attribution": "PsiAtiva is Juan Silva's own business. Juan designed, built and operates the workflows represented here. This is own-business capability evidence, not client work and not a paid client result.",
   "dates": {
     "start": "2026-05-27",
     "end": null
   },
-  "stack": ["javascript", "python"],
-  "impact": "Connected lead capture, evidence-based enrichment, qualification, routing, Postgres memory, and WhatsApp handoff through production n8n workflows.",
+  "stack": [
+    "javascript",
+    "python"
+  ],
+  "impact": "Runs PsiAtiva's own acquisition operation in production, from capture through qualification to a WhatsApp handoff.",
   "liveUrl": "https://psiativa.com.br/",
   "evidenceLink": "/assets/images/n8n.webp",
   "featured": true,

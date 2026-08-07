@@ -30,8 +30,27 @@ const localizedProjectCopySchema = z
   })
   .strict();
 
+/**
+ * Stamp written by the evidence store's exporter.
+ *
+ * These files are DERIVED. The source of truth is the private store in the
+ * notes repo (`_config/portfolio/records/`), which holds the full corpus
+ * across every showability tier; only records marked showable are exported
+ * here. Edit the record and re-run the exporter — an edit made in this
+ * directory is overwritten on the next run and, worse, is a claim that never
+ * passed the store's attribution check.
+ */
+const generatedSchema = z
+  .object({
+    by: z.string().trim().min(1),
+    from: z.string().trim().min(1),
+    note: z.string().trim().min(1),
+  })
+  .strict();
+
 export const projectSchema = z
   .object({
+    _generated: generatedSchema.optional(),
     title: z.string().trim().min(1),
     role: z.string().trim().min(1),
     attribution: z.string().trim().min(1),
