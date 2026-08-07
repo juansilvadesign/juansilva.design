@@ -300,22 +300,33 @@ stack, not the design.
 
 ---
 
-## Milestone E — vCard ⬜
+## Milestone E — vCard 🟡 implementation complete 2026-08-06
 
 Needs C. Reference:
 [`fecoelho-com-br-clone`](../../../../knowledge/projects/fecoelho-com-br-clone/).
 
-- [ ] `src/data/contact.ts` — the single source: name, title, phone, email, socials,
+- [x] `src/data/contact.ts` — the single source: name, title, phone, email, socials,
       as a typed `ContactAction[]` (fecoelho's `src/types/contact.ts` shape).
-- [ ] Port `ProfileHeader` / `ContactLinks` / `ContactIcon` / `ContactFooter` to
+- [x] Port `ProfileHeader` / `ContactLinks` / `ContactIcon` / `ContactFooter` to
       `/card/`, both locales.
-- [ ] **Generate** the `.vcf` from `src/data/contact.ts` via an Astro endpoint —
+- [x] **Generate** the `.vcf` from `src/data/contact.ts` via an Astro endpoint —
       do *not* copy fecoelho's hand-written `public/*.vcf`. A static file drifts
       from the page rendered beside it; a generated one cannot.
-- [ ] Wire it as the NFC/QR target and record the tracked short link in
-      [`../../MEMORY.md`](../../MEMORY.md) — open since June.
+- [x] Wire `/card/` as the stable NFC/QR landing target in the production notes
+      and record it in [`../../MEMORY.md`](../../MEMORY.md).
+- [ ] Create the click-counting short alias, point it at
+      `https://juanpablosilva.com.br/card/`, and record provider + exact alias in
+      [`../../MEMORY.md`](../../MEMORY.md). No provider/account is configured in
+      the workspace, so do not invent a link or scan count.
 - [ ] Verify: download the `.vcf` and import it on a real phone. Every field
       matches the rendered card.
+
+Local verification (2026-08-06): Node `v24.18.0`, Astro `7.1.6`, zero check
+diagnostics, 16 static pages, EN/PT card copy present in static HTML, no card-page
+JavaScript, and `file` recognizes the emitted download as vCard 3.0. The artifact
+uses CRLF, terminates cleanly, folds physical lines at ≤75 bytes, and contains the
+same name, title, phone, email, website, LinkedIn, and GitHub facts supplied by
+`src/data/contact.ts`. Physical import remains deliberately unchecked.
 
 ---
 
