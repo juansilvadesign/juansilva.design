@@ -227,7 +227,8 @@ and a generated vCard 3.0 endpoint. The build emits `/card/`, `/pt/card/`, and
 `/juan-silva.vcf` with no client JavaScript. The canonical `/card/` URL has
 replaced the dead legacy host in the NFC/QR production notes. E remains open on
 two real-world gates: create a click-counting alias and verify an import on a
-physical phone after deployment.
+physical phone after deployment. Juan confirmed `/card/` deployed and the vCard
+verified on a real phone on 2026-08-06, so only the click-counting alias remains.
 
 ### F — Master-portfolio evidence store ⬜
 
