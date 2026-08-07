@@ -11,6 +11,9 @@ export const en = {
       projectsDescription: "Selected design engineering, frontend, and automation work by Juan Silva.",
       contactTitle: "Contact",
       contactDescription: "Contact Juan Silva about agency overflow and contract engineering work.",
+      cardTitle: "Contact Card",
+      cardDescription:
+        "Save Juan Silva's contact details or connect by phone, WhatsApp, email, LinkedIn, and GitHub.",
       privacyTitle: "Privacy Policy",
       privacyDescription: "How Juan Silva's portfolio handles personal and technical data.",
       termsTitle: "Terms of Use",
@@ -105,6 +108,37 @@ export const en = {
       submit: "Submit",
       submitting: "Submitting...",
       submitted: "✓ Message Sent!",
+    },
+  },
+  card: {
+    pageAriaLabel: "Juan Silva contact card",
+    portraitAlt: "Juan Silva",
+    actionsAriaLabel: "Juan Silva's contact options",
+    portfolioAriaLabel: "Open Juan Silva's portfolio",
+    actions: {
+      save: {
+        label: "Save contact",
+        subtitle: "Add Juan Silva to your phone",
+      },
+      phone: {
+        label: "Call",
+      },
+      whatsapp: {
+        label: "WhatsApp",
+        subtitle: "Send a message",
+      },
+      linkedIn: {
+        label: "LinkedIn",
+      },
+      website: {
+        label: "Portfolio",
+      },
+      email: {
+        label: "Email",
+      },
+      github: {
+        label: "GitHub",
+      },
     },
   },
   footer: {

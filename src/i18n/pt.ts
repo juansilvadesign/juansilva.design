@@ -13,6 +13,9 @@ export const pt = {
       projectsDescription: "Seleção de trabalhos de engenharia de design, frontend e automação de Juan Silva.",
       contactTitle: "Contato",
       contactDescription: "Fale com Juan Silva sobre apoio para agências e projetos de engenharia por contrato.",
+      cardTitle: "Cartão de Contato",
+      cardDescription:
+        "Salve o contato de Juan Silva ou fale por telefone, WhatsApp, e-mail, LinkedIn e GitHub.",
       privacyTitle: "Política de Privacidade",
       privacyDescription: "Como o portfólio de Juan Silva trata dados pessoais e técnicos.",
       termsTitle: "Termos de Uso",
@@ -107,6 +110,37 @@ export const pt = {
       submit: "Enviar",
       submitting: "Enviando...",
       submitted: "✓ Mensagem enviada!",
+    },
+  },
+  card: {
+    pageAriaLabel: "Cartão de contato de Juan Silva",
+    portraitAlt: "Juan Silva",
+    actionsAriaLabel: "Opções de contato de Juan Silva",
+    portfolioAriaLabel: "Abrir o portfólio de Juan Silva",
+    actions: {
+      save: {
+        label: "Salvar contato",
+        subtitle: "Adicionar Juan Silva ao celular",
+      },
+      phone: {
+        label: "Ligar",
+      },
+      whatsapp: {
+        label: "WhatsApp",
+        subtitle: "Enviar uma mensagem",
+      },
+      linkedIn: {
+        label: "LinkedIn",
+      },
+      website: {
+        label: "Portfólio",
+      },
+      email: {
+        label: "E-mail",
+      },
+      github: {
+        label: "GitHub",
+      },
     },
   },
   footer: {

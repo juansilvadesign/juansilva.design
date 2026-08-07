@@ -1,14 +1,10 @@
+import { contact } from "./contact";
+
 export const socialLinks = {
-  linkedIn: "https://linkedin.com/in/juansilvadesign",
-  x: "https://x.com/juansilvadesign",
-  instagram: "https://instagram.com/juansilvadesign",
-  threads: "https://www.threads.net/@juansilvadesign",
-  figma: "https://www.figma.com/@juansilvadesign",
-  dribbble: "https://dribbble.com/juansilvadesign",
-  github: "https://github.com/juansilvadesign",
+  ...contact.socials,
   // Both addresses stay on the working mailbox until ROADMAP milestone H.
-  mail: "mailto:jaypy.uxdesign@gmail.com",
-  mailCta: "mailto:jaypy.uxdesign@gmail.com",
+  mail: `mailto:${contact.email}`,
+  mailCta: `mailto:${contact.email}`,
 } as const;
 
 export const siteVersions = [

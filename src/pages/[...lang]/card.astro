@@ -1,0 +1,65 @@
+---
+import ContactFooter from "../../components/ContactFooter.astro";
+import ContactLinks from "../../components/ContactLinks.astro";
+import ProfileHeader from "../../components/ProfileHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { localeStaticPaths, pageTitle, t, type Locale } from "../../i18n";
+
+export function getStaticPaths() {
+  return localeStaticPaths();
+}
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+---
+
+<BaseLayout
+  {lang}
+  title={pageTitle(copy.meta.pages.cardTitle, lang)}
+  description={copy.meta.pages.cardDescription}
+  canonicalPath="/card/"
+  showNavigation={false}
+>
+  <main id="main-content" class="card-page" aria-label={copy.card.pageAriaLabel}>
+    <article class="card-page__panel">
+      <ProfileHeader {lang} />
+      <ContactLinks {lang} />
+      <ContactFooter {lang} />
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .card-page {
+    display: flex;
+    min-height: var(--viewport-height);
+    align-items: flex-start;
+    justify-content: center;
+    padding: var(--space-px-24) var(--space-px-16) var(--space-px-48);
+    background: var(--background);
+  }
+
+  .card-page__panel {
+    width: 100%;
+    max-width: var(--content-form);
+    padding: var(--space-px-24);
+    border: var(--border-width) solid var(--border-subtle);
+    border-radius: var(--radius-panel);
+    background: var(--background-deep);
+  }
+
+  @media (min-width: 640px) {
+    .card-page {
+      align-items: center;
+      padding: var(--space-px-48) var(--space-px-24);
+    }
+
+    .card-page__panel {
+      padding: var(--space-px-40);
+    }
+  }
+</style>

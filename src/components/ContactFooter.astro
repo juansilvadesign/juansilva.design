@@ -1,0 +1,43 @@
+---
+import LanguageSwitch from "./LanguageSwitch.astro";
+import { contact } from "../data/contact";
+import { localizedPath, t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang).card;
+const hostname = new URL(contact.website).hostname;
+const portfolioUrl = new URL(localizedPath("/", lang), contact.website).href;
+---
+
+<footer class="contact-footer">
+  <a href={portfolioUrl} aria-label={copy.portfolioAriaLabel}>✦ {hostname}</a>
+  <LanguageSwitch {lang} currentPath={contact.cardPath} />
+</footer>
+
+<style>
+  .contact-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-16);
+    margin-top: var(--space-px-32);
+    color: var(--text-secondary);
+    font-family: var(--font-ui);
+    font-size: var(--type-label-size);
+    line-height: var(--type-label-leading);
+  }
+
+  .contact-footer > a {
+    color: var(--primary-light);
+    font-weight: var(--font-weight-semibold);
+    transition: color var(--motion-fast) var(--ease-standard);
+  }
+
+  .contact-footer > a:hover {
+    color: var(--text-heading);
+  }
+</style>

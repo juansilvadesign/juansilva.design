@@ -1,0 +1,126 @@
+---
+import ContactIcon from "./ContactIcon.astro";
+import { getContactActions } from "../data/contact";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang).card;
+const actions = getContactActions(lang);
+---
+
+<nav class="contact-links" aria-label={copy.actionsAriaLabel}>
+  {
+    actions.map((action) => (
+      <a
+        class:list={["contact-links__link", { "contact-links__link--primary": action.primary }]}
+        href={action.href}
+        download={action.download ? "juan-silva.vcf" : undefined}
+        target={action.external ? "_blank" : undefined}
+        rel={action.external ? "noopener noreferrer" : undefined}
+      >
+        <span class="contact-links__icon" aria-hidden="true">
+          <ContactIcon name={action.icon} />
+        </span>
+        <span class="contact-links__copy">
+          {action.label}
+          <span class="contact-links__subtitle">{action.subtitle}</span>
+        </span>
+        <span class="contact-links__arrow" aria-hidden="true">{action.arrow}</span>
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-px-12);
+    margin-top: var(--space-px-32);
+  }
+
+  .contact-links__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-px-16);
+    padding: var(--space-px-16) var(--space-px-18);
+    border: var(--border-width) solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    color: var(--text-heading);
+    font-family: var(--font-ui);
+    font-size: var(--text-16);
+    font-weight: var(--font-weight-semibold);
+    transition:
+      transform var(--motion-fast) var(--ease-standard),
+      border-color var(--motion-fast) var(--ease-standard),
+      background-color var(--motion-fast) var(--ease-standard);
+  }
+
+  .contact-links__link:active {
+    transform: scale(0.985);
+  }
+
+  .contact-links__link:hover {
+    border-color: var(--primary-dark);
+    background: var(--surface-hover);
+  }
+
+  .contact-links__icon {
+    display: grid;
+    width: var(--space-px-48);
+    height: var(--space-px-48);
+    flex: 0 0 var(--space-px-48);
+    place-items: center;
+    border-radius: var(--radius-md);
+    background: var(--background-deep);
+    color: var(--primary-light);
+  }
+
+  .contact-links__copy {
+    min-width: 0;
+    flex: 1;
+    text-align: left;
+  }
+
+  .contact-links__subtitle {
+    display: block;
+    overflow: hidden;
+    margin-top: var(--space-px-2);
+    color: var(--text-secondary);
+    font-size: var(--type-meta-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--type-meta-leading);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .contact-links__arrow {
+    flex: 0 0 auto;
+    color: var(--text-secondary);
+  }
+
+  .contact-links__link--primary {
+    border-color: var(--primary-dark);
+    background: var(--primary-dark);
+  }
+
+  .contact-links__link--primary:hover {
+    border-color: var(--primary);
+    background: var(--primary-dark);
+  }
+
+  .contact-links__link--primary .contact-links__icon {
+    background: var(--color-white-a10);
+    color: var(--text-heading);
+  }
+
+  .contact-links__link--primary .contact-links__subtitle,
+  .contact-links__link--primary .contact-links__arrow {
+    color: var(--color-cyan-100);
+  }
+</style>

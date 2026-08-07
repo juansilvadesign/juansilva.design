@@ -11,9 +11,18 @@ interface Props {
   canonicalPath: string;
   image?: string;
   noindex?: boolean;
+  showNavigation?: boolean;
 }
 
-const { lang, title, description, canonicalPath, image, noindex } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  canonicalPath,
+  image,
+  noindex,
+  showNavigation = true,
+} = Astro.props;
 const copy = t(lang);
 ---
 
@@ -29,7 +38,7 @@ const copy = t(lang);
   </head>
   <body>
     <a class="skip-link" href="#main-content">{copy.navigation.skipToContent}</a>
-    <Navbar {lang} currentPath={canonicalPath} />
+    {showNavigation && <Navbar {lang} currentPath={canonicalPath} />}
     <slot />
   </body>
 </html>
