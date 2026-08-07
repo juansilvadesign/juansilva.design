@@ -102,8 +102,9 @@ not one, and the footer's version switcher was dead too. All committed in `3ea45
       Now 2026 → `juanpablosilva.com.br`, 2025 → `dev.juanpablosilva.com.br`.
 - [x] Verified locally: `next build` green, 10/10 static pages, all five assets
       emitted to `dist/`, and **zero `is-a.dev` references anywhere in `dist/`**.
-- [ ] 🔴 **`public/og-image.jpg` (1200×630) still does not exist** — the one defect
-      left open. This is a real design asset, not a config fix.
+- [x] ✅ **`public/og-image.jpg` supplied by Juan 2026-08-07** — verified as
+      **JPEG, exactly 1200×630, 221 KB**. Confirmed referenced from the built
+      home page in both locales. **Still uncommitted and undeployed.**
 - [ ] Verify after deploy: `curl -sI https://juanpablosilva.com.br/og-image.jpg`
       returns **200**, and the `og:image` in the served HTML resolves to it. Then
       re-scrape once in LinkedIn's Post Inspector.
@@ -331,23 +332,81 @@ the `.vcf` is verified on a real phone. Only the click-counting alias remains.
 
 ---
 
-## Milestone F — Master-portfolio evidence store ⬜
+## Milestone F — Master-portfolio evidence store 🟢 core shipped 2026-08-07
 
 Needs C. Built from scratch. Supersedes
 [`../../_config/plans/master-portfolio-evidence-store.md`](../../_config/plans/master-portfolio-evidence-store.md).
 
-- [ ] Schema first: claim, project, role, **attribution (required)**, date range,
-      live URL, evidence link, verification status.
-- [ ] ⛔ **Attribution is a required field**, so an unattributed claim fails the
-      build. This lane has already published false claims; the schema — not
-      discipline — is what prevents the next one.
-- [ ] Seed from the audited sources already in the workspace rather than from
-      memory: [`_config/linkedin-profile/`](../../_config/linkedin-profile/) and
-      [`_config/service-catalog.md`](../../_config/service-catalog.md), honouring
-      the never-claim list.
-- [ ] Render the portfolio project cards from the store — one source, many views.
-- [ ] Master CV as a second render of the same store.
-- [ ] Verify: add a claim with no attribution and confirm the build **fails**.
+> ⛔ **The store does NOT live in this repo, and the plan's banner saying it does
+> was unsafe.** This repo is **public** (`gh repo view` → `PUBLIC`); the notes
+> repo is **private**. The full corpus — every showability tier — lives in
+> [`../../_config/portfolio/`](../../_config/portfolio/), and a validating
+> exporter writes only 🟢-showable records into `src/content/projects/`.
+> **Filtering in the Astro loader would not have worked**: the source JSON would
+> already be public regardless of what the loader rendered. Storing ≠ publishing.
+> Architecture chosen by Juan, 2026-08-07.
+
+- [x] Schema first — [`_config/portfolio/schema.mjs`](../../_config/portfolio/schema.mjs).
+      Dependency-free ESM (the notes repo has no `package.json` and gains no
+      `node_modules`). **Provenance is per FIELD, not per record**: every
+      load-bearing field carries `{ value, status, source, confirmedOn }`.
+      Chosen because this store's actual failures were per-field — a `(verified)`
+      stack line asserted four frameworks with zero imports, `Period` was derived
+      from `pushed_at` on six repos, and `spaceapps` was wrong in *both*
+      directions under a ✅ ROLE CONFIRMED badge. A record with a confirmed role
+      and a blank outcome is now citable for the role alone.
+      - `status: "absent"` is distinct from `"unconfirmed"` — "no metrics exist,
+        confirmed absent, not merely uncollected" is a finding, and recording it
+        stops a later pass from hopefully re-opening the question.
+- [x] ⛔ **Attribution required and must be CONFIRMED** — merely present is not
+      enough. Both halves verified below.
+- [x] Seeded from the audited sources, never from memory — **7 records** (5
+      projects, 2 roles), each naming the source file it was compiled from.
+      Cleared records only, per Juan 2026-08-07: `spaceapps`, `allprice`,
+      `gestrif`, `psiativa-funnel`, `psiativa-ai-operations`, `role-spaceapps`,
+      `role-agenda-geek`. The never-claim lists are carried **into the schema**
+      as a first-class `neverClaim` array, and 🔒 internal facts as
+      `internalOnly` — which no renderer ever emits.
+- [x] Portfolio cards render from the store — `export.mjs` emits 3 cards; the
+      three previously hand-written ones are now generated and stamped
+      `_generated`. `src/content.config.ts` accepts the stamp. **Emission is by
+      allowlist, never blocklist**, so a field added to the store later is
+      private by default and cannot leak by being forgotten.
+- [x] Master CV as a second render — [`render-cv.mjs`](../../_config/portfolio/render-cv.mjs)
+      → `_config/portfolio/master-cv.generated.md`. Confirmed fields only;
+      unconfirmed ones are omitted rather than hedged, and each block names what
+      it withheld. **Writes a sibling file, NOT `_config/master-cv.md`** — that
+      is the hand-written demand spec and it holds slot material the store does
+      not carry yet. This does answer that file's own open question ("prose or a
+      rendered view?"): rendered view. Reconciling the two is a human call.
+- [x] **Verified — five gates, each leaving the public repo byte-unchanged:**
+      | Probe | Result |
+      |---|---|
+      | attribution missing entirely | `exit 1`, nothing written |
+      | attribution present but `unconfirmed` | `exit 1`, nothing written |
+      | non-showable record carrying a `publish` block | `exit 1`, nothing written |
+      | non-showable record, no publish block | `exit 0`, correctly withheld |
+      | `mirror` link with no disclosure | `exit 1`, nothing written |
+      Plus **defense in depth**: stripping `attribution` from an already-exported
+      card fails `npm run check` too — `InvalidContentEntryDataError … attribution: Required`.
+      And the CV render was leak-probed for six `internalOnly` strings: **0 hits**.
+
+### F-next — what is NOT done
+
+- [ ] **17 UNCONFIRMED Sagitta records are not in the store.** They need Juan's
+      interview pass first; the contaminated-brief trap means mechanical
+      compilation would inject false claims. Store scope was deliberately
+      "cleared records only".
+- [ ] The remaining audited-but-uninterviewed records (`figma/superselos`,
+      `figma/miaki`, `figma/syd`, `figma/psi-silvanacabral`, `github/psi.silvanacabral`,
+      `github/celus`, `github/upos`, …) — interviewed 7 of 15, so most of the
+      corpus is still outside the store.
+- [ ] `allprice` and `gestrif` carry no `publish` block (no preview asset), so
+      they are evidence-only. Add previews to publish them.
+- [ ] Reconcile `_config/master-cv.md` (hand-written spec) against
+      `master-cv.generated.md` (render).
+- [ ] `service-catalog.md` tiers still ship `❓` — the store now supports lifting
+      several. Not done.
 
 ---
 
