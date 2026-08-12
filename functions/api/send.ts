@@ -2,6 +2,25 @@ import { sendContactEmail, type ContactEmail } from "../_lib/smtp";
 
 const TURNSTILE_ACTION = "turnstile-spin-v1";
 const SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
+
+// This endpoint runs on its own host (form.juanpablosilva.com.br) while the form
+// is served from the Apache site. So the request hostname is NEVER the page
+// hostname, and anything derived from `request.url` is wrong here — it names the
+// Worker, not the site. The page hostnames are therefore explicit.
+//
+// Both entries are load-bearing: `www` was verified 2026-08-12 to serve a
+// byte-identical contact page rather than redirecting to the apex, so dropping
+// it 403s every `www` visitor at the Turnstile gate.
+//
+// ⛔ The production Turnstile widget must authorize exactly this set. A hostname
+//    that is allowed here but not on the widget fails closed and silently.
+// ⚠️ Milestone H (cutover to juansilva.design) must add the new hostnames here
+//    AND on the widget, or the form dies at the moment the domain flips.
+const SITE_ORIGIN = "https://juanpablosilva.com.br";
+const ALLOWED_PAGE_HOSTNAMES = new Set([
+  "juanpablosilva.com.br",
+  "www.juanpablosilva.com.br",
+]);
 const MAX_BODY_BYTES = 16 * 1024;
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_SECONDS = 15 * 60;
@@ -93,16 +112,14 @@ export async function handleContactRequest(
       turnstileSecret,
       ip === "unknown" ? undefined : ip,
     );
-    const expectedHostname = new URL(request.url).hostname.toLowerCase();
+    const solvedHostname = verification.hostname?.toLowerCase();
+    const hostnameAllowed = Boolean(solvedHostname && ALLOWED_PAGE_HOSTNAMES.has(solvedHostname));
 
-    if (
-      !verification.success ||
-      verification.action !== TURNSTILE_ACTION ||
-      verification.hostname?.toLowerCase() !== expectedHostname
-    ) {
+    if (!verification.success || verification.action !== TURNSTILE_ACTION || !hostnameAllowed) {
       log("contact_turnstile_rejected", requestId, {
         actionMatch: verification.action === TURNSTILE_ACTION,
-        hostnameMatch: verification.hostname?.toLowerCase() === expectedHostname,
+        hostnameMatch: hostnameAllowed,
+        solvedHostname,
         errorCodes: verification.errorCodes,
       });
       throw new ContactRequestError(403, "turnstile-error", "Turnstile verification failed");
@@ -323,19 +340,21 @@ async function consumeRateLimit(
 }
 
 function localeFromRequest(request: Request): Locale {
+  return allowedRefererUrl(request)?.pathname.startsWith("/pt/") ? "pt" : "en";
+}
+
+function allowedRefererUrl(request: Request): URL | undefined {
   const referer = request.headers.get("Referer");
 
   if (!referer) {
-    return "en";
+    return undefined;
   }
 
   try {
     const url = new URL(referer);
-    return url.origin === new URL(request.url).origin && url.pathname.startsWith("/pt/")
-      ? "pt"
-      : "en";
+    return ALLOWED_PAGE_HOSTNAMES.has(url.hostname.toLowerCase()) ? url : undefined;
   } catch {
-    return "en";
+    return undefined;
   }
 }
 
@@ -391,7 +410,12 @@ function respond(
     );
   }
 
-  const target = new URL(locale === "pt" ? "/pt/contact/" : "/contact/", request.url);
+  // Resolve against the PAGE origin, never `request.url` — that is this Worker's
+  // own host, and redirecting there sends the visitor to a contact page that does
+  // not exist on it. Bounce the submitter back to the host they came from so a
+  // `www` visitor stays on `www`.
+  const origin = allowedRefererUrl(request)?.origin ?? SITE_ORIGIN;
+  const target = new URL(locale === "pt" ? "/pt/contact/" : "/contact/", origin);
   target.hash = feedback;
   responseHeaders.set("Location", target.toString());
   return new Response(null, { status: 303, headers: responseHeaders });

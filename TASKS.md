@@ -11,18 +11,21 @@ _Last reviewed: 2026-08-12_
 > closed except for one asset that is committed but unpublished, and **A4 was
 > deleted outright** — see below.
 >
-> 🔴 **The critical path is no longer G — it is the deploy itself.** Verified
-> 2026-08-12: production is a **manual upload of the built `dist/` into an
-> Apache docroot**, and the live copy is a snapshot from **2026-08-07 01:30 UTC**.
-> Three commits have landed since; none are live, `og-image.jpg` among them, so
-> every social share of the site currently renders a broken preview card.
-> **A3 and A6 close the moment someone uploads a current `dist/` — no code
-> change is involved.** G does not: Apache cannot run `functions/api/send.ts`,
-> so G is blocked on a hosting decision (see G).
+> ✅ **Production republished 2026-08-12 and verified green — 21/21 gates.**
+> `og-image.jpg` **200** and byte-identical, CSP + `Referrer-Policy` served for
+> the first time, the custom 404 page reachable at last, zero JS and zero
+> `is-a.dev` intact. **A3, A6 and A7 are closed.** The one residue is a LinkedIn
+> Post Inspector re-scrape, which needs Juan's login.
 >
-> A verified, current `dist/` is **built and waiting** in the working tree
-> (2026-08-12, 16 pages, `og-image.jpg` included, zero JS, zero `is-a.dev`).
-> Evidence: [`../../MEMORY.md`](../../MEMORY.md) → *How production actually publishes*.
+> 🟢 **The critical path is G, and it is UNBLOCKED as of 2026-08-12.** Apache
+> cannot execute `functions/api/send.ts`, so the contact form has no runtime —
+> but the hosting fork is now **decided: a standalone Worker on a `form.`
+> subdomain, with the site staying on Apache.** The full Pages migration was
+> rejected as a hosting migration bundled into a form fix. Fork (b) had been
+> parked on a false premise (a CORS problem that cannot exist without JS — see G).
+> Production remains a **manual upload of the built `dist/` into an Apache
+> docroot** (deploy runbook: [`../../MEMORY.md`](../../MEMORY.md)); that is now
+> **Milestone I**, tracked separately from G on purpose.
 >
 > ⛔ **`juansilvadesign/juansilva.is-a.dev` is off limits.** Juan's instruction is
 > that it stays the dev/v1 site and nothing lands in it. An earlier draft of this
@@ -117,9 +120,15 @@ not one, and the footer's version switcher was dead too. All committed in `3ea45
 - [x] ✅ **`public/og-image.jpg` supplied by Juan 2026-08-07** — verified as
       **JPEG, exactly 1200×630, 221 KB**. Confirmed referenced from the built
       home page in both locales. **Still uncommitted and undeployed.**
-- [ ] Verify after deploy: `curl -sI https://juanpablosilva.com.br/og-image.jpg`
-      returns **200**, and the `og:image` in the served HTML resolves to it. Then
-      re-scrape once in LinkedIn's Post Inspector.
+- [x] ✅ **Verified 2026-08-12 after the cPanel upload:**
+      `https://juanpablosilva.com.br/og-image.jpg` → **200**, `image/jpeg`,
+      **226,633 bytes — byte-identical to the repo copy**, and the served
+      `og:image`/`twitter:image` resolve to it. `last-modified` moved to
+      2026-08-12 05:16 UTC, off the stale snapshot. **A3 is closed.**
+- [ ] ⏳ Re-scrape once in LinkedIn's Post Inspector — the only step left, and it
+      needs Juan's login. LinkedIn caches the old failed scrape, so shares will
+      keep showing no preview until it is re-fetched **even though the asset is
+      now live**.
       - 🔴 **Checked 2026-08-12: still 404, and it is a DEPLOY gap, not a code
         gap.** The file is committed (`d62265a`) and correct on disk (JPEG,
         1200×630, 221 KB), and the served HTML already emits the right
@@ -193,11 +202,11 @@ replaces this build anyway. Fold into the next deploy rather than forcing one.
       2–3 supersede into G, which is now blocked. Close them when G resolves.)*
 - ~~Contact-form submission test~~ — moved to **G**. There is no backend to test.
 
-### A7 — Repair `public/.htaccess` 🟡 fixed in tree 2026-08-12, ships with the next upload
+### A7 — Repair `public/.htaccess` ✅ closed 2026-08-12
 
 Found while identifying the host. `.htaccess` is the **real** production config
 on this origin — `_headers` is decorative here — so these were live defects, not
-cosmetics. All three fixed in the working tree and **uncommitted**.
+cosmetics. All fixed, committed in `cf06062`, and verified on production.
 
 - [x] **Removed an orphan `</IfModule>`.** One opening tag, two closings. An
       unbalanced `.htaccess` is normally a fatal 500 for the entire docroot; this
@@ -217,8 +226,12 @@ cosmetics. All three fixed in the working tree and **uncommitted**.
       `_headers` **kept** — it becomes live again if G moves the site to Pages.
 - [x] Dropped a duplicate `mod_deflate` block declaring a strict subset of the
       types already covered above it.
-- [ ] Commit A7 + verify the headers land after the upload (gates 3 and 4 of
-      `verify-deploy.sh`).
+- [x] ✅ **Committed (`cf06062`) and verified live 2026-08-12.** Gate 3:
+      `Content-Security-Policy` and `Referrer-Policy` are now served, with
+      `X-Frame-Options`/`X-Content-Type-Options` unregressed. Gate 4: a missing
+      route returns a **real 5,279-byte HTML 404 under a correct 404 status**,
+      with no `/nao-encontrada/` rewrite — D's `404.astro` renders in production
+      for the first time. **A7 closed.**
 
 ---
 
@@ -386,10 +399,12 @@ Needs C. Reference:
       Cloudflare). Provider + exact alias recorded in
       [`../../MEMORY.md`](../../MEMORY.md). Chain verified by curl: `308` →
       `juanpablosilva.com.br/card` → `301` → `/card/` → `200`.
-      - [ ] ⚠️ **Retarget the alias to include the trailing slash.** It currently
-            points at `…/card` (no slash), so the redirect costs **two** hops
-            instead of one on every NFC tap and QR scan. One field in the Sink
-            dashboard.
+      - ⛔ **The extra redirect hop is a Sink platform default and CANNOT be
+            changed** (Juan, 2026-08-12). The alias resolves to `…/card`, and
+            Apache's `DirectorySlash` adds the slash, so every NFC tap and QR
+            scan costs 2 hops instead of 1. **Not a defect and not actionable —
+            do not re-open it.** Cost is one extra round-trip on a redirect that
+            already works; the landing page is unaffected.
       - ⛔ Still no scan count may be quoted — Sink records clicks, but none have
             been read out of the dashboard. Uncollected ≠ zero.
 - [x] Verify: download the `.vcf` and import it on a real phone. Every field
@@ -489,39 +504,93 @@ Needs C. Built from scratch. Supersedes
 
 ---
 
-## Milestone G — Contact form on Cloudflare Pages Functions 🔴 BLOCKED
+## Milestone G — Contact form on a standalone Worker 🟢 UNBLOCKED
 
 Needs D. Deletes the Render service and the whole CORS failure class.
 
-> 🔴 **BLOCKED 2026-08-12 — the origin is Apache, which cannot execute a Pages
-> Function.** `functions/api/send.ts` has no runtime at `juanpablosilva.com.br`.
-> Identified from `public/.htaccess`: it is tracked in git, Astro copies it into
-> `dist/`, and it sets *exactly* the four security headers and two
-> `Cache-Control` values production returns. Corroborated by `GET /api/send` →
-> **404**, by the CSP in `public/_headers` being **absent from every live
-> response**, and by the 2026-08-06 MCP inventory finding one Pages project in
-> the account (`moemail`) and none for this repo. ⚠️ None of that is explained by
-> deploy staleness — `_headers`, `_routes.json` and `functions/` all shipped in
-> `1a3f0bb`, **26 hours before** the live snapshot.
+> ✅ **DECIDED 2026-08-12 (Juan): fork (b) — standalone Worker. The site stays on
+> Apache.** `send.ts` is deployed as its own Worker on a `form.` subdomain, the
+> form's `action` is re-targeted at it, and Apache keeps serving all 14 static
+> pages unchanged. No apex DNS change, no re-verification of the 22 green gates,
+> no `.htaccess` retirement. Fork (a) — the full Pages migration — was **not**
+> chosen: it is a hosting migration wearing a form-fix costume, and its best
+> argument (git-push deploys) was a *deploy* problem that has been split out to
+> **Milestone I** so it can be judged on its own merits.
 >
-> ⛔ **Do not continue G by writing more handler code — it is already written and
-> unreachable.** G needs a hosting decision, and the two options are real forks:
-> **(a)** move the site to Cloudflare Pages/Workers — `functions/` and `_headers`
-> begin working, `.htaccess` stops being read, and the `_routes.json`/Turnstile
-> design lands as written; or **(b)** stay on Apache and re-target the form at a
-> standalone endpoint (a Worker on the existing account would do), which
-> re-opens the cross-origin question A4 was deleted to avoid.
+> 🔑 **Fork (b) had been rejected on a false premise, and that is why G looked
+> blocked.** The old note said re-targeting "re-opens the cross-origin question
+> A4 was deleted to avoid" — which assumes JavaScript. `Contact.astro:31` is a
+> native `<form method="post">` with **zero JS**, and **native form posts are not
+> subject to CORS**: the browser sends them cross-origin unconditionally and
+> follows the `303 Location` back to `/contact/#sent`, which is already what
+> `send.ts:394` emits (feedback is CSS `:target` fragments, never `fetch`).
+> ⛔ **CORS gates JS *reading* a response, not the browser *sending* a form.**
+> The Worker needs **no CORS headers at all**. Lesson: test a stated constraint
+> before designing around it.
+>
+> Background (why the origin was never Pages): identified from `public/.htaccess`
+> — tracked in git, copied into `dist/`, and setting *exactly* the four security
+> headers and two `Cache-Control` values production returns. Corroborated by
+> `GET /api/send` → **404**, by the `public/_headers` CSP being **absent from
+> every live response**, and by the 2026-08-06 MCP inventory finding one Pages
+> project (`moemail`) and none for this repo. Not deploy staleness: `_headers`,
+> `_routes.json` and `functions/` all shipped in `1a3f0bb`, **26 hours before**
+> the live snapshot.
 > Full evidence: [`../../MEMORY.md`](../../MEMORY.md) → *How production actually publishes*.
 
-- [ ] `functions/api/send.ts` — same-origin, so **no allowlist exists to get wrong**.
-- [ ] Port the mail send; keep rate limiting.
+- [ ] Re-auth Wrangler OAuth (**expired** — a Juan step, blocks every deploy below).
+- [x] Endpoint host: **`form.juanpablosilva.com.br`** (zone is already on
+      Cloudflare DNS, so this is a route + CNAME, no nameserver change) over a
+      `workers.dev` subdomain — same registrable domain reads as first-party to a
+      visitor inspecting the form target.
+- [x] ✅ **The `www` question is answered — both hostnames are live.**
+      `curl` 2026-08-12: `juanpablosilva.com.br/contact/` and
+      `www.juanpablosilva.com.br/contact/` both return **200 with a
+      byte-identical 8,598-byte body** (same `<title>`, same form). `www` does
+      **not** redirect to the apex. ⇒ **both must be allowlisted here and on the
+      Turnstile widget**, or every `www` submitter is rejected.
+- [x] `functions/api/send.ts` — added `SITE_ORIGIN` + `ALLOWED_PAGE_HOSTNAMES`
+      and removed all three `request.url` derivations. Was 🔴 the Turnstile gate
+      comparing siteverify's hostname to `new URL(request.url).hostname`, which
+      cross-host **403s every submission** (widget solved on the page host,
+      request lands on the Worker).
+- [x] `functions/api/send.ts` — `localeFromRequest` now matches the `Referer`
+      against the allowlist via a new `allowedRefererUrl` helper. Was 🔴 an
+      origin comparison that cross-host always falls through to `en`.
+      ⚠️ Scope correction: this governs only **pre-body-parse** failures (413 /
+      415 / **429**), because line 81 overrides `locale` from the form's hidden
+      `lang` field on every path that reads a body. The user-visible case is a
+      rate-limited PT visitor landing on the English page — real, but narrower
+      than "every PT submitter".
+- [x] 🔴 **`respond()` — the third and worst one, found while patching.**
+      `new URL(..., request.url)` built the `303 Location` against the **Worker's**
+      host, so a successful submission would have redirected to
+      `form.juanpablosilva.com.br/contact/#sent` — **a page that does not exist
+      there.** This breaks the *success* path, not an edge case, and no amount of
+      Turnstile/KV correctness would have masked it. Now resolves against the
+      validated page origin, so a `www` submitter stays on `www`.
+- [ ] 🔴 **`functions/` is not typechecked at all — fix before trusting any of the
+      above.** `tsconfig.json` includes only `src/**/*`, `.astro/types.d.ts` and
+      `astro.config.mjs`, and `@cloudflare/workers-types` is **not installed**, so
+      `PagesFunction`, `Cloudflare.Env`, `KVNamespace` and `cloudflare:sockets`
+      are all unresolved. `astro check` has therefore **never** looked at this
+      handler — the previously recorded "Function bundle check passed" was a
+      bundle check, not a typecheck. That is how three cross-host defects sat here
+      undetected. Add the dep + include `functions/` when restructuring below.
+      ⚠️ Also: `.nvmrc`/`engines` pin **Node 24**; this shell is on **22.22.3**.
+- [ ] Re-point `Contact.astro:33` `action` at the Worker origin. Keep `method="post"`
+      and add **no** JS — the no-JS property is what makes CORS a non-issue.
+- [ ] Restructure for `wrangler deploy` (a Worker entry point, not a
+      `PagesFunction` export) + bind `CONTACT_RATE_LIMIT` KV. ⚠️ `_routes.json`
+      stays inert either way; it is a Pages file.
 - [ ] Add Turnstile (workspace has a `turnstile-spin` skill). ⛔ Note the recorded
       trap: a sitekey/secret mismatch **403s silently** and the secret never goes
-      in a `PUBLIC_` variable.
+      in a `PUBLIC_` variable. The widget must authorize the **page** hostname.
 - [ ] Delete `server/` and the Render service once a real message is delivered
       through the new endpoint.
-- [ ] Verify: submit from production and confirm **delivery**, not a 200. Then
-      confirm the Render service is off and nothing broke.
+- [ ] Verify: submit from production and confirm **delivery**, not a 200 —
+      ⛔ [200 ≠ liveness]. Then a 6th request must be rejected `429` without
+      sending mail. Then confirm the Render service is off and nothing broke.
 
 Implementation in progress (2026-08-05): the same-origin handler, bounded form
 validation, Gmail SMTP/TLS adapter, KV quota, Turnstile action/hostname checks,
@@ -536,12 +605,12 @@ is still no custom client-side submission bundle or Astro island.
 Cloudflare account inventory (authenticated MCP, 2026-08-06): the account has one
 unrelated Pages project (`moemail`), two existing KV namespaces
 (`moemail-moemail-kv` and `sink`), and zero Turnstile widgets. None is a Milestone
-G resource to reuse. The next infrastructure step is a dedicated Pages project
-for `juansilvadesign/juansilva.design` on `main`, a `CONTACT_RATE_LIMIT` KV
-namespace/binding, and a production Turnstile widget after confirming whether the
-allowed hostname set is only `juanpablosilva.com.br` or also `www`. Wrangler OAuth
-remains expired; the authenticated Cloudflare MCP completed the inventory without
-mutating the account.
+G resource to reuse. ⚠️ **Superseded by the 2026-08-12 decision:** the next
+infrastructure step is ~~a dedicated Pages project~~ a **standalone Worker**, a
+`CONTACT_RATE_LIMIT` KV namespace/binding, and a production Turnstile widget
+after confirming whether the allowed hostname set is only `juanpablosilva.com.br`
+or also `www`. Wrangler OAuth remains expired; the authenticated Cloudflare MCP
+completed the inventory without mutating the account.
 
 ---
 
@@ -562,3 +631,40 @@ deferred cost stays visible.
       lesson this project already paid for — **read the response body, not the
       status code**. `juansilva.is-a.dev` answered 200 for weeks while serving an
       empty directory listing.
+
+---
+
+## Milestone I — Retire the manual docroot upload 🟡 OPEN
+
+**Split out of G on 2026-08-12, deliberately.** "git-push deploys" kept being
+used as an argument *for* the full Pages migration, which let a deploy-pipeline
+problem ride along inside a contact-form decision. They are independent: G is now
+a Worker, and this milestone stands or falls on its own regardless of where the
+static site is hosted.
+
+**The problem.** Publishing is a manual cPanel File Manager step — build locally,
+zip the *contents* of `dist/`, upload, extract, overwrite (runbook in
+[`../../MEMORY.md`](../../MEMORY.md)). Consequences already paid for:
+
+- 🔴 **A commit is not a deploy.** `og-image.jpg` was committed in `d62265a` and
+  sat unpublished, 404ing on every LinkedIn/X/WhatsApp share — the agency-overflow
+  play's only door — because the live snapshot predated it by 19 hours.
+- 🔴 The live docroot silently drifts *behind* `main` (3 commits, 2026-08-07) and
+  nothing reports it.
+- ⚠️ The zip must carry the `.htaccess` **dotfile**, which is exactly the file
+  most archive tools drop by default. That single file is now the only thing
+  serving the CSP, the security headers, and `ErrorDocument 404`.
+- ⚠️ Stale files from prior builds linger in the docroot; only hashed `_astro/`
+  assets are safe. Checked by hand today.
+
+**Not yet scoped — options to weigh when this comes up:**
+
+- [ ] cPanel git-version-control deploy hook, or FTP/rsync from CI (keeps Apache,
+      keeps `.htaccess`, keeps the current origin).
+- [ ] Move the static site to Pages/Workers after all — now judged purely as a
+      deploy improvement, with its real cost visible: re-verifying the 22 gates,
+      the apex DNS change, and `.htaccess` going inert.
+- [ ] Minimum viable alternative: a published-vs-`HEAD` drift check that simply
+      *reports*, so "pushed ≠ published" is caught rather than prevented.
+- [ ] Whichever path wins, the acceptance test is the same: **verify by public
+      URL, not by a green build** — and read the body, not the status code.
