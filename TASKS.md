@@ -4,13 +4,25 @@ The living checklist. Strategy, gates and the reasoning behind each milestone
 live in **[`ROADMAP.md`](ROADMAP.md)**; operational truth about domains and
 pipeline lives in **[`../../MEMORY.md`](../../MEMORY.md)**.
 
-_Last reviewed: 2026-08-06_
+_Last reviewed: 2026-08-12_
 
-> **The repo split, content architecture, and Astro page port are done. Milestone
-> G is active on the critical path.** The current Next site is already live and
-> stays live; it is not a thing to keep rescuing. Milestone **A** is closed except
-> for one asset handoff, and **A4
-> was deleted outright** — see below.
+> **The repo split, content architecture, Astro page port and the vCard are
+> done.** Milestone **E closed 2026-08-12** (Sink alias live). Milestone **A** is
+> closed except for one asset that is committed but unpublished, and **A4 was
+> deleted outright** — see below.
+>
+> 🔴 **The critical path is no longer G — it is the deploy itself.** Verified
+> 2026-08-12: production is a **manual upload of the built `dist/` into an
+> Apache docroot**, and the live copy is a snapshot from **2026-08-07 01:30 UTC**.
+> Three commits have landed since; none are live, `og-image.jpg` among them, so
+> every social share of the site currently renders a broken preview card.
+> **A3 and A6 close the moment someone uploads a current `dist/` — no code
+> change is involved.** G does not: Apache cannot run `functions/api/send.ts`,
+> so G is blocked on a hosting decision (see G).
+>
+> A verified, current `dist/` is **built and waiting** in the working tree
+> (2026-08-12, 16 pages, `og-image.jpg` included, zero JS, zero `is-a.dev`).
+> Evidence: [`../../MEMORY.md`](../../MEMORY.md) → *How production actually publishes*.
 >
 > ⛔ **`juansilvadesign/juansilva.is-a.dev` is off limits.** Juan's instruction is
 > that it stays the dev/v1 site and nothing lands in it. An earlier draft of this
@@ -108,6 +120,21 @@ not one, and the footer's version switcher was dead too. All committed in `3ea45
 - [ ] Verify after deploy: `curl -sI https://juanpablosilva.com.br/og-image.jpg`
       returns **200**, and the `og:image` in the served HTML resolves to it. Then
       re-scrape once in LinkedIn's Post Inspector.
+      - 🔴 **Checked 2026-08-12: still 404, and it is a DEPLOY gap, not a code
+        gap.** The file is committed (`d62265a`) and correct on disk (JPEG,
+        1200×630, 221 KB), and the served HTML already emits the right
+        `og:image`/`twitter:image` URL — but the live snapshot predates the
+        commit by 19 hours, so the asset was never uploaded.
+      - 📦 **Upload package built and verified 2026-08-12, waiting on Juan.**
+        `scratchpad/juanpablosilva-dist-2026-08-12.zip` — 102 files, 4.93 MB,
+        archive root is `dist/` *contents* (no wrapper), integrity-checked, and
+        confirmed to contain `.htaccess`, `og-image.jpg`, `404.html` and
+        `juan-silva.vcf`. Deploy method is **cPanel File Manager** (Juan,
+        2026-08-12) — runbook in [`../../MEMORY.md`](../../MEMORY.md).
+      - ✅ Post-deploy gate written: `scratchpad/verify-deploy.sh`, 21 checks
+        across bodies **and** headers. Run against the pre-upload site as a
+        control: **14 pass, 7 fail**, and the 7 are exactly the defects this
+        upload fixes — so a green run afterwards means something.
 
 ### A4 — ~~Unblock the contact form via Render~~ ❌ DELETED 2026-08-05
 
@@ -147,12 +174,51 @@ contact form's only remaining path is **[G](#milestone-g--contact-form-on-cloudf
 Not urgent: the fixes are committed, the live site works, and the Astro rebuild
 replaces this build anyway. Fold into the next deploy rather than forcing one.
 
-- [ ] `curl` the live HTML and confirm `og:url` / `og:image` on
+- [x] `curl` the live HTML and confirm `og:url` / `og:image` on
       `juanpablosilva.com.br`, `og-image.jpg` → 200, and no `is-a.dev` anywhere in
       the served output. ⛔ Read the **body**, not the status code — `is-a.dev`
       answered 200 for weeks while serving an empty directory listing.
+      **Ran 2026-08-12 against the served body, 3 of 4 pass:**
+      | Check | Result |
+      |---|---|
+      | `og:url` = `https://juanpablosilva.com.br/` | ✅ |
+      | canonical + `hreflang` en/pt-BR/x-default | ✅ correct |
+      | `is-a.dev` anywhere in the body | ✅ **zero occurrences** |
+      | `og-image.jpg` → 200 | 🔴 **404** — see A3, deploy gap |
+      Bonus: the home page references **one** `<script>`, and it is Cloudflare's
+      injected `email-decode.min.js` — the site itself still ships **zero JS**,
+      so D's zero-JS baseline holds in production, not just locally.
 - [ ] Update [`../../MEMORY.md`](../../MEMORY.md): mark the defects closed.
+      *(Partly done 2026-08-12 — defect 1 rewritten with its true cause, defects
+      2–3 supersede into G, which is now blocked. Close them when G resolves.)*
 - ~~Contact-form submission test~~ — moved to **G**. There is no backend to test.
+
+### A7 — Repair `public/.htaccess` 🟡 fixed in tree 2026-08-12, ships with the next upload
+
+Found while identifying the host. `.htaccess` is the **real** production config
+on this origin — `_headers` is decorative here — so these were live defects, not
+cosmetics. All three fixed in the working tree and **uncommitted**.
+
+- [x] **Removed an orphan `</IfModule>`.** One opening tag, two closings. An
+      unbalanced `.htaccess` is normally a fatal 500 for the entire docroot; this
+      one shipped 2026-08-06 and the host happened to tolerate it. A tag-balance
+      check now runs over the built artifact before packaging.
+- [x] **Made the custom 404 page reachable.** The catch-all rewrote every miss to
+      `/nao-encontrada/` — a **Next.js-era route the Astro build does not emit** —
+      so D's `404.astro` has never rendered in production; misses fall through to
+      the host's generic 1,251-byte error page. Replaced with
+      `ErrorDocument 404 /404.html`, which also corrects the status: the old
+      `RewriteRule` would have served the 404 body under **HTTP 200**.
+- [x] **Ported the CSP + `Referrer-Policy` from `_headers`** (Juan's call,
+      2026-08-12), byte-identical so the two cannot drift. Pre-flighted against
+      the build first: every external origin is a plain `<a href>`, all four
+      `@font-face` sources are self-hosted, there are zero `<script>` tags, and
+      the one inline `<style>` is covered by `style-src 'unsafe-inline'`.
+      `_headers` **kept** — it becomes live again if G moves the site to Pages.
+- [x] Dropped a duplicate `mod_deflate` block declaring a strict subset of the
+      types already covered above it.
+- [ ] Commit A7 + verify the headers land after the upload (gates 3 and 4 of
+      `verify-deploy.sh`).
 
 ---
 
@@ -301,7 +367,7 @@ stack, not the design.
 
 ---
 
-## Milestone E — vCard 🟡 deployed + verified 2026-08-06
+## Milestone E — vCard ✅ closed 2026-08-12
 
 Needs C. Reference:
 [`fecoelho-com-br-clone`](../../../../knowledge/projects/fecoelho-com-br-clone/).
@@ -315,10 +381,17 @@ Needs C. Reference:
       from the page rendered beside it; a generated one cannot.
 - [x] Wire `/card/` as the stable NFC/QR landing target in the production notes
       and record it in [`../../MEMORY.md`](../../MEMORY.md).
-- [ ] Create the click-counting short alias, point it at
-      `https://juanpablosilva.com.br/card/`, and record provider + exact alias in
-      [`../../MEMORY.md`](../../MEMORY.md). No provider/account is configured in
-      the workspace, so do not invent a link or scan count.
+- [x] ✅ **Click-counting short alias created by Juan and verified 2026-08-12:**
+      **`https://jaypy.com.br/card`**, served by **Sink** (self-hosted on
+      Cloudflare). Provider + exact alias recorded in
+      [`../../MEMORY.md`](../../MEMORY.md). Chain verified by curl: `308` →
+      `juanpablosilva.com.br/card` → `301` → `/card/` → `200`.
+      - [ ] ⚠️ **Retarget the alias to include the trailing slash.** It currently
+            points at `…/card` (no slash), so the redirect costs **two** hops
+            instead of one on every NFC tap and QR scan. One field in the Sink
+            dashboard.
+      - ⛔ Still no scan count may be quoted — Sink records clicks, but none have
+            been read out of the dashboard. Uncollected ≠ zero.
 - [x] Verify: download the `.vcf` and import it on a real phone. Every field
       matches the rendered card.
 
@@ -328,7 +401,13 @@ JavaScript, and `file` recognizes the emitted download as vCard 3.0. The artifac
 uses CRLF, terminates cleanly, folds physical lines at ≤75 bytes, and contains the
 same name, title, phone, email, website, LinkedIn, and GitHub facts supplied by
 `src/data/contact.ts`. Juan confirmed on 2026-08-06 that `/card/` is deployed and
-the `.vcf` is verified on a real phone. Only the click-counting alias remains.
+the `.vcf` is verified on a real phone.
+
+**Live re-verification 2026-08-12** (production, not local): `/card/` **200**,
+`/pt/card/` **200**, and `/juan-silva.vcf` **200** as `text/x-vcard` (359 bytes)
+carrying the same name, title, phone, email, URL, LinkedIn and GitHub the page
+renders. The Sink alias resolves to it. **E is closed**; the only residue is the
+trailing-slash retarget noted above, which is a Sink dashboard edit, not repo work.
 
 ---
 
@@ -410,9 +489,29 @@ Needs C. Built from scratch. Supersedes
 
 ---
 
-## Milestone G — Contact form on Cloudflare Pages Functions 🟢
+## Milestone G — Contact form on Cloudflare Pages Functions 🔴 BLOCKED
 
 Needs D. Deletes the Render service and the whole CORS failure class.
+
+> 🔴 **BLOCKED 2026-08-12 — the origin is Apache, which cannot execute a Pages
+> Function.** `functions/api/send.ts` has no runtime at `juanpablosilva.com.br`.
+> Identified from `public/.htaccess`: it is tracked in git, Astro copies it into
+> `dist/`, and it sets *exactly* the four security headers and two
+> `Cache-Control` values production returns. Corroborated by `GET /api/send` →
+> **404**, by the CSP in `public/_headers` being **absent from every live
+> response**, and by the 2026-08-06 MCP inventory finding one Pages project in
+> the account (`moemail`) and none for this repo. ⚠️ None of that is explained by
+> deploy staleness — `_headers`, `_routes.json` and `functions/` all shipped in
+> `1a3f0bb`, **26 hours before** the live snapshot.
+>
+> ⛔ **Do not continue G by writing more handler code — it is already written and
+> unreachable.** G needs a hosting decision, and the two options are real forks:
+> **(a)** move the site to Cloudflare Pages/Workers — `functions/` and `_headers`
+> begin working, `.htaccess` stops being read, and the `_routes.json`/Turnstile
+> design lands as written; or **(b)** stay on Apache and re-target the form at a
+> standalone endpoint (a Worker on the existing account would do), which
+> re-opens the cross-origin question A4 was deleted to avoid.
+> Full evidence: [`../../MEMORY.md`](../../MEMORY.md) → *How production actually publishes*.
 
 - [ ] `functions/api/send.ts` — same-origin, so **no allowlist exists to get wrong**.
 - [ ] Port the mail send; keep rate limiting.
