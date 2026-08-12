@@ -5,23 +5,41 @@ Options -Multiviews
 <IfModule mod_headers.c>
   # Enable GZIP compression
   Header set Vary "Accept-Encoding"
-  
+
   # Cache control for static assets
   <FilesMatch "\.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-  
+
   # Cache control for HTML files
   <FilesMatch "\.(html|htm)$">
     Header set Cache-Control "public, max-age=3600"
   </FilesMatch>
-  
+
   # Security headers
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "DENY"
   Header always set X-XSS-Protection "1; mode=block"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
-</IfModule>
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Content-Security-Policy — ported from public/_headers on 2026-08-12.
+  # `_headers` is a Cloudflare Pages file; this origin is Apache and never reads
+  # it, so the policy declared there had never actually been served. Kept
+  # byte-identical to the value in `_headers` so the two cannot drift. If the
+  # site later moves to Pages, `_headers` takes over and this becomes the
+  # redundant copy rather than the only one.
+  #
+  # Verified against the build before shipping: every external origin in the
+  # HTML is a plain <a href> (navigation, which CSP does not gate); all four
+  # @font-face sources are self-hosted under /assets/fonts/; there are zero
+  # <script> tags and zero inline handlers; and the single inline <style> block
+  # is covered by style-src 'unsafe-inline'.
+  #
+  # ⛔ One line on purpose. A continuation backslash that picks up trailing
+  #    whitespace makes .htaccess fatal for the whole docroot, and this host is
+  #    uploaded by hand — recovery would mean a second manual upload.
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self'; upgrade-insecure-requests"
 </IfModule>
 
 # Enable compression
@@ -44,20 +62,26 @@ RewriteBase /
 # Root -> index.html
 RewriteRule ^$ index.html [L]
 
-# Let existing files/dirs pass through (including Next.js generated files)
+# Let existing files/dirs pass through untouched.
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Handle Next.js static routes with .html extension
+# Extensionless URLs -> the matching .html, when one exists.
+# Astro's default `directory` build format emits `<route>/index.html`, which
+# mod_dir's DirectorySlash already resolves, so this only catches root-level
+# files like /404.html. Kept because it is harmless and covers both formats.
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+?)/?$ $1.html [L]
 
-# For any other requests that don't match a file, redirect to the custom 404 page
-# This will redirect to the nao-encontrada page
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ /nao-encontrada/ [L]
+# 404 handling.
+# ⛔ Was: `RewriteRule ^.*$ /nao-encontrada/ [L]` — a Next.js-era Portuguese
+# route that the Astro build does NOT emit, so every miss rewrote to a path
+# that did not exist and fell through to the host's generic error page; the
+# custom 404 page was unreachable in production. A RewriteRule was also the
+# wrong tool: it returns **200** with the 404 body. ErrorDocument serves the
+# same page with a correct 404 status, and needs no rewrite at all.
+ErrorDocument 404 /404.html
 
 # Caching
 <IfModule mod_expires.c>
@@ -71,9 +95,5 @@ RewriteRule ^.*$ /nao-encontrada/ [L]
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
 
-# Compression
-<IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css \
-    application/xml application/xhtml+xml application/rss+xml \
-    application/javascript application/x-javascript
-</IfModule>
+# (A second mod_deflate block used to sit here declaring a strict subset of the
+#  types already covered above. Removed as dead weight, not as a behaviour change.)
