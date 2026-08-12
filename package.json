@@ -11,13 +11,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check && astro build"
+    "check:worker": "tsc -p functions",
+    "check": "astro check && npm run check:worker && astro build",
+    "deploy:worker": "wrangler deploy"
   },
   "dependencies": {
     "astro": "^7.1.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "typescript": "^6.0.3"
+    "@cloudflare/workers-types": "^5.20260812.1",
+    "typescript": "^6.0.3",
+    "wrangler": "^4.122.0"
   }
 }

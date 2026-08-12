@@ -27,6 +27,17 @@ const RATE_LIMIT_WINDOW_SECONDS = 15 * 60;
 const emailPattern = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
 const textDecoder = new TextDecoder();
 
+// Bindings this handler needs. `CONTACT_RATE_LIMIT` is the KV namespace; the
+// rest are Worker secrets set with `wrangler secret put` — never plain vars, and
+// never anything prefixed `PUBLIC_`, which Astro would inline into the built HTML.
+export interface Env {
+  CONTACT_RATE_LIMIT: KVNamespace;
+  TURNSTILE_SECRET_KEY: string;
+  RATE_LIMIT_SECRET: string;
+  GMAIL_USER: string;
+  GMAIL_PASS: string;
+}
+
 type Locale = "en" | "pt";
 type FeedbackCode =
   | "sent"
@@ -66,13 +77,10 @@ const dependencies: ContactDependencies = {
   sendEmail: sendContactEmail,
 };
 
-export const onRequestPost: PagesFunction<Cloudflare.Env> = async ({ request, env }) =>
-  handleContactRequest(request, env, dependencies);
-
 export async function handleContactRequest(
   request: Request,
-  env: Cloudflare.Env,
-  deps: ContactDependencies,
+  env: Env,
+  deps: ContactDependencies = dependencies,
 ): Promise<Response> {
   const requestId = request.headers.get("cf-ray") ?? crypto.randomUUID();
   let locale = localeFromRequest(request);

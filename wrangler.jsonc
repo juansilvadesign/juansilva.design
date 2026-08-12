@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "juansilva-contact-form",
+  "main": "functions/worker.ts",
+  "compatibility_date": "2026-08-01",
+
+  // The static site is NOT deployed by wrangler. It is built with `astro build`
+  // and uploaded by hand into an Apache docroot (see ../../MEMORY.md). This config
+  // deploys one thing only: the contact endpoint.
+  //
+  // `workers_dev` stays off on purpose. A *.workers.dev alias would be a second
+  // public surface reaching the same Gmail SMTP path, and it could never pass the
+  // Turnstile hostname gate anyway — so it would only ever be an attack surface.
+  "workers_dev": false,
+  "routes": [
+    {
+      "pattern": "form.juanpablosilva.com.br",
+      "custom_domain": true
+    }
+  ],
+
+  "kv_namespaces": [
+    {
+      "binding": "CONTACT_RATE_LIMIT",
+      "id": "0baf0e1a87c14fd38c4cf7ecf53296f3"
+    }
+  ],
+
+  // The handler emits structured JSON logs (contact_email_accepted,
+  // contact_turnstile_rejected, contact_rate_limited). Without this they are
+  // only visible during a live `wrangler tail`, which makes proving DELIVERY
+  // after the fact impossible.
+  "observability": {
+    "enabled": true
+  }
+}

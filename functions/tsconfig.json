@@ -1,0 +1,23 @@
+{
+  "//": [
+    "Separate from the root tsconfig ON PURPOSE. The root extends astro/tsconfigs/strict,",
+    "which pulls in the DOM lib; @cloudflare/workers-types redeclares Request, Response,",
+    "Headers and fetch, so loading both in one program produces duplicate-identifier",
+    "errors. Splitting the programs is what lets functions/ be typechecked at all.",
+    "Run it with `npm run check:worker` (wired into `npm run check`)."
+  ],
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["@cloudflare/workers-types"],
+    "strict": true,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["**/*.ts"]
+}
