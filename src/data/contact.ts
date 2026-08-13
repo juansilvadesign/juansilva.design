@@ -57,6 +57,17 @@ export const contact = {
   },
 } as const satisfies ContactProfile;
 
+// The contact form posts to a standalone Worker on its own subdomain: this site
+// is static on Apache and cannot execute a handler at all (milestone G).
+//
+// Cross-origin is fine here precisely because the form carries zero JavaScript —
+// a native form post is not subject to CORS, and the Worker 303s the visitor back
+// to the page host. Two things still gate it, and both fail SILENTLY:
+//   • public/.htaccess + public/_headers → CSP `form-action` must name this host.
+//   • the Turnstile widget must authorize the PAGE hostnames (apex and www),
+//     which functions/api/send.ts re-checks in ALLOWED_PAGE_HOSTNAMES.
+export const contactFormEndpoint = "https://form.juanpablosilva.com.br/api/send";
+
 export function getContactActions(lang: Locale): ContactAction[] {
   const copy = t(lang).card.actions;
   const localizedWebsite = new URL(localizedPath("/", lang), contact.website).href;

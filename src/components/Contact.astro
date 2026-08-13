@@ -1,6 +1,7 @@
 ---
 import { localizedPath, t, type Locale } from "../i18n";
 import { socialLinks } from "../data/links";
+import { contactFormEndpoint } from "../data/contact";
 
 interface Props {
   lang: Locale;
@@ -30,7 +31,7 @@ const copy = t(lang);
 
       <form
         class="contact-form"
-        action="/api/send"
+        action={contactFormEndpoint}
         method="post"
         accept-charset="UTF-8"
         aria-label={copy.contact.formAriaLabel}

@@ -17,6 +17,15 @@ _Last reviewed: 2026-08-12_
 > `is-a.dev` intact. **A3, A6 and A7 are closed.** The one residue is a LinkedIn
 > Post Inspector re-scrape, which needs Juan's login.
 >
+> 🟡 **G is BUILT AND DEPLOYED as of 2026-08-12 — but not yet proven.** The Worker
+> `juansilva-contact-form` is live on `form.juanpablosilva.com.br` (version
+> `9a22c747-f8a1-4f97-aa27-01f19436defd`), KV bound, Turnstile widget created,
+> `functions/` typechecked for the first time, and five `curl` probes green
+> including the cross-host redirect fix. **Two Juan steps remain before a single
+> real email can be sent:** set `GMAIL_USER` + `GMAIL_PASS` as Worker secrets, and
+> upload the verified `dist.zip`. ⛔ Nothing here counts as done until a message
+> actually lands in the inbox — [200 ≠ liveness]. Details in Milestone G below.
+>
 > 🟢 **The critical path is G, and it is UNBLOCKED as of 2026-08-12.** Apache
 > cannot execute `functions/api/send.ts`, so the contact form has no runtime —
 > but the hosting fork is now **decided: a standalone Worker on a `form.`
@@ -504,7 +513,7 @@ Needs C. Built from scratch. Supersedes
 
 ---
 
-## Milestone G — Contact form on a standalone Worker 🟢 UNBLOCKED
+## Milestone G — Contact form on a standalone Worker 🟡 DEPLOYED, NOT YET PROVEN
 
 Needs D. Deletes the Render service and the whole CORS failure class.
 
@@ -538,7 +547,9 @@ Needs D. Deletes the Render service and the whole CORS failure class.
 > the live snapshot.
 > Full evidence: [`../../MEMORY.md`](../../MEMORY.md) → *How production actually publishes*.
 
-- [ ] Re-auth Wrangler OAuth (**expired** — a Juan step, blocks every deploy below).
+- [x] Re-auth Wrangler OAuth — ✅ done by Juan 2026-08-12. Token carries
+      `workers`/`workers_kv`/`workers_routes` **write** on account
+      `f2c9e4938b8a761eac778d1a5708640c`.
 - [x] Endpoint host: **`form.juanpablosilva.com.br`** (zone is already on
       Cloudflare DNS, so this is a route + CNAME, no nameserver change) over a
       `workers.dev` subdomain — same registrable domain reads as first-party to a
@@ -569,28 +580,80 @@ Needs D. Deletes the Render service and the whole CORS failure class.
       there.** This breaks the *success* path, not an edge case, and no amount of
       Turnstile/KV correctness would have masked it. Now resolves against the
       validated page origin, so a `www` submitter stays on `www`.
-- [ ] 🔴 **`functions/` is not typechecked at all — fix before trusting any of the
-      above.** `tsconfig.json` includes only `src/**/*`, `.astro/types.d.ts` and
-      `astro.config.mjs`, and `@cloudflare/workers-types` is **not installed**, so
-      `PagesFunction`, `Cloudflare.Env`, `KVNamespace` and `cloudflare:sockets`
-      are all unresolved. `astro check` has therefore **never** looked at this
-      handler — the previously recorded "Function bundle check passed" was a
-      bundle check, not a typecheck. That is how three cross-host defects sat here
-      undetected. Add the dep + include `functions/` when restructuring below.
-      ⚠️ Also: `.nvmrc`/`engines` pin **Node 24**; this shell is on **22.22.3**.
-- [ ] Re-point `Contact.astro:33` `action` at the Worker origin. Keep `method="post"`
-      and add **no** JS — the no-JS property is what makes CORS a non-issue.
-- [ ] Restructure for `wrangler deploy` (a Worker entry point, not a
-      `PagesFunction` export) + bind `CONTACT_RATE_LIMIT` KV. ⚠️ `_routes.json`
-      stays inert either way; it is a Pages file.
-- [ ] Add Turnstile (workspace has a `turnstile-spin` skill). ⛔ Note the recorded
-      trap: a sitekey/secret mismatch **403s silently** and the secret never goes
-      in a `PUBLIC_` variable. The widget must authorize the **page** hostname.
+- [x] ✅ **`functions/` is typechecked as of 2026-08-12 — and the gate was proven
+      to bite.** Fixed by a *separate* `functions/tsconfig.json` rather than adding
+      `functions/` to the root one: the root extends `astro/tsconfigs/strict`,
+      which loads the DOM lib, and `@cloudflare/workers-types` redeclares
+      `Request`/`Response`/`Headers`/`fetch` — one program containing both fails
+      with duplicate-identifier errors. Two programs is what makes this checkable
+      at all. Wired in as `npm run check:worker`, chained into `npm run check`.
+      Proof it is real, not a no-op: `--listFiles` shows all three handler files
+      in the program, and a deliberate `const x: number = "s"` probe exits 2.
+- [x] Re-point `Contact.astro` `action` at the Worker. The literal now lives in
+      `src/data/contact.ts` as `contactFormEndpoint`, beside `website`, so
+      milestone H edits one file. Still `method="post"`, still zero added JS.
+- [x] Restructure for `wrangler deploy` — `functions/worker.ts` is the entry
+      (`export default { fetch }`); `onRequestPost`/`PagesFunction`/`Cloudflare.Env`
+      are gone, replaced by an explicit exported `Env` interface. `wrangler.jsonc`
+      binds `CONTACT_RATE_LIMIT` and sets the custom domain. ⭐ The Worker must now
+      do its OWN path/method routing — Pages gave that for free by file convention,
+      and a standalone Worker receives the whole hostname. `workers_dev` is off:
+      a `*.workers.dev` alias would be a second public surface onto the same SMTP
+      path that could never satisfy the Turnstile hostname gate anyway.
+- [x] Turnstile widget created 2026-08-12 — "juansilva.design contact form",
+      mode `managed`, authorizing **both** `juanpablosilva.com.br` and
+      `www.juanpablosilva.com.br`. Sitekey `0x4AAAAAAEOfkYQxd7Zc5QyO` is a
+      build-time `PUBLIC_` var in the gitignored `.env`; the secret is a Worker
+      secret. ⚠️ Because `.env` is gitignored, a rebuild on a machine without it
+      silently produces a page with a **disabled** submit button (Contact.astro
+      fails closed by design) — check that first if a rebuild looks broken.
+- [x] 🔴 **CSP `form-action` — a silent killer caught before it shipped
+      (2026-08-12).** A7 started serving a CSP nine days after the "no cross-origin
+      problem" analysis was written, and it contained `form-action 'self'`. That
+      analysis was right that **native form posts are not subject to CORS** — but
+      `form-action` is a *separate* gate that polices exactly this, and under plain
+      `'self'` the browser blocks the submission before any request leaves the page:
+      no network entry, no error page, only a console violation. Fixed in
+      `public/.htaccess` **and** `public/_headers` (kept byte-identical, asserted by
+      a diff check) to `form-action 'self' https://form.juanpablosilva.com.br`.
+      ⭐ The generalisable lesson is narrower than "test your assumptions": the
+      earlier conclusion was *correct about the mechanism it named* and still
+      wrong, because a second mechanism governed the same behaviour.
+- [ ] ⏳ **Juan: set the two Gmail secrets** (the only remaining blocker on a real
+      send). `RATE_LIMIT_SECRET` and `TURNSTILE_SECRET_KEY` are already set:
+      ```bash
+      npx wrangler secret put GMAIL_USER   # the Gmail address
+      npx wrangler secret put GMAIL_PASS   # a 16-char App Password, NOT the login
+      ```
+- [ ] ⏳ **Juan: upload `dist.zip`** (built + verified 2026-08-12, 102 entries,
+      4.93 MB). Contains the `.htaccess` dotfile — asserted byte-identical to
+      `public/.htaccess` — and is archived as the *contents* of `dist/`, so it
+      extracts straight into the docroot with no `dist/` prefix. This upload is
+      what carries the new `form-action` CSP **and** the re-pointed form; the two
+      must land together or the form breaks.
 - [ ] Delete `server/` and the Render service once a real message is delivered
       through the new endpoint.
 - [ ] Verify: submit from production and confirm **delivery**, not a 200 —
       ⛔ [200 ≠ liveness]. Then a 6th request must be rejected `429` without
       sending mail. Then confirm the Render service is off and nothing broke.
+      ⚠️ The 429 gate needs a **fresh 15-minute window**: buckets are fixed
+      (`floor(now/900s)`), and smoke-testing on 2026-08-12 already spent 2 of 5
+      on this IP.
+
+**Proven live on 2026-08-12, before any Gmail secret existed** (`curl` against
+`form.juanpablosilva.com.br`, results read from headers, not assumed):
+
+| Probe | Result | What it proves |
+|---|---|---|
+| `GET /` | `404` | the Worker's own path gate |
+| `GET /api/send` | `405` + `Allow: POST` | method gate |
+| `POST /api/send`, bad content-type | `303` → `https://juanpablosilva.com.br/contact/#form-error` | 🔑 the `respond()` cross-host fix — `Location` is the **page** host, not the Worker's |
+| same + `Referer: www…/pt/contact/` | `303` → `https://www.juanpablosilva.com.br/pt/contact/#form-error` | the `www` allowlist **and** `localeFromRequest` both work cross-host |
+| KV after both | key `contact:<hmac>:1985087` = **`2`** | the rate limiter genuinely writes, HMACs the IP, and increments |
+
+⛔ **`wrangler kv key list` defaults to the LOCAL miniflare store.** It reported
+an empty namespace while the counter was in fact being written — pass `--remote`
+or you will read an empty local store and conclude the binding is broken.
 
 Implementation in progress (2026-08-05): the same-origin handler, bounded form
 validation, Gmail SMTP/TLS adapter, KV quota, Turnstile action/hostname checks,

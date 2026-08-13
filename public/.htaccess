@@ -39,7 +39,17 @@ Options -Multiviews
   # ⛔ One line on purpose. A continuation backslash that picks up trailing
   #    whitespace makes .htaccess fatal for the whole docroot, and this host is
   #    uploaded by hand — recovery would mean a second manual upload.
-  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self'; upgrade-insecure-requests"
+  #
+  # 🔴 `form-action` must name the contact Worker (2026-08-12, milestone G).
+  #    The contact form posts cross-origin to form.juanpablosilva.com.br. Native
+  #    form posts are NOT subject to CORS — that part of the G analysis holds —
+  #    but `form-action` is a SEPARATE gate that does police exactly this, and it
+  #    went live with A7 nine days after that analysis was written. With plain
+  #    'self' the browser blocks the submission before any request leaves: no
+  #    network entry, no error page, only a console violation. Silent by design.
+  # ⚠️ Milestone H must add the new domain here as well as in send.ts and on the
+  #    Turnstile widget, or the form dies the moment the domain flips.
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self' https://form.juanpablosilva.com.br; frame-ancestors 'none'; object-src 'none'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; font-src 'self'; upgrade-insecure-requests"
 </IfModule>
 
 # Enable compression
