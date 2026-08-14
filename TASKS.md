@@ -513,7 +513,7 @@ Needs C. Built from scratch. Supersedes
 
 ---
 
-## Milestone G — Contact form on a standalone Worker 🟡 DEPLOYED, NOT YET PROVEN
+## Milestone G — Contact form on a standalone Worker 🔴 WORKER LIVE, SITE UPLOAD MISSING, NOT PROVEN
 
 Needs D. Deletes the Render service and the whole CORS failure class.
 
@@ -619,18 +619,27 @@ Needs D. Deletes the Render service and the whole CORS failure class.
       ⭐ The generalisable lesson is narrower than "test your assumptions": the
       earlier conclusion was *correct about the mechanism it named* and still
       wrong, because a second mechanism governed the same behaviour.
-- [ ] ⏳ **Juan: set the two Gmail secrets** (the only remaining blocker on a real
-      send). `RATE_LIMIT_SECRET` and `TURNSTILE_SECRET_KEY` are already set:
+- [ ] 🔴 **Juan: set the two Gmail secrets — still UNSET as of 2026-08-13**
+      (`wrangler secret list` reports 2 of 4). ⛔ Run in your own terminal (it needs
+      a TTY), never piped, and **strip the App Password's spaces** — see the
+      2026-08-13 block below. `GMAIL_USER` = `jaypy.uxdesign@gmail.com`.
+      `RATE_LIMIT_SECRET` and `TURNSTILE_SECRET_KEY` are already set:
       ```bash
       npx wrangler secret put GMAIL_USER   # the Gmail address
       npx wrangler secret put GMAIL_PASS   # a 16-char App Password, NOT the login
       ```
-- [ ] ⏳ **Juan: upload `dist.zip`** (built + verified 2026-08-12, 102 entries,
-      4.93 MB). Contains the `.htaccess` dotfile — asserted byte-identical to
-      `public/.htaccess` — and is archived as the *contents* of `dist/`, so it
-      extracts straight into the docroot with no `dist/` prefix. This upload is
-      what carries the new `form-action` CSP **and** the re-pointed form; the two
-      must land together or the form breaks.
+- [ ] 🔴 **Juan: upload `dist.zip` — REPORTED DONE 2026-08-13 AND IT HAD NOT
+      LANDED.** Rebuilt + re-verified the same day (102 entries, 4.93 MB, `.htaccess`
+      present and byte-identical to `public/.htaccess`, no `dist/` prefix, archive
+      integrity checked, and the contact page inside asserted to carry the Worker
+      action + the sitekey + a non-disabled submit button). Extracts straight into
+      the docroot. This upload is what carries the new `form-action` CSP **and** the
+      re-pointed form; the two must land together or the form breaks.
+      ⛔ In cPanel File Manager turn **Show Hidden Files ON**, or you cannot confirm
+      `.htaccess` actually landed — and that file *is* the CSP fix.
+      ⛔ `zip` is not installed on this machine; the archive is built by
+      `python3 zipfile`. A glob-based `zip -r ../dist.zip *` silently **omits
+      `.htaccess`**, which is exactly the failure this checkbox keeps guarding.
 - [ ] Delete `server/` and the Render service once a real message is delivered
       through the new endpoint.
 - [ ] Verify: submit from production and confirm **delivery**, not a 200 —
@@ -639,6 +648,59 @@ Needs D. Deletes the Render service and the whole CORS failure class.
       ⚠️ The 429 gate needs a **fresh 15-minute window**: buckets are fixed
       (`floor(now/900s)`), and smoke-testing on 2026-08-12 already spent 2 of 5
       on this IP.
+
+### 🔴 2026-08-13 — the upload was reported done, and verification says it was not
+
+Session opened on *"dist.zip deployed"*. Three independent checks against the public
+URL say the docroot still serves the **pre-G** build:
+
+| Check | Live | Local `dist/` |
+|---|---|---|
+| form `action` | `/api/send` (relative — Apache 404s it) | `https://form.juanpablosilva.com.br/api/send` |
+| CSP `form-action` | `'self'` ← **the silent killer, still live** | `'self' https://form.juanpablosilva.com.br` |
+| Turnstile sitekey | absent, submit button `disabled` | `0x4AAAAAAEOfkYQxd7Zc5QyO`, enabled |
+| `Last-Modified` | `Wed, 12 Aug 2026 05:16:32 GMT` | built 2026-08-13T00:04Z |
+
+Both confounders were excluded rather than assumed: **cache** — `cf-cache-status:
+DYNAMIC` on `/` and `/contact/`, and a `?cb=` cache-buster returns the identical
+`Last-Modified`; **mis-extract into a subfolder** — `/dist/`, `/dist/contact/` and
+`/dist/index.html` all 404. ⭐ `Last-Modified` is the cheapest decisive probe here:
+one `curl -sI`, and it works without knowing which string is new.
+
+So the live form is blocked **three ways at once** — disabled button, an action
+Apache 404s, and a CSP that would block the cross-origin post regardless.
+
+⭐ **GET probes are free.** `worker.ts` gates path *and* method **before**
+`handleContactRequest`, so only `POST /api/send` spends a rate-limit token — and a
+*failed* attempt spends one too, since the limiter runs before Turnstile and before
+the body parse (`send.ts:93`). Re-run the free static probes above **before** any
+POST; if the 429 gate later misbehaves, suspect a Turnstile challenge mid-run before
+suspecting the limiter.
+
+🔴 **Gmail App Password — strip the spaces.** Google shows it as `abcd efgh ijkl
+mnop`. `requiredSecret()` trims only the **ends** (`send.ts:392`) and
+`assertCredential()` deliberately permits interior spaces, rejecting only CR/LF/NUL
+(`smtp.ts:209`) — so whatever is pasted reaches `AUTH PLAIN` verbatim. Paste 16
+characters, no spaces. `GMAIL_USER` must be a bare mailbox (`assertMailbox()` rejects
+spaces and angle brackets — never `Juan <a@b.com>`), and the form **mails itself**:
+`MAIL FROM` and `RCPT TO` are both `GMAIL_USER` (`smtp.ts:138-139`).
+
+⛔ `wrangler secret put` needs a real **TTY** — run it in your own terminal, never
+piped (`echo 'pass' | …` puts the App Password in shell history). A secret change
+**auto-publishes a new Worker version**; no `wrangler deploy` follows it.
+
+**Verification method, decided 2026-08-13:** `GMAIL_USER` = `jaypy.uxdesign@gmail.com`,
+so delivery is provable by matching the mail's `Message-ID` against the `messageId` in
+the `contact_email_accepted` log line. **Juan submits in a real browser while
+`wrangler tail` runs** — ⛔ headless Playwright was rejected: managed-mode Turnstile is
+tuned to pass a human browser, a headless one is likely to be challenged, and that
+burns a token and reads as a **false FAIL** of the mail path.
+
+**Also confirmed 2026-08-13:** the deployed Worker bundle **is** the patched code —
+deploy `2026-08-12T23:57:55Z` is 2 minutes after the last edit to `functions/api/send.ts`
+(`23:55:51Z`); live version is now `47a3fbb3-ff94-4fe1-8b7c-94a5da153d2d` (two
+`Secret Change` deploys superseded the `9a22c747` upload, same code). `GET /` → 404 and
+`GET /api/send` → 405 + `Allow: POST` re-probed green. `wrangler secret list` = **2 of 4**.
 
 **Proven live on 2026-08-12, before any Gmail secret existed** (`curl` against
 `form.juanpablosilva.com.br`, results read from headers, not assumed):
