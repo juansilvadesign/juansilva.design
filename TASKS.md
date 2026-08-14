@@ -829,7 +829,29 @@ deferred cost stays visible.
 
 ---
 
-## Milestone I — Retire the manual docroot upload 🟢 BUILT 2026-08-14, one real run outstanding
+## Milestone I — Retire the manual docroot upload 🟡 BUILT 2026-08-14, but on the WRONG TRANSPORT
+
+> 🔴 **2026-08-14, Juan — the transport is FTP, not SSH.** Verbatim: *"SSH does not
+> work, always use FTP. Currently we are at 88/100 (88%) of number of processes, we
+> need to terminate all empty processes before proceeding."*
+>
+> The cPanel account sits near its **entry-process cap**; exceeding it refuses
+> processes **account-wide**, which would take down every site sharing `<cpanel-account>`
+> (juansilva.design, psiativa, newcar). ⚠️ **SSH connected fine and rsync did
+> deploy on 2026-08-14 — working is not the same as allowed.** The constraint is
+> quota and blast radius, not authentication, so ⛔ do not re-test SSH and conclude
+> this note is stale.
+>
+> **Consequence for I3 below:** the build assertions and the public-URL
+> verification stand unchanged — they are transport-independent. Only the transfer
+> step is wrong. ⛔ It cannot be a like-for-like port: **FTP has no `--delete`**
+> (exact mirroring, which Juan chose, needs an explicit remote listing + delete
+> pass) and **FTP clients hide dotfiles by default**, so `.htaccess` — the single
+> file serving the CSP, the security headers and `ErrorDocument 404` — needs
+> deliberate handling that `rsync dist/` provided for free.
+>
+> ⏳ **Blocked until the empty processes are terminated** (cPanel → Resource Usage
+> → Number of Processes; 88/100 as of 2026-08-14).
 
 **Split out of G on 2026-08-12, deliberately.** "git-push deploys" kept being
 used as an argument *for* the full Pages migration, which let a deploy-pipeline
