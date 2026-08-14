@@ -829,7 +829,7 @@ deferred cost stays visible.
 
 ---
 
-## Milestone I — Retire the manual docroot upload 🟡 OPEN
+## Milestone I — Retire the manual docroot upload 🟢 BUILT 2026-08-14, one real run outstanding
 
 **Split out of G on 2026-08-12, deliberately.** "git-push deploys" kept being
 used as an argument *for* the full Pages migration, which let a deploy-pipeline
@@ -852,14 +852,82 @@ zip the *contents* of `dist/`, upload, extract, overwrite (runbook in
 - ⚠️ Stale files from prior builds linger in the docroot; only hashed `_astro/`
   assets are safe. Checked by hand today.
 
-**Not yet scoped — options to weigh when this comes up:**
+### I1 — The origin was identified, and it is already reachable ✅ 2026-08-14
 
-- [ ] cPanel git-version-control deploy hook, or FTP/rsync from CI (keeps Apache,
-      keeps `.htaccess`, keeps the current origin).
-- [ ] Move the static site to Pages/Workers after all — now judged purely as a
-      deploy improvement, with its real cost visible: re-verifying the 22 gates,
-      the apex DNS change, and `.htaccess` going inert.
-- [ ] Minimum viable alternative: a published-vs-`HEAD` drift check that simply
-      *reports*, so "pushed ≠ published" is caught rather than prevented.
-- [ ] Whichever path wins, the acceptance test is the same: **verify by public
-      URL, not by a green build** — and read the body, not the status code.
+🔑 **`juanpablosilva.com.br` is served from `<cpanel-host>` (<origin-ip>)
+— the same cPanel account psiativa already deploys to over scp-over-SSH.** Proven
+non-invasively before any credential was used: a `curl --resolve` of the origin IP
+with `Host: juanpablosilva.com.br` returned the site itself — same
+`last-modified: Fri, 14 Aug 2026 12:20:34 GMT` as the public URL, and the full A7
+header set including the post-G CSP. ⛔ DNS could never have shown this (the zone is
+proxied); the *origin-IP + Host header* probe is the tool that can.
+
+That collapsed the milestone's cost: the transport, the key and the account were
+already in production use on adjacent work.
+
+**Read-only inventory of the docroot,
+`/home/<cpanel-account>/domains/mydomains/juanpablosilva.com.br/juanpablosilva.com.br`:**
+
+| Finding | Consequence |
+|---|---|
+| `rsync` **is** on the host (`/usr/bin/rsync`) | mirror-with-delete is available, no zip step at all |
+| `node`/`npm` are **MISSING** | ⛔ kills the cPanel-git-hook option outright — the host cannot run `astro build` |
+| 102 files, list **identical** to local `dist/` | no stale files today; the drift risk is prospective, not current |
+| `.htaccess` sha256 matches `public/.htaccess` | live config is the tracked one |
+| 🔴 `.well-known/acme-challenge/` exists | **AutoSSL renewal path — not ours.** `rsync --delete` removes extraneous *directories*, so a literal mirror would delete it |
+| `cgi-bin/` exists, empty | cPanel fixture, likewise not from the repo |
+
+### I2 — Decision: local `npm run deploy`, mirroring with `--delete` ✅ 2026-08-14
+
+Juan's call. Rejected alternatives and why:
+
+- **GitHub Actions on push** — the real fix for "a commit is not a deploy", but it
+  requires the production cPanel SSH key to live as a secret in a **public** repo.
+  Deferred, not dismissed; revisit if the manual trigger starts getting skipped.
+- **cPanel Git Version Control** — ⛔ **structurally impossible**: no Node on the
+  host, so the build cannot happen there, and the alternative (committing a built
+  `dist/` branch) re-introduces the manual step it was meant to remove.
+- **Drift-check only** — kept, but as a *mode* of the deploy tool rather than the
+  whole milestone (`npm run deploy:status`).
+
+### I3 — Built ✅ 2026-08-14
+
+`scripts/deploy.mjs` + `.env.deploy` (gitignored; `.env.deploy.example` tracked).
+
+```
+npm run deploy:check    build + assert + rsync --dry-run + read the live site   (no writes)
+npm run deploy          build + assert + rsync --delete + verify by public URL
+npm run deploy:status   verify the live site only — the drift check             (no build)
+```
+
+Each hazard the File-Manager dance carried is now structural, not procedural:
+
+- **The `.htaccess` dotfile can no longer be dropped.** `rsync dist/` with a
+  trailing slash carries dotfiles unconditionally — the failure mode the zip
+  method needed a hand-written `python3 zipfile` builder to avoid (⛔ `zip` is not
+  installed locally, and a glob `zip -r ../dist.zip *` silently misses it).
+- **The build is asserted before anything is uploaded**, and a failure aborts with
+  nothing written: `.htaccess` byte-identical to `public/.htaccess`, CSP
+  `form-action` naming the Worker, `ErrorDocument 404`, no orphan `</IfModule>`,
+  and — on **both** `/contact/` and `/pt/contact/` — the Worker action, a present
+  sitekey, the `turnstile-spin-v1` action, and a **non-disabled** submit button.
+  ⭐ That sitekey check is the guard against the gitignored-`.env` trap: a rebuild
+  on a machine without `.env` ships a dead form and looks fine.
+- **"Deployed" is no longer a claim.** The tool records `Last-Modified` on the apex
+  **and** `www` before uploading and asserts it *moved* afterwards, then re-reads
+  the served CSP, both contact pages, `og-image.jpg`, and a deliberate miss (which
+  must return a real **404**, not a 404 body under 200 — the pre-A7 defect).
+- **`--delete` mirrors exactly**, with `/.well-known/` and `/cgi-bin/` excluded so
+  an exact mirror of *our* content cannot take out certificate renewal. Permissions
+  are forced (`--chmod=D755,F644`) rather than inherited from the local umask;
+  `-a` is deliberately not used, since preserving owner/group fails as a non-root
+  user on shared hosting.
+
+- [x] Dry run green 2026-08-14 — 16/16 pre-upload assertions, **0 deletions**
+      ("docroot has no stale files"), 12/12 live-site checks.
+- [ ] First real `npm run deploy` against production.
+- [ ] Re-run `deploy:status` after the next content change to confirm drift is
+      actually detected rather than merely reported green.
+
+**Still true whatever happens next:** the acceptance test is **verify by public
+URL, not by a green build** — and read the body, not the status code.
