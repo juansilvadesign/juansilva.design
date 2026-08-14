@@ -17,14 +17,24 @@ _Last reviewed: 2026-08-12_
 > `is-a.dev` intact. **A3, A6 and A7 are closed.** The one residue is a LinkedIn
 > Post Inspector re-scrape, which needs Juan's login.
 >
-> 🟡 **G is BUILT AND DEPLOYED as of 2026-08-12 — but not yet proven.** The Worker
-> `juansilva-contact-form` is live on `form.juanpablosilva.com.br` (version
-> `9a22c747-f8a1-4f97-aa27-01f19436defd`), KV bound, Turnstile widget created,
-> `functions/` typechecked for the first time, and five `curl` probes green
-> including the cross-host redirect fix. **Two Juan steps remain before a single
-> real email can be sent:** set `GMAIL_USER` + `GMAIL_PASS` as Worker secrets, and
-> upload the verified `dist.zip`. ⛔ Nothing here counts as done until a message
-> actually lands in the inbox — [200 ≠ liveness]. Details in Milestone G below.
+> 🟢 **G's MAIN PATH IS PROVEN — a real email landed 2026-08-14T12:25:06Z.** Both
+> Juan steps are done and independently verified: `wrangler secret list` reports
+> **4 of 4**, and the docroot serves the post-G build (`Last-Modified`
+> `Fri, 14 Aug 2026 12:20:34 GMT`, on the apex **and** `www`). A production
+> submission produced Gmail thread `1a0003baf41b75e4`, subject *"New contact form
+> submission from Real Test"* — the exact format from `smtp.ts:155`, carrying the
+> form fields. ⭐ Because `send.ts` has **no Turnstile skip path** (missing token
+> 403s at :112, `requiredSecret` throws on an unset secret, and success needs
+> `success` **AND** the action match **AND** an allowlisted hostname at :126), that
+> delivered mail proves the whole chain — CSP, cross-host post, Turnstile solve,
+> SMTP — in one shot.
+> ✅ **G is now CLOSED (2026-08-14).** The **429 gate is proven** — 6 POSTs into a
+> fresh bucket gave `415`×5 then a real **`429` + `Retry-After: 220`**, with the KV
+> counter stopping at **5** (a rejection returns before the `put`, so it cannot
+> inflate its own window) and **no mail sent**. `server/` and `render.yaml` are
+> **deleted**, and Render needed no switching off — `x-render-routing: no-server`
+> says the service does not exist. `npm run check` green after the deletion.
+> ⏳ Only a post-deletion browser re-submit remains, as a formality. Details below.
 >
 > 🟢 **The critical path is G, and it is UNBLOCKED as of 2026-08-12.** Apache
 > cannot execute `functions/api/send.ts`, so the contact form has no runtime —
@@ -128,7 +138,8 @@ not one, and the footer's version switcher was dead too. All committed in `3ea45
       emitted to `dist/`, and **zero `is-a.dev` references anywhere in `dist/`**.
 - [x] ✅ **`public/og-image.jpg` supplied by Juan 2026-08-07** — verified as
       **JPEG, exactly 1200×630, 221 KB**. Confirmed referenced from the built
-      home page in both locales. **Still uncommitted and undeployed.**
+      home page in both locales. ~~Still uncommitted and undeployed.~~ — stale as
+      written; committed and deployed since, see the line directly below.
 - [x] ✅ **Verified 2026-08-12 after the cPanel upload:**
       `https://juanpablosilva.com.br/og-image.jpg` → **200**, `image/jpeg`,
       **226,633 bytes — byte-identical to the repo copy**, and the served
@@ -513,7 +524,7 @@ Needs C. Built from scratch. Supersedes
 
 ---
 
-## Milestone G — Contact form on a standalone Worker 🔴 WORKER LIVE, SITE UPLOAD MISSING, NOT PROVEN
+## Milestone G — Contact form on a standalone Worker ✅ CLOSED 2026-08-14 *(one browser re-submit outstanding as a formality)*
 
 Needs D. Deletes the Render service and the whole CORS failure class.
 
@@ -619,35 +630,94 @@ Needs D. Deletes the Render service and the whole CORS failure class.
       ⭐ The generalisable lesson is narrower than "test your assumptions": the
       earlier conclusion was *correct about the mechanism it named* and still
       wrong, because a second mechanism governed the same behaviour.
-- [ ] 🔴 **Juan: set the two Gmail secrets — still UNSET as of 2026-08-13**
-      (`wrangler secret list` reports 2 of 4). ⛔ Run in your own terminal (it needs
-      a TTY), never piped, and **strip the App Password's spaces** — see the
-      2026-08-13 block below. `GMAIL_USER` = `jaypy.uxdesign@gmail.com`.
-      `RATE_LIMIT_SECRET` and `TURNSTILE_SECRET_KEY` are already set:
-      ```bash
-      npx wrangler secret put GMAIL_USER   # the Gmail address
-      npx wrangler secret put GMAIL_PASS   # a 16-char App Password, NOT the login
-      ```
-- [ ] 🔴 **Juan: upload `dist.zip` — REPORTED DONE 2026-08-13 AND IT HAD NOT
-      LANDED.** Rebuilt + re-verified the same day (102 entries, 4.93 MB, `.htaccess`
-      present and byte-identical to `public/.htaccess`, no `dist/` prefix, archive
-      integrity checked, and the contact page inside asserted to carry the Worker
-      action + the sitekey + a non-disabled submit button). Extracts straight into
-      the docroot. This upload is what carries the new `form-action` CSP **and** the
-      re-pointed form; the two must land together or the form breaks.
-      ⛔ In cPanel File Manager turn **Show Hidden Files ON**, or you cannot confirm
-      `.htaccess` actually landed — and that file *is* the CSP fix.
-      ⛔ `zip` is not installed on this machine; the archive is built by
-      `python3 zipfile`. A glob-based `zip -r ../dist.zip *` silently **omits
-      `.htaccess`**, which is exactly the failure this checkbox keeps guarding.
-- [ ] Delete `server/` and the Render service once a real message is delivered
-      through the new endpoint.
-- [ ] Verify: submit from production and confirm **delivery**, not a 200 —
-      ⛔ [200 ≠ liveness]. Then a 6th request must be rejected `429` without
-      sending mail. Then confirm the Render service is off and nothing broke.
-      ⚠️ The 429 gate needs a **fresh 15-minute window**: buckets are fixed
-      (`floor(now/900s)`), and smoke-testing on 2026-08-12 already spent 2 of 5
-      on this IP.
+- [x] ✅ **Gmail secrets set by Juan 2026-08-14** — `wrangler secret list` now
+      reports **4 of 4** (`GMAIL_USER`, `GMAIL_PASS`, `RATE_LIMIT_SECRET`,
+      `TURNSTILE_SECRET_KEY`). Each `put` auto-published a version:
+      `4d54b6bc` (12:19:19Z) and `311bab1e` (12:19:46Z), both `Source: Secret Change`.
+      Corroborated out-of-band by Google's *"App password created … for
+      juansilva-design contact form"* alert at 12:18:04Z.
+- [x] ✅ **`dist.zip` uploaded 2026-08-14 — this time verified against the public
+      URL, after the 2026-08-13 false report.** All four checks that failed
+      yesterday now pass live, on the apex **and** `www`:
+
+      | Check | Live 2026-08-14 |
+      |---|---|
+      | `Last-Modified` | `Fri, 14 Aug 2026 12:20:34 GMT` (was 12 Aug) |
+      | form `action` | `https://form.juanpablosilva.com.br/api/send` |
+      | CSP `form-action` | `'self' https://form.juanpablosilva.com.br` |
+      | Turnstile sitekey | `0x4AAAAAAEOfkYQxd7Zc5QyO`, submit **not** `disabled` |
+
+      ⛔ Keep the cPanel notes for Milestone I / any re-upload: **Show Hidden Files
+      ON** or you cannot confirm `.htaccess` landed — and that file *is* the CSP fix;
+      and `zip` is not installed on this machine, so the archive is built by
+      `python3 zipfile` (a glob-based `zip -r ../dist.zip *` silently **omits
+      `.htaccess`**).
+- [x] ✅ **Delivery proven 2026-08-14T12:25:06Z** — a production submission landed
+      in the inbox as Gmail thread `1a0003baf41b75e4`, subject *"New contact form
+      submission from Real Test"*, body carrying Name / Email / Language / Message.
+      Not a 200 — an actual message ⛔ [200 ≠ liveness].
+- [x] ✅ **The `429` gate is PROVEN 2026-08-14** — 6 POSTs into the fresh bucket
+      `1985234`, deliberately bad content-type so each one short-circuits *after* the
+      limiter and isolates the gate under test:
+
+      | Req | Status | Body |
+      |---|---|---|
+      | 1–5 | `415` | `{"success":false,"code":"form-error"}` |
+      | **6** | **`429`** | `{"success":false,"code":"rate-limited"}` + `Retry-After: 220` |
+
+      Three corroborations make this more than a status-code match: `Retry-After: 220`
+      equalled the window's real remainder (219 s a second later), so the
+      `(window+1)*windowMs - now` math is computed, not a constant; the KV counter
+      finished at **`5`, not 6**, confirming a rejected request returns *before* the
+      `put` (`send.ts:339-343`) and so cannot inflate its own window; and Gmail still
+      held **exactly one** message, so the rejection sent no mail.
+      🔴 **The `429` is only OBSERVABLE with `Accept: application/json`.** `respond()`
+      returns **`303`** to `…/contact/#rate-limited` for any browser `Accept`
+      (`send.ts:414-419`) — the status argument is used only on the JSON branch. A
+      plain `curl` would have scored a correct rejection as a **FAIL**.
+      ⛔ Read the counter with `--remote` or you will read an empty local store.
+- [x] ✅ **`server/` and `render.yaml` DELETED 2026-08-14** — precondition (a real
+      delivered message) met. The Render service needed no switching off: it is
+      already gone, verified **by response** — `juansilva-backend.onrender.com` →
+      `404` + `x-render-routing: no-server`, i.e. no such service, not a sleeping one.
+      Safe to remove: a repo-wide sweep found **zero** references outside the deleted
+      file itself, `TASKS.md`, and `functions/README.md`; root `package.json` has no
+      `workspaces` and no `server` script. `npm run check` (Node 24) is green after
+      the deletion — `astro check` + `tsc -p functions` + `astro build`, 16 pages.
+      ⚠️ That check *rebuilds `dist/`*, so it was re-asserted afterwards: the built
+      contact page still carries the Worker action, sitekey
+      `0x4AAAAAAEOfkYQxd7Zc5QyO`, `action="turnstile-spin-v1"` and a **non-disabled**
+      submit button, and `dist/.htaccess` is byte-identical to `public/.htaccess`.
+      (This machine has the gitignored `.env`; a rebuild without it would silently
+      have produced a disabled button.)
+- [ ] ⏳ **Final formality: one more real-browser submit, Juan.** Everything above is
+      verified, but the plan's own last step is a post-deletion submission.
+      ⭐ Low risk by construction: neither deleted file was ever in the Worker bundle
+      or in the uploaded `dist/`, so removing them cannot have touched the running
+      production form. ⚠️ Wait for a fresh 15-min window — this session's probes left
+      its own IP bucket at 5/5.
+
+### ✅ 2026-08-14 — resolved: secrets set, upload landed, mail delivered
+
+The block below is kept as the standing evidence for *why this project verifies
+owner reports against the public URL*. Its four failing checks were all re-run on
+2026-08-14 and all pass (table in the upload checkbox above).
+
+⭐ **The lesson that survived, sharpened:** the 2026-08-13 session was right to
+disbelieve "dist.zip deployed", and the cheapest decisive probe was the same both
+times — one `curl -sI` for `Last-Modified`. It costs nothing, needs no knowledge of
+which string is new, and it answered the question on both the false report and the
+true one. Verify by public URL, never by the claim → [pushed ≠ published].
+
+⭐ **What made 2026-08-14's verification cheap:** the delivered mail is a *chain*
+proof. `send.ts` has no Turnstile skip path, so one inbox message retires the CSP
+`form-action` fix, the cross-host `action`, the sitekey, the Turnstile solve, the
+hostname allowlist, and the SMTP credentials simultaneously. Finding the one gate
+that cannot be bypassed beats probing each surface separately.
+
+⚠️ It does **not** retire the rate limiter — that path only runs on a 6th request,
+and the KV counter proves it never ran. A chain proof covers exactly the gates the
+chain passes through.
 
 ### 🔴 2026-08-13 — the upload was reported done, and verification says it was not
 

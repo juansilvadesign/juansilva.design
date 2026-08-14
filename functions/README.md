@@ -115,14 +115,22 @@ nothing ever looked at the handler. Three cross-host defects sat here undetected
 
 Local success is necessary but not sufficient. Milestone G closes only after:
 
-1. `npm run check` passes, including `check:worker`;
-2. a production form submission passes Turnstile;
-3. the resulting message is **visibly present in the target inbox** — an HTTP 200,
-   a `303`, or an SMTP acceptance log is not delivery evidence;
-4. a sixth request is rejected `429` without sending mail (needs a fresh 15-minute
-   window — buckets are fixed at `floor(now/900s)`, not sliding);
-5. `server/` and `render.yaml` are deleted only after that inbox proof;
-6. the form is submitted once more after deletion.
+1. ✅ `npm run check` passes, including `check:worker` — green on Node 24, 2026-08-14;
+2. ✅ a production form submission passes Turnstile — 2026-08-14;
+3. ✅ the resulting message is **visibly present in the target inbox** — an HTTP 200,
+   a `303`, or an SMTP acceptance log is not delivery evidence. Gmail thread
+   `1a0003baf41b75e4`, 2026-08-14T12:25:06Z;
+4. ✅ a sixth request is rejected `429` without sending mail (needs a fresh 15-minute
+   window — buckets are fixed at `floor(now/900s)`, not sliding) — 2026-08-14, bucket
+   `1985234`: `415`×5 then `429` + `Retry-After: 220`, counter stopped at `5`, inbox
+   unchanged. 🔴 **Send `Accept: application/json` to see the `429` at all** —
+   `respond()` gives a browser `Accept` a `303` to `#rate-limited` instead
+   (`send.ts:414-419`), so a plain `curl` reads a correct refusal as a failure;
+5. ✅ `server/` and `render.yaml` are deleted only after that inbox proof — deleted
+   2026-08-14; Render itself was already gone (`x-render-routing: no-server`);
+6. ⏳ the form is submitted once more after deletion — **outstanding**, needs a real
+   browser. Low risk: neither deleted path was ever in the Worker bundle or the
+   uploaded `dist/`.
 
 KV counters are eventually consistent, so Turnstile remains the primary bot
 barrier while KV enforces the human-scale quota.
