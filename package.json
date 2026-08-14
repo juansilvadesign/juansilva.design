@@ -13,6 +13,9 @@
     "preview": "astro preview",
     "check:worker": "tsc -p functions",
     "check": "astro check && npm run check:worker && astro build",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:check": "node scripts/deploy.mjs --check",
+    "deploy:status": "node scripts/deploy.mjs --status",
     "deploy:worker": "wrangler deploy"
   },
   "dependencies": {
