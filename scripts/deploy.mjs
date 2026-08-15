@@ -68,8 +68,12 @@ const APEX_HOST = new URL(SITE).hostname;
 // .well-known/acme-challenge is the AutoSSL renewal path — deleting it can break
 // certificate renewal. cgi-bin is a cPanel fixture. Both verified present
 // 2026-08-14 and empty of repo files. Never listed into, never deleted.
-const PRESERVE = ["/.well-known/", "/cgi-bin/"];
-const isPreserved = (rel) => PRESERVE.some((p) => `/${rel}/`.startsWith(p));
+const PRESERVE = ["/.well-known/", "/cgi-bin/", "/.ftpquota"];
+// Entries ending in "/" preserve a whole subtree; the rest match one exact path.
+// .ftpquota is pure-ftpd's own quota bookkeeping, written into the FTP account's
+// home — the host's file, not ours, and a mirror would delete it on every run.
+const isPreserved = (rel) =>
+  PRESERVE.some((p) => (p.endsWith("/") ? `/${rel}/`.startsWith(p) : `/${rel}` === p));
 
 const VERBOSE = process.argv.includes("--verbose");
 const FORCE = process.argv.includes("--force");
@@ -586,7 +590,9 @@ if (mode === "status") {
     head(mode === "check" ? "Connecting (read-only)" : "Connecting");
     const conn = await connect();
     client = conn.client;
-    info(`FTP ${env.CPANEL_FTP_USER}@${env.CPANEL_FTP_HOST}:${env.CPANEL_FTP_PORT} — TLS ${conn.tls}`);
+    // The login is often itself an user@domain, so keep the two apart visually —
+    // this line is how an operator confirms WHICH account is about to write.
+    info(`FTP login "${env.CPANEL_FTP_USER}" → ${env.CPANEL_FTP_HOST}:${env.CPANEL_FTP_PORT} — TLS ${conn.tls}`);
 
     const docroot = await enterDocroot(client);
     const rootNames = (await client.list(docroot)).map((f) => f.name);

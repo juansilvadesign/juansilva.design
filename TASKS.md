@@ -829,7 +829,7 @@ deferred cost stays visible.
 
 ---
 
-## Milestone I — Retire the manual docroot upload 🟡 BUILT 2026-08-14, but on the WRONG TRANSPORT
+## Milestone I — Retire the manual docroot upload ✅ CLOSED 2026-08-15 (FTP, deployed + verified)
 
 > 🔴 **2026-08-14, Juan — the transport is FTP, not SSH.** Verbatim: *"SSH does not
 > work, always use FTP. Currently we are at 88/100 (88%) of number of processes, we
@@ -850,8 +850,19 @@ deferred cost stays visible.
 > file serving the CSP, the security headers and `ErrorDocument 404` — needs
 > deliberate handling that `rsync dist/` provided for free.
 >
-> ⏳ **Blocked until the empty processes are terminated** (cPanel → Resource Usage
-> → Number of Processes; 88/100 as of 2026-08-14).
+> ✅ **The process count was measured, not assumed** (cPanel UAPI
+> `ResourceUsage/get_usages` over HTTPS:2083, read-only): **`lvenproc` 88/100 —
+> Juan's number is live, not stale.** But the neighbouring row matters as much:
+> **`lveep` (entry processes) is 8/50.** ⛔ **This host exposes NO way to terminate
+> anything** — `FTP`, `ProcessManager` and `LveInfo` UAPI modules are all absent
+> (`Can't locate Cpanel/API/*.pm`), there are no Passenger apps, and the only
+> in-panel tool that could is Terminal, which is SSH. Clearing them is a human
+> step, or a <host-provider> support ticket.
+>
+> ⭐ **The deploy was never actually blocked on it.** The gate was calibrated against
+> rsync-over-SSH; **one held FTP connection costs ~2 slots and 12 are free.** The
+> script now reads that number itself before connecting and refuses when ≤3 slots
+> remain, so the constraint is enforced rather than remembered.
 
 **Split out of G on 2026-08-12, deliberately.** "git-push deploys" kept being
 used as an argument *for* the full Pages migration, which let a deploy-pipeline
@@ -950,6 +961,100 @@ Each hazard the File-Manager dance carried is now structural, not procedural:
 - [ ] First real `npm run deploy` against production.
 - [ ] Re-run `deploy:status` after the next content change to confirm drift is
       actually detected rather than merely reported green.
+
+### I4 — Re-based onto FTP ✅ 2026-08-14
+
+`scripts/deploy.mjs` now transfers over FTP via `basic-ftp` (zero dependencies).
+The three modes and their names are unchanged. **Stages 1 and 3 — the 16 build
+assertions and the 12 public-URL checks — were not touched: they are
+transport-independent, which is exactly why the split was worth making.**
+
+What FTP could not inherit from rsync, and what replaced it:
+
+| rsync gave us free | FTP replacement |
+|---|---|
+| `--delete` | explicit remote walk → diff → delete files, then now-empty dirs deepest-first. Uploads run **first**, so the live site is never missing a file that is about to be replaced |
+| `--checksum` | ⛔ nothing — FTP has no content hash, and `astro build` rewrites every mtime. **Every file is uploaded every run**; size differences are reported but never used to skip. Unconditional upload is the only thing that actually guarantees convergence |
+| dotfiles carried by `dist/` + trailing slash | the upload set is walked locally, so `.htaccess` is not a special case. If the *remote* listing returns no dotfiles at all the script warns that the delete pass may be partial (that direction only under-deletes, which is safe) |
+| `--exclude` on a mirror | `/.well-known/` and `/cgi-bin/` are never listed into and never deleted — same contract, checked in the delete pass |
+| one SSH process | **one FTP control connection held for the whole run**, closed in a `finally` on every path out. A dangling session is a leaked process on an account at 88 % |
+
+Guards that did not exist before, because FTP made them necessary:
+
+- 🔴 **Refuses to mirror into a cPanel account home.** The login is the *main*
+  account, whose home holds every site — a wrong `CPANEL_DOCROOT` plus
+  mirror-with-delete would take out psiativa and newcar too. Three or more of
+  `domains/ public_html/ mail/ etc/ …` in the target ⇒ hard stop, unconditional.
+- The docroot must name the apex host, **or** `CPANEL_FTP_SCOPED=true` must be
+  declared (a per-directory FTP login is chrooted, so its docroot is `/` and
+  cannot name the site). Declared, never inferred.
+- The target must already hold an `index.html`, or be empty.
+- The process-quota preflight above, with `--force` as the explicit override.
+
+**Proven 2026-08-14, and how:**
+
+- [x] 16/16 build assertions green; the quota preflight read 88/100 live.
+- [x] **The mirror contract was proven end-to-end against a local fake FTP server
+      before it was ever pointed at production** — 102 files uploaded, 3 stale
+      files + 1 stale dir deleted, `.htaccess` landed, `.well-known/acme-challenge/`
+      and `cgi-bin/` survived, and the result diffed **byte-identical to `dist/`**
+      with no extras and no misses. ⭐ Worth keeping: the first failure that run
+      produced was a bug in the *fake server*, not the deploy script.
+- [x] Fails closed on the security downgrade instead of leaking (below).
+- [x] **Scoped FTP account created 2026-08-15** — `deploy@<site-domain>`,
+      jailed to the docroot (confirmed by `Ftp::listftp`, not assumed). ⭐ Created
+      over **cPanel API2** (`POST /json-api/cpanel`, `Ftp::addftp`, password in the
+      form body so it never lands in an access log). ⚠️ The earlier claim that this
+      "cannot be scripted, the `FTP` UAPI module is missing" was **wrong**: `Ftp`
+      and `Cron` are **API2** modules, not UAPI — absence from `/execute/` proves
+      nothing. `.env.deploy` now carries `CPANEL_DOCROOT=/`,
+      `CPANEL_FTP_SCOPED=true`, `CPANEL_API_USER=<cpanel-account>`, `CPANEL_FTP_TLS=false`.
+- [x] **`deploy:check` green against production 2026-08-15** — 102 local vs 102
+      remote, **0 deletions, 0 size differences**, identity guards passed on the
+      chrooted path. ⭐ The dry run earned its keep: it caught that the mirror would
+      have deleted **`.ftpquota`**, pure-ftpd's own quota bookkeeping file in the
+      FTP account's home. Now preserved, and `PRESERVE` entries distinguish subtree
+      prefixes (`/.well-known/`) from exact files (`/.ftpquota`).
+- [x] **The process cap cleared itself once the cause was found** — Juan killed the
+      backlog via **cPanel → Terminal** on 2026-08-15 and `lvenproc` went **88/100 →
+      0/100** (`lveep` 8 → 0). 🔴 **They were leftover agent SSH sessions from
+      earlier deploys on other projects** — not steady-state daemons, as this
+      session had wrongly inferred from the count sitting still for 24 h. ⭐ That is
+      the strongest argument yet for the FTP rule: the tooling was polluting the
+      account it deploys to. ⚠️ Terminal **is** available on this account.
+- [ ] ~~Blocked:~~ 🔴 **This host has no working FTPS** —
+      the banner advertises `[TLS]` and `FEAT` lists `AUTH TLS`/`PBSZ`/`PROT`, yet
+      every scheme (`AUTH TLS`, `AUTH SSL`, `AUTH TLS-C`) answers **`500 This
+      security scheme is not implemented`** as the first command on a clean
+      connection, and implicit FTPS on `:990` is **refused**. So a login here
+      crosses the internet in cleartext. Juan's call (2026-08-14): create a cPanel
+      FTP account whose directory **is** the juanpablosilva.com.br docroot, so a
+      captured credential can write that one folder and cannot reach cPanel,
+      psiativa or newcar. ⛔ It cannot be scripted: the `FTP` UAPI module is
+      missing on this server. Then set `CPANEL_FTP_USER`/`CPANEL_FTP_PASSWORD`,
+      `CPANEL_DOCROOT=/`, `CPANEL_FTP_SCOPED=true`, `CPANEL_API_USER=<cpanel-account>`
+      and `CPANEL_FTP_TLS=false`.
+- [x] **First real `npm run deploy` against production ✅ 2026-08-15, exit 0.**
+      102/102 uploaded, **0 deleted** (preserve list respected), and — the
+      acceptance test — `Last-Modified` **moved on the apex AND `www`**
+      (`Fri, 14 Aug 13:44:13` → `Sat, 15 Aug 22:31:46`), followed by 12/12
+      public-URL checks green: CSP with the Worker in `form-action`, security
+      headers, both contact pages with a live sitekey and an enabled submit,
+      `og-image.jpg` 200, a real 404 on a miss. ⭐ Deliberately run while the
+      docroot already matched `dist/`, so the write path was proven end to end
+      with byte-identical content and nothing to delete.
+- [x] **The transport cost was verified, not assumed:** `lvenproc` **0/100** and
+      `lveep` **0/50** immediately after the deploy — one connection, held for the
+      run, closed in a `finally`, nothing leaked. Contrast the 88 that
+      rsync-over-SSH left behind across previous sessions.
+- [ ] Re-run `deploy:status` after the next content change to confirm drift is
+      actually detected rather than merely reported green.
+- [ ] ⚠️ Revisit if <host-provider> ever enables FTPS: `CPANEL_FTP_TLS=false` is a scoped
+      credential in cleartext, accepted knowingly — not a permanent verdict.
+
+⛔ **Do not port this back to SSH.** rsync-over-SSH works on this host — it deployed
+successfully on 2026-08-14 — and is still forbidden. The constraint is the
+account-wide process cap and its blast radius, not authentication.
 
 **Still true whatever happens next:** the acceptance test is **verify by public
 URL, not by a green build** — and read the body, not the status code.
