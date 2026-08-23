@@ -53,7 +53,18 @@ export const projectSchema = z
     _generated: generatedSchema.optional(),
     title: z.string().trim().min(1),
     role: z.string().trim().min(1),
-    attribution: z.string().trim().min(1),
+    /**
+     * `attribution` and `impact` were removed from the card on 2026-08-22.
+     *
+     * They still gate publication — a record cannot be exported unless its
+     * attribution is confirmed in the store — but the store's PROSE is written
+     * for the private corpus, not for a public repo: it names third parties by
+     * role and carries internal evidentiary notes. No template ever rendered
+     * either field, so publishing them was cost without benefit.
+     *
+     * The user-facing text is `copy[lang]`, which is written deliberately for
+     * this surface. Keep it that way: do not re-add a raw store field here.
+     */
     dates: z
       .object({
         start: dateSchema,
@@ -61,7 +72,6 @@ export const projectSchema = z
       })
       .strict(),
     stack: z.array(stackIdSchema).min(1),
-    impact: z.string().trim().min(1),
     liveUrl: hrefSchema,
     evidenceLink: hrefSchema,
     featured: z.boolean(),

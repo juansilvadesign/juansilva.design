@@ -6,7 +6,6 @@
   },
   "title": "Spaceapps Trilingual Marketing Site",
   "role": "Design Engineer — fixed the supplied homepage design, then coded it; authored the legal, 404 and localized routes outright",
-  "attribution": "Spaceapps owned the project and the client relationship — this was the agency's own marketing site. Thiago designed the homepage; Juan Silva remediated that handoff and implemented it, then authored the three Portuguese legal pages, the custom 404 and the /en-us + /es-ar route tree with no design input, and built the lead-capture service. The homepage design is not Juan's.",
   "dates": {
     "start": "2025-08-06",
     "end": "2025-09-06"
@@ -16,7 +15,6 @@
     "tailwind",
     "figma"
   ],
-  "impact": "Shipped and served the agency's site from ~September 2025. The lead-capture service Juan wrote is still answering today — GET /health returned HTTP 200 with both integrations reporting configured, eleven months after the last commit and long after the frontend went dark.",
   "liveUrl": "https://spaceapps.juanpablosilva.com.br/",
   "evidenceLink": "https://github.com/ZokuWebDesign/Spaceapps",
   "featured": true,

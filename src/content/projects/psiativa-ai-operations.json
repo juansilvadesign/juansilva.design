@@ -6,7 +6,6 @@
   },
   "title": "PsiAtiva AI Acquisition Operations",
   "role": "Founder & Automation Engineer",
-  "attribution": "PsiAtiva is Juan Silva's own business. Juan designed, built and operates the workflows represented here. This is own-business capability evidence, not client work and not a paid client result.",
   "dates": {
     "start": "2026-05-27",
     "end": null
@@ -15,7 +14,6 @@
     "javascript",
     "python"
   ],
-  "impact": "Runs PsiAtiva's own acquisition operation in production, from capture through qualification to a WhatsApp handoff.",
   "liveUrl": "https://psiativa.com.br/",
   "evidenceLink": "/assets/images/n8n.webp",
   "featured": true,
