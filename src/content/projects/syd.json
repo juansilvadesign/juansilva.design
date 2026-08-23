@@ -1,0 +1,38 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/syd.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "SYD (SaveYourDay) — landing-page layer for an on-demand therapy platform",
+  "role": "Designed and coded the landing pages — not the product",
+  "dates": {
+    "start": "2025-06-20",
+    "end": "2025-08-22"
+  },
+  "stack": [
+    "typescript",
+    "tailwind",
+    "figma"
+  ],
+  "liveUrl": "https://sydapp.com.br/",
+  "evidenceLink": "https://github.com/zokuWebDesign/SYD-Next",
+  "featured": false,
+  "preview": "/assets/images/syd-preview.webp",
+  "copy": {
+    "en": {
+      "title": "On-Demand Therapy Platform — Three-Audience Landing Layer",
+      "description": "Wireframed, designed and then coded the public face of an on-demand therapy platform: three audience-specific landing pages — patient, practitioner and corporate HR — each at three breakpoints. This is the landing layer only; the product behind it is another designer's work and another team's build.",
+      "previewAlt": "SYD on-demand therapy platform landing page",
+      "liveLabel": "Live site",
+      "evidenceLabel": "Source code"
+    },
+    "pt": {
+      "title": "Plataforma de terapia sob demanda — camada de landing pages",
+      "description": "Fiz wireframe, design e código da face pública de uma plataforma de terapia sob demanda: três landing pages por público — paciente, profissional e RH corporativo — cada uma em três breakpoints. É apenas a camada de landing; o produto por trás é design de outra pessoa e build de outro time.",
+      "previewAlt": "Landing page da plataforma de terapia SYD",
+      "liveLabel": "Site no ar",
+      "evidenceLabel": "Código-fonte"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/gestrif.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Gestrif — business-management platform landing page",
+  "role": "Fixed the supplied design, then coded the landing page",
+  "dates": {
+    "start": "2025-07-22",
+    "end": "2025-08-12"
+  },
+  "stack": [
+    "typescript",
+    "tailwind"
+  ],
+  "liveUrl": "https://gestrif.juanpablosilva.com.br/",
+  "evidenceLink": "https://github.com/zokuWebDesign/Gestrif",
+  "featured": false,
+  "preview": "/assets/images/gestrif-preview.webp",
+  "copy": {
+    "en": {
+      "title": "Complaint-Management Platform — Landing Page Build",
+      "description": "Took a supplied design for a financial-sector complaint-management platform, fixed what could not be built as drawn, and implemented the landing page in code. An implementation credit: the design direction was not mine.",
+      "previewAlt": "Gestrif complaint-management platform landing page",
+      "liveLabel": "View the build (self-hosted copy)",
+      "evidenceLabel": "Source code"
+    },
+    "pt": {
+      "title": "Plataforma de gestão de reclamações — build da landing page",
+      "description": "Peguei um design recebido para uma plataforma de gestão de reclamações do setor financeiro, corrigi o que não era construível como estava e implementei a landing page em código. É um crédito de implementação: a direção de design não é minha.",
+      "previewAlt": "Landing page da plataforma de reclamações Gestrif",
+      "liveLabel": "Ver o build (cópia própria)",
+      "evidenceLabel": "Código-fonte"
+    }
+  }
+}

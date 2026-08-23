@@ -1,0 +1,38 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/celus.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Celus — point-of-care ultrasound suite (designed the product solo, coded the landing page)",
+  "role": "Sole designer of the whole product — 19 modules across two surfaces — and designer + front-end developer of the landing page",
+  "dates": {
+    "start": "2025-07-31",
+    "end": "2025-09-07"
+  },
+  "stack": [
+    "typescript",
+    "tailwind",
+    "figma"
+  ],
+  "liveUrl": "https://celus.juanpablosilva.com.br/",
+  "evidenceLink": "https://github.com/zokuWebDesign/Celus",
+  "featured": true,
+  "preview": "/assets/images/celus-preview.webp",
+  "copy": {
+    "en": {
+      "title": "Point-of-Care Ultrasound Suite & Marketing Site",
+      "description": "Designed a nineteen-module clinical product solo — an ultrasound decision-support app for clinicians plus its admin back office — on a two-layer token system that resolves across light, dark and two device modes with no broken aliases. Then designed and coded the marketing site in Next.js, wired to a form-capture service. A Bubble developer built the product itself.",
+      "previewAlt": "Celus point-of-care ultrasound marketing site",
+      "liveLabel": "View the build (self-hosted copy)",
+      "evidenceLabel": "Source code"
+    },
+    "pt": {
+      "title": "Suíte de ultrassom point-of-care e site",
+      "description": "Desenhei sozinho um produto clínico de dezenove módulos — um app de apoio à decisão em ultrassom para médicos e seu back-office — sobre um sistema de tokens em duas camadas que resolve em claro, escuro e dois modos de dispositivo, sem aliases quebrados. Depois desenhei e programei o site em Next.js, ligado a um serviço de captura. O produto em si foi construído por um desenvolvedor Bubble.",
+      "previewAlt": "Site do Celus, suíte de ultrassom point-of-care",
+      "liveLabel": "Ver o build (cópia própria)",
+      "evidenceLabel": "Código-fonte"
+    }
+  }
+}
