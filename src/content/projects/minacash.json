@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/minacash.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "MinaCash — mobile experience for a cashback platform",
+  "role": "Sole designer of the mobile experience",
+  "dates": {
+    "start": null,
+    "end": "2024-05-27"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://minacash.com.br/",
+  "evidenceLink": "https://www.figma.com/design/wpp9WlwEfw21dmgfwaaAOp/Minacash?node-id=87-22642",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Cashback Platform — Mobile Experience",
+      "tagline": "Onboarding, account security and the Pix flow, designed for two phone sizes.",
+      "description": "A cashback and financial-rewards platform that began as a client-built Bubble deployment and was extended into structured product interfaces. I designed the whole mobile page — 46 children across iPhone SE and iPhone 13 mini — covering onboarding and registration with postcode lookup, the account and security surface including a change-password modal, and the Pix transaction flow with its confirmation state. The mobile experience is the scope: the original build and the desktop CRM are other people's.",
+      "previewAlt": "Mobile experience design for a cashback platform",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Plataforma de cashback — experiência mobile",
+      "tagline": "Onboarding, segurança da conta e o fluxo Pix, em dois tamanhos de celular.",
+      "description": "Uma plataforma de cashback e recompensas que começou como um build em Bubble feito pelo cliente e foi estendida para interfaces de produto estruturadas. Desenhei toda a página mobile — 46 filhos entre iPhone SE e iPhone 13 mini — cobrindo onboarding e cadastro com busca de CEP, a área de conta e segurança com modal de troca de senha, e o fluxo de transação Pix com seu estado de confirmação. O escopo é a experiência mobile: o build original e o CRM desktop são de outras pessoas.",
+      "previewAlt": "Design da experiência mobile de uma plataforma de cashback",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

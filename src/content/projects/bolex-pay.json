@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/bolex-pay.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Bolex Pay — payment gateway landing page & pricing tiers",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-07-20",
+    "end": "2023-08-02"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/aHFhZTnToTlBOSCxFwUHmw/Bolex-Pay?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Payment Gateway — Landing Page & Pricing Tiers",
+      "tagline": "Five multi-resolution layouts with a pricing comparison matrix.",
+      "description": "A commercial landing page for a payment gateway: transaction rates, settlement speed, card-brand acceptance, developer APIs and transparent subscription tiers. I designed five multi-resolution canvas layouts — desktop at 1920 and 1280, mobile at 375, plus a dedicated plans page and its mobile counterpart — with 3D card mockups, a pricing comparison matrix and the conversion CTA blocks. A design credit only: no production URL was recovered, so nothing here says this shipped.",
+      "previewAlt": "Landing page and pricing design for a payment gateway",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Gateway de pagamento — landing page e planos",
+      "tagline": "Cinco layouts em múltiplas resoluções com matriz comparativa de planos.",
+      "description": "Uma landing page comercial para um gateway de pagamento: taxas por transação, prazo de repasse, bandeiras aceitas, APIs para desenvolvedores e planos de assinatura transparentes. Desenhei cinco layouts em múltiplas resoluções — desktop em 1920 e 1280, mobile em 375, mais uma página dedicada de planos e sua versão mobile — com mockups de cartão em 3D, uma matriz comparativa de preços e os blocos de CTA. É apenas crédito de design: nenhuma URL de produção foi recuperada, então nada aqui afirma que isso foi ao ar.",
+      "previewAlt": "Design de landing page e planos de um gateway de pagamento",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

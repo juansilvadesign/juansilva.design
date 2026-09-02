@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/messias-almada.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Messias & Almada — multi-practice law firm website",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-09-13",
+    "end": "2023-11-21"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://messias.adv.br/",
+  "evidenceLink": "https://www.figma.com/design/QbkG2JXoTQZyDKls9SwQo6/Messias---Almada?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Multi-Practice Law Firm — Website Design",
+      "tagline": "Five practice verticals and 82 nodes — the largest of fifteen firm sites.",
+      "description": "A full digital presence for an established multi-practice firm: five dedicated practice-area subpages, partner profiles, the mission narrative and contact. 82 canvas nodes across desktop and mobile, with two distinct navigation components — a hero navbar and a rest-of-site navbar — plus interactive banner variants and timed hero states. The largest of the fifteen firm websites I designed here. Sole website UI designer; the identity was another designer's and a no-code developer shipped the build.",
+      "previewAlt": "Website design for a multi-practice law firm",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Escritório de advocacia multidisciplinar — design do site",
+      "tagline": "Cinco áreas de atuação e 82 nós — o maior de quinze sites de escritório.",
+      "description": "Uma presença digital completa para um escritório consolidado: cinco subpáginas por área de atuação, perfis dos sócios, a narrativa institucional e contato. São 82 nós entre desktop e mobile, com dois componentes de navegação distintos — uma navbar de hero e outra para o resto do site — além de variações de banner interativo e estados temporizados no hero. É o maior dos quinze sites de escritório que desenhei aqui. Designer de UI único do site; a identidade é de outro designer e um desenvolvedor no-code subiu o build.",
+      "previewAlt": "Design de site para um escritório de advocacia multidisciplinar",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

@@ -16,11 +16,12 @@
   ],
   "liveUrl": "https://psiativa.com.br/",
   "evidenceLink": "https://psiativa.com.br/quiz/",
-  "featured": true,
+  "featured": false,
   "preview": "/assets/images/calculadora.webp",
   "copy": {
     "en": {
       "title": "High-Conversion Funnel Engineering",
+      "tagline": "Astro marketing site with a diagnosis quiz, ROI calculator and protected capture.",
       "description": "Built PsiAtiva's production marketing site in Astro, with a self-diagnosis quiz and ROI calculator, protected capture, and an automated WhatsApp follow-up handoff.",
       "previewAlt": "PsiAtiva ROI calculator funnel",
       "liveLabel": "Live project",
@@ -28,10 +29,21 @@
     },
     "pt": {
       "title": "Engenharia de funil de conversão",
+      "tagline": "Site em Astro com quiz de diagnóstico, calculadora de ROI e captura protegida.",
       "description": "Construí o site de produção da PsiAtiva em Astro, com quiz de autodiagnóstico e calculadora de ROI, captura protegida e passagem automatizada para o acompanhamento no WhatsApp.",
       "previewAlt": "Funil da calculadora de ROI da PsiAtiva",
       "liveLabel": "Projeto no ar",
       "evidenceLabel": "Testar o quiz"
     }
-  }
+  },
+  "evidenceWeight": 7,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
 }

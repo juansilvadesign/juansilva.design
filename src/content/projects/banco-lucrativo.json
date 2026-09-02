@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/banco-lucrativo.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Banco Lucrativo — Brazil–Nigeria remittance & FX platform",
+  "role": "Sole designer — product and marketing site",
+  "dates": {
+    "start": "2024-06-19",
+    "end": "2024-09-24"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/XFkzX0tT89wuG81LMg2SIq/Banco-Lucrativo?node-id=1-16",
+  "featured": false,
+  "preview": "/assets/images/banco-lucrativo-preview.webp",
+  "copy": {
+    "en": {
+      "title": "Brazil–Nigeria Remittance & FX Platform — Product and Brand",
+      "tagline": "A two-role product designed mobile-first, plus the brand system behind it.",
+      "description": "A cross-border remittance and FX product: transfers carrying a ten-frame compliance sequence, instant payments and QR, bill payment, top-up, statements, receipt sharing, and an FX order desk with per-corridor pricing. I designed the complete two-role product mobile-first — 302 children — plus the brand system: four logo variants, the colour system, typography, spacing, auxiliary elements and surface textures. Designed mobile-first and complete at that width; desktop was out of scope, so this is not a responsive-craft credit.",
+      "previewAlt": "Product and brand design for a cross-border remittance and FX platform",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma de remessas e câmbio Brasil–Nigéria — produto e marca",
+      "tagline": "Um produto de dois perfis desenhado mobile-first, e o sistema de marca por trás.",
+      "description": "Um produto de remessa internacional e câmbio: transferências com uma sequência de compliance de dez frames, pagamentos instantâneos e QR, pagamento de contas, recarga, extratos, compartilhamento de comprovante e uma mesa de ordens de câmbio com preço por corredor. Desenhei o produto completo de dois perfis em mobile-first — 302 filhos — mais o sistema de marca: quatro variações de logo, sistema de cores, tipografia, espaçamento, elementos auxiliares e texturas de superfície. Foi desenhado mobile-first e completo nessa largura; desktop ficou fora do escopo, então não é um crédito de trabalho responsivo.",
+      "previewAlt": "Design de produto e marca de uma plataforma de remessas e câmbio",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

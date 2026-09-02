@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/pro-personal.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Pro Personal — three-role personal-training platform",
+  "role": "Sole product designer",
+  "dates": {
+    "start": "2024-03-04",
+    "end": "2024-12"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/8n9IrDRBqZZ8V0qglFF1KL/Pro-Personal?node-id=1-2",
+  "featured": false,
+  "preview": "/assets/images/pro-personal-preview.webp",
+  "copy": {
+    "en": {
+      "title": "Personal-Training Platform — Three Roles, 700 Frames",
+      "tagline": "A 500-page client specification turned into one coherent product.",
+      "description": "A three-role personal-training platform — trainer, client and an admin back office — encoding real strength-and-conditioning methodology rather than a generic workout list. I turned a client specification of more than 500 pages into a coherent 700-frame product across three role surfaces and three wired prototypes, on a design system of 448 components and 60 variant sets built with no vendor kit and twelve semantically named colour roles. It was approved and handed to development; the build did not complete, so nothing here says it launched.",
+      "previewAlt": "Design file for a three-role personal-training platform",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma de personal training — três perfis, 700 frames",
+      "tagline": "Uma especificação de cliente com mais de 500 páginas virada em um produto coerente.",
+      "description": "Uma plataforma de personal training de três perfis — treinador, aluno e um back office administrativo — que codifica metodologia real de treinamento de força e condicionamento, não uma lista genérica de exercícios. Transformei uma especificação de cliente com mais de 500 páginas num produto coerente de 700 frames em três superfícies de perfil e três protótipos conectados, sobre um design system de 448 componentes e 60 conjuntos de variantes feito sem kit de terceiros e com doze papéis de cor nomeados semanticamente. Foi aprovado e entregue ao desenvolvimento; o build não foi concluído, então nada aqui afirma que foi lançado.",
+      "previewAlt": "Arquivo de design de uma plataforma de personal training com três perfis",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

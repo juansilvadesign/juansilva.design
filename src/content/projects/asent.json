@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/asent.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Asent — service marketplace admin flow & landing page",
+  "role": "UI designer on the extension scope — Admin flow and the new landing page",
+  "dates": {
+    "start": "2023-09",
+    "end": "2024-01"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/GQBrMVz0HJZYQQtT8J7u44/Asent?node-id=4-3",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Service Marketplace — Admin Flow & Landing Page Extension",
+      "tagline": "An extension scope designed inside an existing system, not around it.",
+      "description": "A service-hiring and project-management platform connecting clients with enterprise and specialist providers — service requests, quotes and a construction-works timeline. My scope was the extension: the dedicated admin back-office flow and a new, validated landing page and homepage version, designed inside the existing design system rather than around it, reusing its component architecture and tokens so the addition did not fork the product. The base product, the identity and the original design system were other designers' work, as was the client-side flow.",
+      "previewAlt": "Admin flow and landing page design for a service marketplace",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Marketplace de serviços — fluxo de admin e nova landing page",
+      "tagline": "Um escopo de extensão desenhado dentro do sistema existente, não em volta dele.",
+      "description": "Uma plataforma de contratação de serviços e gestão de projetos ligando clientes a fornecedores corporativos e especialistas — solicitações, orçamentos e cronograma de obras. Meu escopo foi a extensão: o fluxo dedicado de back office do admin e uma nova versão validada da landing page e da home, desenhados dentro do design system existente e não em volta dele, reutilizando arquitetura de componentes e tokens para que a adição não bifurcasse o produto. O produto base, a identidade e o design system original são de outros designers, assim como o fluxo do cliente.",
+      "previewAlt": "Design do fluxo de admin e da landing page de um marketplace de serviços",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

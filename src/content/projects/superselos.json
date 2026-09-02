@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/superselos.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "SuperSelos — philately collection & marketplace app (designed, never built)",
+  "role": "Sole designer of the product",
+  "dates": {
+    "start": "2025-04-30",
+    "end": "2025-06-27"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/K7MALNPbdfmaeAWHgsAHPZ/SuperSelos",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Philately Collection & Marketplace App",
+      "tagline": "Fourteen modules designed end to end for a client who arrived with an idea.",
+      "description": "A mobile-only philately app for the Brazilian market — stamp collection management plus a marketplace — spanning fourteen modules, designed end to end for a client who arrived with an idea and nothing else. I designed the whole product from a discovery board: the fourteen-module mobile UI, a wired prototype, and 194 components built across twenty-four authoring sessions with no bulk-paste session anywhere in the history. Designed and handed off; the build never completed, so nothing here says it shipped. The discovery and the logo were someone else's.",
+      "previewAlt": "Design file for a philately collection and marketplace app",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "App de coleção e marketplace de filatelia",
+      "tagline": "Quatorze módulos desenhados de ponta a ponta para um cliente que chegou com uma ideia.",
+      "description": "Um app de filatelia só para mobile no mercado brasileiro — gestão de coleção de selos mais um marketplace — com quatorze módulos, desenhado de ponta a ponta para um cliente que chegou com uma ideia e nada mais. Desenhei todo o produto a partir de um board de discovery: a UI mobile dos quatorze módulos, um protótipo conectado e 194 componentes construídos em vinte e quatro sessões de autoria, sem nenhuma sessão de colagem em massa no histórico. Desenhado e entregue; o build nunca foi concluído, então nada aqui afirma que foi publicado. O discovery e o logo são de outra pessoa.",
+      "previewAlt": "Arquivo de design de um app de coleção e marketplace de filatelia",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

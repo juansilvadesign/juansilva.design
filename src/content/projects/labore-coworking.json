@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/labore-coworking.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Labore Coworking — display banners & icon asset system",
+  "role": "Brand & Visual Designer",
+  "dates": {
+    "start": "2023-09-01",
+    "end": "2023-09-01"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://laborecoworking.com.br/",
+  "evidenceLink": "https://www.figma.com/design/spgFs734QwgWQ0d4yapcfM/Labore-Coworking?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Coworking Brand — Display Banners & Icon System",
+      "tagline": "A multi-resolution banner and icon package for a coworking provider.",
+      "description": "A digital brand-asset and display-production package for a coworking provider: an 8K banner, a Full HD banner, web and social formats, an icon suite and its SVG and PNG exports. A visual-design credit on assets — not an application, not a site build, and not the business behind it.",
+      "previewAlt": "Display banner and icon assets for a coworking brand",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Marca de coworking — banners de display e sistema de ícones",
+      "tagline": "Um pacote de banners e ícones em várias resoluções para um coworking.",
+      "description": "Um pacote de assets de marca e produção de display para um coworking: banner em 8K, banner Full HD, formatos para web e redes, uma suíte de ícones e suas exportações em SVG e PNG. É crédito de design visual sobre peças — não é aplicação, não é build de site, e não é o negócio por trás.",
+      "previewAlt": "Banners de display e ícones para uma marca de coworking",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

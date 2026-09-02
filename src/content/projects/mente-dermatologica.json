@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/mente-dermatologica.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Mente Dermatológica — five-role dermatology LMS",
+  "role": "Sole designer",
+  "dates": {
+    "start": "2024-12-10",
+    "end": "2025-01-30"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/iRVBeN1n4ORWJMgh5ERDLA/Mente-Dermatol%C3%B3gica--Last-Version-",
+  "featured": false,
+  "preview": "/assets/images/mente-dermatologica-preview.webp",
+  "copy": {
+    "en": {
+      "title": "Dermatology Learning Platform — Five Roles, 586 Frames",
+      "tagline": "The deepest token system in this portfolio, on a desktop-only LMS.",
+      "description": "A five-role learning platform for dermatology education: an exam engine, a question bank, flashcards with a difficulty model, live classes and a clinical-case forum, over a back office. I designed 586 frames plus a 68-node design system, with bound variables — primary ramps, neutrals and gradients — living inside bespoke components, which makes it the deepest token system in this portfolio. Desktop-only: do not read it as responsive or multi-device work, and the design system extends an existing base rather than starting from nothing.",
+      "previewAlt": "Design file for a five-role dermatology learning platform",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma de ensino em dermatologia — cinco perfis, 586 frames",
+      "tagline": "O sistema de tokens mais profundo deste portfólio, num LMS só desktop.",
+      "description": "Uma plataforma de ensino de cinco perfis para educação em dermatologia: motor de provas, banco de questões, flashcards com modelo de dificuldade, aulas ao vivo e fórum de casos clínicos, sobre um back office. Desenhei 586 frames mais um design system de 68 nós, com variáveis vinculadas — rampas primárias, neutros e gradientes — dentro de componentes próprios, o que faz dele o sistema de tokens mais profundo deste portfólio. É só desktop: não leia como trabalho responsivo ou multi-dispositivo, e o design system estende uma base existente em vez de partir do zero.",
+      "previewAlt": "Arquivo de design de uma plataforma de ensino em dermatologia com cinco perfis",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

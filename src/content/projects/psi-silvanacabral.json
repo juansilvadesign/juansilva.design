@@ -1,0 +1,50 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/psi-silvanacabral.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Silvana Cabral — psychology practice site (designed and coded, solo)",
+  "role": "Sole designer and sole developer",
+  "dates": {
+    "start": "2025-11-28",
+    "end": "2025-12-13"
+  },
+  "stack": [
+    "typescript",
+    "tailwind",
+    "figma"
+  ],
+  "liveUrl": "https://backup.silvanacabral.com.br",
+  "evidenceLink": "https://github.com/ZokuWebDesign/psi.silvanacabral",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Clinical Psychology Practice Site — Designed and Coded Solo",
+      "tagline": "A one-page practice site taken from reference to deployed in a week, alone.",
+      "description": "Took a solo clinical psychologist's one-page site from first reference to deployed in a week, by myself: moodboard, style guide, a twelve-section page and a twelve-step token ramp, then built as a static Next.js export over thirteen bespoke section components. The booking mechanism is written as code rather than decoration — seven distinct WhatsApp deep links, one per entry point. The photography is AI-generated; no photographs were available to work from.",
+      "previewAlt": "One-page marketing site for a clinical psychology practice",
+      "liveLabel": "View the build (backup host)",
+      "evidenceLabel": "Source code"
+    },
+    "pt": {
+      "title": "Site de consultório de psicologia — design e código, sozinho",
+      "tagline": "Um site de uma página, da referência ao deploy em uma semana, sozinho.",
+      "description": "Levei o site de uma página de uma psicóloga clínica da primeira referência ao deploy em uma semana, sozinho: moodboard, guia de estilo, uma página de doze seções e uma rampa de doze tokens, depois construído como export estático em Next.js sobre treze componentes de seção próprios. O mecanismo de agendamento é código, não enfeite — sete deep links de WhatsApp distintos, um por ponto de entrada. As imagens são geradas por IA; não havia fotografias disponíveis.",
+      "previewAlt": "Site de uma página para um consultório de psicologia clínica",
+      "liveLabel": "Ver o build (host de backup)",
+      "evidenceLabel": "Código-fonte"
+    }
+  },
+  "evidenceWeight": 13,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": true,
+    "designAndCode": true,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

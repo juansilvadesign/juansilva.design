@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/intellive.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Intellive — hybrid physiotherapy & clinical rehabilitation platform",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": null,
+    "end": "2024-05-06"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/5lcfonWINnwAleiBDOADDe/Intellive?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Hybrid Physiotherapy & Rehabilitation Platform",
+      "tagline": "A 117-step clinical intake, plus schedule generation and specialist booking.",
+      "description": "A hybrid digital-physiotherapy and rehabilitation platform for patients, employers and health professionals, designed around automated clinical assessment, personalised treatment schedules and remote specialist access. I designed a six-page, 699-node artifact whose 403-child design page carries a 117-step clinical intake, the diagnosis and schedule-generation loading states, active-treatment and progress screens, and specialist booking, over a 25-child style guide. A UI/UX design credit: no clinical validation, certification or integration is claimed, and the platform's rollout is not something this record establishes.",
+      "previewAlt": "Design file for a hybrid physiotherapy and rehabilitation platform",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma híbrida de fisioterapia e reabilitação",
+      "tagline": "Uma anamnese clínica de 117 etapas, geração de plano e agendamento com especialista.",
+      "description": "Uma plataforma híbrida de fisioterapia digital e reabilitação para pacientes, empresas e profissionais de saúde, desenhada em torno de avaliação clínica automatizada, planos de tratamento personalizados e acesso remoto a especialistas. Desenhei um artefato de seis páginas e 699 nós, cuja página de design com 403 filhos traz uma anamnese clínica de 117 etapas, os estados de carregamento de diagnóstico e geração de plano, as telas de tratamento ativo e progresso, e o agendamento com especialista, sobre um style guide de 25 filhos. É crédito de design de UI/UX: não se reivindica validação clínica, certificação ou integração, e este registro não comprova a implantação da plataforma.",
+      "previewAlt": "Arquivo de design de uma plataforma híbrida de fisioterapia e reabilitação",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/easybuycard.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "EasyBuyCard — fintech card platform, multi-role portal & design system",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2024-08",
+    "end": "2024-09-02"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/PV1a0t9B4S7cmNAUEeX8QD/EasyBuyCard?node-id=0-1",
+  "evidenceLink": "https://web.archive.org/web/20240526/http://easybuycard.com.br/",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Corporate Card Fintech — Multi-Role Portal & Design System",
+      "tagline": "Four back-office roles over a separate 79-node design system page.",
+      "description": "A digital ecosystem for a corporate credit-card fintech: acquisition landing pages, multi-step registration, a full password-recovery lifecycle and back-office dashboards for four distinct roles. I designed 65 nodes on the main page — three landing-page versions, 3D card mockups, the admin, manager and advisor dashboards, the registration and login flows and their mobile viewports — and established a separate 79-node design system page carrying the data tables and shared primitives. Sole website UI designer; identity and build were other people's.",
+      "previewAlt": "Multi-role portal and design system for a corporate card fintech",
+      "liveLabel": "Open the design file",
+      "evidenceLabel": "Archived snapshot of the built site"
+    },
+    "pt": {
+      "title": "Fintech de cartão corporativo — portal multiperfil e design system",
+      "tagline": "Quatro perfis de back office sobre uma página de design system com 79 nós.",
+      "description": "Um ecossistema digital para uma fintech de cartão de crédito corporativo: landing pages de aquisição, cadastro em etapas, um ciclo completo de recuperação de senha e dashboards de back office para quatro perfis distintos. Desenhei 65 nós na página principal — três versões de landing, mockups de cartão em 3D, os dashboards de admin, gestor e assessor, os fluxos de cadastro e login e seus viewports mobile — e criei uma página separada de design system com 79 nós, com as tabelas de dados e os primitivos compartilhados. Designer de UI único do site; identidade e build são de outras pessoas.",
+      "previewAlt": "Portal multiperfil e design system de uma fintech de cartão corporativo",
+      "liveLabel": "Abrir o arquivo de design",
+      "evidenceLabel": "Snapshot arquivado do site publicado"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

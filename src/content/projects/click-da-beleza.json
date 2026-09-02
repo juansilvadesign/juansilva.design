@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/click-da-beleza.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Click da Beleza — beauty & cosmetics D2C storefront",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-09-13",
+    "end": "2023-09-26"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/tQvGNS1f5VAefdMxHHKtZe/Click-da-Beleza?node-id=0-1",
+  "evidenceLink": "https://web.archive.org/web/20240929/https://clickdabeleza.com.br/",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Beauty & Cosmetics D2C Storefront",
+      "tagline": "Eleven screens moving a marketplace seller onto its own brand.",
+      "description": "A direct-to-consumer storefront built to move a high-volume marketplace cosmetics seller onto its own brand, benchmarked against a leading Brazilian cosmetics retailer. I designed eleven responsive screens across desktop and mobile — home, products, product detail, cart, payment and mobile checkout — with the e-commerce utility layer: navbar, search, top banner, shopping bag, wishlist and a help and live-chat entry point. Sole website UI designer; identity and the WooCommerce build were other people's.",
+      "previewAlt": "Direct-to-consumer storefront design for a beauty and cosmetics brand",
+      "liveLabel": "Open the design file",
+      "evidenceLabel": "Archived snapshot of the built site"
+    },
+    "pt": {
+      "title": "Loja D2C de beleza e cosméticos",
+      "tagline": "Onze telas para tirar um vendedor de marketplace e levá-lo à marca própria.",
+      "description": "Uma loja direta ao consumidor feita para tirar um vendedor de cosméticos de alto volume do marketplace e levá-lo à marca própria, com benchmark contra uma das maiores varejistas de cosméticos do Brasil. Desenhei onze telas responsivas entre desktop e mobile — início, produtos, produto, carrinho, pagamento e checkout mobile — com a camada utilitária de e-commerce: navbar, busca, banner superior, sacola, lista de desejos e um ponto de entrada de ajuda e chat. Designer de UI único do site; identidade e build em WooCommerce são de outras pessoas.",
+      "previewAlt": "Design de loja direta ao consumidor de beleza e cosméticos",
+      "liveLabel": "Abrir o arquivo de design",
+      "evidenceLabel": "Snapshot arquivado do site publicado"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/rpn.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "RPN / CapNutry — nutraceuticals landing page & institutional platform",
+  "role": "Lead UI designer for the CapNutry Homem landing page and sole UI designer for the institutional platform",
+  "dates": {
+    "start": "2023-07",
+    "end": "2024-02"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/Q619XDSu6g1qjAs0Yi7Vza/RPN?node-id=628-2046",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Nutraceuticals Brand — Product Landing & Institutional Platform",
+      "tagline": "A conversion landing in phase one, then a 226-node institutional portal.",
+      "description": "A two-part digital presence for a nutraceuticals brand. In the first phase I led the design of one product line's landing page — desktop and mobile, its thirty-day challenge capture form and the checkout. In the second I designed the entire 226-node institutional platform: the reseller flow, the white-label outsourcing offer and the surrounding institutional pages. The companion landing page for the other product line is another designer's, as is the affiliate flow, which a no-code developer built without a mockup.",
+      "previewAlt": "Landing page and institutional platform design for a nutraceuticals brand",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Marca de nutracêuticos — landing de produto e plataforma institucional",
+      "tagline": "Uma landing de conversão na fase um, depois um portal institucional de 226 nós.",
+      "description": "Uma presença digital em duas partes para uma marca de nutracêuticos. Na primeira fase, liderei o design da landing page de uma linha de produto — desktop e mobile, o formulário de captação do desafio de trinta dias e seu checkout. Na segunda, desenhei toda a plataforma institucional de 226 nós: o fluxo de revenda, a oferta de terceirização white-label e as páginas institucionais em volta. A landing da outra linha de produto é de outra designer, assim como o fluxo de afiliados, que um desenvolvedor no-code construiu sem mockup.",
+      "previewAlt": "Design de landing page e plataforma institucional de uma marca de nutracêuticos",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

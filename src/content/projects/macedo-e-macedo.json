@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/macedo-e-macedo.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Macedo e Macedo Produções — audiovisual production agency & commerce platform",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-03",
+    "end": "2023-04"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/RTrRC2hyqINdbTN93zhCbN/Macedo-e-Macedo-Produ%C3%A7%C3%B5es?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Audiovisual Production Agency — Portfolio & Merch Commerce",
+      "tagline": "A media-first portfolio joined to a complete merchandise purchase funnel.",
+      "description": "A creative production company's digital presence, combining a project showcase portfolio, studio narrative and editorial blog with a full merchandise e-commerce flow. I designed thirteen desktop and mobile layouts — home, about, contact, projects, blog listing and article, plus the complete purchase funnel of products, purchase, cart and payment — establishing the media-first visual hierarchy and the portfolio patterns. A design credit only: no production URL was recovered for this build.",
+      "previewAlt": "Portfolio and merchandise commerce design for an audiovisual production agency",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Produtora audiovisual — portfólio e loja de produtos",
+      "tagline": "Um portfólio orientado a mídia unido a um funil completo de compra de produtos.",
+      "description": "A presença digital de uma produtora criativa, combinando portfólio de projetos, narrativa do estúdio e blog editorial com um fluxo completo de e-commerce de produtos. Desenhei treze layouts desktop e mobile — início, sobre, contato, projetos, listagem e artigo do blog, além do funil completo de produtos, compra, carrinho e pagamento — definindo a hierarquia visual orientada a mídia e os padrões de portfólio. É apenas crédito de design: nenhuma URL de produção foi recuperada para este build.",
+      "previewAlt": "Design de portfólio e loja para uma produtora audiovisual",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

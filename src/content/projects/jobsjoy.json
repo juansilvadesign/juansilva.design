@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/jobsjoy.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "JobsJoy — recruitment platform & AI vacancy workflow",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": "2024-07-11",
+    "end": "2024-11-05"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/TzRhikieXz0pS73kWZrIh3/JobsJoy?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Recruitment Platform & AI-Assisted Vacancy Builder",
+      "tagline": "51 component sets behind a two-sided job board and résumé builder.",
+      "description": "A two-sided talent-acquisition platform and job board for candidates and hiring companies, with an AI-assisted vacancy-creation flow, a structured résumé builder and job-management interfaces. I designed the 96-child design page and the 51 component sets on its 76-child design system page, covering company job management, the AI-assisted vacancy builder interface, and candidate search and application. The interface for an AI feature is the credit — I did not build, train or operate any model — and the style guide builds on licensed base primitives rather than original ones.",
+      "previewAlt": "Design file for a recruitment platform with an AI-assisted vacancy builder",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma de recrutamento e criação de vagas assistida por IA",
+      "tagline": "51 conjuntos de componentes por trás de um job board e construtor de currículo.",
+      "description": "Uma plataforma de aquisição de talentos de dois lados e job board para candidatos e empresas, com um fluxo de criação de vagas assistido por IA, um construtor estruturado de currículo e interfaces de gestão de vagas. Desenhei a página de design com 96 filhos e os 51 conjuntos de componentes da página de design system com 76 filhos, cobrindo a gestão de vagas da empresa, a interface do construtor de vagas com IA, e a busca e candidatura do candidato. O crédito é a interface de uma funcionalidade de IA — não construí, treinei nem operei modelo algum — e o style guide parte de primitivos licenciados, não originais.",
+      "previewAlt": "Arquivo de design de uma plataforma de recrutamento com criação de vagas por IA",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

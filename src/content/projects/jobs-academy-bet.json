@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/jobs-academy-bet.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Jobs.bet & Academy.bet — iGaming recruitment and learning platforms",
+  "role": "Co-designer, paired inside one file",
+  "dates": {
+    "start": "2024-02-22",
+    "end": "2024-07-11"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://jobs.bet",
+  "evidenceLink": "https://www.figma.com/design/ZzwpmdaV4G4ir5C7izRA75/Jobs.bet?node-id=1-3",
+  "featured": false,
+  "preview": "/assets/images/jobs-academy-bet-preview.webp",
+  "copy": {
+    "en": {
+      "title": "iGaming Recruitment & Learning Platforms — Paired Design",
+      "tagline": "Seven permissioned roles across two linked products, designed as a pair.",
+      "description": "A linked pair of iGaming products — recruitment and learning — which we delivered as 649 children across seven wired flows and seven permissioned role surfaces, including card and Pix checkout with waiting and success states, plan management, financial dashboards, and a moderation queue with rejection reasons. The responsive work is the strongest in this portfolio: roughly 180 phone frames across four device sizes. Designed in a pair inside one file, split at component level; the Bubble build was another team's.",
+      "previewAlt": "Design file for paired iGaming recruitment and learning platforms",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Plataformas de recrutamento e ensino em iGaming — design em dupla",
+      "tagline": "Sete perfis de permissão em dois produtos ligados, desenhados em dupla.",
+      "description": "Um par de produtos de iGaming ligados entre si — recrutamento e ensino — que entregamos como 649 filhos em sete fluxos conectados e sete superfícies de permissão, incluindo checkout em cartão e Pix com estados de espera e sucesso, gestão de planos, dashboards financeiros e uma fila de moderação com motivos de recusa. O trabalho responsivo é o mais forte deste portfólio: cerca de 180 frames de celular em quatro tamanhos. Foi feito em dupla dentro de um arquivo, dividido no nível de componente; o build em Bubble foi de outro time.",
+      "previewAlt": "Arquivo de design de plataformas de recrutamento e ensino em iGaming",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

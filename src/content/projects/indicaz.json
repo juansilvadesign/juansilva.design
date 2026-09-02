@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/indicaz.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "indicAZ — neighbourhood professional-referral apps",
+  "role": "Sole designer of the app, across three versions and an MVP re-cut",
+  "dates": {
+    "start": "2024-11-04",
+    "end": "2025-01-13"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://play.google.com/store/apps/details?id=com.mycompany.indicaz",
+  "evidenceLink": "https://www.figma.com/design/BGncD9DIfrWDMxnHDTXuDd/IndicAZ?node-id=9-19106",
+  "featured": false,
+  "preview": "/assets/images/indicaz-preview.webp",
+  "copy": {
+    "en": {
+      "title": "Neighbourhood Referral Marketplace — Two Shipped Apps",
+      "tagline": "Three full versions and an MVP re-cut; both apps are on Google Play.",
+      "description": "A two-sided neighbourhood professional-referral marketplace, designed end to end across three full versions — roughly 193 screens, four wired flows and about 21 designed error and success states — then re-cut into a reduced MVP: the same product with fewer screens, the slice the client wanted shipped first, delivered as its own file. Both apps reached Google Play with over a thousand installs each. That is proof it shipped, not proof it succeeded; the review counts are in single figures.",
+      "previewAlt": "Design and shipped apps for a neighbourhood professional-referral marketplace",
+      "liveLabel": "The app on Google Play",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Marketplace de indicação de profissionais — dois apps publicados",
+      "tagline": "Três versões completas e um recorte de MVP; os dois apps estão no Google Play.",
+      "description": "Um marketplace de dois lados para indicação de profissionais do bairro, desenhado de ponta a ponta em três versões completas — cerca de 193 telas, quatro fluxos conectados e por volta de 21 estados de erro e sucesso desenhados — e depois recortado num MVP reduzido: o mesmo produto com menos telas, a fatia que o cliente queria subir primeiro, entregue como arquivo próprio. Os dois apps chegaram ao Google Play com mais de mil instalações cada. Isso prova que foi publicado, não que deu certo; a contagem de avaliações está na casa das dezenas.",
+      "previewAlt": "Design e apps publicados de um marketplace de indicação de profissionais",
+      "liveLabel": "O app no Google Play",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": true,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

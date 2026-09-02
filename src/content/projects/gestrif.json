@@ -21,6 +21,7 @@
   "copy": {
     "en": {
       "title": "Complaint-Management Platform — Landing Page Build",
+      "tagline": "A supplied design made buildable and implemented in code.",
       "description": "Took a supplied design for a financial-sector complaint-management platform, fixed what could not be built as drawn, and implemented the landing page in code. An implementation credit: the design direction was not mine.",
       "previewAlt": "Gestrif complaint-management platform landing page",
       "liveLabel": "View the build (self-hosted copy)",
@@ -28,10 +29,21 @@
     },
     "pt": {
       "title": "Plataforma de gestão de reclamações — build da landing page",
+      "tagline": "Um design recebido tornado construível e implementado em código.",
       "description": "Peguei um design recebido para uma plataforma de gestão de reclamações do setor financeiro, corrigi o que não era construível como estava e implementei a landing page em código. É um crédito de implementação: a direção de design não é minha.",
       "previewAlt": "Landing page da plataforma de reclamações Gestrif",
       "liveLabel": "Ver o build (cópia própria)",
       "evidenceLabel": "Código-fonte"
     }
-  }
+  },
+  "evidenceWeight": 8,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": true,
+    "designAndCode": true,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": false
+  },
+  "caseStudy": null
 }

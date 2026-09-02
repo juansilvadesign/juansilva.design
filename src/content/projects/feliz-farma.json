@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/feliz-farma.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Feliz Farma — pharmacy retail chain landing page & loyalty capture",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2024-03-15",
+    "end": "2024-03-26"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/7dNnmHSHqXPzbcIePGFGoG/Feliz-Farma?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Pharmacy Chain — Landing Page & Loyalty Capture",
+      "tagline": "Loyalty club signup and job-application capture across eight screens.",
+      "description": "A retail customer-capture and institutional landing page for a regional pharmacy network: loyalty club signup, store locator, brand history and candidate job-application flows. I designed eight core responsive screens across desktop and mobile — the updated landing prototype, a phone view, the about page and an application-success state — benchmarking pharmacy retail patterns and wiring both the loyalty-club and job-application capture. A design credit only: no production URL was recovered for this build.",
+      "previewAlt": "Landing page and loyalty capture design for a pharmacy retail chain",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Rede de farmácias — landing page e captação do clube",
+      "tagline": "Cadastro no clube de fidelidade e captação de currículos em oito telas.",
+      "description": "Uma landing page institucional e de captação para uma rede regional de farmácias: cadastro no clube de fidelidade, busca de lojas, história da marca e fluxo de candidatura a vagas. Desenhei oito telas responsivas centrais entre desktop e mobile — o protótipo atualizado da landing, uma visão de celular, a página sobre e um estado de sucesso da candidatura — com benchmark de padrões do varejo farmacêutico e a captação tanto do clube quanto das candidaturas. É apenas crédito de design: nenhuma URL de produção foi recuperada para este build.",
+      "previewAlt": "Design de landing page e captação de fidelidade de uma rede de farmácias",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

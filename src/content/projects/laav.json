@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/laav.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Laav — two-tier automotive franchise ERP (v1 & v2)",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": null,
+    "end": "2025-03-28"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://laavfranquia.com.br/",
+  "evidenceLink": "https://www.figma.com/design/86CBC6GaVTWzmNpFblnt77/Laav-v2?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Automotive Franchise ERP — Two-Tier Design, v1 and v2",
+      "tagline": "Franchisee workshop tooling and franchisor governance, designed across two versions.",
+      "description": "A web and mobile management ERP for an automotive franchise network, designed across two versions. V2 alone runs to 572 top-level nodes over six pages: 347 children covering franchisee work orders, repair estimates, supplies, tools, cashier and routines, and 168 covering franchisor candidate intake, compliance audits, royalty comparisons and KPI monitoring. A UI/UX design credit — I did not build or operate the system, and its rollout is not something this record can speak to.",
+      "previewAlt": "Design file for a two-tier automotive franchise ERP",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "ERP de franquia automotiva — design em dois níveis, v1 e v2",
+      "tagline": "Ferramentas da oficina franqueada e governança da franqueadora, em duas versões.",
+      "description": "Um ERP de gestão web e mobile para uma rede de franquias automotivas, desenhado em duas versões. Só a v2 tem 572 nós de primeiro nível em seis páginas: 347 filhos para ordens de serviço, orçamentos, insumos, ferramentas, caixa e rotinas da oficina franqueada, e 168 para captação de candidatos, auditorias de conformidade, comparação de royalties e monitoramento de KPIs da franqueadora. É crédito de design de UI/UX — não construí nem operei o sistema, e este registro não fala sobre a implantação.",
+      "previewAlt": "Arquivo de design de um ERP de franquia automotiva",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

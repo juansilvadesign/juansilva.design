@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/tas-consultoria.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Tas Consultoria — consulting operations & timesheet platform",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": "2024-01-08",
+    "end": "2024-03-01"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://tasconsultoria.com/",
+  "evidenceLink": "https://www.figma.com/design/UY7MnW3bFBRrqxU2QPHpC6/Tas-Consultoria?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Consulting Operations & Timesheet Platform",
+      "tagline": "Admin and collaborator dashboards, time entry and audit history across 121 frames.",
+      "description": "An enterprise web and mobile internal-operations platform for a professional consulting firm: timesheet logging, rate configuration, employee management and client-process implementation audits. I designed the 138-child design page — 121 frames covering admin and collaborator dashboards, time entry and review, rate configuration, audit history, consultant profiles and phone layouts. A UI/UX design credit; the backend integrations and the internal rollout are not mine to claim.",
+      "previewAlt": "Design file for a consulting operations and timesheet platform",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Plataforma de operações e apontamento de horas para consultoria",
+      "tagline": "Dashboards de admin e colaborador, apontamento e histórico de auditoria em 121 frames.",
+      "description": "Uma plataforma corporativa web e mobile de operações internas para uma consultoria: apontamento de horas, configuração de taxas, gestão de colaboradores e auditorias de implantação de processos em clientes. Desenhei a página de design com 138 filhos — 121 frames cobrindo dashboards de admin e colaborador, lançamento e revisão de horas, configuração de taxas, histórico de auditoria, perfis de consultores e layouts de celular. É crédito de design de UI/UX; as integrações de backend e a implantação interna não são meus para reivindicar.",
+      "previewAlt": "Arquivo de design de uma plataforma de operações e apontamento de horas",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

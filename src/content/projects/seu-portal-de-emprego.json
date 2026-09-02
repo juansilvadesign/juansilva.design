@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/seu-portal-de-emprego.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Seu Portal de Emprego — three-role recruitment platform",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": "2024-02-09",
+    "end": "2024-05-07"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/IbsMCsrhPWywspS93ropXS/Seu-portal-de-emprego?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Three-Role Recruitment Platform",
+      "tagline": "Candidate, company and admin surfaces across a 350-node artifact.",
+      "description": "An employment platform covering job matching, résumés, company-candidate interview scheduling, recruiter notifications, subscription billing and admin financial and user management. I designed the 265-child design page in a five-page, 350-node artifact: candidate search, applications, résumé management and conditional company questions; three-stage company onboarding, job posting and applicant review; and the admin surface. A UI/UX design credit — no implementation, payment processing or launch outcome is claimed here.",
+      "previewAlt": "Design file for a three-role recruitment platform",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma de recrutamento com três perfis",
+      "tagline": "Superfícies de candidato, empresa e admin num artefato de 350 nós.",
+      "description": "Uma plataforma de emprego cobrindo match de vagas, currículos, agendamento de entrevistas entre empresa e candidato, notificações para recrutadores, cobrança por assinatura e gestão financeira e de usuários no admin. Desenhei a página de design com 265 filhos num artefato de cinco páginas e 350 nós: busca, candidaturas, gestão de currículo e perguntas condicionais da empresa; onboarding da empresa em três etapas, publicação de vaga e triagem de candidatos; e a superfície de admin. É crédito de design de UI/UX — nenhuma implementação, processamento de pagamento ou resultado de lançamento é reivindicado aqui.",
+      "previewAlt": "Arquivo de design de uma plataforma de recrutamento com três perfis",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

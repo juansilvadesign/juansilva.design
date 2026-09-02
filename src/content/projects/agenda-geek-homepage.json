@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/agenda-geek-homepage.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Agenda Geek homepage — self-taught HTML/CSS rebuild of one screen (personal, not the NGO's site)",
+  "role": "Sole author of the code — `coded only`, on a screen the team designed collectively",
+  "dates": {
+    "start": "2023-05-12",
+    "end": "2023-05-26"
+  },
+  "stack": [
+    "javascript"
+  ],
+  "liveUrl": "https://agendageek.juanpablosilva.com.br/",
+  "evidenceLink": "https://juansilvadesign.github.io/Agenda-Geek-homepage/",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "NGO Homepage — Self-Taught HTML/CSS Rebuild",
+      "tagline": "The first code I ever wrote: one screen, hand-built to learn front-end.",
+      "description": "An NGO's winning competition design had no path to existing — nobody would build it for free — so I taught myself enough front-end to build its front door. One screen, rebuilt by hand in HTML and CSS from the team's Figma and deployed: five breakpoints from 320px to beyond 1700px, so both ends of the range actually hold. This is the first code I ever wrote, kept here for what it is; the screen was designed by the team, not by me, and the NGO's product was never built.",
+      "previewAlt": "Homepage rebuild for an e-waste NGO, hand-coded in HTML and CSS",
+      "liveLabel": "View the page",
+      "evidenceLabel": "The original 2023 deploy"
+    },
+    "pt": {
+      "title": "Homepage de ONG — reconstrução em HTML/CSS, autodidata",
+      "tagline": "O primeiro código que escrevi: uma tela, feita à mão para aprender front-end.",
+      "description": "O design vencedor de uma ONG não tinha caminho para existir — ninguém o construiria de graça — então aprendi front-end sozinho para construir a porta de entrada. Uma tela, refeita à mão em HTML e CSS a partir do Figma do time e publicada: cinco breakpoints de 320px até acima de 1700px, com as duas pontas do intervalo realmente resolvidas. É o primeiro código que escrevi, mantido aqui pelo que é; a tela foi desenhada pelo time, não por mim, e o produto da ONG nunca foi construído.",
+      "previewAlt": "Reconstrução da homepage de uma ONG de lixo eletrônico, feita à mão em HTML e CSS",
+      "liveLabel": "Ver a página",
+      "evidenceLabel": "O deploy original de 2023"
+    }
+  },
+  "evidenceWeight": 7,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": true,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": false
+  },
+  "caseStudy": null
+}

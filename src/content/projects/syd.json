@@ -17,11 +17,12 @@
   ],
   "liveUrl": "https://sydapp.com.br/",
   "evidenceLink": "https://github.com/zokuWebDesign/SYD-Next",
-  "featured": false,
+  "featured": true,
   "preview": "/assets/images/syd-preview.webp",
   "copy": {
     "en": {
       "title": "On-Demand Therapy Platform — Three-Audience Landing Layer",
+      "tagline": "Three audience landing pages, designed and coded at three breakpoints each.",
       "description": "Wireframed, designed and then coded the public face of an on-demand therapy platform: three audience-specific landing pages — patient, practitioner and corporate HR — each at three breakpoints. This is the landing layer only; the product behind it is another designer's work and another team's build.",
       "previewAlt": "SYD on-demand therapy platform landing page",
       "liveLabel": "Live site",
@@ -29,10 +30,21 @@
     },
     "pt": {
       "title": "Plataforma de terapia sob demanda — camada de landing pages",
+      "tagline": "Três landing pages por público, desenhadas e programadas em três breakpoints.",
       "description": "Fiz wireframe, design e código da face pública de uma plataforma de terapia sob demanda: três landing pages por público — paciente, profissional e RH corporativo — cada uma em três breakpoints. É apenas a camada de landing; o produto por trás é design de outra pessoa e build de outro time.",
       "previewAlt": "Landing page da plataforma de terapia SYD",
       "liveLabel": "Site no ar",
       "evidenceLabel": "Código-fonte"
     }
-  }
+  },
+  "evidenceWeight": 13,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": true,
+    "designAndCode": true,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
 }

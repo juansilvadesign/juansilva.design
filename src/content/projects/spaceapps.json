@@ -17,11 +17,12 @@
   ],
   "liveUrl": "https://spaceapps.juanpablosilva.com.br/",
   "evidenceLink": "https://github.com/ZokuWebDesign/Spaceapps",
-  "featured": true,
+  "featured": false,
   "preview": "/assets/images/spaceapps-preview.webp",
   "copy": {
     "en": {
       "title": "Trilingual Marketing Site & Lead Capture",
+      "tagline": "Trilingual static Next.js site with a lead-capture service still running.",
       "description": "Remediated the supplied homepage design and implemented the static Next.js site. Authored the legal pages, custom 404 and PT/EN/ES routing outright, then built the Google Sheets and Mailgun lead-capture service that is still answering today.",
       "previewAlt": "Spaceapps trilingual marketing site",
       "liveLabel": "View the build (self-hosted copy)",
@@ -29,10 +30,21 @@
     },
     "pt": {
       "title": "Site trilíngue e captura de leads",
+      "tagline": "Site estático trilíngue em Next.js, com captura de leads ainda no ar.",
       "description": "Corrigi o design recebido para a página inicial e implementei o site estático em Next.js. Criei do zero as páginas legais, o 404 personalizado e as rotas PT/EN/ES, além do serviço de captura com Google Sheets e Mailgun, que segue respondendo até hoje.",
       "previewAlt": "Site de marketing trilíngue da Spaceapps",
       "liveLabel": "Ver o build (cópia própria)",
       "evidenceLabel": "Código e evidências"
     }
-  }
+  },
+  "evidenceWeight": 9,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": true,
+    "designAndCode": true,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
 }

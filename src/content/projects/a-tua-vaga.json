@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/a-tua-vaga.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "A Tua Vaga — two-sided recruitment platform with admin back office",
+  "role": "Main UI designer across three role surfaces",
+  "dates": {
+    "start": "2024-10-04",
+    "end": "2024-11-18"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://atuavaga.com.br",
+  "evidenceLink": "https://www.figma.com/design/1qadkiBL5fWNeaTXok0hXR/atua-vaga?node-id=1-16",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Two-Sided Recruitment Platform — UI Across Three Role Surfaces",
+      "tagline": "The complete interface for candidates, employers and admins, from a supplied spec.",
+      "description": "Main UI designer on a two-sided recruitment platform: candidate auth, multi-step registration, job discovery with filters and empty states, application tracking, the employer pipeline, and the admin back office — 230 children on desktop and 16 on mobile. I designed the interface for the technical-fit scoring and its four explainer modals; the scoring itself, the requirements and the brand were other people's work.",
+      "previewAlt": "Interface design for a two-sided recruitment platform",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Plataforma de recrutamento — UI em três perfis de acesso",
+      "tagline": "A interface completa para candidatos, empresas e admin, a partir de um spec recebido.",
+      "description": "Designer de UI principal de uma plataforma de recrutamento de dois lados: autenticação e cadastro em etapas do candidato, busca de vagas com filtros e estados vazios, acompanhamento de candidaturas, o funil da empresa e o back office — 230 filhos no desktop e 16 no mobile. Desenhei a interface do score de aderência técnica e seus quatro modais explicativos; o algoritmo, os requisitos e a marca são de outras pessoas.",
+      "previewAlt": "Design de interface de uma plataforma de recrutamento de dois lados",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

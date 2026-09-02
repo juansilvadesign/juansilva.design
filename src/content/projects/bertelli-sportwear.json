@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/bertelli-sportwear.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Bertelli Sportwear — athletic apparel e-commerce storefront",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-08-16",
+    "end": "2023-08-24"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/lYBgdCb9uGl9jzr4DPq7RL/Bertelli-Sportwear?node-id=0-1",
+  "evidenceLink": "https://web.archive.org/web/20240901/https://bertellisportwear.com.br/",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Activewear E-Commerce Storefront",
+      "tagline": "Ten screens with full desktop and mobile parity through the purchase funnel.",
+      "description": "A brand storefront and shopping experience for an activewear label, structured around athletic photography, product collections and a mobile-complete purchase funnel. I designed ten responsive screens with desktop and mobile parity the whole way through — home, products, product detail, cart, payment and mobile checkout — plus the promotional banner components and wishlist toggles. Sole website UI designer; identity and the WooCommerce build were other people's.",
+      "previewAlt": "E-commerce storefront design for an activewear brand",
+      "liveLabel": "Open the design file",
+      "evidenceLabel": "Archived snapshot of the built site"
+    },
+    "pt": {
+      "title": "Loja online de moda esportiva",
+      "tagline": "Dez telas com paridade total entre desktop e mobile no funil de compra.",
+      "description": "Uma loja de marca e experiência de compra para um rótulo de moda esportiva, estruturada em torno de fotografia atlética, coleções e um funil de compra completo no mobile. Desenhei dez telas responsivas com paridade entre desktop e mobile do início ao fim — início, produtos, produto, carrinho, pagamento e checkout mobile — além dos componentes de banner promocional e dos toggles de lista de desejos. Designer de UI único do site; identidade e build em WooCommerce são de outras pessoas.",
+      "previewAlt": "Design de loja online para uma marca de moda esportiva",
+      "liveLabel": "Abrir o arquivo de design",
+      "evidenceLabel": "Snapshot arquivado do site publicado"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

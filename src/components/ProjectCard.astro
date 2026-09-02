@@ -11,7 +11,12 @@ interface Props {
 const { lang, project } = Astro.props;
 const copy = t(lang);
 const projectCopy = project.data.copy[lang];
-const evidenceIcon = project.data.evidenceLink.includes("github.com")
+
+// `evidenceLink` is optional: design-only records hold a single artifact, and
+// the store now omits the second link rather than pointing it at a duplicate
+// of the first or at a domain it already knows is dead.
+const { evidenceLink } = project.data;
+const evidenceIcon = evidenceLink?.includes("github.com")
   ? "/assets/icons/github.svg"
   : "/assets/icons/link-external-02.svg";
 ---
@@ -38,16 +43,20 @@ const evidenceIcon = project.data.evidenceLink.includes("github.com")
       {projectCopy.liveLabel || copy.projects.liveProjectFallback}
     </a>
 
-    <a
-      class="button button--secondary project-card__secondary"
-      href={project.data.evidenceLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={projectCopy.evidenceLabel || copy.projects.evidenceFallback}
-    >
-      {projectCopy.evidenceLabel || copy.projects.evidenceFallback}
-      <img src={evidenceIcon} alt="" width="16" height="16" />
-    </a>
+    {
+      evidenceLink && (
+        <a
+          class="button button--secondary project-card__secondary"
+          href={evidenceLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={projectCopy.evidenceLabel || copy.projects.evidenceFallback}
+        >
+          {projectCopy.evidenceLabel || copy.projects.evidenceFallback}
+          <img src={evidenceIcon} alt="" width="16" height="16" />
+        </a>
+      )
+    }
   </div>
 </div>
 

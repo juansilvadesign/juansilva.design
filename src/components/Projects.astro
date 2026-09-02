@@ -9,8 +9,17 @@ interface Props {
 
 const { lang } = Astro.props;
 const copy = t(lang);
+/**
+ * Sort key that tolerates every shape `dates` can now take.
+ *
+ * `start` is nullable for agency work where the project began before Juan did,
+ * so a delivered-only record sorts on the date it actually asserts. Reading
+ * `.start` directly threw on those the moment the first one was published.
+ */
+const sortKey = (d: { start: string | null; end: string | null }) => d.start ?? d.end ?? "";
+
 const projects = (await getCollection("projects", ({ data }) => data.featured)).sort((a, b) =>
-  a.data.dates.start.localeCompare(b.data.dates.start),
+  sortKey(a.data.dates).localeCompare(sortKey(b.data.dates)),
 );
 ---
 

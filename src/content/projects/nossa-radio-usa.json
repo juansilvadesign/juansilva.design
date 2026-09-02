@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/nossa-radio-usa.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Nossa Rádio USA — Copinha tournament platform & live scores",
+  "role": "Sole UI designer of the Copinha / Placares de Futebol feature branch",
+  "dates": {
+    "start": "2023-12-12",
+    "end": "2024-01-15"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://nossaradiousa.com/",
+  "evidenceLink": "https://www.figma.com/design/pHbnXgEdjlZyFQ8BbVOd8h/Nossa-R%C3%A1dio-USA?node-id=1775-32",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Tournament Platform & Live Scores — Feature Branch",
+      "tagline": "Registration, standings and five bracket rounds at two viewports.",
+      "description": "A soccer tournament application and live-score hub, built as an event branch inside a radio station's digital ecosystem. I designed all 93 children of that branch across desktop and mobile: the tournament landing and multi-step registration with success states, news and sponsor pages, standings tables, and five bracket rounds drawn at both viewports with progression lines. The tournament branch is the scope — the station's main website is another designer's and predates me.",
+      "previewAlt": "Design file for a soccer tournament platform and live-score hub",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Plataforma de torneio e placares ao vivo — branch de evento",
+      "tagline": "Inscrição, classificação e cinco fases de chaveamento em dois viewports.",
+      "description": "Uma aplicação de torneio de futebol e hub de placares ao vivo, criada como branch de evento dentro do ecossistema digital de uma rádio. Desenhei todos os 93 filhos dessa branch entre desktop e mobile: a landing do torneio e a inscrição em etapas com estados de sucesso, páginas de notícias e patrocinadores, tabelas de classificação e cinco fases de chaveamento desenhadas nos dois viewports com linhas de progressão. O escopo é a branch do torneio — o site principal da rádio é de outra designer e é anterior a mim.",
+      "previewAlt": "Arquivo de design de uma plataforma de torneio de futebol com placares ao vivo",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/sapiens-agro.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Sapiens Agro — agribusiness market-intelligence redesign (foundation)",
+  "role": "Founding designer — foundation only, then handover",
+  "dates": {
+    "start": "2024-08-15",
+    "end": "2024-10-14"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.sapiensagro.com/agrosap",
+  "evidenceLink": "https://www.figma.com/design/XSPJfmd7IuN562eReM9XzF/Sapiens-Agro?node-id=1-16",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Agribusiness Market-Intelligence Redesign — Foundation",
+      "tagline": "I set the foundation for a live subscription platform; a colleague completed it.",
+      "description": "A redesign of a live subscription market-intelligence platform for agribusiness — commodities across three market views, livestock, fertiliser, freight, FX, weather and calculators. I built the foundation the rest of the redesign was completed from: the desktop sign-in, registration and password-reset chain, the app homepage, the component layer, and the first-access, preferences and trial-expiry states — working against an existing product with existing users. State the boundary plainly: I set the foundation, a colleague finished desktop and mobile from my components. The platform I helped redesign is live and still trading.",
+      "previewAlt": "Redesign foundation for an agribusiness market-intelligence platform",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Redesign de plataforma de inteligência de mercado no agro — fundação",
+      "tagline": "Montei a fundação de uma plataforma de assinatura ativa; um colega concluiu.",
+      "description": "O redesign de uma plataforma de assinatura de inteligência de mercado para o agronegócio — commodities em três visões de mercado, pecuária, fertilizantes, frete, câmbio, clima e calculadoras. Montei a fundação a partir da qual o restante do redesign foi concluído: a cadeia de entrar, cadastro e recuperação de senha no desktop, a home do app, a camada de componentes e os estados de primeiro acesso, preferências e fim do teste — trabalhando sobre um produto já no ar, com usuários reais. O limite dito com todas as letras: montei a fundação, um colega concluiu desktop e mobile a partir dos meus componentes. A plataforma que ajudei a redesenhar está no ar e operando.",
+      "previewAlt": "Fundação do redesign de uma plataforma de inteligência de mercado no agro",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

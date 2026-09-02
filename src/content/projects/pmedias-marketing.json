@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/pmedias-marketing.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Pmedias Marketing — digital marketing agency website",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-07-03",
+    "end": "2023-07-13"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/LYa8fGabEI2ax9wrTkZnOm/Pmedias?node-id=0-1",
+  "evidenceLink": "https://web.archive.org/web/20240816/https://www.pmedias.com.br/",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Digital Marketing Agency — Institutional Website",
+      "tagline": "A responsive landing built to hand cleanly to a WordPress implementer.",
+      "description": "An institutional and commercial landing page for a digital marketing agency: services, performance credentials and lead capture, designed responsive for desktop and mobile. I designed the complete high-fidelity website UI — the desktop and mobile landing pages and the navigation menu — working an existing logo and palette into a layout structured to hand cleanly to a WordPress implementer. Sole website UI designer; the identity was another designer's and a no-code developer shipped the build.",
+      "previewAlt": "Institutional website design for a digital marketing agency",
+      "liveLabel": "Open the design file",
+      "evidenceLabel": "Archived snapshot of the built site"
+    },
+    "pt": {
+      "title": "Agência de marketing digital — site institucional",
+      "tagline": "Uma landing responsiva feita para passar limpa a quem implementa em WordPress.",
+      "description": "Uma landing page institucional e comercial para uma agência de marketing digital: serviços, credenciais de performance e captação de leads, desenhada responsiva para desktop e mobile. Desenhei toda a UI do site em alta fidelidade — as landing pages desktop e mobile e o menu de navegação — encaixando um logo e uma paleta já existentes num layout estruturado para passar limpo a quem implementa em WordPress. Designer de UI único do site; a identidade é de outro designer e um desenvolvedor no-code subiu o build.",
+      "previewAlt": "Design de site institucional para uma agência de marketing digital",
+      "liveLabel": "Abrir o arquivo de design",
+      "evidenceLabel": "Snapshot arquivado do site publicado"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

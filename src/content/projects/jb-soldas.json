@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/jb-soldas.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "JB Soldas — industrial welding & electrical busbars website",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-06",
+    "end": "2023-06-30"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/6d6oqPNLo3gfpPiCu2iYBo/JB-SOLDAS?node-id=0-1",
+  "evidenceLink": "https://web.archive.org/web/20240320/http://jbsoldas.com.br/",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Industrial Welding Manufacturer — B2B Catalogue Site",
+      "tagline": "Eleven frames across four documented breakpoints, the tightest in the batch.",
+      "description": "A B2B institutional and catalogue website for an industrial welding and electrical-busbar manufacturer: technical capabilities, company history and certifications, and direct quote-request touchpoints. I designed eleven responsive frames across four documented breakpoints — tablet at 1024 and 641, mobile at 640 and 320 — covering home, services, about and contact with their mobile counterparts. Sole website UI designer; identity and the WordPress build were other people's.",
+      "previewAlt": "B2B catalogue website design for an industrial welding manufacturer",
+      "liveLabel": "Open the design file",
+      "evidenceLabel": "Archived snapshot of the built site"
+    },
+    "pt": {
+      "title": "Fabricante de solda industrial — site de catálogo B2B",
+      "tagline": "Onze frames em quatro breakpoints documentados, o mais preciso do lote.",
+      "description": "Um site institucional e de catálogo B2B para um fabricante de solda industrial e barramentos elétricos: capacidades técnicas, história da empresa e certificações, e pontos diretos de solicitação de orçamento. Desenhei onze frames responsivos em quatro breakpoints documentados — tablet em 1024 e 641, mobile em 640 e 320 — cobrindo início, serviços, sobre e contato com suas versões mobile. Designer de UI único do site; identidade e build em WordPress são de outras pessoas.",
+      "previewAlt": "Design de site de catálogo B2B para um fabricante de solda industrial",
+      "liveLabel": "Abrir o arquivo de design",
+      "evidenceLabel": "Snapshot arquivado do site publicado"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

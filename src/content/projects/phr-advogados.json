@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/phr-advogados.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "PHR Advogados — law firm website & editorial portal",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2024-01-05",
+    "end": "2024-02-15"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://phradvogados.com.br/",
+  "evidenceLink": "https://www.figma.com/design/BHcRPjnGD2AzDId9LBd3Y7/PHR-Advogados?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Family-Law Practice — Website & Editorial Portal",
+      "tagline": "Nine page templates including a podcast hub and blog, desktop and mobile.",
+      "description": "A multi-page presence for a specialised family-law practice: practice-area pages, institutional narrative, media appearances, a podcast hub and blog templates. I designed every desktop and mobile layout — home, about, divorce, custody, services, contact, news, podcast and blog — establishing the typographic hierarchy, the custom navigation components and the practice-area card patterns, over a 19-frame design page and a 24-frame style guide. Sole website UI designer; identity and the build were other people's.",
+      "previewAlt": "Website and editorial portal design for a family-law practice",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Escritório de direito de família — site e portal editorial",
+      "tagline": "Nove templates de página, incluindo hub de podcast e blog, em desktop e mobile.",
+      "description": "Uma presença digital de várias páginas para um escritório especializado em direito de família: páginas por área, narrativa institucional, aparições na mídia, um hub de podcast e templates de blog. Desenhei todos os layouts desktop e mobile — início, quem somos, divórcio, guarda, o que fazemos, contato, notícias, podcast e blog — definindo a hierarquia tipográfica, os componentes de navegação próprios e os padrões de card por área, sobre uma página de design com 19 frames e um style guide com 24. Designer de UI único do site; identidade e build são de outras pessoas.",
+      "previewAlt": "Design de site e portal editorial para um escritório de direito de família",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

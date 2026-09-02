@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/miaki.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Universidade MIAKI — five-role corporate LMS, web + mobile (designed, never built)",
+  "role": "Sole designer of the product",
+  "dates": {
+    "start": "2025-04-01",
+    "end": "2025-07-18"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/O4O105Zug3Tu7cxsfHqhxk/MIAKI?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Corporate Learning Platform — 302 Screens, Five Roles",
+      "tagline": "The largest product in this portfolio: five web portals plus a mobile companion.",
+      "description": "A corporate learning platform for a manufacturer's licensed dealer network: five permission-scoped web portals plus a mobile companion. I designed all 302 screens — 169 desktop across the five role portals and a 133-screen mobile companion covering four of them — plus 162 components and 150 variables with zero broken aliases. The largest product in this portfolio by screen count. Designed and handed off in July 2025; it remains a prototype, and nothing here says it launched.",
+      "previewAlt": "Design file for a five-role corporate learning platform",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma corporativa de ensino — 302 telas, cinco perfis",
+      "tagline": "O maior produto deste portfólio: cinco portais web mais um companion mobile.",
+      "description": "Uma plataforma corporativa de ensino para a rede de revendedores licenciados de um fabricante: cinco portais web com escopo de permissão mais um companion mobile. Desenhei todas as 302 telas — 169 desktop nos cinco portais por perfil e um companion mobile de 133 telas cobrindo quatro deles — mais 162 componentes e 150 variáveis sem nenhum alias quebrado. É o maior produto deste portfólio em número de telas. Desenhado e entregue em julho de 2025; segue como protótipo, e nada aqui afirma que foi lançado.",
+      "previewAlt": "Arquivo de design de uma plataforma corporativa de ensino com cinco perfis",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

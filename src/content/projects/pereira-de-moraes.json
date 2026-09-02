@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/pereira-de-moraes.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Pereira de Moraes Advocacia — law firm landing page",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-09-18",
+    "end": "2023-09-27"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://pereirademoraes.com.br/",
+  "evidenceLink": "https://www.figma.com/design/1ULmeElnpP2m2Azma9UJZL/Pereira-de-Moraes-Advocacia?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Public-Law Advocate — One-Page Institutional Site",
+      "tagline": "Three frames, two mobile adaptations — the tightest institutional piece here.",
+      "description": "A minimalist one-page site for a public-law advocate, built to carry direct-partner seniority and academic credentials and to capture consultation requests. I designed the responsive desktop layout and two distinct mobile viewport adaptations, setting the editorial spacing and the credibility structure. The smallest file in the batch at three core frames, and the clearest example of one-page institutional work. Sole website UI designer; identity and build were other people's.",
+      "previewAlt": "One-page institutional website design for a public-law advocate",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Advogado de direito público — site institucional de uma página",
+      "tagline": "Três frames, duas adaptações mobile — a peça institucional mais enxuta daqui.",
+      "description": "Um site minimalista de uma página para um advogado de direito público, feito para comunicar senioridade do sócio e credenciais acadêmicas e captar pedidos de consulta. Desenhei o layout desktop responsivo e duas adaptações distintas de viewport mobile, definindo o espaçamento editorial e a estrutura de credibilidade. É o menor arquivo do lote, com três frames centrais, e o exemplo mais claro de trabalho institucional de uma página. Designer de UI único do site; identidade e build são de outras pessoas.",
+      "previewAlt": "Design de site institucional de uma página para um advogado de direito público",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

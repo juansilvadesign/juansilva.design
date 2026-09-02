@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/listbox.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "ListBox — B2B fashion wholesale marketplace",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": "2023-10-25",
+    "end": "2024-04-30"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://listbox.com.br/",
+  "evidenceLink": "https://www.figma.com/design/vz0jzqIFf1LD1CiWXb7Llt/ListBox?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "B2B Fashion Wholesale Marketplace — Four Role Architectures",
+      "tagline": "Supplier, retailer, visitor and admin surfaces across 386 frames.",
+      "description": "A B2B fashion wholesale marketplace and digital showroom: supplier catalogue import, pre-orders and wholesale billing; retailer search, filters, wishlist, cart and QR code; admin approvals and mass notifications; plus buyer-interest heatmaps and a fairs and events surface. 402 children across four role architectures in a 386-frame design page. A UI/UX design credit — the style guide builds on licensed base primitives rather than original ones, and the platform's launch is not something this record establishes.",
+      "previewAlt": "Design file for a B2B fashion wholesale marketplace",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Marketplace de moda no atacado B2B — quatro arquiteturas de perfil",
+      "tagline": "Superfícies de fornecedor, lojista, visitante e admin em 386 frames.",
+      "description": "Um marketplace de moda no atacado B2B e showroom digital: importação de catálogo, pré-pedidos e faturamento do fornecedor; busca, filtros, lista de desejos, carrinho e QR code do lojista; aprovações e notificações em massa do admin; além de mapas de calor de interesse e uma superfície de feiras e eventos. São 402 filhos em quatro arquiteturas de perfil numa página de design com 386 frames. É crédito de design de UI/UX — o style guide parte de primitivos licenciados, não originais, e este registro não comprova o lançamento da plataforma.",
+      "previewAlt": "Arquivo de design de um marketplace de moda no atacado B2B",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

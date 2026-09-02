@@ -21,6 +21,7 @@
   "copy": {
     "en": {
       "title": "AI Agent Orchestration & Sales Automation",
+      "tagline": "n8n-orchestrated WhatsApp SDR with Postgres and pgvector memory.",
       "description": "Built PsiAtiva's own acquisition operations with n8n orchestration, a WhatsApp SDR, Postgres and pgvector memory, evidence-based lead qualification, and AI-assisted routing.",
       "previewAlt": "PsiAtiva n8n agent-orchestration workflow",
       "liveLabel": "PsiAtiva in production",
@@ -28,10 +29,21 @@
     },
     "pt": {
       "title": "Orquestração de agentes e automação comercial",
+      "tagline": "SDR no WhatsApp orquestrado em n8n, com memória em Postgres e pgvector.",
       "description": "Construí a operação de aquisição da própria PsiAtiva com orquestração no n8n, SDR no WhatsApp, memória em Postgres e pgvector, qualificação baseada em evidências e roteamento assistido por IA.",
       "previewAlt": "Workflow de orquestração de agentes da PsiAtiva no n8n",
       "liveLabel": "PsiAtiva em produção",
       "evidenceLabel": "Ver evidência do workflow"
     }
-  }
+  },
+  "evidenceWeight": 6,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": false
+  },
+  "caseStudy": null
 }

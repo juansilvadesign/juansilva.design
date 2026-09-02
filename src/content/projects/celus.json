@@ -17,11 +17,12 @@
   ],
   "liveUrl": "https://celus.juanpablosilva.com.br/",
   "evidenceLink": "https://github.com/zokuWebDesign/Celus",
-  "featured": true,
+  "featured": false,
   "preview": "/assets/images/celus-preview.webp",
   "copy": {
     "en": {
       "title": "Point-of-Care Ultrasound Suite & Marketing Site",
+      "tagline": "Nineteen-module clinical ultrasound suite on a two-layer token system.",
       "description": "Designed a nineteen-module clinical product solo — an ultrasound decision-support app for clinicians plus its admin back office — on a two-layer token system that resolves across light, dark and two device modes with no broken aliases. Then designed and coded the marketing site in Next.js, wired to a form-capture service. A Bubble developer built the product itself.",
       "previewAlt": "Celus point-of-care ultrasound marketing site",
       "liveLabel": "View the build (self-hosted copy)",
@@ -29,10 +30,21 @@
     },
     "pt": {
       "title": "Suíte de ultrassom point-of-care e site",
+      "tagline": "Suíte clínica de ultrassom em dezenove módulos sobre tokens em duas camadas.",
       "description": "Desenhei sozinho um produto clínico de dezenove módulos — um app de apoio à decisão em ultrassom para médicos e seu back-office — sobre um sistema de tokens em duas camadas que resolve em claro, escuro e dois modos de dispositivo, sem aliases quebrados. Depois desenhei e programei o site em Next.js, ligado a um serviço de captura. O produto em si foi construído por um desenvolvedor Bubble.",
       "previewAlt": "Site do Celus, suíte de ultrassom point-of-care",
       "liveLabel": "Ver o build (cópia própria)",
       "evidenceLabel": "Código-fonte"
     }
-  }
+  },
+  "evidenceWeight": 8,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": true,
+    "designAndCode": true,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": false
+  },
+  "caseStudy": null
 }

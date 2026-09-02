@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/kat-investimentos.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "KAT Investimentos (Banco Safra) — investment-advisory platform",
+  "role": "Designer in a team of five — sole owner of two of the six role flows",
+  "dates": {
+    "start": "2024-05-10",
+    "end": "2024-11-14"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/dyRJx7ExmpALroOpjAjHi6/Safra---Assessor---Head--otimizado-",
+  "featured": false,
+  "preview": "/assets/images/kat-investimentos-preview.webp",
+  "copy": {
+    "en": {
+      "title": "Investment-Advisory Platform — Two Role Flows, Team of Five",
+      "tagline": "Advisor and head flows owned end to end across 722 desktop and 764 mobile frames.",
+      "description": "An investment-advisory platform spanning fourteen product verticals — consortium, home equity, real-estate credit, FX, wealth, insurance and investment guarantees among them — designed at two breakpoints. In a team of five I owned two of the six role flows end to end, advisor and head, across 722 desktop and 764 mobile frames, and built the head-visibility rule as working UI rather than leaving it as a note. Two flows of six is the claim; the other four and the wider platform belong to the rest of the team.",
+      "previewAlt": "Design file for an investment-advisory platform's advisor and head flows",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Plataforma de assessoria de investimentos — dois fluxos, time de cinco",
+      "tagline": "Fluxos de assessor e head dominados de ponta a ponta em 722 frames desktop e 764 mobile.",
+      "description": "Uma plataforma de assessoria de investimentos abrangendo quatorze verticais de produto — consórcio, home equity, crédito imobiliário, câmbio, wealth, seguros e garantias de investimento entre elas — desenhada em dois breakpoints. Num time de cinco, fui dono de dois dos seis fluxos de perfil de ponta a ponta, assessor e head, em 722 frames desktop e 764 mobile, e construí a regra de visibilidade do head como UI funcionando, em vez de deixá-la como observação. Dois fluxos de seis é a afirmação; os outros quatro e a plataforma como um todo são do restante do time.",
+      "previewAlt": "Arquivo de design dos fluxos de assessor e head de uma plataforma de investimentos",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

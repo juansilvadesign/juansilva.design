@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/mala-de-turista.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Mala de Turista — travel agency & digital nomad portal",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-09-29",
+    "end": "2023-10-10"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://maladeturista.com.br/",
+  "evidenceLink": "https://www.figma.com/design/pHnKZf5r5Lv4xcwv7M9nLv/Mala-de-Turista?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Travel Agency & Digital Nomad Portal — Website Design",
+      "tagline": "Ten responsive page layouts for a travel portal and content hub.",
+      "description": "A travel portal and content hub covering domestic and international packages, curated guided tours, digital-nomad resources and editorial travel writing. I designed ten responsive page layouts across desktop and mobile — home, guided tour, blog listing and article templates, about and contact — structuring the destination cards, the article reading template and the booking lead-capture. Sole website UI designer; the identity was another designer's and the WordPress build was a no-code developer's.",
+      "previewAlt": "Website design for a travel agency and digital nomad portal",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Portal de turismo e nômades digitais — design do site",
+      "tagline": "Dez layouts responsivos para um portal de viagens e hub de conteúdo.",
+      "description": "Um portal de viagens e hub de conteúdo com pacotes nacionais e internacionais, roteiros guiados, material para nômades digitais e conteúdo editorial. Desenhei dez layouts responsivos entre desktop e mobile — home, tour guiado, listagem e artigo do blog, sobre e contato — estruturando os cards de destino, o template de leitura e a captação de leads para reserva. Designer de UI único do site; a identidade é de outro designer e o build em WordPress foi de um desenvolvedor no-code.",
+      "previewAlt": "Design de site para um portal de turismo e nômades digitais",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

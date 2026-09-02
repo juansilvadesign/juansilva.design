@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/alva-lavanderia.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Alva Lavanderia — on-demand laundry marketplace & partner app",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": null,
+    "end": "2024-03-03"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/Vm5VSwjNx0l57W1bZrpSqS/Alva-Lavanderia?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "On-Demand Laundry Marketplace & Partner App",
+      "tagline": "Customer, washer-partner and admin surfaces across 718 nodes.",
+      "description": "A two-sided laundry marketplace connecting customers, independent washer partners and operational admins, with subscription plans, payment, order management and an investor-facing surface. I designed the nine-page suite — 718 top-level nodes — comprising a 401-child master product page, a 70-node customer mobile flow, a 55-node washer-partner flow and a 44-node investor landing suite. A UI/UX design credit; I did not build or operate the marketplace.",
+      "previewAlt": "Design file for an on-demand laundry marketplace and partner app",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Marketplace de lavanderia sob demanda e app do parceiro",
+      "tagline": "Superfícies de cliente, lavador parceiro e admin em 718 nós.",
+      "description": "Um marketplace de lavanderia de dois lados ligando clientes, lavadores parceiros independentes e administradores da operação, com planos de assinatura, pagamento, gestão de pedidos e uma superfície voltada a investidores. Desenhei a suíte de nove páginas — 718 nós de primeiro nível — com uma página-mestra de produto com 401 filhos, um fluxo mobile de cliente com 70 nós, um fluxo de lavador parceiro com 55 e uma landing para investidores com 44. É crédito de design de UI/UX; não construí nem operei o marketplace.",
+      "previewAlt": "Arquivo de design de um marketplace de lavanderia sob demanda",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

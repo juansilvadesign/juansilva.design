@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/cinemafia.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "CineMafia — audiovisual freelancer marketplace",
+  "role": "Mostly sole designer, and author of the component system",
+  "dates": {
+    "start": "2024-05-06",
+    "end": "2024-11-06"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.cinemafia.com.br",
+  "evidenceLink": "https://www.figma.com/design/lmIuwpMFDWNOfY1u3vNJCP/CineMafia--Design-completo-",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Audiovisual Freelancer Marketplace — Product & Component System",
+      "tagline": "Most of a two-sided marketplace, plus the component system the rest was built from.",
+      "description": "A two-sided marketplace for the audiovisual industry — finding a freelancer for a project, then running contracts and payments inside the platform. I designed most of the product and authored the component system the remaining work was assembled from, plus the marketing site. Also delivered a release-scoped cut of the design filtered to only the screens the dev team was shipping that release. Mostly sole, not sole: another designer reused the components on some screens.",
+      "previewAlt": "Design file for an audiovisual freelancer marketplace",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Marketplace de freelancers do audiovisual — produto e sistema de componentes",
+      "tagline": "Boa parte de um marketplace de dois lados, e o sistema de componentes que sustentou o resto.",
+      "description": "Um marketplace de dois lados para o audiovisual — encontrar um freelancer para um projeto e depois tocar contratos e pagamentos dentro da plataforma. Desenhei a maior parte do produto e criei o sistema de componentes a partir do qual o restante foi montado, além do site institucional. Entreguei também um recorte do design por release, filtrado só para as telas que o time de dev ia subir naquela entrega. Foi quase todo meu, não todo: outro designer reutilizou os componentes em algumas telas.",
+      "previewAlt": "Arquivo de design de um marketplace de freelancers do audiovisual",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

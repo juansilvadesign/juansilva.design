@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/lava-thru.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Lava Thru — car-wash subscription & voucher platform",
+  "role": "UI/UX Designer",
+  "dates": {
+    "start": "2024-02-06",
+    "end": "2024-07-23"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.lavathru.com.br/",
+  "evidenceLink": "https://www.figma.com/design/UNaM05TzpUnAoWVvnheN9U/Lava-Thru?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Car-Wash Subscription & Voucher Platform",
+      "tagline": "Recurring wash plans, checkout and voucher tooling across 308 nodes.",
+      "description": "A subscription and marketing platform for an automated drive-thru car-wash network: recurring wash plans, card checkout, a voucher editor, vehicle-linked customer management and unit locations. 308 top-level nodes across five pages, including a 76-child page given over to input, error and subscriber-management states, and a style guide holding the architecture diagrams and brand assets. A UI/UX design credit — the hardware, the payment processing and the rollout are not mine to claim.",
+      "previewAlt": "Design file for a car-wash subscription and voucher platform",
+      "liveLabel": "The site, live",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Plataforma de assinatura e vouchers de lava-rápido",
+      "tagline": "Planos recorrentes, checkout e vouchers em 308 nós.",
+      "description": "Uma plataforma de assinatura e marketing para uma rede de lava-rápidos drive-thru automatizados: planos recorrentes, checkout em cartão, editor de vouchers, gestão de clientes ligada a veículos e localização das unidades. São 308 nós de primeiro nível em cinco páginas, incluindo uma página de 76 filhos dedicada a estados de input, erro e gestão de assinantes, e um style guide com os diagramas de arquitetura e os assets de marca. É crédito de design de UI/UX — o hardware, o processamento de pagamento e a implantação não são meus.",
+      "previewAlt": "Arquivo de design de uma plataforma de assinatura de lava-rápido",
+      "liveLabel": "O site no ar",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": true,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

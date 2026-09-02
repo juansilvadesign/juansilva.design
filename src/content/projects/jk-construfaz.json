@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/jk-construfaz.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "JK Construfaz — building materials e-commerce & local retail store",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2023-07",
+    "end": "2023-07"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/8rWAKIOTfPylYY6aRi4WaZ/JK-Construfaz?node-id=0-1",
+  "evidenceLink": "https://web.archive.org/web/20240714/https://www.casaconstrufaz.com.br/",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Building Materials Retailer — E-Commerce Site",
+      "tagline": "Eleven screens from product discovery through to checkout.",
+      "description": "A retail e-commerce site for a local construction-material supplier, built around product discovery, customer ratings, promotional banners, account creation and a cart-to-checkout flow. I designed eleven responsive screens across desktop and mobile — home, products, all products, cart, checkout, sign-up, login, about and a mobile menu overlay — with the retail component layer: search box, cart badge and product review patterns. Sole website UI designer; identity and the WooCommerce build were other people's.",
+      "previewAlt": "E-commerce website design for a building materials retailer",
+      "liveLabel": "Open the design file",
+      "evidenceLabel": "Archived snapshot of the built site"
+    },
+    "pt": {
+      "title": "Varejo de material de construção — site de e-commerce",
+      "tagline": "Onze telas da descoberta de produto até o checkout.",
+      "description": "Um site de e-commerce para um fornecedor local de material de construção, construído em torno de descoberta de produtos, avaliações de clientes, banners promocionais, criação de conta e um fluxo de carrinho até checkout. Desenhei onze telas responsivas entre desktop e mobile — início, produtos, todos os produtos, carrinho, checkout, criar conta, login, sobre e um overlay de menu mobile — com a camada de componentes de varejo: busca, selo de carrinho e padrões de avaliação. Designer de UI único do site; identidade e build em WooCommerce são de outras pessoas.",
+      "previewAlt": "Design de site de e-commerce para um varejo de material de construção",
+      "liveLabel": "Abrir o arquivo de design",
+      "evidenceLabel": "Snapshot arquivado do site publicado"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

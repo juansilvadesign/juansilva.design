@@ -1,0 +1,48 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/agenda-geek.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Agenda Geek — NGO e-waste gincana platform (competition winner, never built)",
+  "role": "Designer within a three-person competition team — owned the registration, FAQ and school-profile screens, ran the interviews, built the personas and journey, and co-owned the user flow",
+  "dates": {
+    "start": "2022-01",
+    "end": "2022-05"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/proto/OD664WpvRoF8x2mMyhTPnr/Agenda-Geek---g86?page-id=6%3A19&node-id=805%3A7309&starting-point-node-id=805%3A7309",
+  "evidenceLink": "https://www.figma.com/design/OD664WpvRoF8x2mMyhTPnr/Agenda-Geek---g86",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "E-Waste Gincana Platform for an NGO — Competition Winner",
+      "tagline": "Research, personas and three screens on the entry that won, against fourteen teams.",
+      "description": "A platform for an NGO's inter-school e-waste collection contest: schools register, track their collection on a live ranking, earn badges and reach the NGO. Designed over five months in a team of three against fourteen competing entries, and won. Mine was the primary research — nine in-depth interviews carried through to an analysis grid that traces every insight back to the quote that produced it — plus the personas and journey, co-ownership of the user flow, and the registration, FAQ and school-profile screens. The team lead was someone else, and the platform was never built.",
+      "previewAlt": "Design file for an NGO e-waste collection contest platform",
+      "liveLabel": "Open the prototype",
+      "evidenceLabel": "The design file"
+    },
+    "pt": {
+      "title": "Plataforma de gincana de lixo eletrônico para ONG — vencedora do desafio",
+      "tagline": "Pesquisa, personas e três telas na entrega que venceu, entre quatorze times.",
+      "description": "Uma plataforma para a gincana interescolar de coleta de lixo eletrônico de uma ONG: escolas se cadastram, acompanham a coleta num ranking ao vivo, ganham selos e falam com a ONG. Desenhada em cinco meses, num time de três, contra quatorze times concorrentes — e venceu. Meu escopo foi a pesquisa primária — nove entrevistas em profundidade levadas até uma grade de análise que liga cada insight à fala que o gerou — mais as personas e a jornada, a cocriação do fluxo, e as telas de cadastro, FAQ e perfil da escola. A liderança do time era de outra pessoa, e a plataforma nunca foi construída.",
+      "previewAlt": "Arquivo de design da plataforma de gincana de coleta de lixo eletrônico",
+      "liveLabel": "Abrir o protótipo",
+      "evidenceLabel": "O arquivo de design"
+    }
+  },
+  "evidenceWeight": 4,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": true,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}

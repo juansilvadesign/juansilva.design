@@ -1,0 +1,49 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/allprice.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "AllPrice — multi-ERP control panel landing page",
+  "role": "Redesigned and coded the landing page — design-file remediation, then front-end build",
+  "dates": {
+    "start": "2025-07-18",
+    "end": "2026-02-23"
+  },
+  "stack": [
+    "typescript",
+    "tailwind"
+  ],
+  "liveUrl": "https://allprice-lp.juanpablosilva.com.br/",
+  "evidenceLink": "https://github.com/zokuWebDesign/AllPrice",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Multi-ERP Control Panel — Landing Page Remediation & Build",
+      "tagline": "An unbuildable design file remediated, then implemented as the landing page.",
+      "description": "Received a landing-page design built from groups with no frames and no auto-layout — a file that cannot survive contact with responsive code. Rebuilt it into something buildable before writing a line, then implemented it: hero, four feature variants, pricing, testimonials, FAQ and CTA on a sixty-one-component React and shadcn base, plus the legal pages, maintained for about seven months. A build and remediation credit — the product design was finished before I arrived.",
+      "previewAlt": "Landing page for a multi-ERP and multi-marketplace control panel",
+      "liveLabel": "View the build (self-hosted copy)",
+      "evidenceLabel": "Source code"
+    },
+    "pt": {
+      "title": "Painel multi-ERP — remediação e build da landing page",
+      "tagline": "Um arquivo de design inconstruível remediado e implementado como landing page.",
+      "description": "Recebi um design de landing page feito de grupos, sem frames e sem auto-layout — um arquivo que não sobrevive ao contato com código responsivo. Refiz para algo construível antes de escrever uma linha e então implementei: hero, quatro variações de feature, preços, depoimentos, FAQ e CTA sobre uma base React e shadcn de sessenta e um componentes, mais as páginas legais, mantidas por cerca de sete meses. É crédito de build e de remediação — o design do produto já estava pronto quando cheguei.",
+      "previewAlt": "Landing page de um painel de controle multi-ERP e multi-marketplace",
+      "liveLabel": "Ver o build (cópia própria)",
+      "evidenceLabel": "Código-fonte"
+    }
+  },
+  "evidenceWeight": 8,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": true,
+    "designAndCode": true,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": false
+  },
+  "caseStudy": null
+}

@@ -1,0 +1,45 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/clinica-castelo.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "Clínica Castelo — health, aesthetics & dermocosmetics commerce portal",
+  "role": "Sole website UI designer",
+  "dates": {
+    "start": "2024-01-09",
+    "end": "2024-02-09"
+  },
+  "stack": [
+    "figma"
+  ],
+  "liveUrl": "https://www.figma.com/design/hNrSumlx2JYBduA6t5klno/Cl%C3%ADnica-Castelo?node-id=0-1",
+  "featured": false,
+  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "copy": {
+    "en": {
+      "title": "Aesthetics Clinic — Portal & Dermocosmetics Commerce",
+      "tagline": "Two purpose-separated navigations: one for the clinic, one for the shop.",
+      "description": "A combined clinical portal and commerce site for a multidisciplinary aesthetics clinic: treatment presentation, a dermocosmetics store, cart and checkout. I designed 25 responsive nodes across desktop and mobile, including two purpose-separated navigation bars — one for the clinic portal, one for the shop — plus the product card components and the products, purchase, cart, payment and mobile checkout screens. A design credit only: no production URL was recovered, so nothing here says this shipped.",
+      "previewAlt": "Portal and commerce design for a multidisciplinary aesthetics clinic",
+      "liveLabel": "Open the design file"
+    },
+    "pt": {
+      "title": "Clínica de estética — portal e loja de dermocosméticos",
+      "tagline": "Duas navegações separadas por propósito: uma da clínica, outra da loja.",
+      "description": "Um portal clínico combinado com loja para uma clínica de estética multidisciplinar: apresentação dos tratamentos, loja de dermocosméticos, carrinho e checkout. Desenhei 25 nós responsivos entre desktop e mobile, incluindo duas barras de navegação separadas por propósito — uma do portal da clínica, outra da loja — mais os componentes de card de produto e as telas de produtos, compra, carrinho, pagamento e checkout mobile. É apenas crédito de design: nenhuma URL de produção foi recuperada, então nada aqui afirma que isso foi ao ar.",
+      "previewAlt": "Design de portal e loja para uma clínica de estética multidisciplinar",
+      "liveLabel": "Abrir o arquivo de design"
+    }
+  },
+  "evidenceWeight": 1,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": false,
+    "designAndCode": false,
+    "productStack": false,
+    "storeListing": false,
+    "designArtifact": true
+  },
+  "caseStudy": null
+}
