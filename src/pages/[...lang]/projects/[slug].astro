@@ -1,0 +1,411 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../../components/Footer.astro";
+import StackBadge from "../../../components/StackBadge.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { locales, defaultLocale, localizedPath, pageTitle, t, type Locale } from "../../../i18n";
+import { SIGNAL_FACETS, byEvidence } from "../../../lib/projects";
+import "../../../styles/evidence-rail.css";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("projects");
+  return locales.flatMap((lang) =>
+    entries.map((entry) => ({
+      params: { lang: lang === defaultLocale ? undefined : lang, slug: entry.id },
+      props: { lang, entry },
+    })),
+  );
+}
+
+const { lang, entry } = Astro.props;
+const copy = t(lang);
+const d = entry.data;
+const c = d.copy[lang];
+const detail = copy.projects.detail;
+
+/**
+ * The three shapes `dates` can take, per the store schema: a closed range, an
+ * ongoing engagement (no end), and agency work whose start predates Juan
+ * (no start, so only the delivery date is asserted).
+ */
+const month = (iso: string) =>
+  new Date(`${iso.length === 7 ? `${iso}-01` : iso}T00:00:00Z`).toLocaleDateString(
+    lang === "pt" ? "pt-BR" : "en-GB",
+    { year: "numeric", month: "short", timeZone: "UTC" },
+  );
+
+const timeframe = (() => {
+  const { start, end } = d.dates;
+  if (start && end) return detail.dateRange.replace("{start}", month(start)).replace("{end}", month(end));
+  if (start) return detail.dateOngoing.replace("{start}", month(start));
+  if (end) return detail.dateDelivered.replace("{end}", month(end));
+  return null;
+})();
+
+const signals = SIGNAL_FACETS.filter((s) => d.evidenceSignals[s]);
+
+/** "Next" follows the same evidence order the index uses, so the two agree. */
+const ordered = (await getCollection("projects")).sort((a, b) =>
+  byEvidence(
+    { ...a.data, slug: a.id } as never,
+    { ...b.data, slug: b.id } as never,
+  ),
+);
+const at = ordered.findIndex((e) => e.id === entry.id);
+const next = ordered[(at + 1) % ordered.length];
+
+const indexHref = localizedPath("/projects/", lang);
+---
+
+<BaseLayout
+  {lang}
+  title={pageTitle(c.title, lang)}
+  description={c.tagline}
+  canonicalPath={`/projects/${entry.id}/`}
+>
+  <main id="main-content" class="page-shell">
+    <article class="case">
+      <nav class="case__back" aria-label={detail.backToIndex}>
+        <a href={indexHref}>← {detail.backToIndex}</a>
+      </nav>
+
+      <!-- 1 · Hero -->
+      <header class="case__hero">
+        <h1 class="case__title">{c.title}</h1>
+        <p class="case__dek">{c.tagline}</p>
+      </header>
+
+      <figure class="case__media">
+        <img src={d.preview} alt={c.previewAlt} width="1600" height="900" decoding="async" />
+      </figure>
+
+      <!-- 2 · Statement band -->
+      <p class="case__statement">{c.description}</p>
+
+      <!-- 3 · Project brief, entirely from the record -->
+      <section class="brief" aria-label={detail.briefLegend}>
+        <dl class="brief__list">
+          <div class="brief__row">
+            <dt>{detail.roleLabel}</dt>
+            <dd>{d.role}</dd>
+          </div>
+          {timeframe && (
+            <div class="brief__row">
+              <dt>{detail.timeframeLabel}</dt>
+              <dd>{timeframe}</dd>
+            </div>
+          )}
+          <div class="brief__row">
+            <dt>{detail.stackLabel}</dt>
+            <dd class="brief__stack" role="list">
+              {d.stack.map((s) => <StackBadge id={s} />)}
+            </dd>
+          </div>
+          {signals.length > 0 && (
+            <div class="brief__row">
+              <dt>{detail.evidenceLabel}</dt>
+              <dd>
+                <ul class="rail">
+                  {signals.map((s) => (
+                    <li class="rail__item" data-signal={s}>
+                      <span aria-hidden="true" class="rail__dot" />
+                      {copy.projects.index.signalsShort[s]}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          )}
+        </dl>
+
+        <p class="brief__actions">
+          <a class="button" href={d.liveUrl} rel="noopener noreferrer" target="_blank">{c.liveLabel}</a>
+          {d.evidenceLink && c.evidenceLabel && (
+            <a class="button button--secondary" href={d.evidenceLink} rel="noopener noreferrer" target="_blank">
+              {c.evidenceLabel}
+            </a>
+          )}
+        </p>
+      </section>
+
+      <!-- 4 · Narrative, or an honest placeholder -->
+      {d.caseStudy ? (
+        <div class="case__body">
+          <p class="case__lead">{d.caseStudy[lang].brief}</p>
+          <p>{d.caseStudy[lang].context}</p>
+          {d.caseStudy[lang].sections?.map((s) => (
+            <>
+              <h2>{s.heading}</h2>
+              <p>{s.body}</p>
+            </>
+          ))}
+          <h2>{detail.evidenceLabel}</h2>
+          <p>{d.caseStudy[lang].outcome}</p>
+        </div>
+      ) : (
+        <aside class="soon">
+          <p class="soon__title">{detail.caseInProgress}</p>
+          <p class="soon__body">{detail.caseInProgressBody}</p>
+        </aside>
+      )}
+
+      <!-- 5 · Next -->
+      <nav class="case__next" aria-label={detail.nextProject}>
+        <a href={localizedPath(`/projects/${next.id}/`, lang)}>
+          <span class="case__next-label">{detail.nextProject}</span>
+          <span class="case__next-title">{next.data.copy[lang].title} →</span>
+        </a>
+      </nav>
+    </article>
+    <Footer {lang} />
+  </main>
+</BaseLayout>
+
+<style>
+  /* Reading column follows the system's own measure, not the reference's. */
+  /* Clears the fixed navbar — see the note on .pindex-head. */
+  .case {
+    max-width: var(--container-content);
+    margin: 0 auto;
+    padding: var(--space-px-120) var(--space-px-16) var(--space-px-64);
+  }
+
+  .case__back {
+    margin-bottom: var(--space-px-32);
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .case__back a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .case__back a:hover {
+    color: var(--primary);
+  }
+
+  .case__hero {
+    max-width: var(--content-copy);
+    margin: 0 auto var(--space-px-40);
+    text-align: center;
+  }
+
+  .case__title {
+    margin: 0 0 var(--space-px-16);
+    font-family: var(--font-display);
+    font-size: var(--type-heading-mobile-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--type-heading-mobile-leading);
+    color: var(--text-heading);
+    text-wrap: balance;
+  }
+
+  .case__dek {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-18);
+    line-height: var(--leading-28);
+    color: var(--text-secondary);
+  }
+
+  /* Full-bleed media intentionally exceeds the reading column. */
+  .case__media {
+    margin: 0 0 var(--space-px-48);
+  }
+
+  .case__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-media);
+  }
+
+  .case__statement {
+    max-width: var(--content-copy);
+    margin: 0 auto var(--space-px-48);
+    font-family: var(--font-display);
+    font-size: var(--text-20);
+    line-height: var(--leading-32);
+    color: var(--text-primary);
+  }
+
+  .brief {
+    max-width: var(--content-copy);
+    margin: 0 auto var(--space-px-48);
+    border-block: var(--border-width) solid var(--border-subtle);
+  }
+
+  .brief__list {
+    margin: 0;
+    padding: var(--space-px-24) 0;
+  }
+
+  .brief__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-px-4);
+    padding: var(--space-px-12) 0;
+  }
+
+  .brief__row dt {
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .brief__row dd {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-16);
+    line-height: var(--leading-24);
+    color: var(--text-primary);
+  }
+
+  .brief__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-px-8);
+  }
+
+  .brief__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-px-12);
+    margin: 0;
+    padding-bottom: var(--space-px-24);
+  }
+
+  .case__body {
+    max-width: var(--content-copy);
+    margin: 0 auto;
+  }
+
+  .case__body :global(p) {
+    margin: 0 0 var(--space-px-24);
+    font-family: var(--font-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    color: var(--text-primary);
+  }
+
+  .case__body :global(h2) {
+    margin: var(--space-px-40) 0 var(--space-px-16);
+    font-family: var(--font-display);
+    font-size: var(--text-28);
+    font-weight: var(--font-weight-regular);
+    color: var(--text-heading);
+  }
+
+  .case__lead {
+    font-size: var(--text-20) !important;
+    color: var(--text-heading) !important;
+  }
+
+  .soon {
+    max-width: var(--content-copy);
+    margin: 0 auto;
+    padding: var(--space-px-24);
+    background: var(--surface);
+    border-left: var(--border-width-strong) solid var(--primary);
+    border-radius: var(--radius-md);
+  }
+
+  .soon__title {
+    margin: 0 0 var(--space-px-8);
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  .soon__body {
+    max-width: var(--content-copy);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-16);
+    line-height: var(--leading-24);
+    color: var(--text-primary);
+  }
+
+  .case__next {
+    max-width: var(--content-copy);
+    margin: var(--space-px-64) auto 0;
+    padding-top: var(--space-px-24);
+    border-top: var(--border-width) solid var(--border-subtle);
+  }
+
+  .case__next a {
+    display: grid;
+    gap: var(--space-px-6);
+    text-decoration: none;
+  }
+
+  .case__next-label {
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .case__next-title {
+    font-family: var(--font-display);
+    font-size: var(--text-24);
+    line-height: var(--leading-32);
+    color: var(--text-heading);
+    transition: color var(--motion-fast) var(--ease-standard);
+  }
+
+  .case__next a:hover .case__next-title {
+    color: var(--primary);
+  }
+
+  .case__back a:focus-visible,
+  .case__next a:focus-visible {
+    outline: var(--border-width-strong) solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  @media (min-width: 768px) {
+    .case {
+      padding: var(--space-px-128) var(--space-px-48) var(--space-px-96);
+    }
+
+    .case__title {
+      font-size: var(--type-heading-size);
+      line-height: var(--type-heading-leading);
+    }
+
+    .brief__row {
+      grid-template-columns: minmax(0, 160px) minmax(0, 1fr);
+      gap: var(--space-px-24);
+      align-items: baseline;
+    }
+
+    .case__statement {
+      font-size: var(--text-24);
+      line-height: var(--leading-40);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .case {
+      padding-top: var(--space-px-170);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case__next-title {
+      transition-duration: var(--motion-reduced);
+    }
+  }
+</style>

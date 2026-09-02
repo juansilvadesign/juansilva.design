@@ -1,7 +1,9 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import StackBadge from "./StackBadge.astro";
-import { t, type Locale } from "../i18n";
+import { localizedPath, t, type Locale } from "../i18n";
+import { SIGNAL_FACETS } from "../lib/projects";
+import "../styles/evidence-rail.css";
 
 interface Props {
   lang: Locale;
@@ -19,6 +21,13 @@ const { evidenceLink } = project.data;
 const evidenceIcon = evidenceLink?.includes("github.com")
   ? "/assets/icons/github.svg"
   : "/assets/icons/link-external-02.svg";
+
+// The signature element carries across every surface a project appears on.
+const signals = SIGNAL_FACETS.filter((s) => project.data.evidenceSignals[s]);
+const caseHref = localizedPath(`/projects/${project.id}/`, lang);
+const caseLabel = project.data.caseStudy
+  ? copy.projects.index.caseStudy
+  : copy.projects.index.caseStudySoon;
 ---
 
 <div class="project-card">
@@ -30,6 +39,19 @@ const evidenceIcon = evidenceLink?.includes("github.com")
   <div class="project-card__stacks" role="list">
     {project.data.stack.map((stack) => <StackBadge id={stack} />)}
   </div>
+
+  {
+    signals.length > 0 && (
+      <ul class="rail">
+        {signals.map((s) => (
+          <li class="rail__item" data-signal={s}>
+            <span aria-hidden="true" class="rail__dot" />
+            {copy.projects.index.signalsShort[s]}
+          </li>
+        ))}
+      </ul>
+    )
+  }
 
   <div class="project-card__actions">
     <a
@@ -58,6 +80,8 @@ const evidenceIcon = evidenceLink?.includes("github.com")
       )
     }
   </div>
+
+  <a class="project-card__case" href={caseHref}>{caseLabel} →</a>
 </div>
 
 <style>
@@ -88,6 +112,35 @@ const evidenceIcon = evidenceLink?.includes("github.com")
     display: flex;
     width: 100%;
     flex-direction: column;
+  }
+
+  /* The route into the case study, kept quieter than the two live actions. */
+  .project-card__case {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--motion-fast) var(--ease-standard);
+  }
+
+  .project-card__case:hover {
+    color: var(--primary);
+  }
+
+  .project-card__case:focus-visible {
+    outline: var(--border-width-strong) solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card__case {
+      transition-duration: var(--motion-reduced);
+    }
   }
 
   .project-card__actions .button {

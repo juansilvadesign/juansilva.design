@@ -1,8 +1,12 @@
 ---
+import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
-import Projects from "../../components/Projects.astro";
+import ProjectsIndex from "../../components/projects/ProjectsIndex";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { localeStaticPaths, pageTitle, t, type Locale } from "../../i18n";
+import { localeStaticPaths, localizedPath, pageTitle, t, type Locale } from "../../i18n";
+import type { ProjectSummary } from "../../lib/projects";
+import { byEvidence } from "../../lib/projects";
+import "../../styles/projects-index.css";
 
 export function getStaticPaths() {
   return localeStaticPaths();
@@ -14,6 +18,35 @@ interface Props {
 
 const { lang } = Astro.props;
 const copy = t(lang);
+
+/**
+ * Display-only projection. The island receives exactly these fields — the
+ * private store's attribution and impact prose has already been withheld by
+ * the exporter, and nothing here widens that surface.
+ */
+const projects: ProjectSummary[] = (await getCollection("projects"))
+  .map((entry) => {
+    const d = entry.data;
+    const c = d.copy[lang];
+    return {
+      slug: entry.id,
+      title: c.title,
+      tagline: c.tagline,
+      stack: d.stack,
+      preview: d.preview,
+      previewAlt: c.previewAlt,
+      liveUrl: d.liveUrl,
+      liveLabel: c.liveLabel,
+      evidenceLink: d.evidenceLink ?? null,
+      evidenceLabel: c.evidenceLabel ?? null,
+      dates: d.dates,
+      evidenceWeight: d.evidenceWeight,
+      evidenceSignals: d.evidenceSignals,
+      hasCaseStudy: d.caseStudy !== null,
+      href: localizedPath(`/projects/${entry.id}/`, lang),
+    };
+  })
+  .sort(byEvidence);
 ---
 
 <BaseLayout
@@ -23,8 +56,65 @@ const copy = t(lang);
   canonicalPath="/projects/"
 >
   <main id="main-content" class="page-shell">
-    <h1 class="visually-hidden">{copy.meta.pages.projectsTitle}</h1>
-    <Projects {lang} />
+    <header class="pindex-head">
+      <h1 class="pindex-head__title">{copy.projects.index.heading}</h1>
+      <p class="pindex-head__lede">{copy.meta.pages.projectsDescription}</p>
+    </header>
+    <ProjectsIndex client:load projects={projects} copy={copy.projects.index} />
     <Footer {lang} />
   </main>
 </BaseLayout>
+
+<style>
+  /*
+   * The navbar is position:fixed and is not in flow — 98px up to the tablet
+   * breakpoint, 134px above it — so every page owns its own clearance. At the
+   * previous 64px the heading rendered underneath it.
+   */
+  .pindex-head {
+    max-width: var(--container-content);
+    margin: 0 auto;
+    padding: var(--space-px-120) var(--space-px-16) var(--space-px-40);
+  }
+
+  .pindex-head__title {
+    margin: 0 0 var(--space-px-12);
+    font-family: var(--font-display);
+    font-size: var(--type-heading-mobile-size);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--type-heading-mobile-leading);
+    color: var(--text-heading);
+  }
+
+  .pindex-head__lede {
+    max-width: var(--content-copy);
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--type-body-mobile-size);
+    line-height: var(--type-body-mobile-leading);
+    color: var(--text-primary);
+  }
+
+  @media (min-width: 768px) {
+    .pindex-head {
+      padding: var(--space-px-128) var(--space-px-48) var(--space-px-48);
+    }
+
+    .pindex-head__title {
+      font-size: var(--type-heading-size);
+      line-height: var(--type-heading-leading);
+    }
+
+    .pindex-head__lede {
+      font-size: var(--type-body-size);
+      line-height: var(--type-body-leading);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .pindex-head {
+      padding-top: var(--space-px-170);
+      padding-inline: var(--space-px-64);
+    }
+  }
+</style>

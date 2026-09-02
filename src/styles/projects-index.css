@@ -1,0 +1,455 @@
+/*
+ * /projects index.
+ *
+ * Structure borrowed from helloparul-in (evidence board, card grid) and
+ * medium-com (thin rules instead of containers, scarce accent, light motion).
+ * Every colour, space and duration resolves to a design-system token — the
+ * references contribute layout and motion only, never palette.
+ */
+
+@import "./evidence-rail.css";
+
+.pindex {
+  max-width: var(--container-content);
+  margin: 0 auto;
+  padding-inline: var(--space-px-16);
+}
+
+/* ── Evidence board — four cells, 2×2 at phone width ───────────────────── */
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-px-1);
+  margin: 0 0 var(--space-px-48);
+  padding: 0;
+  list-style: none;
+  background: var(--border-subtle);
+  border-block: var(--border-width) solid var(--border-subtle);
+}
+
+.board__cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-px-4);
+  padding: var(--space-px-24) var(--space-px-16);
+  background: var(--background);
+}
+
+.board__n {
+  font-family: var(--font-display);
+  font-size: var(--text-36);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-40);
+  color: var(--text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.board__label {
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  line-height: var(--leading-16);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ── Controls ─────────────────────────────────────────────────────────── */
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-px-24);
+  padding-bottom: var(--space-px-24);
+  border-bottom: var(--border-width) solid var(--border-subtle);
+}
+
+.controls__group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.controls__legend {
+  padding: 0;
+  margin-bottom: var(--space-px-10);
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-px-8);
+}
+
+/* Tap target floor is 44px — enforced here, not left to line-height. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-px-8);
+  min-height: 44px;
+  padding: var(--space-px-8) var(--space-px-14);
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--text-primary);
+  cursor: pointer;
+  background: var(--color-transparent, transparent);
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-pill);
+  transition: color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard);
+}
+
+.chip:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--text-heading);
+}
+
+.chip[aria-pressed="true"] {
+  color: var(--background);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.chip:disabled {
+  color: var(--text-placeholder);
+  cursor: not-allowed;
+  border-color: var(--border-subtle);
+}
+
+.chip__n {
+  font-family: var(--font-mono);
+  font-size: var(--text-12);
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+
+.controls__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-px-16);
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-px-6);
+}
+
+.select__label {
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.select select {
+  min-height: 44px;
+  padding: var(--space-px-8) var(--space-px-12);
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--text-primary);
+  background: var(--surface);
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-control);
+}
+
+.toggle {
+  display: inline-flex;
+  overflow: hidden;
+  border: var(--border-width) solid var(--border-default);
+  border-radius: var(--radius-control);
+}
+
+.toggle__btn {
+  min-height: 44px;
+  padding: var(--space-px-8) var(--space-px-16);
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--text-secondary);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  transition: color var(--motion-fast) var(--ease-standard),
+    background-color var(--motion-fast) var(--ease-standard);
+}
+
+.toggle__btn[aria-pressed="true"] {
+  color: var(--background);
+  background: var(--primary);
+}
+
+.clear {
+  min-height: 44px;
+  padding: var(--space-px-8) var(--space-px-14);
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  background: none;
+  border: 0;
+}
+
+.count {
+  margin: var(--space-px-24) 0;
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ── Recommended slot — reacts to the active filters ──────────────────── */
+
+.rec {
+  margin-bottom: var(--space-px-48);
+  border-block: var(--border-width) solid var(--primary);
+}
+
+.rec__eyebrow {
+  margin: var(--space-px-16) 0 var(--space-px-12);
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+.rec__link {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-px-20);
+  padding-bottom: var(--space-px-24);
+  text-decoration: none;
+}
+
+.rec__media img,
+.pcard__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-media);
+}
+
+.rec__title {
+  margin: 0 0 var(--space-px-8);
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-32);
+  color: var(--text-heading);
+}
+
+.rec__tagline {
+  margin: 0 0 var(--space-px-12);
+  max-width: var(--content-copy);
+  font-family: var(--font-body);
+  font-size: var(--text-16);
+  line-height: var(--leading-24);
+  color: var(--text-primary);
+}
+
+.rec__why {
+  margin: 0;
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+/* ── Grid ─────────────────────────────────────────────────────────────── */
+
+.grid {
+  display: grid;
+  gap: var(--space-px-32);
+  padding: 0;
+  margin: 0 0 var(--space-px-96);
+  list-style: none;
+}
+
+.grid[data-view="grid"] {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+}
+
+.grid[data-view="list"] {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-px-1);
+  background: var(--border-subtle);
+  border-block: var(--border-width) solid var(--border-subtle);
+}
+
+.pcard {
+  min-width: 0;
+}
+
+.pcard__link {
+  display: grid;
+  gap: var(--space-px-16);
+  height: 100%;
+  text-decoration: none;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+
+.pcard[data-view="list"] .pcard__link {
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  align-items: start;
+  gap: var(--space-px-24);
+  padding: var(--space-px-24) var(--space-px-16);
+  background: var(--background);
+}
+
+.pcard__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-px-8);
+  min-width: 0;
+}
+
+.pcard__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-20);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--leading-28);
+  color: var(--text-heading);
+  transition: color var(--motion-fast) var(--ease-standard);
+}
+
+.pcard__link:hover .pcard__title {
+  color: var(--primary);
+}
+
+.pcard__tagline {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-14);
+  line-height: var(--leading-22);
+  color: var(--text-primary);
+}
+
+.pcard__cta {
+  margin-top: auto;
+  padding-top: var(--space-px-8);
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────── */
+
+.empty {
+  padding: var(--space-px-64) 0 var(--space-px-96);
+  text-align: center;
+}
+
+.empty__title {
+  margin: 0 0 var(--space-px-12);
+  font-family: var(--font-display);
+  font-size: var(--text-24);
+  color: var(--text-heading);
+}
+
+/* ── Focus: visible on every interactive element, never removed ───────── */
+
+.chip:focus-visible,
+.toggle__btn:focus-visible,
+.clear:focus-visible,
+.select select:focus-visible,
+.pcard__link:focus-visible,
+.rec__link:focus-visible {
+  outline: var(--border-width-strong) solid var(--focus-ring);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Breakpoints ──────────────────────────────────────────────────────── */
+
+@media (min-width: 768px) {
+  .pindex {
+    padding-inline: var(--space-px-48);
+  }
+
+  .board {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .controls__row {
+    align-items: center;
+  }
+
+  .rec__link {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: var(--space-px-40);
+  }
+
+  .rec__title {
+    font-size: var(--text-32);
+    line-height: var(--leading-40);
+  }
+}
+
+@media (min-width: 1280px) {
+  .pindex {
+    padding-inline: var(--space-px-64);
+  }
+}
+
+/* ── Motion, honoured ─────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .chip,
+  .toggle__btn,
+  .pcard__link,
+  .pcard__title {
+    transition-duration: var(--motion-reduced);
+  }
+}
+
+/* ── React Bits SpotlightCard, retuned to the cyan primary ────────────── */
+
+.spot {
+  position: relative;
+  height: 100%;
+  border-radius: var(--radius-panel);
+}
+
+.spot::before {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-background);
+  content: "";
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: var(--spot-o, 0);
+  background: radial-gradient(
+    circle 260px at var(--spot-x, 50%) var(--spot-y, 50%),
+    var(--color-cyan-a12),
+    var(--color-cyan-a00) 70%
+  );
+  transition: opacity var(--motion-base) var(--ease-standard);
+}
+
+.spot > * {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+/* Pointer-only and motion-safe: the glow never carries meaning on its own. */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .spot::before {
+    display: none;
+  }
+}

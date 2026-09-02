@@ -1,0 +1,38 @@
+/*
+ * The signature element, shared by the index cards and the case-study brief.
+ * Which provenance signals a record actually carries, stated on the record.
+ */
+
+.rail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-px-4) var(--space-px-12);
+  padding: 0;
+  margin: var(--space-px-4) 0 0;
+  list-style: none;
+}
+
+.rail__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-px-6);
+  font-family: var(--font-meta);
+  font-size: var(--type-meta-size);
+  line-height: var(--leading-16);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.rail__dot {
+  width: var(--space-px-6);
+  height: var(--space-px-6);
+  background: var(--primary);
+  border-radius: var(--radius-pill);
+}
+
+/* Store listings are the scarcest signal in the set; mark them apart. */
+.rail__item[data-signal="storeListing"] .rail__dot {
+  background: var(--secondary);
+}
+

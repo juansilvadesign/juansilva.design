@@ -9,5 +9,9 @@
     "dist",
     "node_modules",
     "design-system"
-  ]
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
 }
