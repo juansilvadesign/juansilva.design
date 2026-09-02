@@ -446,7 +446,7 @@ trailing-slash retarget noted above, which is a Sink dashboard edit, not repo wo
 
 ---
 
-## Milestone F — Master-portfolio evidence store 🟢 core shipped 2026-08-07
+## Milestone F — Master-portfolio evidence store ✅ CLOSED 2026-09-02 (50 records published)
 
 Needs C. Built from scratch. Supersedes
 [`../../_config/plans/master-portfolio-evidence-store.md`](../../_config/plans/master-portfolio-evidence-store.md).
@@ -1058,3 +1058,77 @@ account-wide process cap and its blast radius, not authentication.
 
 **Still true whatever happens next:** the acceptance test is **verify by public
 URL, not by a green build** — and read the body, not the status code.
+
+## Milestone J — Every project published + the `/projects` architecture ✅ CLOSED 2026-09-02
+
+Needs F. Delivered in two phases in one session; **not deployed** (Juan's call, FTP).
+
+### J1 — Phase 1: all 50 projects published
+
+- [x] 43 records given `publish` blocks; `node _config/portfolio/export.mjs` → **✔ 50 card(s)**, 0 errors.
+- [x] Store totals: **58 valid · 50 publishable · 8 withheld** (5 describe-only, 2 role records, `cambioflow`).
+- [x] Gates re-verified at close: **0 of 7 private keys** (`attribution`, `impact`, `neverClaim`, `confirmedOn`, `notes`, `internal`, `context`) in the emitted JSON **or the built HTML** · **50/50** preview paths resolve · all 50 card files tracked and committed.
+- ⛔ `cambioflow` remains unpublishable — no recoverable date. Not a bug.
+
+> **The defect this exposed:** `Projects.astro` was rendered by *both* the homepage
+> and `/projects` and filtered on `featured` — so only **3 of 50** projects were
+> reachable. The data was never the gap; the routing was.
+
+### J2 — Phase 2: the three surfaces (via `knowledge/skills/ui-design-router/`)
+
+- [x] **Homepage** — the 3 featured, existing full-bleed treatment kept (CLAUDE.md's "ruthless edits, no new layout" honoured); gained the evidence rail + a case-study link.
+- [x] **`/projects`** — evidence board, evidence-weighted default order, signal + stack filters with live counts, Grid/List toggle, and a **filter-reactive Recommended slot**. One React island, `client:load`.
+- [x] **`/projects/<slug>`** — 50 projects × 2 locales = **100 pages**. Prose is "coming soon"; the page still carries a real provenance brief (role · timeframe · stack · evidence rail · links) from the store.
+- [x] **116 pages built** (was 16). Build green.
+
+**⭐ Homepage trio — Juan's decision, 2026-09-02.** `syd` (w13) · `upos` (w12) ·
+`psiativa-ai-operations` (w6). The two ranking criteria disagreed and Juan chose
+**positioning coverage over raw evidence**: `psiativa-ai-operations` is the *only*
+card of 50 evidencing **Python**, and the only one evidencing **automation** — two
+of the three pillars of *"Design Engineer | Next.js, Python & Scalable Growth
+Automation"*. ⛔ **Do not reorder the homepage to match evidence weight.**
+`psi-silvanacabral` (w13, joint-top) is deliberately on `/projects` only.
+
+**⛔ Tailwind and shadcn were deliberately NOT added.** Both target React+Tailwind;
+this site is zero-dependency Astro with a bespoke token system, so adding them is a
+re-platform, not an edit. React Bits' `SpotlightCard` is used per-project only —
+it is **MIT + Commons Clause**, never to be vendored into a shared template.
+
+**Island scoping:** React hydrates on `/projects` **only** (~61 KB gz). The
+homepage, `/contact`, and all 100 case-study pages ship **zero JS**.
+
+### J3 — Rungs 5 and 6 (both run, neither skipped)
+
+Rung 5 caught three defects that code review structurally could not:
+
+1. 🔴 **The navbar is `position: fixed` and takes no space in flow** — 98px ≤768, **134px** ≥1280. `/projects`' `<h1>` rendered **38px underneath it**; the case-study back-link collided with the wordmark. Fixed with per-page clearance (120 / 128 / 170px). ⛔ **Every new page must reserve its own.**
+2. "21 **LIVE SITE**" — the evidence board was reusing *filter* labels as *count* labels.
+3. The new case-study link cramped the card actions row into 2–3 line wraps at ≥1280 (fixed 340px primary + flexible secondary). Moved out of the flex row.
+
+Rung 6, measured rather than assumed:
+
+- [x] **Contrast computed** on all three surfaces — every text token passes AA, tightest **4.75:1**.
+- [x] **0 horizontal overflow at 360px**, both new page types.
+- [x] **Focus ring proven by a real Tab press** — `solid 2px rgb(44,214,255)`, offset 3px.
+- [x] **Tap targets** — every *new* control ≥44px.
+- [x] **Tokens honoured** — each referenced token verified present; no hard-coded hex.
+- [x] **Signature element** (the evidence rail) on **50/50** cards.
+
+⚠️ **Known, NOT fixed — 8 pre-existing chrome elements fail the 44px tap target:**
+`.skip-link` (40h), `.navbar__brand` (24h), the PT switch (40×40), and **five footer
+social icons at 28×48** (fail on width). None introduced here; the footer icons are a
+real mobile defect, offered and awaiting Juan's go-ahead.
+
+⚠️ Also pre-existing: the navbar is translucent (`--color-white-a02`), so scrolled
+content shows through it.
+
+**A correction worth keeping:** `designArtifact` was first excluded from the displayed
+signals, which left **23 of 50 cards with a blank evidence rail**. Those records are not
+evidence-free — they carry a live Figma file and nothing else. ⛔ **Excluding the most
+common signal from a display list silently blanks exactly the population that only
+carries it.**
+
+### J4 — Next (not started)
+
+- [ ] **Case-study prose** — `caseStudy` is `null` on all 50. Draft from the store per project via individual interviews; Juan reviews. ⛔ Never populate it from the store's `attribution`/`impact` prose — that is private and names third parties.
+- [ ] **Phase 3 media** — motion via talk-to-figma-fork + AEUX + After Effects MCP, demo/walkthrough, hyperframes. 🔴 `/media-engine` is blocked on Juan issuing `RUNWAYML_API_SECRET`.
