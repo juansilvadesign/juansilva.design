@@ -41,6 +41,13 @@ export const en = {
     flagAlt: "Brazilian flag",
     portraitAlt: "Juan Silva",
     title: "Design Engineer. Next.js, Python, and scalable growth automation.",
+    /**
+     * The animated split of `title`. `title` stays the verbatim positioning
+     * line and is what the `<h1>` actually exposes; these two only drive the
+     * typing effect, which rotates and so never holds the whole line at once.
+     */
+    typeLead: "Design Engineer.",
+    typeRotating: ["Next.js", "Python", "scalable growth automations"],
     introduction:
       "Available for US agency overflow and contract engineering. Rio runs one hour ahead of US Eastern — 100% synchronous overlap.",
     emailCta: "Email me",

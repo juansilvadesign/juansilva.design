@@ -1,7 +1,10 @@
 ---
+import HeroHeadline from "./text/HeroHeadline";
+import TypedFallback from "./text/TypedFallback.astro";
 import SocialLinks from "./SocialLinks.astro";
 import { socialLinks } from "../data/links";
 import { t, type Locale } from "../i18n";
+import "../styles/text-type.css";
 
 interface Props {
   lang: Locale;
@@ -30,8 +33,15 @@ const copy = t(lang);
           {copy.hero.location}
           <img src="/assets/icons/BR.svg" alt={copy.hero.flagAlt} width="14" height="14" />
         </p>
-        <h1 id="hero-title">{copy.hero.title}</h1>
-        <p>{copy.hero.introduction}</p>
+        <TypedFallback />
+
+        <HeroHeadline
+          client:load
+          title={copy.hero.title}
+          lead={copy.hero.typeLead}
+          rotating={copy.hero.typeRotating}
+          lede={copy.hero.introduction}
+        />
       </div>
 
       <div class="hero__actions">
@@ -105,7 +115,13 @@ const copy = t(lang);
     height: var(--space-px-14);
   }
 
-  h1 {
+  /*
+   * `#hero-title` is rendered by the HeroHeadline island, so Astro's scoped
+   * selectors never reach it — an island's children get no `data-astro-cid`.
+   * These two rules must be global or the heading falls back to the much
+   * larger global `h1` display size.
+   */
+  :global(#hero-title) {
     font-size: var(--text-32);
     line-height: var(--leading-44);
   }
@@ -173,7 +189,7 @@ const copy = t(lang);
       justify-content: flex-start;
     }
 
-    h1 {
+    :global(#hero-title) {
       font-size: var(--text-44);
       line-height: var(--leading-60);
     }

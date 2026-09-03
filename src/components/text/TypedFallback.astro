@@ -1,0 +1,31 @@
+---
+/**
+ * No-JS fallback for every typed headline.
+ *
+ * The typing islands server-render their real strings into `.typed-real`
+ * spans, so crawlers and assistive tech always get the full copy. This covers
+ * the one remaining case: a sighted visitor with JavaScript off, for whom the
+ * animated spans never fill and the heading would render empty.
+ *
+ * A style swap rather than a duplicate heading inside `<noscript>` — a second
+ * `<h1>` would duplicate the id that `aria-labelledby` points at, and would be
+ * read twice by a screen reader running without scripts.
+ */
+---
+
+<noscript>
+  <style>
+    .typed-real {
+      position: static;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      clip-path: none;
+      white-space: normal;
+    }
+
+    .typed-anim {
+      display: none;
+    }
+  </style>
+</noscript>

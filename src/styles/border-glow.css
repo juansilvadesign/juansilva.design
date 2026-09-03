@@ -1,0 +1,192 @@
+/*
+ * Edge-glow surface — the CSS half of components/projects/BorderGlow.tsx.
+ *
+ * Every colour resolves to a design-system token. The mesh gradients and the
+ * glow hue arrive as custom properties the component computes from the cyan
+ * primary; the geometry below is upstream's, retoned but structurally intact.
+ */
+
+.bglow {
+  --edge-proximity: 0;
+  --cursor-angle: 45deg;
+  --edge-sensitivity: 28;
+  --color-sensitivity: calc(var(--edge-sensitivity) + 20);
+  --glow-padding: 32px;
+  --cone-spread: 25;
+
+  position: relative;
+  display: grid;
+  height: 100%;
+  isolation: isolate;
+  border: var(--border-width-strong) solid var(--border-default);
+  border-radius: var(--radius-case);
+  background: var(--surface);
+
+  /*
+   * The homepage featured card's pointer emphasis: a hard cyan offset, never a
+   * scale change or a generic drop shadow. Matched here so a project reads the
+   * same on the index as it does on the home page.
+   */
+  transition:
+    transform var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard),
+    box-shadow var(--motion-fast) var(--ease-standard);
+}
+
+/* Guarded, so a tap on a touch device cannot leave a card stuck in the offset. */
+@media (hover: hover) {
+  .bglow:hover {
+    border-color: var(--primary);
+    box-shadow: var(--space-px-8) var(--space-px-8) 0 0 var(--color-cyan-a12);
+    transform: translate(calc(var(--space-px-4) * -1), calc(var(--space-px-4) * -1));
+  }
+}
+
+.bglow::before,
+.bglow::after,
+.bglow > .bglow__edge {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  border-radius: inherit;
+  transition: opacity var(--motion-base) var(--ease-standard);
+}
+
+.bglow:not(:hover)::before,
+.bglow:not(:hover)::after,
+.bglow:not(:hover) > .bglow__edge {
+  opacity: 0;
+  transition: opacity var(--motion-decorative) var(--ease-sweep);
+}
+
+/* Mesh-gradient border, masked to a cone that follows the cursor. */
+.bglow::before {
+  border: var(--border-width) solid transparent;
+  background:
+    linear-gradient(var(--surface) 0 100%) padding-box,
+    var(--gradient-one) border-box,
+    var(--gradient-two) border-box,
+    var(--gradient-three) border-box,
+    var(--gradient-four) border-box,
+    var(--gradient-five) border-box,
+    var(--gradient-six) border-box,
+    var(--gradient-seven) border-box,
+    var(--gradient-base) border-box;
+
+  opacity: calc((var(--edge-proximity) - var(--color-sensitivity)) / (100 - var(--color-sensitivity)));
+
+  mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black calc(var(--cone-spread) * 1%),
+    transparent calc((var(--cone-spread) + 15) * 1%),
+    transparent calc((100 - var(--cone-spread) - 15) * 1%),
+    black calc((100 - var(--cone-spread)) * 1%)
+  );
+}
+
+/* The same mesh bled inward, so the fill warms near the lit edge. */
+.bglow::after {
+  border: var(--border-width) solid transparent;
+  background:
+    var(--gradient-one) padding-box,
+    var(--gradient-two) padding-box,
+    var(--gradient-three) padding-box,
+    var(--gradient-four) padding-box,
+    var(--gradient-five) padding-box,
+    var(--gradient-six) padding-box,
+    var(--gradient-seven) padding-box,
+    var(--gradient-base) padding-box;
+
+  mask-image:
+    linear-gradient(to bottom, black, black),
+    radial-gradient(ellipse at 50% 50%, black 40%, transparent 65%),
+    radial-gradient(ellipse at 66% 66%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 66% 33%, black 5%, transparent 40%),
+    radial-gradient(ellipse at 33% 66%, black 5%, transparent 40%),
+    conic-gradient(from var(--cursor-angle) at center, transparent 5%, black 15%, black 85%, transparent 95%);
+
+  mask-composite: subtract, add, add, add, add, add;
+  opacity: calc(
+    var(--fill-opacity) * (var(--edge-proximity) - var(--color-sensitivity)) / (100 - var(--color-sensitivity))
+  );
+  mix-blend-mode: soft-light;
+}
+
+/* Outer bloom, spilling past the card edge. */
+.bglow > .bglow__edge {
+  z-index: 1;
+  inset: calc(var(--glow-padding) * -1);
+  pointer-events: none;
+
+  mask-image: conic-gradient(
+    from var(--cursor-angle) at center,
+    black 2.5%,
+    transparent 10%,
+    transparent 90%,
+    black 97.5%
+  );
+
+  opacity: calc((var(--edge-proximity) - var(--edge-sensitivity)) / (100 - var(--edge-sensitivity)));
+  mix-blend-mode: plus-lighter;
+}
+
+.bglow > .bglow__edge::before {
+  position: absolute;
+  inset: var(--glow-padding);
+  content: "";
+  border-radius: inherit;
+  box-shadow:
+    inset 0 0 0 1px var(--glow-color),
+    inset 0 0 1px 0 var(--glow-color-60),
+    inset 0 0 3px 0 var(--glow-color-50),
+    inset 0 0 6px 0 var(--glow-color-40),
+    inset 0 0 15px 0 var(--glow-color-30),
+    inset 0 0 25px 2px var(--glow-color-20),
+    inset 0 0 50px 2px var(--glow-color-10),
+    0 0 1px 0 var(--glow-color-60),
+    0 0 3px 0 var(--glow-color-50),
+    0 0 6px 0 var(--glow-color-40),
+    0 0 15px 0 var(--glow-color-30),
+    0 0 25px 2px var(--glow-color-20),
+    0 0 50px 2px var(--glow-color-10);
+}
+
+/*
+ * Clips the flush preview's top corners. The radius is the card's minus its
+ * border, not `inherit` — at `inherit` the image bleeds a hairline past the
+ * curve, which is invisible on a padded card and obvious on a flush one.
+ */
+.bglow__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  height: 100%;
+  border-radius: calc(var(--radius-case) - var(--border-width-strong));
+}
+
+/*
+ * Pointer-only and motion-safe, exactly like the spotlight: the glow never
+ * carries meaning on its own, so touch and reduced-motion users lose nothing
+ * by never seeing it. The card keeps its border, padding and surface.
+ */
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .bglow::before,
+  .bglow::after,
+  .bglow > .bglow__edge {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bglow {
+    transition-duration: var(--motion-reduced);
+  }
+
+  .bglow:hover {
+    transform: none;
+  }
+}

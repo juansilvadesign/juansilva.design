@@ -1,0 +1,94 @@
+/*
+ * Typing surface — the CSS half of components/text/TextType.tsx.
+ *
+ * Upstream blinks the caret through GSAP. Here it is a keyframe, so the
+ * component adds no JavaScript beyond the timer that advances the characters.
+ */
+
+.ttype {
+  display: inline;
+  white-space: pre-wrap;
+}
+
+/*
+ * Height reservation. Every candidate string and the live one share a single
+ * grid cell, so the row is as tall as the tallest option and a rotating or
+ * half-typed line never reflows the page. Exact at any font, width or locale —
+ * which a `min-height` in line units is not.
+ */
+.ttype--reserve {
+  display: grid;
+}
+
+.ttype--reserve > * {
+  grid-area: 1 / 1;
+}
+
+.ttype__sizer {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ttype__caret {
+  display: inline-block;
+  margin-left: 0.08em;
+  font-weight: var(--font-weight-regular);
+  color: var(--primary);
+  animation: ttype-blink 1s steps(1, end) infinite;
+}
+
+@keyframes ttype-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/*
+ * The caret is the only part that animates on its own; the characters are
+ * driven from JS, which bails out entirely under reduced motion and renders
+ * the final string. Freezing the caret here covers the same preference for
+ * anything still mounted.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .ttype__caret {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ── Hero headline ────────────────────────────────────────────────────── */
+
+/*
+ * The real, verbatim strings. Screen-reader-only while the animation runs, and
+ * swapped back into flow by the `<noscript>` block in TypedFallback.astro.
+ * Deliberately NOT `.visually-hidden` — that utility sets every property `!important`, so
+ * the no-JS override could not win without matching the whole cascade.
+ */
+.typed-real {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+/*
+ * The rotating line swaps between "Next.js" (7 chars) and "scalable growth
+ * automations" (27), which wrap to a different number of lines. `reserveSpace`
+ * on that instance holds the taller, so the portrait, the buttons and the
+ * social row never jump on a cycle.
+ */
+.hero__type {
+  display: block;
+}
+
+.hero__type-rotating {
+  color: var(--primary);
+}

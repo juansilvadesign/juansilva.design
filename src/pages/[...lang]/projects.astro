@@ -2,11 +2,14 @@
 import { getCollection } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import ProjectsIndex from "../../components/projects/ProjectsIndex";
+import TypedFallback from "../../components/text/TypedFallback.astro";
+import TypedHead from "../../components/text/TypedHead";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { localeStaticPaths, localizedPath, pageTitle, t, type Locale } from "../../i18n";
 import type { ProjectSummary } from "../../lib/projects";
 import { byEvidence, previewFor } from "../../lib/projects";
 import "../../styles/projects-index.css";
+import "../../styles/text-type.css";
 
 export function getStaticPaths() {
   return localeStaticPaths();
@@ -57,8 +60,14 @@ const projects: ProjectSummary[] = (await getCollection("projects"))
 >
   <main id="main-content" class="page-shell">
     <header class="pindex-head">
-      <h1 class="pindex-head__title">{copy.projects.index.heading}</h1>
-      <p class="pindex-head__lede">{copy.meta.pages.projectsDescription}</p>
+      <TypedFallback />
+      <TypedHead
+        client:load
+        title={copy.projects.index.heading}
+        lede={copy.meta.pages.projectsDescription}
+        titleClassName="pindex-head__title"
+        ledeClassName="pindex-head__lede"
+      />
     </header>
     <ProjectsIndex client:load projects={projects} copy={copy.projects.index} />
     <Footer {lang} />
@@ -77,7 +86,7 @@ const projects: ProjectSummary[] = (await getCollection("projects"))
     padding: var(--space-px-120) var(--space-px-16) var(--space-px-40);
   }
 
-  .pindex-head__title {
+  :global(.pindex-head__title) {
     margin: 0 0 var(--space-px-12);
     font-family: var(--font-display);
     font-size: var(--type-heading-mobile-size);
@@ -86,7 +95,7 @@ const projects: ProjectSummary[] = (await getCollection("projects"))
     color: var(--text-heading);
   }
 
-  .pindex-head__lede {
+  :global(.pindex-head__lede) {
     max-width: var(--content-copy);
     margin: 0;
     font-family: var(--font-body);
@@ -100,12 +109,12 @@ const projects: ProjectSummary[] = (await getCollection("projects"))
       padding: var(--space-px-128) var(--space-px-48) var(--space-px-48);
     }
 
-    .pindex-head__title {
+    :global(.pindex-head__title) {
       font-size: var(--type-heading-size);
       line-height: var(--type-heading-leading);
     }
 
-    .pindex-head__lede {
+    :global(.pindex-head__lede) {
       font-size: var(--type-body-size);
       line-height: var(--type-body-leading);
     }

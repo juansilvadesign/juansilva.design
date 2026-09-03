@@ -8,11 +8,25 @@
  */
 
 @import "./evidence-rail.css";
+@import "./border-glow.css";
 
+/*
+ * `overflow-x: clip`, not `hidden`: the border glow's outer bloom is laid out
+ * 32px past each card on every side, so on a narrow window the outermost
+ * cards pushed the document 14px wider than the viewport and the whole page
+ * scrolled sideways. `clip` contains that without creating a scroll container,
+ * and unlike `hidden` it leaves the vertical axis genuinely visible.
+ *
+ * Near-lossless: from 768px the container's own padding (48px, then 64px)
+ * already exceeds the bloom, so nothing is cut. Below that it trims 16px of a
+ * decoration that touch devices do not render at all.
+ */
 .pindex {
   max-width: var(--container-content);
   margin: 0 auto;
   padding-inline: var(--space-px-16);
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 /* ── Evidence board — four cells, 2×2 at phone width ───────────────────── */
@@ -87,34 +101,99 @@
   gap: var(--space-px-8);
 }
 
-/* Tap target floor is 44px — enforced here, not left to line-height. */
+/*
+ * Pill mechanic adapted from React Bits' PillNav — see PillChip.tsx for the
+ * geometry. A disc grows from the bottom edge while the label slides up and an
+ * inverted duplicate slides in under it. `--pill-*` are measured per chip.
+ *
+ * Tap target floor is 44px — enforced here, not left to line-height.
+ */
 .chip {
+  position: relative;
   display: inline-flex;
+  overflow: hidden;
   align-items: center;
-  gap: var(--space-px-8);
   min-height: 44px;
-  padding: var(--space-px-8) var(--space-px-14);
+  padding: var(--space-px-8) var(--space-px-16);
   font-family: var(--font-ui);
   font-size: var(--text-14);
   color: var(--text-primary);
   cursor: pointer;
-  background: var(--color-transparent, transparent);
+  background: transparent;
   border: var(--border-width) solid var(--border-default);
   border-radius: var(--radius-pill);
-  transition: color var(--motion-fast) var(--ease-standard),
-    border-color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard);
+  transition:
+    color var(--motion-fast) var(--ease-standard),
+    border-color var(--motion-fast) var(--ease-standard);
 }
 
-.chip:hover:not(:disabled) {
+.chip:hover:not(:disabled),
+.chip[aria-pressed="true"]:not(:disabled) {
   border-color: var(--primary);
-  color: var(--text-heading);
 }
 
-.chip[aria-pressed="true"] {
-  color: var(--background);
+.chip__circle {
+  position: absolute;
+  z-index: 1;
+  bottom: calc(var(--pill-delta, 0px) * -1);
+  left: 50%;
+  width: var(--pill-d, 0px);
+  height: var(--pill-d, 0px);
+  pointer-events: none;
   background: var(--primary);
-  border-color: var(--primary);
+  border-radius: 50%;
+  transform: translateX(-50%) scale(0);
+  transform-origin: 50% var(--pill-origin-y, 100%);
+  transition: transform var(--motion-base) var(--ease-sweep);
+  will-change: transform;
+}
+
+.chip__labels {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  line-height: 1;
+}
+
+.chip__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-px-8);
+  white-space: nowrap;
+  transition: transform var(--motion-base) var(--ease-sweep);
+}
+
+/*
+ * The duplicate starts a full pill-height below the visible one, so it travels
+ * in as the original travels out. Measured, because the chips are text-width.
+ */
+.chip__label--on {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--background);
+  opacity: 0;
+  transform: translateY(calc(var(--pill-h, 44px) + var(--space-px-12)));
+  transition:
+    transform var(--motion-base) var(--ease-sweep),
+    opacity var(--motion-fast) var(--ease-standard);
+}
+
+/* Pressed is the hover end-state: hovering previews what selecting looks like. */
+.chip:hover:not(:disabled) .chip__circle,
+.chip[aria-pressed="true"]:not(:disabled) .chip__circle {
+  transform: translateX(-50%) scale(1.2);
+}
+
+.chip:hover:not(:disabled) .chip__label,
+.chip[aria-pressed="true"]:not(:disabled) .chip__label {
+  transform: translateY(calc((var(--pill-h, 44px) + var(--space-px-8)) * -1));
+}
+
+.chip:hover:not(:disabled) .chip__label--on,
+.chip[aria-pressed="true"]:not(:disabled) .chip__label--on {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .chip:disabled {
@@ -130,20 +209,45 @@
   opacity: 0.75;
 }
 
+/*
+ * The slide is decoration on top of a state that `aria-pressed` already
+ * carries, so under reduced motion the pill snaps between the two ends.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .chip__circle,
+  .chip__label,
+  .chip__label--on {
+    transition-duration: var(--motion-reduced);
+  }
+}
+
+/*
+ * Stack filters share this row with the sort/view tools. Phone width stacks
+ * them; from 768px the tools are pushed to the right edge of the container so
+ * the row reads as one toolbar instead of a left-hand clump.
+ */
 .controls__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-px-24);
+}
+
+.tools {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   gap: var(--space-px-16);
 }
 
-.select {
+.tool {
   display: flex;
   flex-direction: column;
   gap: var(--space-px-6);
 }
 
-.select__label {
+/* Sort and View each get a visible legend — View previously had none, which
+ * left the toggle looking like it belonged to the sort label beside it. */
+.tool__label {
   font-family: var(--font-meta);
   font-size: var(--type-meta-size);
   letter-spacing: 0.06em;
@@ -151,8 +255,12 @@
   color: var(--text-secondary);
 }
 
-.select select {
-  min-height: 44px;
+/*
+ * 46px, not 44: the toggle beside it is a 44px button inside a 1px border, so
+ * matching the inner heights would leave the two legends 2px out of line.
+ */
+.tool__select {
+  min-height: 46px;
   padding: var(--space-px-8) var(--space-px-12);
   font-family: var(--font-ui);
   font-size: var(--text-14);
@@ -300,6 +408,30 @@
   transition: opacity var(--motion-fast) var(--ease-standard);
 }
 
+/*
+ * Grid tiles are framed cards now, not bare stacks of image-plus-text. The
+ * frame, radius and hover offset live on .bglow (border-glow.css) so they
+ * match the homepage featured card; the breathing room lives here.
+ *
+ * The padding belongs to the copy, not the card: the preview bleeds to all
+ * three edges and the card's own radius clips its top corners, which is why
+ * the media drops the radius it carries on the recommended slot.
+ */
+.pcard[data-view="grid"] .pcard__link {
+  padding: 0;
+  gap: 0;
+  align-content: start;
+}
+
+.pcard[data-view="grid"] .pcard__media img {
+  border-radius: 0;
+}
+
+.pcard[data-view="grid"] .pcard__body {
+  padding: var(--space-px-20);
+  gap: var(--space-px-10);
+}
+
 .pcard[data-view="list"] .pcard__link {
   grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
   align-items: start;
@@ -366,7 +498,7 @@
 .chip:focus-visible,
 .toggle__btn:focus-visible,
 .clear:focus-visible,
-.select select:focus-visible,
+.tool__select:focus-visible,
 .pcard__link:focus-visible,
 .rec__link:focus-visible {
   outline: var(--border-width-strong) solid var(--focus-ring);
@@ -386,7 +518,20 @@
   }
 
   .controls__row {
-    align-items: center;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-px-40);
+  }
+
+  /* The chips take the slack; the tools stay their natural width on the right. */
+  .controls__row .controls__group {
+    flex: 1 1 auto;
+  }
+
+  .tools {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
   }
 
   .rec__link {

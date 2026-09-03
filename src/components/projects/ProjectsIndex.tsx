@@ -1,4 +1,7 @@
 import { useMemo, useState } from "react";
+import CountUp from "../text/CountUp";
+import BorderGlow from "./BorderGlow";
+import PillChip from "./PillChip";
 import SpotlightCard from "./SpotlightCard";
 import {
   EMPTY_FILTERS,
@@ -76,8 +79,19 @@ function Card({ p, copy, view }: { p: ProjectSummary; copy: IndexCopy; view: "gr
   );
   return (
     <li className="pcard" data-view={view}>
-      {/* The spotlight suits a tile, not a full-width row. */}
-      {view === "grid" ? <SpotlightCard>{inner}</SpotlightCard> : inner}
+      {/*
+        Both surfaces suit a tile, not a full-width row: the spotlight tracks a
+        pointer across an area, and the border glow lights the edge nearest it.
+        A list row is 1200px wide and neither reads. Nesting is deliberate —
+        the glow owns the frame, the spotlight washes the interior.
+      */}
+      {view === "grid" ? (
+        <BorderGlow>
+          <SpotlightCard>{inner}</SpotlightCard>
+        </BorderGlow>
+      ) : (
+        inner
+      )}
     </li>
   );
 }
@@ -117,9 +131,10 @@ export default function ProjectsIndex({ projects, copy }: Props) {
   return (
     <div className="pindex">
       <ul className="board" aria-label={copy.heading}>
-        {board.map((c) => (
+        {board.map((c, i) => (
           <li className="board__cell" key={c.k}>
-            <span className="board__n">{c.n}</span>
+            {/* Staggered by cell so the row reads left to right, not as one jump. */}
+            <CountUp className="board__n" to={c.n} delay={i * 90} />
             <span className="board__label">{c.label}</span>
           </li>
         ))}
@@ -133,68 +148,88 @@ export default function ProjectsIndex({ projects, copy }: Props) {
               const n = counts.signals[s];
               const on = filters.signals.includes(s);
               return (
-                <button
+                <PillChip
                   key={s}
-                  type="button"
-                  className="chip"
-                  aria-pressed={on}
+                  label={copy.signals[s]}
+                  count={n}
+                  pressed={on}
                   disabled={!on && n === 0}
-                  onClick={() => toggle("signals", s)}
-                >
-                  {copy.signals[s]}
-                  <span className="chip__n" aria-hidden="true">{n}</span>
-                </button>
+                  onToggle={() => toggle("signals", s)}
+                />
               );
             })}
           </div>
         </fieldset>
 
-        <fieldset className="controls__group">
-          <legend className="controls__legend">{copy.stackLegend}</legend>
-          <div className="chips">
-            {stacks.map((s) => {
-              const n = counts.stacks[s] ?? 0;
-              const on = filters.stacks.includes(s);
-              return (
-                <button
-                  key={s}
-                  type="button"
-                  className="chip"
-                  aria-pressed={on}
-                  disabled={!on && n === 0}
-                  onClick={() => toggle("stacks", s)}
-                >
-                  {copy.stacks[s] ?? s}
-                  <span className="chip__n" aria-hidden="true">{n}</span>
-                </button>
-              );
-            })}
-          </div>
-        </fieldset>
-
+        {/*
+          Stack filters and the sort/view tools share one row on desktop. They
+          were stacked before, which left the tools marooned at the far left of
+          a 1200px container under a legend that only named the dropdown.
+        */}
         <div className="controls__row">
-          <label className="select">
-            <span className="select__label">{copy.sortLegend}</span>
-            <select value={sort} onChange={(e) => setSort(e.target.value as SortKey)}>
-              <option value="evidence">{copy.sortEvidence}</option>
-              <option value="recent">{copy.sortRecent}</option>
-            </select>
-          </label>
+          <fieldset className="controls__group">
+            <legend className="controls__legend">{copy.stackLegend}</legend>
+            <div className="chips">
+              {stacks.map((s) => {
+                const n = counts.stacks[s] ?? 0;
+                const on = filters.stacks.includes(s);
+                return (
+                  <PillChip
+                    key={s}
+                    label={copy.stacks[s] ?? s}
+                    count={n}
+                    pressed={on}
+                    disabled={!on && n === 0}
+                    onToggle={() => toggle("stacks", s)}
+                  />
+                );
+              })}
+            </div>
+          </fieldset>
 
-          <div className="toggle" role="group" aria-label={copy.viewLegend}>
-            <button type="button" className="toggle__btn" aria-pressed={view === "grid"} onClick={() => setView("grid")}>
-              {copy.viewGrid}
-            </button>
-            <button type="button" className="toggle__btn" aria-pressed={view === "list"} onClick={() => setView("list")}>
-              {copy.viewList}
-            </button>
+          <div className="tools">
+            <label className="tool">
+              <span className="tool__label">{copy.sortLegend}</span>
+              <select
+                className="tool__select"
+                value={sort}
+                onChange={(e) => setSort(e.target.value as SortKey)}
+              >
+                <option value="evidence">{copy.sortEvidence}</option>
+                <option value="recent">{copy.sortRecent}</option>
+              </select>
+            </label>
+
+            <div className="tool">
+              <span className="tool__label" id="pindex-view-legend">
+                {copy.viewLegend}
+              </span>
+              <div className="toggle" role="group" aria-labelledby="pindex-view-legend">
+                <button
+                  type="button"
+                  className="toggle__btn"
+                  aria-pressed={view === "grid"}
+                  onClick={() => setView("grid")}
+                >
+                  {copy.viewGrid}
+                </button>
+                <button
+                  type="button"
+                  className="toggle__btn"
+                  aria-pressed={view === "list"}
+                  onClick={() => setView("list")}
+                >
+                  {copy.viewList}
+                </button>
+              </div>
+            </div>
+
+            {active > 0 && (
+              <button type="button" className="clear" onClick={() => setFilters(EMPTY_FILTERS)}>
+                {copy.clear}
+              </button>
+            )}
           </div>
-
-          {active > 0 && (
-            <button type="button" className="clear" onClick={() => setFilters(EMPTY_FILTERS)}>
-              {copy.clear}
-            </button>
-          )}
         </div>
       </div>
 
