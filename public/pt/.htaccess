@@ -1,0 +1,19 @@
+# Portuguese 404.
+#
+# The docroot .htaccess sets `ErrorDocument 404 /404.html`, which is the English
+# page — so every miss under /pt/ answered in English, including a dead link
+# followed from a Portuguese page. `/pt/404/` has been built since milestone D
+# and production had no way to reach it.
+#
+# ErrorDocument is per-directory in .htaccess context, so this scopes the
+# Portuguese build to the Portuguese tree and leaves the rest of the site on the
+# root rule. Deliberately a second file rather than an `<If>` block in the root
+# one: this host is uploaded by hand, and a directive Apache rejects makes the
+# whole file fatal for everything below it. The blast radius belongs inside /pt/.
+#
+# ⛔ Nothing else goes in here. A mod_rewrite directive in this file would stop
+# the docroot's rewrite rules from applying to this directory.
+#
+# ⚠️ Points at the file, not at `/pt/404/`: the directory form leans on mod_dir
+# resolving an internal subrequest, and the file is what the build emits.
+ErrorDocument 404 /pt/404/index.html

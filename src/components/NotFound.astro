@@ -1,6 +1,29 @@
 ---
+/**
+ * The 404, rebuilt for milestone K3.
+ *
+ * Two decisions from Juan (2026-09-03) shape it: the fuzzy effect goes on the
+ * headline itself rather than on a big "404" numeral, and the page keeps its
+ * centred composition but gains real escape routes — a second link to the work
+ * and the footer, which this page never had.
+ *
+ * ⛔ This is the one page in the site that deliberately hydrates an island.
+ * FuzzyText is canvas-driven with no CSS equivalent (K3), and the 404 is
+ * neither indexed nor performance-critical. The case-study pages and /contact
+ * stay island-free.
+ *
+ * The `.shiny-text` treatment K1 put on this headline is gone: the visible
+ * glyphs are canvas pixels now, and `background-clip: text` has no text to
+ * clip. K1's static surfaces are the legal pages and /contact.
+ */
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "./Footer.astro";
+import FuzzyText from "./text/FuzzyText";
+import TypedFallback from "./text/TypedFallback.astro";
 import { localizedPath, pageTitle, t, type Locale } from "../i18n";
+import "../styles/fuzzy-text.css";
+// `.typed-real` / `.typed-anim` live here; nothing else on this page imports it.
+import "../styles/text-type.css";
 
 interface Props {
   lang: Locale;
@@ -8,41 +31,106 @@ interface Props {
 
 const { lang } = Astro.props;
 const copy = t(lang);
+const notFound = copy.notFound;
 ---
 
 <BaseLayout
   {lang}
-  title={pageTitle(copy.notFound.title, lang)}
-  description={copy.notFound.description}
+  title={pageTitle(notFound.title, lang)}
+  description={notFound.description}
   canonicalPath="/404"
   noindex
 >
   <main id="main-content" class="not-found">
-    <h1><span class="shiny-text">{copy.notFound.title}</span></h1>
-    <p>{copy.notFound.description}</p>
-    <a class="button" href={localizedPath("/", lang)}>{copy.notFound.returnHome}</a>
+    <div class="not-found__inner">
+      <h1 class="not-found__title">
+        <span class="typed-real">{notFound.title}</span>
+        <span class="typed-anim fuzzy">
+          <FuzzyText
+            client:load
+            lines={notFound.titleLines}
+            className="fuzzy__canvas"
+            minFontSize={28}
+            maxFontSize={64}
+          />
+        </span>
+      </h1>
+
+      <p class="not-found__dek">{notFound.description}</p>
+
+      <div class="not-found__actions">
+        <a class="button" href={localizedPath("/", lang)}>{notFound.returnHome}</a>
+        <a class="button button--secondary" href={localizedPath("/projects/", lang)}>
+          {notFound.viewProjects}
+        </a>
+      </div>
+
+      <TypedFallback />
+    </div>
   </main>
+
+  <Footer {lang} />
 </BaseLayout>
 
 <style>
   .not-found {
+    /*
+     * J3 defect #1: the navbar is `position: fixed` and takes no space in flow,
+     * so every page reserves its own clearance. Without this the centred column
+     * slides under the navbar on a short viewport.
+     */
+    --nf-clearance: var(--space-px-104);
+
     display: flex;
     min-height: var(--viewport-height);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-px-16);
-    padding: var(--space-px-96) var(--space-px-24) var(--space-px-48);
+    padding: var(--nf-clearance) var(--space-px-24) var(--space-px-64);
+  }
+
+  /* The navbar grows to 134px here, so the clearance has to as well. */
+  @media (min-width: 1280px) {
+    .not-found {
+      --nf-clearance: var(--space-px-140);
+    }
+  }
+
+  .not-found__inner {
+    display: flex;
+    width: 100%;
+    max-width: var(--container-content);
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-px-24);
     text-align: center;
   }
 
-  h1 {
-    font-size: var(--text-36);
-    line-height: var(--leading-48);
+  /*
+   * ⛔ Not shrink-to-fit. FuzzyText solves its font size from this box's width,
+   * so a width that came from the canvas would feed back into the next measure.
+   * See fuzzy-text.css.
+   */
+  .not-found__title {
+    width: 100%;
+    margin: 0;
   }
 
-  p {
-    margin-bottom: var(--space-px-8);
+  .not-found__dek {
+    max-width: var(--content-copy);
+    margin: 0;
     color: var(--text-secondary);
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-px-12);
+    justify-content: center;
+  }
+
+  /* Rung 6 gate: every new control clears 44px. */
+  .not-found__actions .button {
+    min-height: var(--space-px-48);
   }
 </style>

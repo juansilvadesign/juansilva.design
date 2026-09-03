@@ -1,0 +1,44 @@
+/*
+ * Fuzzy headline — the CSS half of components/text/FuzzyText.tsx.
+ *
+ * The canvas is sized in script, so there is deliberately no width or height
+ * here: whatever this file declared would be overwritten on the first measure.
+ * What it does own is the box the component measures *against*.
+ */
+
+/*
+ * ⛔ The host's width must not depend on its own content. The component solves
+ * the font size from `host.clientWidth` and then sizes the canvas to match, so a
+ * shrink-to-fit host — which is what a flex child with `align-items: center`
+ * is — would feed the canvas' new width straight back into the next measure and
+ * grow on every pass. `width: 100%` pins the box to the container instead.
+ */
+.fuzzy {
+  display: block;
+  width: 100%;
+  /*
+   * Rung 6: nothing may widen the page at 360px. The solved size only hits the
+   * `minFontSize` floor on a viewport narrower than the design's 320px minimum,
+   * and if it ever does the overflow is clipped rather than allowed to push the
+   * layout out.
+   */
+  overflow: hidden;
+}
+
+.fuzzy__canvas {
+  display: block;
+  /* The canvas is exactly as wide as its text; this centres it in the host. */
+  margin-inline: auto;
+}
+
+/*
+ * Astro's island wrapper is an unknown element, so it lays out as `display:
+ * inline` and inserts an inline box between `.fuzzy` and the canvas. Collapsing
+ * it makes the canvas a direct flow child of the block above, which is what
+ * `margin-inline: auto` needs to centre against. The component does not depend
+ * on this rule — it walks past inline wrappers on its own — but without it the
+ * canvas centres inside an anonymous box rather than inside `.fuzzy`.
+ */
+.fuzzy > astro-island {
+  display: contents;
+}

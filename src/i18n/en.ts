@@ -261,8 +261,20 @@ export const en = {
   },
   notFound: {
     title: "Not Found",
+    /**
+     * The display split of `title`, and the only thing the fuzzy canvas draws.
+     * `title` stays the verbatim string the `<h1>` exposes and the document
+     * title uses — the same division as `hero.title` against `hero.typeLead`.
+     *
+     * Canvas text cannot wrap, so the break is authored rather than computed:
+     * kept on one line, the 21-character Portuguese headline renders at less
+     * than half the English size at every viewport.
+     * ⛔ Keep `titleLines.join(" ")` identical to `title`.
+     */
+    titleLines: ["Not", "Found"],
     description: "Could not find the requested resource.",
     returnHome: "Return Home",
+    viewProjects: "View projects",
   },
   legal: {
     lastUpdated: "Last updated",

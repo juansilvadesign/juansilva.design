@@ -245,8 +245,11 @@ export const pt = {
   },
   notFound: {
     title: "Página não encontrada",
+    /** See `en.ts` — the break is authored per locale, never computed. */
+    titleLines: ["Página não", "encontrada"],
     description: "Não foi possível encontrar o recurso solicitado.",
     returnHome: "Voltar ao início",
+    viewProjects: "Ver projetos",
   },
   legal: {
     lastUpdated: "Última atualização",
