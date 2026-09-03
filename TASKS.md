@@ -4,7 +4,7 @@ The living checklist. Strategy, gates and the reasoning behind each milestone
 live in **[`ROADMAP.md`](ROADMAP.md)**; operational truth about domains and
 pipeline lives in **[`../../MEMORY.md`](../../MEMORY.md)**.
 
-_Last reviewed: 2026-08-12_
+_Last reviewed: 2026-09-03_
 
 > **The repo split, content architecture, Astro page port and the vCard are
 > done.** Milestone **E closed 2026-08-12** (Sink alias live). Milestone **A** is
@@ -1132,3 +1132,350 @@ carries it.**
 
 - [ ] **Case-study prose** — `caseStudy` is `null` on all 50. Draft from the store per project via individual interviews; Juan reviews. ⛔ Never populate it from the store's `attribution`/`impact` prose — that is private and names third parties.
 - [ ] **Phase 3 media** — motion via talk-to-figma-fork + AEUX + After Effects MCP, demo/walkthrough, hyperframes. 🔴 `/media-engine` is blocked on Juan issuing `RUNWAYML_API_SECRET`.
+
+---
+
+## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1 + K2 shipped 2026-09-03
+
+Source of record: the Maestri fichário **"Fichário"** on the `juansilva.design UI Refactor`
+canvas — `react-bits-changes` + `uiverse-1..10`. Read it with `maestri note read "<name>"`.
+
+Needs J (closed). Scope is **ruthless edits to existing controls**, per CLAUDE.md — no
+new page layouts except the 404 repair and the loading screen, both of which the binder
+asks for explicitly.
+
+### K0 — The eight constraints that govern every item below
+
+1. ⛔ **The uiverse.io URLs are NOT fetchable.** The site sits behind a Cloudflare
+   interstitial — WebFetch and a browser-UA `curl` both return **403 Attention Required**.
+   **The notes are the source, not the links.** Each note's `StyledWrapper` template
+   literal already carries the complete, plain-CSS rule set (`.button {…}`, `.svgIcon {…}`),
+   so nothing needs fetching.
+2. ⛔ **`uiverse-6`'s URL is wrong** — it repeats `uiverse-5`'s `loud-chicken-53`, but the
+   two notes hold *different* components (5 = a 50px circular icon button that widens to
+   140px; 6 = `.animated-button`, a text CTA with two arrows and a circle hover fill).
+   Had the URLs been fetchable, #6 would have been built from #5's CSS. **Use the note's
+   own code for #6 and ignore its link.**
+3. ⛔ **No styled-components, no Tailwind.** J2 settled this: zero-dependency Astro with a
+   bespoke token system, so both are a re-platform, not an edit. Every component is ported
+   as **plain CSS** into a scoped `<style>` block (`.astro`) or a file in `src/styles/`.
+4. ⛔ **Tokens only — no hard-coded hex.** A Rung-6 gate. Every uiverse snippet ships raw
+   values (`rgb(181,160,255)` lavender, `rgb(20,20,20)` near-black) that must be re-mapped
+   onto `--primary` cyan / `--secondary` pink / the neutral ramp before it lands.
+5. ⛔ **Protect the zero-JS pages.** *(K2 spends an island on the **homepage**, which
+   already hydrates `HeroHeadline`. The island-free pages below are the ones this rule
+   is about, and they are still island-free.)* Verified in `dist/` on 2026-09-03: **case-study pages
+   and the 404 hydrate nothing** — no `astro-island`, no `_astro/*.js`. Four binder items
+   target exactly those pages. Prefer CSS-only (`:target`, `@keyframes`,
+   `animation-timeline: scroll()`) over a React island; where an island is unavoidable,
+   say so and price it.
+   > ⚠️ **The J2 note "the homepage ships zero JS" is now STALE.** `dist/index.html`
+   > loads `_astro/HeroHeadline.*.js` + the Astro client runtime — the `HeroHeadline`
+   > island (commit `8f1c203`) changed it. `/contact` and the 100 case-study pages are
+   > still island-free. Correct the J2 line when K lands.
+6. ⛔ **Every effect carries a `prefers-reduced-motion: reduce` branch.** House rule —
+   already honoured in 5 of 6 stylesheets.
+7. ⛔ **Every new label lands in BOTH `src/i18n/en.ts` and `src/i18n/pt.ts`.** EN is the
+   client-facing default; PT is a full locale, not a fallback.
+8. ⛔ **The navbar is `position: fixed` and takes no space in flow** (98px ≤768, 134px
+   ≥1280) — J3's first defect. The loading screen and the repaired 404 must each reserve
+   their own clearance.
+
+⭐ **React Bits is MIT + Commons Clause.** Items K1–K3 are React Bits effects. Per J2 they
+are used **per-project only and never vendored into a shared template** — that holds here.
+`ShinyText` and a straightened `CurvedLoop` are both reproducible as pure CSS, which keeps
+the licence surface to `FuzzyText` alone.
+
+### K1 — `react-bits` #1: shiny text on every H1 ✅ 2026-09-03
+
+Juan's call: **chain the effect on the two animated H1s** — the typewriter runs first,
+the shimmer starts on completion. No element ever runs two effects at once.
+⛔ **`ProfileHeader.astro` is out of scope** (Juan, 2026-09-03) — page H1s only, and that
+one is the vCard/`card` header. **6 surfaces, not 7.**
+
+- [x] New **`src/styles/shiny-text.css`** — pure CSS, no React Bits dependency. The effect
+      is only a travelling gradient behind clipped glyphs, so it needs no JS at all.
+      Imported once in `BaseLayout.astro` beside `clone.css`: this is a site-wide H1
+      treatment, not a per-feature stylesheet.
+- [x] **4 static H1s** carry `.shiny-text`: `NotFound.astro`, `[slug].astro`
+      (`.case__title`), `LegalPage.astro`, `Contact.astro` (`#contact-title`).
+- [x] **2 typed H1s chained** — `HeroHeadline.tsx` swaps the class onto the settled lead
+      when `leadDone` fires; `TypedHead.tsx` does the same on `titleDone`. Both flags
+      already existed to gate the lede, so the chain added state to neither.
+- [x] Reduced-motion: animation off, gradient parked at flat base colour.
+
+⭐ **Three details that decide whether this works rather than merely renders:**
+1. The rule is wrapped in `@supports (background-clip: text)`, because the failure mode of
+   an unsupported `background-clip` is **invisible text** — outside the guard nothing is
+   declared and `color: var(--text-heading)` from `clone.css` still applies.
+2. `-webkit-text-fill-color` beats `color` **regardless of specificity**, which is what
+   lets one global class light up `.case__title` without out-specifying that component's
+   scoped rule. No `!important` anywhere.
+3. The hero's **rotating** term is deliberately left plain — it types and deletes for the
+   life of the page, so shimmering it would be the two-effects-at-once case this milestone
+   exists to avoid.
+
+⚠️ `onDone` was verified to fire under `prefers-reduced-motion` too (`TextType.tsx:109`
+calls `finish()` immediately), so the chain does not silently never arm.
+
+> 🔴 **Motion corrected 2026-09-03 — the first pass invented its own sweep.** Juan
+> supplied upstream's source and it differed on every axis: `200% auto` not `300% 100%`,
+> a **120°** gradient not 100°, stops at **0/35/50/65/100** not 42/50/58, position
+> **150% → -50%** not 100% → 0%, over **2s** not 6s. All five now match.
+> ⭐ Unlike CurvedLoop, the CSS reproduction here is **exact rather than approximate**,
+> and that was checked rather than assumed: upstream's `motion/react` machinery exists
+> for `yoyo`, `delay`, `direction` and `pauseOnHover`, but with the defaults the binder
+> uses, the animation is a *linear interpolation of one property*, which is precisely
+> what a CSS keyframe is. (`pauseOnHover` is `:hover`; `yoyo` would be `alternate`;
+> `delay` is a keyframe percentage.) The four static H1s therefore still hydrate nothing —
+> **verified on `/projects/syd/` with 0 islands on the page.**
+>
+> ✅ **Settled 2026-09-03 — upstream's horizontal sweep with `box-decoration-break:
+> clone`, and the effect REMOVED from case-study titles.** Juan's call after seeing the
+> staggered build: revert to the original motion, drop the line-spans, stay script-free.
+>
+> **Where it applies now — 3 static surfaces, not 4:** the 404, the legal pages and
+> `/contact`, each wrapping its text in an inline `<span class="shiny-text">`. Plus the
+> two typed headlines, which chain it on completion (K1 above). ⛔ **`[slug].astro` no
+> longer carries it at all** — the case-study title is plain `--text-heading` again,
+> verified `animation: none` and solid fill on `/projects/syd`.
+>
+> ⛔ **The class must sit on an INLINE box.** `background-clip: text` paints the element
+> box, so on a block heading one 120° band cuts diagonally across every line at once;
+> `box-decoration-break: clone` gives each line its own copy, but only fragments an
+> inline box. `display` is deliberately not set on the class — `.ttype--reserve` is a grid
+> that reserves height to stop reflow, and forcing `inline` would break that.
+>
+> 🔴 **Two rejected attempts, kept because both looked plausible and neither was cheap:**
+> a **vertical** sweep progressed top-to-bottom but read as a band crossing the lines
+> rather than travelling along each one; a **JS line-splitter** did produce a true
+> one-line-at-a-time stagger — CSS cannot select a line box, so the breaks had to become
+> elements — but it was bugged in use and cost the script-free property. Both are gone;
+> `src/scripts/` is deleted and nothing in `src/` or `dist/` references them.
+>
+> ⭐ **Script-free is restored and measured.** Case studies, the 404 and the legal pages
+> ship **0 React islands** and exactly **one 255-byte inline script — the pre-existing
+> navbar scroll handler**, which they always carried. No splitter chunk in `dist/_astro/`.
+>
+> **Verified:** `/contact` runs the sweep live (`200% auto`, `2s`, `120deg`, `clone`,
+> position moving 45.01% -> 10%), and the case-study title is inert.
+>
+> ⏭️ Knobs: `--shiny-shine` (brand cyan vs upstream white), the 35/65 stop width,
+> `--shiny-spread`, `--shiny-speed`.
+
+### K2 — `react-bits` #2: straight metrics marquee under the hero ✅ 2026-09-03
+
+- [x] **`src/components/text/CurvedLoop.tsx`** — React Bits' component ported, not
+      imitated. Mounted `client:visible` from `src/components/Marquee.astro`, below
+      `<Hero />`.
+- [x] Copy lives in `i18n` as a plain `marquee.items` array in **both locales** — reorder,
+      add or drop a line there and the strip follows.
+- [x] **A11y split matches the typed headlines:** the island is `aria-hidden` and the real
+      copy ships server-rendered in a `.typed-real` list, so assistive tech reads each
+      entry once and never the repeated filler the loop needs to stay seamless.
+      `TypedFallback.astro` handles no-JS. `Marquee.astro` imports `text-type.css` itself
+      rather than inheriting it from Hero's import.
+
+> 🔴 **A correction worth keeping — the first attempt shipped a lookalike.** K2 was
+> initially built as a CSS `translateX` marquee, justified by "a straight loop needs no
+> JavaScript". **Both halves of that were wrong.** `curveAmount: 0` only flattens the
+> path — `M-100,40 Q500,40 1540,40` — while the mechanism is untouched; and the CSS
+> version silently dropped the two behaviours that make the component what it is: the
+> **pointer drag** and the **direction flip on release**. Juan caught it on sight.
+> ⛔ **Reproducing an effect's appearance is not porting it.** Read the source before
+> deciding what a component's JavaScript is *for*.
+
+⭐ **Deviations from upstream, each because the difference is not visible:**
+1. **No per-frame `setState`.** Upstream writes `startOffset` imperatively *and* mirrors
+   it into state every animation frame, re-rendering ~60x a second to reapply the value it
+   just wrote. The offset lives in a ref here, so the attribute is the single source of
+   truth and no re-render can snap the text back to a stale position.
+2. **`prefers-reduced-motion` bails out of the rAF loop** — the text still renders along
+   the path, it just does not travel.
+3. **Cursor is CSS.** Upstream derives `grabbing` from `dragRef.current` during render, but
+   a ref mutation triggers no re-render, so that state never actually paints. `:active`
+   does it correctly.
+4. **`touch-action: pan-y`.** `setPointerCapture` on `pointerdown` otherwise swallows a
+   vertical swipe that merely *started* on the strip, trapping page scroll on a phone.
+5. **The viewBox is matched to the measured pixel width**, not fixed at `1440 × 120`.
+   ⛔ Upstream's box is scaled by `width: 100%`, which makes every unit inside it
+   *proportional to the viewport*: at 375px a 34-unit type rendered at **~8.9 real
+   pixels**, and the strip's own height shrank with it, so it could only sit centred at
+   one specific width. A `ResizeObserver` feeds the real width in, so one user unit is
+   one CSS pixel — `fontSize` is literal and `height` is constant at every breakpoint.
+
+**Juan's sizing call, 2026-09-03: 20px, vertically centred at every viewport.** Measured
+on the built page at **375 / 768 / 1280 / 1440**: rendered type **exactly 20px** and the
+glyph box **18px above, 18px below** in the 60px strip at all four.
+
+> ⚠️ **An instrument correction worth keeping.** `getBBox()` / `getBoundingClientRect()`
+> on the `<text>` reported a 54px-tall box sitting 15px off-centre, which looked like a
+> real defect and nearly triggered a "fix" to working geometry. Both return the **union
+> box of the whole element** — including the path's ±100 overhang and the characters that
+> fall off the ends — not where the glyphs are. `getExtentOfChar()` asks about an actual
+> glyph and showed it spanning y 18–42 in a 0–60 box: already perfectly centred.
+> ⛔ **Probe the glyph, not the element, when asking where text sits.**
+
+- [x] **Seam fixed.** `items.join(SEP)` only separates *entries*, so the join between
+      repeats read "…GMT-3 100+ projects delivered" with no bullet. The string now closes
+      with the separator too. Verified: every seam in the rendered `textPath` carries it.
+- [x] **`client:visible={{ rootMargin: "300px" }}`** rather than bare `client:visible` —
+      at 768 and 375 the strip is below the fold, so it had not hydrated at all when the
+      viewport checks ran. It now hydrates just before entry, with no pop-in.
+- [x] **16px below 768, 20px at and above it** (Juan, 2026-09-03). Resolved from the
+      width the `ResizeObserver` already tracks rather than a second `matchMedia`
+      listener, so the size follows a real resize instead of only the width at hydration.
+      `width === 0` (the pre-measure frame) deliberately resolves to the desktop size, or
+      the strip would measure its spacing at the wrong type and re-lay out.
+      Measured: **375 → 16px**, **768 → 20px**, **1280 → 20px**, centred at all three
+      (20.5/20.5 and 18/18).
+
+✅ **K2 accepted by Juan 2026-09-03** — *"K2 feeling is great, drag works."* The touch-feel
+check that was outstanding is closed.
+
+> **⭐ Decision — Juan, 2026-09-03: ship the suggested figures.** Asked whether to gate the
+> strip on the evidence store, Juan's answer: *"They are not false claims, I can show my
+> figma with +100 projects from different companies, and none of them complained about my
+> design work."* Recorded, and the strip is built with his numbers.
+>
+> ⚠️ **Two wording risks worth one line each, because this site already carries an open
+> unsourced-claims track** (`_config/master-cv.md` §5 — `100+ projects` is still marked
+> unsourced pending the Sagitta audit):
+> - *"+100 empresas impactadas"* — the evidence behind it is **100+ projects**, and
+>   `_config/` records those as *projects*, not *companies*. An agency's 100 projects
+>   routinely span far fewer clients, so this figure **raises** the claim rather than
+>   restating it. **"100+ projects delivered" is defensible today with the same Figma
+>   account** and needs no audit.
+> - *"100% NPS"* — NPS is a surveyed 0–10 recommendation score (%promoters −
+>   %detractors). *"Nobody complained"* is real evidence of **zero detractors**, but it is
+>   not a measured NPS, and a CTO who asks *"what was your sample size?"* has no answer.
+>   **"Zero client complaints"** or **"100% delivery record"** says the same thing and
+>   survives the question.
+>
+> ✅ **Juan took both edits, 2026-09-03.** Shipped copy is **"100+ projects delivered"**
+> and **"Zero client complaints"** (PT: *"+100 projetos entregues"*, *"Zero reclamações de
+> clientes"*), plus two further lines that need no audit — *"2 years at agency pace"* and
+> *"Nearshore from Rio · GMT-3"*. The reasoning is recorded in `en.ts` above the array, so
+> the next person to edit the strip inherits the constraint rather than the conclusion.
+
+### K3 — `react-bits` #3: fuzzy text + a repaired 404
+
+- [ ] `FuzzyText` on the 404 headline — `NotFound.astro`, reached by `pages/404.astro`
+      and `pages/[...lang]/404.astro`.
+- [ ] ⚠️ **This one costs the 404 its zero-JS status.** `FuzzyText` is canvas-driven and
+      has no CSS equivalent. The 404 is not a performance-critical or indexed surface, so
+      **accept one island here** — but it is a deliberate trade, not an oversight.
+      Reduced-motion → render plain text, no canvas.
+- [ ] **Improve the 404 UI** (the binder's second half, currently unspecified): reserve
+      navbar clearance, add a route back to `/` and `/projects`, and match the case-study
+      page's vertical rhythm. Draft, then show Juan before building.
+
+### K4 — Existing-control swaps (uiverse 1, 3, 4, 6)
+
+- [ ] **uiverse-1 — Source Code button.** Replace the existing control, and add it to the
+      case-study pages that have a repo. **7 of 50 records carry a `github.com`
+      `evidenceLink`** — `syd`, `spaceapps`, `allprice`, `gestrif`, `psi-silvanacabral`,
+      `upos`, `celus` — so this is **7 × 2 locales = 14 pages**, not 100. Cards already
+      carry a `sourceCode` boolean; drive the button off that, never off a URL regex.
+- [ ] **uiverse-3 — "View project"** on the `/projects` cards →
+      `components/projects/ProjectsIndex.tsx` + `styles/projects-index.css`.
+- [ ] **uiverse-4 — hero CTA.** `Hero.astro:49` currently renders `copy.hero.emailCta`
+      = *"Email me"*. Apply the `smart-moth-68` effect and ship **one** label.
+      **Recommend "Get in Touch"** — the most conventional phrasing for the US/EU
+      founder/CTO ICP, and it does not presume the channel the way *"Reach out via email"*
+      does. The other two are logged in K7 for when measurement exists.
+- [ ] **uiverse-6 — "Read the case study."** Renders from `i18n.projects.caseStudy`
+      (`caseFallback`) via `ProjectCard.astro:28` and the index. ⛔ Build from the note's
+      code, not its link (K0.2).
+
+### K5 — New controls (uiverse 2, 5, 9, 10)
+
+- [ ] **uiverse-2 — Download resume.** ✅ **Unblocked (Juan, 2026-09-03): generate the PDF
+      from `_config/master-cv.md`.** No PDF exists in `public/` or `src/` yet, so the
+      generation is part of the task, not a precondition — `knowledge/skills/html-to-pdf/`
+      already renders a styled HTML document to a single-page PDF.
+      ⚠️ **Settle `master-cv.md` §5 first.** It carries live attribution flags — the
+      *"spearheaded the end-to-end UI design"* wording that the store contradicts, and the
+      unsourced Sagitta counts. A resume is the one artifact a prospect reads closely, so
+      it must not ship a claim the evidence store already flags.
+- [ ] **uiverse-5 — Back to top on case-study pages.** Do it **without an island**: an
+      `<a href="#top">` styled with the note's CSS, revealed via
+      `animation-timeline: scroll()` inside an `@supports`, falling back to
+      always-visible. Preserves K0.5 across all 100 pages. ≥44px tap target (Rung 6).
+- [ ] **uiverse-9 — Search on `/projects`.** The island already exists, so this is the
+      cheapest of the four: a `query` state beside `sort`/`filters`, matching title +
+      stack + role, folded into `applyFilters` in `src/lib/projects.ts` so the live
+      counts and the Recommended slot stay consistent. Debounce; announce the result
+      count to screen readers.
+- [ ] **uiverse-10 — Loading page + the DVD corner hit.** ✅ **Resolved (Juan,
+      2026-09-03): a first-load splash.** It covers the gap before the site finishes
+      loading, so a visitor sees something deliberate instead of leaving early.
+      ⚠️ **Then it is a performance feature and must be measured as one** — a splash that
+      outlives the load makes the site *feel* slower, not faster. Gate it on the real
+      first-paint window, dismiss it the moment the page is ready (never on a fixed
+      timer), show it only on a first visit (`sessionStorage`), and never let it block the
+      H1 from painting. If the page is already fast, the honest outcome is that the splash
+      barely appears.
+      The corner-hit half is a solved geometry problem: a DVD bouncer only reaches a
+      corner when its horizontal and vertical travels are commensurable, i.e.
+      `vx / vy = (W - w) / (H - h)` up to an integer ratio. Derive the velocity from the
+      measured box rather than tuning it by eye, and it hits the corner every cycle.
+
+### K6 — `/projects` sort dropdown (uiverse-8) — highest a11y risk, own step
+
+- [ ] ✅ **De-risked by Juan's call, 2026-09-03: keep the native `<select>` and take only
+      `loud-puma-8`'s visual properties.** *"It does not make any difference."* — and for
+      the rendered result it does not, while the difference in what has to be rebuilt is
+      total. Style the existing element at `ProjectsIndex.tsx:193`; roving focus,
+      Home/End/Escape, type-ahead, `aria-expanded`, outside-click dismissal and the mobile
+      OS picker all keep working because they were never removed.
+      ⚠️ One real limit to design around: **the open option list is OS-drawn and cannot be
+      styled** — the closed control, arrow and hover/focus states are fully ours, the
+      dropdown panel is not. If the reference's open panel is the point of the design,
+      that is the moment to reconsider — not before.
+
+### K7 — Gates before this milestone closes
+
+- [ ] `npm run check` green (`astro check` + worker tsc + build).
+- [ ] **Rung 5 — see it in a browser** at 360 / 768 / 1280, on all touched page types.
+      J3 proved code review structurally cannot catch this class of defect.
+- [ ] **Rung 6 — measured:** AA contrast on every re-coloured control · 0 horizontal
+      overflow at 360px · focus ring proven by a real Tab press · new controls ≥44px ·
+      **no hard-coded hex survived the port** · reduced-motion branch on all 5 effects.
+- [ ] JS budget re-measured per page type; confirm case studies and `/contact` still
+      hydrate nothing and the 404's new island is the only addition.
+- [ ] Correct the stale J2 "homepage ships zero JS" line (K0.5).
+- [ ] Deploy is a **separate, explicit step** — `npm run deploy` (FTP). J shipped without
+      deploying, on Juan's call; do not assume this one deploys.
+
+### K8 — Logged, not built
+
+- [ ] Hero CTA **A/B test** (`uiverse-4`). ⛔ **The site ships no analytics of any kind** —
+      no gtag, Plausible, Umami, PostHog or CF Insights — so a variant split today would
+      produce no data. Juan's call 2026-09-03: **pick one label now, A/B when measurement
+      exists.** Gated on an analytics decision, which is its own task.
+
+---
+
+## Milestone L — Light/dark theme toggle (uiverse-7) 🔒 deferred 2026-09-03
+
+Split out of the binder by Juan's call on 2026-09-03, because it is **not a button swap**.
+
+`design-system/tokens.css` defines **exactly one palette** — `--background:
+var(--color-neutral-950)` and a neutral ramp built for a dark surface. There is **no
+`prefers-color-scheme` block, no `data-theme` switching, and no light token set anywhere
+in `src/` or `design-system/`** (the single `data-theme="dark"` at `Contact.astro:138` is
+a local attribute, not a system). Shipping the `strong-squid-82` toggle therefore means:
+
+- a second **semantic** token layer — every `--background`/`--surface`/`--text-*`/
+  `--border-*`/gradient re-derived for light, not just inverted;
+- a **contrast re-audit** across all 6 page types (Rung 6 measured AA, tightest currently
+  4.75:1 — an inverted ramp will not inherit that);
+- the **no-flash** problem: a static site needs a blocking inline script in `<head>` to
+  apply the stored preference before first paint, on a site whose case-study pages
+  currently ship zero JS;
+- the decorative layers that assume a dark ground — `border-glow.css`, the cyan gradient
+  rules, the translucent navbar, and every `rgb(255 255 255 / x%)` paint in the token file.
+
+⛔ **Do not half-ship it.** A toggle that works on the homepage and breaks 100 case-study
+pages is worse than no toggle. Scope it as its own milestone with its own gates.

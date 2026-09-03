@@ -8,6 +8,9 @@ import TextType from "./TextType";
  * `aria-hidden`, the real strings ship in `.typed-real` siblings that Astro
  * server-renders, and TypedFallback.astro swaps them into flow when scripts
  * are off. Neither string rotates here, so both settle and stay.
+ *
+ * `titleDone` gates the lede and, since K1, the title's `.shiny-text` shimmer —
+ * the typewriter runs first and the gradient starts on completion.
  */
 
 interface Props {
@@ -31,7 +34,7 @@ export default function TypedHead({
         <span className="typed-real">{title}</span>
         <TextType
           as="span"
-          className="pindex-head__title-type typed-anim"
+          className={`pindex-head__title-type typed-anim${titleDone ? " shiny-text" : ""}`}
           text={title}
           loop={false}
           showCursor={!titleDone}

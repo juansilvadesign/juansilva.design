@@ -56,6 +56,15 @@ export const pt = {
     figmaAriaLabel: "Abrir o perfil de Juan Silva no Figma",
     dribbbleAriaLabel: "Abrir o perfil de Juan Silva no Dribbble",
   },
+  marquee: {
+    ariaLabel: "Histórico",
+    items: [
+      "+100 projetos entregues",
+      "Zero reclamações de clientes",
+      "2 anos em ritmo de agência",
+      "Nearshore do Rio · GMT-3",
+    ],
+  },
   projects: {
     sectionAriaLabel: "Projetos selecionados",
     liveProjectFallback: "Abrir projeto",

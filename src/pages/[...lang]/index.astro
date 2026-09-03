@@ -1,6 +1,7 @@
 ---
 import Footer from "../../components/Footer.astro";
 import Hero from "../../components/Hero.astro";
+import Marquee from "../../components/Marquee.astro";
 import Projects from "../../components/Projects.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { localeStaticPaths, t, type Locale } from "../../i18n";
@@ -20,6 +21,7 @@ const copy = t(lang);
 <BaseLayout {lang} title={copy.meta.defaultTitle} description={copy.meta.description} canonicalPath="/">
   <main id="main-content" class="page-shell">
     <Hero {lang} />
+    <Marquee {lang} />
     <Projects {lang} />
     <Footer {lang} />
   </main>

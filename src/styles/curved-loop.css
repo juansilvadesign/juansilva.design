@@ -1,0 +1,49 @@
+/*
+ * Curved loop — the CSS half of components/text/CurvedLoop.tsx.
+ *
+ * Upstream ships colour and size on the component's own class. Here the type
+ * comes from the token ramp so the strip cannot drift from the rest of the
+ * site, and the drag affordances live in CSS because a ref mutation triggers
+ * no re-render (see the component's note 3).
+ */
+
+.curved-loop {
+  display: block;
+  width: 100%;
+}
+
+.curved-loop--interactive {
+  cursor: grab;
+  /*
+   * `setPointerCapture` on pointerdown otherwise swallows a vertical swipe that
+   * merely began on the strip, which traps the page scroll on a phone. Reserve
+   * the vertical axis for the browser and keep only the horizontal for the drag.
+   */
+  touch-action: pan-y;
+}
+
+.curved-loop--interactive:active {
+  cursor: grabbing;
+}
+
+.curved-loop__svg {
+  display: block;
+  /* Sized in pixels by the component so one user unit is one CSS pixel. */
+  overflow: visible;
+}
+
+/* The text element the component renders along the path. */
+.curved-loop__text {
+  fill: var(--text-secondary);
+  font-family: var(--font-ui);
+  /*
+   * No `font-size` here on purpose. The viewBox is matched to the measured
+   * pixel width, so the size is geometry — it sets the baseline — and lives on
+   * the component as a prop instead of being split across two files.
+   */
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.01em;
+  /* The strip is decorative and draggable; selecting it mid-drag is never the
+   * intent and leaves a highlighted smear behind the pointer. */
+  user-select: none;
+}

@@ -1,0 +1,98 @@
+/*
+ * Shiny text — React Bits' ShinyText, reproduced in CSS.
+ *
+ * The sweep is upstream's, unchanged: a 120° gradient at `200% auto`
+ * travelling `150%` → `-50%` over `speed` seconds. Upstream's `motion/react`
+ * machinery exists for `yoyo`, `delay`, `direction` and `pauseOnHover`; with
+ * the defaults used here the animation is a linear interpolation of one
+ * property, which is exactly what a keyframe is — so this reproduction is
+ * exact, and the pages carrying it stay script-free.
+ * (`pauseOnHover` is `:hover` below; `yoyo` would be `alternate`.)
+ *
+ * ⛔ Applied to an INLINE element. `background-clip: text` paints the element
+ * box, so on a block heading one 120° band cuts diagonally across every line at
+ * once; `box-decoration-break: clone` gives each line fragment its own copy of
+ * the gradient, but it only fragments an inline box. That is why the headings
+ * that use this wrap their text in a span rather than carrying the class on the
+ * <h1> itself.
+ *
+ * ⛔ Deliberately NOT setting `display` here. `.ttype--reserve` is a grid — it
+ * reserves height so a half-typed line cannot reflow the page — and forcing
+ * `inline` would break that reservation.
+ */
+
+.shiny-text {
+  /*
+   * Base is the resting heading colour, so an unsupported browser — or one
+   * under reduced motion — lands on exactly the colour the heading had before
+   * this file existed. Nothing about the design changes when the effect is off.
+   */
+  --shiny-base: var(--text-heading);
+  --shiny-shine: var(--primary-light);
+  --shiny-spread: 120deg;
+  --shiny-speed: 2s;
+}
+
+/*
+ * Gated, because the failure mode of an unsupported `background-clip: text` is
+ * invisible text, not an unstyled heading. Inside the guard the gradient
+ * becomes the glyph fill; outside it nothing is declared at all and the
+ * cascade keeps `color: var(--text-heading)` from clone.css.
+ */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .shiny-text {
+    background-image: linear-gradient(
+      var(--shiny-spread),
+      var(--shiny-base) 0%,
+      var(--shiny-base) 35%,
+      var(--shiny-shine) 50%,
+      var(--shiny-base) 65%,
+      var(--shiny-base) 100%
+    );
+    /*
+     * `auto` height and the default `repeat` are upstream's. Tiling is
+     * invisible because the gradient opens and closes on the same base colour,
+     * which is exactly why the sweep can run past the element bounds.
+     */
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /*
+     * `-webkit-text-fill-color` beats `color` regardless of specificity, so
+     * this class can light up a heading without out-specifying the component's
+     * own scoped rule.
+     */
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    /* Each wrapped line gets its own copy of the gradient. */
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    animation: shiny-text-sweep var(--shiny-speed) linear infinite;
+  }
+}
+
+/* Upstream's transform: progress 0 -> 100 maps to `150 - p * 2`% */
+@keyframes shiny-text-sweep {
+  from {
+    background-position: 150% center;
+  }
+
+  to {
+    background-position: -50% center;
+  }
+}
+
+.shiny-text:hover {
+  animation-play-state: paused;
+}
+
+/*
+ * Parked at the start of the cycle, where the shine sits off-screen entirely —
+ * not mid-sweep, which would freeze a half-lit heading on screen forever.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text {
+    animation: none;
+    background-position: 150% center;
+  }
+}

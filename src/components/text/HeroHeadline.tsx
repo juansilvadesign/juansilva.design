@@ -9,6 +9,12 @@ import TextType from "./TextType";
  * `initialDelay` would drift the moment the copy or the typing speed changed —
  * and the PT lead is six characters longer than the EN one.
  *
+ * The shimmer is chained, not concurrent: `leadDone` already gates the rotating
+ * term and the lede, and it now also swaps `.shiny-text` onto the settled lead —
+ * so the typewriter finishes before the gradient starts, and no element ever
+ * runs two effects at once (TASKS.md K1). The rotating term is left plain; it is
+ * still typing and deleting for the life of the page.
+ *
  * ⛔ Every animated span is decorative and `aria-hidden`. The complete
  * positioning line — "Design Engineer. Next.js, Python, and scalable growth
  * automation." — is verbatim-mandated by the workspace CLAUDE.md, and a
@@ -35,6 +41,7 @@ export default function HeroHeadline({ title, lead, rotating, lede }: Props) {
         <span className="typed-real">{title}</span>
         <span className="hero__type typed-anim">
           <TextType
+            className={leadDone ? "shiny-text" : ""}
             text={lead}
             loop={false}
             showCursor={!leadDone}

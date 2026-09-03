@@ -59,6 +59,26 @@ export const en = {
     figmaAriaLabel: "Open Juan Silva's Figma profile",
     dribbbleAriaLabel: "Open Juan Silva's Dribbble profile",
   },
+  /**
+   * The track-record strip under the hero. A plain array — reorder, add or drop
+   * a line here and the marquee follows; it duplicates the list itself to make
+   * the loop seamless, so the copy is stated exactly once.
+   *
+   * ⛔ Every line has to survive a prospect asking "how do you know that?".
+   * "100+ projects" is the figure `_config/master-cv.md` records, evidenced by
+   * the Sagitta Figma account; it counts *projects*, not companies. "Zero client
+   * complaints" is the defensible reading of the same history — a measured NPS
+   * would need a survey and a sample size, and there is neither.
+   */
+  marquee: {
+    ariaLabel: "Track record",
+    items: [
+      "100+ projects delivered",
+      "Zero client complaints",
+      "2 years at agency pace",
+      "Nearshore from Rio · GMT-3",
+    ],
+  },
   projects: {
     sectionAriaLabel: "Selected projects",
     liveProjectFallback: "Open project",

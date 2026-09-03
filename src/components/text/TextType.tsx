@@ -53,7 +53,7 @@ export interface TextTypeProps {
   reserveSpace?: boolean;
 }
 
-function usePrefersReducedMotion() {
+export function usePrefersReducedMotion() {
   const [reduced, setReduced] = useState(false);
 
   useEffect(() => {

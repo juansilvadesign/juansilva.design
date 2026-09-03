@@ -1,0 +1,86 @@
+---
+/**
+ * The track-record strip under the hero.
+ *
+ * The binder asked for React Bits' CurvedLoop "but horizontally straight",
+ * which is `curveAmount={0}` — the path flattens, the mechanism does not
+ * change. The motion is a per-frame `startOffset` walk along an SVG `textPath`
+ * with pointer drag and a direction flip on release; see CurvedLoop.tsx for
+ * why a CSS marquee is not a substitute.
+ *
+ * Accessibility follows the same split the typed headlines use: the island is
+ * `aria-hidden` and the real copy ships server-rendered in a `.typed-real`
+ * list, so assistive tech reads each entry once and never the repeated filler
+ * the loop needs to stay seamless. `TypedFallback.astro` — already on this
+ * page via the hero — swaps that list into flow when scripts are off.
+ */
+import CurvedLoop from "./text/CurvedLoop";
+import { t, type Locale } from "../i18n";
+import "../styles/curved-loop.css";
+// `.typed-real` / `.typed-anim` live here; do not rely on Hero.astro importing it.
+import "../styles/text-type.css";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+const { ariaLabel, items } = copy.marquee;
+
+/**
+ * One string for the loop — the component repeats it to fill the path, so the
+ * separator has to close the string as well as sit between the entries. Without
+ * the trailing one the seam reads "...GMT-3 100+ projects delivered", running
+ * the last entry straight into the first of the next copy.
+ */
+const SEPARATOR = "  •  ";
+const marqueeText = items.join(SEPARATOR) + "  •";
+---
+
+<section class="marquee" aria-label={ariaLabel}>
+  <ul class="marquee__real typed-real">
+    {items.map((item) => <li>{item}</li>)}
+  </ul>
+
+  <div class="marquee__loop typed-anim">
+    <CurvedLoop
+      client:visible={{ rootMargin: "300px" }}
+      marqueeText={marqueeText}
+      curveAmount={0}
+      height={60}
+      fontSize={20}
+      fontSizeMobile={16}
+      speed={0.6}
+      direction="left"
+      className="curved-loop__text"
+    />
+  </div>
+</section>
+
+<style>
+  .marquee {
+    /* Rung 6 gate: nothing here may widen the page at 360px. */
+    overflow: hidden;
+    border-block: var(--border-width) solid var(--border-subtle);
+    background: var(--color-white-a02);
+  }
+
+  .marquee__real {
+    display: flex;
+    gap: var(--space-px-32);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .marquee__loop {
+    /*
+     * The island reserves its own fixed height from the `height` prop even
+     * while hidden, so the strip cannot collapse and shove the page up when it
+     * finishes measuring; the flex centring here just keeps it aligned in the row.
+     */
+    display: flex;
+    align-items: center;
+  }
+</style>
