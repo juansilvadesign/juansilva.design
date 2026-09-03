@@ -1234,8 +1234,9 @@ calls `finish()` immediately), so the chain does not silently never arm.
 > clone`, and the effect REMOVED from case-study titles.** Juan's call after seeing the
 > staggered build: revert to the original motion, drop the line-spans, stay script-free.
 >
-> **Where it applies now — 3 static surfaces, not 4:** the 404, the legal pages and
-> `/contact`, each wrapping its text in an inline `<span class="shiny-text">`. Plus the
+> **Where it applies now — 2 static surfaces** (was 3; ⛔ **K3 removed the 404**, whose
+> headline is a canvas now): the legal pages and `/contact`, each wrapping its text in an
+> inline `<span class="shiny-text">`. Plus the
 > two typed headlines, which chain it on completion (K1 above). ⛔ **`[slug].astro` no
 > longer carries it at all** — the case-study title is plain `--text-heading` again,
 > verified `animation: none` and solid fill on `/projects/syd`.
@@ -1358,17 +1359,130 @@ check that was outstanding is closed.
 > *"Nearshore from Rio · GMT-3"*. The reasoning is recorded in `en.ts` above the array, so
 > the next person to edit the strip inherits the constraint rather than the conclusion.
 
-### K3 — `react-bits` #3: fuzzy text + a repaired 404
+### K3 — `react-bits` #3: fuzzy text + a repaired 404 ✅ 2026-09-03
 
-- [ ] `FuzzyText` on the 404 headline — `NotFound.astro`, reached by `pages/404.astro`
-      and `pages/[...lang]/404.astro`.
-- [ ] ⚠️ **This one costs the 404 its zero-JS status.** `FuzzyText` is canvas-driven and
-      has no CSS equivalent. The 404 is not a performance-critical or indexed surface, so
-      **accept one island here** — but it is a deliberate trade, not an oversight.
-      Reduced-motion → render plain text, no canvas.
-- [ ] **Improve the 404 UI** (the binder's second half, currently unspecified): reserve
-      navbar clearance, add a route back to `/` and `/projects`, and match the case-study
-      page's vertical rhythm. Draft, then show Juan before building.
+**Four decisions from Juan opened this one, the binder's second half having been
+unspecified:** the fuzz goes on the **headline itself**, not on a big `404` numeral; the
+page keeps its **centred** composition and gains real escape routes; the **PT 404 gap gets
+fixed**; and the effect **idles at upstream's `baseIntensity` and rises on hover** rather
+than sitting still until a pointer arrives — the only choice that also works on touch.
+
+⭐ **Upstream's source is fetchable after all — K0.1 does not generalise.** `uiverse.io` is
+behind a Cloudflare interstitial, but React Bits is a public GitHub repo and
+`raw.githubusercontent.com/DavidHDev/react-bits/main/src/ts-default/TextAnimations/FuzzyText/FuzzyText.tsx`
+returns **200**. K1 and K2 both had upstream handed over by Juan; this one did not need it.
+⛔ The K2 lesson still governs — *read the source before deciding what the JavaScript is
+for* — and reading it is what surfaced the six adaptations below.
+
+- [x] **`src/components/text/FuzzyText.tsx`** — ported. The mechanism is a text bitmap
+      copied to a visible canvas one scanline at a time, each row nudged sideways.
+- [x] ⚠️ **This one costs the 404 its zero-JS status**, as priced. Verified in `dist/`:
+      **exactly 1 island** on `/404.html` and `/pt/404/`, and still **0** on `/contact`,
+      `/pt/contact`, the legal pages and the case studies.
+- [x] **The 404 UI**, built to Juan's picks: navbar clearance reserved (`--nf-clearance`,
+      104px → 140px ≥1280), a second route to `/projects/`, and the **`<Footer />` the page
+      never had** — `BaseLayout` mounts the navbar but not the footer, so the old 404's only
+      way out was one "Return Home" button.
+- [x] **`public/pt/.htaccess`** — see the production defect below.
+
+⭐ **Six adaptations, each because upstream's default assumes a page this is not:**
+1. **Multi-line.** Upstream draws one line and never wraps. "Not Found" is 9 characters and
+   "Página não encontrada" is **21**, so one line renders PT at less than half EN's size.
+   The break is **authored per locale** in `i18n` (`notFound.titleLines`) — same division as
+   `hero.title` against `hero.typeLead` — and drawn as rows of one buffer, so the
+   displacement still runs continuously down the whole block instead of per line.
+2. **The size is solved from the container, not passed in.** Upstream measures once, so any
+   resize or rotation leaves the text at the size it was born at — the defect class K2 fixed
+   with its `ResizeObserver`. Here the largest size whose widest line *plus its own fuzz
+   clearance* still fits is re-solved on every resize.
+3. **`fuzzRange` is a ratio of the font size (30/128), not a flat 30px.** Upstream pairs 30px
+   with a `clamp(2rem, 8vw, 8rem)` display size; at this site's heading sizes a flat 30px
+   displaces further than a glyph is tall and the word stops being readable.
+4. **Device-pixel resolution, CSS-pixel noise.** Upstream sizes the canvas in CSS pixels, so
+   retina upscales the bitmap and the glyphs go soft. Drawing the buffer at an integer device
+   scale while displacing **one CSS pixel row at a time** is the only combination that
+   sharpens the type without making the noise finer than upstream's.
+5. **Pointer events, no `preventDefault`.** Upstream's `touchmove` handler is
+   `{ passive: false }` and cancels the event, swallowing a vertical swipe that merely
+   *started* on the headline. Identical to K2's `touch-action: pan-y` fix.
+6. **`fontWeight` is 500, not upstream's 900.** ⛔ **Only Spectral 400 and 500 are
+   `@font-face`d** (`clone.css:4-18`). Asking for 900 gets a synthesised bold in the canvas,
+   which is not what any other H1 on the site renders.
+
+> 🔴 **Two defects that only appeared in a browser — Rung 5 earning its place again.**
+>
+> 1. **The canvas never painted at all.** `canvas.parentElement` is not `.fuzzy`: Astro wraps
+>    a hydrated component in **`<astro-island>`**, an element unknown to the UA and therefore
+>    `display: inline` — and ⛔ **`clientWidth` is 0 for every inline element by definition.**
+>    That reads exactly like a collapsed container, so the component sat at the canvas
+>    default 300×150 with **0 lit pixels** while every layout check around it passed. The fix
+>    walks past any inline or `display: contents` wrapper to the first real block box.
+>    Same family as the recorded "an island's children get no `data-astro-cid`".
+> 2. **The width budget overshot by 3px.** The solve subtracted the edge buffer but not the
+>    per-side slack or the three `ceil`s, so `PT@375` came out **330px inside a 327px host**
+>    and lost 3px of clearance to the clip. `overflow: hidden` hid it from every page-level
+>    overflow check — the page measured 0 horizontal overflow the whole time.
+
+⭐ **Measured, not assumed — 8 viewport × locale cases, glyph ink read out of the canvas
+rather than the element** (the K2 `getExtentOfChar` lesson: probe the glyphs, not the box):
+
+| | 320 | 375 | 768 | 1280 |
+|---|---|---|---|---|
+| **EN** canvas width | 205 | 205 | 205 | 205 |
+| **PT** canvas width | 270 | 325 | 341 | 341 |
+| host width | 272 | 327 | 720 | 1232 |
+
+Every case: **fits the host**, **0 horizontal page overflow**, ink present (4,303 px EN /
+5,792–9,055 px PT), **0 console errors**, both buttons **52–58px** tall, footer present,
+navbar gap **185–234px** (no overlap at any width). EN sits at the **64px ceiling**
+(`--text-64`, the top of the type scale) from 320px up; PT is width-limited to ~61px at 375
+and reaches the ceiling by 768. ⭐ Had the headline stayed on one line, PT would have
+rendered at **~27px** — the whole reason for adaptation 1.
+
+⭐ **Both legs of the reduced-motion gate proven, not just the refusal one:** with
+`prefers-reduced-motion: reduce` the canvas still carries **4,303 lit pixels** (it paints a
+still frame — the text does not vanish) and two samples 180ms apart are **byte-identical**
+(it does not animate). Without the preference the same two samples **differ**.
+
+🔴 **A production defect the binder never asked about — the PT 404 was unreachable.**
+`public/.htaccess:94` is `ErrorDocument 404 /404.html`: **one English page for every miss on
+the site**, `/pt/*` included. `dist/pt/404/index.html` has been built since milestone D and
+production had no way to serve it — a Portuguese visitor following a dead link got English.
+Fixed with **`public/pt/.htaccess`**, an `ErrorDocument` scoped to the Portuguese tree.
+- ⛔ **Deliberately a second file, not an `<If>` block in the root one.** This host is
+  uploaded by hand and a directive Apache rejects makes the *whole file* fatal for
+  everything below it — the root `.htaccess` warns about exactly this at its own line 39.
+  A second file keeps the blast radius inside `/pt/`.
+- ⛔ **Nothing else may go in that file.** A mod_rewrite directive there would stop the
+  docroot's rewrite rules from applying to `/pt/`.
+- ⚠️ It points at `/pt/404/index.html`, not `/pt/404/` — the directory form leans on mod_dir
+  resolving an internal subrequest, and the file is what the build emits.
+- Verified in `dist/`: `dist/pt/.htaccess` is **byte-identical** to the source and the
+  `public/pt/` copy did **not** clobber the generated `dist/pt/` tree (`index.html`, `404/`,
+  `card/`, `contact/`, `cookies/`, `privacy-policy/`, `projects/` all present).
+- ⏳ **Owner action — this is the one claim no local check can close.** There is no Apache
+  here, so the scoped `ErrorDocument` is verified as *built*, never as *served*. After the
+  next `dist/` upload: `curl -sI https://juanpablosilva.com.br/pt/nao-existe/` must return
+  **404** with the **Portuguese** body, and `/nao-existe/` must still return the English one.
+  ⛔ Until that runs, "the PT 404 works" is a claim, not a result — [[feedback_pushed_is_not_published]].
+
+🔴 **K1's surface count drops from 3 to 2.** The `.shiny-text` treatment K1 put on this
+headline is **gone**: the visible glyphs are canvas pixels now and `background-clip: text`
+has no text to clip. Verified in `dist/`: **0** occurrences on `/404.html` and `/pt/404/`,
+still **1** each on `/contact/` and `/privacy-policy/`. K1's static surfaces are the legal
+pages and `/contact`.
+
+⚠️ **`dist.zip` grows by one entry.** The manual-upload archive was asserted at **102
+entries**; `public/pt/.htaccess` makes it 103, and ⛔ a glob-based zip would silently miss a
+dotfile *inside a subdirectory* just as it missed the root one (`pack_dist.py` uses
+`python3 zipfile`, which does not).
+
+⏭️ **Knobs, in the order Juan is most likely to want them:** `maxFontSize` — currently
+**64**, the top of the type scale, which reads modestly in a 1,232px column and is the one
+thing that looks small in the desktop screenshot; `baseIntensity` **0.18** / `hoverIntensity`
+**0.5**; `fps` **30** (upstream's 60 halved — indistinguishable on random noise, half the
+CPU for a loop that never stops); `fuzzRatio` **30/128**; `lineHeight` **1.05**; and the
+authored breaks in `notFound.titleLines`.
 
 ### K4 — Existing-control swaps (uiverse 1, 3, 4, 6)
 
