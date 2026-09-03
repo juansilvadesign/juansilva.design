@@ -58,6 +58,8 @@ export const pt = {
     sectionAriaLabel: "Projetos selecionados",
     liveProjectFallback: "Abrir projeto",
     evidenceFallback: "Ver evidência",
+    sourceFallback: "Código-fonte",
+    caseFallback: "Ler o estudo de caso",
     externalLinkAlt: "Abre em uma nova aba",
     detail: {
       backToIndex: "Todos os projetos",
@@ -122,6 +124,7 @@ export const pt = {
         tailwind: "Tailwind",
         javascript: "JavaScript",
         python: "Python",
+        opensource: "Open Source",
       },
     },
   },

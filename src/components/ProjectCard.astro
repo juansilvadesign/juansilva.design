@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import StackBadge from "./StackBadge.astro";
 import { localizedPath, t, type Locale } from "../i18n";
-import { SIGNAL_FACETS } from "../lib/projects";
+import { SIGNAL_FACETS, formatTimeframe, projectActions } from "../lib/projects";
 import "../styles/evidence-rail.css";
 
 interface Props {
@@ -13,162 +13,270 @@ interface Props {
 const { lang, project } = Astro.props;
 const copy = t(lang);
 const projectCopy = project.data.copy[lang];
-
-// `evidenceLink` is optional: design-only records hold a single artifact, and
-// the store now omits the second link rather than pointing it at a duplicate
-// of the first or at a domain it already knows is dead.
-const { evidenceLink } = project.data;
-const evidenceIcon = evidenceLink?.includes("github.com")
-  ? "/assets/icons/github.svg"
-  : "/assets/icons/link-external-02.svg";
+const d = project.data;
 
 // The signature element carries across every surface a project appears on.
-const signals = SIGNAL_FACETS.filter((s) => project.data.evidenceSignals[s]);
-const caseHref = localizedPath(`/projects/${project.id}/`, lang);
-const caseLabel = project.data.caseStudy
-  ? copy.projects.index.caseStudy
-  : copy.projects.index.caseStudySoon;
+const signals = SIGNAL_FACETS.filter((s) => d.evidenceSignals[s]);
+
+const [primary, secondary] = projectActions({
+  stack: d.stack,
+  liveUrl: d.liveUrl,
+  liveLabel: projectCopy.liveLabel,
+  evidenceLink: d.evidenceLink,
+  evidenceLabel: projectCopy.evidenceLabel,
+  caseHref: localizedPath(`/projects/${project.id}/`, lang),
+  caseLabel: copy.projects.caseFallback,
+  liveFallbackLabel: copy.projects.liveProjectFallback,
+});
+
+// A code project with no repository is a real gap in the store, not a template
+// problem. Surface it at build time rather than silently rendering a fallback.
+if (secondary.kind === "case" && d.stack.some((s) => s !== "figma")) {
+  console.warn(
+    `[projects] ${project.id}: code project with no repository link — ` +
+      `second action fell back to the case study.`,
+  );
+}
+
+const isVideo = /\.(mp4|webm)$/i.test(d.preview);
+
+// The reference's chip is compact metadata, not a repeat of what sits below it:
+// the stack badges already name the stack two rows down.
+const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
 ---
 
-<div class="project-card">
-  <div class="project-card__copy">
-    <h2>{projectCopy.title}</h2>
-    <p>{projectCopy.description}</p>
-  </div>
+<article class="case-card">
+  <div class="case-card__copy">
+    {timeframe && <p class="case-card__chip">{timeframe}</p>}
 
-  <div class="project-card__stacks" role="list">
-    {project.data.stack.map((stack) => <StackBadge id={stack} />)}
-  </div>
+    <h2 class="case-card__title">{projectCopy.title}</h2>
+    <p class="case-card__body">{projectCopy.description}</p>
 
-  {
-    signals.length > 0 && (
-      <ul class="rail">
-        {signals.map((s) => (
-          <li class="rail__item" data-signal={s}>
-            <span aria-hidden="true" class="rail__dot" />
-            {copy.projects.index.signalsShort[s]}
-          </li>
-        ))}
-      </ul>
-    )
-  }
-
-  <div class="project-card__actions">
-    <a
-      class="button project-card__primary"
-      href={project.data.liveUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={projectCopy.liveLabel || copy.projects.liveProjectFallback}
-    >
-      <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
-      {projectCopy.liveLabel || copy.projects.liveProjectFallback}
-    </a>
+    <div class="case-card__stacks" role="list">
+      {d.stack.map((stack) => <StackBadge id={stack} />)}
+    </div>
 
     {
-      evidenceLink && (
-        <a
-          class="button button--secondary project-card__secondary"
-          href={evidenceLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={projectCopy.evidenceLabel || copy.projects.evidenceFallback}
-        >
-          {projectCopy.evidenceLabel || copy.projects.evidenceFallback}
-          <img src={evidenceIcon} alt="" width="16" height="16" />
-        </a>
+      signals.length > 0 && (
+        <ul class="rail">
+          {signals.map((s) => (
+            <li class="rail__item" data-signal={s}>
+              <span aria-hidden="true" class="rail__dot" />
+              {copy.projects.index.signalsShort[s]}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <div class="case-card__actions">
+      <a
+        class="button"
+        href={primary.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={primary.label}
+      >
+        <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
+        {primary.label}
+      </a>
+
+      <a
+        class="button button--secondary"
+        href={secondary.href}
+        target={secondary.external ? "_blank" : undefined}
+        rel={secondary.external ? "noopener noreferrer" : undefined}
+      >
+        {secondary.label}
+        {
+          secondary.kind === "source" && (
+            <img src="/assets/icons/github.svg" alt="" width="16" height="16" />
+          )
+        }
+      </a>
+    </div>
+  </div>
+
+  <div class="case-card__visual">
+    {
+      isVideo ? (
+        <video src={d.preview} muted loop playsinline autoplay aria-label={projectCopy.previewAlt} />
+      ) : (
+        <img
+          src={d.preview}
+          alt={projectCopy.previewAlt}
+          width="1920"
+          height="1080"
+          loading="lazy"
+          decoding="async"
+        />
       )
     }
   </div>
-
-  <a class="project-card__case" href={caseHref}>{caseLabel} →</a>
-</div>
+</article>
 
 <style>
-  .project-card,
-  .project-card__copy {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
+  /* A bordered editorial container, not a shadowed dashboard widget. */
+  .case-card {
+    display: grid;
+    overflow: hidden;
+    border: var(--border-width-strong) solid var(--border-default);
+    border-radius: var(--radius-case);
+    background: var(--surface);
+    grid-template-columns: minmax(0, 1fr);
+    transition:
+      transform var(--motion-fast) var(--ease-standard),
+      border-color var(--motion-fast) var(--ease-standard),
+      box-shadow var(--motion-fast) var(--ease-standard);
   }
 
-  .project-card {
-    max-width: var(--content-project);
+  .case-card__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--space-px-24);
     gap: var(--space-px-24);
   }
 
-  .project-card__copy {
-    gap: var(--space-px-8);
+  .case-card__chip {
+    margin: 0;
+    padding: var(--space-px-6) var(--space-px-14);
+    border-radius: var(--radius-pill);
+    background: var(--background-deep);
+    color: var(--text-secondary);
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    line-height: var(--type-meta-leading);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  .project-card__stacks {
+  .case-card__title {
+    margin: 0;
+    color: var(--text-heading);
+    font-family: var(--font-display);
+    font-size: var(--text-24);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .case-card__body {
+    max-width: 44ch;
+    margin: 0;
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--type-body-mobile-size);
+    line-height: var(--type-body-mobile-leading);
+  }
+
+  .case-card__stacks {
     display: flex;
     width: 100%;
     flex-wrap: wrap;
     gap: var(--stack-gap);
   }
 
-  .project-card__actions {
+  .case-card__actions {
     display: flex;
     width: 100%;
     flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--space-px-12);
   }
 
-  /* The route into the case study, kept quieter than the two live actions. */
-  .project-card__case {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    font-family: var(--font-meta);
-    font-size: var(--type-meta-size);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color var(--motion-fast) var(--ease-standard);
-  }
-
-  .project-card__case:hover {
-    color: var(--primary);
-  }
-
-  .project-card__case:focus-visible {
-    outline: var(--border-width-strong) solid var(--focus-ring);
-    outline-offset: 3px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .project-card__case {
-      transition-duration: var(--motion-reduced);
-    }
-  }
-
-  .project-card__actions .button {
+  .case-card__actions .button {
     width: 100%;
   }
 
-  .project-card__actions img {
+  .case-card__actions img {
     width: var(--space-px-16);
     height: var(--space-px-16);
   }
 
+  .case-card__visual {
+    display: flex;
+    overflow: hidden;
+    min-height: var(--space-px-252);
+    background: var(--background-deep);
+  }
+
+  .case-card__visual :global(img),
+  .case-card__visual :global(video) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+  }
+
   @media (min-width: 768px) {
-    .project-card__actions {
+    .case-card__copy {
+      padding: var(--space-px-40);
+    }
+
+    .case-card__title {
+      font-size: var(--text-28);
+    }
+
+    .case-card__body {
+      font-size: var(--type-body-size);
+      line-height: var(--type-body-leading);
+    }
+
+    .case-card__actions {
       flex-direction: row;
     }
 
-    .project-card__primary {
-      flex: 0 0 var(--control-primary-width);
-    }
-
-    .project-card__secondary {
-      flex: 1 1 auto;
+    .case-card__actions .button {
+      width: auto;
     }
   }
 
-  @media (min-width: 1536px) {
-    .project-card {
-      padding-top: var(--space-px-27);
+  @media (min-width: 1280px) {
+    /* The reference's asymmetric emphasis: copy leads, media supports. */
+    .case-card {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .case-card__copy {
+      padding: var(--space-px-48);
+    }
+
+    .case-card__title {
+      font-size: var(--type-subheading-size);
+    }
+
+    /* Alternating direction, so a run of cards reads as a rhythm. The column
+     * template mirrors along with the order, otherwise the copy inherits the
+     * narrow .85fr track and the emphasis inverts on every second card. */
+    .case-card:nth-child(even) {
+      grid-template-columns: 0.85fr 1.15fr;
+    }
+
+    .case-card:nth-child(even) .case-card__copy {
+      order: 2;
+    }
+
+    .case-card:nth-child(even) .case-card__visual {
+      order: 1;
+    }
+
+    /* The reference's pointer emphasis is a hard card offset, never a scale
+     * change or a generic drop shadow. Retoned from its red to our cyan. */
+    .case-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--space-px-8) var(--space-px-8) 0 0 var(--color-cyan-a12);
+      transform: translate(calc(var(--space-px-4) * -1), calc(var(--space-px-4) * -1));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-card {
+      transition-duration: var(--motion-reduced);
+    }
+
+    .case-card:hover {
+      transform: none;
     }
   }
 </style>

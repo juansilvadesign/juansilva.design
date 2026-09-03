@@ -12,16 +12,25 @@ export const localeInfo = {
     hreflang: "en",
     openGraphLocale: "en_US",
     pathPrefix: "",
+    /** Circular flag in `public/assets/icons/flags/`, used by the language switch. */
+    flag: "US",
   },
   pt: {
     htmlLang: "pt-BR",
     hreflang: "pt-BR",
     openGraphLocale: "pt_BR",
     pathPrefix: "/pt",
+    flag: "BR",
   },
 } as const satisfies Record<
   Locale,
-  { htmlLang: string; hreflang: string; openGraphLocale: string; pathPrefix: string }
+  {
+    htmlLang: string;
+    hreflang: string;
+    openGraphLocale: string;
+    pathPrefix: string;
+    flag: string;
+  }
 >;
 
 export const hreflangPair = locales.map((locale) => ({

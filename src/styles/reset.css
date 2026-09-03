@@ -17,8 +17,20 @@ h4,
 h5,
 h6,
 p,
-figure {
+figure,
+ul,
+ol,
+dl,
+dd {
   margin: var(--space-0);
+}
+
+/* Lists in this system are layout primitives (nav, evidence rails, badge rows),
+ * never prose bullets. The UA's `margin-block: 1em` resolves against the
+ * inherited 18px body font and silently added 36px to the navbar's height. */
+ul,
+ol {
+  padding: var(--space-0);
 }
 
 button,

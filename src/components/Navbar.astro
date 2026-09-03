@@ -17,7 +17,7 @@ const navigation = [
 ];
 ---
 
-<nav class="navbar" aria-label={copy.navigation.ariaLabel}>
+<nav class="navbar" data-navbar aria-label={copy.navigation.ariaLabel}>
   <div class="navbar__inner">
     <a class="navbar__brand" href={localizedPath("/", lang)} aria-label={copy.navigation.logoAlt}>
       <img src="/assets/logo/logo-full.svg" alt="" width="143" height="32" />
@@ -48,6 +48,41 @@ const navigation = [
   </div>
 </nav>
 
+<script>
+  /**
+   * The original site never scrolled, so the bar only ever had a rest state.
+   * Here it switches to a compact, opaque mode once the page moves and returns
+   * to rest at the very top. Read in rAF so a burst of scroll events collapses
+   * into one style write per frame.
+   */
+  const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+
+  if (navbar) {
+    const SCROLLED_FROM = 8;
+    let ticking = false;
+
+    const sync = () => {
+      ticking = false;
+      const scrolled = window.scrollY > SCROLLED_FROM;
+      // Writing the same value would still invalidate style on some engines.
+      if (scrolled !== (navbar.dataset.scrolled === "true")) {
+        navbar.dataset.scrolled = String(scrolled);
+      }
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(sync);
+    };
+
+    // Runs once up front: a reload or a deep link can restore a scrolled
+    // position before any scroll event fires, and the bar must already match.
+    sync();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+</script>
+
 <style>
   .navbar {
     position: fixed;
@@ -59,8 +94,19 @@ const navigation = [
     border-bottom: var(--border-width-strong) solid var(--color-transparent);
     background: var(--gradient-nav-rest);
     transition:
+      padding var(--motion-base) var(--ease-standard),
       background var(--motion-base) var(--ease-standard),
       border-color var(--motion-base) var(--ease-standard);
+  }
+
+  /* Scrolled: the bar stops being a transparent overlay and becomes a system
+   * surface. The vertical tightening lives in the breakpoints below, because
+   * only from 1024px up is there any resting slack to give back. */
+  .navbar[data-scrolled="true"] {
+    border-bottom-color: var(--border-interactive);
+    background: var(--nav-scrolled-surface);
+    backdrop-filter: blur(var(--nav-blur));
+    -webkit-backdrop-filter: blur(var(--nav-blur));
   }
 
   .navbar__inner {
@@ -87,6 +133,7 @@ const navigation = [
   .navbar__brand img {
     width: auto;
     height: var(--space-px-24);
+    transition: height var(--motion-base) var(--ease-standard);
   }
 
   .navbar__links {
@@ -172,9 +219,20 @@ const navigation = [
       padding: var(--space-px-16) var(--space-px-56);
     }
 
-    .navbar:hover {
+    /* Equal specificity to the scrolled rule, so it is scoped out explicitly
+     * rather than left to source order. */
+    .navbar:not([data-scrolled="true"]):hover {
       border-bottom-color: var(--border-interactive);
       background: var(--gradient-nav-hover);
+    }
+
+    .navbar[data-scrolled="true"] {
+      padding-top: var(--space-px-8);
+      padding-bottom: var(--space-px-8);
+    }
+
+    .navbar[data-scrolled="true"] .navbar__brand img {
+      height: var(--space-px-24);
     }
 
     .navbar__inner {
@@ -205,6 +263,19 @@ const navigation = [
   @media (min-width: 1536px) {
     .navbar {
       padding: var(--space-px-24) var(--space-px-72);
+    }
+
+    .navbar[data-scrolled="true"] {
+      padding-top: var(--space-px-8);
+      padding-bottom: var(--space-px-8);
+    }
+  }
+
+  /* The state change still happens; only its animation is dropped. */
+  @media (prefers-reduced-motion: reduce) {
+    .navbar,
+    .navbar__brand img {
+      transition-duration: var(--motion-reduced);
     }
   }
 </style>

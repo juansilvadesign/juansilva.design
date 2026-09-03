@@ -35,6 +35,84 @@ export interface ProjectSummary {
 }
 
 /**
+ * Stack tokens that mean "Juan wrote code here".
+ *
+ * `figma` is deliberately absent: a figma-only record is design work, and the
+ * store has nine of those. Kept in sync with `stackIdSchema` in
+ * `src/content.config.ts`.
+ */
+const CODE_STACKS = ["typescript", "javascript", "python", "tailwind"] as const;
+
+/** Hosts whose links are genuinely source code, not just another live surface. */
+const REPO_HOSTS = ["github.com", "gitlab.com", "bitbucket.org"] as const;
+
+export function isCodeProject(stack: readonly string[]): boolean {
+  return stack.some((s) => (CODE_STACKS as readonly string[]).includes(s));
+}
+
+export function isRepoLink(href: string | null | undefined): boolean {
+  if (!href) return false;
+  // A record's evidence link may be a root-relative asset path, which is never
+  // a repo and must not be fed to `new URL` without a base.
+  if (!URL.canParse(href)) return false;
+  const { hostname } = new URL(href);
+  return REPO_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
+}
+
+export interface ProjectAction {
+  href: string;
+  label: string;
+  /** External links open in a new tab and carry the external-link affordance. */
+  external: boolean;
+  kind: "live" | "source" | "case";
+}
+
+export interface ProjectActionInput {
+  stack: readonly string[];
+  liveUrl: string;
+  liveLabel: string;
+  evidenceLink?: string | null;
+  evidenceLabel?: string | null;
+  caseHref: string;
+  caseLabel: string;
+  liveFallbackLabel: string;
+}
+
+/**
+ * The two actions a card shows, and only two.
+ *
+ * Cards used to render three: live, evidence, and a case-study link that read
+ * "Case study soon" on every record that had none. The rule now is
+ *   code project   → live site + source code
+ *   design project → live site + case study
+ * with the case study as the fallback whenever a code project has no repo —
+ * every project has a case-study page, so slot two is never empty. An evidence
+ * link that is not a repo (a screenshot, a second live surface) is not promoted
+ * into the source slot; it still renders in the project brief on the detail
+ * page, which is where that kind of evidence belongs.
+ */
+export function projectActions(p: ProjectActionInput): [ProjectAction, ProjectAction] {
+  const live: ProjectAction = {
+    href: p.liveUrl,
+    label: p.liveLabel || p.liveFallbackLabel,
+    external: true,
+    kind: "live",
+  };
+
+  const second: ProjectAction =
+    isCodeProject(p.stack) && isRepoLink(p.evidenceLink)
+      ? {
+          href: p.evidenceLink as string,
+          label: p.evidenceLabel || "Source code",
+          external: true,
+          kind: "source",
+        }
+      : { href: p.caseHref, label: p.caseLabel, external: false, kind: "case" };
+
+  return [live, second];
+}
+
+/**
  * The date a record actually asserts.
  *
  * `start` is null for agency work that began before Juan joined, so those sort
@@ -42,6 +120,40 @@ export interface ProjectSummary {
  */
 export function assertedDate(d: { start: string | null; end: string | null }): string {
   return d.end ?? d.start ?? "";
+}
+
+export interface TimeframeCopy {
+  dateRange: string;
+  dateOngoing: string;
+  dateDelivered: string;
+}
+
+/**
+ * The record's timeframe as a sentence, for whichever surface shows it.
+ *
+ * Extracted from the case-study page so the featured card and the detail page
+ * cannot drift. Handles all three shapes `dates` takes: a closed range, an
+ * ongoing engagement, and agency work whose start predates Juan and therefore
+ * asserts only a delivery date.
+ */
+export function formatTimeframe(
+  dates: { start: string | null; end: string | null },
+  lang: string,
+  copy: TimeframeCopy,
+): string | null {
+  const month = (iso: string) =>
+    new Date(`${iso.length === 7 ? `${iso}-01` : iso}T00:00:00Z`).toLocaleDateString(
+      lang === "pt" ? "pt-BR" : "en-GB",
+      { year: "numeric", month: "short", timeZone: "UTC" },
+    );
+
+  const { start, end } = dates;
+  if (start && end) {
+    return copy.dateRange.replace("{start}", month(start)).replace("{end}", month(end));
+  }
+  if (start) return copy.dateOngoing.replace("{start}", month(start));
+  if (end) return copy.dateDelivered.replace("{end}", month(end));
+  return null;
 }
 
 /**

@@ -3,8 +3,8 @@ import { getCollection } from "astro:content";
 import Footer from "../../../components/Footer.astro";
 import StackBadge from "../../../components/StackBadge.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { locales, defaultLocale, localizedPath, pageTitle, t, type Locale } from "../../../i18n";
-import { SIGNAL_FACETS, byEvidence } from "../../../lib/projects";
+import { locales, defaultLocale, localizedPath, pageTitle, t } from "../../../i18n";
+import { SIGNAL_FACETS, byEvidence, formatTimeframe } from "../../../lib/projects";
 import "../../../styles/evidence-rail.css";
 
 export async function getStaticPaths() {
@@ -23,24 +23,8 @@ const d = entry.data;
 const c = d.copy[lang];
 const detail = copy.projects.detail;
 
-/**
- * The three shapes `dates` can take, per the store schema: a closed range, an
- * ongoing engagement (no end), and agency work whose start predates Juan
- * (no start, so only the delivery date is asserted).
- */
-const month = (iso: string) =>
-  new Date(`${iso.length === 7 ? `${iso}-01` : iso}T00:00:00Z`).toLocaleDateString(
-    lang === "pt" ? "pt-BR" : "en-GB",
-    { year: "numeric", month: "short", timeZone: "UTC" },
-  );
-
-const timeframe = (() => {
-  const { start, end } = d.dates;
-  if (start && end) return detail.dateRange.replace("{start}", month(start)).replace("{end}", month(end));
-  if (start) return detail.dateOngoing.replace("{start}", month(start));
-  if (end) return detail.dateDelivered.replace("{end}", month(end));
-  return null;
-})();
+/** Shared with the featured card, so the two surfaces cannot drift. */
+const timeframe = formatTimeframe(d.dates, lang, detail);
 
 const signals = SIGNAL_FACETS.filter((s) => d.evidenceSignals[s]);
 
@@ -133,12 +117,61 @@ const indexHref = localizedPath("/projects/", lang);
         <div class="case__body">
           <p class="case__lead">{d.caseStudy[lang].brief}</p>
           <p>{d.caseStudy[lang].context}</p>
+
           {d.caseStudy[lang].sections?.map((s) => (
             <>
               <h2>{s.heading}</h2>
               <p>{s.body}</p>
             </>
           ))}
+
+          {/* The long form, in authored order. Images break the reading column
+              deliberately; everything else stays inside the measure. */}
+          {d.caseStudy[lang].blocks?.map((b) =>
+            b.type === "heading" ? (
+              b.level === 2 ? <h2>{b.text}</h2> : <h3>{b.text}</h3>
+            ) : b.type === "prose" ? (
+              <p>{b.body}</p>
+            ) : b.type === "callout" ? (
+              <aside class="cs-callout">{b.body}</aside>
+            ) : b.type === "quote" ? (
+              <figure class="cs-quote">
+                <blockquote>{b.text}</blockquote>
+                {b.source && <figcaption>{b.source}</figcaption>}
+              </figure>
+            ) : b.type === "list" ? (
+              b.ordered ? (
+                <ol class="cs-list">{b.items.map((it) => <li>{it}</li>)}</ol>
+              ) : (
+                <ul class="cs-list">{b.items.map((it) => <li>{it}</li>)}</ul>
+              )
+            ) : b.type === "statRow" ? (
+              <dl class="cs-stats" style={`--cs-stat-cols:${b.items.length}`}>
+                {b.items.map((it) => (
+                  <div class="cs-stat">
+                    <dt>
+                      {it.icon && <span class="cs-stat__icon" aria-hidden="true">{it.icon}</span>}
+                      {it.value}
+                    </dt>
+                    {it.label && <dd>{it.label}</dd>}
+                  </div>
+                ))}
+              </dl>
+            ) : (
+              <figure class="cs-figure">
+                <img
+                  src={b.src}
+                  alt={b.alt}
+                  width={b.width}
+                  height={b.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+                {b.caption && <figcaption>{b.caption}</figcaption>}
+              </figure>
+            ),
+          )}
+
           <h2>{detail.evidenceLabel}</h2>
           <p>{d.caseStudy[lang].outcome}</p>
         </div>
@@ -307,6 +340,139 @@ const indexHref = localizedPath("/projects/", lang);
   .case__lead {
     font-size: var(--text-20) !important;
     color: var(--text-heading) !important;
+  }
+
+  /* ─── Long-form block types ──────────────────────────────────── */
+
+  .case__body :global(h3) {
+    margin: var(--space-px-32) 0 var(--space-px-12);
+    color: var(--text-heading);
+    font-family: var(--font-display);
+    font-size: var(--text-20);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* An aside from the source, not a warning: quiet rule, no alarm colour. */
+  .case__body :global(.cs-callout) {
+    margin: 0 0 var(--space-px-24);
+    padding: var(--space-px-16) var(--space-px-20);
+    border-left: var(--border-width-strong) solid var(--border-default);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: var(--text-16);
+    line-height: var(--leading-24);
+  }
+
+  .case__body :global(.cs-quote) {
+    margin: var(--space-px-32) 0;
+    padding-left: var(--space-px-20);
+    border-left: var(--border-width-strong) solid var(--primary);
+  }
+
+  .case__body :global(.cs-quote blockquote) {
+    margin: 0;
+    color: var(--text-heading);
+    font-family: var(--font-display);
+    font-size: var(--text-20);
+    line-height: var(--leading-32);
+  }
+
+  .case__body :global(.cs-quote figcaption) {
+    margin-top: var(--space-px-8);
+    color: var(--text-secondary);
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .case__body :global(.cs-list) {
+    margin: 0 0 var(--space-px-24);
+    padding-left: var(--space-px-20);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+    list-style: disc;
+  }
+
+  .case__body :global(ol.cs-list) {
+    list-style: decimal;
+  }
+
+  .case__body :global(.cs-list li) {
+    margin-bottom: var(--space-px-8);
+  }
+
+  /* The evidence board: a 1px internal rhythm, as in the reference. */
+  .case__body :global(.cs-stats) {
+    display: grid;
+    overflow: hidden;
+    margin: var(--space-px-32) 0;
+    border: var(--border-width) solid var(--border-subtle);
+    border-radius: var(--radius-panel);
+    background: var(--border-subtle);
+    gap: var(--border-width);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .case__body :global(.cs-stat) {
+    padding: var(--space-px-24);
+    background: var(--background);
+  }
+
+  .case__body :global(.cs-stat dt) {
+    display: flex;
+    align-items: baseline;
+    color: var(--primary);
+    font-family: var(--font-display);
+    font-size: var(--text-32);
+    line-height: 1.1;
+    gap: var(--space-px-8);
+  }
+
+  .case__body :global(.cs-stat__icon) {
+    font-size: var(--text-20);
+  }
+
+  .case__body :global(.cs-stat dd) {
+    margin: var(--space-px-8) 0 0;
+    color: var(--text-secondary);
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    line-height: var(--leading-16);
+  }
+
+  /* Figures step outside the reading measure; their captions do not. */
+  .case__body :global(.cs-figure) {
+    margin: var(--space-px-32) 0;
+  }
+
+  .case__body :global(.cs-figure img) {
+    width: 100%;
+    height: auto;
+    border: var(--border-width) solid var(--border-subtle);
+    border-radius: var(--radius-media);
+    background: var(--surface);
+  }
+
+  .case__body :global(.cs-figure figcaption) {
+    margin-top: var(--space-px-8);
+    color: var(--text-secondary);
+    font-family: var(--font-meta);
+    font-size: var(--type-meta-size);
+    line-height: var(--leading-16);
+  }
+
+  @media (min-width: 1024px) {
+    /* Wider than the measure so screenshots stay legible, still centred. */
+    .case__body :global(.cs-figure),
+    .case__body :global(.cs-stats) {
+      width: calc(100% + var(--space-px-160));
+      margin-left: calc(var(--space-px-80) * -1);
+    }
   }
 
   .soon {

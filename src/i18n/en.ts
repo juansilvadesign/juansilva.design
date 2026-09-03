@@ -56,6 +56,10 @@ export const en = {
     sectionAriaLabel: "Selected projects",
     liveProjectFallback: "Open project",
     evidenceFallback: "View evidence",
+    /** Second card action when a code project links a real repository. */
+    sourceFallback: "Source code",
+    /** Second card action otherwise — every project has a case-study page. */
+    caseFallback: "Read the case study",
     externalLinkAlt: "Opens in a new tab",
     detail: {
       backToIndex: "All projects",
@@ -120,6 +124,7 @@ export const en = {
         tailwind: "Tailwind",
         javascript: "JavaScript",
         python: "Python",
+        opensource: "Open Source",
       },
     },
   },

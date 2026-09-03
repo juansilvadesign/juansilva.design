@@ -44,5 +44,1180 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Develop a website to help schools that want to join the Agenda Geek's gymkhana, explaining the main points about e-waste and removing the main doubts about how the Agenda Geek works.",
+      "context": "This project is a brief of the Challenge “Ajude uma ONG” promoted by the communities “Jovens UX&UI” and “VagasUX” with a duration of 5 months (Jan – May 2022).",
+      "outcome": "Out of 14 teams, 4 made it to the end, and ours was crowned champion, winning the challenge. The platform was never built.",
+      "blocks": [
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/057311d4febc.webp",
+          "width": 1600,
+          "height": 800
+        },
+        {
+          "type": "callout",
+          "body": "This project is a brief of the Challenge “Ajude uma ONG” promoted by the communities “Jovens UX&UI” and “VagasUX” with a duration of 5 months (Jan - May 2022)."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Solution"
+        },
+        {
+          "type": "callout",
+          "body": "Develop a website to help schools that want to join the Agenda Geek’s gymkhana, explaining the main points about e-waste and removing the main doubts about how the Agenda Geek works."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "To demonstrate in a simplified way how the schools involved in the gymkhana are progressing, as well as to stimulate the engagement of the participants.",
+            "Provide fast means of communication.",
+            "Facilitate access to required and key documents."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Summary"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Context (Main Challenges).",
+            "Discovery & Ideation (Design Process)",
+            "Design, Prototype & Deliverable (Results)",
+            "Next Steps & Learnings (Roadmap)",
+            "86 Team - The Survivors! (Who made this project possible)"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Context"
+        },
+        {
+          "type": "quote",
+          "text": "Atualmente o Brasil ocupa o 5º lugar dos países que mais geram resíduos eletrônicos. De acordo com relatório desenvolvido pela Universidade das Nações Unidas, o Brasil descartou, apenas em 2019,  mais de 2 milhões de toneladas de resíduos eletrônicos , sendo que menos de 3% desse volume foi reciclado. — Relatório Green Eletron.Brazil currently ranks 5th of the top countries that generate the most electronic waste. According to a report developed by the United Nations University, Brazil disposed, in 2019 alone, more than 2 million tons of electronic waste, and less than 3% of this volume was recycled. - Green Eletron’s Report."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "An increasing problem…"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "2 MILLION",
+              "label": "tons of eletronic waste",
+              "icon": "📱"
+            },
+            {
+              "value": "-3% Recycled",
+              "label": "Percent of recycled e-waste",
+              "icon": "♻️"
+            }
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Source: Report developed by the United Nations University."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "1🧑 = 2📱💻 devices"
+        },
+        {
+          "type": "prose",
+          "body": "Of the 440 million total devices 53% are cell phones and the other 47% are computers/notebooks/tablets."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Discovery & Ideation"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Desk Research"
+        },
+        {
+          "type": "prose",
+          "body": "We began this stage by doing desk research to better understand the segment where the NGO Agenda Geek operates. The participants read the reports and materials provided and we consolidated the knowledge generated in a Problem Statement Framework (CSD Matrix).\nIn this Framework, we group the information according to the project's stakeholders by affinity (key factors evaluated: Schools, Students, Parents, Agenda Geek, Sponsors, Partners)."
+        },
+        {
+          "type": "callout",
+          "body": "The Problem Statement Framework (CSD Matrix) in high quality can be seen in FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Competitor Analysis"
+        },
+        {
+          "type": "prose",
+          "body": "To evaluate the positioning of Agenda Geek in relation to its main competitors, we conducted an analysis that allowed us to raise NGO strengths and opportunities for improvement."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Impact x Knowledge Matrix"
+        },
+        {
+          "type": "prose",
+          "body": "The group prepared 6 proto-persons based on the research done up to this stage. This study helped us to better target the doubts and questions that would be taken to the interview stage."
+        },
+        {
+          "type": "prose",
+          "body": "During the development of proto-personas, we updated the Problem Statement Framework (CSD Matrix) to check if any questions had not been addressed. At this stage, the group raised many interesting points for the project and because of this, we felt the need to prioritize the questions that would follow for the user research. To define the priority we developed an impact x knowledge matrix for only four proto-personas (students and schools)."
+        },
+        {
+          "type": "image",
+          "alt": "Impact x Knowledge Matrix (Students)",
+          "caption": "Impact x Knowledge Matrix (Students)",
+          "src": "/assets/cases/agenda-geek/5b6b19be6410.webp",
+          "width": 1600,
+          "height": 1741
+        },
+        {
+          "type": "callout",
+          "body": "The result in high quality can be seen in FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Interviews (Attitudinal & Qualitative)"
+        },
+        {
+          "type": "prose",
+          "body": "For the in-depth interview stage, we chose to follow up only with only the Student and School proto-personas, because we believe that by focusing on solving these problems we would have a greater impact."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Designing the Script"
+        },
+        {
+          "type": "prose",
+          "body": "With the doubts and insights of the research summarized, the group gathered in an affinity map the main doubts grouped by themes, and then we held another meeting to verify the main doubts and define the most adequate research method to solve them."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/e68e7c09fa74.webp",
+          "width": 1600,
+          "height": 1091
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/49b2513a7b27.webp",
+          "width": 1600,
+          "height": 1099
+        },
+        {
+          "type": "callout",
+          "body": "The result in high quality can be seen in FigJam."
+        },
+        {
+          "type": "callout",
+          "body": "Interview scripts"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Realização das entrevistas"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "9 📹",
+              "label": "Entrevistas"
+            },
+            {
+              "value": "4 🧑‍🏫",
+              "label": "Representantes de escola"
+            },
+            {
+              "value": "5 👲",
+              "label": "Estudantes"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O resultado da pesquisa foi reunido em um novo mapa de afinidade onde separamos os principais insights das entrevistas."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f5bc1d40cf20.webp",
+          "width": 1006,
+          "height": 1194
+        },
+        {
+          "type": "callout",
+          "body": "The result in high quality can be seen in FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design, Prototype & Deliverable"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "User Flow"
+        },
+        {
+          "type": "prose",
+          "body": "From the ideas that were prioritized in the previous step, we thought about the sections and steps that should exist to help the user in his journey, creating a user flow."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/11024928b095.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Crazy 8’s"
+        },
+        {
+          "type": "prose",
+          "body": "Next, the team met for the Crazy 8’s exercise. Based on the sections and steps thought out in the previous stage, each team member conceived 8 functionalities for the solution. After each member explained their ideas to the whole group, we started voting and prioritizing those that the group thought would bring more results."
+        },
+        {
+          "type": "image",
+          "alt": "Crazy 8’s created by the team.",
+          "caption": "Crazy 8’s created by the team.",
+          "src": "/assets/cases/agenda-geek/003114b10fca.webp",
+          "width": 626,
+          "height": 696
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Wireframes"
+        },
+        {
+          "type": "prose",
+          "body": "Wireframes were made for each design that was prioritized in the previous stage. The wireframe helped the team to better understand the concept of the site and to design the necessary flow for the user to learn about the contest, register, measure the results and contact Agenda Geek."
+        },
+        {
+          "type": "image",
+          "alt": "Ranking",
+          "caption": "Ranking",
+          "src": "/assets/cases/agenda-geek/34ab6fa02863.webp",
+          "width": 1440,
+          "height": 1024
+        },
+        {
+          "type": "image",
+          "alt": "School Profile]",
+          "caption": "School Profile]",
+          "src": "/assets/cases/agenda-geek/d2702d5dd65f.webp",
+          "width": 1440,
+          "height": 920
+        },
+        {
+          "type": "image",
+          "alt": "Example of a develop Wireframe",
+          "caption": "Example of a develop Wireframe",
+          "src": "/assets/cases/agenda-geek/05cea2d4a54e.webp",
+          "width": 1448,
+          "height": 3169
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "🎨 Style Guide"
+        },
+        {
+          "type": "prose",
+          "body": "To build the Style Guide we took into account the archetypes and choices made by the NGO in the dynamic that was performed together with the mentors. From the main points, the team developed Mood Boards to inspire the choice of colors and fonts. The main focus was to bring technology associated with nature."
+        },
+        {
+          "type": "image",
+          "alt": "Mood board created by the team.",
+          "caption": "Mood board created by the team.",
+          "src": "/assets/cases/agenda-geek/9ef802844454.webp",
+          "width": 664,
+          "height": 515
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Typography"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f5ac04e90e86.webp",
+          "width": 1440,
+          "height": 936
+        },
+        {
+          "type": "callout",
+          "body": "The team chose the titles with Rajdhani font to connect with the technological part of the Agenda Geek. We decided on the Inter font for the body and buttons, preserving visibility for reading long texts."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Design System"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/b6318e2dcb95.webp",
+          "width": 1072,
+          "height": 1035
+        },
+        {
+          "type": "callout",
+          "body": "The colors were inspired by nature and the NGO's logo. The gradients together with the neon effect were chosen to bring more technology and youth to the project."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/e0928723074d.webp",
+          "width": 1239,
+          "height": 663
+        },
+        {
+          "type": "prose",
+          "body": "With these basic definitions, the team started the work of creating the base components. Besides gaining more agility in the development of the components, we could guarantee the consistency of the elements and increase the productivity of the project's team of developers. All the component descriptions can be found in the Figma file."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "💬 UX Writing Guidelines"
+        },
+        {
+          "type": "prose",
+          "body": "The voice of the Agenda Geek website was designed based on the interview with the founder of the NGO, and, from this, a voice chart was created. The voice chart is an important guide for the content to be aligned with the objectives of the organization and the people and can be used as a decision tool. The chart contains each product principle in a column, and for each principle, each of the six aspects of voice is defined in a different row: concepts, vocabulary, verbiage, grammar, punctuation, and capitalization."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "General Guidelines"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Title: up to 45 characters",
+            "Body text per section: up to 160 characters",
+            "Button(s): up to 25 characters each"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Voice Chart"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/1b54444c7986.webp",
+          "width": 779,
+          "height": 632
+        },
+        {
+          "type": "callout",
+          "body": "The voice chart presents the guidelines for all texts in general, but in different contexts, we speak in different tones. As our focus for the project was the gymkhana to be promoted by the NGO, we thought of a tone of voice to be adopted when the subject matter would be the event."
+        },
+        {
+          "type": "quote",
+          "text": "Thus, the tone of voice thought of is more enthusiastic, since one of the attributes that represent the brand is passion; more respectful than irreverent since it deals with a serious subject and should be accessible to all ages. The tone is also more casual, which can be understood by various age groups, and pulls towards a more relaxed side since the intention is to be accessible and jovial."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Voice Tone"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/140304280f04.webp",
+          "width": 356,
+          "height": 181
+        },
+        {
+          "type": "callout",
+          "body": "As our focus for the project was the gymkhana to be promoted by the NGO, we thought of a tone of voice to be adopted when the subject matter would be the event."
+        },
+        {
+          "type": "quote",
+          "text": "Thus, the tone of voice thought of is more enthusiastic, since one of the attributes that represent the brand is passion; more respectful than irreverent since it deals with a serious subject and should be accessible to all ages. The tone is also more casual, being able to be understood by various age groups and not too serious, but funnier, as the intent is to be accessible and jovial."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Checking the Evidence"
+        },
+        {
+          "type": "prose",
+          "body": "After having elaborated the texts that would appear in the prototype within the parameters mentioned above, we used the Hemingway Editor tool to make sure that the designed sentences were simple and easy to understand. According to the tool's own website, the ideal is that the text presented be understandable to students from the 9th grade on, and the project's screens are within this spectrum."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "📦 Prototype"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f66bd4b3c0b2.webp",
+          "width": 1600,
+          "height": 705
+        },
+        {
+          "type": "callout",
+          "body": "You can access the prototype in Figma by clicking here."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/0b86f0fdfafa.webp",
+          "width": 1440,
+          "height": 4522
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Content"
+        },
+        {
+          "type": "prose",
+          "body": "Next, we present a table explaining why each screen was created to help developers and explain the concept behind the solution."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "🧪 Usability Testing"
+        },
+        {
+          "type": "prose",
+          "body": "In this step, to verify that the concept and navigability were in line with the user's needs, we applied an unmoderated usability test using the Maze tool and the high-fidelity prototype."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Usability test script (expand)"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "6 👥",
+              "label": "Applied Tests"
+            },
+            {
+              "value": "4 ✅",
+              "label": "Tasks"
+            },
+            {
+              "value": "68 🟡",
+              "label": "Maze’s Score"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "According to Maze, and taking into account the indicators of task success, duration, and test abandonment, the prototype got an average score (of 68)."
+        },
+        {
+          "type": "prose",
+          "body": "Due to the delivery time, we were not able to conduct moderate testing to assess the main difficulties in the prototype. However, according to the feedback from the participants, the main difficulty was understanding how the Maze works and that is why they had difficulty completing some tasks."
+        },
+        {
+          "type": "prose",
+          "body": "The team's recommendation would be to perform 5 moderate tests to validate the feedback or evaluate possible changes to the prototype."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/256dd9720d8d.webp",
+          "width": 1600,
+          "height": 1105
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "🎬 Apresentação do Projeto"
+        },
+        {
+          "type": "prose",
+          "body": "After 5 months of hard work, we had the demo meeting where we presented our project to Fabiano Holtsmann (founder and president of Agenda Geek), to the mentors and organizers of the challenge, and to the other teams that were competing."
+        },
+        {
+          "type": "prose",
+          "body": "After the presentation, we received compliments from everyone. All the teams did an excellent job. Out of 14 teams, 4 made it to the end, and ours was crowned champion, winning the challenge!"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Demo Meeting"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f15f02ed35fc.webp",
+          "width": 1600,
+          "height": 765
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Next Steps & Learnings"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Handoff with the development team.",
+            "Define and track success metrics (NPS, Heart, CTR, ...).",
+            "Create a roadmap with the ideas that were not implemented in the first wave."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Improvements for the next project (backlog):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Implement the roadmap created.",
+            "Perform moderate testing to analyze the enrollment stage.",
+            "Make all interface components responsive.",
+            "Improve the usability of the registration form.",
+            "Improve the look of the articles on the home page."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Team 86 - The Survivors!"
+        },
+        {
+          "type": "quote",
+          "text": "❤️ Made with care by Team 86."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Desenvolver um website que auxilie as escolas que desejam ingressar na Gincana da Agenda Geek, explicando os principais pontos sobre o e-lixo e retirando as principais dúvidas sobre o funcionamento da Agenda Geek.",
+      "context": "Este projeto faz parte da minha jornada pelo Desafio Ajude uma ONG promovido pelas comunidades Jovens UX&UI e VagasUX com duração de 5 meses (Janeiro – Maio de 2022).",
+      "outcome": "De 14 equipes, 4 chegaram ao fim, e a nossa foi consagrada campeã, ganhando o desafio. A plataforma nunca foi construída.",
+      "blocks": [
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/b8b981daee19.webp",
+          "width": 1600,
+          "height": 800
+        },
+        {
+          "type": "callout",
+          "body": "Este projeto faz parte da minha jornada pelo Desafio Ajude uma ONG promovido pelas comunidades Jovens UX&UI e VagasUX com duração de 5 meses (Janeiro - Maio de 2022)."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Objetivo da Solução"
+        },
+        {
+          "type": "callout",
+          "body": "Desenvolver um website que auxilie as escolas que desejam ingressar na Gincana da Agenda Geek, explicando os principais pontos sobre o e-lixo e retirando as principais dúvidas sobre o funcionamento da Agenda Geek."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Demonstrar de uma forma simplificada como está a evolução das escolas participantes na gincana, assim como estimular o engajamento dos participantes.",
+            "Fornecer um meio de comunicação rápido.",
+            "Facilitar o acesso a documentos importantes e necessários."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Sumário"
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Contexto (Principais Desafios).",
+            "Descoberta & Definição (Processo de Design).",
+            "Desenvolvimento e Entrega (Conclusão).",
+            "Próximos Passos e Aprendizados (Resolução).",
+            "Equipe 86 - Os Sobreviventes! (Quem fez o projeto acontecer)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Contexto"
+        },
+        {
+          "type": "quote",
+          "text": "Atualmente o Brasil ocupa o 5º lugar dos países que mais geram resíduos eletrônicos. De acordo com relatório desenvolvido pela Universidade das Nações Unidas, o Brasil descartou, apenas em 2019, mais de 2 milhões de toneladas de resíduos eletrônicos, sendo que menos de 3% desse volume foi reciclado. — Relatório Green Eletron."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Um problema com tendência de aumento..."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "2 MILHÕES",
+              "label": "toneladas resíduos eletrônicos",
+              "icon": "📱"
+            },
+            {
+              "value": "-3% Reciclados",
+              "label": "Porcentagem de e-lixo reciclado",
+              "icon": "♻️"
+            }
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Fonte: Relatório desenvolvido pela Universidade das Nações Unidas."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "1🧑 = 2📱💻 dispositivos"
+        },
+        {
+          "type": "prose",
+          "body": "Do total de 440 milhões de dispositivos 53% são celulares e os outros 47% computadores/notebooks/tablets."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Descoberta & Definição"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Desk Research"
+        },
+        {
+          "type": "prose",
+          "body": "Iniciamos essa etapa realizando uma Desk Research para compreender melhor sobre o segmento onde a ONG Agenda Geek atua. Os participantes realizaram leitura de relatórios e materiais fornecidos e consolidamos o conhecimento gerado em uma Matriz CSD. Na Matriz agrupamos por afinidade as informações de acordo com as partes interessadas no projeto (Escola, Alunos, Pais, Agenda Geek, Patrocinadores e Parceiros)."
+        },
+        {
+          "type": "callout",
+          "body": "A Matriz CSD em alta qualidade pode ser vista no FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Análise de Competidores"
+        },
+        {
+          "type": "prose",
+          "body": "Para avaliarmos o posicionamento da Agenda Geek em relação aos seus principais competidores, realizamos uma análise que nos permitiu levantar pontos fortes da ONG e oportunidades de melhoria."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Matriz de Impacto x Conhecimento"
+        },
+        {
+          "type": "prose",
+          "body": "O grupo elaborou 6 protopersonas com base nas pesquisas realizadas até esse estágio. Esse estudo nos ajudou a direcionar melhor as dúvidas e perguntas que seriam levadas para a etapa de entrevista."
+        },
+        {
+          "type": "prose",
+          "body": "Durante a elaboração da protopersona atualizamos a Matriz CSD para verificar se alguma questão não havia sido abordada. Nesse estágio o grupo levantou muitos pontos interessantes para o projeto e por isso sentimos a necessidade de priorizar as dúvidas que seguiriam para a pesquisa com o usuário. Para definir a prioridade elaboramos uma matriz de impacto x conhecimento das protopersonas (Estudante, Escola, Agenda Geek e Pais)."
+        },
+        {
+          "type": "image",
+          "alt": "Matriz de Impacto x Conhecimento de Alunos",
+          "caption": "Matriz de Impacto x Conhecimento de Alunos",
+          "src": "/assets/cases/agenda-geek/5b6b19be6410.webp",
+          "width": 1600,
+          "height": 1741
+        },
+        {
+          "type": "callout",
+          "body": "O resultado em alta qualidade pode ser visto no FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Entrevista em profundidade"
+        },
+        {
+          "type": "prose",
+          "body": "Para a etapa de entrevista em profundidade optamos por seguir apenas com as personas Aluno e Escola, pois acreditamos que, ao focarmos na solução dos problemas dessas personas, teríamos um impacto maior."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Construção do Roteiro"
+        },
+        {
+          "type": "prose",
+          "body": "Com as dúvidas e insights da pesquisa resumidos, o grupo reuniu em um mapa de afinidade as principais dúvidas agrupadas por temas e depois realizamos uma nova reunião para verificar as principais dúvidas e definir o método de pesquisa mais adequado para saná-las."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/e68e7c09fa74.webp",
+          "width": 1600,
+          "height": 1091
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/49b2513a7b27.webp",
+          "width": 1600,
+          "height": 1099
+        },
+        {
+          "type": "callout",
+          "body": "O resultado em alta qualidade pode ser visto no FigJam."
+        },
+        {
+          "type": "callout",
+          "body": "Roteiros das entrevistas"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Realização das entrevistas"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "9 📹",
+              "label": "Entrevistas"
+            },
+            {
+              "value": "4 🧑‍🏫",
+              "label": "Representantes de escola"
+            },
+            {
+              "value": "5 👲",
+              "label": "Estudantes"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O resultado da pesquisa foi reunido em um novo mapa de afinidade onde separamos os principais insights das entrevistas."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f0d01267428f.webp",
+          "width": 1600,
+          "height": 590
+        },
+        {
+          "type": "prose",
+          "body": "O resultado em alta qualidade pode ser visto no FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Persona e Jornada do Usuário"
+        },
+        {
+          "type": "prose",
+          "body": "As entrevistas nos ajudaram a validar e ajustar alguns pontos das personas. O contato com os usuários-foco durante as entrevistas permitiu ao grupo compreender melhor as suas rotinas e a partir desse olhar construímos a jornada da pessoa usuária e levantamos oportunidades."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/0d56c9a1d6fc.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "type": "callout",
+          "body": "O resultado completo em alta qualidade pode ser visto no FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Como poderíamos (HMW)"
+        },
+        {
+          "type": "prose",
+          "body": "Para consolidar e alinhar a equipe em torno dos desafios que levantamos durante essa etapa o grupo utilizou a ferramenta “Como poderíamos” (how might we) com questionamentos extraídos  das entrevistas e pesquisas realizadas. A partir das ideias que surgiram com o HMW, priorizamos quais soluções seriam levadas para a etapa seguinte."
+        },
+        {
+          "type": "image",
+          "alt": "De 88 ideias, 15 foram priorizadas!",
+          "caption": "De 88 ideias, 15 foram priorizadas!",
+          "src": "/assets/cases/agenda-geek/922f875ef953.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "type": "callout",
+          "body": "O resultado completo e em alta qualidade pode ser visto no FigJam."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Desenvolvimento & Entrega"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Fluxo de Usuário"
+        },
+        {
+          "type": "prose",
+          "body": "A partir das ideias que foram priorizadas na etapa anterior, pensamos nas seções e etapas que deveriam existir para auxiliar o usuário em sua jornada, criando um fluxo de usuário."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/11024928b095.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Crazy 8’s"
+        },
+        {
+          "type": "prose",
+          "body": "A seguir, a equipe se reuniu para a realização do exercício Crazy 8s. A partir das seções e etapas pensadas na etapa anterior, cada membro da equipe idealizou 8 funcionalidades para a solução. Após cada integrante explanar suas ideias para o grande grupo, partimos para a votação e priorização das que o grupo entendeu que trariam mais resultados."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/003114b10fca.webp",
+          "width": 626,
+          "height": 696
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Wireframes"
+        },
+        {
+          "type": "prose",
+          "body": "Foram feitos wireframes de cada desenho que foi priorizado na etapa anterior. O wireframe ajudou a equipe a compreender melhor o conceito do site e a desenhar o fluxo necessário para o usuário se inteirar da gincana, realizar a inscrição, mensurar seu resultado e entrar em contato com a Agenda Geek."
+        },
+        {
+          "type": "image",
+          "alt": "Ranking",
+          "caption": "Ranking",
+          "src": "/assets/cases/agenda-geek/34ab6fa02863.webp",
+          "width": 1440,
+          "height": 1024
+        },
+        {
+          "type": "image",
+          "alt": "School Profile",
+          "caption": "School Profile",
+          "src": "/assets/cases/agenda-geek/d2702d5dd65f.webp",
+          "width": 1440,
+          "height": 920
+        },
+        {
+          "type": "image",
+          "alt": "Exemplo de Wireframe desenvolvido",
+          "caption": "Exemplo de Wireframe desenvolvido",
+          "src": "/assets/cases/agenda-geek/05cea2d4a54e.webp",
+          "width": 1448,
+          "height": 3169
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "🎨 StyleGuide"
+        },
+        {
+          "type": "prose",
+          "body": "Para a construção do Styleguide levamos em consideração os arquétipos e escolhas realizadas pela ONG na dinâmica que foi realizada em conjunto com os mentores. A partir dos principais pontos a  equipe desenvolveu MoodBoards para inspirar a escolha das cores e fontes. O principal foco foi trazer a tecnologia associada à natureza."
+        },
+        {
+          "type": "image",
+          "alt": "Moodboard criado pela equipe",
+          "caption": "Moodboard criado pela equipe",
+          "src": "/assets/cases/agenda-geek/9ef802844454.webp",
+          "width": 664,
+          "height": 515
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f5ac04e90e86.webp",
+          "width": 1440,
+          "height": 936
+        },
+        {
+          "type": "callout",
+          "body": "A equipe escolheu para os títulos a Fonte Rajdhani para fazer conexão com a parte tecnológica da Agenda Geek. Para o body e botões optamos pela fonte Inter, preservando uma visibilidade para leitura de longos textos."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/b6318e2dcb95.webp",
+          "width": 1072,
+          "height": 1035
+        },
+        {
+          "type": "callout",
+          "body": "As cores foram inspiradas na natureza e no logo da ONG. Os gradientes em conjunto com o efeito neon foram escolhidos para trazer mais tecnologia e juventude ao projeto."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/e0928723074d.webp",
+          "width": 1239,
+          "height": 663
+        },
+        {
+          "type": "prose",
+          "body": "Com essas definições básicas a equipe iniciou o trabalho de criação de componentes-base. Além de ganhar mais agilidade no desenvolvimento com os componentes, pudemos garantir a consistência dos elementos e aumento da produtividade da equipe de desenvolvedores do projeto. Todas as descrições dos componentes se encontram no arquivo do Figma."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "💬 Diretrizes de UX Writing"
+        },
+        {
+          "type": "prose",
+          "body": "A voz do site da Agenda Geek foi pensada a partir da entrevista feita com o fundador da ONG, e, a partir dela, foi montada uma tabela de voz (voice chart). A tabela de voz é um guia importante para que o conteúdo esteja alinhado com os objetivos da organização e das pessoas e pode ser utilizada como uma ferramenta de decisão. A tabela contém cada princípio do produto em uma coluna e, para cada princípio, cada um dos seis aspectos da voz é definido em uma linha diferente: conceitos, vocabulário, verbosidade, gramática, pontuação e maiusculização (capitalization)."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Diretrizes gerais"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Título: até 45 caracteres",
+            "Corpo do texto por seção: até 160 caracteres",
+            "Botão(ões): até 25 caracteres cada um"
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Tabela de voz"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/1b54444c7986.webp",
+          "width": 779,
+          "height": 632
+        },
+        {
+          "type": "callout",
+          "body": "A tabela de voz apresenta as diretrizes para todos os textos no geral, mas, em contextos diferentes, falamos em tons diferentes. Como o nosso foco para o projeto era a gincana a ser promovida pela ONG, pensamos em um tom de voz a ser adotado quando o assunto a ser tratado seria o evento."
+        },
+        {
+          "type": "quote",
+          "text": "Assim, o tom de voz pensado é mais entusiasmado, já que um dos atributos que representam a marca é apaixonada; mais respeitoso do que irreverente, já que trata de um assunto sério e deve ser acessível a todas as idades. O tom também é mais casual, podendo ser entendido por várias faixas etárias e puxando para um lado mais descontraído, pois o o intuito é ser acessível e jovial."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Tom de voz"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/140304280f04.webp",
+          "width": 356,
+          "height": 181
+        },
+        {
+          "type": "callout",
+          "body": "Como o nosso foco para o projeto era a gincana a ser promovida pela ONG, pensamos em um tom de voz a ser adotado quando o assunto a ser tratado seria o evento."
+        },
+        {
+          "type": "quote",
+          "text": "Assim, o tom de voz pensado é mais entusiasmado, já que um dos atributos que representam a marca é apaixonada; mais respeitoso do que irreverente, já que trata de um assunto sério e deve ser acessível a todas as idades. O tom também é mais casual, podendo ser entendido por várias faixas etárias e não sério em demasia, mas mais engraçada, pois o o intuito é ser acessível e jovial."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Prova Real"
+        },
+        {
+          "type": "prose",
+          "body": "Após termos elaborados os textos que iriam aparecer no protótipo dentro dos parâmetros mencionados anteriormente, utilizamos a ferramenta Hemingway Editor para nos certificarmos de que as frases concebidas eram simples e de fácil compreensão. De acordo com o próprio site da ferramenta, o ideal é que o texto apresentado seja compreensível para alunos da 9ª série em diante, estando as telas do projeto dentro desse espectro."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "📦Protótipo"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f66bd4b3c0b2.webp",
+          "width": 1600,
+          "height": 705
+        },
+        {
+          "type": "callout",
+          "body": "O protótipo navegável pode ser acessado aqui."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/0b86f0fdfafa.webp",
+          "width": 1440,
+          "height": 4522
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Conteúdos"
+        },
+        {
+          "type": "prose",
+          "body": "A seguir, apresentamos uma tabela explanando o motivo de cada tela ter sido criada com o intuito de auxiliar os desenvolvedores e explicar o conceito por trás da solução."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "🧪 Teste de Usabilidade"
+        },
+        {
+          "type": "prose",
+          "body": "Nessa etapa, para verificar se o conceito e a navegabilidade estavam de acordo com as necessidades do usuário, aplicamos um teste de usabilidade não moderado utilizando a ferramenta Maze e o protótipo em alta fidelidade."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Roteiro do teste (expandir)"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "6 👥",
+              "label": "Testes aplicados"
+            },
+            {
+              "value": "4 ✅",
+              "label": "Tarefas"
+            },
+            {
+              "value": "68 🟡",
+              "label": "Score do Maze"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "De acordo com o Maze e, levando em consideração os indicadores de sucesso da tarefa, duração e abandono do teste, o protótipo ficou com uma nota média (68)."
+        },
+        {
+          "type": "prose",
+          "body": "Devido ao tempo de entrega não conseguimos realizar testes moderados para avaliar as principais dificuldades no protótipo. Porém, de acordo com o feedback dos participantes, a principal dificuldade foi compreender como o Maze funciona e por isso eles tiveram dificuldade em completar algumas tarefas."
+        },
+        {
+          "type": "prose",
+          "body": "A recomendação da equipe seria realizar 5 testes moderados para validar o feedback ou avaliar as possíveis alterações no protótipo."
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/256dd9720d8d.webp",
+          "width": 1600,
+          "height": 1105
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "🎬 Apresentação do Projeto"
+        },
+        {
+          "type": "prose",
+          "body": "Após 5 meses de trabalho árduo, tivemos a reunião de demonstração onde apresentamos o nosso projecto para o Fabiano Holtsmann (fundador e presidente da Agenda Geek), para os mentores e organizadores do desafio, e para as outras equipes que estavam competindo."
+        },
+        {
+          "type": "prose",
+          "body": "Após a apresentação, recebemos elogios de todos. Todas as equipes realizaram um excelente trabalho. De 14 equipes, 4 chegaram ao fim, e a nossa foi consagrada campeã, ganhando o desafio!"
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Demo Meeting"
+        },
+        {
+          "type": "image",
+          "alt": "",
+          "src": "/assets/cases/agenda-geek/f15f02ed35fc.webp",
+          "width": 1600,
+          "height": 765
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Próximos Passos e Aprendizados"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Fazer o handoff com a equipe de desenvolvimento.",
+            "Definir e acompanhar as métricas de sucesso (NPS, Heart, CTR, ...).",
+            "Criar roadmap com as ideias que não fora implementadas na primeira onda."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Melhorias para o próximo projeto (backlog):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Implementar o roadmap criado.",
+            "Realizar testes moderados para analisar a etapa de inscrição.",
+            "Tornar responsivo todos os componentes da interface.",
+            "Melhorar a usabilidade do formulário de inscrição.",
+            "Aprimorar o visual dos artigos da página inicial."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Equipe 86 - Os Sobreviventes!"
+        },
+        {
+          "type": "quote",
+          "text": "❤️ Feito com carinho pela Equipe 86."
+        }
+      ]
+    }
+  }
 }

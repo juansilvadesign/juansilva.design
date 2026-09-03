@@ -122,6 +122,11 @@
   --status-danger: var(--color-danger);
   --nav-gradient-rest: var(--color-white-a02);
   --nav-gradient-hover: var(--color-white-a06);
+  /* Scrolled navigation: the bar leaves its transparent rest state and becomes
+   * an opaque system surface once the page moves. Alpha rather than the solid
+   * token so the blur behind it still reads. */
+  --nav-scrolled-surface: rgb(12 14 18 / 92%);
+  --nav-blur: 12px;
 
   /* ─── Typography — families (confirmed in Figma Desktop) ─────── */
   --font-display: "Spectral", Georgia, serif;
@@ -255,6 +260,8 @@
   --radius-media: 12px;
   --radius-panel: 16px;
   --radius-round: 56px;
+  /* Featured case card — the reference's editorial container corner. */
+  --radius-case: 26px;
   --radius-pill: 9999px;
 
   /* ─── Border & elevation ─────────────────────────────────────── */

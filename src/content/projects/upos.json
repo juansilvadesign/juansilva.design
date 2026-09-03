@@ -16,7 +16,7 @@
     "figma"
   ],
   "liveUrl": "https://upos.juanpablosilva.com.br/",
-  "evidenceLink": "https://app.upos.com.br/login",
+  "evidenceLink": "https://github.com/zokuWebDesign/upOS",
   "featured": true,
   "preview": "/assets/images/upos-preview.webp",
   "copy": {
@@ -26,7 +26,7 @@
       "description": "Designed an eight-module operations product for a technical-assistance business — service desk, quoting, a work-order kanban, catalogues, customers and finance — then designed and coded its marketing site in Next.js. The product is live in production, and a later team rebuilt the app on a different stack and kept the design.",
       "previewAlt": "upOS field-service operations marketing site, with the product dashboard in the hero",
       "liveLabel": "View the build (self-hosted copy)",
-      "evidenceLabel": "The product, live in production"
+      "evidenceLabel": "Source code"
     },
     "pt": {
       "title": "Produto de gestão de ordens de serviço e site",
@@ -34,7 +34,7 @@
       "description": "Desenhei um produto de operações com oito módulos para uma assistência técnica — atendimento, orçamento, kanban de ordens de serviço, catálogos, clientes e financeiro — e depois desenhei e programei o site em Next.js. O produto está em produção, e um time posterior refez o app em outra stack mantendo o design.",
       "previewAlt": "Site do upOS, com o painel do produto em destaque",
       "liveLabel": "Ver o build (cópia própria)",
-      "evidenceLabel": "O produto em produção"
+      "evidenceLabel": "Código-fonte"
     }
   },
   "evidenceWeight": 12,

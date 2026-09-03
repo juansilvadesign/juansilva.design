@@ -35,6 +35,51 @@ const localizedProjectCopySchema = z
   .strict();
 
 /**
+ * The rich body of a case study, in authored order.
+ *
+ * Mirrors `validateCaseStudyBlocks` in `_config/portfolio/schema.mjs` — the two
+ * are halves of one release and must change together, or the store will accept
+ * a record the site cannot render.
+ *
+ * `image.src` is deliberately constrained to a local path: these assets come
+ * from Notion, whose URLs are signed and expire, so a remote src would publish
+ * a page that goes blank later without failing the build.
+ */
+const caseStudyBlockSchema = z.discriminatedUnion("type", [
+  z.object({ type: z.literal("heading"), level: z.union([z.literal(2), z.literal(3)]), text: z.string().trim().min(1) }).strict(),
+  z.object({ type: z.literal("prose"), body: z.string().trim().min(1) }).strict(),
+  z.object({ type: z.literal("callout"), body: z.string().trim().min(1) }).strict(),
+  z.object({ type: z.literal("quote"), text: z.string().trim().min(1), source: z.string().trim().min(1).optional() }).strict(),
+  z.object({ type: z.literal("list"), ordered: z.boolean(), items: z.array(z.string().trim().min(1)).min(1) }).strict(),
+  z
+    .object({
+      type: z.literal("statRow"),
+      items: z
+        .array(
+          z
+            .object({
+              value: z.string().trim().min(1),
+              label: z.string().trim(),
+              icon: z.string().trim().min(1).optional(),
+            })
+            .strict(),
+        )
+        .min(1),
+    })
+    .strict(),
+  z
+    .object({
+      type: z.literal("image"),
+      src: z.string().startsWith("/", "Case-study images must be local: Notion URLs expire"),
+      alt: z.string(),
+      caption: z.string().trim().min(1).optional(),
+      width: z.number().int().positive().optional(),
+      height: z.number().int().positive().optional(),
+    })
+    .strict(),
+]);
+
+/**
  * Case-study prose for the detail page. `null` is the "coming soon" state and
  * is the default: each case study is written from its own interview rather
  * than generated from the record.
@@ -47,8 +92,12 @@ const localizedCaseStudySchema = z
     sections: z
       .array(z.object({ heading: z.string().trim().min(1), body: z.string().trim().min(1) }).strict())
       .optional(),
+    /** The long form. Independent of `sections`; a record may carry either or both. */
+    blocks: z.array(caseStudyBlockSchema).optional(),
   })
   .strict();
+
+export type CaseStudyBlock = z.infer<typeof caseStudyBlockSchema>;
 
 /**
  * Stamp written by the evidence store's exporter.

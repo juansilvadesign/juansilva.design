@@ -20,7 +20,14 @@ const alternatives = locales.filter((locale) => locale !== lang);
         hreflang={localeInfo[locale].hreflang}
         aria-label={`${copy.locale.switchLabel}: ${locale.toUpperCase()}`}
       >
-        {locale.toUpperCase()}
+        {/* Decorative: the anchor's aria-label already names the destination
+            locale, so the flag must not repeat it in the accessibility tree. */}
+        <img
+          src={`/assets/icons/flags/${localeInfo[locale].flag}.svg`}
+          alt=""
+          width="24"
+          height="24"
+        />
       </a>
     ))
   }
@@ -30,10 +37,6 @@ const alternatives = locales.filter((locale) => locale !== lang);
   .language-switch {
     display: flex;
     align-items: center;
-    font-family: var(--font-ui);
-    font-size: var(--type-label-size);
-    font-weight: var(--font-weight-semibold);
-    line-height: var(--type-label-leading);
   }
 
   a {
@@ -45,14 +48,29 @@ const alternatives = locales.filter((locale) => locale !== lang);
     border: var(--border-width) solid var(--border-subtle);
     border-radius: var(--radius-pill);
     background: var(--background-deep);
-    color: var(--text-primary);
     transition:
-      background-color var(--motion-fast) var(--ease-standard),
-      color var(--motion-fast) var(--ease-standard);
+      border-color var(--motion-fast) var(--ease-standard),
+      background-color var(--motion-fast) var(--ease-standard);
   }
 
   a:hover {
+    border-color: var(--border-interactive);
     background: var(--surface-hover);
-    color: var(--text-heading);
+  }
+
+  a:focus-visible {
+    outline: var(--border-width-strong) solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  img {
+    width: var(--space-px-24);
+    height: var(--space-px-24);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition-duration: var(--motion-reduced);
+    }
   }
 </style>
