@@ -122,6 +122,20 @@ export function assertedDate(d: { start: string | null; end: string | null }): s
   return d.end ?? d.start ?? "";
 }
 
+/**
+ * The thumbnail for a locale.
+ *
+ * A record may override the shared `preview` per language when the artwork
+ * itself carries copy. Every surface goes through here so the card, the index
+ * and the detail page cannot disagree about which picture a locale gets.
+ */
+export function previewFor(
+  data: { preview: string; copy: Record<string, { preview?: string }> },
+  lang: string,
+): string {
+  return data.copy[lang]?.preview ?? data.preview;
+}
+
 export interface TimeframeCopy {
   dateRange: string;
   dateOngoing: string;

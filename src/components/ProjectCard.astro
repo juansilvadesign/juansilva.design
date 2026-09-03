@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import StackBadge from "./StackBadge.astro";
 import { localizedPath, t, type Locale } from "../i18n";
-import { SIGNAL_FACETS, formatTimeframe, projectActions } from "../lib/projects";
+import { SIGNAL_FACETS, formatTimeframe, previewFor, projectActions } from "../lib/projects";
 import "../styles/evidence-rail.css";
 
 interface Props {
@@ -38,7 +38,8 @@ if (secondary.kind === "case" && d.stack.some((s) => s !== "figma")) {
   );
 }
 
-const isVideo = /\.(mp4|webm)$/i.test(d.preview);
+const preview = previewFor(d, lang);
+const isVideo = /\.(mp4|webm)$/i.test(preview);
 
 // The reference's chip is compact metadata, not a repeat of what sits below it:
 // the stack badges already name the stack two rows down.
@@ -100,10 +101,10 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
   <div class="case-card__visual">
     {
       isVideo ? (
-        <video src={d.preview} muted loop playsinline autoplay aria-label={projectCopy.previewAlt} />
+        <video src={preview} muted loop playsinline autoplay aria-label={projectCopy.previewAlt} />
       ) : (
         <img
-          src={d.preview}
+          src={preview}
           alt={projectCopy.previewAlt}
           width="1920"
           height="1080"

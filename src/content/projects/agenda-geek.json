@@ -16,13 +16,13 @@
   "liveUrl": "https://www.figma.com/proto/OD664WpvRoF8x2mMyhTPnr/Agenda-Geek---g86?page-id=6%3A19&node-id=805%3A7309&starting-point-node-id=805%3A7309",
   "evidenceLink": "https://www.figma.com/design/OD664WpvRoF8x2mMyhTPnr/Agenda-Geek---g86",
   "featured": false,
-  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "preview": "/assets/images/agenda-geek-preview-en.webp",
   "copy": {
     "en": {
       "title": "E-Waste Gincana Platform for an NGO — Competition Winner",
       "tagline": "Research, personas and three screens on the entry that won, against fourteen teams.",
       "description": "A platform for an NGO's inter-school e-waste collection contest: schools register, track their collection on a live ranking, earn badges and reach the NGO. Designed over five months in a team of three against fourteen competing entries, and won. Mine was the primary research — nine in-depth interviews carried through to an analysis grid that traces every insight back to the quote that produced it — plus the personas and journey, co-ownership of the user flow, and the registration, FAQ and school-profile screens. The team lead was someone else, and the platform was never built.",
-      "previewAlt": "Design file for an NGO e-waste collection contest platform",
+      "previewAlt": "Agenda Geek project cover: the platform's home page beside the team and sponsor credits",
       "liveLabel": "Open the prototype",
       "evidenceLabel": "The design file"
     },
@@ -30,9 +30,10 @@
       "title": "Plataforma de gincana de lixo eletrônico para ONG — vencedora do desafio",
       "tagline": "Pesquisa, personas e três telas na entrega que venceu, entre quatorze times.",
       "description": "Uma plataforma para a gincana interescolar de coleta de lixo eletrônico de uma ONG: escolas se cadastram, acompanham a coleta num ranking ao vivo, ganham selos e falam com a ONG. Desenhada em cinco meses, num time de três, contra quatorze times concorrentes — e venceu. Meu escopo foi a pesquisa primária — nove entrevistas em profundidade levadas até uma grade de análise que liga cada insight à fala que o gerou — mais as personas e a jornada, a cocriação do fluxo, e as telas de cadastro, FAQ e perfil da escola. A liderança do time era de outra pessoa, e a plataforma nunca foi construída.",
-      "previewAlt": "Arquivo de design da plataforma de gincana de coleta de lixo eletrônico",
+      "previewAlt": "Capa do projeto Agenda Geek: a página inicial da plataforma ao lado dos créditos de equipe e patrocínio",
       "liveLabel": "Abrir o protótipo",
-      "evidenceLabel": "O arquivo de design"
+      "evidenceLabel": "O arquivo de design",
+      "preview": "/assets/images/agenda-geek-preview-pt.webp"
     }
   },
   "evidenceWeight": 4,
@@ -102,7 +103,7 @@
         },
         {
           "type": "quote",
-          "text": "Atualmente o Brasil ocupa o 5º lugar dos países que mais geram resíduos eletrônicos. De acordo com relatório desenvolvido pela Universidade das Nações Unidas, o Brasil descartou, apenas em 2019,  mais de 2 milhões de toneladas de resíduos eletrônicos , sendo que menos de 3% desse volume foi reciclado. — Relatório Green Eletron.Brazil currently ranks 5th of the top countries that generate the most electronic waste. According to a report developed by the United Nations University, Brazil disposed, in 2019 alone, more than 2 million tons of electronic waste, and less than 3% of this volume was recycled. - Green Eletron’s Report."
+          "text": "Brazil currently ranks 5th of the top countries that generate the most electronic waste. According to a report developed by the United Nations University, Brazil disposed, in 2019 alone, more than 2 million tons of electronic waste, and less than 3% of this volume was recycled. - Green Eletron’s Report."
         },
         {
           "type": "heading",
@@ -232,28 +233,28 @@
         {
           "type": "heading",
           "level": 3,
-          "text": "Realização das entrevistas"
+          "text": "Conducting the interviews"
         },
         {
           "type": "statRow",
           "items": [
             {
               "value": "9 📹",
-              "label": "Entrevistas"
+              "label": "Interviews"
             },
             {
               "value": "4 🧑‍🏫",
-              "label": "Representantes de escola"
+              "label": "School representatives"
             },
             {
               "value": "5 👲",
-              "label": "Estudantes"
+              "label": "Students"
             }
           ]
         },
         {
           "type": "prose",
-          "body": "O resultado da pesquisa foi reunido em um novo mapa de afinidade onde separamos os principais insights das entrevistas."
+          "body": "The research results were gathered into a new affinity map, where we separated the main insights from the interviews."
         },
         {
           "type": "image",
@@ -554,7 +555,7 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "🎬 Apresentação do Projeto"
+          "text": "🎬 Project Presentation"
         },
         {
           "type": "prose",

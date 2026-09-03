@@ -5,7 +5,7 @@ import ProjectsIndex from "../../components/projects/ProjectsIndex";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { localeStaticPaths, localizedPath, pageTitle, t, type Locale } from "../../i18n";
 import type { ProjectSummary } from "../../lib/projects";
-import { byEvidence } from "../../lib/projects";
+import { byEvidence, previewFor } from "../../lib/projects";
 import "../../styles/projects-index.css";
 
 export function getStaticPaths() {
@@ -33,7 +33,7 @@ const projects: ProjectSummary[] = (await getCollection("projects"))
       title: c.title,
       tagline: c.tagline,
       stack: d.stack,
-      preview: d.preview,
+      preview: previewFor(d, lang),
       previewAlt: c.previewAlt,
       liveUrl: d.liveUrl,
       liveLabel: c.liveLabel,

@@ -4,7 +4,7 @@ import Footer from "../../../components/Footer.astro";
 import StackBadge from "../../../components/StackBadge.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { locales, defaultLocale, localizedPath, pageTitle, t } from "../../../i18n";
-import { SIGNAL_FACETS, byEvidence, formatTimeframe } from "../../../lib/projects";
+import { SIGNAL_FACETS, byEvidence, formatTimeframe, previewFor } from "../../../lib/projects";
 import "../../../styles/evidence-rail.css";
 
 export async function getStaticPaths() {
@@ -60,7 +60,7 @@ const indexHref = localizedPath("/projects/", lang);
       </header>
 
       <figure class="case__media">
-        <img src={d.preview} alt={c.previewAlt} width="1600" height="900" decoding="async" />
+        <img src={previewFor(d, lang)} alt={c.previewAlt} width="1600" height="900" decoding="async" />
       </figure>
 
       <!-- 2 · Statement band -->

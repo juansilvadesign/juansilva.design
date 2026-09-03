@@ -28,6 +28,12 @@ const localizedProjectCopySchema = z
     /** The longer form, for the homepage showcase and the case-study intro. */
     description: z.string().trim().min(1),
     previewAlt: z.string().trim().min(1),
+    /**
+     * Optional per-locale thumbnail. Some previews have copy baked into the
+     * artwork, so the English and Portuguese cards are different pictures.
+     * Absent, the locale falls back to the record's top-level `preview`.
+     */
+    preview: hrefSchema.optional(),
     liveLabel: z.string().trim().min(1),
     /** Present only alongside `evidenceLink`. */
     evidenceLabel: z.string().trim().min(1).optional(),
