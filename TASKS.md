@@ -1135,7 +1135,7 @@ carries it.**
 
 ---
 
-## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K3 + K4.1 shipped 2026-09-03
+## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K3 + K4.1/K4.3 shipped 2026-09-03
 
 Source of record: the Maestri fichário **"Fichário"** on the `juansilva.design UI Refactor`
 canvas — `react-bits-changes` + `uiverse-1..10`. Read it with `maestri note read "<name>"`.
@@ -1484,7 +1484,7 @@ thing that looks small in the desktop screenshot; `baseIntensity` **0.18** / `ho
 CPU for a loop that never stops); `fuzzRatio` **30/128**; `lineHeight` **1.05**; and the
 authored breaks in `notFound.titleLines`.
 
-### K4 — Existing-control swaps (uiverse 1, 3, 4, 6) 🟢 uiverse-1 shipped 2026-09-03
+### K4 — Existing-control swaps (uiverse 1, 3, 4, 6) 🟢 uiverse-1 + uiverse-3 shipped 2026-09-03
 
 #### uiverse-1 — Source-code button ✅ 2026-09-03
 
@@ -1567,8 +1567,86 @@ long enough to contain the event, recording `:hover` alongside the position.
 ⏭️ **Knobs:** `STAR_FLOOR` (**1**, so the counter needs ≥2); `--sweep-duration`
 (**1000ms**, upstream's); the ≥1280 breakpoint for the centre/left flip.
 
-- [ ] **uiverse-3 — "View project"** on the `/projects` cards →
-      `components/projects/ProjectsIndex.tsx` + `styles/projects-index.css`.
+#### uiverse-3 — "View project" on the `/projects` cards ✅ 2026-09-03
+
+- [x] `ProjectsIndex.tsx` gains the circle + arrow + label spans; `projects-index.css`
+      replaces the flat `.pcard__cta` rule with the ported `learn-more` effect. **50 cards
+      × 2 locales**, grid **and** list.
+- [x] 🔑 **It is a `<span>`, never a button.** The card is already one
+      `<a class="pcard__link">` wrapping media, title, rail and CTA, so a `<button>` or
+      nested `<a>` here would be invalid content **and** a nested-interactive defect. Every
+      new node is a span, the circle is `aria-hidden`, and the label keeps the meaning.
+- [x] ⇒ the effect is driven from **`.pcard__link:hover`** (Juan's call: the tile is what
+      people aim at, and it matches SpotlightCard/BorderGlow, which are already card-keyed).
+      `:focus-visible` carries the same three rules, so keyboard gets parity.
+
+⚠️ **It shares its element with uiverse-6.** The span renders
+`hasCaseStudy ? caseStudy : caseStudySoon`, and **1 of 50** records (`agenda-geek`) has a
+case study — so 49 cards read *"View project"* and one reads uiverse-6's *"Read the case
+study"*, growing as J4 drafts prose. The effect is bound to the **element, not the label**:
+a grid where one card animates differently is a defect. uiverse-6 remains the homepage
+`ProjectCard` button, which is a genuinely different element.
+
+⛔ **`width: 12rem` was dropped, and it had to be.** The note fixes the control at 192px;
+PT's *"Ler o estudo de caso"* does not fit. The label sizes the control and the circle is
+absolutely positioned over it. Enumerated the whole slot rather than the labels we expected:
+**0 clipped** across 375/600/768/1024/1440 × EN/PT, narrowest control 244px.
+
+⭐ **Colour roles are local custom properties, for Milestone L.** Juan asked that the future
+light theme restore the note's *original* mapping rather than inherit this inverted one, so
+`--cta-fill` / `--cta-mark` / `--cta-label` / `--cta-label-active` sit in one block with the
+originals recorded beside them. ⛔ **Deliberately not shipped as a
+`prefers-color-scheme: light` block** — there is no light palette yet, so that would fire on
+light-preference visitors *today* against a dark-only page.
+
+**Verified against the build, not the dev server:**
+
+| Gate | Result |
+|---|---|
+| Cards carrying it | **50** per locale, 0 console errors |
+| Animation | circle 40 → 319 across **24** positions, arrow 0 → 16 across 12, settling **445ms** vs 450 declared |
+| Shaft materialises | `rgba(0,0,0,0)` → `rgb(12,14,18)` — the note's actual mechanism, not a lookalike: at rest only the chevron shows |
+| Contrast | inverted label on cyan fill **9.85:1** (site's Rung-6 tightest is 4.75) |
+| K0.4 tokens | zero colour literals in the shipped `.pcard__cta*` rules |
+| K0.6 reduced motion | `--cta-duration: var(--motion-reduced)` — the fill stays, it just stops sweeping |
+| K0.5 | untouched: this stylesheet loads **only** on `/projects/` + `/pt/projects/`, never on the homepage or the 100 case-study pages |
+
+🔴 **Three defects found only by looking, all fixed:**
+
+1. **The circle was an ellipse.** `height: 100%` of a text-sized box made it 40×54. The
+   control now takes its height from `--cta-size` and the circle is square at rest.
+2. **List view rendered a 1056px cyan bar.** `.pcard__body` is a flex column, so the CTA
+   stretches to the card — which *is* the right look in a 260px grid tile and is absurd in a
+   wide row. `align-self: flex-start` in the list block sizes it to its label (**168px**
+   hovered). ⭐ Same reason the file already restricts SpotlightCard and BorderGlow to grid.
+3. **The chevron sat right-of-centre** (Juan, on review). Measured **6.54px** off in a 40px
+   circle, from two compounding offsets.
+
+⭐ **Why the chevron was off, and why the note is off too.** A 45°-rotated square puts
+**all** of its ink on the right half of its own box: the two arms end at the box centre and
+the apex reaches `+S·√2/2`, so the ink centre is `+S·√2/4 ≈ 0.354·S`. The note then anchors
+that box at `right: 0` of the shaft, whose right edge is past the circle centre — so the
+error is the sum of the two. The note carries the same flaw (~2.5px in its 48px circle);
+it is just less visible at that size. ⛔ **Not fixable by nudging `left`** — that treats one
+symptom. Two declarations, each meaning exactly one thing:
+`right: calc(S / -2)` centres the **box** on the shaft's right end, and
+`translateX(calc(S * -0.354))` pulls it back so the **ink** centres there too. The shaft's
+right end is itself pinned to the circle centre via
+`left: calc(var(--cta-size) / 2 - var(--space-px-16))`.
+
+⭐ **Measured, not eyeballed.** An instrument reading the real computed `::before` box and
+simulating the rotation's ink extent reported **6.54 → 0.00px** from centre, confirmed at 8×
+magnification against a centre line, and again in list view. ⛔ The instrument had to be
+extended to add the new `translateX` from the computed matrix first — left as it was, it
+would have read the pre-transform position and **passed a still-broken chevron**.
+Hover clearance re-checked after the move: apex reaches 39.5px, the label starts at 54px.
+
+🔴 **A dead read path nearly cost a false diagnosis.** `python3 -m http.server 4321` silently
+failed to bind — **Astro's dev server already owned 4321** — so the first measurements came
+from live dev output: 0 cards and `_jsxDEV is not a function`. The tell was that the error
+also fired in `TypedHead.tsx`, a file this work never touched. ⛔ Serve `dist/` on a port the
+toolchain does not use, and confirm what answered before trusting a failure.
+
 - [ ] **uiverse-4 — hero CTA.** `Hero.astro:49` currently renders `copy.hero.emailCta`
       = *"Email me"*. Apply the `smart-moth-68` effect and ship **one** label.
       **Recommend "Get in Touch"** — the most conventional phrasing for the US/EU

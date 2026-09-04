@@ -469,14 +469,149 @@
   color: var(--text-primary);
 }
 
+/* ── Card CTA — uiverse-3 (`learn-more`) ──────────────────────────────────
+ *
+ * A circle parked at the left that swallows the whole control on hover, with
+ * the arrow gaining its shaft and travelling right as the label inverts.
+ *
+ * ⛔ Two departures from the note, both forced:
+ *   1. It is a <span>, not a <button> — the card is already an anchor, so the
+ *      effect is driven from `.pcard__link:hover` (Juan's call: the tile is
+ *      what people aim at) rather than from the control's own :hover.
+ *   2. `width: 12rem` is dropped. It is fixed in the note and PT's longest
+ *      label — "Ler o estudo de caso" — does not fit in it. The label sizes
+ *      the control instead, and the circle is absolutely positioned over it.
+ *
+ * ⭐ The colour roles are local custom properties on purpose. Milestone L adds
+ * a second semantic token layer, and Juan asked that the light theme restore
+ * the note's ORIGINAL mapping rather than inherit this inverted one. When L
+ * lands, redefine these four in one place:
+ *     --cta-fill: <dark neutral>   (the note's #282936)
+ *     --cta-mark: <white>          (arrow on that dark circle)
+ *     --cta-label: <dark neutral>  (rest, on a light card)
+ *     --cta-label-active: <white>  (once the circle has swallowed the control)
+ * ⛔ Deliberately NOT shipped as a `prefers-color-scheme: light` block — there
+ * is no light palette yet, so it would fire on light-preference visitors today
+ * and wreck the contrast on a dark-only page.
+ */
 .pcard__cta {
+  --cta-fill: var(--primary);
+  --cta-mark: var(--background-deep);
+  --cta-label: var(--text-secondary);
+  --cta-label-active: var(--background-deep);
+  --cta-size: var(--space-px-40);
+  --cta-duration: 450ms;
+  --cta-ease: cubic-bezier(0.65, 0, 0.076, 1);
+
+  position: relative;
+  display: inline-flex;
+  height: var(--cta-size);
+  align-items: center;
   margin-top: auto;
-  padding-top: var(--space-px-8);
+  vertical-align: middle;
+}
+
+/* The label sizes the control's width; its left padding reserves the circle's
+ * lane. The height comes from `--cta-size` above, so the circle stays square
+ * at rest instead of stretching into an ellipse with the text box. */
+.pcard__cta-text {
+  position: relative;
+  z-index: 1;
+  padding-right: var(--space-px-18);
+  padding-left: calc(var(--cta-size) + var(--space-px-14));
+  color: var(--cta-label);
   font-family: var(--font-meta);
   font-size: var(--type-meta-size);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text-secondary);
+  transition: color var(--cta-duration) var(--cta-ease);
+}
+
+.pcard__cta-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--cta-size);
+  height: var(--cta-size);
+  border-radius: var(--radius-pill);
+  background: var(--cta-fill);
+  transition: width var(--cta-duration) var(--cta-ease);
+}
+
+/* The shaft is absent at rest — only the chevron head shows — and appears as
+ * the arrow travels. That asymmetry is the note's actual mechanism, not a
+ * side effect of its colours. */
+/* The shaft ends at the circle's centre, which is where the chevron's ink is
+ * centred below. At rest the shaft is invisible, so that end point is the only
+ * thing positioning the arrow. */
+.pcard__cta-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--cta-size) / 2 - var(--space-px-16));
+  width: var(--space-px-16);
+  height: var(--border-width-strong);
+  margin: auto;
+  background: none;
+  transition:
+    background-color var(--cta-duration) var(--cta-ease),
+    transform var(--cta-duration) var(--cta-ease);
+}
+
+/* A square showing two borders, rotated into a chevron.
+ *
+ * ⛔ A 45°-rotated square puts ALL of its ink on the right half of its own box:
+ * the two arms end at the box centre and the apex reaches +S·√2/2, so the ink
+ * centre sits at +S·√2/4 ≈ 0.354·S. Anchoring the box at `right: 0` — as the
+ * note does — therefore reads visibly right-of-centre; it measured 6.54px off
+ * in a 40px circle. Two declarations fix it, and each means one thing:
+ *   `right`     centres the BOX on the shaft's right end,
+ *   `translateX` pulls it back by the ink offset so the INK centres there too.
+ */
+.pcard__cta-arrow::before {
+  position: absolute;
+  top: calc((var(--space-px-10) - var(--border-width-strong)) / -2);
+  right: calc(var(--space-px-10) / -2);
+  width: var(--space-px-10);
+  height: var(--space-px-10);
+  border-top: var(--border-width-strong) solid var(--cta-mark);
+  border-right: var(--border-width-strong) solid var(--cta-mark);
+  content: "";
+  transform: translateX(calc(var(--space-px-10) * -0.354)) rotate(45deg);
+}
+
+.pcard__link:hover .pcard__cta-circle,
+.pcard__link:focus-visible .pcard__cta-circle {
+  width: 100%;
+}
+
+.pcard__link:hover .pcard__cta-arrow,
+.pcard__link:focus-visible .pcard__cta-arrow {
+  background: var(--cta-mark);
+  transform: translateX(var(--space-px-16));
+}
+
+.pcard__link:hover .pcard__cta-text,
+.pcard__link:focus-visible .pcard__cta-text {
+  color: var(--cta-label-active);
+}
+
+/* `.pcard__body` is a flex column, so the CTA stretches to the card width. In
+ * the grid that is what makes it read as a deliberate full-width control. In a
+ * list row the body is ~1050px, and a cyan bar that long stops reading as a
+ * button entirely — the same reason SpotlightCard and BorderGlow are grid-only.
+ * Size it to its label there instead. */
+.pcard[data-view="list"] .pcard__cta {
+  align-self: flex-start;
+}
+
+/* The fill is a state change, not decorative travel, so it stays — it just
+ * arrives instantly instead of sweeping. Removing it would drop the only
+ * hover affordance the CTA has. */
+@media (prefers-reduced-motion: reduce) {
+  .pcard__cta {
+    --cta-duration: var(--motion-reduced);
+  }
 }
 
 /* ── Empty state ──────────────────────────────────────────────────────── */

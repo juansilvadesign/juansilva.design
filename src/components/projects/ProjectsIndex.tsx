@@ -73,7 +73,20 @@ function Card({ p, copy, view }: { p: ProjectSummary; copy: IndexCopy; view: "gr
         <h3 className="pcard__title">{p.title}</h3>
         <p className="pcard__tagline">{p.tagline}</p>
         <EvidenceRail p={p} copy={copy} />
-        <span className="pcard__cta">{p.hasCaseStudy ? copy.caseStudy : copy.caseStudySoon}</span>
+        {/*
+          uiverse-3. All spans: the card is already one anchor, and a <button>
+          or nested <a> here would be invalid content plus a nested-interactive
+          defect. The circle is decoration, so it is hidden from assistive tech
+          and the label carries the meaning on its own.
+        */}
+        <span className="pcard__cta">
+          <span aria-hidden="true" className="pcard__cta-circle">
+            <span className="pcard__cta-arrow" />
+          </span>
+          <span className="pcard__cta-text">
+            {p.hasCaseStudy ? copy.caseStudy : copy.caseStudySoon}
+          </span>
+        </span>
       </span>
     </a>
   );
