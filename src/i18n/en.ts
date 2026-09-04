@@ -86,7 +86,6 @@ export const en = {
     /** Second card action when the record asserts `evidenceSignals.sourceCode`. */
     sourceFallback: "Source code",
     /** Second card action otherwise — every project has a case-study page. */
-    caseFallback: "Read the case study",
     /** Accessible name for the star count; a bare numeral reads as nothing. */
     starsOne: "1 star on GitHub",
     starsMany: "{n} stars on GitHub",

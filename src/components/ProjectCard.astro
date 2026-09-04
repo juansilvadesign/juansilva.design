@@ -5,6 +5,7 @@ import StackBadge from "./StackBadge.astro";
 import { localizedPath, t, type Locale } from "../i18n";
 import { SIGNAL_FACETS, formatTimeframe, previewFor, projectActions } from "../lib/projects";
 import "../styles/evidence-rail.css";
+import "../styles/action-row.css";
 
 interface Props {
   lang: Locale;
@@ -25,7 +26,14 @@ const [primary, secondary] = projectActions({
   liveLabel: projectCopy.liveLabel,
   evidenceLink: d.evidenceLink,
   caseHref: localizedPath(`/projects/${project.id}/`, lang),
-  caseLabel: copy.projects.caseFallback,
+  // The SAME predicate `/projects` uses (`projects.astro` → `hasCaseStudy`),
+  // deliberately reusing its two labels rather than the near-duplicate
+  // `projects.caseFallback`. Those had drifted: this card promised "Read the
+  // case study" for records whose `caseStudy` is null, while the index called
+  // the very same record "View project". The schema makes `caseStudy` either
+  // null or both locales, so this one check is complete.
+  caseLabel:
+    d.caseStudy !== null ? copy.projects.index.caseStudy : copy.projects.index.caseStudySoon,
   liveFallbackLabel: copy.projects.liveProjectFallback,
   sourceLabel: copy.projects.sourceFallback,
 });
@@ -82,7 +90,20 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
         rel="noopener noreferrer"
         aria-label={primary.label}
       >
-        <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
+        <svg
+          class="action-primary__icon"
+          viewBox="0 0 20 20"
+          fill="none"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M17.5 7.50001L17.5 2.50001M17.5 2.50001H12.5M17.5 2.50001L10 10M8.33333 2.5H6.5C5.09987 2.5 4.3998 2.5 3.86502 2.77248C3.39462 3.01217 3.01217 3.39462 2.77248 3.86502C2.5 4.3998 2.5 5.09987 2.5 6.5V13.5C2.5 14.9001 2.5 15.6002 2.77248 16.135C3.01217 16.6054 3.39462 16.9878 3.86502 17.2275C4.3998 17.5 5.09987 17.5 6.5 17.5H13.5C14.9001 17.5 15.6002 17.5 16.135 17.2275C16.6054 16.9878 16.9878 16.6054 17.2275 16.135C17.5 15.6002 17.5 14.9001 17.5 13.5V11.6667"
+            stroke="currentColor"
+            stroke-width="1.66667"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
         {primary.label}
       </a>
 
@@ -91,12 +112,33 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
           <SourceCodeButton {lang} href={secondary.href} slug={project.id} />
         ) : (
           <a
-            class="button button--secondary"
+            class="button button--secondary case-cta"
             href={secondary.href}
             target={secondary.external ? "_blank" : undefined}
             rel={secondary.external ? "noopener noreferrer" : undefined}
           >
-            {secondary.label}
+            <svg
+              class="case-cta__arr case-cta__arr--in"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
+            <span class="case-cta__text">{secondary.label}</span>
+            <span class="case-cta__circle" aria-hidden="true"></span>
+            <svg
+              class="case-cta__arr case-cta__arr--out"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+              ></path>
+            </svg>
           </a>
         )
       }
@@ -203,6 +245,145 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     height: var(--space-px-16);
   }
 
+  /*
+   * uiverse-6 — the case-study CTA, ported from the binder note's
+   * `.animated-button`.
+   *
+   * ⛔ K0.2: the note's own URL repeats uiverse-5's `loud-chicken-53` and
+   * points at a different component entirely. Everything below is built from
+   * the note's CODE, never from that link.
+   *
+   * K0.4: the note is built on `greenyellow` with a `#212121` inversion. Both
+   * are re-mapped — the accent onto `--primary`, which the card's own hover
+   * already borders in, so the button reads as part of that gesture rather
+   * than a second unrelated accent. Measured 9.24:1 for the ring and label on
+   * the card surface, and again for the dark label once the cyan floods.
+   */
+
+  .case-cta {
+    --case-accent: var(--primary);
+    --case-ink-active: var(--background);
+    --case-arrow-size: var(--space-px-16);
+    --case-arrow-inset: var(--space-px-16);
+    --case-shift: var(--space-px-12);
+    --case-circle-rest: var(--space-px-20);
+    --case-duration: 800ms;
+    --case-ring-duration: 600ms;
+    /* The note's own curve — a long, decelerating settle. Not a token: no
+     * existing easing token matches it, and K0.4 governs colour, not motion. */
+    --case-ease: cubic-bezier(0.23, 1, 0.32, 1);
+
+    position: relative;
+    overflow: hidden;
+    /* Wide enough that the centred label never runs under either arrow.
+     * The note buys the same clearance with 36px; this is the nearest token. */
+    padding-inline: var(--space-px-40);
+    border-radius: var(--radius-pill);
+    box-shadow: 0 0 0 var(--border-width-strong) var(--case-accent);
+    color: var(--case-accent);
+    transition:
+      color var(--motion-base) var(--case-ease),
+      box-shadow var(--case-ring-duration) var(--case-ease),
+      border-radius var(--case-ring-duration) var(--case-ease);
+  }
+
+  /* Both arrows are decoration for a link whose label already carries the
+   * meaning, so neither is exposed and neither can take the pointer. */
+  .case-cta__arr {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    width: var(--case-arrow-size);
+    height: var(--case-arrow-size);
+    fill: currentColor;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition:
+      left var(--case-duration) var(--case-ease),
+      right var(--case-duration) var(--case-ease);
+  }
+
+  .case-cta__arr--out {
+    right: var(--case-arrow-inset);
+  }
+
+  .case-cta__arr--in {
+    left: -25%;
+  }
+
+  .case-cta__text {
+    position: relative;
+    z-index: 1;
+    transform: translateX(calc(var(--case-shift) * -1));
+    transition: transform var(--case-duration) var(--case-ease);
+  }
+
+  /*
+   * The flood. The note fixes this at 220px, which covers ITS button and
+   * nothing wider — below 768px this control is `width: 100%` and a 220px
+   * circle would leave the edges unflooded. `150%` of the button's own width
+   * always exceeds its diagonal at this aspect ratio, so the fill is complete
+   * at every width, and `aspect-ratio` keeps it a circle rather than an
+   * ellipse as it grows.
+   */
+  .case-cta__circle {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    width: var(--case-circle-rest);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    opacity: 0;
+    background: var(--case-accent);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition:
+      width var(--case-duration) var(--case-ease),
+      opacity var(--case-duration) var(--case-ease);
+  }
+
+  /*
+   * Full `:focus-visible` parity here — the opposite of uiverse-4's hero CTA,
+   * and for the opposite reason. That effect HIDES its label, so a persistent
+   * focus state could not carry it; this one only shifts the label 12px and
+   * floods behind it, leaving it readable throughout. uiverse-3's parity rule
+   * therefore applies unchanged.
+   */
+  .case-cta:hover,
+  .case-cta:focus-visible {
+    border-radius: var(--radius-control);
+    background: var(--color-transparent);
+    box-shadow: 0 0 0 var(--space-px-12) var(--color-transparent);
+    color: var(--case-ink-active);
+  }
+
+  .case-cta:hover .case-cta__arr--out,
+  .case-cta:focus-visible .case-cta__arr--out {
+    right: -25%;
+  }
+
+  .case-cta:hover .case-cta__arr--in,
+  .case-cta:focus-visible .case-cta__arr--in {
+    left: var(--case-arrow-inset);
+  }
+
+  .case-cta:hover .case-cta__text,
+  .case-cta:focus-visible .case-cta__text {
+    transform: translateX(var(--case-shift));
+  }
+
+  .case-cta:hover .case-cta__circle,
+  .case-cta:focus-visible .case-cta__circle {
+    width: 150%;
+    opacity: 1;
+  }
+
+  .case-cta:active {
+    scale: 0.95;
+    box-shadow: 0 0 0 var(--space-px-4) var(--case-accent);
+  }
+
   .case-card__visual {
     display: flex;
     overflow: hidden;
@@ -287,6 +468,40 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
 
     .case-card:hover {
       transform: none;
+    }
+
+    /*
+     * The travel is removed, not shortened: the arrows stay put and the label
+     * never shifts. The colour inversion survives because it is the hover
+     * affordance itself — a fill arriving instantly is a colour change, not
+     * the kind of motion this query opts out of. Same call as the hero's
+     * LinkedIn flood.
+     */
+    .case-cta,
+    .case-cta__arr,
+    .case-cta__text,
+    .case-cta__circle {
+      transition: none;
+    }
+
+    .case-cta__text,
+    .case-cta:hover .case-cta__text,
+    .case-cta:focus-visible .case-cta__text {
+      transform: none;
+    }
+
+    .case-cta:hover .case-cta__arr--out,
+    .case-cta:focus-visible .case-cta__arr--out {
+      right: var(--case-arrow-inset);
+    }
+
+    .case-cta:hover .case-cta__arr--in,
+    .case-cta:focus-visible .case-cta__arr--in {
+      left: -25%;
+    }
+
+    .case-cta:active {
+      scale: none;
     }
   }
 </style>

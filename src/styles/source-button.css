@@ -24,7 +24,9 @@
   justify-content: center;
   padding: var(--control-padding-block) var(--control-padding-inline);
   border: var(--border-width-strong) solid var(--border-interactive);
-  border-radius: var(--radius-control);
+  /* Pill, so all three action-row controls share one shape (2026-09-04).
+   * Radius only — the shine sweep and the star logic are untouched. */
+  border-radius: var(--radius-pill);
   background: var(--background-deep);
   color: var(--text-heading);
   font-family: var(--font-ui);

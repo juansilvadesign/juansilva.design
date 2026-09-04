@@ -176,7 +176,7 @@ const copy = t(lang);
 
   .button--send {
     --send-bob-duration: 600ms;
-    --send-launch-distance: 1.2em;
+    --send-plane-size: 16px;
 
     position: relative;
     overflow: hidden;
@@ -187,8 +187,15 @@ const copy = t(lang);
     display: block;
   }
 
+  .button__plane {
+    position: relative;
+    left: 0;
+  }
+
   .button__plane svg {
     display: block;
+    width: var(--send-plane-size);
+    height: var(--send-plane-size);
     transform-origin: center center;
   }
 
@@ -211,22 +218,46 @@ const copy = t(lang);
       transition: transform var(--motion-base) var(--ease-sweep);
     }
 
+    .button--send .button__plane {
+      transition: left var(--motion-base) var(--ease-sweep);
+    }
+
     .button--send:hover .button__plane {
       animation: send-plane-bob var(--send-bob-duration) var(--ease-sweep)
         infinite alternate;
     }
 
     /*
-     * The launch runs on focus too, but the label exit deliberately does NOT.
-     * uiverse-3 gave `:focus-visible` full parity with `:hover` because its
-     * effect was decorative; here the label leaves the box, and focus is a
-     * PERSISTENT state — a keyboard user would be parked on a button whose
-     * name they can no longer read. Hover is transient and self-cancelling.
+     * The plane finishes CENTRED in the button, not at the note's fixed
+     * `translateX(1.2em)`. Upstream's constant is tuned to its own 4-character
+     * "Send"; against these labels it left the glyph 44px left of centre, which
+     * reads as a half-finished animation once the label has gone.
+     *
+     * The travel is therefore derived, and it moves from `transform` to `left`
+     * so it composes with the bob (which owns `transform` on this element).
+     * A flex item's percentage offsets resolve against the flex container's
+     * CONTENT box, and at `width: auto` that box is exactly the content — so
+     * the plane's rest position is its left edge, and `50%` less half the glyph
+     * lands its centre on the button's. Label-independent, so EN and PT agree.
+     */
+    .button--send:hover .button__plane {
+      left: calc(50% - (var(--send-plane-size) / 2));
+    }
+
+    /*
+     * Focus gets the tilt but NO travel, and that asymmetry is load-bearing.
+     * The label exit is hover-only (below), so on focus the label is still
+     * there — a travelling plane collided with it by a measured 20px. It also
+     * must not centre: that is where the label still is.
+     *
+     * The wider rule stands: uiverse-3 gave `:focus-visible` full parity with
+     * `:hover`, but here the effect HIDES the control's name. Hover is
+     * transient and self-cancelling; focus is persistent, so a keyboard user
+     * would be parked on a button they can no longer read.
      */
     .button--send:hover .button__plane svg,
     .button--send:focus-visible .button__plane svg {
-      transform: translateX(var(--send-launch-distance)) rotate(45deg)
-        scale(1.1);
+      transform: rotate(45deg) scale(1.1);
     }
 
     /*
@@ -408,6 +439,7 @@ const copy = t(lang);
 
     .button--send:hover .button__plane {
       animation: none;
+      left: 0;
     }
 
     .button--send:hover .button__plane svg,

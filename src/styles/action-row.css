@@ -1,0 +1,68 @@
+/**
+ * The primary action in a project's action row — the filled twin of
+ * uiverse-6's outlined `.case-cta`.
+ *
+ * Before this, the row inverted its own hierarchy: the primary was a grey
+ * `--surface-interactive` fill while the secondary carried `--primary` cyan,
+ * so the *secondary* drew the eye first. Filling the primary with the accent
+ * and leaving the secondary outlined puts the rank back the right way up and
+ * gives the pair one shape and one colour.
+ *
+ * SHARED, not scoped, because it renders on two surfaces: the homepage
+ * featured cards (`.case-card__actions`) and all 100 case-study pages
+ * (`.brief__actions`). Copying it into both components is precisely the
+ * two-copies-drift that had one surface promising "Read the case study" while
+ * the other said "View project" about the same record.
+ *
+ * ⛔ Scoped to the action rows, NEVER to `.button` itself. The hero uses the
+ * same class and is deliberately untouched — `:not(.button--secondary)` keeps
+ * this off the secondary in both containers, which carries `.button` too.
+ */
+
+.case-card__actions .button:not(.button--secondary),
+.brief__actions .button:not(.button--secondary) {
+  border-color: var(--primary);
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  color: var(--background);
+  transition:
+    background-color var(--motion-base) var(--ease-standard),
+    border-color var(--motion-base) var(--ease-standard),
+    color var(--motion-base) var(--ease-standard),
+    border-radius var(--motion-base) var(--ease-standard);
+}
+
+/*
+ * The border stays `--primary` rather than going transparent so the box keeps
+ * its 2px and the control cannot change height against its sibling.
+ *
+ * Hover inverts it into the outline the secondary wears at rest and takes the
+ * same pill → control morph, so hovering either half of the pair speaks the
+ * same motion language.
+ */
+.case-card__actions .button:not(.button--secondary):hover,
+.case-card__actions .button:not(.button--secondary):focus-visible,
+.brief__actions .button:not(.button--secondary):hover,
+.brief__actions .button:not(.button--secondary):focus-visible {
+  border-radius: var(--radius-control);
+  background: var(--color-transparent);
+  color: var(--primary);
+}
+
+/*
+ * Inlined so the mark can follow `currentColor` through the inversion. As an
+ * `<img>` it carried a hard-coded `stroke="#CECFD2"`, which measures ~1.4:1 on
+ * the cyan fill — effectively invisible the moment the button was filled.
+ */
+.action-primary__icon {
+  width: var(--space-px-16);
+  height: var(--space-px-16);
+  flex: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-card__actions .button:not(.button--secondary),
+  .brief__actions .button:not(.button--secondary) {
+    transition: none;
+  }
+}

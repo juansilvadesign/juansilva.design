@@ -1135,7 +1135,7 @@ carries it.**
 
 ---
 
-## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K3 + K4.1/K4.3 shipped 2026-09-03
+## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K4 CLOSED 2026-09-03 · next = K5
 
 Source of record: the Maestri fichário **"Fichário"** on the `juansilva.design UI Refactor`
 canvas — `react-bits-changes` + `uiverse-1..10`. Read it with `maestri note read "<name>"`.
@@ -1484,7 +1484,7 @@ thing that looks small in the desktop screenshot; `baseIntensity` **0.18** / `ho
 CPU for a loop that never stops); `fuzzRatio` **30/128**; `lineHeight` **1.05**; and the
 authored breaks in `notFound.titleLines`.
 
-### K4 — Existing-control swaps (uiverse 1, 3, 4, 6) 🟢 uiverse-1 + uiverse-3 + uiverse-4 + the LinkedIn swap shipped 2026-09-03
+### K4 — Existing-control swaps (uiverse 1, 3, 4, 6) ✅ **CLOSED 2026-09-03** — all four shipped, plus the off-binder LinkedIn swap and the 09-04 action-row consistency pass
 
 #### uiverse-1 — Source-code button ✅ 2026-09-03
 
@@ -1714,12 +1714,153 @@ reported the label flying out, which would have condemned the a11y branch as bro
 mouse was still parked on the button from the previous step. The `isHovered` gate in the probe
 is what caught it. ⛔ **Assert the state you think you are measuring, inside the measurement.**
 
-⏭️ **Knobs:** `--send-bob-duration` (**600ms**, upstream's); `--send-launch-distance`
-(**1.2em**, upstream's); the 768px gate, which tracks `.hero__actions`'s own `width: auto`
-breakpoint and must move with it.
-- [ ] **uiverse-6 — "Read the case study."** Renders from `i18n.projects.caseStudy`
-      (`caseFallback`) via `ProjectCard.astro:28` and the index. ⛔ Build from the note's
-      code, not its link (K0.2).
+🔴 **Corrected 2026-09-03 after Juan's review — two defects, one of them shipped blind.**
+
+1. **The plane finished 44.2px LEFT of centre.** Upstream's `translateX(1.2em)` is tuned to
+   its own 4-character *"Send"*; against these labels the glyph stopped short and, with the
+   label gone, read as a half-finished animation. ⭐ **Second constant in this one note that
+   does not survive a different label** — after the `5em` travel. The fix derives it: the
+   travel moved from `transform` to **`left`** (so it composes with the bob, which owns
+   `transform` on that element), and a flex item's percentage offsets resolve against the
+   flex container's **content box** — which at `width: auto` *is* the content — so
+   `calc(50% - (var(--send-plane-size) / 2))` lands the glyph's centre on the button's.
+   Measured **0.0px offset in BOTH locales**, PT's wider button included, which is what
+   proves it is label-independent.
+2. 🔴 **`:focus-visible` overlapped the label by 20px** — the plane travelled while the label
+   stayed. ⛔ **The original gate could not see it: it asserted the label's `transform` was
+   `none` and never that the glyph had not collided with it.** Focus now takes the tilt and
+   **no travel**; overlap **0**, clearance 1.6px on the bounding box (the rotated arrow's ink
+   is well inside that — [[feedback_an_svg_text_bbox_is_not_where_the_glyphs_are]]).
+
+⛔ **Both readings had to be taken on the `svg`, not the `.button__plane` wrapper.** The
+launch transform sits on the child, so the wrapper's `getBoundingClientRect()` never moves —
+the first probe read the wrapper and reported *centred* and *no overlap*, both false.
+
+⭐ `--send-plane-size` now sizes the glyph **and** feeds the centring maths, so the rendered
+size and the arithmetic cannot drift apart.
+
+⏭️ **Knobs:** `--send-bob-duration` (**600ms**, upstream's); `--send-plane-size` (**16px** —
+drives both the glyph and the centring); the 768px gate, which tracks `.hero__actions`'s own
+`width: auto` breakpoint and must move with it.
+#### uiverse-6 — Case-study CTA ✅ 2026-09-03 — **K4 CLOSED**
+
+- [x] `ProjectCard.astro`'s secondary anchor becomes `.case-cta` — two arrows, a label span
+      and the flood circle, styled in the component's scoped block. ⛔ Built from the note's
+      **code**; its URL repeats uiverse-5's `loud-chicken-53` and points at a different
+      component (K0.2), exactly as predicted.
+- [x] **Accent `--primary`, dark label on the flood** (Juan's call). It rhymes with
+      `.case-card:hover`, which already borders in `--primary`, so the control reads as part
+      of that gesture rather than a second accent.
+- [x] **Pill at rest → `--radius-control` on hover, ring kept** (Juan's call). Defensible on
+      this card specifically: with no source-code action, this button is the only route into
+      the project.
+
+🔑 **It renders on ONE card, and that had to be checked rather than assumed.** The homepage
+shows **3** featured records; `syd` and `upos` both carry `sourceCode`, so slot two is
+uiverse-1's SourceCodeButton on those two and this control appears only on
+**`psiativa-ai-operations`** — 1 card × 2 locales. Same shape as uiverse-1's star counter,
+which also ships mostly dormant. It spreads on its own as records lose/gain a repo link.
+
+⛔ **The note's 220px circle does not cover this button, and the failure is mobile-only.**
+Below 768px the control is `width: 100%`: measured **290px wide, diagonal 294.6px**, so a
+fixed 220px circle would leave the corners unflooded — while passing on desktop, where the
+diagonal is 218.5px and 220px *just* covers. Re-derived as `width: 150%` with
+`aspect-ratio: 1`, which exceeds the diagonal at every width and stays a circle rather than
+an ellipse as it grows. Measured **310px vs 218.5** desktop and **429px vs 294.6** mobile.
+⭐ Third upstream constant in this binder that only fits its own demo box.
+
+⚠️ **The label was wrong on this surface, and fixing it was the honest half of the task.**
+`ProjectCard` passed `copy.projects.caseFallback` — *"Read the case study"* — unconditionally,
+while `/projects` renders `hasCaseStudy ? caseStudy : caseStudySoon` for the very same
+record. `psiativa-ai-operations` has **`caseStudy: null`**, so the homepage promised prose
+that does not exist and the two surfaces disagreed about one record. It now reuses the
+index's own predicate and its two labels; both surfaces read **"View project" / "Ver o
+projeto"**, verified on the rendered index, and both will flip to the case-study wording on
+their own as J4 lands prose. ⛔ The near-duplicate `projects.caseFallback` key was **deleted
+from both locales** — it had exactly one consumer, and leaving a second key holding the same
+string is how the two surfaces drifted in the first place.
+
+⭐ **Full `:focus-visible` parity here — deliberately the opposite of uiverse-4.** That
+effect hides its label, so a persistent focus state could not carry it; this one only shifts
+the label 12px and floods *behind* it, so uiverse-3's parity rule applies unchanged.
+
+**Verified in a browser on `dist/`, not asserted:**
+
+| Gate | Result |
+|---|---|
+| Rest | pill `9999px`, 2px `rgb(0,200,255)` ring, cyan label, 210.7 × **58px** |
+| Hover | radius → **8px**, ring → `0 0 0 12px` transparent, label → `rgb(15,18,23)` |
+| Arrow swap | out `16px → -51.7px`, in `-51.7px → 16px` |
+| Flood coverage | **310px vs 218.5** desktop · **429px vs 294.6** mobile — covers both |
+| Contrast, rest | **9.24:1** — cyan ink on `rgb(19,22,27)`, measured from pixels. PASS AA |
+| Contrast, flooded | **9.57:1** — `rgb(15,18,23)` ink on `rgb(0,200,255)`. PASS AA |
+| `:focus-visible` | full parity, label readable, 2px ring intact |
+| Tap target | 58px desktop · 52px at 390px — both ≥44 |
+| K0.6 reduced motion | travel removed (arrows parked, label unshifted); flood kept as an instant colour change |
+| Label agreement | homepage **"View project"** = `/projects` **"View project"** |
+| `npm run check` | 0 errors, 0 warnings, 0 hints · 116 pages |
+
+⏭️ **Knobs:** `--case-accent` / `--case-ink-active` (the Milestone L swap points);
+`--case-duration` (**800ms**) and `--case-ring-duration` (**600ms**, upstream's);
+`--case-arrow-size` / `--case-arrow-inset` / `--case-shift`; `--case-ease`, the note's own
+`cubic-bezier(0.23, 1, 0.32, 1)` — kept as a local knob because no easing token matches it
+and K0.4 governs colour, not motion.
+
+#### K4.6 — Action-row primary, the consistency pass ✅ 2026-09-04
+
+Juan's follow-up to uiverse-6: *"fix the main button of the featured card as well, to keep
+its consistency with View project."* K4 stays closed — this is the swap's consequence, not a
+fifth binder item.
+
+🔑 **The mismatch was hierarchy, not just shape.** The primary was a grey
+`--surface-interactive` fill while the new secondary carried `--primary` cyan — so the
+**secondary outshouted the primary**. Shipped: the primary is now the **filled twin** of the
+outlined `.case-cta` — cyan fill, `--background` ink, `--radius-pill` — and on hover it
+inverts to the outline and takes the same pill → `--radius-control` morph, so hovering either
+half of the pair speaks one motion language.
+
+⛔ **The primary is ONE element across three cards, and only one of them has the cyan
+secondary.** `syd` and `upos` pair it with uiverse-1's SourceCodeButton, so restyling the
+primary alone would have traded card 3's mismatch for a new one on cards 1–2. Juan's call:
+**SourceCodeButton moves to `--radius-pill` too** — radius only, the shine sweep and the
+`STAR_FLOOR` logic untouched — so all three rows share one shape while colour keeps the
+meaning (cyan = the two "go look at it" actions, dark = source).
+
+⭐ **Shared stylesheet, not a scoped block — the opposite call from uiverse-4/6, on purpose.**
+Those have one instance each; this renders on the homepage cards **and** all 100 case-study
+pages (`.brief__actions`), so it lives in `src/styles/action-row.css` and is imported by both.
+Copying it into two components is the exact two-copies-drift that had one surface saying
+*"Read the case study"* while the other said *"View project"* about the same record.
+
+⛔ **Scoped to the action rows, never to `.button`.** The hero uses the same class; Juan's
+call was cards + case-study rows only. The selector is
+`.case-card__actions .button:not(.button--secondary)` — the `:not()` matters because the
+secondary carries `.button` too, so a bare descendant selector would have restyled the very
+control this was meant to pair with.
+
+🔴 **Filling the button broke its icon, invisibly.** The external-link mark was an `<img>`
+carrying a hard-coded `stroke="#CECFD2"` — **~1.4:1 on the cyan fill**, i.e. gone. `<img>`
+cannot see `currentColor`, so it was **inlined** as an SVG with `stroke="currentColor"` and
+now inverts with the label. ⚠️ Only ProjectCard's copy was inlined; `Hero.astro` still uses
+the `<img>` and is deliberately unchanged.
+
+**Verified in a browser on `dist/`, not asserted:**
+
+| Gate | Result |
+|---|---|
+| All 3 card rows | primary + secondary both `9999px`, both **58px**, tops level <0.5px |
+| Primary rest | `rgb(0,200,255)` fill, `rgb(15,18,23)` ink |
+| Primary hover | radius → **8px**, background transparent, label + border `--primary` |
+| Contrast, filled | **9.57:1** on all three — card 3, card 1, and the case-study row. PASS AA |
+| Case-study page | same pill, same fill, **58px** — homepage and `/projects/<slug>/` agree |
+| 390px | primary and secondary both **290 × 52**, equal width, stacked, ≥44 tap target, 0 overflow |
+| K0.6 reduced motion | `transition: none`; the inversion still applies as a state change |
+| Hero untouched | still `8px` / `rgba(255,255,255,0.1)` / `rgb(247,247,247)` |
+| `/projects` index | 0 action rows present — `action-row.css` cannot reach `.pcard` |
+| `npm run check` | 0 errors, 0 warnings, 0 hints · 116 pages |
+
+⏭️ **Knobs:** the fill/ink pair is `--primary` / `--background` inline in `action-row.css` —
+**a third Milestone L swap point**, alongside `--li-flood` and `--case-accent`.
 
 #### K4.5 — LinkedIn control (hero) ✅ 2026-09-03
 
