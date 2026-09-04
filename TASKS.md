@@ -1135,7 +1135,7 @@ carries it.**
 
 ---
 
-## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1 + K2 shipped 2026-09-03
+## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K3 + K4.1 shipped 2026-09-03
 
 Source of record: the Maestri fichário **"Fichário"** on the `juansilva.design UI Refactor`
 canvas — `react-bits-changes` + `uiverse-1..10`. Read it with `maestri note read "<name>"`.
@@ -1484,13 +1484,89 @@ thing that looks small in the desktop screenshot; `baseIntensity` **0.18** / `ho
 CPU for a loop that never stops); `fuzzRatio` **30/128**; `lineHeight` **1.05**; and the
 authored breaks in `notFound.titleLines`.
 
-### K4 — Existing-control swaps (uiverse 1, 3, 4, 6)
+### K4 — Existing-control swaps (uiverse 1, 3, 4, 6) 🟢 uiverse-1 shipped 2026-09-03
 
-- [ ] **uiverse-1 — Source Code button.** Replace the existing control, and add it to the
-      case-study pages that have a repo. **7 of 50 records carry a `github.com`
-      `evidenceLink`** — `syd`, `spaceapps`, `allprice`, `gestrif`, `psi-silvanacabral`,
-      `upos`, `celus` — so this is **7 × 2 locales = 14 pages**, not 100. Cards already
-      carry a `sourceCode` boolean; drive the button off that, never off a URL regex.
+#### uiverse-1 — Source-code button ✅ 2026-09-03
+
+- [x] New **`src/components/SourceCodeButton.astro`** + **`src/styles/source-button.css`**,
+      rendered on **14 case-study pages** (7 records × 2 locales) and on the **2 homepage
+      cards** (`syd` + `upos` are the only `featured: true` records of the seven).
+- [x] **The URL regex is deleted, not bypassed.** `projectActions()` chose slot two with
+      `isCodeProject(stack) && isRepoLink(evidenceLink)` — a stack allowlist crossed with a
+      repo-host allowlist. Both functions are **gone**; the verdict is
+      `evidenceSignals.sourceCode` alone. `evidenceLink` supplies the destination and is
+      never consulted about whether the button belongs.
+- [x] ⭐ **The swap was provably a no-op for current output.** Boolean and old derivation
+      agree on **all 50 records**, so nothing moved on the page — which is what made it
+      safe. The change is about which one is *authoritative* from here on.
+- [x] Fixed label from the existing `projects.sourceFallback` — **"Source code" /
+      "Código-fonte"** (Juan's call). No new label key was needed; `spaceapps`'s own
+      *"Source and evidence"* no longer renders here.
+
+⭐ **The note is the one binder item that is NOT plain CSS.** uiverse-1 ships **Tailwind
+utility classes**, not a `StyledWrapper` template literal like the rest, so K0.1's "the
+note already carries the complete rule set" does not hold for #1 — every class was
+re-derived. It also ships `<button href="#">`, which is invalid; it renders as an `<a>`.
+
+🔑 **The star counter was the real decision, and the floor is `> 1`.** The note is a *"Star
+on GitHub"* button with a hardcoded `6`. The live counts are **0,1,1,0,0,0,0**. Juan's first
+rule was `> 0`; on seeing that the only two non-zero repos sit at exactly **1** — which on a
+portfolio reads as self-starred — he moved it to **`> 1`** (`STAR_FLOOR` in the generated
+file). ⇒ **the counter renders nowhere today**, and the markup stays dormant until a
+repository clears the bar. ⭐ It also retired the `allprice` wrap: without the 59px star
+group that button is back to 186px and its row fits again.
+
+- ⛔ **The count is a committed cache, never a build-time fetch.** `astro build` stays
+  offline and deterministic; `scripts/github-stars.mjs` (`npm run stars:refresh`) is the
+  only thing that talks to GitHub, and it writes `src/data/github-stars.ts` with the date
+  it ran. A number that goes stale is then a choice, not an accident.
+- ⭐ **The script is also the store's consistency gate** — and it is the *only* one, by
+  construction: the build cannot catch a `sourceCode: true` record whose link is not a repo,
+  precisely because K4 forbids it from looking at the URL. The script exits **1** and names
+  the record. Proven against a deliberately broken record, not assumed.
+
+**Verified in `dist/`, not asserted:**
+
+| Gate | Result |
+|---|---|
+| Pages carrying the control | **14** case-study + **2** homepage — exactly the 7 slugs × 2 locales |
+| Star counter | **0 pages** — both non-zero repos sit at 1, under the `> 1` floor |
+| a11y name | "1 star on GitHub" / "1 estrela no GitHub" — the numeral itself is `aria-hidden` |
+| K0.4 tokens | **zero** colour literals in the shipped `.source-button` rules |
+| K0.5 zero-JS | 0 islands on all 14 — control pages show **9**, so the gate can see |
+| K0.6 reduced motion | branch shipped; the sweep is `display: none`, not a 1 ms flash |
+| 27 non-repo links | unchanged — Figma files and archive snapshots keep the plain button |
+| `npm run check` | 0 errors, 0 warnings, 0 hints · 116 pages |
+
+⭐ **Two-leg mutation test on the source records** (⛔ never on `dist/`): flipping
+`a-tua-vaga` — whose link is a **Figma** URL — to `sourceCode: true` made the control appear
+*pointing at Figma*, and flipping `celus` off removed it despite its real repo link. Both
+legs bite in opposite directions, which is what proves the URL genuinely has no say. Records
+restored, rebuild re-verified.
+
+⭐ **Seen in a browser, not just built** (the rung K2 was caught skipping). Measured on the
+real element: same height as its sibling (**58px** both), tap target ≥44px, and the sweep
+travels **48 → −160 across 56 distinct positions**, settling at ~1030 ms against the
+declared 1000 ms. 🔴 The first sampling attempt reported "does not animate" — the 2.5 s
+window closed before the hover landed. A dead read path, not a defect; the fix was a window
+long enough to contain the event, recording `:hover` alongside the position.
+
+**Responsive pass on `.brief__actions` (Juan, 2026-09-03) — case-study surface only:**
+
+- **Centred below 1280px**, `flex-start` at ≥1280. The homepage card is untouched; it owns
+  `.case-card__actions` and was re-measured to confirm nothing leaked.
+- **Both actions fill the column below 768px** — primary *and* source. ⭐ The first pass
+  filled only the source button, as asked, and the `syd` screenshot showed why that reads
+  wrong: a narrow *"Live site"* pill above a full-width secondary **inverts the emphasis**.
+  Juan's correction ("both mobile buttons are fill") went in. This covers the plain
+  secondary too, so all 50 case-study pages behave the same.
+- Written mobile-first, matching the file's `min-width` convention: fill in the base rule,
+  `width: auto` in the 768px block. Boundaries proven at **767 → 768** and **1279 → 1280**,
+  not assumed.
+
+⏭️ **Knobs:** `STAR_FLOOR` (**1**, so the counter needs ≥2); `--sweep-duration`
+(**1000ms**, upstream's); the ≥1280 breakpoint for the centre/left flip.
+
 - [ ] **uiverse-3 — "View project"** on the `/projects` cards →
       `components/projects/ProjectsIndex.tsx` + `styles/projects-index.css`.
 - [ ] **uiverse-4 — hero CTA.** `Hero.astro:49` currently renders `copy.hero.emailCta`
