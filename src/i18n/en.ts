@@ -50,8 +50,8 @@ export const en = {
     typeRotating: ["Next.js", "Python", "scalable growth automations"],
     introduction:
       "Available for US agency overflow and contract engineering. Rio runs one hour ahead of US Eastern — 100% synchronous overlap.",
-    emailCta: "Email me",
-    emailAriaLabel: "Send Juan Silva an email",
+    emailCta: "Get in Touch",
+    emailAriaLabel: "Get in Touch, send Juan Silva an email",
     linkedInCta: "LinkedIn",
     linkedInAriaLabel: "Open Juan Silva's LinkedIn profile",
     githubAriaLabel: "Open Juan Silva's GitHub profile",

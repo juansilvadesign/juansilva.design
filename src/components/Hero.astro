@@ -45,17 +45,36 @@ const copy = t(lang);
       </div>
 
       <div class="hero__actions">
-        <a class="button" href={socialLinks.mailCta} aria-label={copy.hero.emailAriaLabel}>
-          {copy.hero.emailCta}
+        <a
+          class="button button--send"
+          href={socialLinks.mailCta}
+          aria-label={copy.hero.emailAriaLabel}
+        >
+          <span class="button__plane" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" focusable="false">
+              <path
+                fill="currentColor"
+                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+              ></path>
+            </svg>
+          </span>
+          <span class="button__label">{copy.hero.emailCta}</span>
         </a>
         <a
-          class="button button--secondary"
+          class="button button--secondary button--linkedin"
           href={socialLinks.linkedIn}
           target="_blank"
           rel="noopener noreferrer"
           aria-label={copy.hero.linkedInAriaLabel}
         >
-          {copy.hero.linkedInCta}
+          <span class="button__glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" focusable="false">
+              <path
+                d="M18.3362 18.339H15.6707V14.1622C15.6707 13.1662 15.6505 11.8845 14.2817 11.8845C12.892 11.8845 12.6797 12.9683 12.6797 14.0887V18.339H10.0142V9.75H12.5747V10.9207H12.6092C12.967 10.2457 13.837 9.53325 15.1367 9.53325C17.8375 9.53325 18.337 11.3108 18.337 13.6245V18.339H18.3362ZM7.00373 8.57475C6.14573 8.57475 5.45648 7.88025 5.45648 7.026C5.45648 6.1725 6.14648 5.47875 7.00373 5.47875C7.85873 5.47875 8.55173 6.1725 8.55173 7.026C8.55173 7.88025 7.85798 8.57475 7.00373 8.57475ZM8.34023 18.339H5.66723V9.75H8.34023V18.339ZM19.6697 3H4.32923C3.59498 3 3.00098 3.5805 3.00098 4.29675V19.7033C3.00098 20.4202 3.59498 21 4.32923 21H19.6675C20.401 21 21.001 20.4202 21.001 19.7033V4.29675C21.001 3.5805 20.401 3 19.6675 3H19.6697Z"
+              ></path>
+            </svg>
+          </span>
+          <span class="button__label">{copy.hero.linkedInCta}</span>
           <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
         </a>
       </div>
@@ -144,6 +163,175 @@ const copy = t(lang);
     height: var(--space-px-16);
   }
 
+  /*
+   * uiverse-4 — the hero's primary CTA, ported from the binder note
+   * (`adamgiebl/smart-moth-68`). The note ships styled-components over a
+   * `royalblue` button; K0.3 and K0.4 forbid both, so only the MOTION is taken.
+   * The control keeps `.button`'s token geometry and colours and gains a plane
+   * that launches while the label slides out of a clipped box.
+   *
+   * Scoped here rather than in `src/styles/` because — unlike uiverse-1's 16
+   * surfaces — this effect has exactly one instance on the site.
+   */
+
+  .button--send {
+    --send-bob-duration: 600ms;
+    --send-launch-distance: 1.2em;
+
+    position: relative;
+    overflow: hidden;
+  }
+
+  .button__plane,
+  .button__label {
+    display: block;
+  }
+
+  .button__plane svg {
+    display: block;
+    transform-origin: center center;
+  }
+
+  .button--send:active {
+    transform: scale(0.95);
+  }
+
+  /*
+   * Gated on ≥768px because that is where `.hero__actions .button` drops to
+   * `width: auto` and the control hugs its label. Below it the button is
+   * full-width, the label sits centred with room to spare on the right, and a
+   * fly-out would slide the text sideways instead of clipping it — the travel
+   * below is derived from the label's own box, which only reaches the clip
+   * edge when the box is content-sized. The pointer query is the second half:
+   * touch has no hover, so it would never fire there anyway.
+   */
+  @media (min-width: 768px) and (hover: hover) and (pointer: fine) {
+    .button--send .button__plane svg,
+    .button--send .button__label {
+      transition: transform var(--motion-base) var(--ease-sweep);
+    }
+
+    .button--send:hover .button__plane {
+      animation: send-plane-bob var(--send-bob-duration) var(--ease-sweep)
+        infinite alternate;
+    }
+
+    /*
+     * The launch runs on focus too, but the label exit deliberately does NOT.
+     * uiverse-3 gave `:focus-visible` full parity with `:hover` because its
+     * effect was decorative; here the label leaves the box, and focus is a
+     * PERSISTENT state — a keyboard user would be parked on a button whose
+     * name they can no longer read. Hover is transient and self-cancelling.
+     */
+    .button--send:hover .button__plane svg,
+    .button--send:focus-visible .button__plane svg {
+      transform: translateX(var(--send-launch-distance)) rotate(45deg)
+        scale(1.1);
+    }
+
+    /*
+     * Upstream hard-codes `translateX(5em)`, which clears its own 4-character
+     * "Send" and nothing longer. "Get in Touch" and "Entre em contato" are both
+     * wider than 5em, so the distance is re-derived from the element instead:
+     * 100% carries the label's left edge to where its right edge was, and the
+     * padding plus border covers the rest of the way to the clip boundary.
+     */
+    .button--send:hover .button__label {
+      transform: translateX(
+        calc(
+          100% + var(--control-padding-inline) + var(--border-width-strong)
+        )
+      );
+    }
+  }
+
+  @keyframes send-plane-bob {
+    from {
+      transform: translateY(0.1em);
+    }
+
+    to {
+      transform: translateY(-0.1em);
+    }
+  }
+
+  /*
+   * The LinkedIn control, ported from the `adamgiebl` uiverse note. Only the
+   * MOTION is taken: a circle parked off the left edge whose inset box-shadow
+   * grows inward, so the hover fill arrives as a sweep instead of a flat fade.
+   * Geometry follows `.button` (K0.4 / the uiverse-1 precedent), so it stays
+   * 58px and 8px-radius beside the primary CTA rather than the note's 30px pill.
+   *
+   * Colour roles are LOCAL CUSTOM PROPERTIES, for Milestone L. Juan's call:
+   * flood neutral now so the secondary action never outshouts the primary CTA,
+   * and restore LinkedIn's own brand blue when the light theme ships. The
+   * originals are recorded beside each role and deliberately NOT shipped behind
+   * `prefers-color-scheme: light` — there is no light palette yet, so that block
+   * would fire on light-preference visitors today against a dark-only page.
+   * Same reasoning, and the same shape, as uiverse-3.
+   *
+   * ⛔ Brand blue is not merely deferred for taste: rgb(0,119,181) measures
+   * 3.85:1 as rest text on `--background`, under AA. It becomes usable only
+   * against the light surface Milestone L introduces.
+   */
+
+  .button--linkedin {
+    /* role                        shipped (dark)                    Milestone L (light) */
+    --li-flood: var(--surface-interactive-hover); /* rgb(0, 119, 181) LinkedIn brand blue */
+    --li-flood-duration: 500ms;
+    --li-flood-size: 20em;
+    --li-flood-offset: -5em;
+
+    position: relative;
+    overflow: hidden;
+  }
+
+  /*
+   * The flood sits at z-index 0 with the content raised to 1, rather than the
+   * note's `z-index: -1`. A negative index escapes the button entirely unless
+   * something happens to form a stacking context, which would paint the circle
+   * behind the hero instead of behind the label.
+   */
+  .button--linkedin::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    inset: 0 0 0 var(--li-flood-offset);
+    width: var(--li-flood-size);
+    height: var(--li-flood-size);
+    margin: auto;
+    border-radius: 50%;
+    transition: box-shadow var(--li-flood-duration) var(--ease-sweep);
+  }
+
+  .button--linkedin > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .button__glyph {
+    display: block;
+  }
+
+  .button__glyph svg {
+    display: block;
+  }
+
+  /*
+   * `.button--secondary:hover` paints a flat fill that would mask the sweep, so
+   * the base hover background is neutralised and the circle does all the work.
+   * The scoped attribute selector Astro adds outranks the global rule.
+   */
+  .button--linkedin:hover,
+  .button--linkedin:focus-visible {
+    background: var(--color-transparent);
+  }
+
+  .button--linkedin:hover::before,
+  .button--linkedin:focus-visible::before {
+    box-shadow: inset 0 0 0 calc(var(--li-flood-size) / 2) var(--li-flood);
+  }
+
   @media (min-width: 768px) {
     .hero {
       padding-top: var(--space-px-32);
@@ -203,6 +391,46 @@ const copy = t(lang);
 
     .hero__portrait {
       width: auto;
+    }
+  }
+
+  /*
+   * K0.6. Last in source order so it beats the hover block at equal
+   * specificity. The motion is removed, not shortened — a 1ms fly-out is
+   * still a fly-out, and a label that leaves its box is exactly the kind of
+   * large translation this query exists to opt out of.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    .button--send .button__plane svg,
+    .button--send .button__label {
+      transition: none;
+    }
+
+    .button--send:hover .button__plane {
+      animation: none;
+    }
+
+    .button--send:hover .button__plane svg,
+    .button--send:focus-visible .button__plane svg,
+    .button--send:hover .button__label,
+    .button--send:active {
+      transform: none;
+    }
+
+    /*
+     * The flood is removed rather than shortened, and the control falls back to
+     * the flat `.button--secondary` fill it shipped with. Unlike the send
+     * button there is no "do nothing" option here: the fill IS the hover
+     * affordance, so it has to arrive some other way — as a colour change,
+     * which is not the kind of motion this query opts out of.
+     */
+    .button--linkedin::before {
+      display: none;
+    }
+
+    .button--linkedin:hover,
+    .button--linkedin:focus-visible {
+      background: var(--surface-interactive-hover);
     }
   }
 </style>

@@ -47,8 +47,8 @@ export const pt = {
     typeRotating: ["Next.js", "Python", "automação de crescimento"],
     introduction:
       "Disponível para apoiar agências dos EUA e projetos por contrato. O Rio está uma hora à frente do horário do leste dos EUA — 100% de sobreposição síncrona.",
-    emailCta: "Enviar e-mail",
-    emailAriaLabel: "Enviar um e-mail para Juan Silva",
+    emailCta: "Entre em contato",
+    emailAriaLabel: "Entre em contato, envie um e-mail para Juan Silva",
     linkedInCta: "LinkedIn",
     linkedInAriaLabel: "Abrir o perfil de Juan Silva no LinkedIn",
     githubAriaLabel: "Abrir o perfil de Juan Silva no GitHub",

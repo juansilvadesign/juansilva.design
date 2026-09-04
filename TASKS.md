@@ -1484,7 +1484,7 @@ thing that looks small in the desktop screenshot; `baseIntensity` **0.18** / `ho
 CPU for a loop that never stops); `fuzzRatio` **30/128**; `lineHeight` **1.05**; and the
 authored breaks in `notFound.titleLines`.
 
-### K4 — Existing-control swaps (uiverse 1, 3, 4, 6) 🟢 uiverse-1 + uiverse-3 shipped 2026-09-03
+### K4 — Existing-control swaps (uiverse 1, 3, 4, 6) 🟢 uiverse-1 + uiverse-3 + uiverse-4 + the LinkedIn swap shipped 2026-09-03
 
 #### uiverse-1 — Source-code button ✅ 2026-09-03
 
@@ -1647,14 +1647,143 @@ from live dev output: 0 cards and `_jsxDEV is not a function`. The tell was that
 also fired in `TypedHead.tsx`, a file this work never touched. ⛔ Serve `dist/` on a port the
 toolchain does not use, and confirm what answered before trusting a failure.
 
-- [ ] **uiverse-4 — hero CTA.** `Hero.astro:49` currently renders `copy.hero.emailCta`
-      = *"Email me"*. Apply the `smart-moth-68` effect and ship **one** label.
-      **Recommend "Get in Touch"** — the most conventional phrasing for the US/EU
-      founder/CTO ICP, and it does not presume the channel the way *"Reach out via email"*
-      does. The other two are logged in K7 for when measurement exists.
+#### uiverse-4 — Hero CTA ✅ 2026-09-03
+
+- [x] **One label shipped: "Get in Touch" / "Entre em contato"** (Juan's call). The other
+      two wordings stay parked in K8 until measurement exists. PT moved off *"Enviar
+      e-mail"*, which presumed the channel the same way the retired EN *"Email me"* did.
+- [x] `Hero.astro` gains a leading plane + a label span; the effect is a scoped `<style>`
+      block, **not** a file in `src/styles/`. Unlike uiverse-1's 16 surfaces this control
+      has exactly **one instance on the site**, so a site-wide stylesheet would be dead
+      weight on every page that does not render it.
+- [x] **Icon at 16px, not the note's 24px** — it matches the external-link mark on the
+      LinkedIn button in the same row. Every transform in the note is `em`-based, so the
+      effect scales down intact.
+
+⛔ **Upstream's `translateX(5em)` is wrong for every label we ship, and copying it would
+have failed silently.** The note clears its own 4-character *"Send"*; measured on the real
+element, **"Get in Touch" is 125.7px and "Entre em contato" is 175.9px**, against 5em ≈ 90px.
+The travel is re-derived from the element instead —
+`calc(100% + var(--control-padding-inline) + var(--border-width-strong))` — where 100% carries
+the label's left edge to where its right edge was and the padding+border covers the rest of
+the way to the clip boundary. ⭐ The label's right edge measured **exactly 20px** from that
+boundary, which is the 18px + 2px the formula adds. Same class of defect as uiverse-3's
+`width: 12rem`, and the same fix: **derive from the box, never from the note's constant.**
+
+🔑 **The label exit runs on `:hover` but deliberately NOT on `:focus-visible`** — a divergence
+from uiverse-3's parity rule, and the reason is that this effect *hides the control's name*.
+Hover is transient and self-cancelling; focus is **persistent**, so a keyboard user would be
+parked on a button whose label they can no longer read. Focus gets the plane launch and the
+ring; the label holds. Measured at **125.7px still readable** under `:focus-visible`.
+
+⛔ **The effect is gated to `≥768px and (hover: hover) and (pointer: fine)`.** Below 768px
+`.hero__actions .button` is `width: 100%`, the label sits centred with room to spare on the
+right, and the derived travel — which only reaches the clip edge on a content-sized box —
+would slide the text sideways instead of clipping it. Verified OFF at 390px.
+
+⚠️ **The `aria-label` was rewritten, and it was a real conformance fix, not cosmetics.**
+It read *"Send Juan Silva an email"* against a visible *"Email me"* — the accessible name did
+not contain the visible label, a **WCAG 2.5.3 Label in Name (Level A)** failure that was
+already live before this task and would have been made more obvious by the new wording. It
+now reads *"Get in Touch, send Juan Silva an email"* / *"Entre em contato, envie um e-mail
+para Juan Silva"*: the visible label is contained, and the mail channel is still disclosed to
+screen readers even though the visible text no longer names it.
+
+**Verified in a browser on `dist/`, not asserted:**
+
+| Gate | Result |
+|---|---|
+| Row geometry | send **58px** / LinkedIn **58px**, tops level to <0.5px |
+| Tap target | 58px ≥ 44 (52px at 390px, still ≥44) |
+| Label exit, EN | 721 → 866.7 = **145.7px**, visible width 125.7 → **0** |
+| Label exit, PT | *"Entre em contato"* 175.9px wide → visible **0** |
+| Transition | `transitionrun` → `transitionend@300ms`, **19 distinct positions**, monotonic |
+| Plane launch | `rotate(45°) scale(1.1) translateX(21.6px)`; bob oscillates **3.6px** |
+| `:focus-visible` | label **holds** at 125.7px readable; plane launches; no bob |
+| K0.4 tokens | **zero** colour literals in the shipped rules |
+| K0.6 reduced motion | all transforms `none`, animation `none` — removed, not shortened |
+| K0.5 zero-JS | homepage islands still **2**; no `client:` directive added |
+| `npm run check` | 0 errors, 0 warnings, 0 hints · 116 pages |
+
+🔴 **The first hover reading was a PRE-transition artefact and nearly shipped as proof.**
+Sampling right after the hover call returned *1 distinct label position* — the 300ms
+transition had already finished during the tool round-trip, so the endpoints looked right
+while the travel itself was never observed. The fix was to arm a `transitionrun`/`transitionend`
+sampler **before** moving the pointer. 🔴 A second reading was worse: a `:focus-visible` probe
+reported the label flying out, which would have condemned the a11y branch as broken — the
+mouse was still parked on the button from the previous step. The `isHovered` gate in the probe
+is what caught it. ⛔ **Assert the state you think you are measuring, inside the measurement.**
+
+⏭️ **Knobs:** `--send-bob-duration` (**600ms**, upstream's); `--send-launch-distance`
+(**1.2em**, upstream's); the 768px gate, which tracks `.hero__actions`'s own `width: auto`
+breakpoint and must move with it.
 - [ ] **uiverse-6 — "Read the case study."** Renders from `i18n.projects.caseStudy`
       (`caseFallback`) via `ProjectCard.astro:28` and the index. ⛔ Build from the note's
       code, not its link (K0.2).
+
+#### K4.5 — LinkedIn control (hero) ✅ 2026-09-03
+
+Not a binder item — Juan supplied an `adamgiebl` uiverse component mid-session for the hero's
+secondary action. Logged here because it is the same class of work as K4: an existing-control
+swap on an element the binder already touches.
+
+- [x] `Hero.astro`'s LinkedIn anchor gains a leading LinkedIn glyph and a label span; the
+      flood is a scoped `<style>` block beside uiverse-4's, same one-instance reasoning.
+- [x] **Glyph leads, external mark trails** (Juan's call). The note ships neither, but the
+      link carries `target="_blank"`, which makes the trailing mark a usability obligation
+      rather than decoration. Structure now mirrors the primary CTA's leading icon.
+- [x] **Geometry follows `.button`, not the note.** The note is a 25px pill at `5px 15px`
+      padding, which renders ~30px tall and would break the row; shipped at
+      `--radius-control` 8px and **58px**, level with the primary CTA (Juan's call).
+
+🔑 **The flood is NEUTRAL, and brand blue is deferred to Milestone L — Juan's call, with a
+measurement behind it.** `rgb(0, 119, 181)` is LinkedIn's own blue and it **fails AA as rest
+text on this site: 3.85:1** against `--background`. It is not rescuable by tinting either —
+lightening it to clear 4.5:1 at rest drops white-on-fill to 3.88:1, so **no single blue serves
+both states** on a dark surface. It becomes usable only against the light surface Milestone L
+introduces. Shipped instead: `--surface-interactive-hover`, the grey `.button--secondary`
+already fades to, so the secondary action never outshouts the primary CTA beside it.
+
+⭐ **Colour roles are local custom properties with the originals recorded beside them** —
+`--li-flood`, and the note's brand blue in the comment on the same line. ⛔ Deliberately **not**
+shipped as a `prefers-color-scheme: light` block: there is no light palette yet, so that would
+fire on light-preference visitors today against a dark-only page. Exactly uiverse-3's shape.
+
+⛔ **The note's `z-index: -1` was not ported.** A negative index escapes the button entirely
+unless something happens to form a stacking context, which would paint the flood behind the
+hero instead of behind the label. Shipped as `::before { z-index: 0 }` with
+`.button--linkedin > * { z-index: 1 }`, which has no such dependency.
+
+⚠️ **`.button--secondary:hover`'s flat fill had to be neutralised** or it would paint over the
+sweep and make the effect invisible. The scoped attribute selector Astro adds outranks the
+global rule, so `background: var(--color-transparent)` on hover is what lets the circle do the
+work. ⚠️ The note also ships `className="bi bi-twitter"` on a LinkedIn glyph — a copy-paste
+artefact, dropped. Third binder-style defect after K0.2's wrong URL and uiverse-1's
+`<button href>`.
+
+**Verified in a browser on `dist/`, not asserted:**
+
+| Gate | Result |
+|---|---|
+| Row geometry | **58px**, 8px radius, tops level with the primary CTA |
+| Flood sweep | `box-shadow@500ms`, **20 distinct spreads**, 0 → 180px, monotonic |
+| Flood coverage | final `inset 0 0 0 180px` = half the 20em circle ⇒ **85.6% of pixels** |
+| Contrast, flooded | **5.44:1** — measured from rendered pixels, ink `rgb(206,207,210)` on `rgb(75,77,81)`. PASS AA |
+| K0.6 reduced motion | `::before` `display: none`; falls back to the flat `.button--secondary` fill |
+| Structure | glyph `aria-hidden`, label, external mark — in that order, both locales |
+| K0.5 zero-JS | homepage islands still **2** |
+
+🔴 **The first contrast number was produced by a dead instrument and it PASSED.** The probe
+parsed `--li-flood`'s resolved value `#ffffff40` with a `[\d.]+` regex, got `["40"]`, failed a
+length check, silently fell back to the page background and reported **12.04:1** — a real
+number, for the rest state, presented as the flooded state. The correct **5.44:1** came from
+decoding an element screenshot and sampling actual pixels. ⛔ **A contrast probe that cannot
+parse its own colour reports the background it defaulted to, not the one under the text.**
+
+⏭️ **Knobs:** `--li-flood` (the Milestone L swap point); `--li-flood-duration` (**500ms**,
+upstream's); `--li-flood-size` / `--li-flood-offset` (**20em / -5em**, upstream's — the offset
+is what makes the sweep read as arriving from the left). ⏭️ The rest state is unchanged and
+still borderless; adding the note's outline is a one-line change if Juan wants more presence.
 
 ### K5 — New controls (uiverse 2, 5, 9, 10)
 
@@ -1718,7 +1847,9 @@ toolchain does not use, and confirm what answered before trusting a failure.
 
 ### K8 — Logged, not built
 
-- [ ] Hero CTA **A/B test** (`uiverse-4`). ⛔ **The site ships no analytics of any kind** —
+- [ ] Hero CTA **A/B test** (`uiverse-4`). ✅ **Label settled 2026-09-03 — "Get in Touch"
+      shipped**; *"Reach out via email"* and *"Reach Out"* stay parked here.
+      ⛔ **The site ships no analytics of any kind** —
       no gtag, Plausible, Umami, PostHog or CF Insights — so a variant split today would
       produce no data. Juan's call 2026-09-03: **pick one label now, A/B when measurement
       exists.** Gated on an analytics decision, which is its own task.
