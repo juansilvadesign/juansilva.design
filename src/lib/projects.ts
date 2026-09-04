@@ -34,31 +34,6 @@ export interface ProjectSummary {
   href: string;
 }
 
-/**
- * Stack tokens that mean "Juan wrote code here".
- *
- * `figma` is deliberately absent: a figma-only record is design work, and the
- * store has nine of those. Kept in sync with `stackIdSchema` in
- * `src/content.config.ts`.
- */
-const CODE_STACKS = ["typescript", "javascript", "python", "tailwind"] as const;
-
-/** Hosts whose links are genuinely source code, not just another live surface. */
-const REPO_HOSTS = ["github.com", "gitlab.com", "bitbucket.org"] as const;
-
-export function isCodeProject(stack: readonly string[]): boolean {
-  return stack.some((s) => (CODE_STACKS as readonly string[]).includes(s));
-}
-
-export function isRepoLink(href: string | null | undefined): boolean {
-  if (!href) return false;
-  // A record's evidence link may be a root-relative asset path, which is never
-  // a repo and must not be fed to `new URL` without a base.
-  if (!URL.canParse(href)) return false;
-  const { hostname } = new URL(href);
-  return REPO_HOSTS.some((h) => hostname === h || hostname.endsWith(`.${h}`));
-}
-
 export interface ProjectAction {
   href: string;
   label: string;
@@ -68,14 +43,20 @@ export interface ProjectAction {
 }
 
 export interface ProjectActionInput {
-  stack: readonly string[];
+  /** The store's own verdict — `evidenceSignals.sourceCode`. */
+  sourceCode: boolean;
   liveUrl: string;
   liveLabel: string;
   evidenceLink?: string | null;
-  evidenceLabel?: string | null;
   caseHref: string;
   caseLabel: string;
   liveFallbackLabel: string;
+  /**
+   * The one fixed source label. It travels on the action so every consumer
+   * agrees on the wording; the rendered button is `SourceCodeButton`, which
+   * reads the same key rather than accepting a label it could be handed wrong.
+   */
+  sourceLabel: string;
 }
 
 /**
@@ -83,13 +64,20 @@ export interface ProjectActionInput {
  *
  * Cards used to render three: live, evidence, and a case-study link that read
  * "Case study soon" on every record that had none. The rule now is
- *   code project   → live site + source code
- *   design project → live site + case study
- * with the case study as the fallback whenever a code project has no repo —
- * every project has a case-study page, so slot two is never empty. An evidence
- * link that is not a repo (a screenshot, a second live surface) is not promoted
- * into the source slot; it still renders in the project brief on the detail
- * page, which is where that kind of evidence belongs.
+ *   asserts source code → live site + source code
+ *   everything else     → live site + case study
+ * every project has a case-study page, so slot two is never empty.
+ *
+ * ⛔ The verdict is `evidenceSignals.sourceCode` and nothing else. This used to
+ * re-derive it in the template layer — a code-looking stack crossed with a
+ * repo-host allowlist over `evidenceLink` — which meant the store said one
+ * thing and the page decided another. The exporter already owns that call, so
+ * two answers could only ever drift. `evidenceLink` supplies the destination;
+ * it is never consulted about whether the button belongs.
+ *
+ * A record asserting the flag with no link is a store defect. Slot two falls
+ * back to the case study rather than rendering a button that goes nowhere, and
+ * the caller reports it at build time.
  */
 export function projectActions(p: ProjectActionInput): [ProjectAction, ProjectAction] {
   const live: ProjectAction = {
@@ -100,10 +88,10 @@ export function projectActions(p: ProjectActionInput): [ProjectAction, ProjectAc
   };
 
   const second: ProjectAction =
-    isCodeProject(p.stack) && isRepoLink(p.evidenceLink)
+    p.sourceCode && p.evidenceLink
       ? {
-          href: p.evidenceLink as string,
-          label: p.evidenceLabel || "Source code",
+          href: p.evidenceLink,
+          label: p.sourceLabel,
           external: true,
           kind: "source",
         }

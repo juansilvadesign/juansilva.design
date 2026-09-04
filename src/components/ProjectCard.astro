@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import SourceCodeButton from "./SourceCodeButton.astro";
 import StackBadge from "./StackBadge.astro";
 import { localizedPath, t, type Locale } from "../i18n";
 import { SIGNAL_FACETS, formatTimeframe, previewFor, projectActions } from "../lib/projects";
@@ -19,22 +20,25 @@ const d = project.data;
 const signals = SIGNAL_FACETS.filter((s) => d.evidenceSignals[s]);
 
 const [primary, secondary] = projectActions({
-  stack: d.stack,
+  sourceCode: d.evidenceSignals.sourceCode,
   liveUrl: d.liveUrl,
   liveLabel: projectCopy.liveLabel,
   evidenceLink: d.evidenceLink,
-  evidenceLabel: projectCopy.evidenceLabel,
   caseHref: localizedPath(`/projects/${project.id}/`, lang),
   caseLabel: copy.projects.caseFallback,
   liveFallbackLabel: copy.projects.liveProjectFallback,
+  sourceLabel: copy.projects.sourceFallback,
 });
 
-// A code project with no repository is a real gap in the store, not a template
-// problem. Surface it at build time rather than silently rendering a fallback.
-if (secondary.kind === "case" && d.stack.some((s) => s !== "figma")) {
+// A record that asserts source code without carrying the link to it is a real
+// gap in the store, not a template problem. Surface it at build time rather
+// than silently rendering a fallback. This is now the only inconsistency worth
+// warning about: the old check fired on every non-Figma record with no repo,
+// which described most of the store rather than a defect.
+if (d.evidenceSignals.sourceCode && !d.evidenceLink) {
   console.warn(
-    `[projects] ${project.id}: code project with no repository link — ` +
-      `second action fell back to the case study.`,
+    `[projects] ${project.id}: evidenceSignals.sourceCode is true but the ` +
+      `record carries no evidenceLink — second action fell back to the case study.`,
   );
 }
 
@@ -82,19 +86,20 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
         {primary.label}
       </a>
 
-      <a
-        class="button button--secondary"
-        href={secondary.href}
-        target={secondary.external ? "_blank" : undefined}
-        rel={secondary.external ? "noopener noreferrer" : undefined}
-      >
-        {secondary.label}
-        {
-          secondary.kind === "source" && (
-            <img src="/assets/icons/github.svg" alt="" width="16" height="16" />
-          )
-        }
-      </a>
+      {
+        secondary.kind === "source" ? (
+          <SourceCodeButton {lang} href={secondary.href} slug={project.id} />
+        ) : (
+          <a
+            class="button button--secondary"
+            href={secondary.href}
+            target={secondary.external ? "_blank" : undefined}
+            rel={secondary.external ? "noopener noreferrer" : undefined}
+          >
+            {secondary.label}
+          </a>
+        )
+      }
     </div>
   </div>
 
@@ -186,7 +191,10 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     gap: var(--space-px-12);
   }
 
-  .case-card__actions .button {
+  /* `.source-button` is scoped to its own component, so the parent reaches it
+   * through :global() — same as the visual's img/video below. */
+  .case-card__actions .button,
+  .case-card__actions :global(.source-button) {
     width: 100%;
   }
 
@@ -228,7 +236,8 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
       flex-direction: row;
     }
 
-    .case-card__actions .button {
+    .case-card__actions .button,
+    .case-card__actions :global(.source-button) {
       width: auto;
     }
   }

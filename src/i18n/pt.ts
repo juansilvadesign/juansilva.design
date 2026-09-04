@@ -71,6 +71,8 @@ export const pt = {
     evidenceFallback: "Ver evidência",
     sourceFallback: "Código-fonte",
     caseFallback: "Ler o estudo de caso",
+    starsOne: "1 estrela no GitHub",
+    starsMany: "{n} estrelas no GitHub",
     externalLinkAlt: "Abre em uma nova aba",
     detail: {
       backToIndex: "Todos os projetos",

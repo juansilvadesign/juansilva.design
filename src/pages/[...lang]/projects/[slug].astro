@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Footer from "../../../components/Footer.astro";
+import SourceCodeButton from "../../../components/SourceCodeButton.astro";
 import StackBadge from "../../../components/StackBadge.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { locales, defaultLocale, localizedPath, pageTitle, t } from "../../../i18n";
@@ -27,6 +28,19 @@ const detail = copy.projects.detail;
 const timeframe = formatTimeframe(d.dates, lang, detail);
 
 const signals = SIGNAL_FACETS.filter((s) => d.evidenceSignals[s]);
+
+/**
+ * The store's verdict decides the control; the link only says where it goes.
+ * Seven records carry the flag, so this is 14 pages across the two locales.
+ */
+const hasSource = d.evidenceSignals.sourceCode && Boolean(d.evidenceLink);
+
+if (d.evidenceSignals.sourceCode && !d.evidenceLink) {
+  console.warn(
+    `[projects] ${entry.id}: evidenceSignals.sourceCode is true but the record ` +
+      `carries no evidenceLink — the case-study page shows no source control.`,
+  );
+}
 
 /** "Next" follows the same evidence order the index uses, so the two agree. */
 const ordered = (await getCollection("projects")).sort((a, b) =>
@@ -102,12 +116,20 @@ const indexHref = localizedPath("/projects/", lang);
           )}
         </dl>
 
+        {/* Slot two is the source-code control on the records that assert it,
+            and the record's own evidence link on the rest. The 27 non-repo
+            links here are Figma files and archive snapshots — a GitHub-marked
+            button on those would misdescribe what sits behind them. */}
         <p class="brief__actions">
           <a class="button" href={d.liveUrl} rel="noopener noreferrer" target="_blank">{c.liveLabel}</a>
-          {d.evidenceLink && c.evidenceLabel && (
-            <a class="button button--secondary" href={d.evidenceLink} rel="noopener noreferrer" target="_blank">
-              {c.evidenceLabel}
-            </a>
+          {hasSource ? (
+            <SourceCodeButton {lang} href={d.evidenceLink as string} slug={entry.id} />
+          ) : (
+            d.evidenceLink && c.evidenceLabel && (
+              <a class="button button--secondary" href={d.evidenceLink} rel="noopener noreferrer" target="_blank">
+                {c.evidenceLabel}
+              </a>
+            )
           )}
         </p>
       </section>
@@ -308,12 +330,25 @@ const indexHref = localizedPath("/projects/", lang);
     gap: var(--space-px-8);
   }
 
+  /* Mobile and tablet centre the pair; desktop restores the left-aligned row
+   * below, where the column is wide enough for it to read as one. This is the
+   * case-study surface only — the homepage card owns its own actions rule. */
   .brief__actions {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: var(--space-px-12);
     margin: 0;
     padding-bottom: var(--space-px-24);
+  }
+
+  /* On mobile both actions fill the column — a narrow primary above a
+   * full-width secondary inverts the emphasis. :global() for the source
+   * control because it is scoped to its own component; mobile-first, so the
+   * 768px block resets both to their natural widths. */
+  .brief__actions .button,
+  .brief__actions :global(.source-button) {
+    width: 100%;
   }
 
   .case__body {
@@ -557,6 +592,11 @@ const indexHref = localizedPath("/projects/", lang);
       align-items: baseline;
     }
 
+    .brief__actions .button,
+    .brief__actions :global(.source-button) {
+      width: auto;
+    }
+
     .case__statement {
       font-size: var(--text-24);
       line-height: var(--leading-40);
@@ -566,6 +606,10 @@ const indexHref = localizedPath("/projects/", lang);
   @media (min-width: 1280px) {
     .case {
       padding-top: var(--space-px-170);
+    }
+
+    .brief__actions {
+      justify-content: flex-start;
     }
   }
 

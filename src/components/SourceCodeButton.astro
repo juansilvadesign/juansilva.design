@@ -1,0 +1,86 @@
+---
+/**
+ * The source-code control — uiverse-1 (`elijahgummer/bright-chicken-11`).
+ *
+ * Which projects get one is decided by `evidenceSignals.sourceCode`, the flag
+ * the exporter derives in the store. Nothing here inspects the URL: the boolean
+ * says whether, `href` says where, and a record that asserts the one without
+ * the other is a store defect the caller reports at build time.
+ *
+ * The star count is read from the committed cache and rendered only when it is
+ * above zero — five of the seven repositories sit at 0, and a button that
+ * advertises no stars is worse than a button that simply does not mention them.
+ */
+import { t, type Locale } from "../i18n";
+import { starsFor } from "../data/github-stars";
+import "../styles/source-button.css";
+
+interface Props {
+  lang: Locale;
+  /** The repository URL, straight from the record's `evidenceLink`. */
+  href: string;
+  /** Record slug — the key the star cache is written against. */
+  slug: string;
+  /** Extra classes from the caller, for surface-specific width rules. */
+  class?: string;
+}
+
+const { lang, href, slug, class: className } = Astro.props;
+const copy = t(lang);
+const stars = starsFor(slug);
+
+const starsLabel =
+  stars === null
+    ? null
+    : stars === 1
+      ? copy.projects.starsOne
+      : copy.projects.starsMany.replace("{n}", String(stars));
+---
+
+<a
+  class:list={["source-button", className]}
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <span aria-hidden="true" class="source-button__sweep"></span>
+
+  <span class="source-button__label">
+    <svg
+      aria-hidden="true"
+      class="source-button__mark"
+      viewBox="0 0 20 20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10 1.25C5.16562 1.25 1.25 5.16562 1.25 10C1.25 13.8719 3.75469 17.1422 7.23281 18.3016C7.67031 18.3781 7.83437 18.1156 7.83437 17.8859C7.83437 17.6781 7.82344 16.9891 7.82344 16.2563C5.625 16.6609 5.05625 15.7203 4.88125 15.2281C4.78281 14.9766 4.35625 14.2 3.98438 13.9922C3.67812 13.8281 3.24062 13.4234 3.97344 13.4125C4.6625 13.4016 5.15469 14.0469 5.31875 14.3094C6.10625 15.6328 7.36406 15.2609 7.86719 15.0313C7.94375 14.4625 8.17344 14.0797 8.425 13.8609C6.47812 13.6422 4.44375 12.8875 4.44375 9.54062C4.44375 8.58906 4.78281 7.80156 5.34063 7.18906C5.25313 6.97031 4.94687 6.07344 5.42812 4.87031C5.42812 4.87031 6.16094 4.64063 7.83437 5.76719C8.53437 5.57031 9.27813 5.47187 10.0219 5.47187C10.7656 5.47187 11.5094 5.57031 12.2094 5.76719C13.8828 4.62969 14.6156 4.87031 14.6156 4.87031C15.0969 6.07344 14.7906 6.97031 14.7031 7.18906C15.2609 7.80156 15.6 8.57812 15.6 9.54062C15.6 12.8984 13.5547 13.6422 11.6078 13.8609C11.925 14.1344 12.1984 14.6594 12.1984 15.4797C12.1984 16.65 12.1875 17.5906 12.1875 17.8859C12.1875 18.1156 12.3516 18.3891 12.7891 18.3016C14.5261 17.7152 16.0355 16.5988 17.1048 15.1096C18.1741 13.6204 18.7495 11.8333 18.75 10C18.75 5.16562 14.8344 1.25 10 1.25Z"
+      ></path>
+    </svg>
+    {copy.projects.sourceFallback}
+  </span>
+
+  {
+    stars !== null && (
+      <span class="source-button__stars">
+        <svg
+          aria-hidden="true"
+          class="source-button__star"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+          />
+        </svg>
+        {/* The numeral is decoration once the label below states it in words —
+            left readable it announces as "1 1 star on GitHub". */}
+        <span aria-hidden="true" class="source-button__count">
+          {stars}
+        </span>
+        <span class="visually-hidden">{starsLabel}</span>
+      </span>
+    )
+  }
+</a>

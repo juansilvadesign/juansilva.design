@@ -1,0 +1,118 @@
+/**
+ * The source-code control — uiverse-1 (`elijahgummer/bright-chicken-11`),
+ * ported from the binder note.
+ *
+ * The note ships Tailwind against a light background; both had to be undone.
+ * `bg-black` became the neutral ramp's deepest step so the control still reads
+ * as a repository button on a near-black site, `hover:ring-black` became a
+ * brightening border because a black ring is invisible here, and the star's
+ * `text-yellow-300` became `--primary` — there is no yellow in the palette and
+ * K0.4 does not permit inventing one. The travelling shine is the one thing
+ * that survives unchanged: `bg-white opacity-10` is already `--color-white-a10`.
+ *
+ * Geometry follows `.button` rather than the note's `h-9` (36px), so the two
+ * sit level in the same actions row and the tap target clears 44px.
+ */
+
+.source-button {
+  --sweep-duration: 1000ms;
+
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: var(--control-padding-block) var(--control-padding-inline);
+  border: var(--border-width-strong) solid var(--border-interactive);
+  border-radius: var(--radius-control);
+  background: var(--background-deep);
+  color: var(--text-heading);
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-semibold);
+  gap: var(--space-px-12);
+  transition:
+    border-color var(--motion-base) var(--ease-standard),
+    background-color var(--motion-base) var(--ease-standard);
+}
+
+.source-button:hover {
+  border-color: var(--surface-interactive-hover);
+  background: var(--surface);
+}
+
+/* The note's signature: a rotated white bar parked off the right edge that
+ * travels across the face on hover. Pointer-only decoration, so it is hidden
+ * from assistive technology and never intercepts the click. */
+.source-button__sweep {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--space-px-32);
+  height: var(--space-px-128);
+  background: var(--color-white-a10);
+  pointer-events: none;
+  transform: translate(var(--space-px-48), calc(var(--space-px-48) * -1)) rotate(12deg);
+  transition: transform var(--sweep-duration) var(--ease-sweep);
+}
+
+.source-button:hover .source-button__sweep,
+.source-button:focus-visible .source-button__sweep {
+  transform: translate(calc(var(--space-px-160) * -1), calc(var(--space-px-48) * -1)) rotate(12deg);
+}
+
+.source-button__label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--control-gap);
+  white-space: nowrap;
+}
+
+.source-button__mark {
+  width: var(--space-px-16);
+  height: var(--space-px-16);
+  flex: none;
+  fill: currentcolor;
+}
+
+/* The star group is a second reading, so it is set off by a hairline rather
+ * than sitting in the same run of text as the label. */
+.source-button__stars {
+  display: inline-flex;
+  align-items: center;
+  padding-left: var(--space-px-12);
+  border-left: var(--border-width) solid var(--border-interactive);
+  color: var(--text-secondary);
+  gap: var(--space-px-4);
+}
+
+.source-button__star {
+  width: var(--space-px-16);
+  height: var(--space-px-16);
+  flex: none;
+  fill: currentcolor;
+  transition: color var(--motion-base) var(--ease-standard);
+}
+
+.source-button:hover .source-button__star {
+  color: var(--primary);
+}
+
+.source-button__count {
+  font-family: var(--font-meta);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .source-button,
+  .source-button__star {
+    transition-duration: var(--motion-reduced);
+  }
+
+  /* The sweep is the whole effect, so it is removed rather than shortened —
+   * a 1ms flash across the face is worse than no animation at all. */
+  .source-button__sweep {
+    display: none;
+  }
+}

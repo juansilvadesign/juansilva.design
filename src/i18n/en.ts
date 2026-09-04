@@ -83,10 +83,13 @@ export const en = {
     sectionAriaLabel: "Selected projects",
     liveProjectFallback: "Open project",
     evidenceFallback: "View evidence",
-    /** Second card action when a code project links a real repository. */
+    /** Second card action when the record asserts `evidenceSignals.sourceCode`. */
     sourceFallback: "Source code",
     /** Second card action otherwise — every project has a case-study page. */
     caseFallback: "Read the case study",
+    /** Accessible name for the star count; a bare numeral reads as nothing. */
+    starsOne: "1 star on GitHub",
+    starsMany: "{n} stars on GitHub",
     externalLinkAlt: "Opens in a new tab",
     detail: {
       backToIndex: "All projects",
