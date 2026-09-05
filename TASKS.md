@@ -1135,7 +1135,7 @@ carries it.**
 
 ---
 
-## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K4 CLOSED 2026-09-03 · next = K5
+## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K4 CLOSED 2026-09-03 · K5 in progress (uiverse-9 done 2026-09-05)
 
 Source of record: the Maestri fichário **"Fichário"** on the `juansilva.design UI Refactor`
 canvas — `react-bits-changes` + `uiverse-1..10`. Read it with `maestri note read "<name>"`.
@@ -1926,7 +1926,7 @@ upstream's); `--li-flood-size` / `--li-flood-offset` (**20em / -5em**, upstream'
 is what makes the sweep read as arriving from the left). ⏭️ The rest state is unchanged and
 still borderless; adding the note's outline is a one-line change if Juan wants more presence.
 
-### K5 — New controls (uiverse 2, 5, 9, 10)
+### K5 — New controls (uiverse 2, 5, 9, 10) — 🟢 uiverse-9 shipped 2026-09-05; 2, 5, 10 open
 
 - [ ] **uiverse-2 — Download resume.** ✅ **Unblocked (Juan, 2026-09-03): generate the PDF
       from `_config/master-cv.md`.** No PDF exists in `public/` or `src/` yet, so the
@@ -1940,11 +1940,75 @@ still borderless; adding the note's outline is a one-line change if Juan wants m
       `<a href="#top">` styled with the note's CSS, revealed via
       `animation-timeline: scroll()` inside an `@supports`, falling back to
       always-visible. Preserves K0.5 across all 100 pages. ≥44px tap target (Rung 6).
-- [ ] **uiverse-9 — Search on `/projects`.** The island already exists, so this is the
-      cheapest of the four: a `query` state beside `sort`/`filters`, matching title +
-      stack + role, folded into `applyFilters` in `src/lib/projects.ts` so the live
-      counts and the Recommended slot stay consistent. Debounce; announce the result
-      count to screen readers.
+#### uiverse-9 — Search on `/projects` ✅ 2026-09-05
+
+- [x] `query` joins **`Filters`** in `src/lib/projects.ts`, so it flows through `matches`
+      into `applyFilters` **and** `facetCounts` — the probes are built by spreading `f`, so
+      the chip counts describe the searched set for free. Recommended reacts, zero-count
+      chips disable, and `Clear filters` zeroes both halves.
+- [x] `ProjectsIndex.tsx` holds the field in its own `draft` state and commits to `filters`
+      on a **250ms debounce**. Both halves are load-bearing: typing must not wait on 12
+      facet probes, and the `role="status"` count would otherwise read a tally *per
+      keystroke*. `Clear filters` is counted off `draft`, so it appears on the first key,
+      not 250ms in.
+- [x] New copy in **both** locales (K0.7): `searchLegend` · `searchPlaceholder` ·
+      `emptyQuery`. The empty state now branches — *"No projects carry that combination of
+      evidence"* is simply wrong when the cause was a typo, so a query echoes itself back.
+
+🔑 **Scope is title + tagline + stack — `role` was dropped, against the binder line.**
+`role` is one **non-localised English** string that no `/projects` card prints (it renders
+only on the case-study page, `[slug].astro:89`), so searching it would match PT cards on
+words a PT visitor cannot see and has had no chance to read. `tagline` replaces it: it is
+on every card. Matching is fold-then-AND — NFD-strip the accents, then every whitespace
+token must be a substring — so PT **`gestao` finds `Gestão` (2 records, verified live)**,
+`landing figma` crosses a title and a stack id (6), and whitespace-only never empties the
+grid. ⛔ No record carries the `opensource` stack id today (histogram: figma 45, typescript
+8, tailwind 8, javascript 2, python 1), so that path is reasoned, not measured.
+
+⭐ **The note's `required` + `:not(:invalid)` was replaced by `:not(:placeholder-shown)`.**
+That trick is how the component stays open once typed, and it works by declaring an empty
+search box an **invalid required field** to assistive tech. The `:placeholder-shown` swap is
+the identical "has content" test told truthfully — which makes the placeholder *structural*
+here, never decoration. The note's own `<title>Search</title>` went with it: the control
+sits in the same labelled `.tool` wrapper as Sort and View, so the visible legend already
+names it and keeping both would announce it twice. Verified: `required` **false**,
+accessible name **"Search" / "Buscar"** from the real `<label>`.
+
+⛔ **44px, not the note's 40 — and the first port was a 46×44 ellipse.** Rung 6 sets the tap
+floor. Setting only `padding-left` left Chromium's UA `padding: 1px 2px` on the right, and
+under `border-box` a width smaller than its own padding **floors at the padding**: 44+2. The
+icon sat 2px off centre. Fixed with the longhand `padding: 0 0 0 var(--search-size)`, right
+padding restored only in the open state, where there is room. Now **44×44 exactly**, icon
+concentric.
+
+⛔ **The toolbar's row mode moved 768 → 1024, and it had to.** Search is the **fourth**
+control in `.tools`, which is `flex: 0 0 auto` — every pixel it takes comes out of the chips
+beside it, the flexible half. Measured at 768 with the field open: the stack column was
+crushed to **68px** and its labels clipped mid-word (*"Tailwin"*, *"TypeSc"*, *"JavaScr"*).
+1024 is an existing breakpoint (4 other uses), not a new one. Below it the two stack — the
+layout phone width has always used. After: 768 gives the chips the full **672px in both
+states, 0 clipped, 0 horizontal overflow**. This is K4.6's shape again — the swap's
+consequence, not a new item. ⏭️ At 1024 the chip block still re-wraps 130px→182px while the
+field opens; nothing clips, and 1280 is motionless (84px→84px).
+
+**Rung 5 — seen** at 360 / 768 / 1024 / 1280, EN **and** PT, open and closed.
+**Rung 6 — measured:** collapsed **44×44**, open 200px ending at x=216 of 360 ·
+`document.scrollWidth === innerWidth` at every width · focus ring proven by a **real Tab
+press** (lands on `.search__input`, `:focus-visible` true, `2px solid rgb(44,214,255)` =
+`--focus-ring`, and **`border-radius` stays 9999px** — the reason it got its own rule instead
+of joining the shared focus group, which forces `--radius-sm` and would square the pill) ·
+**no note hex survived** (`#191A1E` / `#0e0e0e` / `#5f5e5e` / `rgb(95 94 94)`: 0 hits in
+`dist/_astro/*.css`; the built shadow resolves to `--background-deep` + `--color-white-a10`) ·
+AA on every new pair — typed text **11.64:1**, placeholder **6.19:1**, icon at rest
+**6.19:1**, icon active **9.24:1**, legend **6.40:1** ·
+reduced-motion **asserted under emulation, not just declared**: 0.3s → **0.001s**, and the
+field still reaches 200px, because the width *is* the open/closed state and removing it
+would make the two identical.
+
+**JS budget:** no new island — the field lives inside the `ProjectsIndex` island that
+already existed. `dist/` re-measured: case-study pages and `/contact` still hydrate
+**nothing** (0 `astro-island`, 0 `_astro/*.js`), so K0.5 holds.
+
 - [ ] **uiverse-10 — Loading page + the DVD corner hit.** ✅ **Resolved (Juan,
       2026-09-03): a first-load splash.** It covers the gap before the site finishes
       loading, so a visitor sees something deliberate instead of leaving early.

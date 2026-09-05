@@ -211,14 +211,69 @@ export type SignalFacet = (typeof SIGNAL_FACETS)[number];
 export interface Filters {
   signals: SignalFacet[];
   stacks: string[];
+  /**
+   * Free-text narrowing. Held raw and tokenised at match time rather than
+   * pre-parsed into state, so the island stores exactly what the visitor typed
+   * and `Clear filters` has one thing to reset.
+   */
+  query: string;
 }
 
-export const EMPTY_FILTERS: Filters = { signals: [], stacks: [] };
+export const EMPTY_FILTERS: Filters = { signals: [], stacks: [], query: "" };
 
-/** A project matches when it carries every selected signal and at least one selected stack. */
+/**
+ * Lower-case, and strip the accents.
+ *
+ * NFD splits an accented letter into its base plus a combining mark, so
+ * dropping the U+0300–U+036F block leaves the base behind and "gestao" finds
+ * "Gestão". The PT titles and taglines are full of accents a visitor types
+ * inconsistently; this is the alternative to a hand-kept alias list.
+ */
+function fold(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+/**
+ * The text a card actually prints, plus the stack ids behind its filter chips.
+ *
+ * Deliberately not `role`: it is one non-localised English string that no card
+ * on this page shows, so searching it would match PT cards on words a PT
+ * visitor cannot see and has had no chance to read.
+ */
+function haystack(p: ProjectSummary): string {
+  return fold(`${p.title} ${p.tagline} ${p.stack.join(" ")}`);
+}
+
+/**
+ * Every whitespace-separated token must appear somewhere in that text.
+ *
+ * AND across tokens, substring inside one, so the visitor never has to know
+ * which field holds which word: "landing figma" crosses a title and a stack id
+ * and returns 6. Substring-within-token is also what keeps a run-together
+ * stack id reachable as two words — "open source" would find `opensource`
+ * without an alias table — though no record carries that id today.
+ *
+ * A blank or all-whitespace query matches everything, so a stray space never
+ * empties the grid.
+ */
+export function matchesQuery(p: ProjectSummary, query: string): boolean {
+  const tokens = fold(query).split(/\s+/).filter(Boolean);
+  if (tokens.length === 0) return true;
+  const text = haystack(p);
+  return tokens.every((t) => text.includes(t));
+}
+
+/**
+ * A project matches when it carries every selected signal, at least one
+ * selected stack, and the query.
+ */
 export function matches(p: ProjectSummary, f: Filters): boolean {
   if (f.signals.some((s) => !p.evidenceSignals[s])) return false;
   if (f.stacks.length > 0 && !f.stacks.some((s) => p.stack.includes(s))) return false;
+  if (!matchesQuery(p, f.query)) return false;
   return true;
 }
 
@@ -226,7 +281,14 @@ export function applyFilters(all: ProjectSummary[], f: Filters, sort: SortKey): 
   return all.filter((p) => matches(p, f)).sort(SORTS[sort]);
 }
 
-/** Counts for each facet given the *other* active filters, so a facet never reads as zero-when-clicked. */
+/**
+ * Counts for each facet given the *other* active filters, so a facet never
+ * reads as zero-when-clicked.
+ *
+ * The probes are built by spreading `f`, so the query rides along with them
+ * for free: a chip's count always describes the set the visitor can actually
+ * see, never the unsearched 50.
+ */
 export function facetCounts(all: ProjectSummary[], f: Filters) {
   const signals = {} as Record<SignalFacet, number>;
   for (const s of SIGNAL_FACETS) {

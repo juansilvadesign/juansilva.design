@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CountUp from "../text/CountUp";
 import BorderGlow from "./BorderGlow";
 import PillChip from "./PillChip";
@@ -24,12 +24,15 @@ export interface IndexCopy {
   stackLegend: string;
   sortLegend: string;
   viewLegend: string;
+  searchLegend: string;
+  searchPlaceholder: string;
   sortEvidence: string;
   sortRecent: string;
   viewGrid: string;
   viewList: string;
   clear: string;
   empty: string;
+  emptyQuery: string;
   emptyHint: string;
   recommended: string;
   recommendedWhy: string;
@@ -113,13 +116,42 @@ export default function ProjectsIndex({ projects, copy }: Props) {
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
   const [sort, setSort] = useState<SortKey>("evidence");
   const [view, setView] = useState<"grid" | "list">("grid");
+  /*
+    uiverse-9. The field holds its own value so typing is never held up, and
+    the committed query lands in `filters` a beat later. Both halves are
+    needed: the input must feel instant, while re-running 12 facet probes and
+    rewriting the role="status" count on every keystroke would make a screen
+    reader read a tally per letter.
+  */
+  const [draft, setDraft] = useState("");
+
+  /*
+    250ms: above a fast typist's inter-key gap, below the ~300ms that starts to
+    read as lag. The equality guard keeps `Clear filters` from being undone —
+    it zeroes both halves, and without the guard this timer would then commit
+    an identical empty string and re-render for nothing.
+  */
+  useEffect(() => {
+    const id = window.setTimeout(
+      () => setFilters((f) => (f.query === draft ? f : { ...f, query: draft })),
+      250,
+    );
+    return () => window.clearTimeout(id);
+  }, [draft]);
 
   const stacks = useMemo(() => stackFacets(projects), [projects]);
   const visible = useMemo(() => applyFilters(projects, filters, sort), [projects, filters, sort]);
   const counts = useMemo(() => facetCounts(projects, filters), [projects, filters]);
   const pick = useMemo(() => recommend(visible), [visible]);
 
-  const active = filters.signals.length + filters.stacks.length;
+  /* Counted off `draft`, not `filters.query`, so the button appears on the
+     first keypress instead of 250ms into it. */
+  const active = filters.signals.length + filters.stacks.length + (draft.trim() ? 1 : 0);
+
+  const clearAll = () => {
+    setDraft("");
+    setFilters(EMPTY_FILTERS);
+  };
 
   const toggle = <K extends "signals" | "stacks">(key: K, value: Filters[K][number]) =>
     setFilters((f) => {
@@ -201,6 +233,55 @@ export default function ProjectsIndex({ projects, copy }: Props) {
           </fieldset>
 
           <div className="tools">
+            {/*
+              uiverse-9 — `splendid-starfish-73`. Two departures from the note,
+              both load-bearing:
+
+              It keeps itself open with `required` + `:not(:invalid)`, which
+              tells assistive tech an empty search box is an invalid required
+              field. `:not(:placeholder-shown)` is the same "has content" test
+              told truthfully — so the placeholder is structural here, not
+              decoration, and must never be dropped.
+
+              And the note's own <title>Search</title> is gone with the icon
+              hidden: this sits in the same labelled `.tool` wrapper as Sort and
+              View, so the visible legend already names the field. Keeping both
+              would announce the control twice.
+            */}
+            <label className="tool">
+              <span className="tool__label">{copy.searchLegend}</span>
+              <span className="search">
+                <input
+                  type="search"
+                  className="search__input"
+                  value={draft}
+                  onChange={(e) => setDraft(e.target.value)}
+                  placeholder={copy.searchPlaceholder}
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                <span aria-hidden="true" className="search__icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                      d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeMiterlimit={10}
+                      strokeWidth={32}
+                    />
+                    <path
+                      d="M338.29 338.29L448 448"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeMiterlimit={10}
+                      strokeWidth={32}
+                    />
+                  </svg>
+                </span>
+              </span>
+            </label>
+
             <label className="tool">
               <span className="tool__label">{copy.sortLegend}</span>
               <select
@@ -238,7 +319,7 @@ export default function ProjectsIndex({ projects, copy }: Props) {
             </div>
 
             {active > 0 && (
-              <button type="button" className="clear" onClick={() => setFilters(EMPTY_FILTERS)}>
+              <button type="button" className="clear" onClick={clearAll}>
                 {copy.clear}
               </button>
             )}
@@ -271,8 +352,15 @@ export default function ProjectsIndex({ projects, copy }: Props) {
 
       {visible.length === 0 ? (
         <div className="empty">
-          <p className="empty__title">{copy.empty}</p>
-          <button type="button" className="clear" onClick={() => setFilters(EMPTY_FILTERS)}>
+          {/* A query and a chip combination fail for different reasons, and
+              "no project carries that evidence" is simply wrong when the cause
+              was a typo. Echo the term back so the visitor can see it. */}
+          <p className="empty__title">
+            {filters.query.trim()
+              ? copy.emptyQuery.replace("{q}", filters.query.trim())
+              : copy.empty}
+          </p>
+          <button type="button" className="clear" onClick={clearAll}>
             {copy.emptyHint}
           </button>
         </div>

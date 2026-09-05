@@ -270,6 +270,126 @@
   border-radius: var(--radius-control);
 }
 
+/*
+ * uiverse-9 — `splendid-starfish-73`, ported to tokens.
+ *
+ * Collapsed it is 44px, not the note's 40: Rung 6 sets the floor for a tap
+ * target and the note sits below it. The extra 4px also lets the icon keep the
+ * note's own padding without crowding the glyph.
+ *
+ * The note's neumorphism is one idea — a raised pair at rest, the same pair
+ * inset once the field is in use — expressed in four hard-coded greys lit for
+ * its own #191A1E ground. Re-mapped here onto --background-deep for the shadow
+ * and a 10% white for the highlight, which is the pair this darker surface
+ * needs; the 25% grey the note used reads as a blown-out rim at our contrast.
+ */
+.search {
+  --search-size: 44px;
+  --search-open: 200px;
+  --search-lift: 1.5px 1.5px 3px var(--background-deep),
+    -1.5px -1.5px 3px var(--color-white-a10);
+  --search-well: inset 1.5px 1.5px 3px var(--background-deep),
+    inset -1.5px -1.5px 3px var(--color-white-a10);
+  position: relative;
+  display: block;
+}
+
+.search__input {
+  width: var(--search-size);
+  height: var(--search-size);
+  /*
+   * Longhand, and the right side is explicitly 0: the UA sheet ships
+   * `padding: 1px 2px`, and under border-box a width smaller than its own
+   * padding floors at the padding. Setting only padding-left therefore left a
+   * 46×44 ellipse with the 44px icon 2px off its centre. The open state below
+   * puts the right padding back, where there is room for it.
+   */
+  padding: 0 0 0 var(--search-size);
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  color: var(--text-primary);
+  cursor: pointer;
+  background: var(--surface);
+  border: 0;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--search-lift);
+  /* Safari otherwise refuses height and padding on a search input. */
+  appearance: none;
+  transition: width var(--motion-base) var(--ease-standard),
+    padding var(--motion-base) var(--ease-standard),
+    box-shadow var(--motion-base) var(--ease-standard);
+}
+
+/*
+ * The open state. `:not(:placeholder-shown)` is the note's `:not(:invalid)`
+ * without the lie it tells about an empty field — see the component. Both
+ * halves matter: :focus opens it to type into, the placeholder test keeps it
+ * open afterwards so a visitor can read their own query back.
+ */
+.search__input:focus,
+.search__input:not(:placeholder-shown) {
+  width: var(--search-open);
+  padding-right: var(--space-px-16);
+  cursor: text;
+  box-shadow: var(--search-well);
+}
+
+/* Clipped to nothing at 44px anyway; fading it in stops the words from
+ * appearing to slide out of the icon as the field opens. */
+.search__input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+
+.search__input:focus::placeholder {
+  opacity: 1;
+}
+
+/*
+ * Its own focus rule rather than the shared group below: that one sets
+ * border-radius on the element it rings, which would square off this pill for
+ * exactly as long as it is focused.
+ */
+.search__input:focus-visible {
+  outline: var(--border-width-strong) solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* Grey-on-grey here, and outside the token system entirely. `Clear filters`
+ * already empties the field and is the affordance the rest of the toolbar
+ * uses. */
+.search__input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.search__icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: var(--search-size);
+  height: var(--search-size);
+  padding: var(--space-px-12);
+  color: var(--text-secondary);
+  /* The note makes the icon clickable once open, for a submit this control
+   * does not have — filtering is live. Staying inert keeps the whole 44px disc
+   * a single target that focuses the field. */
+  pointer-events: none;
+  transition: color var(--motion-fast) var(--ease-standard);
+}
+
+.search__input:focus + .search__icon,
+.search__input:not(:placeholder-shown) + .search__icon {
+  color: var(--primary);
+}
+
+.search__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 .toggle {
   display: inline-flex;
   overflow: hidden;
@@ -652,6 +772,29 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
+  .rec__link {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: var(--space-px-40);
+  }
+
+  .rec__title {
+    font-size: var(--text-32);
+    line-height: var(--leading-40);
+  }
+}
+
+/*
+ * The toolbar goes side-by-side at 1024, not 768.
+ *
+ * It was 768 while `.tools` held three controls. Search is the fourth, and
+ * `.tools` is `flex: 0 0 auto`, so every pixel it takes comes out of the chips
+ * beside it — which are the flexible half. Measured at 768 with the field
+ * open, that left the stack column 68px wide and clipped its labels mid-word
+ * ("Tailwin", "TypeSc"). Below 1024 the two now stack, which is the same
+ * layout phone width has always used and the one that has room.
+ */
+@media (min-width: 1024px) {
   .controls__row {
     flex-direction: row;
     align-items: flex-end;
@@ -668,17 +811,6 @@
     flex: 0 0 auto;
     flex-wrap: nowrap;
   }
-
-  .rec__link {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
-    align-items: center;
-    gap: var(--space-px-40);
-  }
-
-  .rec__title {
-    font-size: var(--text-32);
-    line-height: var(--leading-40);
-  }
 }
 
 @media (min-width: 1280px) {
@@ -693,7 +825,13 @@
   .chip,
   .toggle__btn,
   .pcard__link,
-  .pcard__title {
+  .pcard__title,
+  /* The width change is the open/closed state itself, not travel for its own
+   * sake, so it arrives instantly instead of being removed — dropping it would
+   * leave the two states indistinguishable. */
+  .search__input,
+  .search__input::placeholder,
+  .search__icon {
     transition-duration: var(--motion-reduced);
   }
 }
