@@ -19,6 +19,15 @@ export interface EvidenceSignals {
 export interface ProjectSummary {
   slug: string;
   title: string;
+  /**
+   * The store's non-localised `title` — search fodder only, never rendered.
+   *
+   * The localised `copy[lang].title` is written to describe the work
+   * ("Nanotechnology Cosmetics Lab — Institutional & B2B Portal"), which means
+   * the brand it was built for is absent from it on 49 of 50 records. Visitors
+   * search for the brand. This carries it.
+   */
+  searchTitle: string;
   tagline: string;
   stack: string[];
   preview: string;
@@ -237,30 +246,64 @@ function fold(s: string): string {
 }
 
 /**
- * The text a card actually prints, plus the stack ids behind its filter chips.
+ * The text a card prints, the stack ids behind its filter chips, and the two
+ * identifiers a visitor is most likely to type: the slug and the brand.
  *
- * Deliberately not `role`: it is one non-localised English string that no card
- * on this page shows, so searching it would match PT cards on words a PT
- * visitor cannot see and has had no chance to read.
+ * `slug` closes a hole that swallowed the whole collection — it was on the
+ * summary and populated, but never searched, so every one of the 50 records
+ * returned nothing when searched by its own slug, in both languages, even
+ * though that slug is sitting in the visitor's URL bar to be copied.
+ *
+ * `searchTitle` is the deliberate exception to the rule below, taken with the
+ * cost understood. It closes the other half: the localised titles describe the
+ * work rather than name the client, so 49 of 50 records could not be found by
+ * the brand they were built for. The slug alone recovers 38 of those; the
+ * remaining 11 spell the brand only in the store title ("B. Kemi", "KAT
+ * Investimentos", "Messias & Almada").
+ *
+ * ⛔ The rule it bends, which still governs everything else: `role` stays out.
+ * It is one non-localised English string no card on this page shows, so
+ * searching it would match PT cards on words a PT visitor cannot see and has
+ * had no chance to read. `searchTitle` carries that same cost — a PT visitor
+ * can match it on English words — and is admitted anyway because a brand name
+ * is the same in both languages and is already public on the card as its live
+ * link. Do not read this as a general licence to index store prose: the fields
+ * `content.config.ts` holds back (`attribution`, `impact`) are written for the
+ * private corpus and must not follow.
  */
 function haystack(p: ProjectSummary): string {
-  return fold(`${p.title} ${p.tagline} ${p.stack.join(" ")}`);
+  return fold(`${p.title} ${p.tagline} ${p.stack.join(" ")} ${p.slug} ${p.searchTitle}`);
 }
 
 /**
- * Every whitespace-separated token must appear somewhere in that text.
+ * Every token must appear somewhere in that text.
  *
  * AND across tokens, substring inside one, so the visitor never has to know
  * which field holds which word: "landing figma" crosses a title and a stack id
- * and returns 6. Substring-within-token is also what keeps a run-together
- * stack id reachable as two words — "open source" would find `opensource`
- * without an alias table — though no record carries that id today.
+ * and returns 9 — it was 6 before the slug and store title joined the haystack,
+ * and the three it gained (celus, pereira-de-moraes, upos) each say "landing
+ * page" in a store title the localised copy never repeats. Recall the search
+ * was quietly missing, not noise.
  *
- * A blank or all-whitespace query matches everything, so a stray space never
- * empties the grid.
+ * Substring-within-token is also what keeps a run-together stack id reachable
+ * as two words — "open source" would find `opensource` without an alias table
+ * — though no record carries that id today. It is why a partial is enough
+ * too: "psi" finds `psi-silvanacabral` and both `psiativa-*` records without
+ * the visitor finishing the word.
+ *
+ * `/`, `-` and `_` split alongside whitespace, so a slug pasted from the URL
+ * bar arrives as words. Splitting on whitespace alone left "/psi-silvanacabral"
+ * as ONE token carrying a leading slash, which matched nothing — the slug is
+ * stored without it. Only the QUERY is split this way; the haystack keeps its
+ * hyphens, so those pieces still land inside the slug they came from.
+ *
+ * A blank or all-punctuation query matches everything, so a stray space or a
+ * lone slash never empties the grid.
  */
 export function matchesQuery(p: ProjectSummary, query: string): boolean {
-  const tokens = fold(query).split(/\s+/).filter(Boolean);
+  const tokens = fold(query)
+    .split(/[\s/_-]+/)
+    .filter(Boolean);
   if (tokens.length === 0) return true;
   const text = haystack(p);
   return tokens.every((t) => text.includes(t));
