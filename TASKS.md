@@ -1164,8 +1164,18 @@ asks for explicitly.
    onto `--primary` cyan / `--secondary` pink / the neutral ramp before it lands.
 5. ⛔ **Protect the zero-JS pages.** *(K2 spends an island on the **homepage**, which
    already hydrates `HeroHeadline`. The island-free pages below are the ones this rule
-   is about, and they are still island-free.)* Verified in `dist/` on 2026-09-03: **case-study pages
-   and the 404 hydrate nothing** — no `astro-island`, no `_astro/*.js`. Four binder items
+   is about, and they are still island-free.)*
+   > ⚠️ **The 2026-09-03 evidence for this line was STALE and is corrected here
+   > (re-probed 2026-09-06).** It read "case-study pages **and the 404** hydrate nothing".
+   > The **404 no longer qualifies** — K1 put `FuzzyText` on it, and `dist/404.html` now
+   > carries **2 `astro-island`s + `_astro/FuzzyText.*.js`**. Two further corrections from
+   > the same probe: **`/contact` is island-free but not JS-free** — it loads third-party
+   > Cloudflare Turnstile (`challenges.cloudflare.com/turnstile/v0/api.js`); and every
+   > case-study page carries **one inline `<script type="module">`**, the pre-existing
+   > navbar `data-scrolled` handler. The rule as enforced is therefore **no
+   > `astro-island` and no `_astro/*.js`**, not "no script of any kind".
+   Re-verified in `dist/` on **2026-09-06**, after uiverse-5 and uiverse-10: **the 100
+   case-study pages hydrate nothing** — 0 `astro-island`, 0 external `.js`. Four binder items
    target exactly those pages. Prefer CSS-only (`:target`, `@keyframes`,
    `animation-timeline: scroll()`) over a React island; where an island is unavoidable,
    say so and price it.
@@ -1926,7 +1936,7 @@ upstream's); `--li-flood-size` / `--li-flood-offset` (**20em / -5em**, upstream'
 is what makes the sweep read as arriving from the left). ⏭️ The rest state is unchanged and
 still borderless; adding the note's outline is a one-line change if Juan wants more presence.
 
-### K5 — New controls (uiverse 2, 5, 9, 10) — 🟢 uiverse-9 shipped 2026-09-05; 2, 5, 10 open
+### K5 — New controls (uiverse 2, 5, 9, 10) — 🟢 9 shipped 2026-09-05 · **5 + 10 shipped 2026-09-06** · only uiverse-2 open (still gated on `master-cv.md` §5)
 
 - [ ] **uiverse-2 — Download resume.** ✅ **Unblocked (Juan, 2026-09-03): generate the PDF
       from `_config/master-cv.md`.** No PDF exists in `public/` or `src/` yet, so the
@@ -1936,10 +1946,30 @@ still borderless; adding the note's outline is a one-line change if Juan wants m
       *"spearheaded the end-to-end UI design"* wording that the store contradicts, and the
       unsourced Sagitta counts. A resume is the one artifact a prospect reads closely, so
       it must not ship a claim the evidence store already flags.
-- [ ] **uiverse-5 — Back to top on case-study pages.** Do it **without an island**: an
-      `<a href="#top">` styled with the note's CSS, revealed via
-      `animation-timeline: scroll()` inside an `@supports`, falling back to
-      always-visible. Preserves K0.5 across all 100 pages. ≥44px tap target (Rung 6).
+- [x] **uiverse-5 — Back to top on case-study pages.** ✅ **2026-09-06.** Built as
+      specced: no island, `@supports (animation-timeline: scroll())` with an
+      always-visible fallback, 50px tap target (≥44px, Rung 6). New
+      **`src/components/BackToTop.astro`** (scoped `<style>`), wired into
+      `[slug].astro` outside `<main>`; label `navigation.backToTop` in both locales.
+      **Verified in `dist/` + Chrome 153:** on **100/100** case-study pages, which still
+      report **0 `astro-island`, 0 external `.js`** — K0.5 holds. Reveal tracks the
+      declared `animation-range: 240px 480px` exactly (scrollY 240 → 0.00, **360 → 0.50**,
+      480+ → 1.00); click returns `scrollY` to 0; accessible name "Back to top" with the
+      visible label and the SVG both `aria-hidden`. Reduced motion: animation `none`,
+      control always visible.
+      ⭐ **It targets `#main-content`, not a new `#top`.** That anchor already exists on
+      every page as the skip-link target, so a second one would be a duplicate landmark.
+      ⛔🔴 **NEVER put an `animation` shorthand in the same rule as `animation-timeline`.**
+      The first build did, and **lightningcss merged them** into
+      `animation: linear both btt-reveal scroll(root)`. `animation-timeline` is not a
+      component of that shorthand, so **Chrome rejected the whole declaration** —
+      computed `animation-name` came back `none`, and because the `@supports` block had
+      already applied `opacity: 0; visibility: hidden`, **the button was invisible at
+      every scroll position in Chrome** (measured at 0/400/1200/2317). The `@supports`
+      guard cannot catch this: the *condition* parses, the *declaration inside* dies.
+      Fix = longhands only (`animation-name` / `-timing-function` / `-fill-mode` /
+      `-timeline` / `-range`). A probe through lightningcss confirmed the shorthand is
+      merged in every arrangement, including declaring the timeline in a second rule.
 #### uiverse-9 — Search on `/projects` ✅ 2026-09-05
 
 - [x] `query` joins **`Filters`** in `src/lib/projects.ts`, so it flows through `matches`
@@ -2009,7 +2039,46 @@ would make the two identical.
 already existed. `dist/` re-measured: case-study pages and `/contact` still hydrate
 **nothing** (0 `astro-island`, 0 `_astro/*.js`), so K0.5 holds.
 
-- [ ] **uiverse-10 — Loading page + the DVD corner hit.** ✅ **Resolved (Juan,
+- [x] **uiverse-10 — Loading page + the DVD corner hit.** ✅ **SHIPPED 2026-09-06.**
+      New **`src/components/Splash.astro`** + an `is:inline` arming script in the
+      homepage's `head` slot. **Homepage only** (Juan's call, from the measurement below),
+      so the 100 island-free case studies gain nothing and K0.5 holds — verified: the
+      splash markup appears on `dist/index.html` + `dist/pt/index.html` and **nowhere
+      else**, and no case study carries the script.
+      ⭐ **Gate is `localStorage`, not `sessionStorage` — "first load EVER"** (Juan,
+      2026-09-06: *"only appears in the first loading ever"*). A returning visitor has a
+      warm cache and no gap left to cover. Dismissed on the real `load` event, never a
+      timer; a 6s JS timeout and a pure-CSS `splash-failsafe` animation sit behind it so
+      no failure can strand a visitor behind the overlay. **Fail-safe direction is "no
+      splash"**: the element is CSS-hidden by default and only the head script's
+      `data-splash` attribute reveals it, so a throwing `localStorage` (private mode
+      throws on *access*), a script error, or JS-off all yield the plain page.
+      **Verified in Chrome 153:** first visit → armed then `data-splash="done"` with the
+      storage flag set; second visit → **never armed**; H1 paints underneath throughout;
+      `z-index` 60 vs navbar 50.
+      ⛔ **The bounce animations are gated on `[data-splash="on"]`.** Declared bare, they
+      kept running forever on the hidden splash on **every later visit** — infinite
+      compositor work on the heaviest page, in a feature justified as *performance*.
+      Caught by measurement (a second visit still reported `splash-x` active), not review.
+      ⭐ **The corner hit is derived, not tuned, and holds at any viewport.** Each axis
+      gets its own `alternate` animation crossing exactly its own span, so
+      `vx/vy = (W-w)/(H-h)` is just the ratio of the two durations — 1.2s (x) and 1.8s
+      (y). **Measured at 1280×720** (spans 1060 × 671), driving both axes to exact times:
+      **t=0 → (0,0) CORNER · 1200 → right wall only · 1800 → bottom wall only · 2400 →
+      left wall only · 3600 → (1060,0) CORNER · 7200 → (0,0) CORNER** — i.e. every
+      lcm(1.2, 1.8) = 3.6s, as derived. Both axes share one `startTime` (delta 0ms),
+      which is the precondition for any of it.
+      ⚠️ **On a fast first load the splash is gone well before 3.6s, so most visitors
+      will never see a corner hit.** That is the honest outcome this task predicted, not
+      a defect — the alternative is holding the cover up longer than the load needs.
+      ⭐ **Mark is `logo-full.svg` masked, not an `<img>`** (Juan's call): a single
+      white-filled `<path>`, no rects or gradients, so `mask` + `background-color` gives
+      the wordmark silhouette in **`--primary` → `--secondary`**. The note's `DVD` /
+      `FWDJC` text and its red/blue/green/yellow/purple rainbow are gone — the handle was
+      the uiverse author's, and the rainbow is exactly what K0.4 forbids.
+      Reduced motion: no bounce at all — the mark sits static and centred (measured at
+      the exact viewport centre, 530×335).
+      ORIGINAL NOTE — ✅ **Resolved (Juan,
       2026-09-03): a first-load splash.** It covers the gap before the site finishes
       loading, so a visitor sees something deliberate instead of leaving early.
       ⚠️ **Then it is a performance feature and must be measured as one** — a splash that

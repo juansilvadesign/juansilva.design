@@ -1,0 +1,203 @@
+---
+/**
+ * uiverse-10 — first-load splash, homepage only.
+ *
+ * ⛔ HOMEPAGE ONLY, and that is a measurement, not a preference. The two React
+ * pages are the only ones with a load gap worth covering (`/` is 41KB HTML plus
+ * a 184KB runtime); a case study is 18.8KB and ships no JS at all, so a splash
+ * there would manufacture the very delay it claims to hide. Mounting this in
+ * BaseLayout would also put a script on the 100 island-free case-study pages
+ * and break K0.5. Keep it here.
+ *
+ * FIRST LOAD EVER, not first per session — `localStorage`, not `sessionStorage`
+ * (Juan, this session). A returning visitor has a warm cache and no gap left to
+ * cover, so showing it again would only add delay.
+ *
+ * ⭐ The fail-safe direction is "no splash". The element is hidden in CSS by
+ * default and only revealed by the `data-splash` attribute the head script
+ * sets. If the script throws, if `localStorage` is unavailable (private mode
+ * throws on access, not on read), or if JS is off entirely, the visitor simply
+ * gets the page. Nothing can leave them stranded behind an overlay: dismissal
+ * is wired to the real `load` event, backed by a JS timeout, backed in turn by
+ * a pure-CSS animation that hides it regardless of whether any script ran.
+ */
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+---
+
+{/*
+  aria-hidden: the real page is in the DOM underneath and is what assistive
+  tech should read. The splash is a visual cover for a network wait, not
+  content, and announcing it would interrupt the page it is covering.
+*/}
+<div class="splash" aria-hidden="true">
+  <div class="splash__x">
+    <div class="splash__mark" role="img" aria-label={copy.navigation.logoAlt}></div>
+  </div>
+</div>
+
+<style>
+  .splash {
+    position: fixed;
+    inset: 0;
+    /* Above the navbar, expressed against its token rather than a magic 100. */
+    z-index: calc(var(--z-navigation) + 10);
+    background-color: var(--background-deep);
+    /* Default = invisible. Only the head script's attribute reveals it, so
+       every failure mode lands on "no splash" rather than "stuck splash". */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    --mark-w: min(220px, 46vw);
+    /* logo-full.svg is 143×32; 4.47 keeps the aspect at any width. */
+    --mark-h: calc(var(--mark-w) / 4.47);
+  }
+
+  :global(html[data-splash="on"]) .splash {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    /*
+      Pure-CSS failsafe, third and last line of defence. If neither the `load`
+      listener nor the JS timeout ever fires, this still clears the overlay.
+      0s duration with an 8s delay = a hard cut, not a fade.
+    */
+    animation: splash-failsafe 0s linear 8s forwards;
+  }
+
+  /* Dismissal. The attribute flips to "done" and the cover fades out; the
+     delayed `visibility` keeps it hit-testable for exactly as long as it is
+     still visible. */
+  :global(html[data-splash="done"]) .splash {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--motion-base) ease,
+      visibility 0s linear var(--motion-base);
+  }
+
+  .splash__x {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--mark-w);
+    height: var(--mark-h);
+  }
+
+  .splash__mark {
+    width: 100%;
+    height: 100%;
+    /* Masked rather than an <img>, so the fill is a token and can animate.
+       An <img> would ship the logo's own colours and K0.4 forbids hard-coded
+       values reaching the page by any route, including inside an asset. */
+    background-color: var(--primary);
+    -webkit-mask: url("/assets/logo/logo-full.svg") center / contain no-repeat;
+    mask: url("/assets/logo/logo-full.svg") center / contain no-repeat;
+  }
+
+  /*
+    The corner hit, derived rather than tuned.
+
+    A bouncer reaches a corner only when its horizontal and vertical travels are
+    commensurable — vx/vy = (W-w)/(H-h) up to an integer ratio. Driving each
+    axis with its own `alternate` animation makes that ratio the ratio of the
+    two durations, so it holds at EVERY viewport size without measuring one:
+    each axis always crosses exactly its own available span.
+
+    1.2s and 1.8s give wall hits at every 1.2s (x) and 1.8s (y), and a corner
+    wherever both coincide — lcm(1.2, 1.8) = 3.6s, every time, forever.
+
+    ⚠️ On a fast first load the splash is gone well before 3.6s, so the corner
+    hit is a property of the animation rather than something most visitors will
+    see. That is the honest outcome the task predicts, not a defect.
+  */
+  /*
+    ⛔ Gated on the armed state, not declared on the element. Left ungated,
+    these two infinite animations keep running on the hidden splash for the
+    whole life of every LATER visit — on the one page that already carries the
+    heaviest runtime, in service of a feature whose entire justification is
+    performance. Measured: a second visit had `splash-x` still active.
+  */
+  :global(html[data-splash="on"]) .splash__x {
+    animation: splash-x 1.2s linear infinite alternate;
+  }
+
+  :global(html[data-splash="on"]) .splash__mark {
+    animation:
+      splash-y 1.8s linear infinite alternate,
+      splash-tint 2.4s steps(1, end) infinite;
+  }
+
+  @keyframes splash-x {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(100vw - var(--mark-w)));
+    }
+  }
+
+  @keyframes splash-y {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      /* svh, not vh: mobile browser chrome makes vh taller than the visible
+         box, which would park the mark below the fold at the bottom bounce. */
+      transform: translateY(calc(100svh - var(--mark-h)));
+    }
+  }
+
+  /* Colour flips on each horizontal wall hit, the way the original does. */
+  @keyframes splash-tint {
+    0% {
+      background-color: var(--primary);
+    }
+    50% {
+      background-color: var(--secondary);
+    }
+  }
+
+  @keyframes splash-failsafe {
+    to {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+  }
+
+  /*
+    House rule. The bounce is the whole effect, so reduced motion does not get
+    a slower bounce — it gets none: the mark sits centred and still, and the
+    splash stops being a moving object in front of someone who asked for none.
+  */
+  @media (prefers-reduced-motion: reduce) {
+    /* Must out-specify the gated rules above, hence the same :global() prefix
+       — a bare `.splash__x` here would lose the cascade and keep bouncing. */
+    :global(html[data-splash="on"]) .splash__x,
+    .splash__x {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: none;
+    }
+
+    :global(html[data-splash="on"]) .splash__mark,
+    .splash__mark {
+      animation: none;
+      background-color: var(--primary);
+    }
+
+    :global(html[data-splash="done"]) .splash {
+      transition-duration: var(--motion-reduced);
+    }
+  }
+</style>

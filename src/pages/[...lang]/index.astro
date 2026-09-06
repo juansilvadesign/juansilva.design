@@ -4,6 +4,7 @@ import Hero from "../../components/Hero.astro";
 import Marquee from "../../components/Marquee.astro";
 import Projects from "../../components/Projects.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Splash from "../../components/Splash.astro";
 import { localeStaticPaths, t, type Locale } from "../../i18n";
 
 export function getStaticPaths() {
@@ -19,6 +20,52 @@ const copy = t(lang);
 ---
 
 <BaseLayout {lang} title={copy.meta.defaultTitle} description={copy.meta.description} canonicalPath="/">
+  {/*
+    uiverse-10. In the head slot so it runs BEFORE the body paints — arming it
+    from the body would let a frame of real page render first and then be
+    covered, which reads as a stutter rather than a load screen.
+
+    `is:inline` is load-bearing: Astro would otherwise bundle this into a
+    module script, and a module is deferred by definition — it cannot run
+    before first paint, which is the one thing this script exists to do.
+  */}
+  <Fragment slot="head">
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var KEY = "jsd:splash-seen";
+        // Reading localStorage THROWS (not returns null) in some privacy
+        // modes, so a failure here must mean "no splash", never a crash.
+        try {
+          if (localStorage.getItem(KEY)) return;
+        } catch (e) {
+          return;
+        }
+        root.dataset.splash = "on";
+
+        var done = function () {
+          if (root.dataset.splash !== "on") return;
+          root.dataset.splash = "done";
+          try {
+            localStorage.setItem(KEY, "1");
+          } catch (e) {}
+        };
+
+        // Dismissed by the real ready signal, never by a timer that decides
+        // in advance how long the page "should" take. If load already fired,
+        // the page was faster than this script and the splash never shows.
+        if (document.readyState === "complete") done();
+        else window.addEventListener("load", done, { once: true });
+
+        // Failsafe only — an upper bound so a stalled resource cannot hold
+        // the cover up indefinitely. Not the dismissal mechanism.
+        setTimeout(done, 6000);
+      })();
+    </script>
+  </Fragment>
+
+  <Splash {lang} />
+
   <main id="main-content" class="page-shell">
     <Hero {lang} />
     <Marquee {lang} />
