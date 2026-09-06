@@ -1,0 +1,194 @@
+---
+/**
+ * uiverse-5 — "Back to top" on the 100 case-study pages.
+ *
+ * ⛔ CSS only, by design. K0.5 keeps the case studies island-free, and this is
+ * the reason the control is an `<a href="#main-content">` rather than the
+ * note's `<button>`: an anchor scrolls with no script at all, and it reuses the
+ * anchor the skip-link already relies on instead of planting a second `#top`.
+ *
+ * The reveal is a scroll-progress animation, so it too costs no JS. Browsers
+ * without `animation-timeline` fall through the `@supports` and simply keep the
+ * control visible — the fallback is the useful state, never a dead affordance.
+ *
+ * Ported from the binder note with the raw values re-mapped onto tokens (K0.4):
+ * `rgb(20,20,20)` → `--surface`, `rgb(181,160,255)` → `--primary`, and the
+ * hover foreground → `--background`, which is what keeps the expanded pill
+ * legible: white-on-cyan measures 1.96:1, near-black-on-cyan measures 9.66:1.
+ */
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+const label = copy.navigation.backToTop;
+---
+
+<a class="btt" href="#main-content" aria-label={label}>
+  <svg class="btt__icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
+    <path
+      d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+    ></path>
+  </svg>
+  {/* The anchor is already named by `aria-label`; this is the same word made
+      visible, so it is hidden from assistive tech to avoid announcing twice. */}
+  <span class="btt__label" aria-hidden="true">{label}</span>
+</a>
+
+<style>
+  .btt {
+    position: fixed;
+    right: var(--space-px-24);
+    bottom: var(--space-px-24);
+    /* Under the navbar: this scrolls away from it, and a control that could
+       cover primary navigation is the wrong trade. */
+    z-index: var(--z-content);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-8);
+    /* 50px clears the 44px minimum tap target on its own (Rung 6). */
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-pill);
+    background-color: var(--surface);
+    box-shadow: 0 0 0 4px var(--color-cyan-a12);
+    color: var(--text-primary);
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      width var(--motion-base) ease,
+      background-color var(--motion-base) ease,
+      color var(--motion-base) ease,
+      box-shadow var(--motion-base) ease;
+  }
+
+  .btt__icon {
+    width: 12px;
+    flex: none;
+    fill: currentColor;
+    transition: transform var(--motion-base) ease;
+  }
+
+  /*
+    The label is laid out at full size and clipped by the 50px width, rather
+    than grown from `font-size: 0` as the note does. Animating font-size
+    relayouts text on every frame; this way only the container's width
+    animates, and the word is already the right size when it is uncovered.
+  */
+  .btt__label {
+    /* The note says 13px; the ramp has no 13. --text-14 is the nearest real
+       token and reads better in the pill than --text-12. No literal fallback
+       here on purpose — that would be a hard-coded value wearing a var(). */
+    font-size: var(--text-14);
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity var(--motion-base) ease;
+  }
+
+  .btt:hover,
+  .btt:focus-visible {
+    width: 140px;
+    background-color: var(--primary);
+    /* 9.66:1 against --primary. */
+    color: var(--background);
+  }
+
+  .btt:hover .btt__icon,
+  .btt:focus-visible .btt__icon {
+    transform: translateY(-200%);
+  }
+
+  .btt:hover .btt__label,
+  .btt:focus-visible .btt__label {
+    opacity: 1;
+  }
+
+  .btt:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  /*
+    Scroll-driven reveal. Base state above is visible, so a browser without
+    `animation-timeline` (Firefox and Safari at time of writing) keeps a working
+    control instead of one that never appears.
+
+    `scroll(root block)` names the document scroller explicitly — the anonymous
+    `scroll()` resolves against the nearest scrollable ancestor, and this
+    element is `position: fixed`, so leaving it implicit invites the wrong one.
+  */
+  @supports (animation-timeline: scroll()) {
+    .btt {
+      opacity: 0;
+      visibility: hidden;
+      /*
+        ⛔ LONGHANDS ONLY — never the `animation` shorthand in this rule.
+        lightningcss folds a neighbouring `animation-timeline` INTO the
+        shorthand and emits `animation: linear both btt-reveal scroll(root)`.
+        `animation-timeline` is not a component of that shorthand, so Chrome
+        rejects the whole declaration: computed `animation-name` comes back
+        `none`, the reveal never runs, and because this block has already set
+        `opacity: 0; visibility: hidden` the control is invisible at EVERY
+        scroll position. Verified in Chrome 153 — hidden at 0/400/1200/2317.
+        The @supports guard cannot catch it: the condition parses fine, it is
+        the declaration inside that dies.
+      */
+      animation-name: btt-reveal;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 240px 480px;
+    }
+  }
+
+  @keyframes btt-reveal {
+    to {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .btt {
+      right: var(--space-px-16);
+      bottom: var(--space-px-16);
+    }
+  }
+
+  /*
+    House rule: every effect carries a reduced-motion branch. The width and
+    icon transitions collapse, and the scroll reveal is dropped entirely —
+    a control that materialises during scrolling is exactly the kind of
+    motion this preference is asking us not to run.
+  */
+  @media (prefers-reduced-motion: reduce) {
+    .btt,
+    .btt__icon,
+    .btt__label {
+      transition-duration: var(--motion-reduced);
+    }
+
+    .btt:hover .btt__icon,
+    .btt:focus-visible .btt__icon {
+      transform: none;
+    }
+
+    @supports (animation-timeline: scroll()) {
+      .btt {
+        opacity: 1;
+        visibility: visible;
+        /* Longhand here too, same reason as above. */
+        animation-name: none;
+      }
+    }
+  }
+</style>

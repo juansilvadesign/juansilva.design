@@ -32,6 +32,7 @@ export const pt = {
   navigation: {
     ariaLabel: "Navegação principal",
     skipToContent: "Pular para o conteúdo",
+    backToTop: "Voltar ao topo",
     home: "Início",
     projects: "Projetos",
     contact: "Contato",

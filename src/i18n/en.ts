@@ -30,6 +30,7 @@ export const en = {
   navigation: {
     ariaLabel: "Primary navigation",
     skipToContent: "Skip to content",
+    backToTop: "Back to top",
     home: "Home",
     projects: "Projects",
     contact: "Contact",

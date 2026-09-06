@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Footer from "../../../components/Footer.astro";
 import SourceCodeButton from "../../../components/SourceCodeButton.astro";
 import StackBadge from "../../../components/StackBadge.astro";
+import BackToTop from "../../../components/BackToTop.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { locales, defaultLocale, localizedPath, pageTitle, t } from "../../../i18n";
 import { SIGNAL_FACETS, byEvidence, formatTimeframe, previewFor } from "../../../lib/projects";
@@ -215,6 +216,10 @@ const indexHref = localizedPath("/projects/", lang);
     </article>
     <Footer {lang} />
   </main>
+
+  {/* uiverse-5. Outside <main> so the fixed control is not itself a target
+      of the #main-content jump it performs. */}
+  <BackToTop {lang} />
 </BaseLayout>
 
 <style>
