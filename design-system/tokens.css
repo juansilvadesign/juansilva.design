@@ -38,6 +38,7 @@
   --color-gray-50: hsl(0 0% 98%);
   --color-slate-950: hsl(222 84% 5%);
   --color-slate-800: hsl(217 33% 17%);
+  --color-slate-600: hsl(215 16% 45%);
   --color-slate-500: hsl(215 16% 47%);
   --color-slate-400: hsl(215 20% 65%);
   --color-slate-200: hsl(214 32% 91%);
@@ -390,8 +391,8 @@
   --surface-inverse: var(--color-neutral-800);
   --text-heading: var(--color-neutral-1000);
   --text-primary: var(--color-neutral-650);
-  --text-secondary: var(--color-slate-500);
-  --text-placeholder: var(--color-slate-500);
+  --text-secondary: var(--color-slate-600);
+  --text-placeholder: var(--color-slate-600);
   --border-subtle: var(--color-gray-300);
   --border-default: var(--color-slate-400);
   --border-interactive: var(--color-black-a12);

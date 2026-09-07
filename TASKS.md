@@ -2499,11 +2499,12 @@ Not a binder note — Juan asked directly on 2026-09-07 to reuse the case-study 
       needs the same edit — nothing fails loudly.
 
 
-## Milestone L — Light/dark theme toggle (uiverse-7) 🔒 deferred 2026-09-03
+## Milestone L — Light/dark theme toggle (uiverse-7) ✅ closed 2026-09-07
 
 Split out of the binder by Juan's call on 2026-09-03, because it is **not a button swap**.
+The historical scope below was closed on 2026-09-07.
 
-`design-system/tokens.css` defines **exactly one palette** — `--background:
+At deferral, `design-system/tokens.css` defined **exactly one palette** — `--background:
 var(--color-neutral-950)` and a neutral ramp built for a dark surface. There is **no
 `prefers-color-scheme` block, no `data-theme` switching, and no light token set anywhere
 in `src/` or `design-system/`** (the single `data-theme="dark"` at `Contact.astro:138` is
@@ -2521,3 +2522,26 @@ a local attribute, not a system). Shipping the `strong-squid-82` toggle therefor
 
 ⛔ **Do not half-ship it.** A toggle that works on the homepage and breaks 100 case-study
 pages is worse than no toggle. Scope it as its own milestone with its own gates.
+
+### Delivered 2026-09-07
+
+- [x] **Light is a semantic token layer, not an inversion.**
+      `:root[data-theme="light"]` re-derives backgrounds, surfaces, text, borders, controls,
+      selection, nav paints, project/LinkedIn CTA roles, and light-safe decorative treatments.
+      Dark remains the server-safe fallback.
+- [x] **`uiverse-7` is an accessible native control.** `ThemeToggle.astro` ports
+      `Galahhad/strong-squid-82` without styled-components, preserves the source's sun/moon,
+      clouds and stars, has EN/PT action labels, a 44px hit target, visible keyboard focus, and
+      a reduced-motion branch. Choice persists under `jsd:theme`, follows the OS when unset,
+      syncs cross-tab changes, and emits `themechange` for dependent UI.
+- [x] **No theme flash.** The layout runs a blocking head script before generated stylesheets,
+      applies the saved/system choice to `<html data-theme>`, and advertises `light dark` to
+      native controls. The contact Turnstile widget explicitly re-renders on a theme change.
+- [x] **Global coverage.** The navbar owns the control on every BaseLayout page; light handling
+      covers the logo/footer art, translucent navigation, contact background, CTAs, search and
+      project-card controls.
+- [x] **Rung 6.** `npm run check` is green: Astro **0 errors, 0 warnings, 0 hints**, worker
+      TypeScript clean, **116 pages** built. Live 320px checks covered home, project index,
+      case study, contact, legal, contact card, PT home and 404 with no horizontal overflow.
+      The light semantic text pairs measured **4.70:1 or higher** (the tightest is
+      `--primary-ink` on the page ground).

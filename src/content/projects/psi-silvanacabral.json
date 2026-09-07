@@ -49,8 +49,8 @@
   "caseStudy": {
     "en": {
       "brief": "A solo clinical psychologist needed a one-page site that could turn a visitor into a booked session. There was no CMS to build, no login and no backend: the entire booking mechanism was going to be WhatsApp. So the job was to make a single page carry the positioning, the reassurance and the opening line of a conversation — and then to build it.",
-      "context": "Freelance work under Locuz, taken on after the Spaceapps era. Sole designer and sole developer: the reference pass, the moodboard, the style guide, the page design and the production build were all mine. There was no existing brand to work from and no photography of the practice to work with.",
-      "outcome": "The build was finished, deployed, and is still inspectable on my own host. It never went live under the client's own domain. The imagery is AI-generated, she did not want it representing her practice, and the root domain was parked to redirect to her Google Business Profile instead. The project went unpaid. The artifact is real and the source is public; the engagement did not convert, and the reason was image sourcing — which is now the first thing I settle on any project that starts with no photography.",
+      "context": "Freelance work under Locuz, taken on after the Spaceapps era. Sole designer and sole developer: the reference pass, the moodboard, the style guide, the page design and the production build were all mine. There was no existing brand to work from, and the only photograph I was given was a single 150×150 profile picture.",
+      "outcome": "The build was finished, deployed, and is still inspectable on my own host. It never went live under the client's own domain. The imagery is AI-generated, she did not want it representing her practice, and the root domain was parked to redirect to her Google Business Profile instead. The project went unpaid. I had asked for photographs and been given one 150×150 profile picture, so I generated the imagery rather than let the ship date slip; she turned it down, and that was the end of it. The artifact is real and the source is public. The lesson is worth more than the project was: photography is now a precondition I settle before the work starts, not a dependency I design around.",
       "blocks": [
         {
           "type": "image",
@@ -62,7 +62,7 @@
         },
         {
           "type": "callout",
-          "body": "Two things are worth stating before anything else. The photography on this site is AI-generated, because no photographs of the practice existed to work from — and that is also why the project ended the way it did. And the repository contains a server file that is dead template scaffolding: nineteen lines of Express, two routes, never deployed. The site is a static export. There is no backend here and there never was one."
+          "body": "Two things are worth stating before anything else. The photography on this site is AI-generated. I asked for photographs and received a single 150×150 profile picture, so I generated imagery rather than stall the build — and that decision is why the project ended the way it did. And the repository contains a server file that is dead template scaffolding: nineteen lines of Express, two routes, never deployed. The site is a static export. There is no backend here and there never was one."
         },
         {
           "type": "heading",
@@ -76,11 +76,11 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "No brand, no photographs, two weeks"
+          "text": "No brand, one 150×150 photograph, two weeks"
         },
         {
           "type": "prose",
-          "body": "The project started from nothing: no logo, no palette, no type pairing, no pictures. So the first half of the work was building the thing the design would then be made of — a visual-reference pass, a moodboard, logo explorations, and a style guide covering the palette, the Cormorant Garamond and Montserrat pairing, and the desktop and mobile grids. Underneath it, a twelve-step warm-sand ramp with semantic aliases that resolve in both light and dark."
+          "body": "The project started from almost nothing: no logo, no palette, no type pairing, and one 150×150 profile picture. So the first half of the work was building the thing the design would then be made of — a visual-reference pass, a moodboard, logo explorations, and a style guide covering the palette, the Cormorant Garamond and Montserrat pairing, and the desktop and mobile grids. Underneath it, a twelve-step warm-sand ramp with semantic aliases that resolve in both light and dark."
         },
         {
           "type": "statRow",
@@ -188,8 +188,8 @@
     },
     "pt": {
       "brief": "Uma psicóloga clínica que atende sozinha precisava de um site de uma página capaz de transformar uma visita em uma sessão marcada. Não havia CMS a construir, nem login, nem backend: o mecanismo de agendamento inteiro seria o WhatsApp. O trabalho era fazer uma única página carregar o posicionamento, o acolhimento e a primeira frase de uma conversa — e depois construí-la.",
-      "context": "Trabalho freelance sob a Locuz, depois da fase Spaceapps. Design e código sozinho: a pesquisa de referências, o moodboard, o guia de estilo, o design da página e o build de produção foram todos meus. Não havia marca pré-existente nem nenhuma fotografia do consultório para usar.",
-      "outcome": "O build foi concluído, publicado, e continua inspecionável no meu próprio host. Ele nunca entrou no ar sob o domínio da cliente. As imagens são geradas por IA, ela não quis que representassem o consultório dela, e o domínio raiz acabou estacionado redirecionando para o perfil dela no Google. O projeto não foi pago. O artefato é real e o código é público; a relação comercial não se converteu, e o motivo foi a origem das imagens — que hoje é a primeira coisa que eu resolvo em qualquer projeto que começa sem fotografia.",
+      "context": "Trabalho freelance sob a Locuz, depois da fase Spaceapps. Design e código sozinho: a pesquisa de referências, o moodboard, o guia de estilo, o design da página e o build de produção foram todos meus. Não havia marca pré-existente, e a única fotografia que recebi foi uma foto de perfil de 150×150.",
+      "outcome": "O build foi concluído, publicado, e continua inspecionável no meu próprio host. Ele nunca entrou no ar sob o domínio da cliente. As imagens são geradas por IA, ela não quis que representassem o consultório dela, e o domínio raiz acabou estacionado redirecionando para o perfil dela no Google. O projeto não foi pago. Eu tinha pedido fotografias e recebido uma foto de perfil de 150×150, então gerei as imagens em vez de deixar a data de entrega escorrer; ela não aceitou, e a relação terminou ali. O artefato é real e o código é público. A lição vale mais do que o projeto valeu: fotografia hoje é uma precondição que eu resolvo antes de começar, não uma dependência que eu contorno no design.",
       "blocks": [
         {
           "type": "image",
@@ -201,7 +201,7 @@
         },
         {
           "type": "callout",
-          "body": "Duas coisas precisam ser ditas antes de qualquer outra. As imagens deste site são geradas por IA, porque não existia nenhuma fotografia do consultório para usar — e foi também por isso que o projeto terminou como terminou. E o repositório contém um arquivo de servidor que é sobra morta de template: dezenove linhas de Express, duas rotas, nunca publicadas. O site é um export estático. Não há backend aqui e nunca houve."
+          "body": "Duas coisas precisam ser ditas antes de qualquer outra. As imagens deste site são geradas por IA. Eu pedi fotografias e recebi uma foto de perfil de 150×150, então gerei as imagens em vez de travar o build — e foi essa decisão que fez o projeto terminar como terminou. E o repositório contém um arquivo de servidor que é sobra morta de template: dezenove linhas de Express, duas rotas, nunca publicadas. O site é um export estático. Não há backend aqui e nunca houve."
         },
         {
           "type": "heading",
@@ -215,11 +215,11 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Sem marca, sem fotos, duas semanas"
+          "text": "Sem marca, uma foto de 150×150, duas semanas"
         },
         {
           "type": "prose",
-          "body": "O projeto começou do zero: sem logo, sem paleta, sem tipografia definida, sem imagens. Então a primeira metade do trabalho foi construir aquilo de que o design seria feito — uma passagem de referências visuais, um moodboard, estudos de logo e um guia de estilo com a paleta, o par Cormorant Garamond e Montserrat, e os grids de desktop e mobile. Por baixo, uma rampa de doze passos em areia quente, com aliases semânticos que resolvem em claro e em escuro."
+          "body": "O projeto começou de quase nada: sem logo, sem paleta, sem tipografia definida, e uma foto de perfil de 150×150. Então a primeira metade do trabalho foi construir aquilo de que o design seria feito — uma passagem de referências visuais, um moodboard, estudos de logo e um guia de estilo com a paleta, o par Cormorant Garamond e Montserrat, e os grids de desktop e mobile. Por baixo, uma rampa de doze passos em areia quente, com aliases semânticos que resolvem em claro e em escuro."
         },
         {
           "type": "statRow",

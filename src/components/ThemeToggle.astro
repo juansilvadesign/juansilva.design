@@ -73,9 +73,8 @@ const copy = t(lang);
       }
     };
     var defaultTheme = function () {
-      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+      if (!window.matchMedia) return "dark";
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     };
 
     document.querySelectorAll("[data-theme-switch]").forEach(function (switcher) {
@@ -318,7 +317,7 @@ const copy = t(lang);
     background-color: var(--container-night-bg);
   }
 
-  .theme-switch:hover .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container,
+  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container,
   :global(html[data-theme="dark"]) .theme-switch .theme-switch__circle-container {
     left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
   }
@@ -343,7 +342,7 @@ const copy = t(lang);
     left: calc(var(--circle-container-offset) + 0.187em);
   }
 
-  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container,
+  .theme-switch:hover .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container,
   :global(html[data-theme="dark"]) .theme-switch:hover .theme-switch__circle-container {
     left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter) - 0.187em);
   }
