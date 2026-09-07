@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Juan Silva — Design Engineer</title>
+<style>
+  :root{
+    --ink:#14181d; --muted:#5b656f; --faint:#8a939c;
+    --rule:#dfe3e7; --accent:#0d7d8c; --accent-soft:#f0f7f8;
+  }
+  @page{ size:A4; margin:13mm 14mm; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:"Inter","Helvetica Neue",Arial,system-ui,sans-serif;
+    color:var(--ink); font-size:9.6pt; line-height:1.44;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--accent); text-decoration:none; }
+
+  /* ── header ─────────────────────────────────────────── */
+  header{ border-bottom:2px solid var(--ink); padding-bottom:7px; margin-bottom:12px; }
+  h1{ font-size:21pt; letter-spacing:-.02em; margin:0 0 1px; font-weight:700; }
+  .position{ font-size:10pt; color:var(--accent); font-weight:600; margin-bottom:5px; }
+  .contact{ font-size:8.4pt; color:var(--muted); }
+  .contact div+div{ margin-top:1.5px; }
+  .contact span{ white-space:nowrap; }
+  .sep{ color:var(--faint); margin:0 4px; }
+
+  /* ── sections ───────────────────────────────────────── */
+  h2{
+    font-size:8pt; text-transform:uppercase; letter-spacing:.13em;
+    color:var(--accent); font-weight:700;
+    margin:13px 0 6px; padding-bottom:3px; border-bottom:1px solid var(--rule);
+  }
+  section{ break-inside:auto; }
+  section.keep{ break-inside:avoid; }
+  tr{ break-inside:avoid; }
+  .summary p{ margin:0 0 5px; }
+  .summary strong{ font-weight:650; }
+
+  /* ── entries ────────────────────────────────────────── */
+  .entry{ margin-bottom:9px; break-inside:avoid; }
+  .entry:last-child{ margin-bottom:0; }
+  .row{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .title{ font-weight:670; font-size:10pt; }
+  .title .at{ font-weight:400; color:var(--muted); }
+  .meta{ font-size:8.3pt; color:var(--faint); white-space:nowrap; }
+  .role{ font-size:8.6pt; color:var(--accent); font-weight:600; margin:1px 0 3px; }
+  ul{ margin:3px 0 0; padding-left:14px; }
+  li{ margin-bottom:2.5px; }
+  li::marker{ color:var(--faint); }
+  .links{ font-size:8.3pt; color:var(--muted); margin-top:2.5px; }
+
+  /* ── open source table ──────────────────────────────── */
+  table{ width:100%; border-collapse:collapse; font-size:8.6pt; margin-top:2px; }
+  td{ padding:2.5px 0; vertical-align:top; border-bottom:1px solid #f0f2f4; }
+  td.repo{ font-weight:600; }
+  td.stars{ width:52px; color:var(--muted); white-space:nowrap; }
+  td.pr{ width:118px; color:var(--muted); white-space:nowrap; text-align:right; }
+  tr:last-child td{ border-bottom:none; }
+
+  /* ── stack ──────────────────────────────────────────── */
+  .stack{ font-size:8.8pt; }
+  .stack div{ margin-bottom:3px; }
+  .stack b{ font-weight:650; display:inline-block; min-width:104px; color:var(--muted); }
+
+  .edu li{ margin-bottom:3px; }
+  .award{ background:var(--accent-soft); padding:1px 5px; border-radius:3px; font-weight:600; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Juan Silva</h1>
+  <div class="position">Design Engineer &nbsp;|&nbsp; Next.js, Python &amp; Scalable Growth Automation</div>
+  <div class="contact">
+    <div>
+      <span>Rio de Janeiro, Brazil (GMT&#8209;3)</span><span class="sep">·</span>
+      <span>jaypy.uxdesign@gmail.com</span>
+    </div>
+    <div>
+      <span><a href="https://juanpablosilva.com.br/">juanpablosilva.com.br</a></span><span class="sep">·</span>
+      <span><a href="https://github.com/juansilvadesign">github.com/juansilvadesign</a></span><span class="sep">·</span>
+      <span><a href="https://www.linkedin.com/in/juansilvadesign/">linkedin.com/in/juansilvadesign</a></span>
+    </div>
+  </div>
+</header>
+
+<section class="summary">
+  <p>Design engineer who both designs and ships: <strong>100+ projects</strong> across a UI&#8209;design track at
+  Sagitta Digital and a design&#8209;engineering role at Spaceapps, where I <strong>designed and built 4 of the 5
+  client landing pages end to end</strong> — SYD, upOS, Celus and AllPrice — plus the agency's own trilingual site,
+  as sole author throughout.</p>
+  <p>Design side: two design systems built from scratch, and dev&#8209;handoff specs annotated in&#8209;file where
+  developers actually meet them. Engineering side: TypeScript and Next.js across 13+ repositories, Astro across 7,
+  and a <strong>production operations platform — Postgres, session auth, self&#8209;hosted — running a two&#8209;branch
+  business today</strong>.</p>
+  <p>Nearshore from Rio de Janeiro, <strong>15h/week</strong>, B2B USD contractor.</p>
+</section>
+
+<section>
+  <h2>Selected work</h2>
+
+  <div class="entry">
+    <div class="row"><span class="title">SYD <span class="at">— healthcare / psychology landing page</span></span>
+      <span class="meta">Spaceapps · 2025</span></div>
+    <div class="role">Designed and coded</div>
+    <ul>
+      <li>Designed three audience surfaces — patient, professional and HR — wireframing each and designing all three
+          at 1440 / 1280 / 375, with breakpoints declared as explicit modes in the design file.</li>
+      <li>Built them as a Next.js App Router rewrite of an earlier Vite version, with form capture wired to a
+          Node/Express service on Render.</li>
+      <li>The audience-segmented information architecture was designed, not merely routed: three wireframe sets and
+          three design sets, one per audience.</li>
+    </ul>
+    <div class="links">Live: <a href="https://sydapp.com.br/">sydapp.com.br</a></div>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">NewCar <span class="at">— marketing site + operations platform</span></span>
+      <span class="meta">2026 – present</span></div>
+    <div class="role">Sole author — design and code, both surfaces</div>
+    <ul>
+      <li>Designed and built the marketing site in Astro, React and Tailwind for a premium auto&#8209;maintenance
+          business.</li>
+      <li>Designed and built the operations platform — bookings, point&#8209;of&#8209;sale and a finance dashboard —
+          on Next.js and Postgres with Drizzle ORM, session auth and self&#8209;hosted Docker deployment. In daily use
+          across two branches.</li>
+      <li>Took it to production and keeps it there: diagnosed and restored a silent outage, carried a database
+          credential rotation through to a verifying probe, and migrated 1,563 historical records.</li>
+      <li>Shipped per&#8209;branch calendar routing, and a phone/tablet point&#8209;of&#8209;sale with an offline sale
+          queue so a sale taken without connectivity is not lost.</li>
+    </ul>
+    <div class="links">Live: <a href="https://newcar.rio.br/">newcar.rio.br</a> · pos.newcar.rio.br</div>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">KAT / Banco Safra <span class="at">— internal brokerage account manager</span></span>
+      <span class="meta">Sagitta Digital</span></div>
+    <div class="role">Owned two operator-facing flows end to end</div>
+    <ul>
+      <li>Designed the Assessor and Head role flows in full — one of two designers on a team of five, owning two of
+          the six role flows.</li>
+      <li>722 top&#8209;level frames across 420 distinct screen names, on an extended licensed base kit.</li>
+      <li>Wrote the per&#8209;flow behaviour specification as 43 annotations embedded in the design file, where a
+          developer meets them rather than in a separate document.</li>
+    </ul>
+    <div class="links">Private file — available on request</div>
+  </div>
+</section>
+
+<section class="keep">
+  <h2>Open source</h2>
+  <p style="margin:0 0 4px;font-size:8.8pt;color:var(--muted);">Six merged pull requests into repositories I do not
+  own — +4,936 / &minus;254 across 79 files.</p>
+  <table>
+    <tr>
+      <td class="repo">grab/cursor-talk-to-figma-mcp <span style="font-weight:400;color:var(--muted)">— MCP write tools for the Figma Plugin API</span></td>
+      <td class="stars">7.0k ★</td><td class="pr">PR #185 · 2026</td>
+    </tr>
+    <tr>
+      <td class="repo">joaogfc/ZeroDelay <span style="font-weight:400;color:var(--muted)">— browser extension: CI, test suite, release tooling, telemetry</span></td>
+      <td class="stars">433 ★</td><td class="pr">4 PRs · 2026</td>
+    </tr>
+    <tr>
+      <td class="repo">EcomGraduates/loom-downloader <span style="font-weight:400;color:var(--muted)">— Node CLI: resumable downloads, config precedence</span></td>
+      <td class="stars">157 ★</td><td class="pr">PR #10 · 2025</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>Experience</h2>
+
+  <div class="entry">
+    <div class="row"><span class="title">Independent Design Engineer <span class="at">— Locuz / PsiAtiva</span></span>
+      <span class="meta">2026 – present</span></div>
+    <ul>
+      <li>Design and build client-facing sites and internal operations tooling; run n8n growth automation, FastAPI
+          services and Postgres on my own products.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Spaceapps <span class="at">— Design Engineer</span></span>
+      <span class="meta">Mar 2025 – Sep 2025</span></div>
+    <ul>
+      <li>Designed and coded 4 of 5 paid client landing pages end to end; implemented the fifth from an in-house
+          designer's file. Also designed and coded the agency's own trilingual site.</li>
+      <li>Delivered responsive React and Next.js front ends in TypeScript, Tailwind and Radix; sole author across the
+          repositories, roughly 1.7 MB of TypeScript.</li>
+      <li>Implemented route-based internationalisation (pt / en-US / es-AR) and an Express capture service writing to
+          primary and backup Google Sheets via a service account.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row"><span class="title">Sagitta Digital <span class="at">— UI Designer (intern to junior)</span></span>
+      <span class="meta">approx. 2 years</span></div>
+    <ul>
+      <li>Designed high-fidelity mobile, web and desktop product flows across fintech, marketplace, e-learning,
+          healthcare and operations software.</li>
+      <li>Built Figma component systems, variables and tokens, interactive prototypes and developer handoff
+          documentation, extending licensed base kits.</li>
+      <li>Designed the indicAZ mobile app, shipped in two Google Play listings, and CâmbioFlow, a shipped
+          multi-currency wallet.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Stack</h2>
+  <div class="stack">
+    <div><b>Languages</b> TypeScript, JavaScript, Python, SQL, PL/pgSQL, HTML, CSS, Shell</div>
+    <div><b>Front end</b> React, Next.js App Router, Astro, Vite, Tailwind, Radix, shadcn/ui, i18n, accessibility, technical SEO</div>
+    <div><b>Design</b> Figma, Figma Plugin API, design systems, variables and tokens, prototyping, developer handoff</div>
+    <div><b>Back end &amp; data</b> Node, Express, FastAPI, PostgreSQL, Drizzle ORM, REST, Docker, Google Sheets API</div>
+    <div><b>Quality</b> GitHub Actions, CI/CD, <code>node:test</code>, ESLint, release automation, browser extension builds</div>
+    <div><b>Automation</b> n8n, Model Context Protocol (MCP), agent tooling, browser automation</div>
+  </div>
+</section>
+
+<section>
+  <h2>Education &amp; recognition</h2>
+  <ul class="edu">
+    <li><span class="award">1st place of 14 teams</span> — Desafio Ajude uma ONG, a five-month jury-judged UX/UI
+        challenge, May 2022. The prize was a full Alura scholarship.</li>
+    <li>UX Unicórnio — UX/UI programme, January – July 2022.</li>
+    <li>Digital Design, Universidade Anhembi Morumbi — left in January 2022 to train in UX.</li>
+    <li>Portuguese native · English fluent.</li>
+  </ul>
+</section>
+
+</body>
+</html>

@@ -55,6 +55,12 @@ export const en = {
     emailAriaLabel: "Get in Touch, send Juan Silva an email",
     linkedInCta: "LinkedIn",
     linkedInAriaLabel: "Open Juan Silva's LinkedIn profile",
+    resumeCta: "Download CV",
+    /* The tooltip is hover-only and never fires on touch, so the same two
+     * facts — format and weight — are repeated here, which is where a
+     * screen reader and a phone user actually receive them. */
+    resumeAriaLabel: "Download Juan Silva's resume, PDF, 77 KB",
+    resumeMeta: "PDF · 77 KB",
     githubAriaLabel: "Open Juan Silva's GitHub profile",
     xAriaLabel: "Open Juan Silva's X profile",
     figmaAriaLabel: "Open Juan Silva's Figma profile",

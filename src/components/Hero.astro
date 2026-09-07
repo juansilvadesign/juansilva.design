@@ -2,6 +2,7 @@
 import HeroHeadline from "./text/HeroHeadline";
 import TypedFallback from "./text/TypedFallback.astro";
 import SocialLinks from "./SocialLinks.astro";
+import ResumeButton from "./ResumeButton.astro";
 import { socialLinks } from "../data/links";
 import { t, type Locale } from "../i18n";
 import "../styles/text-type.css";
@@ -77,6 +78,7 @@ const copy = t(lang);
           <span class="button__label">{copy.hero.linkedInCta}</span>
           <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
         </a>
+        <ResumeButton {lang} />
       </div>
 
       <SocialLinks {lang} />

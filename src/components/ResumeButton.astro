@@ -1,0 +1,199 @@
+---
+/*
+ * uiverse-2 — "Download resume", ported from the binder note
+ * (`Praashoo7/rotten-jellyfish-64`). K0.3 forbids styled-components and
+ * Tailwind, so — as with uiverse-4 — only the MOTION is taken: the label
+ * slides up and out while the icon rises into its place, and a tooltip
+ * carrying the file's real weight fades in above.
+ *
+ * ⛔ The note ships `<div className="button">`. A download is a LINK, not a
+ * div: a div is not focusable, not keyboard-activatable, and carries no
+ * `download` semantics. This is an `<a download>` and the effect is bound to
+ * `:hover` AND `:focus-visible`, so a keyboard reaches the same state.
+ *
+ * ⛔ The note's `--width: 100px` is NOT ported. K4 settled that a fixed
+ * control width breaks PT ("Baixar currículo" is half again as long as
+ * "Download CV"), and every fixed px in a uiverse note is demo-fitted. Width
+ * comes from `.resume__sizer`, an in-flow copy of the label — so each locale
+ * sizes its own control. The two animated layers sit absolutely on top of it.
+ *
+ * ⭐ Why a sizer instead of just leaving the label in flow: the layers must be
+ * full-button-height for `translateY(±100%)` to clear the box exactly. An
+ * in-flow label is only line-height tall, so -100% would leave a sliver
+ * showing. The sizer keeps the box honest; the layers do the motion.
+ *
+ * ⛔ `overflow: hidden` lives on `.resume__well`, NOT on `.resume` — the
+ * tooltip is drawn with `.resume`'s pseudo-elements and would be clipped away
+ * by an overflow on the same element. The note makes the same split.
+ *
+ * ⛔ `font-family` is named explicitly. uiverse-5 shipped a hero-adjacent
+ * control that inherited `--font-body` (Lora, a serif) because it named no
+ * family; there is no implicit UI font on this site to fall back to.
+ */
+import { t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const copy = t(lang);
+---
+
+<a
+  class="resume"
+  href="/juan-silva-resume.pdf"
+  download
+  aria-label={copy.hero.resumeAriaLabel}
+  data-tooltip={copy.hero.resumeMeta}
+>
+  <span class="resume__well">
+    <span class="resume__sizer" aria-hidden="true">{copy.hero.resumeCta}</span>
+    <span class="resume__text" aria-hidden="true">{copy.hero.resumeCta}</span>
+    <span class="resume__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+        <path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 0 0 4.561 21h14.878a2 2 0 0 0 1.94-1.515L22 17"></path>
+      </svg>
+    </span>
+  </span>
+</a>
+
+<style>
+  /*
+   * Geometry is copied from `.button`'s tokens rather than reusing the class.
+   * `.hero__actions .button { width: 100% }` stretches its siblings full-width
+   * below 768px; this control keeps the note's compact box at every width
+   * (Juan, 2026-09-07), and not carrying `.button` is what opts it out —
+   * cleaner than out-specifying a rule that exists for the other two.
+   */
+  .resume {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--control-padding-block) var(--control-padding-inline);
+    border: var(--border-width-strong) solid var(--color-transparent);
+    border-radius: var(--radius-control);
+    background: var(--color-transparent);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    transition:
+      background-color var(--motion-base) var(--ease-standard),
+      border-color var(--motion-base) var(--ease-standard),
+      color var(--motion-base) var(--ease-standard);
+  }
+
+  .resume:hover,
+  .resume:focus-visible {
+    border-color: var(--surface-interactive-hover);
+    background: var(--surface-interactive-hover);
+    color: var(--primary);
+  }
+
+  .resume__well {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  /* Establishes the control's width from the live label, per locale. */
+  .resume__sizer {
+    display: block;
+    visibility: hidden;
+  }
+
+  .resume__text,
+  .resume__icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--motion-base) var(--ease-standard);
+  }
+
+  .resume__icon {
+    transform: translateY(100%);
+  }
+
+  .resume:hover .resume__text,
+  .resume:focus-visible .resume__text {
+    transform: translateY(-100%);
+  }
+
+  .resume:hover .resume__icon,
+  .resume:focus-visible .resume__icon {
+    transform: translateY(0);
+  }
+
+  /*
+   * Tooltip — the note's one genuinely useful affordance: it states what you
+   * are about to download before you commit to it. ⚠️ It is hover-only, so it
+   * never fires on touch; the same facts are in `aria-label`, which is where a
+   * screen reader and a phone user actually get them.
+   */
+  .resume::before,
+  .resume::after {
+    position: absolute;
+    left: 50%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--motion-base) var(--ease-standard),
+      visibility var(--motion-base) var(--ease-standard),
+      bottom var(--motion-base) var(--ease-standard);
+  }
+
+  .resume::before {
+    content: attr(data-tooltip);
+    bottom: calc(100% + var(--space-px-12));
+    transform: translateX(-50%);
+    padding: var(--space-px-4) var(--space-px-8);
+    border-radius: var(--radius-control);
+    background: var(--text-heading);
+    color: var(--background-deep);
+    font-size: var(--text-12);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+  }
+
+  .resume::after {
+    content: "";
+    bottom: calc(100% + var(--space-px-4));
+    transform: translateX(-50%);
+    border: var(--space-px-4) solid transparent;
+    border-top-color: var(--text-heading);
+  }
+
+  .resume:hover::before,
+  .resume:hover::after,
+  .resume:focus-visible::before,
+  .resume:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .resume:hover::before,
+  .resume:focus-visible::before {
+    bottom: calc(100% + var(--space-px-8));
+  }
+
+  .resume:hover::after,
+  .resume:focus-visible::after {
+    bottom: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .resume,
+    .resume__text,
+    .resume__icon,
+    .resume::before,
+    .resume::after {
+      transition: none;
+    }
+  }
+</style>
