@@ -38,6 +38,9 @@ export const pt = {
     contact: "Contato",
     logoAlt: "Página inicial de Juan Silva",
     linkedInProfile: "Juan Silva no LinkedIn",
+    themeSwitchLabel: "Tema",
+    themeSwitchToLight: "Mudar para o tema claro",
+    themeSwitchToDark: "Mudar para o tema escuro",
   },
   hero: {
     location: "Juan Silva — Rio de Janeiro, Brasil",

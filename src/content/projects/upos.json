@@ -46,5 +46,298 @@
     "storeListing": false,
     "designArtifact": false
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "A technical-assistance and repair business needed the system that runs its service orders end to end — from the moment a customer walks in with a broken thing to the moment the invoice is settled. Eight desktop modules, a deliberately small mobile surface, and the marketing site that sells the whole thing.",
+      "context": "Agency work at Spaceapps; the client relationship belonged to the agency and I delivered as staff. The discovery was run by the tech lead, who handed me the board. From that board onward the product design was mine, alone — and the landing page was mine to design and to build.",
+      "outcome": "The product is live and running a real business today: anyone can reach the login screen. It evidences the design and not the engineering — the application was built in Bubble by another developer and later rebuilt in Next.js by an incoming one, and the design came through that platform rewrite intact, which is a harder test than shipping once. The landing page I built no longer exists at its original address; it was replaced by someone else's redesign after I left, so the copy on my own domain is the only surviving artifact of it, and it is a copy rather than the instance that served the client. No performance metric exists for this project — a confirmed absence, not an uncollected one.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "The upOS marketing site at desktop width, with the product dashboard in the hero",
+          "caption": "Placeholder — the landing page at desktop width.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "callout",
+          "body": "I did not build upOS. I designed the product and I coded the landing page. The application was built in Bubble by another developer and later rebuilt in Next.js by the agency's incoming developer. Expect the question \"so who built it?\" and expect a plain answer: the designer-to-builder split is the normal shape of this portfolio, not an awkward exception inside it."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Front desk to money"
+        },
+        {
+          "type": "prose",
+          "body": "A repair shop's real problem is not any single screen; it is that a device, a promise and an amount of money travel through the business at different speeds and in different people's heads. The front desk takes the device in. Somebody quotes it. Somebody else fixes it. Someone has to know, three days later, where it is and what was agreed. The system had to hold all of that in one place without turning the counter into a data-entry job."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Authentication — the way in, and the only module that exists on every surface.",
+            "Service desk — intake and quoting, where the promise to the customer is made.",
+            "Assistance — the work itself, with a work-order kanban so the shop can see the queue rather than remember it.",
+            "Services and Products — the catalogues that make a quote repeatable instead of improvised.",
+            "Customers — the history that makes the second visit easier than the first.",
+            "Finance — quoting through to settlement.",
+            "Configuration — the settings that let one design fit shops that do not work identically."
+          ]
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "8",
+              "label": "desktop modules designed",
+              "icon": "🧩"
+            },
+            {
+              "value": "2",
+              "label": "of them on mobile, deliberately",
+              "icon": "📱"
+            },
+            {
+              "value": "3",
+              "label": "roles modelled in discovery",
+              "icon": "👤"
+            },
+            {
+              "value": "59",
+              "label": "files in the landing-page repo",
+              "icon": "📁"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The mobile surface is two modules, and that is the design decision"
+        },
+        {
+          "type": "prose",
+          "body": "The phone gets authentication and service intake. Nothing else. Not because the rest was cut for time, but because intake is the part that happens away from the desk — someone standing at a counter or in the field with a customer in front of them — and the back office is not. Finance on a phone would be a feature nobody opens. This is the opposite of a responsive-coverage claim: two of eight is the answer, and mirroring all eight onto a small screen would have been the easier and worse decision."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "Service intake on the mobile surface",
+          "caption": "Placeholder — service intake on mobile, one of only two modules that exist there.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The money path is invoicing, not checkout"
+        },
+        {
+          "type": "prose",
+          "body": "It is worth naming precisely, because the wrong word here would flatter the work and misdescribe it. There is no cart, no checkout and no recurring commerce in this product. What there is: a quote that becomes an agreement, and financial control that follows it to settlement. That is business-to-business invoicing, and designing it well is a different problem from designing a store — the hard part is not payment, it is that the amount can change between the promise and the repair."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Three roles, modelled"
+        },
+        {
+          "type": "prose",
+          "body": "The discovery board modelled three actors, and the product was designed around them. I want to be exact about the strength of that claim: three roles were modelled and the design accounts for them. Three separately permissioned interface surfaces are a different and larger claim, and I have never confirmed it in the file, so I do not make it."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The landing page"
+        },
+        {
+          "type": "prose",
+          "body": "The marketing site was mine to design and to build, in Next.js: hero, banner, a how-it-works section, two feature-image sections, testimonials, an FAQ and a closing call to action, plus the cookies, privacy and terms set and a custom 404. At fifty-nine files it is the leanest repository of that period, and lean was the point — a marketing page for an operations product should load instantly on the worst connection in the shop."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "alt": "The how-it-works section of the marketing site",
+          "caption": "Placeholder — the how-it-works section of the landing page.",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not my build of the product. I designed it; a Bubble developer built it and a later developer rebuilt it in Next.js.",
+            "Not evidence of my engineering. The live application evidences my design, and the fact that the design survived a rewrite. The code behind that login screen has never been mine.",
+            "Not the discovery. The tech lead ran it and handed over the board.",
+            "Not a responsive-coverage claim. Two of eight modules exist on mobile, deliberately.",
+            "Not a permissioned role system. Three roles were modelled; three permissioned surfaces were never confirmed.",
+            "Not payments or checkout. Quoting plus financial control is invoicing.",
+            "Not a date range for the engagement. The dates on this page bound the landing-page repository only — the product design came before it, and version control cannot date that.",
+            "Not the site at the product's own address today. That is someone else's redesign at the address my page used to occupy."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The design outlived its own implementation"
+        },
+        {
+          "type": "prose",
+          "body": "The most useful thing this project proves is not that it shipped. It is that when the application was rebuilt from scratch on a completely different stack, by a developer I never worked with, the design went across. Nobody redesigned it on the way. That is the closest thing a designer gets to a load test: the interface was specified clearly enough that a stranger could rebuild the thing underneath it and leave it standing."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Uma assistência técnica precisava do sistema que faz suas ordens de serviço andarem de ponta a ponta — do momento em que o cliente entra com algo quebrado até o momento em que a conta é quitada. Oito módulos no desktop, uma superfície mobile propositalmente pequena, e o site que vende tudo isso.",
+      "context": "Trabalho de agência na Spaceapps; a relação com o cliente era da agência e eu entreguei como funcionário. A discovery foi conduzida pelo líder técnico, que me entregou o quadro pronto. Dali em diante o design do produto foi meu, sozinho — e a landing page foi minha para desenhar e para construir.",
+      "outcome": "O produto está no ar e rodando um negócio real hoje: qualquer pessoa alcança a tela de login. Ele evidencia o design, não a engenharia — a aplicação foi construída em Bubble por outro desenvolvedor e depois refeita em Next.js por outro, e o design atravessou essa troca de plataforma intacto, o que é um teste mais duro do que publicar uma vez. A landing page que eu construí não existe mais no endereço original; ela foi substituída pelo redesign de outra pessoa depois que eu saí, então a cópia no meu próprio domínio é o único artefato sobrevivente dela — e é uma cópia, não a instância que serviu o cliente. Não existe nenhuma métrica de desempenho para este projeto: uma ausência confirmada, não uma ausência por falta de coleta.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "O site do upOS em largura desktop, com o painel do produto em destaque",
+          "caption": "Placeholder — a landing page em largura desktop.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "callout",
+          "body": "Eu não construí o upOS. Eu desenhei o produto e programei a landing page. A aplicação foi construída em Bubble por outro desenvolvedor e depois refeita em Next.js pelo desenvolvedor que entrou na agência. Espere a pergunta \"então quem construiu?\" e espere uma resposta direta: a divisão entre quem desenha e quem constrói é o formato normal deste portfólio, não uma exceção constrangedora dentro dele."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Do balcão até o dinheiro"
+        },
+        {
+          "type": "prose",
+          "body": "O problema real de uma assistência técnica não é nenhuma tela isolada; é que um aparelho, uma promessa e um valor circulam pelo negócio em velocidades diferentes e na cabeça de pessoas diferentes. O balcão recebe o aparelho. Alguém orça. Outra pessoa conserta. E alguém precisa saber, três dias depois, onde ele está e o que foi combinado. O sistema tinha que segurar tudo isso num lugar só sem transformar o balcão num posto de digitação."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Autenticação — a porta de entrada, e o único módulo que existe em todas as superfícies.",
+            "Atendimento — recepção e orçamento, onde a promessa ao cliente é feita.",
+            "Assistência — o trabalho em si, com um kanban de ordens de serviço para a oficina enxergar a fila em vez de lembrar dela.",
+            "Serviços e Produtos — os catálogos que tornam um orçamento repetível em vez de improvisado.",
+            "Clientes — o histórico que faz a segunda visita ser mais fácil que a primeira.",
+            "Financeiro — do orçamento até a quitação.",
+            "Configurações — os ajustes que permitem um mesmo design servir oficinas que não trabalham igual."
+          ]
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "8",
+              "label": "módulos desenhados no desktop",
+              "icon": "🧩"
+            },
+            {
+              "value": "2",
+              "label": "deles no mobile, de propósito",
+              "icon": "📱"
+            },
+            {
+              "value": "3",
+              "label": "papéis modelados na discovery",
+              "icon": "👤"
+            },
+            {
+              "value": "59",
+              "label": "arquivos no repositório da landing",
+              "icon": "📁"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A superfície mobile tem dois módulos, e essa é a decisão de design"
+        },
+        {
+          "type": "prose",
+          "body": "O celular recebe autenticação e recepção de serviço. Nada além disso. Não porque o resto foi cortado por prazo, mas porque a recepção é a parte que acontece longe da mesa — alguém em pé no balcão ou em campo, com um cliente na frente — e o back office não é. Financeiro no celular seria uma funcionalidade que ninguém abre. Isto é o oposto de uma alegação de cobertura responsiva: dois de oito é a resposta, e espelhar os oito numa tela pequena teria sido a decisão mais fácil e pior."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "Recepção de serviço na superfície mobile",
+          "caption": "Placeholder — recepção de serviço no mobile, um dos dois únicos módulos que existem ali.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O caminho do dinheiro é faturamento, não checkout"
+        },
+        {
+          "type": "prose",
+          "body": "Vale nomear com precisão, porque a palavra errada aqui embelezaria o trabalho e o descreveria mal. Não existe carrinho, nem checkout, nem comércio recorrente neste produto. O que existe: um orçamento que vira um acordo, e um controle financeiro que o acompanha até a quitação. Isso é faturamento entre empresas, e desenhar isso bem é um problema diferente de desenhar uma loja — a parte difícil não é o pagamento, é que o valor pode mudar entre a promessa e o conserto."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Três papéis, modelados"
+        },
+        {
+          "type": "prose",
+          "body": "O quadro de discovery modelava três atores, e o produto foi desenhado em torno deles. Quero ser exato sobre a força dessa afirmação: três papéis foram modelados e o design os contempla. Três superfícies de interface com permissões separadas são uma afirmação diferente e maior, que eu nunca confirmei no arquivo — então eu não a faço."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A landing page"
+        },
+        {
+          "type": "prose",
+          "body": "O site era meu para desenhar e para construir, em Next.js: hero, banner, uma seção de como funciona, duas seções de imagem de funcionalidade, depoimentos, FAQ e uma chamada final, mais o conjunto de cookies, privacidade e termos e um 404 próprio. Com cinquenta e nove arquivos, é o repositório mais enxuto daquele período, e enxuto era o ponto — a página de um produto de operações precisa carregar na hora na pior conexão da oficina."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "alt": "A seção de como funciona do site",
+          "caption": "Placeholder — a seção de como funciona da landing page.",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é a minha construção do produto. Eu desenhei; um desenvolvedor Bubble construiu e outro depois refez em Next.js.",
+            "Não é evidência da minha engenharia. A aplicação no ar evidencia o meu design, e o fato de o design ter sobrevivido a uma reconstrução. O código atrás daquela tela de login nunca foi meu.",
+            "Não é a discovery. O líder técnico conduziu e entregou o quadro.",
+            "Não é alegação de cobertura responsiva. Dois de oito módulos existem no mobile, de propósito.",
+            "Não é um sistema de papéis com permissões. Três papéis foram modelados; três superfícies com permissão nunca foram confirmadas.",
+            "Não é pagamento nem checkout. Orçamento mais controle financeiro é faturamento.",
+            "Não é o período do contrato. As datas desta página delimitam apenas o repositório da landing page — o design do produto veio antes, e o versionamento não consegue datá-lo.",
+            "Não é o site que está hoje no endereço do produto. Aquilo é o redesign de outra pessoa no endereço que a minha página ocupava."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O design sobreviveu à própria implementação"
+        },
+        {
+          "type": "prose",
+          "body": "A coisa mais útil que este projeto prova não é que ele foi publicado. É que, quando a aplicação foi reconstruída do zero numa stack completamente diferente, por um desenvolvedor com quem eu nunca trabalhei, o design atravessou. Ninguém o redesenhou no caminho. Isso é o mais perto que um designer chega de um teste de carga: a interface estava especificada com clareza suficiente para um estranho reconstruir o que estava embaixo e deixá-la de pé."
+        }
+      ]
+    }
+  }
 }

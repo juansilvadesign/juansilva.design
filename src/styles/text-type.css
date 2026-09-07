@@ -33,7 +33,7 @@
   display: inline-block;
   margin-left: 0.08em;
   font-weight: var(--font-weight-regular);
-  color: var(--primary);
+  color: var(--primary-ink);
   animation: ttype-blink 1s steps(1, end) infinite;
 }
 
@@ -90,5 +90,5 @@
 }
 
 .hero__type-rotating {
-  color: var(--primary);
+  color: var(--primary-ink);
 }

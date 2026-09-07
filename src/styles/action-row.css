@@ -24,7 +24,7 @@
   border-color: var(--primary);
   border-radius: var(--radius-pill);
   background: var(--primary);
-  color: var(--background);
+  color: var(--on-primary);
   transition:
     background-color var(--motion-base) var(--ease-standard),
     border-color var(--motion-base) var(--ease-standard),
@@ -46,7 +46,7 @@
 .brief__actions .button:not(.button--secondary):focus-visible {
   border-radius: var(--radius-control);
   background: var(--color-transparent);
-  color: var(--primary);
+  color: var(--primary-ink);
 }
 
 /*

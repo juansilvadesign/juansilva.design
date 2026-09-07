@@ -171,7 +171,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  color: var(--background);
+  color: var(--on-primary);
   opacity: 0;
   transform: translateY(calc(var(--pill-h, 44px) + var(--space-px-12)));
   transition:
@@ -439,11 +439,11 @@
 
   .tool__select:hover::picker-icon,
   .tool__select:focus-visible::picker-icon {
-    color: var(--primary);
+    color: var(--primary-ink);
   }
 
   .tool__select:open::picker-icon {
-    color: var(--primary);
+    color: var(--primary-ink);
     transform: rotate(180deg);
   }
 
@@ -510,7 +510,7 @@
 
   .tool__select option:hover,
   .tool__select option:focus-visible {
-    color: var(--background);
+    color: var(--on-primary);
     background-position: left center;
     background-size: 100% 100%;
     outline: none;
@@ -522,12 +522,12 @@
    * :focus, so the two have to be styled independently and then combined.
    */
   .tool__select option:checked {
-    color: var(--primary);
+    color: var(--primary-ink);
   }
 
   .tool__select option:checked:hover,
   .tool__select option:checked:focus-visible {
-    color: var(--background);
+    color: var(--on-primary);
   }
 
   /* House rule K0.6. One custom property covers the trigger, the chevron, the
@@ -557,9 +557,9 @@
   --search-size: var(--tool-h, 48px);
   --search-open: 200px;
   --search-lift: 1.5px 1.5px 3px var(--background-deep),
-    -1.5px -1.5px 3px var(--color-white-a10);
+    -1.5px -1.5px 3px var(--elevation-highlight);
   --search-well: inset 1.5px 1.5px 3px var(--background-deep),
-    inset -1.5px -1.5px 3px var(--color-white-a10);
+    inset -1.5px -1.5px 3px var(--elevation-highlight);
   position: relative;
   display: block;
 }
@@ -659,7 +659,7 @@
 
 .search__input:focus + .search__icon,
 .search__input:not(:placeholder-shown) + .search__icon {
-  color: var(--primary);
+  color: var(--primary-ink);
 }
 
 .search__icon svg {
@@ -771,7 +771,7 @@
 }
 
 .toggle__btn[aria-pressed="true"] {
-  color: var(--background);
+  color: var(--on-primary);
 }
 
 .toggle__icon {
@@ -784,7 +784,7 @@
   padding: var(--space-px-8) var(--space-px-14);
   font-family: var(--font-ui);
   font-size: var(--text-14);
-  color: var(--primary);
+  color: var(--primary-ink);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -814,7 +814,7 @@
   font-size: var(--type-meta-size);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--primary);
+  color: var(--primary-ink);
 }
 
 .rec__link {
@@ -942,7 +942,7 @@
 }
 
 .pcard__link:hover .pcard__title {
-  color: var(--primary);
+  color: var(--primary-ink);
 }
 
 .pcard__tagline {
@@ -979,10 +979,10 @@
  * and wreck the contrast on a dark-only page.
  */
 .pcard__cta {
-  --cta-fill: var(--primary);
-  --cta-mark: var(--background-deep);
-  --cta-label: var(--text-secondary);
-  --cta-label-active: var(--background-deep);
+  --cta-fill: var(--pcard-cta-fill);
+  --cta-mark: var(--pcard-cta-mark);
+  --cta-label: var(--pcard-cta-label);
+  --cta-label-active: var(--pcard-cta-label-active);
   --cta-size: var(--space-px-40);
   --cta-duration: 450ms;
   --cta-ease: cubic-bezier(0.65, 0, 0.076, 1);
@@ -1140,7 +1140,7 @@
 }
 
 .toggle__btn[aria-pressed="true"]:focus-visible {
-  outline-color: var(--background);
+  outline-color: var(--on-primary);
 }
 
 /* ── Breakpoints ──────────────────────────────────────────────────────── */

@@ -24,13 +24,58 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITEKEY?.trim();
 >
   {
     turnstileSiteKey && (
-      <script
-        is:inline
-        slot="head"
-        src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-        async
-        defer
-      />
+      <>
+        {/* Explicit rendering lets the iframe honour the persisted site theme.
+            The response input remains Turnstile's default, so the worker's
+            existing `cf-turnstile-response` contract is unchanged. */}
+        <script is:inline slot="head">
+          (function () {
+            var boot = function () {
+              if (window.__jsdTurnstileBooted || !window.turnstile) return;
+              var widget = document.querySelector("[data-turnstile]");
+              if (!(widget instanceof HTMLElement)) return;
+
+              window.__jsdTurnstileBooted = true;
+              var widgetId = null;
+              var activeTheme = null;
+
+              var render = function (theme) {
+                var nextTheme = theme === "light" ? "light" : "dark";
+                if (activeTheme === nextTheme && widgetId !== null) return;
+                if (widgetId !== null) window.turnstile.remove(widgetId);
+
+                activeTheme = nextTheme;
+                widgetId = window.turnstile.render(widget, {
+                  sitekey: widget.dataset.sitekey,
+                  action: widget.dataset.action,
+                  theme: nextTheme,
+                  language: widget.dataset.language,
+                });
+              };
+
+              render(document.documentElement.dataset.theme);
+              document.addEventListener("themechange", function (event) {
+                render(event.detail && event.detail.theme);
+              });
+            };
+
+            window.jsdTurnstileReady = function () {
+              if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", boot, { once: true });
+              } else {
+                boot();
+              }
+            };
+          })();
+        </script>
+        <script
+          is:inline
+          slot="head"
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=jsdTurnstileReady"
+          async
+          defer
+        />
+      </>
     )
   }
   <main id="main-content" class="page-shell">

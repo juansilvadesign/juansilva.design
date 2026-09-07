@@ -46,5 +46,284 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "A solo clinical psychologist needed a one-page site that could turn a visitor into a booked session. There was no CMS to build, no login and no backend: the entire booking mechanism was going to be WhatsApp. So the job was to make a single page carry the positioning, the reassurance and the opening line of a conversation — and then to build it.",
+      "context": "Freelance work under Locuz, taken on after the Spaceapps era. Sole designer and sole developer: the reference pass, the moodboard, the style guide, the page design and the production build were all mine. There was no existing brand to work from and no photography of the practice to work with.",
+      "outcome": "The build was finished, deployed, and is still inspectable on my own host. It never went live under the client's own domain. The imagery is AI-generated, she did not want it representing her practice, and the root domain was parked to redirect to her Google Business Profile instead. The project went unpaid. The artifact is real and the source is public; the engagement did not convert, and the reason was image sourcing — which is now the first thing I settle on any project that starts with no photography.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "The deployed one-page practice site at desktop width",
+          "caption": "Placeholder — the deployed page at desktop width.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "callout",
+          "body": "Two things are worth stating before anything else. The photography on this site is AI-generated, because no photographs of the practice existed to work from — and that is also why the project ended the way it did. And the repository contains a server file that is dead template scaffolding: nineteen lines of Express, two routes, never deployed. The site is a static export. There is no backend here and there never was one."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The brief"
+        },
+        {
+          "type": "prose",
+          "body": "One page, in Portuguese, for a clinical psychologist working alone. It had to do the work a practice website does when there is no reception desk behind it: say who she is and who she treats, name the feelings people actually arrive with, explain her approach, list the health plans she accepts, answer the questions that stop someone from writing the first message, and give directions. Twelve sections in the end, and every one of them earning its place on a page nobody scrolls twice."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "No brand, no photographs, two weeks"
+        },
+        {
+          "type": "prose",
+          "body": "The project started from nothing: no logo, no palette, no type pairing, no pictures. So the first half of the work was building the thing the design would then be made of — a visual-reference pass, a moodboard, logo explorations, and a style guide covering the palette, the Cormorant Garamond and Montserrat pairing, and the desktop and mobile grids. Underneath it, a twelve-step warm-sand ramp with semantic aliases that resolve in both light and dark."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "12",
+              "label": "sections on the page",
+              "icon": "📄"
+            },
+            {
+              "value": "13",
+              "label": "bespoke section components",
+              "icon": "🧱"
+            },
+            {
+              "value": "9",
+              "label": "shadcn primitives underneath",
+              "icon": "⚙️"
+            },
+            {
+              "value": "30",
+              "label": "design tokens authored",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "When the design was settled I marked the file released for development and then built it myself, as a static Next.js export: thirteen bespoke section components sitting on nine shadcn primitives, three legal pages and a custom 404. Designing and building the same page has one specific advantage, and it is not speed. It is that nothing gets designed that cannot be built, and nothing gets built that quietly drops what was designed."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "alt": "The style guide: palette, type pairing and the twelve-step token ramp",
+          "caption": "Placeholder — the style guide: palette, type pairing and the warm-sand ramp.",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The booking mechanism is code, not decoration"
+        },
+        {
+          "type": "prose",
+          "body": "WhatsApp was the entire conversion path, which meant the interesting design problem was not the button — it was what the message already says when the button opens the app. A visitor who has to compose their own first message to a psychologist is a visitor who closes the tab. So every entry point on the site opens WhatsApp with its own pre-written Portuguese message, phrased for the place the person was standing when they tapped: seven distinct deep links, fourteen rendered instances across the deployed page."
+        },
+        {
+          "type": "prose",
+          "body": "The one I am fondest of is on the 404, where the pre-filled message is not about booking at all:"
+        },
+        {
+          "type": "quote",
+          "text": "não estou conseguindo acessar o site, pode me ajudar?",
+          "source": "The pre-filled WhatsApp message on the 404 page"
+        },
+        {
+          "type": "prose",
+          "body": "A broken link on a practice site is a person who wanted something and did not get it. Handing them a sentence that describes their actual situation costs one line of code and turns the worst page on the site into a working entry point."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Responsiveness was built in the browser, not in Figma"
+        },
+        {
+          "type": "prose",
+          "body": "The mobile artboard in the design file is empty, and that is not an omission I want to hide — it is how this one was made. The desktop page was designed at full fidelity and the responsive behaviour was then written directly in code, where the breakpoints actually live; the deployed HTML carries 177 responsive utility hits. It is a reasonable method when the same person designs and builds, and a bad one to hand to anybody else. On a project with a separate developer, the artboard gets drawn."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "The one-page site at mobile width",
+          "caption": "Placeholder — the same page at mobile width, laid out in code rather than in the design file.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not a backend. The Express file in the repository is dead template scaffolding and was never deployed; the site is a static export served by Apache.",
+            "Not a themed site. The design file resolves a complete light and dark token set, but the deployed page ships no dark-mode utilities and the theming library goes unused. That was a scope decision under a tight clock, not a feature.",
+            "Not competitive analysis. The large benchmark board in the file is ten full-scroll screenshots placed side by side — visual reference, nothing annotated and nothing synthesised.",
+            "Not a 1,189-token design system. Thirty tokens were authored for this project; the rest of that number is inherited ramps that came with the base file.",
+            "Not analytics. Only Google Tag Manager appears in the deployed page.",
+            "Not my starter file. The base came from a course template, which I made production-grade through auto-layout and tokenisation — after which it became the default file everywhere I worked."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The collateral nobody asked for"
+        },
+        {
+          "type": "prose",
+          "body": "A practice does not stop needing things once the site is up. Alongside the build I produced Instagram highlight covers, a business card, and a four-page walkthrough for setting up her email in Thunderbird, with annotated phone mockups. None of it was in scope. All of it was the difference between handing over a website and handing over something someone can actually run."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Uma psicóloga clínica que atende sozinha precisava de um site de uma página capaz de transformar uma visita em uma sessão marcada. Não havia CMS a construir, nem login, nem backend: o mecanismo de agendamento inteiro seria o WhatsApp. O trabalho era fazer uma única página carregar o posicionamento, o acolhimento e a primeira frase de uma conversa — e depois construí-la.",
+      "context": "Trabalho freelance sob a Locuz, depois da fase Spaceapps. Design e código sozinho: a pesquisa de referências, o moodboard, o guia de estilo, o design da página e o build de produção foram todos meus. Não havia marca pré-existente nem nenhuma fotografia do consultório para usar.",
+      "outcome": "O build foi concluído, publicado, e continua inspecionável no meu próprio host. Ele nunca entrou no ar sob o domínio da cliente. As imagens são geradas por IA, ela não quis que representassem o consultório dela, e o domínio raiz acabou estacionado redirecionando para o perfil dela no Google. O projeto não foi pago. O artefato é real e o código é público; a relação comercial não se converteu, e o motivo foi a origem das imagens — que hoje é a primeira coisa que eu resolvo em qualquer projeto que começa sem fotografia.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "O site de uma página do consultório em largura desktop",
+          "caption": "Placeholder — a página publicada em largura desktop.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "callout",
+          "body": "Duas coisas precisam ser ditas antes de qualquer outra. As imagens deste site são geradas por IA, porque não existia nenhuma fotografia do consultório para usar — e foi também por isso que o projeto terminou como terminou. E o repositório contém um arquivo de servidor que é sobra morta de template: dezenove linhas de Express, duas rotas, nunca publicadas. O site é um export estático. Não há backend aqui e nunca houve."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O briefing"
+        },
+        {
+          "type": "prose",
+          "body": "Uma página, em português, para uma psicóloga clínica que atende sozinha. Ela precisava fazer o que o site de um consultório faz quando não existe recepção atrás dele: dizer quem ela é e quem ela atende, nomear os sentimentos com que as pessoas de fato chegam, explicar a abordagem, listar os planos aceitos, responder as dúvidas que travam a primeira mensagem e mostrar onde fica. Doze seções no fim, e cada uma precisando justificar o lugar numa página que ninguém rola duas vezes."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Sem marca, sem fotos, duas semanas"
+        },
+        {
+          "type": "prose",
+          "body": "O projeto começou do zero: sem logo, sem paleta, sem tipografia definida, sem imagens. Então a primeira metade do trabalho foi construir aquilo de que o design seria feito — uma passagem de referências visuais, um moodboard, estudos de logo e um guia de estilo com a paleta, o par Cormorant Garamond e Montserrat, e os grids de desktop e mobile. Por baixo, uma rampa de doze passos em areia quente, com aliases semânticos que resolvem em claro e em escuro."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "12",
+              "label": "seções na página",
+              "icon": "📄"
+            },
+            {
+              "value": "13",
+              "label": "componentes de seção próprios",
+              "icon": "🧱"
+            },
+            {
+              "value": "9",
+              "label": "primitivos shadcn por baixo",
+              "icon": "⚙️"
+            },
+            {
+              "value": "30",
+              "label": "tokens de design autorais",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Com o design fechado, marquei o arquivo como liberado para DEV e construí eu mesmo, como export estático em Next.js: treze componentes de seção próprios sobre nove primitivos shadcn, três páginas legais e um 404 próprio. Desenhar e construir a mesma página tem uma vantagem específica, e não é velocidade. É que nada é desenhado sem poder ser construído, e nada é construído abandonando em silêncio o que foi desenhado."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "alt": "O guia de estilo: paleta, tipografia e a rampa de doze tokens",
+          "caption": "Placeholder — o guia de estilo: paleta, tipografia e a rampa de areia quente.",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O agendamento é código, não enfeite"
+        },
+        {
+          "type": "prose",
+          "body": "O WhatsApp era o caminho de conversão inteiro, o que significa que o problema de design interessante não era o botão — era o que a mensagem já diz quando o aplicativo abre. Quem precisa redigir sozinho a primeira mensagem para uma psicóloga é quem fecha a aba. Então cada ponto de entrada do site abre o WhatsApp com sua própria mensagem pré-escrita, formulada para o lugar de onde a pessoa saiu: sete deep links distintos, quatorze instâncias renderizadas na página publicada."
+        },
+        {
+          "type": "prose",
+          "body": "A minha favorita está no 404, onde a mensagem pré-preenchida não fala de agendamento:"
+        },
+        {
+          "type": "quote",
+          "text": "não estou conseguindo acessar o site, pode me ajudar?",
+          "source": "A mensagem pré-preenchida do WhatsApp na página 404"
+        },
+        {
+          "type": "prose",
+          "body": "Um link quebrado no site de um consultório é uma pessoa que queria alguma coisa e não conseguiu. Entregar a ela uma frase que descreve a situação real custa uma linha de código e transforma a pior página do site em um ponto de entrada que funciona."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A responsividade foi feita no navegador, não no Figma"
+        },
+        {
+          "type": "prose",
+          "body": "A prancheta de mobile no arquivo de design está vazia, e isso não é uma omissão que eu queira esconder — foi assim que este projeto foi feito. A página desktop foi desenhada em fidelidade total e o comportamento responsivo foi escrito direto no código, onde os breakpoints de fato existem; o HTML publicado carrega 177 ocorrências de utilitários responsivos. É um método razoável quando a mesma pessoa desenha e constrói, e um método ruim para entregar a outra pessoa. Em projeto com desenvolvedor separado, a prancheta é desenhada."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "O site de uma página em largura mobile",
+          "caption": "Placeholder — a mesma página em mobile, resolvida em código e não no arquivo de design.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é backend. O arquivo Express do repositório é sobra morta de template e nunca foi publicado; o site é um export estático servido por Apache.",
+            "Não é um site com tema. O arquivo de design resolve um conjunto completo de tokens claro e escuro, mas a página publicada não traz nenhum utilitário de modo escuro e a biblioteca de tema fica sem uso. Foi decisão de escopo sob prazo curto, não funcionalidade.",
+            "Não é análise competitiva. O grande quadro de benchmark do arquivo são dez capturas de tela inteiras lado a lado — referência visual, nada anotado e nada sintetizado.",
+            "Não é um design system de 1.189 tokens. Trinta tokens foram criados para este projeto; o resto daquele número são rampas herdadas que vieram com o arquivo base.",
+            "Não é analytics. Só o Google Tag Manager aparece na página publicada.",
+            "O arquivo base não é meu. Ele veio de um template de curso, que eu tornei pronto para produção com auto-layout e tokenização — e depois virou o arquivo padrão em todo lugar onde trabalhei."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O material que ninguém pediu"
+        },
+        {
+          "type": "prose",
+          "body": "Um consultório não para de precisar de coisas quando o site sobe. Junto com o build eu produzi capas de destaques do Instagram, um cartão de visita e um passo a passo de quatro páginas para configurar o e-mail dela no Thunderbird, com mockups de celular anotados. Nada disso estava no escopo. Tudo isso é a diferença entre entregar um site e entregar algo que alguém consegue realmente tocar."
+        }
+      ]
+    }
+  }
 }

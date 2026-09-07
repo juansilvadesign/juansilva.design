@@ -262,7 +262,8 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
 
   .case-cta {
     --case-accent: var(--primary);
-    --case-ink-active: var(--background);
+    --case-ink-rest: var(--primary-ink);
+    --case-ink-active: var(--on-primary);
     --case-arrow-size: var(--space-px-16);
     --case-arrow-inset: var(--space-px-16);
     --case-shift: var(--space-px-12);
@@ -280,7 +281,7 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     padding-inline: var(--space-px-40);
     border-radius: var(--radius-pill);
     box-shadow: 0 0 0 var(--border-width-strong) var(--case-accent);
-    color: var(--case-accent);
+    color: var(--case-ink-rest);
     transition:
       color var(--motion-base) var(--case-ease),
       box-shadow var(--case-ring-duration) var(--case-ease),

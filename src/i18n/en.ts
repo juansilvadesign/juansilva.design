@@ -36,6 +36,9 @@ export const en = {
     contact: "Contact",
     logoAlt: "Juan Silva home",
     linkedInProfile: "Juan Silva on LinkedIn",
+    themeSwitchLabel: "Theme",
+    themeSwitchToLight: "Switch to light theme",
+    themeSwitchToDark: "Switch to dark theme",
   },
   hero: {
     location: "Juan Silva — Rio de Janeiro, Brazil",

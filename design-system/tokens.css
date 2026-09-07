@@ -27,6 +27,11 @@
   --color-neutral-50: #f7f7f7;
   --color-white: #ffffff;
 
+  /* Brand colours whose source artwork is deliberately used as an interactive
+   * surface. Kept as primitives; the semantic layer below decides where each
+   * can safely appear in either theme. */
+  --color-linkedin: #0077b5;
+
   /* Framework palette values that are visible in the production v2 source. */
   --color-gray-900: hsl(0 0% 9%);
   --color-gray-300: #d1d5db;
@@ -89,23 +94,35 @@
 
   /* ─── Translucent paints from production ────────────────────── */
   --color-transparent: rgb(255 255 255 / 0%);
+  --color-black-a02: rgb(0 0 0 / 2%);
+  --color-black-a06: rgb(0 0 0 / 6%);
+  --color-black-a10: rgb(0 0 0 / 10%);
+  --color-black-a12: rgb(0 0 0 / 12%);
+  --color-black-a25: rgb(0 0 0 / 25%);
+  --color-black-a30: rgb(0 0 0 / 30%);
   --color-white-a02: rgb(255 255 255 / 2%);
   --color-white-a06: rgb(255 255 255 / 6%);
   --color-white-a10: rgb(255 255 255 / 10%);
   --color-white-a12: rgb(255 255 255 / 12%);
   --color-white-a25: rgb(255 255 255 / 25%);
+  --color-white-a61: rgb(255 255 255 / 61%);
+  --color-white-a92: rgb(255 255 255 / 92%);
+  --color-white-a94: rgb(255 255 255 / 94%);
   --color-cyan-a00: rgb(0 200 255 / 0%);
   --color-cyan-a12: rgb(0 200 255 / 12%);
   --color-cyan-a50: rgb(0 200 255 / 50%);
   --color-green-500-a20: rgb(34 197 94 / 20%);
 
   /* ─── Semantic colors ────────────────────────────────────────── */
+  --color-scheme: dark;
   --background: var(--color-neutral-950);
   --background-deep: var(--color-neutral-1000);
   --surface: var(--color-neutral-900);
   --surface-hover: var(--color-neutral-800);
   --surface-interactive: var(--color-white-a10);
   --surface-interactive-hover: var(--color-white-a25);
+  --surface-subtle: var(--color-white-a02);
+  --surface-inverse: var(--color-neutral-800);
   --text-heading: var(--color-neutral-50);
   --text-primary: var(--color-neutral-200);
   --text-secondary: var(--color-neutral-400);
@@ -114,12 +131,21 @@
   --border-default: var(--color-neutral-600);
   --border-interactive: var(--color-white-a12);
   --primary: var(--color-cyan-400);
+  /* `--primary` is the fill; `--primary-ink` is foreground ink. They happen
+   * to be identical on the dark canvas, but separating them prevents cyan
+   * text from failing contrast against the light canvas. */
+  --primary-ink: var(--color-cyan-400);
   --primary-light: var(--color-cyan-300);
   --primary-dark: var(--color-cyan-700);
+  --on-primary: var(--color-neutral-1000);
+  --on-inverse: var(--color-white);
   --secondary: var(--color-pink-500);
   --focus-ring: var(--color-cyan-300);
   --status-success: var(--color-success);
   --status-danger: var(--color-danger);
+  --selection-fill: var(--primary-dark);
+  --selection-ink: var(--text-heading);
+  --elevation-highlight: var(--color-white-a10);
   --nav-gradient-rest: var(--color-white-a02);
   --nav-gradient-hover: var(--color-white-a06);
   /* Scrolled navigation: the bar leaves its transparent rest state and becomes
@@ -127,6 +153,22 @@
    * token so the blur behind it still reads. */
   --nav-scrolled-surface: rgb(12 14 18 / 92%);
   --nav-blur: 12px;
+
+  /* Theme-aware local roles. These preserve the controls' documented dark
+   * mapping while giving the light canvas its own contrast-safe version. */
+  --pcard-cta-fill: var(--primary);
+  --pcard-cta-mark: var(--on-primary);
+  --pcard-cta-label: var(--text-secondary);
+  --pcard-cta-label-active: var(--on-primary);
+  --linkedin-flood: var(--surface-interactive-hover);
+  --linkedin-label-active: var(--text-primary);
+
+  /* Raster/vector artwork that was authored for the dark canvas. The filter
+   * is semantic rather than component-local so every consuming surface swaps
+   * in lockstep with the palette. */
+  --brand-mark-filter: none;
+  --decorative-art-filter: none;
+  --contact-background-opacity: 1;
 
   /* ─── Typography — families (confirmed in Figma Desktop) ─────── */
   --font-display: "Spectral", Georgia, serif;
@@ -327,4 +369,54 @@
   --gradient-stack-python: linear-gradient(90deg, var(--color-blue-950) 0%, var(--color-amber-950) 100%);
   --gradient-stack-python-border: linear-gradient(90deg, var(--color-blue-800) 0%, var(--color-amber-800) 100%);
   --gradient-google-drive: linear-gradient(270deg, var(--color-google-green-dark) 0%, var(--color-google-green) 20%, var(--color-google-blue-dark) 40%, var(--color-google-blue) 60%, var(--color-google-red) 80%, var(--color-google-yellow) 100%);
+}
+
+/* ─── Light semantic layer ────────────────────────────────────────────────
+ *
+ * Primitives never change. This is the only alternate palette: components
+ * consume semantic roles, so an explicit `data-theme` attribute can repaint
+ * every static route without duplicating their CSS. The early head script in
+ * BaseLayout assigns that attribute before first paint.
+ */
+:root[data-theme="light"] {
+  --color-scheme: light;
+  --background: var(--color-white);
+  --background-deep: var(--color-neutral-50);
+  --surface: var(--color-slate-50);
+  --surface-hover: var(--color-slate-100);
+  --surface-interactive: var(--color-black-a06);
+  --surface-interactive-hover: var(--color-black-a12);
+  --surface-subtle: var(--color-black-a02);
+  --surface-inverse: var(--color-neutral-800);
+  --text-heading: var(--color-neutral-1000);
+  --text-primary: var(--color-neutral-650);
+  --text-secondary: var(--color-slate-500);
+  --text-placeholder: var(--color-slate-500);
+  --border-subtle: var(--color-gray-300);
+  --border-default: var(--color-slate-400);
+  --border-interactive: var(--color-black-a12);
+  --primary: var(--color-cyan-500);
+  --primary-ink: var(--color-cyan-700);
+  --primary-light: var(--color-cyan-500);
+  --primary-dark: var(--color-cyan-900);
+  --on-primary: var(--color-neutral-1000);
+  --on-inverse: var(--color-white);
+  --focus-ring: var(--color-cyan-700);
+  --status-success: var(--color-green-800);
+  --status-danger: var(--color-pink-700);
+  --selection-fill: var(--color-cyan-900);
+  --selection-ink: var(--color-white);
+  --elevation-highlight: var(--color-black-a10);
+  --nav-gradient-rest: var(--color-black-a02);
+  --nav-gradient-hover: var(--color-black-a06);
+  --nav-scrolled-surface: var(--color-white-a92);
+  --pcard-cta-fill: var(--surface-inverse);
+  --pcard-cta-mark: var(--on-inverse);
+  --pcard-cta-label: var(--text-heading);
+  --pcard-cta-label-active: var(--on-inverse);
+  --linkedin-flood: var(--color-linkedin);
+  --linkedin-label-active: var(--color-white);
+  --brand-mark-filter: invert(1);
+  --decorative-art-filter: invert(1);
+  --contact-background-opacity: 0.16;
 }

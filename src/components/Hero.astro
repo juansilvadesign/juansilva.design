@@ -310,7 +310,8 @@ const copy = t(lang);
 
   .button--linkedin {
     /* role                        shipped (dark)                    Milestone L (light) */
-    --li-flood: var(--surface-interactive-hover); /* rgb(0, 119, 181) LinkedIn brand blue */
+    --li-flood: var(--linkedin-flood); /* rgb(0, 119, 181) LinkedIn brand blue */
+    --li-label-active: var(--linkedin-label-active);
     --li-flood-duration: 500ms;
     --li-flood-size: 20em;
     --li-flood-offset: -5em;
@@ -358,6 +359,7 @@ const copy = t(lang);
   .button--linkedin:hover,
   .button--linkedin:focus-visible {
     background: var(--color-transparent);
+    color: var(--li-label-active);
   }
 
   .button--linkedin:hover::before,

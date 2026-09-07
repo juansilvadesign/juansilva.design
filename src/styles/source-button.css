@@ -51,7 +51,7 @@
   right: 0;
   width: var(--space-px-32);
   height: var(--space-px-128);
-  background: var(--color-white-a10);
+  background: var(--surface-interactive);
   pointer-events: none;
   transform: translate(var(--space-px-48), calc(var(--space-px-48) * -1)) rotate(12deg);
   transition: transform var(--sweep-duration) var(--ease-sweep);
@@ -96,7 +96,7 @@
 }
 
 .source-button:hover .source-button__star {
-  color: var(--primary);
+  color: var(--primary-ink);
 }
 
 .source-button__count {

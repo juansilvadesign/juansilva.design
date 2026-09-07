@@ -46,5 +46,278 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "An on-demand therapy platform needed a public face for three different audiences: the patient looking for a session tonight, the practitioner deciding whether to take the platform seriously, and the corporate HR buyer evaluating it as a staff benefit. Three landing pages, three different arguments, one product behind all of them.",
+      "context": "Agency work at Spaceapps. The client relationship belonged to the agency and I delivered as staff, joining after the product design was already finished. The app itself — its screens, its role surfaces, and the discovery that produced them — is the tech lead's work. My stage was the landing layer, and this case study is about that layer only.",
+      "outcome": "The three pages were wireframed, designed at three breakpoints each, built in Vite, migrated to Next.js and shipped. They are still serving at the project's domain, which I host today — I took the hosting over in 2026, roughly ten months after the build ended, for reasons that have nothing to do with the engagement, and serving the files now says nothing about what I was hired to do then. In August 2026 all six routes were captured by the Wayback Machine, so the work no longer depends on the domain surviving. No performance metric exists for this project, or for any project in this portfolio; that is a confirmed absence rather than an uncollected one.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "The patient landing page at desktop width",
+          "caption": "Placeholder — the patient page at 1440px.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "callout",
+          "body": "The scope line, stated up front because it is the whole point of this record. This is the landing layer. The product behind it — the application, its screens, its four role surfaces and the discovery that shaped them — is another designer's work; my contribution to the app itself was roughly five per cent, adjustments and fixes. The agency ran a fifteen-phase delivery process and I executed inside it. What follows is what my stage of that process looked like."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Three audiences, three arguments"
+        },
+        {
+          "type": "prose",
+          "body": "The temptation on a project like this is one landing page with three tabs. It does not work, because the three readers do not share a question. A patient wants to know how fast someone can talk to them and whether it will be someone real. A practitioner wants to know about caseload, payment and whether the platform will compete with their own practice. An HR buyer wants coverage, reporting and a number they can defend in a budget meeting. Those are not three tones of one page; they are three pages."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "3",
+              "label": "audience landing pages",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "breakpoints each — 1440, 1280, 375",
+              "icon": "📐"
+            },
+            {
+              "value": "9",
+              "label": "designed page states in total",
+              "icon": "🖼️"
+            },
+            {
+              "value": "2",
+              "label": "builds — Vite, then Next.js",
+              "icon": "🔁"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Patient — the shortest path from arriving to talking to someone, with the reassurance load carried by the page rather than by a form.",
+            "Practitioner — the supply side, which is a recruitment page pretending to be a marketing page and has to answer money and autonomy before anything else.",
+            "Corporate HR — the buyer who is not the user, evaluating on behalf of staff who will never see this page."
+          ]
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "alt": "The practitioner landing page",
+          "caption": "Placeholder — the practitioner page, the recruitment argument.",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Wireframed, designed, then built by the same person"
+        },
+        {
+          "type": "prose",
+          "body": "Each page went wireframe first, then design at 1440, 1280 and 375, then code. Nine designed states, all of them mine, and then the build of all nine. This is the strongest responsive evidence in my portfolio and it is worth being precise about why: not because three breakpoints is a large number, but because the same person carried every one of them from wireframe through to shipped markup, so there is no handoff at which the responsive intent could have been lost."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Built twice: Vite, then Next.js"
+        },
+        {
+          "type": "prose",
+          "body": "The landing layer was first built in Vite with React Router, then migrated to Next.js in August 2025. Both repositories are still public, and I keep both deliberately — the pair is the only honest record of what the migration actually changed. It is also the thing most often stated wrongly about this project: the earlier repository is Vite, not Next.js, and a tooling scan that reports otherwise has been fooled by a theming package whose name begins with the same four letters."
+        },
+        {
+          "type": "callout",
+          "body": "A note for anyone reading the source rather than the site: the deployed pages still load several hero and testimonial images from a third-party image host rather than from the repository. I know, it is visible in the code, and I have chosen to leave it rather than quietly rewrite history on a finished project."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The file that proved a claim by not containing anything"
+        },
+        {
+          "type": "prose",
+          "body": "There is a design-file detail here that matters more than it looks. Across the agency's projects I had propagated a heavily tokenised starter file, and the obvious question about any such claim is whether the file follows the person or the employer. This project is the control: it is the one project of that era whose product I did not design, and it is the one file with no starter file in it — a handful of variables, no colour variables, none of the primitive layers the others all carry. The file tracks me, not the agency. An absence is doing the evidentiary work."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "The corporate HR landing page at 375px",
+          "caption": "Placeholder — the HR page at 375px, the narrowest of the three breakpoints.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not the product. The application, its screens and its role model are another designer's work, and I will not claim any of them.",
+            "Not the mobile apps. The product shipped to both app stores under the agency's bundle identifier; those listings are proof that the system went live, and they are evidence about the agency, not about me.",
+            "Not the discovery. The tech lead ran it on every project of that era and handed me the board.",
+            "Not the agency's delivery process. Fifteen phases were theirs; I executed one stage inside them.",
+            "Not a completion claim from the project schedule. The snapshot in the design file is a mid-project view and cannot be cited as a status.",
+            "Not evidence that I shipped the system. My shipped artifact is the landing-page layer — that exact sentence, and no shorter one.",
+            "Not my client. The relationship was the agency's; I delivered as staff."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Durability"
+        },
+        {
+          "type": "prose",
+          "body": "For most of this project's life there was no snapshot of it anywhere. That is a real risk for a portfolio built on client work: the domain lapses, the host changes hands, and the evidence for a year of your work disappears without anyone doing anything wrong. In August 2026 I submitted the site to the Wayback Machine and confirmed, by reading the archive index rather than trusting the save, that all six routes were captured — including all three audience pages, which is what makes the three-audience claim survive the domain."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Uma plataforma de terapia sob demanda precisava de uma face pública para três públicos diferentes: o paciente que procura uma sessão hoje à noite, o profissional decidindo se leva a plataforma a sério, e o comprador de RH avaliando a coisa como benefício para os funcionários. Três landing pages, três argumentos diferentes, um mesmo produto por trás.",
+      "context": "Trabalho de agência na Spaceapps. A relação com o cliente era da agência e eu entreguei como funcionário, entrando depois que o design do produto já estava pronto. O aplicativo em si — suas telas, suas superfícies de papel e a discovery que as gerou — é trabalho do líder técnico. A minha etapa era a camada de landing pages, e este estudo de caso trata apenas dessa camada.",
+      "outcome": "As três páginas foram prototipadas em wireframe, desenhadas em três breakpoints cada, construídas em Vite, migradas para Next.js e publicadas. Elas continuam no ar no domínio do projeto, que hoje sou eu quem hospeda — assumi a hospedagem em 2026, cerca de dez meses depois do fim do build, por razões que não têm nada a ver com o trabalho contratado; servir os arquivos hoje não diz nada sobre o que fui contratado para fazer na época. Em agosto de 2026 as seis rotas foram capturadas pelo Wayback Machine, então o trabalho não depende mais da sobrevivência do domínio. Não existe nenhuma métrica de desempenho para este projeto, nem para nenhum outro deste portfólio; é uma ausência confirmada, não uma ausência por falta de coleta.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "A landing page do paciente em largura desktop",
+          "caption": "Placeholder — a página do paciente em 1440px.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "callout",
+          "body": "O limite de escopo, dito logo de cara porque é o ponto central deste registro. Esta é a camada de landing pages. O produto por trás dela — a aplicação, suas telas, suas quatro superfícies de papel e a discovery que as moldou — é trabalho de outra pessoa; minha contribuição ao aplicativo em si foi de uns cinco por cento, ajustes e correções. A agência conduzia um processo de entrega de quinze fases e eu executei dentro dele. O que vem a seguir é como era a minha etapa desse processo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Três públicos, três argumentos"
+        },
+        {
+          "type": "prose",
+          "body": "A tentação num projeto assim é uma landing page só, com três abas. Não funciona, porque os três leitores não compartilham a mesma pergunta. O paciente quer saber em quanto tempo alguém fala com ele e se será alguém de verdade. O profissional quer saber de volume de atendimento, de pagamento e se a plataforma vai concorrer com o consultório dele. O comprador de RH quer cobertura, relatório e um número que ele consiga defender numa reunião de orçamento. Isso não são três tons de uma página; são três páginas."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "3",
+              "label": "landing pages por público",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "breakpoints cada — 1440, 1280, 375",
+              "icon": "📐"
+            },
+            {
+              "value": "9",
+              "label": "estados de página desenhados",
+              "icon": "🖼️"
+            },
+            {
+              "value": "2",
+              "label": "builds — Vite, depois Next.js",
+              "icon": "🔁"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Paciente — o caminho mais curto entre chegar e falar com alguém, com o peso do acolhimento carregado pela página e não por um formulário.",
+            "Profissional — o lado da oferta, que é uma página de recrutamento fingindo ser página de marketing e precisa responder dinheiro e autonomia antes de qualquer outra coisa.",
+            "RH corporativo — o comprador que não é o usuário, avaliando em nome de funcionários que nunca vão ver esta página."
+          ]
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "alt": "A landing page do profissional",
+          "caption": "Placeholder — a página do profissional, o argumento de recrutamento.",
+          "width": 800,
+          "height": 600
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Wireframe, design e código pela mesma pessoa"
+        },
+        {
+          "type": "prose",
+          "body": "Cada página passou por wireframe, depois design em 1440, 1280 e 375, depois código. Nove estados desenhados, todos meus, e depois o build dos nove. Esta é a evidência de responsividade mais forte do meu portfólio, e vale ser preciso sobre o motivo: não porque três breakpoints seja um número grande, mas porque a mesma pessoa levou cada um deles do wireframe até o markup publicado, então não existe handoff em que a intenção responsiva pudesse ter se perdido."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Construído duas vezes: Vite, depois Next.js"
+        },
+        {
+          "type": "prose",
+          "body": "A camada de landing pages foi construída primeiro em Vite com React Router, e depois migrada para Next.js em agosto de 2025. Os dois repositórios continuam públicos, e eu mantenho os dois de propósito — o par é o único registro honesto do que a migração de fato mudou. É também a coisa mais frequentemente dita errado sobre este projeto: o repositório antigo é Vite, não Next.js, e um scan de ferramentas que diga o contrário foi enganado por um pacote de tema cujo nome começa com as mesmas quatro letras."
+        },
+        {
+          "type": "callout",
+          "body": "Uma observação para quem for ler o código em vez do site: as páginas publicadas ainda carregam várias imagens de hero e de depoimentos a partir de um serviço de imagens de terceiros, e não do repositório. Eu sei, está visível no código, e escolhi deixar assim em vez de reescrever a história de um projeto encerrado."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O arquivo que provou uma afirmação justamente por não conter nada"
+        },
+        {
+          "type": "prose",
+          "body": "Há um detalhe do arquivo de design aqui que importa mais do que parece. Ao longo dos projetos da agência eu havia propagado um arquivo base fortemente tokenizado, e a pergunta óbvia sobre uma afirmação dessas é se o arquivo segue a pessoa ou o empregador. Este projeto é o controle: é o único daquela fase cujo produto não fui eu que desenhei, e é o único arquivo sem o arquivo base dentro — um punhado de variáveis, nenhuma variável de cor, nenhuma das camadas de primitivos que todos os outros carregam. O arquivo segue a mim, não a agência. É uma ausência fazendo o trabalho de evidência."
+        },
+        {
+          "type": "image",
+          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "alt": "A landing page de RH em 375px",
+          "caption": "Placeholder — a página de RH em 375px, o mais estreito dos três breakpoints.",
+          "width": 800,
+          "height": 450
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é o produto. A aplicação, suas telas e seu modelo de papéis são trabalho de outra pessoa, e não vou reivindicar nada disso.",
+            "Não são os aplicativos móveis. O produto foi publicado nas duas lojas sob o identificador da agência; aquelas fichas provam que o sistema entrou no ar, e são evidência sobre a agência, não sobre mim.",
+            "Não é a discovery. O líder técnico conduziu a discovery em todos os projetos daquela fase e me entregou o quadro pronto.",
+            "Não é o processo de entrega da agência. As quinze fases eram delas; eu executei uma etapa dentro delas.",
+            "Não é uma alegação de conclusão a partir do cronograma. O recorte que está no arquivo de design é uma visão de meio de projeto e não pode ser citado como status.",
+            "Não é evidência de que eu publiquei o sistema. Meu artefato publicado é a camada de landing pages — exatamente essa frase, e nenhuma mais curta.",
+            "Não era meu cliente. A relação era da agência; eu entreguei como funcionário."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Durabilidade"
+        },
+        {
+          "type": "prose",
+          "body": "Durante quase toda a vida deste projeto não existiu nenhum snapshot dele em lugar nenhum. Esse é um risco real para um portfólio construído sobre trabalho de cliente: o domínio vence, a hospedagem troca de mãos, e a evidência de um ano de trabalho seu desaparece sem que ninguém tenha feito nada de errado. Em agosto de 2026 eu submeti o site ao Wayback Machine e confirmei, lendo o índice do arquivo em vez de confiar no salvamento, que as seis rotas foram capturadas — incluindo as três páginas de público, que é o que faz a afirmação dos três públicos sobreviver ao domínio."
+        }
+      ]
+    }
+  }
 }

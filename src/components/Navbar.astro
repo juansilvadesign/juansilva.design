@@ -1,6 +1,7 @@
 ---
 import LanguageSwitch from "./LanguageSwitch.astro";
 import ProfileLink from "./ProfileLink.astro";
+import ThemeToggle from "./ThemeToggle.astro";
 import { localizedPath, t, type Locale } from "../i18n";
 
 interface Props {
@@ -39,6 +40,9 @@ const navigation = [
       }
       <li class="navbar__locale">
         <LanguageSwitch {lang} {currentPath} />
+      </li>
+      <li class="navbar__theme">
+        <ThemeToggle {lang} />
       </li>
     </ul>
 
@@ -133,6 +137,7 @@ const navigation = [
   .navbar__brand img {
     width: auto;
     height: var(--space-px-24);
+    filter: var(--brand-mark-filter);
     transition: height var(--motion-base) var(--ease-standard);
   }
 
@@ -189,13 +194,40 @@ const navigation = [
     margin-left: var(--space-px-4);
   }
 
+  .navbar__theme {
+    display: flex;
+  }
+
   .navbar__profile {
     display: none;
   }
 
   @media (max-width: 639px) {
+    .navbar {
+      padding-inline: var(--space-px-8);
+    }
+
     .navbar__item--home {
       display: none;
+    }
+
+    .navbar__brand img {
+      height: var(--space-px-20);
+    }
+
+    .navbar__links {
+      gap: 0;
+    }
+
+    .navbar__link {
+      min-height: 44px;
+      align-items: center;
+      padding: var(--space-px-4);
+      font-size: var(--text-12);
+    }
+
+    .navbar__locale {
+      margin-left: 0;
     }
   }
 

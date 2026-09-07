@@ -34,7 +34,37 @@ const copy = t(lang);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="light dark" />
+    {/*
+      Theme must be selected before the generated stylesheets and body paint.
+      `is:inline` is intentional: an Astro-bundled module is deferred, which
+      would expose a frame of the fallback dark palette on a saved light visit.
+    */}
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        var KEY = "jsd:theme";
+        var theme = null;
+
+        try {
+          var stored = localStorage.getItem(KEY);
+          if (stored === "light" || stored === "dark") theme = stored;
+        } catch (error) {
+          // Privacy modes can throw on storage access. System preference is
+          // still a safe, non-persistent fallback.
+        }
+
+        if (!theme) {
+          try {
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          } catch (error) {
+            theme = "dark";
+          }
+        }
+
+        root.dataset.theme = theme;
+      })();
+    </script>
     <SEOHead {lang} {title} {description} {canonicalPath} {image} {noindex} />
     <Analytics part="head" />
     <slot name="head" />
