@@ -34,9 +34,31 @@ interface Props {
   pressed: boolean;
   disabled?: boolean;
   onToggle: () => void;
+  /**
+   * Optional brand mark, from `lib/stack.ts` — the same SVG the case-study
+   * StackBadge renders. Stack chips carry one; the evidence-signal chips above
+   * them do not, and are left as they were.
+   */
+  icon?: string | null;
+  /**
+   * Recolourable inline markup, for a mark that cannot serve as its own mask.
+   * Rendered in place of the background image. See STACK_ICON_INLINE.
+   */
+  iconInline?: string | null;
+  /** Which stack this is — carries the mark's own rest colours in CSS. */
+  iconId?: string | null;
 }
 
-export default function PillChip({ label, count, pressed, disabled = false, onToggle }: Props) {
+export default function PillChip({
+  label,
+  count,
+  pressed,
+  disabled = false,
+  onToggle,
+  icon = null,
+  iconInline = null,
+  iconId = null,
+}: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const [geo, setGeo] = useState({ d: 0, delta: 0, originY: 0, h: 0 });
 
@@ -69,8 +91,30 @@ export default function PillChip({ label, count, pressed, disabled = false, onTo
     return () => ro.disconnect();
   }, [measure]);
 
-  const inner = (
+  /*
+    Built per copy rather than once, because the two differ by exactly one
+    thing: the resting label shows the brand mark in full colour, while the
+    duplicate that rides the cyan disc knocks it back — the same inversion the
+    text already does. Most marks are masked to a silhouette; the two that
+    ship their own pressed artwork paint it instead, which is what the flag
+    below switches. The stylesheet owns both treatments.
+  */
+  const inner = (on: boolean) => (
     <>
+      {icon && (
+        <span
+          aria-hidden="true"
+          className="chip__icon"
+          data-on={on || undefined}
+          data-stack={iconInline ? iconId : undefined}
+          style={
+            iconInline ? undefined : ({ "--chip-icon": `url("${icon}")` } as React.CSSProperties)
+          }
+          /* Build-time markup from our own icon file, recoloured by CSS
+             variables — never anything a visitor can reach. */
+          dangerouslySetInnerHTML={iconInline ? { __html: iconInline } : undefined}
+        />
+      )}
       {label}
       <span className="chip__n">{count}</span>
     </>
@@ -95,9 +139,9 @@ export default function PillChip({ label, count, pressed, disabled = false, onTo
     >
       <span className="chip__circle" aria-hidden="true" />
       <span className="chip__labels">
-        <span className="chip__label">{inner}</span>
+        <span className="chip__label">{inner(false)}</span>
         <span className="chip__label chip__label--on" aria-hidden="true">
-          {inner}
+          {inner(true)}
         </span>
       </span>
     </button>

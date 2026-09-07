@@ -1,7 +1,5 @@
 ---
-import type { ProjectData } from "../content.config";
-
-type StackId = ProjectData["stack"][number];
+import { STACK_ICONS, type StackId } from "../lib/stack";
 
 interface Props {
   id: StackId;
@@ -9,16 +7,18 @@ interface Props {
 
 const { id } = Astro.props;
 
-const stackPresentation = {
-  typescript: { name: "TypeScript", icon: "/assets/icons/typescript.svg" },
-  javascript: { name: "JavaScript", icon: "/assets/icons/javascript.svg" },
-  tailwind: { name: "Tailwind", icon: "/assets/icons/tailwind.svg" },
-  figma: { name: "Figma", icon: "/assets/icons/figma.svg" },
-  python: { name: "Python", icon: "/assets/icons/python.svg" },
-  opensource: { name: "Open Source", icon: "/assets/icons/open-source.svg" },
-} as const satisfies Record<StackId, { name: string; icon: string }>;
+/* Icons come from `lib/stack.ts` — the /projects filter chips are a React
+   island and render the same marks, so the paths cannot live in here. */
+const stackNames = {
+  typescript: "TypeScript",
+  javascript: "JavaScript",
+  tailwind: "Tailwind",
+  figma: "Figma",
+  python: "Python",
+  opensource: "Open Source",
+} as const satisfies Record<StackId, string>;
 
-const stack = stackPresentation[id];
+const stack = { name: stackNames[id], icon: STACK_ICONS[id] };
 ---
 
 <span class:list={["technology", `technology--${id}`]} role="listitem">

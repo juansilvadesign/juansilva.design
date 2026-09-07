@@ -217,6 +217,33 @@ export const SIGNAL_FACETS = [
 
 export type SignalFacet = (typeof SIGNAL_FACETS)[number];
 
+/**
+ * The subset, and the order, the /projects filter row offers.
+ *
+ * Separate from `SIGNAL_FACETS` on purpose. That list is the canonical set of
+ * things a record can assert, and it still draws every evidence rail on the
+ * cards and the Evidence row on each case-study page — a signal dropped here
+ * is only withdrawn as a *filter*, never hidden from a project that carries it.
+ *
+ * Ordered strongest-claim-first rather than by how much each narrows: "Product
+ * stack" and "Designed and coded" are the ones worth filtering on.
+ *
+ * Two are commented out rather than deleted, so re-enabling is one line:
+ *   · `liveSite`     — 21 of 50 records, and the ones without it are mostly
+ *                      design-only work the visitor can already see is design
+ *                      only. As a filter it mostly restates the grid.
+ *   · `storeListing` — 1 record of 50. A chip that resolves to a single
+ *                      project is a link wearing a filter's clothes.
+ */
+export const SIGNAL_FILTER_FACETS = [
+  "productStack",
+  "designAndCode",
+  "designArtifact",
+  "sourceCode",
+  // "storeListing",
+  // "liveSite",
+] as const satisfies readonly SignalFacet[];
+
 export interface Filters {
   signals: SignalFacet[];
   stacks: string[];

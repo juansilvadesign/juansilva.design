@@ -1135,7 +1135,7 @@ carries it.**
 
 ---
 
-## Milestone K — Binder UI refactor (11 canvas notes) 🟢 **CLOSED 2026-09-07** — K1–K4 closed 09-03 · K5 closed 09-07 (uiverse-9 09-05 · 5 + 10 09-06 · **2 09-07**)
+## Milestone K — Binder UI refactor (11 canvas notes) 🟢 **CLOSED 2026-09-07** — K1–K4 closed 09-03 · K5 closed 09-07 (uiverse-9 09-05 · 5 + 10 09-06 · **2 09-07**) · **K9 off-binder 09-07** (uiverse-11, the `/projects` view toggle) · **K10 off-binder 09-07** (stack marks in the `/projects` filter chips)
 
 Source of record: the Maestri fichário **"Fichário"** on the `juansilva.design UI Refactor`
 canvas — `react-bits-changes` + `uiverse-1..10`. Read it with `maestri note read "<name>"`.
@@ -2308,7 +2308,135 @@ known-good page *before* its case-study result was believed.
       produce no data. Juan's call 2026-09-03: **pick one label now, A/B when measurement
       exists.** Gated on an analytics decision, which is its own task.
 
+
+### K9 — Off-binder: the `/projects` view toggle (uiverse-11) ✅ 2026-09-07
+
+Not a binder note — Juan supplied `uiverse.io/Javierrocadev/bright-catfish-97` directly on
+2026-09-07, the way K4 took the off-binder LinkedIn swap. Every K0 constraint still applies.
+
+- [x] **The two buttons were kept, not the note's checkbox.** The note is one `<label>`
+      around an `sr-only` checkbox. The whole port is CSS either way — the knob is a
+      pseudo-element on the track in both constructions — so the checkbox bought no pixels
+      and cost the reading: a switch announces *"on/off"* for a choice between two peers,
+      where the pair announces *"Grid, pressed" / "List, not pressed"* and each half takes
+      focus. Juan's call, asked before building.
+- [x] **`data-view` on the track moves the knob** — not the note's `peer-checked:`, and not
+      a `:has()` on the pressed button. It is the same attribute `.grid` and every `.pcard`
+      already carry for this state, and it keeps the CSS ignorant of which child is which.
+      ⛔ The codebase contains **no `:has()` anywhere**; this did not become the first.
+- [x] **lucide `layout-grid` / `layout-list`, inlined** — upstream geometry verbatim,
+      **fetched from the lucide repo rather than written from memory**. No `lucide-react`:
+      an icon dependency for two glyphs is the same re-platform K0.3 refused for Tailwind.
+      The two icons share their left-hand rects, so only the right half switches.
+- [x] **No new copy, so K0.7 was already satisfied.** `viewGrid` / `viewList` stop being
+      visible labels and become the accessible names inside `.visually-hidden`. Verified in
+      `dist/pt/projects/index.html`: **"Grade" / "Lista"**.
+- [x] **Reduced-motion branch** (K0.6). The knob's travel *is* the selection, so it drops to
+      `--motion-reduced` instead of being removed — same reading as the search field beside
+      it. Measured under `prefers-reduced-motion: reduce`: **0.001s**, still landing at
+      `translateX(48px)`. The hover `scale(.95)` goes with it, which is the decorative half.
+
+⭐ **The palette was inverted after the first build, on Juan's call.** It shipped cyan-track
+/ near-black-knob first — faithful to the note's filled track, but a solid `--primary` pill
+outweighed everything else in the toolbar. Inverted, the track wears the same `--surface`
++ 1px `--border-default` as the `<select>` beside it and cyan is spent only on the 40px
+knob, so **the accent marks the selection rather than the control**. The ring is an inset
+`box-shadow`, not a `border`, so the box model stays exactly 96 × 48 and the knob arithmetic
+needs no second set of numbers.
+
+⛔ **The `.tool__select` comment was WRONG, and is corrected in place.** It claimed
+`min-height: 46px` made the select 46px "to match the toggle beside it". Measured in the
+browser, the select rendered **48px** — the floor is a minimum, and a `<select>`'s intrinsic
+content clears it — so the old reasoning bought a 2px misalignment instead of curing one.
+
+- [x] **All three tools levelled, on Juan's call after the swap shipped.** They carried
+      three different heights — search 44, select 48 (unintentionally), toggle 46 — and
+      `align-items: flex-end` hid it at the bottom edge while exposing it at the top, so
+      the three legends sat on three lines. **`--tool-h: 48px` on `.tools` is now the row's
+      single height**, and each control derives from it: the select **states** 48 instead of
+      inheriting whatever the UA gives a `<select>` at this font size, `--search-size` takes
+      it (a bigger tap target as a side effect), and the toggle is `--tool-h` tall by two
+      wide — which is also the note's own 2:1. The search icon's padding became
+      `calc((size - 20px) / 2)` so its **glyph stays 20px, identical to the toggle's**;
+      a fixed 12px would have grown it to 24 at the new size.
+      **Measured at 768 / 1280 / 1440: all three heights 48, all three tops equal, all three
+      legends on one line.** At 360 the toggle wraps to its own line — normal `flex-wrap`,
+      and Search and Sort still agree.
+      ⚠️ The `.chip` filter rows are a separate rhythm at `min-height: 44px` and were
+      deliberately left alone.
+
+⭐ **`--toggle-h` aliases `--tool-h` with a fallback, once.** Every number in the toggle
+derives from that one value, so a reparented toggle would resolve five invalid values at
+once — and an invalid `translateX` computes to `none`, i.e. a knob that silently stops
+moving rather than a visible break. `.search` already aliased its size the same way.
+
+⛔ **A comment claiming var() in `transform` breaks transitions was left contradicting the
+code, and is fixed.** The hover rules are written out per state, and the note explaining why
+read as a blanket ban — but `translateX(var(--toggle-h))` sits two rules above it. Measured
+mid-flight, the knob **does** interpolate through it: 0 → 5.4 → 27.6 → 40.9 → 46.5 → 48px
+across the 300ms. The real distinction, now stated: `--toggle-h` is a **constant**, so it
+substitutes once and the two endpoints are genuinely different values. A var that changed
+*per state* would leave the endpoints differing only by substitution, which is the case
+engines have historically failed to interpolate.
+
+⛔ **`.toggle__btn` left the shared `:focus-visible` group**, for the reason the select and
+the search pill left it: the group sets `--radius-sm` and `outline-offset: 3px`, which
+squares off the pill and pushes the ring off the track — and the toggle's old
+`overflow: hidden` was clipping that ring anyway. It is now inset (`-4px`) at the pill
+radius, and the colour flips with the state because one pairing does not read (cyan-300
+over the cyan knob). Measured: **10.51:1** unpressed (cyan-300 on the surface track) and
+**9.57:1** pressed (near-black on the knob). Glyphs: **6.19:1** and **9.57:1**.
+
+🔑 **Rungs 5–6, measured against `dist/` on `localhost:4400`, 2026-09-07:** the knob is a
+true 40px circle, concentric with both 48 × 48 targets (centres at 24 and 72) · 0 horizontal
+overflow at 360px · `npm run check` green — `astro check` **0 errors, 0 warnings, 0 hints**
+across 57 files, worker tsc, 116 pages built · the 100 case-study pages still hydrate
+nothing, so **K0.5 holds**. ⚠️ **Not deployed** — `npm run deploy` is a separate, explicit
+step, per K7.
+
 ---
+
+### K10 — Off-binder: stack marks in the `/projects` filter chips ✅ 2026-09-07
+
+Not a binder note — Juan asked directly on 2026-09-07 to reuse the case-study stack icons in the
+`/projects` chips, then to reorder and trim the evidence row. Every K0 constraint still applies.
+
+- [x] **The icon map moved to `src/lib/stack.ts`.** `StackBadge.astro` and the chips could not
+      share before for one reason: a React island cannot import an Astro component. The paths
+      now have one home and both surfaces read it.
+- [x] **The pressed chip knocks the mark back to a dark silhouette**, the same inversion the
+      label already does — Tailwind's cyan and TypeScript's blue both dissolve into `--primary`
+      otherwise. Masking the icon's own alpha and painting `--background` through it.
+- [x] ⛔ **Except a mark that IS a filled tile.** TypeScript and JavaScript are a full-bleed
+      brand square with the glyph in *white paint, not a hole*, so an alpha mask resolves the
+      whole square and returns a featureless block. Luminance masking does not rescue it — the
+      tile bleeds ~35 % on TS, and the polarity is inverted on JS (black glyph, bright tile), so
+      no single recipe serves both. Those two are **inlined** instead, which puts the `fill`
+      under CSS control; the first `<path>` becomes `var(--stack-tile)` and the rest
+      `var(--stack-glyph)`, **by position, not by colour**.
+- [x] ⛔🔴 **The Figma clip-path wrapper is stripped before inlining.** Its `clipPath` is a rect
+      the size of the viewBox — it clips nothing — but the id is baked in, so inlining twice per
+      chip put `clip0_23114_5` and `clip0_23114_40` in the document **twice each**. Duplicate ids
+      are invalid and `url(#id)` binds to the first; it rendered correctly only because the clip
+      is a no-op. Now 0 `clipPath` in the document.
+- [x] **A 24 px themed export was rejected on measurement, not taste** — 3 paths, identical node
+      counts, every coordinate exactly 2× the 12 px file to within 0.00005. Same artwork, only
+      the fills differ, so it bought no precision at the 16 px rendered. The import points at the
+      **tracked** `typescript.svg` / `javascript.svg`; four redundant files were deleted.
+- [x] **Evidence row reordered and trimmed** to `Product stack · Designed and coded · Design file
+      · Source code`. `storeListing` (1 record of 50) and `liveSite` (21 of 50) are **commented
+      out, not deleted** — Juan's call, redundant or too low in qty; re-enabling is one line.
+- [x] 🔑 **`SIGNAL_FILTER_FACETS` is separate from `SIGNAL_FACETS` on purpose.** The canonical
+      list still draws every card's evidence rail *and* the Evidence row on each case-study page,
+      so pruning it directly would have **hidden** signals from projects that carry them.
+      Verified after the change: rails still render all six.
+- [x] **Rung 6 — measured:** `npm run check` clean (0/0/0), 116 pages built · EN + PT rows both
+      correct · 390 px no horizontal overflow, 44 px tap targets held · case-study badges
+      unaffected · 0 `clipPath` ids in `dist/projects/index.html`.
+- [ ] ⚠️ **Known duplication, not yet resolved:** the rest-state brand colours live in the `.svg`
+      *and* in `.chip__icon[data-stack="…"]`. Re-export with a different brand blue and the CSS
+      needs the same edit — nothing fails loudly.
+
 
 ## Milestone L — Light/dark theme toggle (uiverse-7) 🔒 deferred 2026-09-03
 

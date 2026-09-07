@@ -202,6 +202,67 @@
   border-color: var(--border-subtle);
 }
 
+/*
+ * The stack chip's brand mark — the same SVG `StackBadge.astro` renders on the
+ * case-study pages, at the same 16px. A background rather than an <img> so the
+ * pressed copy can knock it back with a mask; `--chip-icon` is set per chip in
+ * PillChip.tsx.
+ */
+.chip__icon {
+  flex: 0 0 auto;
+  width: var(--space-px-16);
+  height: var(--space-px-16);
+  background: var(--chip-icon) center / contain no-repeat;
+}
+
+/*
+ * On the cyan disc the mark inverts with the label, because the brand colours
+ * are the wrong ones there — Tailwind's cyan and TypeScript's blue both sit on
+ * top of `--primary` and vanish.
+ *
+ * Masking the icon's own alpha and painting `--background` through it gives a
+ * dark silhouette that reads at 16px. `background-image` moves to `mask-image`
+ * and the paint becomes flat colour, so the two properties swap roles here.
+ */
+.chip__icon[data-on]:not([data-stack]) {
+  background: var(--background);
+  mask: var(--chip-icon) center / contain no-repeat;
+  -webkit-mask: var(--chip-icon) center / contain no-repeat;
+}
+
+/*
+ * TypeScript and JavaScript take the other route. Their marks are a filled
+ * brand tile with the glyph knocked out of it in white, so masking one returns
+ * a featureless block — the tile IS the alpha. They are inlined instead (see
+ * STACK_ICON_INLINE), which puts the two fills under CSS control, and the whole
+ * difference between rest and pressed becomes these four colours.
+ */
+.chip__icon[data-stack] {
+  background: none;
+}
+
+.chip__icon[data-stack] svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chip__icon[data-stack="typescript"] {
+  --stack-tile: #007acc;
+  --stack-glyph: #fff;
+}
+
+.chip__icon[data-stack="javascript"] {
+  --stack-tile: #f7df1e;
+  --stack-glyph: #000;
+}
+
+/* The inversion, from the theme rather than a second copy of the artwork. */
+.chip__icon[data-stack][data-on] {
+  --stack-tile: var(--background);
+  --stack-glyph: var(--primary);
+}
+
 .chip__n {
   font-family: var(--font-mono);
   font-size: var(--text-12);
@@ -232,7 +293,18 @@
   gap: var(--space-px-24);
 }
 
+/*
+ * `--tool-h` is the row's single height. Search, Sort and View each derive
+ * from it rather than carrying their own number, because they did carry their
+ * own numbers — 44, 48 and 46 — and the three legends above them sat on three
+ * different lines. `align-items: flex-end` was hiding it at the bottom edge
+ * and exposing it at the top.
+ *
+ * 48 is what the <select> already measured; it is the one of the three whose
+ * height was never really ours to pick (see below).
+ */
 .tools {
+  --tool-h: 48px;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
@@ -256,11 +328,18 @@
 }
 
 /*
- * 46px, not 44: the toggle beside it is a 44px button inside a 1px border, so
- * matching the inner heights would leave the two legends 2px out of line.
+ * ⚠️ The `min-height: 46px` this carried until uiverse-11 did NOT decide the
+ * height, and its comment was wrong about it: measured, the control rendered
+ * **48px**, because a <select>'s intrinsic content clears a 46px floor. The old
+ * reasoning — "46, not 44, to match the toggle beside it" — therefore bought a
+ * misalignment instead of curing one.
+ *
+ * So the height is now stated rather than inherited from whatever the UA gives
+ * a <select> at this font size. 48 keeps what it has always actually been, and
+ * `--tool-h` hands the same number to the search pill and the toggle.
  */
 .tool__select {
-  min-height: 46px;
+  height: var(--tool-h, 48px);
   padding: var(--space-px-8) var(--space-px-12);
   font-family: var(--font-ui);
   font-size: var(--text-14);
@@ -463,9 +542,10 @@
 /*
  * uiverse-9 — `splendid-starfish-73`, ported to tokens.
  *
- * Collapsed it is 44px, not the note's 40: Rung 6 sets the floor for a tap
- * target and the note sits below it. The extra 4px also lets the icon keep the
- * note's own padding without crowding the glyph.
+ * Collapsed it is `--tool-h`, not the note's 40: Rung 6 sets the floor for a
+ * tap target and the note sits below it. It was 44 — clearing that floor but
+ * 4px short of the two controls beside it, which put its legend on its own
+ * line. Taking the row's height fixes the alignment and buys a larger target.
  *
  * The note's neumorphism is one idea — a raised pair at rest, the same pair
  * inset once the field is in use — expressed in four hard-coded greys lit for
@@ -474,7 +554,7 @@
  * needs; the 25% grey the note used reads as a blown-out rim at our contrast.
  */
 .search {
-  --search-size: 44px;
+  --search-size: var(--tool-h, 48px);
   --search-open: 200px;
   --search-lift: 1.5px 1.5px 3px var(--background-deep),
     -1.5px -1.5px 3px var(--color-white-a10);
@@ -490,9 +570,11 @@
   /*
    * Longhand, and the right side is explicitly 0: the UA sheet ships
    * `padding: 1px 2px`, and under border-box a width smaller than its own
-   * padding floors at the padding. Setting only padding-left therefore left a
-   * 46×44 ellipse with the 44px icon 2px off its centre. The open state below
-   * puts the right padding back, where there is room for it.
+   * padding floors at the padding. Setting only padding-left therefore left an
+   * ellipse 2px wider than it was tall, with the icon disc off its centre by
+   * the same 2px — observed at the 44px this used to be, and it scales with
+   * whatever `--search-size` becomes. The open state below puts the right
+   * padding back, where there is room for it.
    */
   padding: 0 0 0 var(--search-size);
   font-family: var(--font-ui);
@@ -524,7 +606,7 @@
   box-shadow: var(--search-well);
 }
 
-/* Clipped to nothing at 44px anyway; fading it in stops the words from
+/* Clipped to nothing while collapsed anyway; fading it in stops the words from
  * appearing to slide out of the icon as the field opens. */
 .search__input::placeholder {
   color: var(--text-secondary);
@@ -561,11 +643,16 @@
   place-items: center;
   width: var(--search-size);
   height: var(--search-size);
-  padding: var(--space-px-12);
+  /*
+   * Derived so the glyph stays 20px whatever the disc does — the same 20px the
+   * toggle's two icons are, which is the only reason the three read as one set.
+   * A fixed 12px was right at 44 and would have grown the glyph to 24 at 48.
+   */
+  padding: calc((var(--search-size) - var(--space-px-20)) / 2);
   color: var(--text-secondary);
   /* The note makes the icon clickable once open, for a submit this control
-   * does not have — filtering is live. Staying inert keeps the whole 44px disc
-   * a single target that focuses the field. */
+   * does not have — filtering is live. Staying inert keeps the whole disc a
+   * single target that focuses the field. */
   pointer-events: none;
   transition: color var(--motion-fast) var(--ease-standard);
 }
@@ -580,29 +667,116 @@
   height: 100%;
 }
 
+/*
+ * uiverse-11 — `Javierrocadev/bright-catfish-97`, ported onto the two buttons
+ * that were already here.
+ *
+ * The note's rose-400 → emerald-500 track goes out with its hex (K0.4), and
+ * with the good/bad reading the pair carries: Grid and List are peers, and
+ * neither is the safe one. The accent went onto the track first; a filled cyan
+ * pill then outweighed everything else in this row, so it is inverted — the
+ * track is the same `--surface` + 1px the <select> beside it wears, and cyan
+ * is spent only on the 40px knob. The accent now marks the selection instead
+ * of the control, which is the thing worth pointing at.
+ *
+ * The ring is an inset shadow, not a border, so the box model stays exactly
+ * 96 × 48 and the knob arithmetic below needs no second set of numbers.
+ *
+ * 96 × 48 — the note's own `w-24 h-12`, kept rather than re-fitted. Measured in
+ * the browser, the sort <select> beside it is 48px, not the 46 its own comment
+ * claims: `min-height: 46px` is a floor, and the control's intrinsic content
+ * clears it. `--tool-h` is that 48, and the track is two of them wide — which
+ * is also the note's own 2:1. All three legends now sit on one line.
+ */
 .toggle {
+  /*
+   * Aliased once, with the fallback, the way `.search` aliases `--search-size`:
+   * `--tool-h` belongs to the toolbar row, and every number in this component
+   * is derived from it, so a reparented toggle would otherwise resolve five
+   * invalid values at once — and an invalid `translateX` computes to `none`,
+   * which is a knob that silently stops moving rather than a visible break.
+   */
+  --toggle-h: var(--tool-h, 48px);
+  position: relative;
   display: inline-flex;
-  overflow: hidden;
-  border: var(--border-width) solid var(--border-default);
-  border-radius: var(--radius-control);
+  width: calc(var(--toggle-h) * 2);
+  height: var(--toggle-h);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 var(--border-width) var(--border-default);
 }
 
+/*
+ * The knob, at the note's `after:h-10 after:w-10` — a true circle, not a
+ * rounded half-track. Every number below is `--toggle-h` minus the 4px inset it
+ * sits in, so the note's arithmetic holds at any row height: at 48 it is a
+ * 40px circle with 48px of travel, landing concentric with the button under it
+ * in both positions (centres at 24 and 72).
+ */
+.toggle::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: var(--space-px-4);
+  left: var(--space-px-4);
+  width: calc(var(--toggle-h) - var(--space-px-8));
+  height: calc(var(--toggle-h) - var(--space-px-8));
+  border-radius: var(--radius-pill);
+  background: var(--primary);
+  transition: transform var(--motion-base) var(--ease-standard);
+}
+
+/* Half the track, which is one `--toggle-h` — the note's `translate-x-12`. */
+.toggle[data-view="list"]::after {
+  transform: translateX(var(--toggle-h));
+}
+
+/*
+ * The note's `peer-hover:after:scale-95`, which reads as the knob giving under
+ * the pointer. Both combinations are written out rather than composed from a
+ * per-state custom property.
+ *
+ * ⚠️ Not a blanket ban on var() in `transform` — `translateX(var(--toggle-h))`
+ * is two rules up, and the knob was measured interpolating through it
+ * (0 → 5.4 → 27.6 → 40.9 → 46.5 → 48px over the 300ms). The distinction is that
+ * `--toggle-h` is a CONSTANT: it substitutes once and the two endpoints are
+ * genuinely different values. A var that changed per state would make the
+ * endpoints differ only by substitution, which is the case engines have
+ * historically failed to interpolate.
+ */
+.toggle:hover::after {
+  transform: scale(0.95);
+}
+
+.toggle[data-view="list"]:hover::after {
+  transform: translateX(var(--toggle-h)) scale(0.95);
+}
+
+/*
+ * Above the knob, and each exactly half the track — so the 46px hit target is
+ * the visible half, not just the 20px glyph.
+ */
 .toggle__btn {
-  min-height: 44px;
-  padding: var(--space-px-8) var(--space-px-16);
-  font-family: var(--font-ui);
-  font-size: var(--text-14);
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
   color: var(--text-secondary);
   cursor: pointer;
   background: transparent;
   border: 0;
-  transition: color var(--motion-fast) var(--ease-standard),
-    background-color var(--motion-fast) var(--ease-standard);
+  transition: color var(--motion-fast) var(--ease-standard);
 }
 
 .toggle__btn[aria-pressed="true"] {
   color: var(--background);
-  background: var(--primary);
+}
+
+.toggle__icon {
+  width: var(--space-px-20);
+  height: var(--space-px-20);
 }
 
 .clear {
@@ -941,13 +1115,32 @@
 /* ── Focus: visible on every interactive element, never removed ───────── */
 
 .chip:focus-visible,
-.toggle__btn:focus-visible,
 .clear:focus-visible,
 .pcard__link:focus-visible,
 .rec__link:focus-visible {
   outline: var(--border-width-strong) solid var(--focus-ring);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
+}
+
+/*
+ * Its own rule, for the reason the select and the search pill have theirs: the
+ * group above sets `--radius-sm`, which would square off this pill, and a +3px
+ * offset, which would push the ring off the track and onto the page.
+ *
+ * The colour still flips with the state, in the direction the inverted palette
+ * asks for: `--focus-ring` is cyan-300, which reads at 10.51:1 on the surface
+ * track but would sit cyan-on-cyan over the knob. So the pressed half rings
+ * near-black instead, at 9.57:1.
+ */
+.toggle__btn:focus-visible {
+  outline: var(--border-width-strong) solid var(--focus-ring);
+  outline-offset: calc(var(--space-px-4) * -1);
+  border-radius: var(--radius-pill);
+}
+
+.toggle__btn[aria-pressed="true"]:focus-visible {
+  outline-color: var(--background);
 }
 
 /* ── Breakpoints ──────────────────────────────────────────────────────── */
@@ -1013,6 +1206,11 @@
 @media (prefers-reduced-motion: reduce) {
   .chip,
   .toggle__btn,
+  /* Same reading as the search field below: the knob's travel IS which view is
+   * selected, so it arrives instantly rather than being dropped — with no
+   * transition and no colour change to the track, the two states would be one
+   * picture. The hover scale goes with it, which is the part that was decorative. */
+  .toggle::after,
   .pcard__link,
   .pcard__title,
   /* The width change is the open/closed state itself, not travel for its own

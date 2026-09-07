@@ -6,6 +6,7 @@ import SpotlightCard from "./SpotlightCard";
 import {
   EMPTY_FILTERS,
   SIGNAL_FACETS,
+  SIGNAL_FILTER_FACETS,
   applyFilters,
   facetCounts,
   recommend,
@@ -15,6 +16,7 @@ import {
   type SignalFacet,
   type SortKey,
 } from "../../lib/projects";
+import { stackIcon, stackIconInline } from "../../lib/stack";
 
 export interface IndexCopy {
   heading: string;
@@ -63,6 +65,44 @@ function EvidenceRail({ p, copy }: { p: ProjectSummary; copy: IndexCopy }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+/*
+  lucide `layout-grid` and `layout-list`, inlined. The repo carries no icon
+  dependency and adding one for two glyphs would be the same re-platform K0.3
+  refused for Tailwind. Upstream's own geometry, unchanged: both icons open on
+  the same two left-hand rects, so only the right half switches.
+*/
+function ViewIcon({ name }: { name: "grid" | "list" }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className="toggle__icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect width="7" height="7" x="3" y="3" rx="1" />
+      <rect width="7" height="7" x="3" y="14" rx="1" />
+      {name === "grid" ? (
+        <>
+          <rect width="7" height="7" x="14" y="3" rx="1" />
+          <rect width="7" height="7" x="14" y="14" rx="1" />
+        </>
+      ) : (
+        <>
+          <path d="M14 4h7" />
+          <path d="M14 9h7" />
+          <path d="M14 15h7" />
+          <path d="M14 20h7" />
+        </>
+      )}
+    </svg>
   );
 }
 
@@ -189,7 +229,10 @@ export default function ProjectsIndex({ projects, copy }: Props) {
         <fieldset className="controls__group">
           <legend className="controls__legend">{copy.filterLegend}</legend>
           <div className="chips">
-            {SIGNAL_FACETS.map((s) => {
+            {/* The offered subset and its order — see SIGNAL_FILTER_FACETS.
+                `SIGNAL_FACETS` stays the canonical list and still draws the
+                rails below, so a chip retired here hides nothing. */}
+            {SIGNAL_FILTER_FACETS.map((s) => {
               const n = counts.signals[s];
               const on = filters.signals.includes(s);
               return (
@@ -226,6 +269,12 @@ export default function ProjectsIndex({ projects, copy }: Props) {
                     pressed={on}
                     disabled={!on && n === 0}
                     onToggle={() => toggle("stacks", s)}
+                    /* The same mark StackBadge renders on the case studies.
+                       Null for a stack token added to the content before an
+                       icon exists — the chip then reads as it did before. */
+                    icon={stackIcon(s)}
+                    iconInline={stackIconInline(s)}
+                    iconId={s}
                   />
                 );
               })}
@@ -304,18 +353,42 @@ export default function ProjectsIndex({ projects, copy }: Props) {
               </select>
             </label>
 
+            {/*
+              uiverse-11 — `Javierrocadev/bright-catfish-97`. The note is one
+              <label> around a checkbox; the markup here stays the two buttons
+              it already was. The whole port is CSS — the knob is a
+              pseudo-element on the track in either construction — so the
+              checkbox buys no pixels and costs the reading: a switch announces
+              "on/off" for a choice between two peers, where these announce
+              "Grid, pressed" / "List, not pressed" and each takes focus.
+
+              `data-view` on the track is what moves the knob, rather than the
+              note's `peer-checked:` or a `:has()` on the pressed button. It is
+              the same attribute the card list and each card already carry for
+              this state, and it keeps the CSS ignorant of which child is which.
+
+              The labels leave the surface but not the DOM — the glyph is the
+              only visible thing on a 46px button, so `viewGrid`/`viewList`
+              stay as the accessible names in both locales (K0.7).
+            */}
             <div className="tool">
               <span className="tool__label" id="pindex-view-legend">
                 {copy.viewLegend}
               </span>
-              <div className="toggle" role="group" aria-labelledby="pindex-view-legend">
+              <div
+                className="toggle"
+                data-view={view}
+                role="group"
+                aria-labelledby="pindex-view-legend"
+              >
                 <button
                   type="button"
                   className="toggle__btn"
                   aria-pressed={view === "grid"}
                   onClick={() => setView("grid")}
                 >
-                  {copy.viewGrid}
+                  <ViewIcon name="grid" />
+                  <span className="visually-hidden">{copy.viewGrid}</span>
                 </button>
                 <button
                   type="button"
@@ -323,7 +396,8 @@ export default function ProjectsIndex({ projects, copy }: Props) {
                   aria-pressed={view === "list"}
                   onClick={() => setView("list")}
                 >
-                  {copy.viewList}
+                  <ViewIcon name="list" />
+                  <span className="visually-hidden">{copy.viewList}</span>
                 </button>
               </div>
             </div>
