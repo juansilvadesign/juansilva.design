@@ -271,6 +271,196 @@
 }
 
 /*
+ * Its own focus rule rather than the shared group below, for the same reason
+ * the search pill has one: that group sets border-radius on the element it
+ * rings, which snapped this control 8px -> 4px for exactly as long as it was
+ * focused. Caught by a real Tab press, not by reading the rule.
+ */
+.tool__select:focus-visible {
+  outline: var(--border-width-strong) solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/*
+ * uiverse-8 — `gharsh11032000/loud-puma-8`, ported onto the native <select>.
+ *
+ * The note is a hover menu: a trigger with a rotating chevron, a #0a3cff fill
+ * that sweeps in on scaleX, and a submenu whose four items each sweep the same
+ * way. Roughly half its CSS (its lines 94-177) is that submenu — the panel IS
+ * the design, so "take the visual properties, keep the native select" would
+ * have shipped half a component.
+ *
+ * `appearance: base-select` gets the panel back without giving up the element.
+ * MEASURED in Chrome 153, not assumed:
+ *   - legacy <select>: an <option> is 0x0 with the picker OPEN — never a CSS
+ *     box at all. Per-item sweeps there are structurally impossible, not merely
+ *     inconsistent across browsers.
+ *   - base-select: the same <option> lays out at 197x24, `display: flex`,
+ *     a ::before genuinely paints (24px -> 80px tall), and `background-size`
+ *     animates to 100% on a real hover.
+ * Roving focus, Home/End/Escape, type-ahead, outside-click and the mobile OS
+ * picker all survive, because the element is still a <select>.
+ *
+ * ⛔ Chrome/Edge 135+ and Safari 27+ only — NOT Firefox (behind a flag through
+ * 158); caniuse global 71.56%. Everything here is inside @supports, so Firefox
+ * keeps precisely the control declared above: styled trigger, OS-drawn panel,
+ * fully working. That fallback is why no markup changed.
+ *
+ * ⛔ No <button>/<selectedcontent> child was added, and that is deliberate.
+ * The picker works without one (verified: the select's innerHTML is still just
+ * its two <option>s, and no button is generated), which keeps the HTML parser
+ * out of it — a <button> inside <select> is dropped by parsers predating this
+ * feature, and ProjectsIndex is SSR'd into dist/.
+ *
+ * ⭐ The note is hover-ONLY: every effect hangs off `.item:hover`, so a
+ * keyboard user gets none of it. That is K6's "highest a11y risk" in one line,
+ * and it is fixed here rather than ported. Probed the real keyboard model: the
+ * highlighted option is document.activeElement and matches :focus/:focus-
+ * visible, while :checked marks the committed sort. Every :hover below
+ * therefore carries a :focus-visible twin — uiverse-3's parity rule, inside
+ * the picker.
+ *
+ * ⛔ :focus-visible, NOT :focus, and Rung 5 is what caught it. Opening with the
+ * mouse moves DOM focus to the CHECKED option while the pointer sits on the
+ * other one, so a `:focus` twin lit both at once and the panel rendered as a
+ * single cyan block with nothing to distinguish the option under the cursor.
+ * Measured both ways: mouse-open gives the checked option focus=true but
+ * focus-visible=FALSE, while arrowing gives the moved-to option focus-visible=
+ * TRUE. So :focus-visible is precisely the "the keyboard is driving" test, and
+ * it leaves exactly one option lit in either mode.
+ */
+@supports (appearance: base-select) {
+  .tool__select {
+    /* The note's own curve. Already house vocabulary — ProjectCard's
+     * --case-ease is the identical cubic-bezier — so it is not a new easing. */
+    --sort-ease: cubic-bezier(0.23, 1, 0.32, 1);
+    --sort-duration: var(--motion-base);
+    appearance: base-select;
+    gap: var(--space-px-12);
+    transition: border-color var(--sort-duration) var(--sort-ease);
+  }
+
+  .tool__select:hover,
+  .tool__select:open {
+    border-color: var(--primary);
+  }
+
+  /*
+   * base-select replaces the UA arrow with ::picker-icon. The note rotates its
+   * chevron on hover; this rotates on :open, which is what a flipped chevron
+   * actually claims — the panel is down. Hover cannot know that, and on a
+   * control that opens on click it would be a lie.
+   */
+  .tool__select::picker-icon {
+    color: var(--text-secondary);
+    transition:
+      transform var(--sort-duration) var(--sort-ease),
+      color var(--sort-duration) var(--sort-ease);
+  }
+
+  .tool__select:hover::picker-icon,
+  .tool__select:focus-visible::picker-icon {
+    color: var(--primary);
+  }
+
+  .tool__select:open::picker-icon {
+    color: var(--primary);
+    transform: rotate(180deg);
+  }
+
+  /*
+   * The panel. The note welds its submenu to the trigger with
+   * `border-radius: 0 0 16px 16px` and a transparent top border; ours is a
+   * detached popover the UA positions, so it takes a full radius and its own
+   * border instead of a seam that would not line up.
+   *
+   * `allow-discrete` + @starting-style are what let a popover animate in at
+   * all — without them `display` flips instantly and the fade never runs.
+   */
+  .tool__select::picker(select) {
+    appearance: base-select;
+    padding: var(--space-px-6);
+    background: var(--surface);
+    border: var(--border-width) solid var(--primary);
+    border-radius: var(--radius-control);
+    opacity: 0;
+    transform: translateY(-12px);
+    transition:
+      opacity var(--sort-duration) var(--sort-ease),
+      transform var(--sort-duration) var(--sort-ease),
+      display var(--sort-duration) allow-discrete,
+      overlay var(--sort-duration) allow-discrete;
+  }
+
+  .tool__select:open::picker(select) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @starting-style {
+    .tool__select:open::picker(select) {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+  }
+
+  /*
+   * The sweep. The note is an ::after at scaleX(0) whose transform-origin flips
+   * left -> right so the fill retracts from the side it did not enter; on an
+   * <option> a background-size ramp is the same motion with one less box. The
+   * origin flip survives as the background-position pair below: `right` at
+   * rest, `left` while lit, untransitioned, so it snaps before the size runs.
+   *
+   * #0a3cff -> --primary (K0.4). The label flips to --background, not the
+   * note's #ffffff: white on cyan-400 fails AA, and dark-on-cyan is the exact
+   * pair action-row.css already ships on the case-card CTAs.
+   */
+  .tool__select option {
+    padding: var(--space-px-8) var(--space-px-12);
+    color: var(--text-primary);
+    background-color: transparent;
+    background-image: linear-gradient(var(--primary), var(--primary));
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 0% 100%;
+    border-radius: var(--radius-xs);
+    transition:
+      background-size var(--sort-duration) var(--sort-ease),
+      color var(--sort-duration) var(--sort-ease);
+  }
+
+  .tool__select option:hover,
+  .tool__select option:focus-visible {
+    color: var(--background);
+    background-position: left center;
+    background-size: 100% 100%;
+    outline: none;
+  }
+
+  /*
+   * The committed sort must read at 0% sweep too — ::checkmark alone is not a
+   * state a colour-blind or low-vision reader can rely on, and :checked is not
+   * :focus, so the two have to be styled independently and then combined.
+   */
+  .tool__select option:checked {
+    color: var(--primary);
+  }
+
+  .tool__select option:checked:hover,
+  .tool__select option:checked:focus-visible {
+    color: var(--background);
+  }
+
+  /* House rule K0.6. One custom property covers the trigger, the chevron, the
+   * panel and every option, because they all inherit it. */
+  @media (prefers-reduced-motion: reduce) {
+    .tool__select {
+      --sort-duration: var(--motion-reduced);
+    }
+  }
+}
+
+/*
  * uiverse-9 — `splendid-starfish-73`, ported to tokens.
  *
  * Collapsed it is 44px, not the note's 40: Rung 6 sets the floor for a tap
@@ -753,7 +943,6 @@
 .chip:focus-visible,
 .toggle__btn:focus-visible,
 .clear:focus-visible,
-.tool__select:focus-visible,
 .pcard__link:focus-visible,
 .rec__link:focus-visible {
   outline: var(--border-width-strong) solid var(--focus-ring);

@@ -1135,7 +1135,7 @@ carries it.**
 
 ---
 
-## Milestone K — Binder UI refactor (11 canvas notes) 🟢 K1–K4 CLOSED 2026-09-03 · K5 in progress (uiverse-9 done 2026-09-05)
+## Milestone K — Binder UI refactor (11 canvas notes) 🟢 **CLOSED 2026-09-07** — K1–K4 closed 09-03 · K5 closed 09-07 (uiverse-9 09-05 · 5 + 10 09-06 · **2 09-07**)
 
 Source of record: the Maestri fichário **"Fichário"** on the `juansilva.design UI Refactor`
 canvas — `react-bits-changes` + `uiverse-1..10`. Read it with `maestri note read "<name>"`.
@@ -1936,16 +1936,73 @@ upstream's); `--li-flood-size` / `--li-flood-offset` (**20em / -5em**, upstream'
 is what makes the sweep read as arriving from the left). ⏭️ The rest state is unchanged and
 still borderless; adding the note's outline is a one-line change if Juan wants more presence.
 
-### K5 — New controls (uiverse 2, 5, 9, 10) — 🟢 9 shipped 2026-09-05 · **5 + 10 shipped 2026-09-06** · only uiverse-2 open (still gated on `master-cv.md` §5)
+### K5 — New controls (uiverse 2, 5, 9, 10) — 🟢 **CLOSED 2026-09-07.** 9 shipped 09-05 · 5 + 10 shipped 09-06 · **2 shipped 09-07**
 
-- [ ] **uiverse-2 — Download resume.** ✅ **Unblocked (Juan, 2026-09-03): generate the PDF
-      from `_config/master-cv.md`.** No PDF exists in `public/` or `src/` yet, so the
-      generation is part of the task, not a precondition — `knowledge/skills/html-to-pdf/`
-      already renders a styled HTML document to a single-page PDF.
-      ⚠️ **Settle `master-cv.md` §5 first.** It carries live attribution flags — the
-      *"spearheaded the end-to-end UI design"* wording that the store contradicts, and the
-      unsourced Sagitta counts. A resume is the one artifact a prospect reads closely, so
-      it must not ship a claim the evidence store already flags.
+- [x] **uiverse-2 — Download resume.** ✅ **SHIPPED 2026-09-07**, both halves: the résumé
+      itself and the control that serves it.
+      🔴 **The gate was far wider than "§5's attribution flags."** `master-cv.md` opened with
+      ⛔ *"THIS IS NOT A CV YET. DO NOT CITE, SEND, OR COPY FROM IT"* — it is a **demand spec**,
+      a slot list of what claims would need backing, not claims. There was nothing to render.
+      Closing it took an interview across Slots 0–6, not a §5 patch. What it surfaced:
+      - 🔴 **Slot 0 pointed the CV at a DEAD domain.** `juansilva.is-a.dev` answers HTTP 200
+        over an empty Apache `Index of /` (MEMORY.md, since 2026-08-04). **A résumé that prints
+        a dead portfolio link fails at the exact moment it is being checked.** Now
+        `juanpablosilva.com.br`, plus a real contact block.
+      - 🔴🔴 **`projects/shipd-resume/` claimed a degree Juan does not hold** — *"Bachelor's
+        Degree in Digital Design, 2021"*, when he **left Anhembi Morumbi in January 2022**.
+        Same class as the Fulbright error the LinkedIn pass already caught, on a harder
+        credential. Five more defects beside it (two retired Spaceapps dates, a Sagitta level
+        inflation, the dead URL, the do-not-render Cambridge cert). Sent to Olympus for
+        **personhood verification, not credential evaluation**, so the exposure is narrow —
+        but it was the workspace's only résumé artifact and therefore the default thing any
+        future pass would copy. All six corrected in source; ⚠️ **its `.pdf`/`.docx`/`.html`
+        renders are still stale.**
+      - ⭐ **That same file carried the best evidence in the workspace, unrecorded:** six
+        merged PRs into repos Juan does not own. **Verified 6/6 against the GitHub API** —
+        +4.936 / −254 across 79 files, incl. **`grab/cursor-talk-to-figma-mcp` (6.994★,
+        org-owned)**. It is now Slot 6 and its own section on the résumé: the only evidence
+        judged by someone other than Juan, and the only answer to *"sole author on 28 repos"*,
+        which otherwise reads as **never code-reviewed**.
+      - ⛔ **Two URL traps caught before they reached the PDF.** `syd.app.br` is the SYD
+        product app (118 screens, Thiago's) and `katinvestimentos.com.br` is KAT's marketing
+        site — Juan's KAT work was the **internal** account manager. Either one on a résumé
+        claims work that is not his. ⭐ Conversely `sydapp.com.br` was re-probed and is **back
+        up** (200, 375 KB, real title), discharging the record's own *"(recheck)"*.
+      **📄 The résumé** — `resume/juan-silva-resume.html` → **`public/juan-silva-resume.pdf`**
+      (A4, 2 pages, 78.710 B) via `knowledge/skills/html-to-pdf/`. First render **split the
+      open-source table across the page break** and wrapped the contact line; fixed with
+      `break-inside: avoid` and a two-line contact block, re-rendered. **Verified on the
+      extracted PDF text, not by eye:** ⛔ absent — `syd.app.br` · `katinvestimentos` ·
+      `is-a.dev` · `Bachelor` · `graduated` · `Cambridge` · `20h` · `full-stack` ·
+      `full-scale`; ✅ present — `sydapp.com.br` · `15h/week` · `100+ projects` ·
+      `left in January 2022` · `Mar 2025 – Sep 2025`.
+      **🎛️ The control** — new **`src/components/ResumeButton.astro`** (scoped `<style>`),
+      third in `.hero__actions` after the email CTA and the LinkedIn control.
+      ⛔ **The note ships `<div className="button">`; a download is a LINK.** A div is not
+      focusable, not keyboard-activatable and carries no `download` semantics. Built as
+      `<a href download>`, with the effect bound to `:hover` **and** `:focus-visible` —
+      **measured identical on both paths** (icon `topRel` 44 → 14, tooltip visible, 2px ring).
+      ⛔🔴 **`--width: 100px` deliberately NOT ported.** K4 settled that a fixed control width
+      breaks PT. Width comes from `.resume__sizer`, an in-flow copy of the label, so each
+      locale sizes its own box — **measured EN 174px vs PT 138px, from one rule.**
+      ⭐ **Why a sizer and not just an in-flow label:** the animated layers must be
+      full-button-height for `translateY(±100%)` to clear the box exactly; an in-flow label is
+      only line-height tall and −100% would leave a **sliver of text showing**. The sizer holds
+      the box, the layers do the motion.
+      ⛔ **`overflow: hidden` is on `.resume__well`, NOT on `.resume`.** The tooltip is drawn
+      with `.resume`'s pseudo-elements and an overflow on the same element **clips it away**.
+      The note makes the same split; it is not incidental.
+      ⛔ **`font-family` named explicitly** — uiverse-5 shipped a control that rendered in Lora
+      because it named none, and there is no implicit UI font here. **Measured `Inter`.**
+      ⚠️ **The tooltip is hover-only and never fires on touch**, so its two facts (format,
+      weight) are repeated in `aria-label` — where a phone user and a screen reader get them.
+      ✅ **Verified in `dist/` + Chromium:** control present on **both** homepages with both
+      locale strings, `/juan-silva-resume.pdf` serves **200 `application/pdf` 78.710 B**, and
+      **K0.5 holds — 100/100 case-study pages still report 0 `astro-island`, 0 external
+      `<script src>`** (this control ships no JS at all).
+      ⏭️ **Left open:** regenerate or delete the stale `shipd-resume` renders · write
+      `sources/portfolio/opensource/` records · Banco Lucrativo's `What I did` · the optional
+      university start year.
 - [x] **uiverse-5 — Back to top on case-study pages.** ✅ **2026-09-06.** Built as
       specced: no island, `@supports (animation-timeline: scroll())` with an
       always-visible fallback, 50px tap target (≥44px, Rung 6). New
@@ -2138,18 +2195,95 @@ already existed. `dist/` re-measured: case-study pages and `/contact` still hydr
       `vx / vy = (W - w) / (H - h)` up to an integer ratio. Derive the velocity from the
       measured box rather than tuning it by eye, and it hits the corner every cycle.
 
-### K6 — `/projects` sort dropdown (uiverse-8) — highest a11y risk, own step
+### K6 — `/projects` sort dropdown (uiverse-8) ✅ **SHIPPED 2026-09-07** — the panel came back, and it turned out to be the LOW-risk path
 
-- [ ] ✅ **De-risked by Juan's call, 2026-09-03: keep the native `<select>` and take only
-      `loud-puma-8`'s visual properties.** *"It does not make any difference."* — and for
-      the rendered result it does not, while the difference in what has to be rebuilt is
-      total. Style the existing element at `ProjectsIndex.tsx:193`; roving focus,
-      Home/End/Escape, type-ahead, `aria-expanded`, outside-click dismissal and the mobile
-      OS picker all keep working because they were never removed.
-      ⚠️ One real limit to design around: **the open option list is OS-drawn and cannot be
-      styled** — the closed control, arrow and hover/focus states are fully ours, the
-      dropdown panel is not. If the reference's open panel is the point of the design,
-      that is the moment to reconsider — not before.
+- [x] ⭐ **The 09-03 de-risking call was reversed on evidence, and the heading's "highest
+      a11y risk" with it.** That call was *"keep the native `<select>`, take only
+      `loud-puma-8`'s visual properties"* — *"It does not make any difference."* It made a
+      large one. Reading the note showed **roughly half its CSS (its lines 94–177) is the
+      submenu**: a panel that fades and slides in, whose four items each carry their own
+      sweep. The trigger alone is half a component, and this file already said so —
+      *"if the reference's open panel is the point of the design, that is the moment to
+      reconsider."* It was.
+- [x] ⛔ **A legacy `<select>` genuinely cannot carry it — MEASURED, not asserted.** With
+      the picker **open**, an `<option>`'s `getBoundingClientRect()` is **0×0**: it is
+      never a CSS box at all, so per-item sweeps there are *structurally impossible*, not
+      merely inconsistent across browsers. ⛔ The first probe "confirmed" a legacy
+      `option::before` painting at 50×10 — a **phantom**. `getComputedStyle(el, '::before')`
+      resolves whether or not a box is ever generated; both modes returned identical
+      numbers, which was the tell. **Layout geometry is the instrument; computed style is
+      not.**
+- [x] ✅ **`appearance: base-select` gets the panel back without giving up the element.**
+      Measured in Chrome 153: the same `<option>` lays out at **197×24**, `display: flex`,
+      a `::before` genuinely paints (**24px → 80px** tall), and `background-size` animates
+      to 100% on a real hover. Roving focus, Home/End/Escape, type-ahead, outside-click and
+      the mobile OS picker all survive **because the element is still a `<select>`** — so
+      this is the *low*-a11y-risk path, and strictly better than the hand-rolled listbox
+      that was the alternative.
+- [x] ⛔ **Support is Chrome/Edge 135+ and Safari 27+, NOT Firefox** (behind a flag through
+      158) — caniuse global **71.56%**. Everything is inside `@supports (appearance:
+      base-select)`, so Firefox keeps exactly the control it has today: styled trigger,
+      OS-drawn panel, fully working. That fallback is the whole reason the markup did not
+      change.
+- [x] ⛔ **Zero markup change — no `<button><selectedcontent>` child was added.** The picker
+      works without one (verified: the select's `innerHTML` is still just its two
+      `<option>`s and no button is generated), which keeps the **HTML parser** out of it —
+      a `<button>` inside a `<select>` is dropped by parsers predating the feature, and
+      `ProjectsIndex` is **SSR'd into `dist/`**. The port is CSS only.
+- [x] **Ported to tokens (K0.4).** `#0a3cff` → `--primary`; the label flips to
+      `--background`, **not** the note's `#ffffff` — white on cyan-400 fails AA, and
+      dark-on-cyan is the exact pair `action-row.css` already ships on the case-card CTAs.
+      The note's `scaleX` + `transform-origin` flip survives as a `background-size` ramp
+      with a `background-position` pair (`right` at rest, `left` while lit, untransitioned)
+      so the fill still retracts from the side it did not enter. **0 note hex in `dist/`**
+      (`0a3cff`, `cccccc`: 0 hits); the only `#ffffff` in the file is inside the comment
+      explaining why it was rejected.
+- [x] ⭐ **The chevron rotates on `:open`, not on hover.** The note rotates on
+      `.item:hover`, but on a control that opens on *click* a flipped chevron would be
+      claiming something untrue. `::picker-icon` + `:open` says what the rotation means.
+- [x] 🔴 **`:focus-visible`, NOT `:focus` — and Rung 5 is what caught it.** The note is
+      **hover-only** (every effect hangs off `.item:hover`), so a keyboard user gets none
+      of it; uiverse-3's parity rule says each `:hover` needs a twin. A `:focus` twin
+      **lit both options at once**: opening with the mouse moves DOM focus to the *checked*
+      option while the pointer sits on the other, and the panel rendered as **one solid
+      cyan block** with nothing to distinguish the option under the cursor. Measured both
+      ways — mouse-open gives the checked option `focus=true` but **`focus-visible=false`**,
+      while arrowing gives the moved-to option **`focus-visible=true`**. So
+      `:focus-visible` is precisely the "the keyboard is driving" test. After the fix:
+      **exactly 1 option lit in each mode**, mouse and keyboard renders identical.
+- [x] 🔴 **Split out of the shared focus group — a second defect only a real Tab press
+      found.** That group sets `border-radius: var(--radius-sm)` on the element it rings,
+      which snapped this control **8px → 4px for exactly as long as it was focused**. Same
+      class of defect as uiverse-9's search pill, and fixed the same way: its own focus
+      rule, same outline, no radius. Fixed **outside `@supports`** — Firefox had the
+      identical wobble today.
+
+**Rung 5 — seen** at 360 / 768 / 1280, EN **and** PT, closed and open, mouse-driven and
+keyboard-driven.
+**Rung 6 — measured:** trigger **46px** (48 at 1280) and each option **46px**, both over the
+44px floor · `scrollWidth - innerWidth === 0` at every width in both locales · focus ring
+proven by a **real Tab press** (`2px solid rgb(44,214,255)` = `--focus-ring`, and
+`border-radius` now **holds at 8px** focused *and* resting) · AA on every re-coloured pair —
+swept option label **9.57:1**, resting option **11.64:1**, committed option **9.24:1**,
+chevron at rest **6.19:1**, chevron hot **9.24:1** · reduced motion **asserted under
+emulation, not just declared**: 0.3s → **0.001s** across trigger, options *and*
+`::picker-icon`, and the picker **still opens and still sweeps** — the risk there is
+`allow-discrete` at 1ms, so it was checked rather than assumed.
+**Still sorts:** driven by keyboard only (focus → Enter → ArrowDown → Enter), the value went
+`evidence` → `recent`, the grid reordered, and `:checked` followed. PT reads
+*"Evidência mais forte" / "Mais recentes"* under legend *"Ordenar"* — no new strings, so
+K0.7 was already satisfied.
+
+**JS budget (K0.5): zero change — the port is pure CSS.** Re-measured on `dist/`: the **100
+case-study pages carry 0 `astro-island` and 0 `_astro/*.js`**, `/contact` likewise (its
+Turnstile is third-party), and `/projects` still has the one pre-existing `ProjectsIndex`
+island. ⛔ **The first instrument under-reported and was thrown out**: a
+`src=`-attribute regex found **0** JS on the homepage, which demonstrably loads
+`_astro/HeroHeadline.*.js` — Astro emits these as dynamic imports inside inline module
+scripts, not `src=` attributes. The literal `/_astro/*.js` scan was validated against that
+known-good page *before* its case-study result was believed.
+
+⏭️ **Not deployed.** Per K7, deploy is a separate explicit step.
 
 ### K7 — Gates before this milestone closes
 

@@ -282,6 +282,16 @@ export default function ProjectsIndex({ projects, copy }: Props) {
               </span>
             </label>
 
+            {/*
+              uiverse-8 — `loud-puma-8`. The markup is UNCHANGED on purpose:
+              the whole port is CSS behind `@supports (appearance: base-select)`,
+              which styles the option panel the note is half made of while the
+              element stays a native <select>. Adding the customizable-select
+              `<button><selectedcontent>` child would have bought nothing here
+              and cost the fallback — parsers that predate the feature drop a
+              <button> inside a <select>, and this island is SSR'd into dist/.
+              Firefox has no base-select, so it keeps the plain styled control.
+            */}
             <label className="tool">
               <span className="tool__label">{copy.sortLegend}</span>
               <select
