@@ -28,9 +28,30 @@ const label = copy.navigation.backToTop;
 ---
 
 <a class="btt" href="#main-content" aria-label={label}>
-  <svg class="btt__icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
+  {/*
+    Lucide `arrow-big-up` (Juan, 2026-09-06), verbatim from the upstream icon —
+    24×24, `fill="none"`, 2px stroke, round caps and joins, which is the same
+    idiom as the site's Untitled UI set, so it sits beside them without
+    retuning. Lucide is ISC: no attribution clause, unlike the Font Awesome
+    glyph the binder note shipped (CC BY) whose source is gone.
+
+    ⛔ Do not "simplify" the arcs out of this path. The `a1 1 0 0 0` segments
+    are the rounded corners of the arrow's own outline; flattening them to
+    straight joins is a different icon, not a tidier one.
+  */}
+  <svg
+    class="btt__icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
     <path
-      d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"
+      d="M9 19a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-6a1 1 0 0 1 1-1h3.293a.707.707 0 0 0 .5-1.207l-7.086-7.086a1 1 0 0 0-1.414 0l-7.086 7.086a.707.707 0 0 0 .5 1.207H8a1 1 0 0 1 1 1z"
     ></path>
   </svg>
   {/* The anchor is already named by `aria-label`; this is the same word made
@@ -49,7 +70,6 @@ const label = copy.navigation.backToTop;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-px-8);
     /* 50px clears the 44px minimum tap target on its own (Rung 6). */
     width: 50px;
     height: 50px;
@@ -70,25 +90,71 @@ const label = copy.navigation.backToTop;
   }
 
   .btt__icon {
-    width: 12px;
+    /*
+      18px, not the note's 12px. Its glyph was a solid fill, which reads at any
+      size; this one is a 2px stroke on a 24 viewBox, so the rendered weight is
+      2 × (size / 24) — 1.0px at 12px, which goes spindly against the pill's
+      text. 18px puts it at 1.5px, matching the other Untitled UI icons.
+    */
+    width: 18px;
+    height: 18px;
     flex: none;
-    fill: currentColor;
+    /* Stroked now, so the fill would only paint the arrow's interior. The
+       colour still travels via currentColor for the hover inversion. */
+    fill: none;
+    stroke: currentColor;
     transition: transform var(--motion-base) ease;
   }
 
   /*
-    The label is laid out at full size and clipped by the 50px width, rather
-    than grown from `font-size: 0` as the note does. Animating font-size
-    relayouts text on every frame; this way only the container's width
-    animates, and the word is already the right size when it is uncovered.
+    ⛔ ABSOLUTE, so the label takes NO layout space at rest.
+
+    This was a real defect, not a nicety. In flow, the label kept its full
+    width even at `opacity: 0` — 75px of it — so the flex line needed
+    18 + 8 + 75 = 101px inside a 50px circle. `justify-content: center` splits
+    that 51px overflow evenly, which pushed the icon 25.5px LEFT of the box,
+    and `overflow: hidden` then clipped it away completely: measured at
+    icon.left 1180 against button.left 1206, fully outside, 42px off centre.
+    **The resting button was an empty circle.**
+
+    The note avoided this with `font-size: 0`, which I replaced on the grounds
+    that animating font-size relayouts text per frame. That reasoning holds —
+    the mistake was dropping its layout effect without replacing it. Taking the
+    label out of flow keeps both properties: nothing to relayout, and no width
+    stealing the icon's centre.
   */
   .btt__label {
+    position: absolute;
+    /*
+      `inset: 0` + `place-items: center`, NOT `top/left: 50%` + a translate.
+      Both centre the box, but the translate version centred a `line-height: 1`
+      box — 14px tall around a 14px font — so the glyphs sat wherever that
+      font's ascent/descent left them rather than optically centred, and the
+      label read low in the pill. Filling the button and centring the line box
+      is the same mechanism the flex container already uses for the icon.
+
+      It also makes the numbers legible in devtools: this reads top 0 /
+      bottom 0 against the button, where the old rule showed the PRE-transform
+      offsets (top 25px = 50% of 50px, bottom 11px = 50 − 25 − 14) and looked
+      off-centre while the transform was in fact correcting it.
+    */
+    inset: 0;
+    display: grid;
+    place-items: center;
+    /*
+      ⛔ `--font-ui`, and it must be stated. `body` sets `--font-body`
+      ("Lora", Georgia, serif) — the site's prose font is deliberately a serif —
+      and this control sits OUTSIDE <main>, so it inherits that and rendered
+      "Back to top" in Lora. Every other UI control names `--font-ui`
+      explicitly (source-button.css, curved-loop.css); a button label that
+      omits it does not fall back to a UI font, it falls back to the serif.
+    */
+    font-family: var(--font-ui);
     /* The note says 13px; the ramp has no 13. --text-14 is the nearest real
        token and reads better in the pill than --text-12. No literal fallback
        here on purpose — that would be a hard-coded value wearing a var(). */
     font-size: var(--text-14);
     font-weight: 600;
-    line-height: 1;
     white-space: nowrap;
     opacity: 0;
     transition: opacity var(--motion-base) ease;

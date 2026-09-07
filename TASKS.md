@@ -1959,6 +1959,52 @@ still borderless; adding the note's outline is a one-line change if Juan wants m
       control always visible.
       ⭐ **It targets `#main-content`, not a new `#top`.** That anchor already exists on
       every page as the skip-link target, so a second one would be a duplicate landmark.
+      ⭐ **Icon is Lucide `arrow-big-up`** (Juan, 2026-09-06 — *"their svg does not exist
+      anymore"*). The note carried a solid-filled **Font Awesome** `arrow-up` on a 384×512
+      viewBox, whose source is gone and which brought CC BY attribution with it. Lucide is
+      **ISC** — no attribution clause — and ships 24×24, `fill="none"`, 2px stroke, round
+      caps, the same idiom as the site's Untitled UI set, so it sits beside them untuned.
+      Path taken verbatim from upstream and independently confirmed against the copy Juan
+      pasted — byte-identical. Rendered at 18px; measured `hasInk`, bbox ≈ x4 y3.41
+      w16 h16.59, stroke following `currentColor`.
+      *(An interim step used Untitled UI `arrow-narrow-up`, derived by rotating
+      `arrow-narrow-right` −90°. Superseded by Juan's call; kept here only so the
+      rotation trick is not rediscovered from scratch: (x,y) → (y, 24−x).)*
+      ⛔🔴 **A hidden-but-in-flow label pushed the icon clean out of the button.**
+      The label sat in the flex line at `opacity: 0` while keeping its full **75px** of
+      width, so the line needed 18 + 8 + 75 = **101px inside a 50px circle**;
+      `justify-content: center` split the 51px overflow evenly and `overflow: hidden`
+      clipped the result. Measured **icon.left 1180 vs button.left 1206 — fully outside,
+      42px off centre**: the resting control was an **empty circle on all 100 pages**.
+      The note's `font-size: 0` existed precisely to keep the label out of layout; it was
+      replaced with `opacity: 0` for a sound reason (font-size animation relayouts text
+      per frame) but without replacing its layout effect. Fix = `position: absolute` on
+      the label, which keeps both properties. Now measured `offCentreX 0, offCentreY 0`,
+      `ICON_FULLY_INSIDE true`; on hover the pill goes 50→140px, the icon slides up 36px
+      (−200%) and out **by design**, and the label fades in centred.
+      ⛔🔴 **A UI control outside `<main>` inherits the SERIF body font.** The label
+      set no `font-family`, and `body` sets `--font-body` = `"Lora", Georgia, serif` —
+      this site's prose font is deliberately a serif — so "Back to top" rendered in Lora
+      (Juan's screenshot, 2026-09-06). There is no implicit UI font to fall back to:
+      every other control names `--font-ui` explicitly (`source-button.css:32`,
+      `curved-loop.css:38`). Fixed by naming it. **Verified by comparison, not by
+      assertion:** the same string in the label and in uiverse-1's `.source-button__label`
+      now measure **90.13px, family Inter**, against prose at **90.28px, Spectral**.
+      *(Aside: Inter is NOT among the page's `@font-face` faces — only Spectral and Lora
+      are — so `--font-ui` resolves through to a local Inter or `system-ui`. That is
+      site-wide pre-existing behaviour shared by every UI control, not this component's.)*
+      ⭐ **Label centring is `inset: 0` + `place-items: center`, not `top/left: 50%` +
+      translate.** The devtools reading Juan flagged — **top 25px, bottom 11px** — was the
+      PRE-transform box (25 = 50% of 50px; 11 = 50 − 25 − 14), with the translate then
+      correcting it, so the box was centred but a `line-height: 1` box was: the glyphs sat
+      where the font metrics left them. Filling the button and centring the line box is
+      the mechanism the flex container already uses for the icon, and it reads **top 0 /
+      bottom 0** in devtools. **Measured on the glyph ink, not the box:**
+      `inkTopGap 18 · inkBottomGap 18 · inkOffCentrePx 0`.
+      ⚠️ **The lesson: "the colours and the size are right" is not "the user can see it."**
+      The first verification pass measured ink, dimensions, contrast and behaviour, and
+      passed all four, while the control was invisible. Nothing checked the icon's
+      position *relative to its own button*.
       ⛔🔴 **NEVER put an `animation` shorthand in the same rule as `animation-timeline`.**
       The first build did, and **lightningcss merged them** into
       `animation: linear both btt-reveal scroll(root)`. `animation-timeline` is not a
