@@ -1094,8 +1094,15 @@ this site is zero-dependency Astro with a bespoke token system, so adding them i
 re-platform, not an edit. React Bits' `SpotlightCard` is used per-project only —
 it is **MIT + Commons Clause**, never to be vendored into a shared template.
 
-**Island scoping:** React hydrates on `/projects` **only** (~61 KB gz). The
-homepage, `/contact`, and all 100 case-study pages ship **zero JS**.
+**Island scoping — corrected 2026-09-07 (K7).** As written, React hydrated on
+`/projects` **only** (~61 KB gz). **K1's `HeroHeadline` + `CurvedLoop` islands added
+`/` to that list** — `dist/index.html` now loads `_astro/HeroHeadline.*.js` +
+`_astro/CurvedLoop.*.js` + the client runtime, re-measured against the fresh build
+2026-09-07. `/404` also gained an island the same milestone (`FuzzyText`, K1). What
+still holds: **`/contact` and all 100 case-study pages (50 EN + 50 PT) ship zero
+first-party JS** — re-verified with a strict `_astro/*.js` token scan (not a
+substring match, which false-positives on unrelated `.js` text like the GTM
+snippet) across every one of the 100 pages, zero hits.
 
 ### J3 — Rungs 5 and 6 (both run, neither skipped)
 
@@ -1179,10 +1186,10 @@ asks for explicitly.
    target exactly those pages. Prefer CSS-only (`:target`, `@keyframes`,
    `animation-timeline: scroll()`) over a React island; where an island is unavoidable,
    say so and price it.
-   > ⚠️ **The J2 note "the homepage ships zero JS" is now STALE.** `dist/index.html`
-   > loads `_astro/HeroHeadline.*.js` + the Astro client runtime — the `HeroHeadline`
-   > island (commit `8f1c203`) changed it. `/contact` and the 100 case-study pages are
-   > still island-free. Correct the J2 line when K lands.
+   > ✅ **Corrected 2026-09-07 (K7)** — the J2 "island scoping" line above now states
+   > current reality: `/` hydrates (`HeroHeadline` + `CurvedLoop`), `/404` hydrates
+   > (`FuzzyText`), `/contact` and all 100 case-study pages still ship zero
+   > first-party JS.
 6. ⛔ **Every effect carries a `prefers-reduced-motion: reduce` branch.** House rule —
    already honoured in 5 of 6 stylesheets.
 7. ⛔ **Every new label lands in BOTH `src/i18n/en.ts` and `src/i18n/pt.ts`.** EN is the
@@ -2285,19 +2292,73 @@ known-good page *before* its case-study result was believed.
 
 ⏭️ **Not deployed.** Per K7, deploy is a separate explicit step.
 
-### K7 — Gates before this milestone closes
+### K7 — Gates before this milestone closes ✅ verified 2026-09-07, deploy held for go-ahead
 
-- [ ] `npm run check` green (`astro check` + worker tsc + build).
-- [ ] **Rung 5 — see it in a browser** at 360 / 768 / 1280, on all touched page types.
-      J3 proved code review structurally cannot catch this class of defect.
-- [ ] **Rung 6 — measured:** AA contrast on every re-coloured control · 0 horizontal
-      overflow at 360px · focus ring proven by a real Tab press · new controls ≥44px ·
-      **no hard-coded hex survived the port** · reduced-motion branch on all 5 effects.
-- [ ] JS budget re-measured per page type; confirm case studies and `/contact` still
-      hydrate nothing and the 404's new island is the only addition.
-- [ ] Correct the stale J2 "homepage ships zero JS" line (K0.5).
-- [ ] Deploy is a **separate, explicit step** — `npm run deploy` (FTP). J shipped without
-      deploying, on Juan's call; do not assume this one deploys.
+- [x] `npm run check` green — **0 errors, 0 warnings, 0 hints** (`astro check`, 57 files),
+      worker tsc clean, `astro build` **116 pages**.
+- [x] **Rung 5 — seen in a browser**, against the fresh `dist/` on a local preview server:
+      `/` and `/projects/` at 360 / 768 / 1280 (EN), `/pt/projects/` at 1280, `/404` —
+      all clean, zero horizontal overflow, zero console errors. **Combined-interaction
+      check**, the thing a per-item pass cannot catch: switched `/projects` to List view,
+      changed Sort to "Most recent", and pressed the TypeScript stack chip **all three at
+      once** — count recalculated to 8, chip/button pressed-states and evidence counts all
+      correct, zero console errors. Per-effect Rung 5 (all six page types, both locales,
+      mouse *and* keyboard) already stands individually recorded under K1–K6, K9, K10.
+- [x] **Rung 6 — measured**, consolidating the per-control evidence already recorded under
+      K1–K6, K9, K10 (AA contrast ratios, real-Tab-press focus rings, 0 overflow at 360px,
+      ≥44px targets, 0 hard-coded hex, reduced-motion branches) rather than re-deriving it.
+      🔴 One defect this pass caught that no contrast/overflow/focus measurement
+      could have — see the Analytics fix below.
+- [x] JS budget re-measured against the fresh `dist/`, per page type, with a strict token
+      scan (`astro-island` literal + a clean `_astro/[name].[hash].js` token). ⛔ A looser
+      substring scan (`_astro/.*\.js`) was tried first and **false-positived on 49 of 50
+      case-study pages** — `.*` bridged from an unrelated `_astro/*.css` reference all the
+      way to the literal `.js` inside the page's own Google Tag Manager snippet, on the
+      same minified line. Thrown out once the mechanism was seen; the strict token scan is
+      what the numbers below are from.
+      | Page type | astro-island | first-party JS |
+      |---|---|---|
+      | `/`, `/pt/` | 1 | `HeroHeadline` + `CurvedLoop` + client runtime |
+      | `/projects/`, `/pt/projects/` | 1 | `ProjectsIndex` + `TypedHead` + client runtime |
+      | `/404` | 2 | `FuzzyText` + client runtime |
+      | `/contact/`, `/pt/contact/` | 0 | 0 (third-party Turnstile only) |
+      | 100 case-study pages (50 EN + 50 PT) | 0 | 0 — all 100 individually confirmed |
+- [x] Corrected the stale J2 "island scoping" line (above, J2 section) — it now states `/`
+      and `/404` hydrate, `/contact` and all 100 case studies still ship zero first-party JS.
+- [x] 🔴 **Found and fixed during Rung 5 — outside K's own scope, but shipping in the same
+      build this deploy would publish.** `src/components/Analytics.astro`'s GTM snippet
+      called its IIFE with **4 arguments, not 5**:
+      `(window,document,'dataLayer',gtmId)` against a `function(w,d,s,l,i)` signature.
+      Missing the `'script'` literal shifts every parameter down one slot, so
+      `d.getElementsByTagName(s)` searched for `<dataLayer>` elements — not a real tag —
+      got an empty collection, and `f.parentNode.insertBefore(...)` threw
+      `TypeError: Cannot read properties of undefined (reading 'parentNode')` on **every**
+      page load. GTM has never actually loaded in production. Invisible to `astro
+      check`/tsc — a runtime bug inside a template string — surfaced only by Rung 5's real
+      browser console. Fixed by adding the missing `'script'` argument; rebuilt, reloaded,
+      **zero console errors**. ⚠️ **Separate and NOT fixed — a data gap, not a bug**:
+      `PUBLIC_GOOGLE_TAG_ID=AW-` in `.env` / `.env.deploy` is an incomplete Google Ads
+      conversion ID. It doesn't throw (`gtag('config', 'AW-')` is silently accepted), so
+      the console check couldn't catch it either — but Ads conversion tracking is
+      presumably inert. Juan's call whether to fill in the real ID or drop the line.
+- [x] ✅ **Deployed 2026-09-07T18:28:54Z**, Juan's explicit go-ahead given after reviewing
+      the `npm run deploy:check` dry run. `npm run deploy` (FTP mirror to
+      `juanpablosilva.com.br`'s cPanel docroot): **261/261 files uploaded**, 4 stale files
+      deleted (2 orphaned hashed build artifacts + `assets/icons/{javascript,typescript}.svg`,
+      confirmed zero remaining references in `dist/` before the run — K10 inlined those two
+      instead of file-referencing them). **Verified by public URL, not by the script's own
+      claim** — `Last-Modified` moved on both apex and `www`
+      (`Sat, 15 Aug 2026 22:31:46 GMT` → `Mon, 07 Sep 2026 18:28:54 GMT`), plus all 12
+      post-deploy checks (CSP, security headers, contact form both locales, Turnstile,
+      `og-image.jpg` → 200, missing-page → 404, zero `is-a.dev`). The Analytics GTM fix
+      confirmed live by direct curl: `https://juanpablosilva.com.br/` now serves
+      `(window,document,'script','dataLayer','GTM-KL3Q3MGN')` — 5 arguments, matching the
+      fix, not the broken 4-argument call this deploy replaced.
+      ⚠️ **Noted, not blocking:** the FTP connection runs `CPANEL_FTP_TLS=false`
+      (pre-existing config — this host advertises FTPS then refuses every AUTH scheme, per
+      `deploy.mjs`'s own comments) — the password crosses the network in cleartext on every
+      deploy. And `PUBLIC_GOOGLE_TAG_ID=AW-` is still an incomplete Google Ads ID — Juan's
+      call whether to fill it in or drop it.
 
 ### K8 — Logged, not built
 
