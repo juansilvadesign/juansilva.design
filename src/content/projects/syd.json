@@ -62,7 +62,7 @@
         },
         {
           "type": "callout",
-          "body": "The scope line, stated up front because it is the whole point of this record. This is the landing layer. The product behind it — the application, its screens, its four role surfaces and the discovery that shaped them — is another designer's work; my contribution to the app itself was roughly five per cent, adjustments and fixes. The agency ran a fifteen-phase delivery process and I executed inside it. What follows is what my stage of that process looked like."
+          "body": "The scope line, stated up front because it is the whole point of this record. This is the landing layer. The product behind it — the application, its screens, its four role surfaces and the discovery that shaped them — is another designer's work; I did help on the app itself, but only with adjustments and fixes — the product design was finished before I joined. The agency ran a fifteen-phase delivery process and I executed inside it. What follows is what my stage of that process looked like."
         },
         {
           "type": "heading",
@@ -134,10 +134,6 @@
           "body": "The landing layer was first built in Vite with React Router, then migrated to Next.js in August 2025. Both repositories are still public, and I keep both deliberately — the pair is the only honest record of what the migration actually changed. It is also the thing most often stated wrongly about this project: the earlier repository is Vite, not Next.js, and a tooling scan that reports otherwise has been fooled by a theming package whose name begins with the same four letters."
         },
         {
-          "type": "callout",
-          "body": "A note for anyone reading the source rather than the site: the deployed pages still load several hero and testimonial images from a third-party image host rather than from the repository. I know, it is visible in the code, and I have chosen to leave it rather than quietly rewrite history on a finished project."
-        },
-        {
           "type": "heading",
           "level": 2,
           "text": "The file that proved a claim by not containing anything"
@@ -198,7 +194,7 @@
         },
         {
           "type": "callout",
-          "body": "O limite de escopo, dito logo de cara porque é o ponto central deste registro. Esta é a camada de landing pages. O produto por trás dela — a aplicação, suas telas, suas quatro superfícies de papel e a discovery que as moldou — é trabalho de outra pessoa; minha contribuição ao aplicativo em si foi de uns cinco por cento, ajustes e correções. A agência conduzia um processo de entrega de quinze fases e eu executei dentro dele. O que vem a seguir é como era a minha etapa desse processo."
+          "body": "O limite de escopo, dito logo de cara porque é o ponto central deste registro. Esta é a camada de landing pages. O produto por trás dela — a aplicação, suas telas, suas quatro superfícies de papel e a discovery que as moldou — é trabalho de outra pessoa; eu também ajudei no aplicativo em si, mas só com ajustes e correções — o design do produto já estava pronto quando entrei. A agência conduzia um processo de entrega de quinze fases e eu executei dentro dele. O que vem a seguir é como era a minha etapa desse processo."
         },
         {
           "type": "heading",
@@ -268,10 +264,6 @@
         {
           "type": "prose",
           "body": "A camada de landing pages foi construída primeiro em Vite com React Router, e depois migrada para Next.js em agosto de 2025. Os dois repositórios continuam públicos, e eu mantenho os dois de propósito — o par é o único registro honesto do que a migração de fato mudou. É também a coisa mais frequentemente dita errado sobre este projeto: o repositório antigo é Vite, não Next.js, e um scan de ferramentas que diga o contrário foi enganado por um pacote de tema cujo nome começa com as mesmas quatro letras."
-        },
-        {
-          "type": "callout",
-          "body": "Uma observação para quem for ler o código em vez do site: as páginas publicadas ainda carregam várias imagens de hero e de depoimentos a partir de um serviço de imagens de terceiros, e não do repositório. Eu sei, está visível no código, e escolhi deixar assim em vez de reescrever a história de um projeto encerrado."
         },
         {
           "type": "heading",

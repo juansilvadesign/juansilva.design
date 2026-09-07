@@ -109,7 +109,7 @@
         },
         {
           "type": "prose",
-          "body": "When the design was settled I marked the file released for development and then built it myself, as a static Next.js export: thirteen bespoke section components sitting on nine shadcn primitives, three legal pages and a custom 404. Designing and building the same page has one specific advantage, and it is not speed. It is that nothing gets designed that cannot be built, and nothing gets built that quietly drops what was designed."
+          "body": "When the design was settled I marked the file released for development and then built it myself, as a static Next.js export: thirteen bespoke section components sitting on nine shadcn primitives, three legal pages and a custom 404. It was deployed a week in, and the second week was fixes and adjustments she asked for. Designing and building the same page has one specific advantage, and it is not speed. It is that nothing gets designed that cannot be built, and nothing gets built that quietly drops what was designed."
         },
         {
           "type": "image",
@@ -248,7 +248,7 @@
         },
         {
           "type": "prose",
-          "body": "Com o design fechado, marquei o arquivo como liberado para DEV e construí eu mesmo, como export estático em Next.js: treze componentes de seção próprios sobre nove primitivos shadcn, três páginas legais e um 404 próprio. Desenhar e construir a mesma página tem uma vantagem específica, e não é velocidade. É que nada é desenhado sem poder ser construído, e nada é construído abandonando em silêncio o que foi desenhado."
+          "body": "Com o design fechado, marquei o arquivo como liberado para DEV e construí eu mesmo, como export estático em Next.js: treze componentes de seção próprios sobre nove primitivos shadcn, três páginas legais e um 404 próprio. Ele foi publicado na primeira semana, e a segunda semana foi de ajustes e correções que ela pediu. Desenhar e construir a mesma página tem uma vantagem específica, e não é velocidade. É que nada é desenhado sem poder ser construído, e nada é construído abandonando em silêncio o que foi desenhado."
         },
         {
           "type": "image",
