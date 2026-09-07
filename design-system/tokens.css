@@ -38,7 +38,7 @@
   --color-gray-50: hsl(0 0% 98%);
   --color-slate-950: hsl(222 84% 5%);
   --color-slate-800: hsl(217 33% 17%);
-  --color-slate-600: hsl(215 16% 45%);
+  --color-slate-600: hsl(215 16% 44%);
   --color-slate-500: hsl(215 16% 47%);
   --color-slate-400: hsl(215 20% 65%);
   --color-slate-200: hsl(214 32% 91%);
@@ -52,6 +52,7 @@
   --color-cyan-400: #00c8ff;
   --color-cyan-500: #009cd4;
   --color-cyan-700: #007cab;
+  --color-cyan-800: #00769d;
   --color-cyan-900: #065674;
 
   /* ─── Color primitives — Figma secondary pink ───────────────── */
@@ -397,7 +398,7 @@
   --border-default: var(--color-slate-400);
   --border-interactive: var(--color-black-a12);
   --primary: var(--color-cyan-500);
-  --primary-ink: var(--color-cyan-700);
+  --primary-ink: var(--color-cyan-800);
   --primary-light: var(--color-cyan-500);
   --primary-dark: var(--color-cyan-900);
   --on-primary: var(--color-neutral-1000);
