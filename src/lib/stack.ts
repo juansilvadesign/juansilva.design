@@ -22,15 +22,42 @@ import type { ProjectData } from "../content.config";
  * node counts, every coordinate exactly 2x to within 5-decimal rounding. Same
  * artwork, different fills — so a second file buys no precision at the 16px
  * the chip renders, and these stay the single source.
+ *
+ * ⛔ These two live in `src/assets/`, NOT in `public/` with their four siblings,
+ * and moving them back breaks the build's contract. `?raw` is a JavaScript
+ * import, and Vite refuses to serve one out of `public/`:
+ *
+ *     Assets in public directory cannot be imported from JavaScript.
+ *
+ * It resolved anyway — the relative path is readable on disk — but only by
+ * falling outside the pipeline, warning on every dev transform. `public/` is
+ * copied verbatim and is not addressable from a module; `src/` is. So the two
+ * marks the chips must recolour moved here, and the URL the badge needs is
+ * imported (`?url`) rather than hardcoded, which keeps the artwork's one home
+ * and lets the bundler own the path. The other four are never inlined, so they
+ * stay in `public/` and keep their literal URLs below.
+ *
+ * ⚠️ Known and accepted: both files are under Vite's 4096-byte
+ * `assetsInlineLimit`, so `?url` resolves to a data: URI rather than an emitted
+ * file. Measured on this build: 26 marks across 22 pages at ~2.2 kB each
+ * (~57 kB total) replacing two ~1.5 kB cacheable requests. Accepted — it trades
+ * a per-page byte cost for one fewer request, and `img-src` already allows
+ * `data:` in the CSP at `public/.htaccess:52`. If that trade ever stops paying,
+ * the lever is a function-form `build.assetsInlineLimit` in `astro.config.mjs`
+ * scoped to these two paths — not a global limit change, which would also move
+ * every other asset. Recorded so it reads as a decision, not a default.
  */
-import javascriptSvg from "../../public/assets/icons/javascript.svg?raw";
-import typescriptSvg from "../../public/assets/icons/typescript.svg?raw";
+import javascriptSvg from "../assets/icons/javascript.svg?raw";
+import typescriptSvg from "../assets/icons/typescript.svg?raw";
+import javascriptUrl from "../assets/icons/javascript.svg?url";
+import typescriptUrl from "../assets/icons/typescript.svg?url";
 
 export type StackId = ProjectData["stack"][number];
 
 export const STACK_ICONS = {
-  typescript: "/assets/icons/typescript.svg",
-  javascript: "/assets/icons/javascript.svg",
+  // Bundler-resolved: these two are imported, not served from `public/`.
+  typescript: typescriptUrl,
+  javascript: javascriptUrl,
   tailwind: "/assets/icons/tailwind.svg",
   figma: "/assets/icons/figma.svg",
   python: "/assets/icons/python.svg",
