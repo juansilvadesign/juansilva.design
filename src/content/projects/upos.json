@@ -100,9 +100,9 @@
               "icon": "📱"
             },
             {
-              "value": "3",
-              "label": "roles modelled in discovery",
-              "icon": "👤"
+              "value": "26",
+              "label": "view/edit permissions, 8 areas",
+              "icon": "🔐"
             },
             {
               "value": "59",
@@ -140,11 +140,11 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Three roles, modelled"
+          "text": "Permissions are a module, not three hardcoded screens"
         },
         {
           "type": "prose",
-          "body": "The discovery board modelled three actors, and the product was designed around them. I want to be exact about the strength of that claim: three roles were modelled and the design accounts for them. Three separately permissioned interface surfaces are a different and larger claim, and I have never confirmed it in the file, so I do not make it."
+          "body": "Discovery modelled three actors, and the obvious way to design for them is to draw three versions of every screen. I did the opposite. Access lives in Configuration as its own module: a profiles table — Admin master, Técnico, Vendedor — each showing how many users sit in it and whether it is active, and a profile builder holding roughly twenty-six individual permissions across eight areas of the product, every one of them split into view and edit. Ver financeiro and Editar financeiro are separate switches, and so are the kanban, the work orders, the parts orders and the reports. The shop can then define a profile I never thought of, which a shop with a night-shift technician will need and I could not have guessed."
         },
         {
           "type": "heading",
@@ -176,7 +176,7 @@
             "Not evidence of my engineering. The live application evidences my design, and the fact that the design survived a rewrite. The code behind that login screen has never been mine.",
             "Not the discovery. The tech lead ran it and handed over the board.",
             "Not a responsive-coverage claim. Two of eight modules exist on mobile, deliberately.",
-            "Not a permissioned role system. Three roles were modelled; three permissioned surfaces were never confirmed.",
+            "Not proof that the other seven modules each render differently per profile. Access is specified in Configuration rather than drawn as per-role variants of every screen, so those variants do not exist in the file and I do not claim them.",
             "Not payments or checkout. Quoting plus financial control is invoicing.",
             "Not a date range for the engagement. The dates on this page bound the landing-page repository only — the product design came before it, and version control cannot date that.",
             "Not the site at the product's own address today. That is someone else's redesign at the address my page used to occupy."
@@ -246,9 +246,9 @@
               "icon": "📱"
             },
             {
-              "value": "3",
-              "label": "papéis modelados na discovery",
-              "icon": "👤"
+              "value": "26",
+              "label": "permissões ver/editar, 8 áreas",
+              "icon": "🔐"
             },
             {
               "value": "59",
@@ -286,11 +286,11 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Três papéis, modelados"
+          "text": "Permissão é um módulo, não três telas fixas"
         },
         {
           "type": "prose",
-          "body": "O quadro de discovery modelava três atores, e o produto foi desenhado em torno deles. Quero ser exato sobre a força dessa afirmação: três papéis foram modelados e o design os contempla. Três superfícies de interface com permissões separadas são uma afirmação diferente e maior, que eu nunca confirmei no arquivo — então eu não a faço."
+          "body": "A discovery modelava três atores, e o caminho óbvio para atendê-los é desenhar três versões de cada tela. Eu fiz o contrário. O acesso mora nas Configurações como módulo próprio: uma tabela de perfis — Admin master, Técnico, Vendedor — cada um mostrando quantos usuários estão nele e se está ativo, e um construtor de perfil com cerca de vinte e seis permissões individuais em oito áreas do produto, todas divididas entre ver e editar. Ver financeiro e Editar financeiro são chaves separadas, e o mesmo vale para o kanban, as ordens de serviço, os pedidos de peças e os relatórios. Assim a oficina consegue definir um perfil que eu nunca imaginei, que uma oficina com técnico do turno da noite vai precisar e que eu não teria como adivinhar."
         },
         {
           "type": "heading",
@@ -322,7 +322,7 @@
             "Não é evidência da minha engenharia. A aplicação no ar evidencia o meu design, e o fato de o design ter sobrevivido a uma reconstrução. O código atrás daquela tela de login nunca foi meu.",
             "Não é a discovery. O líder técnico conduziu e entregou o quadro.",
             "Não é alegação de cobertura responsiva. Dois de oito módulos existem no mobile, de propósito.",
-            "Não é um sistema de papéis com permissões. Três papéis foram modelados; três superfícies com permissão nunca foram confirmadas.",
+            "Não é prova de que os outros sete módulos renderizem diferente por perfil. O acesso é especificado nas Configurações e não desenhado como variantes por papel de cada tela, então essas variantes não existem no arquivo e eu não as reivindico.",
             "Não é pagamento nem checkout. Orçamento mais controle financeiro é faturamento.",
             "Não é o período do contrato. As datas desta página delimitam apenas o repositório da landing page — o design do produto veio antes, e o versionamento não consegue datá-lo.",
             "Não é o site que está hoje no endereço do produto. Aquilo é o redesign de outra pessoa no endereço que a minha página ocupava."
