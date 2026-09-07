@@ -1,6 +1,7 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import SEOHead from "../components/SEOHead.astro";
+import Analytics from "../components/Analytics.astro";
 import { localeInfo, t, type Locale } from "../i18n";
 import "../styles/clone.css";
 import "../styles/shiny-text.css";
@@ -35,9 +36,11 @@ const copy = t(lang);
     <meta name="generator" content={Astro.generator} />
     <meta name="color-scheme" content="dark" />
     <SEOHead {lang} {title} {description} {canonicalPath} {image} {noindex} />
+    <Analytics part="head" />
     <slot name="head" />
   </head>
   <body>
+    <Analytics part="body" />
     <a class="skip-link" href="#main-content">{copy.navigation.skipToContent}</a>
     {showNavigation && <Navbar {lang} currentPath={canonicalPath} />}
     <slot />

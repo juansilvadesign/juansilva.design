@@ -169,6 +169,23 @@ function assertDist() {
 
   check(existsSync(join(DIST, "og-image.jpg")), "og-image.jpg present (every social share depends on it)");
 
+  const indexHtmlPath = join(DIST, "index.html");
+  if (existsSync(indexHtmlPath)) {
+    const indexHtml = readFileSync(indexHtmlPath, "utf8");
+    const gaId = env.PUBLIC_GOOGLE_ANALYTICS_ID || env.GOOGLE_ANALYTICS_ID;
+    if (gaId) {
+      check(indexHtml.includes(gaId), "dist/index.html carries Google Analytics ID");
+    }
+    const gtmId = env.PUBLIC_GTM_ID || env.GTM_ID;
+    if (gtmId) {
+      check(indexHtml.includes(gtmId), "dist/index.html carries GTM container ID");
+    }
+    const clarityId = env.PUBLIC_CLARITY_ID || env.CLARITY_ID;
+    if (clarityId) {
+      check(indexHtml.includes(clarityId), "dist/index.html carries Clarity project ID");
+    }
+  }
+
   const pages = countFiles(DIST);
   info(`dist/ contains ${pages} files`);
   check(pages > 50, `file count looks like a full build (${pages})`, `file count suspiciously low (${pages}) — partial build?`);
@@ -566,7 +583,11 @@ if (mode === "status") {
   verifyPublic(null);
 } else {
   head("Building");
-  execFileSync("npx", ["astro", "build"], { cwd: ROOT, stdio: "inherit" });
+  execFileSync("npx", ["astro", "build"], {
+    cwd: ROOT,
+    stdio: "inherit",
+    env: { ...process.env, ...env },
+  });
 
   assertDist();
   if (failures) {
