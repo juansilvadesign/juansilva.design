@@ -1135,10 +1135,67 @@ evidence-free — they carry a live Figma file and nothing else. ⛔ **Excluding
 common signal from a display list silently blanks exactly the population that only
 carries it.**
 
-### J4 — Next (not started)
+### J4 — Case-study prose 🟡 **3 of the top 3 shipped 2026-09-07** · Phase 3 media still open
 
-- [ ] **Case-study prose** — `caseStudy` is `null` on all 50. Draft from the store per project via individual interviews; Juan reviews. ⛔ Never populate it from the store's `attribution`/`impact` prose — that is private and names third parties.
-- [ ] **Phase 3 media** — motion via talk-to-figma-fork + AEUX + After Effects MCP, demo/walkthrough, hyperframes. 🔴 `/media-engine` is blocked on Juan issuing `RUNWAYML_API_SECRET`.
+> 🔧 **Two claims in the previous version of this section were STALE and are corrected here (re-probed 2026-09-07).**
+> It read *"`caseStudy` is `null` on all 50"* — it was null on **49**; `agenda-geek` was already populated
+> (100 EN / 106 PT blocks, imported from its Notion export) and is the reference for the block grammar.
+> It also read that `/media-engine` is blocked on `RUNWAYML_API_SECRET` — **that key was issued 2026-09-02**
+> and `knowledge/projects/media-engine/ROADMAP.md` marks Phase 1 ✅ COMPLETE. ⛔ **A recorded blocker needs a
+> re-probe before it is quoted as current.**
+
+**Coverage: 4 of 50 records carry a case study; 46 still render the "coming soon" aside.**
+
+- [x] **Case-study prose — top 3 by evidence weight**, EN + PT, long form with blocks — `psi-silvanacabral`
+      (21/21), `syd` (18/18), `upos` (20/20). Written from the store's confirmed `summary`/`contribution`/
+      `context`, structured around each record's `neverClaim` list, and closing on a **"What this is not"**
+      section — on a portfolio whose standing risk is overclaiming, publishing the limits is what makes the
+      rest legible. The three `/projects` cards flipped to "Read the case study" in both locales.
+  - ⭐ **The ⛔ was enforced mechanically, not by discipline.** A gate compares 8-word shingles of the drafted
+        prose against the record's `attribution`/`impact`/`internalOnly` and refuses the write on any overlap.
+        **Both legs proven:** injecting real `attribution` text caught 23 shingles and wrote nothing; the clean
+        run passes. It also caught one of the author's *own* sentences mid-session, which was rephrased.
+        Final state: **0 overlaps** on all three. ⛔ A gate that has never failed is decoration — prove the
+        known-bad leg before trusting a pass.
+  - ⚠️ **Images are placeholders** (`/assets/images/placeholders/*.svg`), captioned with the shot each frame
+        is waiting for. Swapping in a real asset is a one-field `src` change per block.
+  - ⛔ **Portrait placeholders were removed after Rung 5 caught them.** `.cs-figure img { width: 100% }` scales
+        a 240×520 portrait frame to **770×1666px**. All 18 case images are landscape (800×450 / 800×600) —
+        heights now 434/578. **See the open defect below: this already affects `agenda-geek` in production.**
+  - **Verified, not assumed:** 116 pages build clean · 0 horizontal overflow at 1280 **and 360** · stat tiles
+        wrap 2×2 at 360 · PT accents intact · no locale bleed either direction · **zero-JS invariant holds —
+        0 `astro-island` and 0 `_astro/*.js` across all 100 case-study pages** (K0 #5).
+  - **Corrections the interview produced**, all now live: the AI-imagery claim was wrong (Juan *asked* for
+        photographs and got **one 150×150 profile picture**, then generated imagery to hold the ship date —
+        the source calls that lesson worth more than the project); the one-week-vs-16-day conflict is closed
+        as **both true** (deployed in week one, week two was client-requested fixes) and written into
+        `dates.source` with a do-not-reopen; the imgur disclosure was cut; the "~5%" figure was dropped for
+        *"helped on the app, adjustments and fixes only"*.
+  - ⭐ **`upos` gained a claim from a Figma audit** (channel `3pdicfop`, 2026-09-07): the permission system is
+        designed and in the file — `7-Config` holds a profiles table (**Admin master · Técnico · Vendedor**,
+        user counts 1/3/10) and a **1280×2723 matrix of ~26 view/edit permissions across 8 areas**. The store's
+        `neverClaim` was **revised, not deleted** — *built* is still false. New source:
+        [`sources/portfolio/figma/upos.md`](../../sources/portfolio/figma/upos.md).
+        ⛔ Discovery's actors (`Cliente · Técnico · Vendedor`) are **not** the shipped profiles.
+- [ ] **Case-study prose — the remaining 46.** ⛔ Not a batch job: each is written from its own record and
+      interviewed for the gaps the store cannot hold (the decisions, the constraints, the why). Next by
+      evidence weight: `spaceapps` (9) — ⚠️ the record previously wrong in *both* directions, so handle with
+      the most care — then `allprice` (8), `celus` (8), `gestrif` (8).
+- [ ] **Phase 3 media** — demo/walkthrough, hyperframes, motion via talk-to-figma-fork + AEUX.
+      ✅ **Runway is unblocked** — key issued 2026-09-02, cost baseline measured (500 → 344 credits;
+      ~10 credits per 2s `gen4_turbo` clip, and ⛔ `cancelTask` on a live image job costs 20 **with no refund**).
+      🔴 **The real blocker is now the bridge, not the key: no `AfterEffectsMCP` server is connected**, so the
+      AEUX + After Effects leg cannot run until it is up. The Loom-style walkthrough (master plan Phase 3,
+      item 2) needs neither and is the cheapest thing here.
+
+#### Open defect found during J4 — pre-existing, in production, NOT fixed
+
+⛔ **`.cs-figure img { width: 100% }` blows portrait case images up to the full reading column.**
+`agenda-geek` ships **5 portrait images of 20**, the worst a 1440×4522 that renders **770×2418px** on the live
+page today — a single image over three viewport-heights tall. The other four render 1685 / 914 / 856 / 838px. Introduced by neither J4 nor K; it has been latent since the block renderer landed and only became
+visible when a second record started using `image` blocks. **Deliberately left alone** — the fix changes how a
+shipped page looks and that is Juan's call. Candidate: cap `.cs-figure img` with `max-height` + `width: auto`
++ centring, which leaves the 15 landscape images untouched.
 
 ---
 
