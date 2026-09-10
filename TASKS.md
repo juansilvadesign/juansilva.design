@@ -1135,7 +1135,23 @@ evidence-free — they carry a live Figma file and nothing else. ⛔ **Excluding
 common signal from a display list silently blanks exactly the population that only
 carries it.**
 
-### J4 — Case-study prose 🟡 **3 of the top 3 shipped 2026-09-07** · Phase 3 media still open
+### J4 — Case-study prose 🟡 **3 of the top 3 written 2026-09-07** · ⛔ **NOT DEPLOYED** · Phase 3 media open
+
+> ⛔🔴 **"Shipped" was true of the REPO, not of the SITE — verified 2026-09-09.** All three case studies are
+> committed, pushed (`main` in sync with `origin/main`) and present in the local `dist/`, and production
+> still serves the **"coming soon" aside**. Measured live vs `dist/`:
+>
+> | record | live | local `dist/` |
+> |---|---|---|
+> | `psi-silvanacabral` | 22,855 B · `cs-figure` **0** · `soon` present | 39,208 B · `cs-figure` ✅ |
+> | `syd` | 22,538 B · `cs-figure` **0** · `soon` present | 38,315 B ✅ |
+> | `upos` | 22,516 B · `cs-figure` **0** · `soon` present | 39,263 B ✅ |
+> | `agenda-geek` | 38,658 B · `cs-figure` 2 ✅ (already live) | 45,836 B — **also drifted** |
+>
+> There is **no CI workflow** (`.github/workflows/` is empty) — deploy is manual, `npm run deploy`
+> (`scripts/deploy.mjs`, reads `.env.deploy`). ⛔ **Nothing in J4 or the K milestone is in front of a
+> prospect until someone runs it**, `agenda-geek`'s drift included. Grep the byte size or `cs-figure`
+> count on the live page — a 200 and a page that renders are not the same claim.
 
 > 🔧 **Two claims in the previous version of this section were STALE and are corrected here (re-probed 2026-09-07).**
 > It read *"`caseStudy` is `null` on all 50"* — it was null on **49**; `agenda-geek` was already populated
@@ -1184,18 +1200,73 @@ carries it.**
 - [ ] **Phase 3 media** — demo/walkthrough, hyperframes, motion via talk-to-figma-fork + AEUX.
       ✅ **Runway is unblocked** — key issued 2026-09-02, cost baseline measured (500 → 344 credits;
       ~10 credits per 2s `gen4_turbo` clip, and ⛔ `cancelTask` on a live image job costs 20 **with no refund**).
-      🔴 **The real blocker is now the bridge, not the key: no `AfterEffectsMCP` server is connected**, so the
-      AEUX + After Effects leg cannot run until it is up. The Loom-style walkthrough (master plan Phase 3,
-      item 2) needs neither and is the cheapest thing here.
+      > 🔧 **The AE blocker was re-probed 2026-09-09 and is NARROWER than recorded.** The line below read
+      > *"no `AfterEffectsMCP` server is connected"*. The server **is** connected now (36 tools exposed);
+      > `bridge-status` returns **`panelResponsive: false`, 8.1s timeout**, `bridgeDir`
+      > `/mnt/c/Users/melor/Documents/ae-mcp-bridge`. ⛔ **Tool presence is not bridge liveness** — the
+      > remaining step is inside AE: `Window > mcp-bridge-auto.jsx`, tick **Auto-run commands**, and it must
+      > be **reopened after every AE restart** (AE 2025+: floating window only).
+      **Decisions taken 2026-09-09 (Juan), replacing "cheapest first":** quality over speed — the rule is now
+      **a real video per case study, with stills as the fallback**. Form = **silent inline loop** (10–20s,
+      muted, autoplay, looping, poster = the still). Source = **Figma → AEUX → AE**. First subject = **upOS**.
+      The Loom-style walkthrough (master plan Phase 3, item 2) is **not** the entry point any more.
+  - [x] **Storyboard + named-layer asset manifest — `upos-permissions-loop`**, written 2026-09-09 to
+        [`motion/upos-permissions-loop.storyboard.md`](motion/upos-permissions-loop.storyboard.md).
+        14.0s · 30fps · 1920×1080 · 4 scenes, seamless (f420 ≡ f0). Carries **one** claim —
+        *permissions are a module, not three hardcoded screens* — grounded in the verified node IDs from
+        [`sources/portfolio/figma/upos.md`](../../sources/portfolio/figma/upos.md), not re-scanned.
+  - ⭐ **The format gate changed the delivery, and the reason is local, not in the pack.**
+        [`web-motion-delivery-decision`](../../../../knowledge/design/guides/web-motion-delivery-decision.md)
+        routes non-interactive **UI vector** work to **Lottie**. ⛔ **Lottie is ruled out here: it needs a
+        runtime script, and all 100 case-study pages ship zero first-party JS (K0 #5).** A player would be the
+        first island on a case-study page. `<video autoplay muted loop playsinline poster>` is pure HTML and
+        keeps the invariant — so **WebM**, which is also what `animating-ui-cards-for-web` specifies.
+        **Considered deviation:** the pack's *"MP4 is not a web-delivery format"* is about **transparent**
+        motion; this asset is opaque inside `.cs-figure`, so MP4 ships as a **fallback `<source>`** for Safari.
+        ⛔ Not two theme variants — `<source media>` is not honoured for video, so a theme-switched video
+        would need JS. Opaque + dark, matching the `*-dark-placeholder.svg` practice across all 50 records.
+  - ⛔ **The `video` block type does not exist, and adding it is a THREE-file lockstep change.**
+        `_config/portfolio/schema.mjs` (`validateCaseStudyBlocks`) · `src/content.config.ts` (the Zod
+        discriminated union) · `src/pages/[...lang]/projects/[slug].astro` (the renderer). Both schemas
+        reject an unknown type **loudly**, but **the renderer's last branch is a fallback `else`, not a
+        `type === "image"` check** — a `video` block that ever got past them renders as
+        `<img src=undefined>`. The schema file says it in its own comment: *"the two are halves of one
+        release and must change together."*
+  - ⛔ **Asset hazard, carried into the storyboard:** frame `7-3.1` (`19142:36607`) visibly renders Untitled UI
+        placeholder residue — `12/12/2025` ×3 and `olivia@untitledui.com`. **It must not be exported as a
+        flat image.** The storyboard rebuilds that table as live text and drops the `Data da criação` column
+        entirely, which kills the residue *and* satisfies the keep-text-live rule text animators need.
 
-#### Open defect found during J4 — pre-existing, in production, NOT fixed
+#### Defect found during J4 — pre-existing, in production · ✅ **FIXED 2026-09-09** (Juan's go-ahead)
 
-⛔ **`.cs-figure img { width: 100% }` blows portrait case images up to the full reading column.**
-`agenda-geek` ships **5 portrait images of 20**, the worst a 1440×4522 that renders **770×2418px** on the live
-page today — a single image over three viewport-heights tall. The other four render 1685 / 914 / 856 / 838px. Introduced by neither J4 nor K; it has been latent since the block renderer landed and only became
-visible when a second record started using `image` blocks. **Deliberately left alone** — the fix changes how a
-shipped page looks and that is Juan's call. Candidate: cap `.cs-figure img` with `max-height` + `width: auto`
-+ centring, which leaves the 15 landscape images untouched.
+⛔ **`.cs-figure img { width: 100% }` blew portrait case images up to the full reading column.**
+`agenda-geek` ships **5 portrait images of 20**, the worst a 1440×4522 that rendered **770×2418px** — a single
+image over three viewport-heights tall. The other four rendered 1685 / 914 / 856 / 838px. Introduced by neither
+J4 nor K; latent since the block renderer landed, and only visible once a second record used `image` blocks.
+
+**The fix is scoped by ORIENTATION, not applied to every image** — three edits in `[slug].astro`:
+
+1. the renderer marks `cs-figure--portrait` **at build time** from each block's own `width`/`height`;
+2. `.cs-figure img` is **left untouched**, so all 15 landscape images render byte-identically to before;
+3. `.cs-figure--portrait img` gets `width:auto; max-width:100%; max-height:80vh; margin-inline:auto`, and is
+   **excluded from the ≥1024px bleed** — that rule widens the figure past the measure, which on a narrowed
+   portrait only stranded the caption far left of the image.
+
+⭐ **The obvious one-rule fix was measured and REJECTED.** Capping every image with `max-height:70vh` +
+`width:auto` would have (a) shrunk `140304280f04.webp` from 770 → **356px**, its intrinsic width, and
+(b) clipped the near-square `1072×1035`. The orientation split exists because there is a **clean gap in the
+data**: at the 770px figure width (`--content-copy` 610 + `--space-px-160`), the tallest **landscape** image
+renders **743px** and the shortest **portrait 838px**. ⛔ *A cap that catches portraits cannot be derived from
+a viewport fraction — it has to come from the corpus's own measurements.*
+
+**Verified, not assumed** — 116 pages build clean · **5/20** figures marked portrait on `agenda-geek` and
+**0/3** on each of `psi-silvanacabral` / `syd` / `upos` (both legs) · worst image **2418px → 720px**, aspect
+preserved (231×720 for a 1440×4522) · **CLS 0.0018** across a full scroll of the 24,676px page · **0**
+horizontal overflow at 360px. ⚠️ Measured geometry via Playwright `getBoundingClientRect`, **not** a visual
+confirm — the screenshot file was not reachable from this filesystem.
+⚠️ **First measurement was an ARTIFACT and was discarded:** flipping `loading` to eager and reading boxes in
+the same tick reported the portraits at **2×2px**. ⛔ *A `width:auto` image that has not loaded reserves no
+box — await `onload` before measuring, or you will "find" a defect you just invented.*
 
 ---
 
