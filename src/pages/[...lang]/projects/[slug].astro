@@ -182,7 +182,12 @@ const indexHref = localizedPath("/projects/", lang);
                 ))}
               </dl>
             ) : (
-              <figure class="cs-figure">
+              <figure
+                class:list={[
+                  "cs-figure",
+                  b.width && b.height && b.height > b.width && "cs-figure--portrait",
+                ]}
+              >
                 <img
                   src={b.src}
                   alt={b.alt}
@@ -499,6 +504,21 @@ const indexHref = localizedPath("/projects/", lang);
     background: var(--surface);
   }
 
+  /*
+   * Portrait frames only. `.cs-figure img` above is deliberately left alone:
+   * at >=1024px the figure is 610px (--content-copy) + 160px = 770px, and the
+   * tallest LANDSCAPE image in the corpus renders 743px at that width, so a
+   * height cap that catches portraits cannot touch them. The shortest PORTRAIT
+   * renders 838px and the worst 2418px -- a clean 743/838 gap, which is why the
+   * cap is scoped by orientation rather than applied to every image.
+   */
+  .case__body :global(.cs-figure--portrait img) {
+    width: auto;
+    max-width: 100%;
+    max-height: 80vh;
+    margin-inline: auto;
+  }
+
   .case__body :global(.cs-figure figcaption) {
     margin-top: var(--space-px-8);
     color: var(--text-secondary);
@@ -509,7 +529,7 @@ const indexHref = localizedPath("/projects/", lang);
 
   @media (min-width: 1024px) {
     /* Wider than the measure so screenshots stay legible, still centred. */
-    .case__body :global(.cs-figure),
+    .case__body :global(.cs-figure:not(.cs-figure--portrait)),
     .case__body :global(.cs-stats) {
       width: calc(100% + var(--space-px-160));
       margin-left: calc(var(--space-px-80) * -1);
