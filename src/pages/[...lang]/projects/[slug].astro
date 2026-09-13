@@ -6,7 +6,9 @@ import StackBadge from "../../../components/StackBadge.astro";
 import BackToTop from "../../../components/BackToTop.astro";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { locales, defaultLocale, localizedPath, pageTitle, t } from "../../../i18n";
-import { SIGNAL_FACETS, byEvidence, formatTimeframe, previewFor } from "../../../lib/projects";
+import { existsSync } from "node:fs";
+import { join, resolve } from "node:path";
+import { SIGNAL_FACETS, byEvidence, formatTimeframe, isVideoPreview, posterFor, previewFor } from "../../../lib/projects";
 import "../../../styles/evidence-rail.css";
 import "../../../styles/action-row.css";
 
@@ -28,6 +30,45 @@ const detail = copy.projects.detail;
 
 /** Shared with the featured card, so the two surfaces cannot drift. */
 const timeframe = formatTimeframe(d.dates, lang, detail);
+
+/**
+ * The hero visual. A record may ship a video preview — `price-watcher-ticket-autobuy`
+ * is the first — and the card has rendered those as `<video>` since it was
+ * written, so the detail page had been the odd one out, silently degrading a
+ * moving hero to a still frame.
+ */
+const preview = previewFor(d, lang);
+const isVideo = isVideoPreview(preview);
+const poster = isVideo ? posterFor(preview) : undefined;
+
+/**
+ * `posterFor` is a naming convention, not a schema field, so nothing else can
+ * catch a missing file: the attribute would just 404 and the video would fall
+ * back to its own first frame — which is exactly the blank frame the poster
+ * exists to avoid. Root-relative previews resolve inside `public/`.
+ *
+ * ⛔ Resolved from `process.cwd()`, not from `import.meta.url`. Astro serves
+ * this module from a compiled chunk, so a path walked up from `import.meta.url`
+ * lands outside the project and reports every poster missing — which is what
+ * the first version of this check did, on a file that was sitting right there.
+ *
+ * And when `public/` itself cannot be found, the check yields rather than
+ * warning: "I could not look" is not "I looked and it is not there", and a
+ * guard that cannot tell those apart teaches you to ignore it.
+ */
+const PUBLIC_DIR = resolve(process.cwd(), "public");
+
+const posterHref = (() => {
+  if (!poster) return undefined;
+  if (!poster.startsWith("/")) return poster;
+  if (!existsSync(PUBLIC_DIR)) return poster;
+  if (existsSync(join(PUBLIC_DIR, poster))) return poster;
+  console.warn(
+    `[projects] ${entry.id}: video preview "${preview}" has no poster at ` +
+      `public${poster} — viewers who block autoplay will see its first frame.`,
+  );
+  return undefined;
+})();
 
 const signals = SIGNAL_FACETS.filter((s) => d.evidenceSignals[s]);
 
@@ -76,7 +117,22 @@ const indexHref = localizedPath("/projects/", lang);
       </header>
 
       <figure class="case__media">
-        <img src={previewFor(d, lang)} alt={c.previewAlt} width="1600" height="900" decoding="async" />
+        {isVideo ? (
+          <video
+            src={preview}
+            poster={posterHref}
+            muted
+            loop
+            playsinline
+            autoplay
+            preload="metadata"
+            width="1600"
+            height="900"
+            aria-label={c.previewAlt}
+          />
+        ) : (
+          <img src={preview} alt={c.previewAlt} width="1600" height="900" decoding="async" />
+        )}
       </figure>
 
       <!-- 2 · Statement band -->
@@ -181,6 +237,45 @@ const indexHref = localizedPath("/projects/", lang);
                   </div>
                 ))}
               </dl>
+            ) : b.type === "video" ? (
+              <figure class="cs-figure cs-loop">
+                {/*
+                  Silent inline loop. Two elements, not one: `media` on <source> is
+                  NOT honoured inside <video> (unlike inside <picture>), so the
+                  reduced-motion branch has to be a CSS display swap over a real
+                  <img>. That keeps this page at zero first-party JS.
+
+                  The codecs strings are load-bearing. The WebM is VP9 Profile 1
+                  (4:4:4) — a bare type="video/webm" lets a browser claim support by
+                  MIME, fail to decode the profile, and render nothing, with the mp4
+                  fallback never firing.
+                */}
+                <video
+                  class="cs-loop__motion"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  poster={b.poster}
+                  width={b.width}
+                  height={b.height}
+                  aria-label={b.alt}
+                >
+                  <source src={b.webm} type='video/webm; codecs="vp09.01.41.08"' />
+                  <source src={b.mp4} type='video/mp4; codecs="avc1.640029"' />
+                </video>
+                <img
+                  class="cs-loop__still"
+                  src={b.poster}
+                  alt={b.alt}
+                  width={b.width}
+                  height={b.height}
+                  loading="lazy"
+                  decoding="async"
+                />
+                {b.caption && <figcaption>{b.caption}</figcaption>}
+              </figure>
             ) : (
               <figure
                 class:list={[
@@ -285,7 +380,8 @@ const indexHref = localizedPath("/projects/", lang);
     margin: 0 0 var(--space-px-48);
   }
 
-  .case__media img {
+  .case__media img,
+  .case__media video {
     display: block;
     width: 100%;
     height: auto;
@@ -517,6 +613,38 @@ const indexHref = localizedPath("/projects/", lang);
     max-width: 100%;
     max-height: 80vh;
     margin-inline: auto;
+  }
+
+  /*
+   * Inline loop. The <video> and its still share the image frame exactly, so the
+   * reduced-motion swap changes no geometry -- only which element paints.
+   */
+  .case__body :global(.cs-loop video) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: var(--border-width) solid var(--border-subtle);
+    border-radius: var(--radius-media);
+    background: var(--surface);
+  }
+
+  .case__body :global(.cs-loop .cs-loop__still) {
+    display: none;
+  }
+
+  /*
+   * An autoplaying loop has no controls and no pause, so a viewer who asked for
+   * less motion has no way out of it. Serve the poster instead. This is a CSS
+   * swap rather than <source media> because that attribute is ignored inside
+   * <video>; it only works in <picture>.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    .case__body :global(.cs-loop .cs-loop__motion) {
+      display: none;
+    }
+    .case__body :global(.cs-loop .cs-loop__still) {
+      display: block;
+    }
   }
 
   .case__body :global(.cs-figure figcaption) {

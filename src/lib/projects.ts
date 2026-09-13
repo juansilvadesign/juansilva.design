@@ -133,6 +133,37 @@ export function previewFor(
   return data.copy[lang]?.preview ?? data.preview;
 }
 
+/**
+ * Whether a preview is a moving picture rather than a still.
+ *
+ * The card and the case-study hero both branch on this. It lives here for the
+ * same reason `previewFor` does: two copies of the regex is two chances for one
+ * surface to render a `<video>` while the other renders a broken `<img>`.
+ *
+ * ⛔ Keep this module free of `node:fs` and other Node built-ins — the
+ * /projects React island imports it, so anything added here ships to the
+ * browser.
+ */
+export function isVideoPreview(src: string): boolean {
+  return /\.(mp4|webm)$/i.test(src);
+}
+
+/**
+ * The poster a video preview should show before it plays, by convention:
+ * `<name>.mp4` is postered by `<name>-poster.webp` beside it.
+ *
+ * It matters more than a poster usually does here. A composition whose first
+ * frame is an empty canvas — anything that fades its first element in — renders
+ * as a black rectangle wherever autoplay is refused (Low Power Mode, reduced
+ * data, some embedded webviews). The poster is what those viewers see instead.
+ *
+ * Convention, not a schema field: callers must confirm the file exists. The
+ * case-study page does that at build time and warns.
+ */
+export function posterFor(src: string): string {
+  return src.replace(/\.(mp4|webm)$/i, "-poster.webp");
+}
+
 export interface TimeframeCopy {
   dateRange: string;
   dateOngoing: string;

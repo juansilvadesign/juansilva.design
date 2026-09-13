@@ -53,12 +53,14 @@
       "outcome": "The product is live and running a real business today: anyone can reach the login screen. It evidences the design and not the engineering — the application was built in Bubble by another developer and later rebuilt in Next.js by an incoming one, and the design came through that platform rewrite intact, which is a harder test than shipping once. The landing page I built no longer exists at its original address; it was replaced by someone else's redesign after I left, so the copy on my own domain is the only surviving artifact of it, and it is a copy rather than the instance that served the client. No performance metric exists for this project — a confirmed absence, not an uncollected one.",
       "blocks": [
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
-          "alt": "The upOS marketing site at desktop width, with the product dashboard in the hero",
-          "caption": "Placeholder — the landing page at desktop width.",
-          "width": 800,
-          "height": 450
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase.poster.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "The upOS landing page scrolling, then the product behind it: service intake, the work-order kanban, financial control, and the permissions module.",
+          "caption": "Thirty seconds, silent and looping — the landing page I designed and coded, and the eight-module product I designed behind it."
         },
         {
           "type": "callout",
@@ -199,12 +201,14 @@
       "outcome": "O produto está no ar e rodando um negócio real hoje: qualquer pessoa alcança a tela de login. Ele evidencia o design, não a engenharia — a aplicação foi construída em Bubble por outro desenvolvedor e depois refeita em Next.js por outro, e o design atravessou essa troca de plataforma intacto, o que é um teste mais duro do que publicar uma vez. A landing page que eu construí não existe mais no endereço original; ela foi substituída pelo redesign de outra pessoa depois que eu saí, então a cópia no meu próprio domínio é o único artefato sobrevivente dela — e é uma cópia, não a instância que serviu o cliente. Não existe nenhuma métrica de desempenho para este projeto: uma ausência confirmada, não uma ausência por falta de coleta.",
       "blocks": [
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
-          "alt": "O site do upOS em largura desktop, com o painel do produto em destaque",
-          "caption": "Placeholder — a landing page em largura desktop.",
-          "width": 800,
-          "height": 450
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase.poster.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "O site do upOS rolando e, em seguida, o produto atrás dele: atendimento, o kanban de ordens de serviço, o controle financeiro e o módulo de permissões.",
+          "caption": "Trinta segundos, sem som e em loop — a landing page que desenhei e programei, e o produto de oito módulos que desenhei atrás dela."
         },
         {
           "type": "callout",

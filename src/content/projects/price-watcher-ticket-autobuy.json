@@ -1,0 +1,306 @@
+{
+  "_generated": {
+    "by": "_config/portfolio/export.mjs",
+    "from": "_config/portfolio/records/price-watcher-ticket-autobuy.json",
+    "note": "Derived file. Edit the store record, then re-run the exporter."
+  },
+  "title": "price-watcher + ticket-autobuy — a price watcher that cannot buy, and the buyer beside it",
+  "role": "Sole author and operator — architecture, the adapter contract, the alert-rule semantics, the headless checkout automation, both test suites, and the failure analysis that followed the system into production",
+  "dates": {
+    "start": "2026-09-01",
+    "end": "2026-09-11"
+  },
+  "stack": [
+    "python",
+    "opensource"
+  ],
+  "liveUrl": "https://github.com/juansilvadesign/price-watcher",
+  "evidenceLink": "https://github.com/juansilvadesign/ticket-autobuy",
+  "featured": false,
+  "preview": "/assets/images/price-watcher-ticket-autobuy-preview.mp4",
+  "copy": {
+    "en": {
+      "title": "A Price Watcher That Cannot Buy, and the Buyer Beside It",
+      "tagline": "Two Python tools, one deliberate line between them.",
+      "description": "Built a price watcher for arbitrary websites and, beside it, a tool that reserves a listing when the price drops and hands a human the code to pay. The watcher is standard-library only and structurally cannot buy; the buyer holds the browser and the risk. They talk through one key in a config file that the watcher parses and ignores. It ran unattended against a live third-party site for eleven days, and the part worth reading is the three failures it hid from me while reporting success.",
+      "previewAlt": "A twenty-second reel: a ticket page showing one price opens to reveal the nineteen in its payload, the watcher fires a new-lowest alert to Telegram, a vertical line divides price-watcher from ticket-autobuy with the one config key that crosses it, the buyer walks a checkout to a completed order, and the counts settle at 424 tests, 7 nights and 1 real order",
+      "liveLabel": "Read the watcher",
+      "evidenceLabel": "Read the buyer"
+    },
+    "pt": {
+      "title": "Um monitor de preços que não pode comprar, e o comprador ao lado",
+      "tagline": "Duas ferramentas em Python, uma linha deliberada entre elas.",
+      "description": "Construí um monitor de preços para sites arbitrários e, ao lado dele, uma ferramenta que reserva um anúncio quando o preço cai e entrega a um humano o código para pagar. O monitor usa só a biblioteca padrão e estruturalmente não compra; o comprador carrega o browser e o risco. Os dois conversam por uma única chave num arquivo de configuração que o monitor lê e ignora. Rodou sozinho contra um site de terceiro por onze dias, e o que vale ler são as três falhas que ele me escondeu enquanto reportava sucesso.",
+      "previewAlt": "Um vídeo de vinte segundos: uma página de ingressos que mostra um preço se abre revelando os dezenove do payload, o monitor dispara um alerta de nova mínima no Telegram, uma linha vertical separa price-watcher de ticket-autobuy com a única chave de configuração que a cruza, o comprador percorre um checkout até um pedido concluído, e os números param em 424 testes, 7 noites e 1 pedido real",
+      "liveLabel": "Ver o monitor",
+      "evidenceLabel": "Ver o comprador"
+    }
+  },
+  "evidenceWeight": 5,
+  "evidenceSignals": {
+    "liveSite": false,
+    "sourceCode": true,
+    "designAndCode": false,
+    "productStack": true,
+    "storeListing": false,
+    "designArtifact": false
+  },
+  "caseStudy": {
+    "en": {
+      "brief": "I wanted one ticket. What I built instead was a pair of tools that hold a line between watching a market and acting on it — and then spent eleven days learning, from my own running system, how many ways a program can fail while telling you it is fine.",
+      "context": "A personal project with no client and no deadline but a real one: a seven-night concert whose secondary market moved every minute. The generic price trackers do not cover a site like this, because they only integrate with marketplaces they have deals with. So the question was never \"can I scrape it\" — it was what shape a thing should take when it has to run unattended, every minute, against a site that owes me nothing.",
+      "outcome": "424 tests green offline, seven nights read end to end, and one order completed against the live site — deliberately left unpaid, because the tool's whole design is that a human pays. It also did not do what I built it for: two tickets were bought by hand at over R$ 300 because the automation never closed in time. Both numbers belong in the same paragraph. What I would actually put in front of a client is neither — it is the three sections above, where a system I wrote reported success while doing nothing, and instrumentation rather than guesswork is what found it.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Two repositories, one case study, on purpose. price-watcher and ticket-autobuy are halves of a system whose interesting decision is the boundary between them, and either half read alone loses it: the watcher becomes a small scraper, and the buyer becomes a ticket bot. Neither is the thing that was built. Both are command-line tools — there is no interface here, and this case evidences engineering only."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The reconnaissance killed three plans before any code"
+        },
+        {
+          "type": "prose",
+          "body": "The first plan was to intercept the page's data request. There is no such request — the site is a Next.js front end over a Bubble backend, and every price is server-rendered into the first response, reachable by a bare curl with no browser and no cookies. The second plan assumed a page like that carries no structured data; it carries full schema.org Event JSON-LD. The third plan was to skip writing anything and point an existing tool at it."
+        },
+        {
+          "type": "prose",
+          "body": "That third one is the one worth telling. changedetection.io has a restock mode, and its price extractor is a JSONPath expression matching a field named exactly `price`. This page publishes `lowPrice` and `highPrice`. I verified it by running the real expression against the real payload with a control leg alongside it — a synthetic object with a plain `price` field returned a value, and the real page returned nothing. Because availability still resolves, the tool never raises an extraction error. It produces a watch that looks healthy and silently ignores every price threshold you set on it, and the only way you would ever find out is by never receiving an alert."
+        },
+        {
+          "type": "callout",
+          "body": "That is the failure mode this whole project kept meeting, and it is why I wrote roughly four hundred lines instead of adopting a tool: something reporting success while doing nothing is worse than something broken, because broken gets fixed."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The line is the design"
+        },
+        {
+          "type": "prose",
+          "body": "price-watcher keeps two invariants. It depends on nothing outside the Python standard library — no virtualenv, no install, nothing to keep current — and it never buys: no checkout, no stored card, no login, no queue automation. Those are not v1 limitations waiting to be lifted. They are what make it safe to leave running every minute for free, because a process with no session and no credential has nothing to leak and nothing to spend."
+        },
+        {
+          "type": "prose",
+          "body": "Everything the watcher refuses lives in the second tool. ticket-autobuy holds the browser, the authenticated session and the risk. The two communicate through exactly one thing: a `buy` block inside a target file, which the watcher loads, validates and then ignores. Nothing else crosses. The buyer reads the price history the watcher just wrote, so checking the market costs the site zero additional requests, and the network is touched only at the moment of a purchase."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "It reserves; it never pays. The roughly ten-minute hold on an unpaid Pix is the human gate, measured on a real order rather than assumed.",
+            "It never logs in by itself. A session is established by a person in a real browser, because automating that would mean storing a password — and a scripted login is the least ordinary-looking thing this tool could do at the moment it most wants to look ordinary.",
+            "Every alert rule is edge-triggered: it fires on a transition, never on a state, so a job running every sixty seconds cannot re-alert forever and train you to ignore it."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Three failures that reported success"
+        },
+        {
+          "type": "prose",
+          "body": "All three were in code I wrote, all three were found while the system was live, and none of them looked like a failure from outside."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "A single outlier killed an alert rule permanently"
+        },
+        {
+          "type": "prose",
+          "body": "One listing appeared at R$ 66,00 on a night trading around R$ 220,00, stayed for a single poll, and vanished. It took the all-time-low record — and the all-time-low rule has no expiry, so the rule was now permanently dead on the night it had been built for, and the rolling-window rule was muted alongside it. Both rules were armed. Both looked healthy. Neither could ever have spoken again, and nothing anywhere would have said so."
+        },
+        {
+          "type": "prose",
+          "body": "The fix was an anomaly floor doing two jobs from one number: alert immediately on anything below it, and exclude anything below it from every baseline. The part that matters is that the exclusion is applied when history is read, not when it is written. That means arming the floor repairs a history that is already poisoned, and the log itself stays a faithful record of what the site actually served — a history that quietly omits the bad row cannot be audited. Replayed over roughly 1,100 recorded runs across seven targets, the rule fires exactly once: on the real R$ 66,00."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "A fail-closed disarm stayed silent for twenty-five hours"
+        },
+        {
+          "type": "prose",
+          "body": "The buyer hit an ambiguous state, did the correct thing — refused to act and disarmed the night — and then said nothing about it for twenty-five hours. Its only trace was one line on stderr. The log file gained zero bytes across roughly 1,500 scheduled runs while the session keepalive reported healthy every twenty minutes, and sixty-seven polls inside the buying window sat at or under the ceiling, including four consecutive minutes at R$ 220,00 with 178 available."
+        },
+        {
+          "type": "prose",
+          "body": "Worse, the disarm was wrong, and the tool had the evidence to know it. The routine that reads the orders page returned an empty result for four different causes, one of which was \"the page rendered and there are no pending orders\" — a case its own source comments as meaning no order exists. Forty-five seconds of successful checking was being graded as ignorance. The repair was to make silence impossible: a closed night now announces itself, an unresolved one nags on a throttle, and refusing to act requires two independent signals rather than one ambiguous empty value. A test had been asserting the silence."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "A timeout that could never fire where firing was allowed"
+        },
+        {
+          "type": "prose",
+          "body": "A sixty-second budget was supposed to abort a run that took too long. Measured, the work it was meant to bound took about thirty seconds, and the remaining forty-seven sat entirely after the point of no return — after the click that creates an order. So the budget could only ever have triggered where aborting was already impossible, and nothing but a print statement ever read it. It was replaced by a forty-five-second budget enforced on the segment before the click, and only that segment. In the same pass the measured walk went from 29.65 to roughly 17–19 seconds."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "424",
+              "label": "tests green, offline — 228 watcher, 196 buyer"
+            },
+            {
+              "value": "7",
+              "label": "nights watched live, on two cron cadences"
+            },
+            {
+              "value": "5.49s",
+              "label": "to extract the Pix code, after two 47-second failures"
+            },
+            {
+              "value": "18.37s",
+              "label": "checkout walk, against a 45-second budget"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What it cost, and what it is worth"
+        },
+        {
+          "type": "prose",
+          "body": "The honest summary is that the system worked and the operation did not. Two of the seven nights were bought by hand at over R$ 300 because the automation never closed a purchase in time, and the night everything was finally pointed at came and went unattended. The end-to-end proof arrived on the last evening, on a target armed specifically to test it: a real order, a real Pix code in 5.49 seconds, deliberately left unpaid and verified lapsed thirteen minutes later. Then the whole thing was shut down — zero active scheduled jobs, all eight targets disarmed."
+        },
+        {
+          "type": "callout",
+          "body": "There are no users, no stars and no third-party reviewer. Sole author, sole operator, eleven days. What this case is offered as evidence of is narrower and, I think, more useful: I will find the failure in my own system, instrument it so it cannot hide again, and pin the fix with a test — including when the failure was a test asserting that nothing happened."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Eu queria um ingresso. O que construí foi um par de ferramentas que sustenta uma linha entre observar um mercado e agir sobre ele — e depois passei onze dias aprendendo, do meu próprio sistema em produção, de quantas formas um programa consegue falhar enquanto avisa que está tudo bem.",
+      "context": "Projeto pessoal, sem cliente e sem prazo, mas com um prazo real: um show de sete noites cujo mercado secundário se movia a cada minuto. Os monitores de preço genéricos não cobrem um site assim, porque só integram com os marketplaces com quem têm acordo. Então a pergunta nunca foi \"dá para raspar\" — foi que forma uma coisa deve ter quando precisa rodar sozinha, todo minuto, contra um site que não me deve nada.",
+      "outcome": "424 testes verdes offline, sete noites lidas de ponta a ponta e um pedido concluído contra o site real — deixado sem pagar de propósito, porque o desenho inteiro da ferramenta é que quem paga é um humano. Também não fez aquilo para que foi construída: dois ingressos foram comprados na mão por mais de R$ 300 porque a automação nunca fechou a tempo. Os dois números pertencem ao mesmo parágrafo. O que eu de fato colocaria na frente de um cliente não é nenhum dos dois — são as três seções acima, onde um sistema que eu escrevi reportava sucesso sem fazer nada, e foi instrumentação, não palpite, que achou.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Dois repositórios, um único case, de propósito. price-watcher e ticket-autobuy são metades de um sistema cuja decisão interessante é a fronteira entre eles, e cada metade lida sozinha perde isso: o monitor vira um raspador pequeno, e o comprador vira um bot de ingresso. Nenhum dos dois é o que foi construído. Ambos são ferramentas de linha de comando — não há interface aqui, e este case comprova engenharia apenas."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O reconhecimento matou três planos antes de qualquer código"
+        },
+        {
+          "type": "prose",
+          "body": "O primeiro plano era interceptar a requisição de dados da página. Ela não existe — o site é um front-end Next.js sobre um backend Bubble, e todo preço é renderizado no servidor já na primeira resposta, alcançável por um curl simples, sem browser e sem cookies. O segundo plano supunha que uma página dessas não carrega dados estruturados; ela carrega um JSON-LD schema.org Event completo. O terceiro era não escrever nada e apontar uma ferramenta pronta para o site."
+        },
+        {
+          "type": "prose",
+          "body": "Esse terceiro é o que vale contar. O changedetection.io tem um modo de reposição, e seu extrator de preço é uma expressão JSONPath que casa com um campo chamado exatamente `price`. Esta página publica `lowPrice` e `highPrice`. Verifiquei rodando a expressão real contra o payload real com uma perna de controle ao lado — um objeto sintético com um campo `price` devolveu valor, e a página real não devolveu nada. Como a disponibilidade ainda resolve, a ferramenta nunca levanta erro de extração. Ela produz um monitor que parece saudável e ignora silenciosamente todo limite de preço que você configurar, e o único jeito de descobrir seria nunca receber um alerta."
+        },
+        {
+          "type": "callout",
+          "body": "Esse é o modo de falha que este projeto encontrou repetidas vezes, e é por isso que escrevi cerca de quatrocentas linhas em vez de adotar uma ferramenta: algo que reporta sucesso sem fazer nada é pior do que algo quebrado, porque o quebrado é consertado."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A linha é o projeto"
+        },
+        {
+          "type": "prose",
+          "body": "O price-watcher mantém dois invariantes. Não depende de nada fora da biblioteca padrão do Python — sem virtualenv, sem instalação, nada para manter atualizado — e nunca compra: sem checkout, sem cartão guardado, sem login, sem automação de fila. Não são limitações de v1 esperando para serem removidas. São o que torna seguro deixá-lo rodando todo minuto de graça, porque um processo sem sessão e sem credencial não tem o que vazar nem o que gastar."
+        },
+        {
+          "type": "prose",
+          "body": "Tudo o que o monitor recusa vive na segunda ferramenta. O ticket-autobuy carrega o browser, a sessão autenticada e o risco. Os dois se comunicam por exatamente uma coisa: um bloco `buy` dentro de um arquivo de target, que o monitor carrega, valida e então ignora. Nada mais cruza. O comprador lê o histórico de preços que o monitor acabou de escrever, então checar o mercado custa ao site zero requisições adicionais, e a rede só é tocada no momento de uma compra."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Ele reserva; nunca paga. A retenção de cerca de dez minutos de um Pix não pago é o portão humano, medida num pedido real e não suposta.",
+            "Ele nunca faz login sozinho. A sessão é estabelecida por uma pessoa num browser real, porque automatizar isso significaria guardar uma senha — e um login roteirizado é a coisa menos comum que esta ferramenta poderia fazer no momento em que mais quer parecer comum.",
+            "Toda regra de alerta é disparada por transição, nunca por estado, para que um job rodando a cada sessenta segundos não re-alerte para sempre e te ensine a ignorá-lo."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Três falhas que reportavam sucesso"
+        },
+        {
+          "type": "prose",
+          "body": "As três estavam em código que eu escrevi, as três foram encontradas com o sistema no ar, e nenhuma parecia uma falha vista de fora."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Um único ponto fora da curva matou uma regra para sempre"
+        },
+        {
+          "type": "prose",
+          "body": "Um anúncio apareceu a R$ 66,00 numa noite que negociava perto de R$ 220,00, ficou por uma única leitura e sumiu. Levou o recorde de mínima histórica — e a regra de mínima histórica não expira, então ela estava agora permanentemente morta justamente na noite para a qual tinha sido construída, e a regra de janela móvel ficou muda junto. As duas estavam armadas. As duas pareciam saudáveis. Nenhuma jamais voltaria a falar, e nada em lugar nenhum diria isso."
+        },
+        {
+          "type": "prose",
+          "body": "A correção foi um piso de anomalia fazendo dois trabalhos com um número só: alertar na hora sobre qualquer coisa abaixo dele, e excluir qualquer coisa abaixo dele de toda linha de base. O que importa é que a exclusão é aplicada na leitura do histórico, não na escrita. Isso significa que armar o piso conserta um histórico já envenenado, e o log continua um registro fiel do que o site de fato serviu — um histórico que omite discretamente a linha ruim não pode ser auditado. Reprocessada sobre cerca de 1.100 execuções gravadas em sete targets, a regra dispara exatamente uma vez: no R$ 66,00 real."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Um desarme fail-closed ficou vinte e cinco horas em silêncio"
+        },
+        {
+          "type": "prose",
+          "body": "O comprador chegou a um estado ambíguo, fez a coisa certa — recusou-se a agir e desarmou a noite — e depois não disse nada sobre isso por vinte e cinco horas. Seu único rastro foi uma linha no stderr. O arquivo de log ganhou zero bytes ao longo de cerca de 1.500 execuções agendadas enquanto o keepalive da sessão reportava saúde a cada vinte minutos, e sessenta e sete leituras dentro da janela de compra estavam no teto ou abaixo dele, incluindo quatro minutos seguidos a R$ 220,00 com 178 disponíveis."
+        },
+        {
+          "type": "prose",
+          "body": "Pior: o desarme estava errado, e a ferramenta tinha a evidência para saber disso. A rotina que lê a página de pedidos devolvia um resultado vazio para quatro causas diferentes, uma das quais era \"a página renderizou e não há pedidos pendentes\" — caso que o próprio código comenta como significando que não existe pedido. Quarenta e cinco segundos de verificação bem-sucedida estavam sendo classificados como ignorância. O conserto foi tornar o silêncio impossível: uma noite fechada agora se anuncia, uma pendente insiste num intervalo controlado, e recusar-se a agir exige dois sinais independentes em vez de um único vazio ambíguo. Havia um teste afirmando o silêncio."
+        },
+        {
+          "type": "heading",
+          "level": 3,
+          "text": "Um timeout que nunca poderia disparar onde disparar era permitido"
+        },
+        {
+          "type": "prose",
+          "body": "Um orçamento de sessenta segundos deveria abortar uma execução longa demais. Medido, o trabalho que ele deveria limitar levava cerca de trinta segundos, e os quarenta e sete restantes ficavam inteiramente depois do ponto sem retorno — depois do clique que cria um pedido. Ou seja, o orçamento só poderia disparar onde abortar já era impossível, e nada além de um print jamais o leu. Foi substituído por um orçamento de quarenta e cinco segundos imposto ao trecho anterior ao clique, e só a ele. Na mesma passagem, o percurso medido caiu de 29,65 para cerca de 17–19 segundos."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "424",
+              "label": "testes verdes, offline — 228 monitor, 196 comprador"
+            },
+            {
+              "value": "7",
+              "label": "noites acompanhadas ao vivo, em duas cadências de cron"
+            },
+            {
+              "value": "5,49s",
+              "label": "para extrair o código Pix, após duas falhas de 47 segundos"
+            },
+            {
+              "value": "18,37s",
+              "label": "de percurso no checkout, contra um teto de 45 segundos"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que custou, e o que vale"
+        },
+        {
+          "type": "prose",
+          "body": "O resumo honesto é que o sistema funcionou e a operação não. Duas das sete noites foram compradas na mão por mais de R$ 300 porque a automação nunca fechou a compra a tempo, e a noite para a qual tudo foi finalmente apontado passou sem ninguém. A prova de ponta a ponta chegou na última tarde, num target armado especificamente para testá-la: um pedido real, um código Pix real em 5,49 segundos, deixado sem pagar de propósito e verificado como expirado treze minutos depois. Depois disso tudo foi desligado — zero jobs agendados ativos, os oito targets desarmados."
+        },
+        {
+          "type": "callout",
+          "body": "Não há usuários, não há estrelas e não há revisor externo. Autor único, operador único, onze dias. O que este case oferece como evidência é mais estreito e, acho, mais útil: eu encontro a falha no meu próprio sistema, instrumento para que ela não consiga se esconder de novo, e fixo a correção com um teste — inclusive quando a falha era um teste afirmando que nada acontecia."
+        }
+      ]
+    }
+  }
+}

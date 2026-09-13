@@ -15,6 +15,35 @@ const dateSchema = z
   .string()
   .regex(/^\d{4}-\d{2}(?:-\d{2})?$/, "Use YYYY-MM or YYYY-MM-DD");
 
+/**
+ * Case-study media may live locally, or on our own CDN — and nowhere else.
+ *
+ * ⛔ Host-pinned deliberately. The obvious shortcut, `URL.canParse(value)`, would
+ * accept a Notion signed URL, which is the exact failure this guard exists to stop:
+ * those URLs expire and the page silently goes blank weeks later. Widening this to
+ * any parseable URL re-opens that hole. Any new host goes in this list explicitly.
+ */
+const CASE_ASSET_HOSTS = ["cdn.juanpablosilva.com.br"];
+
+export const isCaseAssetSrc = (value: string): boolean => {
+  if (value.startsWith("/")) return true;
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    return false;
+  }
+  return url.protocol === "https:" && CASE_ASSET_HOSTS.includes(url.hostname);
+};
+
+const caseAssetSrcSchema = z
+  .string()
+  .min(1)
+  .refine(
+    isCaseAssetSrc,
+    `Case-study media must be a local path or https://${CASE_ASSET_HOSTS[0]} — remote hosts expire`,
+  );
+
 const hrefSchema = z.string().min(1).refine(
   (value) => value.startsWith("/") || URL.canParse(value),
   "Use an absolute URL or a root-relative path",
@@ -76,11 +105,28 @@ const caseStudyBlockSchema = z.discriminatedUnion("type", [
   z
     .object({
       type: z.literal("image"),
-      src: z.string().startsWith("/", "Case-study images must be local: Notion URLs expire"),
+      src: caseAssetSrcSchema,
       alt: z.string(),
       caption: z.string().trim().min(1).optional(),
       width: z.number().int().positive().optional(),
       height: z.number().int().positive().optional(),
+    })
+    .strict(),
+  /**
+   * A silent, looping inline clip. Three sources move in lockstep — a missing
+   * poster is not cosmetic: it is what a `prefers-reduced-motion` viewer sees
+   * instead of the video, so it is required, not optional.
+   */
+  z
+    .object({
+      type: z.literal("video"),
+      webm: caseAssetSrcSchema,
+      mp4: caseAssetSrcSchema,
+      poster: caseAssetSrcSchema,
+      alt: z.string().trim().min(1),
+      caption: z.string().trim().min(1).optional(),
+      width: z.number().int().positive(),
+      height: z.number().int().positive(),
     })
     .strict(),
 ]);
