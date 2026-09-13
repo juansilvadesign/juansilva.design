@@ -1,0 +1,15 @@
+# Render outputs and derived frames — regenerate, never commit (Juan, 2026-09-12).
+# The delivered video lives on Cloudflare R2, not in git.
+out/
+renders/
+snapshots/
+*.webm
+*.mp4
+*.mov
+*.webp
+*.png.seq/
+
+# Build inputs: ~16 MB of PNG, all re-derivable. See REGENERATE.md.
+assets/
+
+node_modules/

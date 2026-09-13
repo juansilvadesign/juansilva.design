@@ -598,6 +598,123 @@ frame is higher than the column suggests.
 title and its column headers, **stopping before the first data row**. Defect 4 is out of frame by construction, not
 by camera discipline.
 
+## Build log — what changed once it was running (2026-09-12/13)
+
+Four things the storyboard did not anticipate, all found by looking at rendered frames.
+
+### ⛔ The landing page was captured DEAD, and it shipped that way in the first cut
+
+`ComoFunciona` and `FeaturesWithImage` latch each feature row to active through an
+**IntersectionObserver at `threshold: 0.3`**, then transition over **1s staggered 200ms per item**.
+Inactive is `opacity-50 translate-y-8` in grey `#9CA3AF`; active is `opacity-100` in `#101828`
+with a coloured icon.
+
+⛔ **A single full-page capture freezes every row inactive.** Jumping `scrollTo(0, scrollHeight)`
+and back does *not* fix it: nothing intersects at either sampled moment, so the observer never
+fires. The page has to be stepped down in ~400px increments with a pause each time.
+
+**Fix:** two strips. `lp-inactive@2x.png` is the base; `lp-active@2x.png` sits above it inside
+`#lp-reveal`, whose height is tweened to `scroll + 756` — 756 being the viewport's 0.7 threshold
+line. Content that has crossed the line shows active, content below stays inactive. That is the
+real latch, reproduced, not a global crossfade.
+
+### ⛔ Scale and translate cannot share an element
+
+With both transforms on one node the `transform-origin` sits in the *scrolled* coordinate space,
+so the intended 1.015 centre push on a 7871px-tall strip became a **~51px upward drift**. Split
+into `#lp-scaler` (frame-sized, `transform-origin: 960px 540px`, scale only) wrapping `#lp-track`
+(scroll only). S2's push-through depends on this being right.
+
+### ⛔ Three full-page strips crashed the renderer
+
+`check_runtime_failure: Protocol error (Runtime.callFunctionOn): Target closed`. Each 3840×15742
+PNG decodes to ~242 MB of bitmap; three live at once is ~726 MB. **Fixed by cropping to what is
+actually traversed** — S1 stops at scroll 3946, so 5026 css px is the whole requirement — and by
+giving S5 a hero-only crop instead of the entire page. **342 MB, and both crops are simply correct.**
+
+### The cursor, and why the kanban does not get a click
+
+Five beats drive the module navigation so each screen change is motivated rather than arriving as
+an unexplained cut. Targets were read off gridded half-scale frames, not estimated:
+Serviços card `(1290, 554)` · Cadastrar recebimento `(1795, 694)` · + Novo perfil `(1684, 414)` ·
+a permission toggle `(1808, 520)`.
+
+⛔ **The kanban gets a hover, not a click** — the board pans, so a click would chase a moving
+target. The cursor instead arrives on one card and tracks it through the pan while the card glows.
+Card geometry came from the Figma frame tree rather than eyeballing: Boards at native `(240,216)`,
+`EM ABERTO` column `+812`, card `+16`, second card at `y 644`, `648×308`, displayed at `1.125`,
+offset by the image's `top:-300` → **image-space `(1201, 424) 729×347`**.
+
+### Typography
+
+Inter v20 (variable, one file covers 100–900) is served from `assets/fonts/inter-var.woff2`, not a
+CDN — renders must be deterministic and offline-safe. It is the product's own face; the counter is
+the only text in the piece.
+
+### Verified state
+
+- `check`: **0 errors, 0 warnings** across lint, runtime, layout, motion, contrast.
+- **Seam: frame 0 and frame 29.98 are byte-identical**, `4f8573ffc03622cf0154ff7d` — unchanged
+  through the restructure, the cursor, the glow and the font swap.
+- CLI bumped **0.8.34 → 0.8.36** and re-verified before rendering, per the skill's rule.
+
+## Delivered — measured, 2026-09-13
+
+Render: **1800/1800 frames, 416.8 MB, 5m 22s.** ⚠️ The "software GPU, will not be quick" warning was
+wrong — it took five minutes. Rendered frame 0 is **pixel-identical** to the verified snapshot
+(`bb2b5038421486cc8098cebb`), and the seam holds on the real output.
+
+### ⛔ 1798 frames, not 1800
+
+Frames **1–6 and 1799–1800 are all pixel-identical to frame 1**. Encoding all 1800 freezes the loop
+join for **8 frames (~133ms)**. The head hold is designed; the tail pair is redundancy. Both
+deliverables carry 1798 frames = **29.967s**, and the join was verified to advance in each.
+
+### ⛔ The CRF sweep was measuring the wrong thing
+
+A VP9 4:2:0 sweep came back flat — PSNR 28.854 at crf 20 vs 28.847 at crf 32, across a 2.5× size
+range. A **lossless 4:2:0 control also scored 28.86**, which proves the ceiling was never
+quantization: it is the **chroma subsampling**. ⚠️ A lossless *4:4:4* control scored 31.47 rather than
+∞, so a colourspace mismatch contaminates the absolute dB figures — **do not quote them**. The
+relative reading is what stands, and it changed the encode.
+
+Measured on brand blue `#155EEF` (1218 sampled pixels, frame 1360), source vs decode:
+
+| Encode | mean abs delta | max | size |
+|---|---|---|---|
+| H.264 **yuv420p** | 9.87 | **91** | 19.37 MB |
+| VP9 **yuv444p** | **6.38** | **29** | 32.38 MB |
+
+Max error falling 91 → 29 is the visible glyph fringing disappearing. At 2× nearest-neighbour the
+4:2:0 smear on blue-on-white text is obvious; 4:4:4 is close to source.
+
+### ⚠️ The 18 MB projection was wrong by 1.8×
+
+Extrapolating from a 120-frame sample of the **matrix** section gave ~18 MB. The real WebM is
+**32.4 MB**. The matrix is slow and text-dense — cheap. S1's full-page scroll and S3's kanban pan are
+full-frame motion and far more expensive. ⭐ **Do not extrapolate an encode from its calmest scene.**
+It still lands under the 50 MB Juan accepted, at higher quality than the animated WebP would have been.
+
+### The files
+
+`renders/out/` — all BT.709 tagged, no audio, 1920×1080, 60fps.
+
+| File | Codec | Size |
+|---|---|---|
+| `upos-lp-app-showcase.webm` | VP9 **Profile 1** / yuv444p, crf 24 | 32.38 MB |
+| `upos-lp-app-showcase.mp4` | H.264 High / yuv420p, crf 18, faststart | 19.37 MB |
+| `upos-lp-app-showcase.poster.webp` | frame 1 | 0.09 MB |
+| `upos-lp-app-showcase.poster.jpg` | frame 1 | 0.21 MB |
+
+`renders/seq/` is 421 MB, gitignored, regenerable — see `REGENERATE.md`.
+
+⛔ Integration is **specified but not applied**: `upos-lp-app-showcase.INTEGRATION.md`. Three items
+touch shipped code and none are approved — the `<video>` markup with its profile-bearing `type`
+string, the reduced-motion CSS swap, and the two schema guards plus a new `video` block type.
+
+⚠️ **Untested: Safari.** VP9 Profile 1 may not decode there, and the MP4 fallback only fires if the
+`codecs="vp09.01.41.08"` string is right. There is no Safari in this environment.
+
 ## Handoff
 
 1. **Juan reviews this file.** Nothing is rendered before that.

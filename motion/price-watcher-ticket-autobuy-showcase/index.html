@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      /* Vendored locally so the render is reproducible offline. See frame.md. */
+      @font-face {
+        font-family: "Inter";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        src: url("assets/fonts/jetbrains-mono-var.woff2") format("woff2");
+        font-weight: 100 800;
+        font-display: block;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0; width: 1920px; height: 1080px;
+        overflow: hidden; background: #0c0e12;
+      }
+      body {
+        font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+        color: #f7f7f7;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Full-bleed ground. Never on the composition root: the producer's frame
+         compositing can drop the root's own background and render black. */
+      #ground { position: absolute; inset: 0; background: #0c0e12; }
+      /* One localized glow so the dark canvas has depth without a gradient wash. */
+      #glow {
+        position: absolute; left: 50%; top: 50%;
+        width: 2400px; height: 1600px; margin: -800px 0 0 -1200px;
+        background: radial-gradient(closest-side, rgba(0,200,255,.09), rgba(0,200,255,0) 100%);
+      }
+
+      /* Every scene lives in a full-frame viewport that clips its own content. */
+      .view { position: absolute; inset: 0; overflow: hidden; opacity: 0; }
+      #s1 { opacity: 1; }
+
+      /* ─── shared atoms ─────────────────────────────────────────── */
+      .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-variant-ligatures: none; }
+      .label {
+        font-size: 24px; font-weight: 600; letter-spacing: .16em;
+        text-transform: uppercase; color: #85888e;
+      }
+      .statement {
+        font-size: 44px; font-weight: 700; letter-spacing: -.02em; color: #f7f7f7;
+      }
+      .statement .dim { color: #85888e; font-weight: 600; }
+      .panel {
+        background: #13161b; border: 2px solid #22262f; border-radius: 20px;
+      }
+
+      /* ─── S1 · the market ──────────────────────────────────────── */
+      #s1-card {
+        position: absolute; left: 50%; top: 132px; width: 1080px; margin-left: -540px;
+        padding: 40px 44px 36px;
+      }
+      #s1-event { font-size: 26px; font-weight: 600; color: #85888e; letter-spacing: .01em; }
+      #s1-price-wrap { display: flex; align-items: baseline; gap: 22px; margin-top: 18px; }
+      #s1-price { font-size: 92px; font-weight: 700; letter-spacing: -.03em; color: #f7f7f7; }
+      #s1-price-tag {
+        font-size: 24px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+        color: #00c8ff;
+      }
+      /* The reveal: a clipped drawer that opens to the full matrix. */
+      #s1-matrix { margin-top: 34px; height: 0; overflow: hidden; }
+      #s1-matrix-inner { border-top: 2px solid #22262f; padding-top: 26px; }
+      /* Explicit row height so MATRIX_H is arithmetic, not a measurement that
+         drifts with font metrics: the drawer animates to a number computed in
+         JS, and the two must agree exactly or the rows clip. */
+      .row {
+        display: flex; align-items: center; justify-content: space-between;
+        height: 56px; font-size: 28px; color: #cecfd2;
+      }
+      .row .qty { color: #85888e; font-size: 24px; width: 150px; text-align: right; }
+      .row .amt { color: #f7f7f7; width: 220px; text-align: right; }
+      .row.lead { color: #f7f7f7; }
+      .row.lead .amt { color: #00c8ff; }
+      #s1-caption {
+        position: absolute; left: 0; right: 0; bottom: 116px; text-align: center;
+      }
+
+      /* ─── S2 · the watcher ─────────────────────────────────────── */
+      #s2-term {
+        position: absolute; left: 50%; top: 188px; width: 1180px; margin-left: -590px;
+        padding: 36px 42px 40px;
+      }
+      #s2-term .cmd { font-size: 30px; color: #f7f7f7; }
+      #s2-term .cmd .sigil { color: #00c8ff; }
+      .logline { font-size: 28px; color: #85888e; margin-top: 20px; opacity: 0; }
+      .logline .tgt { color: #cecfd2; }
+      .logline .val { color: #cecfd2; }
+      #s2-alert {
+        margin-top: 28px; padding: 22px 28px; border-radius: 14px;
+        background: rgba(0,200,255,.10); border: 2px solid rgba(0,200,255,.42);
+        font-size: 30px; color: #2cd6ff; opacity: 0;
+      }
+      #s2-alert .arrow { color: #85888e; }
+      #s2-badges {
+        position: absolute; left: 0; right: 0; bottom: 150px;
+        display: flex; justify-content: center; gap: 22px;
+      }
+      .badge {
+        font-size: 25px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+        padding: 15px 28px; border-radius: 999px; border: 2px solid #22262f; color: #85888e;
+        opacity: 0;
+      }
+      .badge.refuse { border-color: rgba(255,0,89,.55); color: #ff5d8b; }
+
+      /* ─── S3 · the line ────────────────────────────────────────── */
+      /* The divider is the argument. It is drawn once here and never redrawn:
+         S4 and S5 inherit the same element, so the line the piece is about is
+         continuous rather than re-introduced three times. */
+      #rule {
+        position: absolute; left: 960px; top: 118px; width: 3px; height: 844px;
+        margin-left: -1.5px; background: linear-gradient(180deg,
+          rgba(52,64,84,0) 0%, #344054 14%, #344054 86%, rgba(52,64,84,0) 100%);
+        transform-origin: 50% 0%;
+      }
+      #rule-glow {
+        position: absolute; left: 960px; top: 118px; width: 2px; height: 844px;
+        margin-left: -1px; background: #00c8ff; filter: blur(9px); opacity: 0;
+      }
+      .col { position: absolute; top: 210px; width: 720px; opacity: 0; }
+      #col-l { left: 150px; text-align: right; }
+      #col-r { left: 1050px; text-align: left; }
+      .col .name { font-size: 54px; font-weight: 800; letter-spacing: -.025em; }
+      #col-l .name { color: #00c8ff; }
+      #col-r .name { color: #f7f7f7; }
+      .col .kicker { font-size: 25px; margin-top: 16px; color: #85888e; letter-spacing: .02em; }
+      .col .verbs { font-size: 33px; margin-top: 40px; color: #cecfd2; line-height: 1.55; }
+      .col .verdict { font-size: 33px; font-weight: 700; margin-top: 34px; }
+      #col-l .verdict { color: #ff5d8b; }
+      #col-r .verdict { color: #fde272; }
+
+      /* The one object that crosses the line. */
+      #cross {
+        position: absolute; left: 50%; top: 700px; width: 800px; margin-left: -400px;
+        padding: 26px 32px; border-radius: 16px;
+        background: #1a1d24; border: 2px solid #344054; opacity: 0;
+      }
+      #cross .code { font-size: 30px; color: #fde272; }
+      #cross .code .k { color: #85888e; }
+      #cross-label {
+        position: absolute; left: 0; right: 0; top: 652px; text-align: center;
+        font-size: 23px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+        color: #85888e; opacity: 0;
+      }
+      #cross-note {
+        position: absolute; left: 0; right: 0; top: 826px; text-align: center;
+        font-size: 29px; color: #85888e; opacity: 0;
+      }
+      #cross-note b { color: #cecfd2; font-weight: 700; }
+
+      /* ─── S4 · it closed ───────────────────────────────────────────
+         ⛔ Everything in this scene lives RIGHT of the line. An order card on
+         the watcher's side would read as "the watcher bought it", which is the
+         one claim the whole piece exists to deny. The left half gets a single
+         dim statement instead — true, and it keeps the side occupied. */
+      #s4-left {
+        position: absolute; left: 150px; top: 452px; width: 720px;
+        text-align: right; opacity: 0;
+      }
+      #s4-left .hd { font-size: 31px; color: #85888e; }
+      /* One step below the muted token so the side-note recedes without
+         dropping under 3:1 on the #0c0e12 ground (measures 3.9:1). */
+      #s4-left .sub { font-size: 25px; color: #6b7079; margin-top: 14px; }
+      #s4-walk {
+        position: absolute; left: 1050px; top: 214px; width: 720px; opacity: 0;
+      }
+      .step {
+        display: flex; align-items: center; gap: 18px; height: 55px;
+        font-size: 29px; color: #85888e; opacity: .25;
+      }
+      .step .tick {
+        width: 14px; height: 14px; border-radius: 50%; background: #344054; flex: none;
+      }
+      #s4-budget {
+        margin-top: 24px; font-size: 28px; color: #85888e; opacity: 0;
+      }
+      #s4-budget b { color: #00c8ff; font-weight: 700; }
+      #s4-order {
+        position: absolute; left: 1050px; top: 580px; width: 720px;
+        padding: 34px 38px; border-radius: 20px;
+        background: #1a1d24; border: 2px solid #22262f; opacity: 0;
+      }
+      #s4-order .oid { font-size: 25px; letter-spacing: .14em; text-transform: uppercase; color: #85888e; }
+      #s4-order .oid b { color: #22c55e; font-weight: 700; letter-spacing: .10em; }
+      #s4-order .otix { font-size: 31px; color: #cecfd2; margin-top: 22px; }
+      #s4-order .oamt { font-size: 72px; font-weight: 700; letter-spacing: -.03em; margin-top: 10px; color: #f7f7f7; }
+      #s4-order .opix { font-size: 29px; color: #22c55e; margin-top: 20px; }
+      #s4-note {
+        position: absolute; left: 0; right: 0; bottom: 96px; text-align: center;
+        font-size: 34px; color: #85888e; opacity: 0;
+      }
+      #s4-note b { color: #f7f7f7; font-weight: 700; }
+
+      /* ─── S5 · the count ───────────────────────────────────────── */
+      #s5-stats {
+        position: absolute; left: 0; right: 0; top: 238px;
+        display: flex; justify-content: center; gap: 116px; opacity: 0;
+      }
+      .stat { text-align: center; width: 400px; }
+      .stat .n {
+        font-size: 104px; font-weight: 700; letter-spacing: -.035em; color: #00c8ff;
+        line-height: 1;
+      }
+      .stat .t { font-size: 26px; color: #85888e; margin-top: 18px; line-height: 1.45; }
+      #s5-names {
+        position: absolute; left: 0; right: 0; top: 620px;
+        display: flex; justify-content: center; align-items: center; gap: 96px; opacity: 0;
+      }
+      #s5-names .n { font-size: 52px; font-weight: 800; letter-spacing: -.025em; width: 460px; }
+      #s5-names .n.l { color: #00c8ff; text-align: right; }
+      #s5-names .n.r { color: #f7f7f7; text-align: left; }
+      #s5-handle {
+        position: absolute; left: 0; right: 0; top: 742px; text-align: center;
+        font-size: 27px; color: #85888e; opacity: 0;
+      }
+
+      /* Luma wipe used for every scene handoff — the eye reads "done", not
+         "dissolve". One element, retargeted between scenes.
+
+         Soft at BOTH ends and deliberately over-tall: the opaque band is 64% of
+         1800px = 1152px, so at WIPE_COVER the whole 1080px frame sits inside it
+         and the scene underneath can be swapped without the cut ever showing.
+         Animated on `y`, never on `bottom` — layout properties snap to integer
+         device pixels and stutter under the seek-by-frame capture engine.
+
+         ⛔ The parked position is `top`, not a CSS transform: GSAP overwrites
+         the whole transform when it animates `y`, so a transform here would be
+         silently discarded on the first tween. */
+      #wipe {
+        position: absolute; left: 0; top: 1080px; width: 1920px; height: 1800px;
+        background: linear-gradient(180deg,
+          rgba(12,14,18,0) 0%, #0c0e12 18%, #0c0e12 82%, rgba(12,14,18,0) 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="20"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="stage" class="clip" data-start="0" data-duration="20" data-track-index="1">
+        <div id="ground"></div>
+        <div id="glow" data-layout-allow-overflow></div>
+
+        <!-- ═══ S1 — the market shows one price ═══════════════════ -->
+        <div id="s1" class="view">
+          <div id="s1-card" class="panel">
+            <div id="s1-event">Rock in Rio 2026 &middot; 04/09 &middot; Gramado</div>
+            <div id="s1-price-wrap">
+              <div id="s1-price" class="mono">R$&nbsp;220,00</div>
+              <div id="s1-price-tag">cheapest</div>
+            </div>
+            <div id="s1-matrix">
+              <div id="s1-matrix-inner">
+                <div class="row lead mono"><span>Gramado || Inteira</span><span class="qty">qty 12</span><span class="amt">R$ 220,00</span></div>
+                <div class="row mono"><span>Gramado || Meia Estudante</span><span class="qty">qty 4</span><span class="amt">R$ 248,00</span></div>
+                <div class="row mono"><span>Gramado || Meia At&eacute; 21</span><span class="qty">qty 26</span><span class="amt">R$ 265,00</span></div>
+                <div class="row mono"><span>Gramado || Meia Idoso</span><span class="qty">qty 2</span><span class="amt">R$ 288,00</span></div>
+                <div class="row mono"><span>Gramado || Meia Professor</span><span class="qty">qty 7</span><span class="amt">R$ 302,00</span></div>
+                <div class="row mono"><span>Comfort Zone || Inteira</span><span class="qty">qty 9</span><span class="amt">R$ 640,00</span></div>
+                <div class="row mono"><span>Vip &minus; Club One || Inteira</span><span class="qty">qty 3</span><span class="amt">R$ 1.480,00</span></div>
+              </div>
+            </div>
+          </div>
+          <div id="s1-caption" class="statement">
+            The page shows <span class="dim">one</span> price. The payload carries nineteen.
+          </div>
+        </div>
+
+        <!-- ═══ S2 — the watcher, and what it refuses ═════════════ -->
+        <div id="s2" class="view">
+          <div id="s2-term" class="panel">
+            <div class="cmd mono"><span class="sigil">$</span> python3 watch.py</div>
+            <div class="logline mono" data-log><span class="tgt">rockinrio2026-09-04</span> &nbsp;Gramado || Inteira &nbsp;<span class="val">R$ 242,00</span></div>
+            <div class="logline mono" data-log><span class="tgt">rockinrio2026-09-05</span> &nbsp;Gramado || Inteira &nbsp;<span class="val">R$ 330,00</span></div>
+            <div class="logline mono" data-log><span class="tgt">rockinrio2026-09-11</span> &nbsp;Gramado || Inteira &nbsp;<span class="val">R$ 220,00</span></div>
+            <div id="s2-alert" class="mono">
+              &#9888; NEW LOWEST &mdash; R$ 220,00 <span class="arrow">&rarr; telegram</span>
+            </div>
+          </div>
+          <div id="s2-badges">
+            <div class="badge" data-badge>stdlib only &middot; 0 dependencies</div>
+            <div class="badge refuse" data-badge>never buys</div>
+          </div>
+        </div>
+
+        <!-- ═══ S3 · S4 · S5 — the persistent line ════════════════ -->
+        <div id="s345" class="view">
+          <div id="rule-glow" data-layout-allow-overflow></div>
+          <div id="rule" data-layout-allow-overflow></div>
+
+          <!-- S3 -->
+          <div id="col-l" class="col">
+            <div class="name mono">price-watcher</div>
+            <div class="kicker mono">Python stdlib &middot; no venv &middot; 0 deps</div>
+            <div class="verbs">polls &middot; records &middot; alerts</div>
+            <div class="verdict">cannot buy</div>
+          </div>
+          <div id="col-r" class="col">
+            <div class="name mono">ticket-autobuy</div>
+            <div class="kicker mono">Playwright &middot; venv &middot; a real session</div>
+            <div class="verbs">resolves &middot; walks &middot; reserves</div>
+            <div class="verdict">hands you the Pix code</div>
+          </div>
+
+          <div id="cross-label">the only thing that crosses</div>
+          <div id="cross">
+            <div class="code mono"><span class="k">"buy"</span>: { <span class="k">"enabled"</span>: true, <span class="k">"max_price_brl"</span>: 220.00 }</div>
+          </div>
+          <div id="cross-note">a key in a target file the watcher parses and <b>ignores</b></div>
+
+          <!-- S4 -->
+          <div id="s4-left">
+            <div class="hd">the watcher never stops</div>
+            <div class="sub mono">autobuy reads the history it just wrote<br />&mdash; zero extra requests to the site</div>
+          </div>
+          <div id="s4-walk">
+            <div class="step" data-step><span class="tick"></span>resolve the listing</div>
+            <div class="step" data-step><span class="tick"></span>re-check the price, live</div>
+            <div class="step" data-step><span class="tick"></span>walk the checkout</div>
+            <div class="step" data-step><span class="tick"></span>reserve &mdash; one click</div>
+            <div class="step" data-step><span class="tick"></span>read the Pix code</div>
+            <div id="s4-budget" class="mono">walk <b>18.37s</b> &nbsp;/&nbsp; 45s budget</div>
+          </div>
+          <div id="s4-order">
+            <div class="oid mono">order <b>6731D321</b></div>
+            <div class="otix mono">Gramado || Inteira</div>
+            <div class="oamt mono">R$&nbsp;352,00</div>
+            <div class="opix mono">Pix extracted in 5.49s</div>
+          </div>
+          <div id="s4-note">left <b>unpaid on purpose</b> &mdash; the hold is the human gate</div>
+
+          <!-- S5 -->
+          <div id="s5-stats">
+            <div class="stat"><div class="n mono" data-count="424">0</div><div class="t">tests green, offline<br />228 watcher &middot; 196 buyer</div></div>
+            <div class="stat"><div class="n mono" data-count="7">0</div><div class="t">nights watched live<br />on two cron cadences</div></div>
+            <div class="stat"><div class="n mono" data-count="1">0</div><div class="t">real order, end to end<br />against a hostile site</div></div>
+          </div>
+          <div id="s5-names">
+            <div class="n l mono">price-watcher</div>
+            <div class="n r mono">ticket-autobuy</div>
+          </div>
+          <div id="s5-handle" class="mono">github.com/juansilvadesign</div>
+        </div>
+
+        <div id="wipe" data-layout-allow-overflow></div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      /* The matrix drawer's open height, derived from the markup rather than
+         guessed: every .row is a fixed 56px, plus the 26px gap and the 2px rule
+         above them. Counting the rows in the DOM means adding or removing one
+         cannot silently clip the drawer. */
+      const ROW_H = 56;
+      const MATRIX_H = document.querySelectorAll("#s1-matrix .row").length * ROW_H + 28;
+
+      /* Wipe geometry, in `y` offsets from the CSS resting position (top:1080).
+         COVER is the only value safe to swap a scene on: the 1152px opaque band
+         lands at -36..1116, so the whole 1080px frame is inside it.
+
+         Pure set + to, never fromTo: a repeated fromTo on one element makes the
+         last-authored "from" the resting state for every seek before the first
+         tween runs, which under a frame-seeking renderer means the wipe's
+         position depends on authoring order rather than on time. */
+      const WIPE_PARKED = 0;      // parked below frame by CSS alone
+      const WIPE_COVER = -1440;   // opaque band spans the whole frame
+      const WIPE_CLEAR = -2880;   // fully above frame
+
+      tl.set("#wipe", { y: WIPE_PARKED }, 0);
+
+      /** One handoff: cover, swap underneath, clear. `at` is the cover moment. */
+      function handoff(from, to, at) {
+        tl.to("#wipe", { y: WIPE_COVER, duration: 0.55, ease: "power2.in" }, at - 0.55)
+          .set(from, { autoAlpha: 0 }, at)
+          .set(to, { autoAlpha: 1 }, at)
+          .to("#wipe", { y: WIPE_CLEAR, duration: 0.55, ease: "power2.out" }, at)
+          .set("#wipe", { y: WIPE_PARKED }, at + 0.55);
+      }
+
+      /* ===== S1 — one price, then nineteen (0.0–3.8s) =============
+         The drawer opens on the same beat the caption lands, so the claim and
+         its evidence are never more than a few frames apart. */
+      tl.fromTo("#s1-card", { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, ease: "power2.out" }, 0.15)
+        .fromTo("#s1-price", { scale: 0.965 }, { scale: 1, duration: 0.9, ease: "power2.out" }, 0.3)
+        .to("#s1-matrix", { height: MATRIX_H, duration: 0.85, ease: "power3.inOut" }, 1.35)
+        .fromTo("#s1-matrix .row",
+          { autoAlpha: 0, y: 12 },
+          { autoAlpha: 1, y: 0, duration: 0.34, stagger: 0.055, ease: "power2.out" }, 1.5)
+        .fromTo("#s1-caption", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }, 1.75);
+      /* Hold long enough to read the caption once, then wipe up. */
+      handoff("#s1", "#s2", 3.8);
+
+      /* ===== S2 — the watcher, and its refusal (3.8–7.6s) =========
+         Log lines arrive on a beat, not all at once: a watcher is something
+         that runs over time, and a single dump would read as a static list. */
+      tl.fromTo("#s2-term", { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, 3.95)
+        .to("[data-log]", { autoAlpha: 1, duration: 0.28, stagger: 0.3, ease: "none" }, 4.35)
+        .fromTo("#s2-alert", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out" }, 5.55)
+        /* The badges are the point of the scene, so they land after the alert
+           rather than decorating the frame from the start. `never buys` is the
+           one claim a viewer should carry into S3. */
+        .fromTo("[data-badge]", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.45, stagger: 0.16, ease: "power2.out" }, 6.05);
+      handoff("#s2", "#s345", 7.6);
+
+      /* ===== S3 — the line (7.6–12.4s) ============================
+         The centre of the piece, and the longest hold. The divider is DRAWN
+         (scaleY 0 → 1) rather than faded in: the viewer should see a boundary
+         being decided, which is what actually happened. */
+      tl.fromTo("#rule", { scaleY: 0 }, { scaleY: 1, duration: 0.75, ease: "power3.inOut" }, 7.75)
+        .fromTo("#rule-glow", { scaleY: 0, autoAlpha: 0 }, { scaleY: 1, autoAlpha: 0.5, duration: 0.75, ease: "power3.inOut" }, 7.75)
+        .to("#rule-glow", { autoAlpha: 0.14, duration: 0.9, ease: "power1.out" }, 8.5)
+
+        /* Each column enters from its own side, away from the line — the motion
+           itself says "these are two things, and the line is between them". */
+        .fromTo("#col-l", { autoAlpha: 0, x: -46 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power2.out" }, 8.25)
+        .fromTo("#col-r", { autoAlpha: 0, x: 46 }, { autoAlpha: 1, x: 0, duration: 0.6, ease: "power2.out" }, 8.4)
+
+        .fromTo("#cross-label", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 9.5)
+        .fromTo("#cross", { autoAlpha: 0, scale: 0.95 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 9.6)
+        .fromTo("#cross-note", { autoAlpha: 0, y: 12 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, 10.1)
+
+        /* Hold the whole argument on screen — 2.0s with nothing moving except
+           the glow settling. This is the frame a reader pauses on. */
+        .to("#rule-glow", { autoAlpha: 0.22, duration: 1.1, ease: "sine.inOut" }, 10.6);
+
+      /* ===== S4 — it closed (12.4–16.6s) ==========================
+         Both columns leave; the LINE stays. Everything that follows happens on
+         the buyer's side of it, so the completed order can never be read as
+         something the watcher did. */
+      tl.to("#cross", { autoAlpha: 0, y: -18, duration: 0.45, ease: "power2.in" }, 12.4)
+        .to("#cross-label", { autoAlpha: 0, duration: 0.35 }, 12.4)
+        .to("#cross-note", { autoAlpha: 0, duration: 0.35 }, 12.4)
+        .to("#col-l", { autoAlpha: 0, y: -26, duration: 0.45, ease: "power2.in" }, 12.4)
+        .to("#col-r", { autoAlpha: 0, y: -26, duration: 0.45, ease: "power2.in" }, 12.5)
+
+        .fromTo("#s4-left", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, ease: "power2.out" }, 13.0)
+        .fromTo("#s4-walk", { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, 12.9)
+        /* Five screens, ticked in sequence. The cadence is the measured one:
+           ~2.4s/screen compressed to a readable beat, not an invented speed. */
+        .to("[data-step]", { opacity: 1, color: "#cecfd2", duration: 0.2, stagger: 0.26, ease: "none" }, 13.1)
+        .to("[data-step] .tick", { background: "#00c8ff", duration: 0.2, stagger: 0.26, ease: "none" }, 13.1)
+        .fromTo("#s4-budget", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 14.45)
+
+        /* The order resolves under the walk that produced it. Green appears
+           here and nowhere else in the piece. */
+        .fromTo("#s4-order", { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, 14.75)
+        .to("#s4-order", { borderColor: "#22c55e", duration: 0.5, ease: "power2.out" }, 15.15)
+        .fromTo("#s4-note", { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, 15.5);
+
+      /* ===== S5 — the count (16.6–20.0s) ==========================
+         Numbers count up and stop on real values. Nothing rolls past its own
+         figure: a counter that overshoots and settles is a lie about precision
+         in a piece whose whole argument is that the figures are checkable. */
+      tl.to("#s4-walk", { autoAlpha: 0, duration: 0.4, ease: "power2.in" }, 16.4)
+        .to("#s4-order", { autoAlpha: 0, y: -22, duration: 0.45, ease: "power2.in" }, 16.4)
+        .to("#s4-note", { autoAlpha: 0, duration: 0.35 }, 16.4)
+        .to("#s4-left", { autoAlpha: 0, duration: 0.4 }, 16.4)
+
+        .fromTo("#s5-stats", { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power2.out" }, 16.75);
+
+      document.querySelectorAll("[data-count]").forEach((el, i) => {
+        const end = Number(el.dataset.count);
+        const box = { v: 0 };
+        tl.to(box, {
+          v: end,
+          duration: 1.15,
+          ease: "power2.out",
+          onUpdate: () => { el.textContent = String(Math.round(box.v)); },
+        }, 16.9 + i * 0.14);
+      });
+
+      tl.fromTo("#s5-names", { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out" }, 18.15)
+        .fromTo("#s5-handle", { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, 18.6)
+        /* The line outlives everything it separated. Last thing still lit. */
+        .to("#rule-glow", { autoAlpha: 0.42, duration: 0.9, ease: "power2.out" }, 18.15);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

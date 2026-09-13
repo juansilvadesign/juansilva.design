@@ -1,4 +1,4 @@
-# Storyboard — upOS · "Permissions are a module" · 1920×1080 · 14.0s · 30fps (420f) · **silent, seamless loop**
+# Storyboard — upOS · "Permissions are a module" · 1920×1080 · 14.0s · 60fps (840f) · **silent, seamless loop**
 
 > **Concept:** the obvious way to design for three roles is to draw three versions of every screen. upOS does the opposite — access is one declarative module. The loop shows the refutation, then the module.
 > **CTA:** none. This is inline case-study media, not an ad. It ends where it began so it can run forever.
@@ -33,7 +33,7 @@ The MP4 is a **fallback source**, not the delivery format — Safari's VP9/WebM 
 
 ---
 
-## Scene 1 — The obvious way, refuted  (t: 0.0–3.6s · f0–108)
+## Scene 1 — The obvious way, refuted  (t: 0.0–3.6s · f0–216)
 
 - **Beat:** you *could* draw three variants of all eight modules. Twenty-four screens, and every future change made three times.
 - **Look:** cold wireframe ghosts on near-black; no colour yet. Pack: [[animating-ui-cards-for-web]] (Size-not-Scale on the cards).
@@ -53,16 +53,16 @@ The MP4 is a **fallback source**, not the delivery format — Safari's VP9/WebM 
 └──────────────────────────────────────────────┘
 ```
 
-- **Motion:** row 1 staggers in left→right (f6–f30, 2f offset per card). Rows 2 and 3 *duplicate downward* — the same row sliding into place twice more (f30–f66), so the eye reads "again, and again" rather than "three groups". `3 × 8` counts up on a Hold-keyframed `source text` as the cards land.
+- **Motion:** row 1 staggers in left→right (f12–f60, 4f offset per card). Rows 2 and 3 *duplicate downward* — the same row sliding into place twice more (f60–f132), so the eye reads "again, and again" rather than "three groups". `3 × 8` counts up on a Hold-keyframed `source text` as the cards land.
 - **Camera:** slow 1.02× push on `S1_null_cam` — motion, not zoom.
-- **Transition out:** the whole ghost grid loses opacity on a **luma matte wipe** travelling left→right (f90–108), so the grid doesn't fade uniformly — it gets *wiped away*, which reads as rejection rather than a crossfade. Principle 5 (mattes are the reveal primitive).
+- **Transition out:** the whole ghost grid loses opacity on a **luma matte wipe** travelling left→right (f180–216), so the grid doesn't fade uniformly — it gets *wiped away*, which reads as rejection rather than a crossfade. Principle 5 (mattes are the reveal primitive).
 
 ⛔ These three names are the **shipped** profiles (`Admin master · Técnico · Vendedor`). Never the discovery trio (`Cliente · Técnico · Vendedor`) — `Cliente` was never a system profile. The two lists differ by one name and reconciling them from memory is the documented trap in this record.
 ⛔ The 24 cards are **hypothetical and must read that way** — 25% opacity, 1px stroke, no fills, no real content. Nothing here may look like a screen that was designed.
 
 ---
 
-## Scene 2 — One module instead  (t: 3.6–7.8s · f108–234)
+## Scene 2 — One module instead  (t: 3.6–7.8s · f216–468)
 
 - **Beat:** access lives in Configuration as its own module — a profiles table with named roles.
 - **Look:** the real product surface arrives; first colour in the piece. Pack: [[animating-ui-cards-for-web]].
@@ -81,7 +81,7 @@ The MP4 is a **fallback source**, not the delivery format — Safari's VP9/WebM 
 └──────────────────────────────────────────────┘
 ```
 
-- **Motion:** the table card scales up from the wipe's trailing edge using **Size, not Scale** (keeps the border-radius and 1px stroke crisp — [[animating-ui-cards-for-web]]). Rows write on with a text animator, staggered 4f, opacity + 8px Y. The `Ativo/Inativo` pills pop last with a small overshoot (centred anchor).
+- **Motion:** the table card scales up from the wipe's trailing edge using **Size, not Scale** (keeps the border-radius and 1px stroke crisp — [[animating-ui-cards-for-web]]). Rows write on with a text animator, staggered 8f, opacity + 8px Y. The `Ativo/Inativo` pills pop last with a small overshoot (centred anchor).
 - **Camera:** hold. After the ghost-grid motion, stillness is the contrast.
 - **Transition out:** the table card slides up and out of frame top while Scene 3's matrix rises from below — one continuous vertical move, not a cut.
 
@@ -97,7 +97,7 @@ Frame `7-3.1` (`19142:36607`) **visibly renders Untitled UI placeholder residue*
 
 ---
 
-## Scene 3 — Roughly twenty-six permissions, eight areas  (t: 7.8–12.4s · f234–372)
+## Scene 3 — Roughly twenty-six permissions, eight areas  (t: 7.8–12.4s · f468–744)
 
 - **Beat:** and a profile builder underneath it, so the shop can define a profile nobody anticipated.
 - **Look:** the matrix — the densest, most "this was really designed" frame in the piece.
@@ -118,7 +118,7 @@ Frame `7-3.1` (`19142:36607`) **visibly renders Untitled UI placeholder residue*
 └──────────────────────────────────────────────┘
 ```
 
-- **Motion:** vertical camera travel down `UI733_matrix` (f234–f348), eased at **both** ends. Checkmarks tick on in a staggered cascade slightly *ahead* of the camera, drawn with **Trim Paths** on open stroke paths (never a fade — a check should draw). `~26` and `8 áreas` count up on Hold keyframes, landing f348.
+- **Motion:** vertical camera travel down `UI733_matrix` (f468–f696), eased at **both** ends. Checkmarks tick on in a staggered cascade slightly *ahead* of the camera, drawn with **Trim Paths** on open stroke paths (never a fade — a check should draw). `~26` and `8 áreas` count up on Hold keyframes, landing f696.
 - **Camera:** the travel *is* the camera — `S3_null_cam` Y position, F9 then shaped in the Graph Editor. Never linear (principle 2).
 - **Transition out:** matrix continues up and out; the field returns to near-black for the seam.
 
@@ -127,12 +127,12 @@ Frame `7-3.1` (`19142:36607`) **visibly renders Untitled UI placeholder residue*
 
 ---
 
-## Scene 4 — Seam  (t: 12.4–14.0s · f372–420)
+## Scene 4 — Seam  (t: 12.4–14.0s · f744–840)
 
 - **Beat:** none. This scene exists so the loop has no visible cut.
-- **Motion:** everything is off-frame by f396. f396–420 holds the empty near-black field that Scene 1 opens on — **f420 must be pixel-identical to f0.**
+- **Motion:** everything is off-frame by f792. f792–840 holds the empty near-black field that Scene 1 opens on — **f840 must be pixel-identical to f0.**
 - **Loop rule** ([[animating-ui-cards-for-web]]): symmetric curves — **max velocity at both cut keyframes, easing mirrored (1,90 / 90,1)**. The eye must not be able to find the join.
-- ✅ **Verify by scrubbing across the seam**, not by watching the timeline end. Play f400→f020 as a continuous range.
+- ✅ **Verify by scrubbing across the seam**, not by watching the timeline end. Play f800→f040 as a continuous range.
 
 ---
 
@@ -176,7 +176,7 @@ Tiered, because screens recur and the source already numbers them — `7-3.1` �
 | `S2_row_admin` | group | table row | name + count + status **only**. ⛔ No date cell, no avatar, no email |
 | `S2_row_tecnico` | group | table row | ditto |
 | `S2_row_vendedor` | group | table row | ditto — status is `Inativo`, which is real and worth keeping |
-| `S2_pill_admin` / `S2_pill_tecnico` / `S2_pill_vendedor` | instance | status pills | `LIB_pill_status`; stagger 4f, do not pop in unison (P2) |
+| `S2_pill_admin` / `S2_pill_tecnico` / `S2_pill_vendedor` | instance | status pills | `LIB_pill_status`; stagger 8f, do not pop in unison (P2) |
 | `S2_null_card` | null | group parent | the whole card moves from this (P6) |
 
 ### Scene 3
@@ -211,7 +211,7 @@ Tiered, because screens recur and the source already numbers them — `7-3.1` �
 - ✅ All animating text is LIVE, not outlined — required by the text animators *and* by the residue fix.
 - ✅ Open paths where a stroke draws (`LIB_check`).
 - ✅ Centred anchors flagged on everything that overshoots.
-- ✅ f420 ≡ f0 for the seam.
+- ✅ f840 ≡ f0 for the seam.
 - ⚠️ **Accents (`Técnico`, `áreas`, `Configurações`, `Assistência`) must be confirmed in the chosen font before AEUX export** — a missing glyph shows up in AE, not in Figma. Run `check_fonts` on the frame first.
 
 ## Handoff
@@ -415,7 +415,7 @@ All 8 accented headers correct; **`fontSubstituted: false` on all 60+ text write
       **~150–200 MCP round trips**. Three ways out, Juan's call: grind it, have Juan key it by hand from this
       spec (fast for a designer), or add a predefined batch-keyframe script to the bridge (`run-script` only
       runs *predefined* scripts — arbitrary JSX cannot be sent).
-- [ ] **Production encode** at 1920×1080 · 30fps · 14s, quality **above** q75 — measure the real bytes
+- [ ] **Production encode** at 1920×1080 · 60fps · 14s, quality **above** q75 — measure the real bytes
       rather than trusting the 1536×864 pixel-scaling (~3.6 MB projected at q75).
 
 ---
@@ -433,7 +433,7 @@ All 8 accented headers correct; **`fontSubstituted: false` on all 60+ text write
 | `S1_grid_row_vendedor` | 22013:2762 | `S1_card_vendedor_1..8` = 2763–2770 · `S1_txt_vendedor` 2771 |
 | `S1_txt_count` | 22013:2772 | `3 × 8`, 56px |
 | `S1_matte_wipe` | 22013:2773 | white 1920×1080, parked **off-frame left at x = −1920** — its wipe START position, so AE animates X rightward. ⛔ Do not "fix" it to 0,0: over the frame it just washes the scene out in Figma |
-| `S4_scene_seam` | 22013:2774 | empty dark field; f420 must equal S1's f0 |
+| `S4_scene_seam` | 22013:2774 | empty dark field; f840 must equal S1's f0 |
 
 ⚠️ **`S1_null_cam` / `S3_null_cam` are NOT in Figma** — Figma has no null objects. They are created in AE.
 ⚠️ **24 ghost cards are uniquely named** (`S1_card_<profile>_<n>`), not 24 × `LIB_card_ghost`. The manifest's
@@ -496,13 +496,17 @@ were the same decision.
 1. ⭐ **Everything came in at 60fps**, not the storyboard's 30. Given the standing "best quality, no
    size-driven compromises" rule (Juan, 2026-09-10) this is an **upgrade and is being kept**. Animated WebP
    handles 60fps (~16.67 ms frames); it roughly doubles bytes vs 30fps, which is accepted.
-   ⛔ **Update the header of this file when the render lands: it says 30fps (420f); the asset is 60fps (840f).**
+   ✅ **DONE 2026-09-12 — the header and every frame number in this file are now 60fps values.** Scene
+   boundaries were unaffected (stated in seconds; 3.6/7.8/12.4s are whole frames at both rates).
+   ⛔ The 30fps figures that remain are REAL and must not be "fixed": the `S2_encode_test` comp (1536×864,
+   30fps, 126f) and the whole encode-sweep table are measurements of actual renders.
 2. **Every comp is 5s.** Scene targets (3.6 / 4.2 / 4.6 / 1.6s) all fit, so animate in place and render the
    exact range with `render-video`'s `startTime` + `duration`. No comp-settings change needed.
 3. ⛔🔴 **The bridge cannot nest an existing comp inside another comp.** `create-composition`, `precompose`
    and `import-footage` are the only structural tools, and none of them adds a comp as a layer. The 14s master
-   timeline is therefore **a human step** — Juan built `MASTER_permissions_loop` (1920×1080 · 60fps · 14s,
-   scenes at 0 / 3.6 / 7.8 / 12.4s) by hand. ⭐ Animation *inside* a scene comp carries through when nested,
+   timeline's **creation** is therefore a human step — Juan made `MASTER_permissions_loop` (1920×1080 · 60fps ·
+   14s) and dragged the comps in. ⛔ **But its CONTENT is not** — pruning and timing were done over the bridge
+   2026-09-10; see the correction at the end of this file. ⭐ Animation *inside* a scene comp carries through when nested,
    so scene-internal work does not wait on the master.
 
 ### ⛔ The API asymmetry that dictates the animation strategy
@@ -543,7 +547,10 @@ an unsaved one before trusting that anything survived a restart. Everything did.
 
 ✅ `MASTER_permissions_loop` exists — id 1420, **14s · 60fps · 1920×1080**. Correct settings.
 
-### ⛔🔴 But the master's CONTENT is wrong: 95 layers, not 4
+### ✅ RESOLVED 2026-09-10 — master content fixed over the bridge (was: 95 layers, not 4)
+
+> ⛔ **The diagnosis below is history. The three "impossible" claims in it were WRONG** — see the correction
+> at the end of this section. 87 surplus layers were deleted and all 4 scenes timed **via the bridge**.
 
 `numLayers: 95`, every layer at `startTime: 0` — the whole project panel was dragged in at once.
 Sampled: layer 1 = **`S1_scene_22013-2740.png`**, layer 2 = `S1_card_admin_1`.
@@ -558,12 +565,34 @@ extension — `S1_scene_22013-2740.png`.
 **Required content:** exactly **4 layers** — `S1_scene`, `S2_scene`, `S3_scene`, `S4_scene_seam` — at
 **0 / 3.6 / 7.8 / 12.4s**.
 
-⛔ **This cannot be fixed through the bridge, and the reason is worth recording:** there is **no delete-layer
-tool**, and **`move-layer` reorders the STACK only, not time** (`front`/`back`/`before`/`after`/`toIndex` —
-no time argument). Combined with the inability to nest a comp, the master comp is a **human-only artifact**
-from creation through to layer timing.
+~~⛔ **This cannot be fixed through the bridge:** there is **no delete-layer tool**, and **`move-layer`
+reorders the STACK only, not time**. The master comp is a **human-only artifact** from creation through to
+layer timing.~~
 
-⚠️ `getLayerInfo` returns `{"error":"No active composition"}` when no comp is open in the UI — so the
-one call that dumps every layer at once is unavailable unless a comp is actually open. `get-layer-details`
-works regardless but costs one round trip per layer, which is why the 95 layers were **sampled, not
-enumerated**.
+### ⛔🔴 CORRECTION 2026-09-10 — two of those three claims were false
+
+The blocker above was recorded from the **repo `src/` copy** of the panel, not the copy AE loads. Re-probed
+against `…/After Effects 2024/Support Files/Scripts/ScriptUI Panels/mcp-bridge-auto.jsx`:
+
+| claim | truth |
+|---|---|
+| "no delete-layer tool" | ❌ **false** — `deleteLayer` exists, resolves the comp **by name**, and is on the `run-script` allow-list |
+| "`move-layer` has no time argument" | ❌ **irrelevant** — `setLayerProperties` **and** `batchSetLayerProperties` both accept `startTime` *and* `outPoint`, applied in that order (move, then trim) |
+| "cannot nest a comp" | ✅ **true, and the only surviving third** — nothing adds an existing comp as a layer, so the initial drag-in stays human |
+
+**What was actually run:** 87 `deleteLayer` calls + **one** `batchSetLayerProperties`, then re-read →
+4 layers at 0/3.6/7.8/12.4s, contiguous, ending exactly on 14.0s. Backup first:
+a dated `upos-test.BACKUP-91layers-*.aep` beside the project (exact path in the private `_memory` record).
+
+⛔🔴 **`getLayerInfo` SILENTLY IGNORES `compositionName`** — it always reads the **active** comp (and errors
+`"No active composition"` when none is open). Proven by asking for `S1_scene` and getting MASTER's 91 layers
+back with no error. ⭐ `get-layer-details` **does** honour `compName` — proven by a clean `Layer not found`
+at index 5 of the 4-layer `S1_scene`. Corroborate any `getLayerInfo` read against `bridge-status`, which
+names `activeComp` + `numLayers`.
+
+⛔🔴 **Leave ~1.3s after a result before sending the next command.** The panel calls
+`updateCommandStatus("completed")` *after* writing its result; if your next `pending` command is already in
+`ae_command.json`, that writeback marks **your** command completed and it never runs — **3 of the first 32
+deletes silently did not execute.** With a settle delay + retry: 58/58, zero errors.
+⭐ For bulk work, drive `ae_command.json` directly (poll `ae_mcp_result.json` for a matching `_commandId`)
+instead of paying 2 MCP calls per operation — 87 deletes ran as one loop. Poll interval is 2000ms.
