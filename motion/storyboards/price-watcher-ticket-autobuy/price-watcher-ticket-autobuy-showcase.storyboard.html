@@ -1,0 +1,984 @@
+<title>price-watcher Reel v2</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400..700&display=swap">
+<style>
+  /* ══════════════════════════════════════════════════════════════
+     Two token systems, kept deliberately apart:
+
+     --pg-*  the page's own identity (violet-biased neutrals, drawn
+             from the logo's hue but never the reel's palette — a
+             contact sheet must not compete with the frames it shows)
+     --r-*   the REEL's palette, scoped to .mock[data-cut], so the
+             toggle repaints all eight frames without touching chrome
+     ══════════════════════════════════════════════════════════════ */
+
+  :root {
+    --pg-bg:      #fbfbfd;
+    --pg-surface: #ffffff;
+    --pg-sunk:    #f4f3f8;
+    --pg-line:    #e4e2ec;
+    --pg-line-2:  #cfcbdd;
+    --pg-ink:     #14121c;
+    --pg-ink-2:   #4a4658;
+    --pg-ink-3:   #7b7690;
+    --pg-accent:  #4F2DEA;
+
+    --pg-cyan:   #00769d;
+    --pg-violet: #4F2DEA;
+    --pg-pink:   #d7004b;
+    --pg-green:  #095c37;
+    --pg-amber:  #854a0e;
+
+    --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+    --f-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
+    --f-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --gutter: 84px;
+    color-scheme: light dark;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --pg-bg:      #0a0910;
+      --pg-surface: #131120;
+      --pg-sunk:    #100e1b;
+      --pg-line:    #242034;
+      --pg-line-2:  #3a3450;
+      --pg-ink:     #f4f2fa;
+      --pg-ink-2:   #c3bed4;
+      --pg-ink-3:   #8b85a0;
+      --pg-accent:  #A693FC;
+
+      --pg-cyan:   #00c8ff;
+      --pg-violet: #A693FC;
+      --pg-pink:   #ff5d8b;
+      --pg-green:  #22c55e;
+      --pg-amber:  #fde272;
+    }
+  }
+  :root[data-theme="dark"] {
+    --pg-bg:      #0a0910;
+    --pg-surface: #131120;
+    --pg-sunk:    #100e1b;
+    --pg-line:    #242034;
+    --pg-line-2:  #3a3450;
+    --pg-ink:     #f4f2fa;
+    --pg-ink-2:   #c3bed4;
+    --pg-ink-3:   #8b85a0;
+    --pg-accent:  #A693FC;
+
+    --pg-cyan:   #00c8ff;
+    --pg-violet: #A693FC;
+    --pg-pink:   #ff5d8b;
+    --pg-green:  #22c55e;
+    --pg-amber:  #fde272;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--pg-bg);
+    color: var(--pg-ink-2);
+    font-family: var(--f-body);
+    font-size: 15px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 30px 120px; position: relative; }
+
+  /* The spine — the reel's own motif used as page structure. It lights
+     cyan→violet exactly where Frame 5 draws the divider in the video. */
+  .spine {
+    position: absolute; left: 30px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(180deg,
+      transparent 0%, var(--pg-line) 4%, var(--pg-line) 47%,
+      var(--pg-cyan) 53%, var(--pg-violet) 60%,
+      var(--pg-line) 66%, var(--pg-line) 96%, transparent 100%);
+  }
+  .bay { padding-left: var(--gutter); }
+  @media (max-width: 900px) { .spine { display: none; } .bay { padding-left: 0; } }
+
+  h1, h2, h3, h4 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+  h1 {
+    font-size: clamp(38px, 6.1vw, 74px); font-weight: 900; font-stretch: 112%;
+    letter-spacing: -.035em; line-height: .96; color: var(--pg-ink);
+  }
+  h2 {
+    font-size: 12.5px; font-weight: 700; font-stretch: 118%;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--pg-ink-3);
+  }
+  h3 {
+    font-size: 25px; font-weight: 800; font-stretch: 106%;
+    letter-spacing: -.02em; color: var(--pg-ink); line-height: 1.2;
+  }
+  p { margin: 0 0 14px; max-width: 68ch; }
+  p:last-child { margin-bottom: 0; }
+  b, strong { color: var(--pg-ink); font-weight: 600; }
+  em { font-style: italic; }
+  code {
+    font-family: var(--f-mono); font-size: .87em; color: var(--pg-accent);
+    background: var(--pg-sunk); border: 1px solid var(--pg-line);
+    border-radius: 5px; padding: .1em .4em;
+  }
+  .mono { font-family: var(--f-mono); }
+  a { color: var(--pg-accent); }
+  :focus-visible { outline: 2px solid var(--pg-accent); outline-offset: 3px; border-radius: 4px; }
+
+  section { margin-top: 76px; }
+  .sec-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; }
+  .sec-head h2 { white-space: nowrap; }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--pg-line); }
+
+  /* ── Header ──────────────────────────────────────────────── */
+  header { padding: 72px 0 0; }
+  .eyebrow {
+    font-family: var(--f-mono); font-size: 11.5px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--pg-ink-3);
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  .chip-live {
+    color: var(--pg-amber);
+    border: 1px solid color-mix(in srgb, var(--pg-amber) 38%, transparent);
+    background: color-mix(in srgb, var(--pg-amber) 9%, transparent);
+    border-radius: 999px; padding: 3px 11px; letter-spacing: .14em;
+  }
+  .thesis {
+    font-family: var(--f-display); font-weight: 500; font-stretch: 100%;
+    font-size: clamp(19px, 2.3vw, 26px); line-height: 1.42; letter-spacing: -.015em;
+    color: var(--pg-ink-2); max-width: 25ch; margin: 24px 0 0;
+  }
+  .thesis em { font-style: normal; color: var(--pg-ink); font-weight: 700; }
+
+  .slate {
+    margin-top: 36px; display: flex; flex-wrap: wrap;
+    border: 1px solid var(--pg-line); border-radius: 12px; overflow: hidden;
+    background: var(--pg-surface);
+  }
+  .slate div { flex: 1 1 118px; padding: 14px 19px; border-right: 1px solid var(--pg-line); }
+  .slate div:last-child { border-right: 0; }
+  .slate dt {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: .17em;
+    text-transform: uppercase; color: var(--pg-ink-3); margin-bottom: 5px;
+  }
+  .slate dd {
+    margin: 0; font-family: var(--f-mono); font-size: 14.5px;
+    color: var(--pg-ink); font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Cut toggle ──────────────────────────────────────────── */
+  .cutbar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    padding: 13px 0; margin-top: 44px;
+    background: color-mix(in srgb, var(--pg-bg) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--pg-line);
+  }
+  .cutbar .lede {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--pg-ink-3);
+  }
+  .seg {
+    display: inline-flex; background: var(--pg-sunk);
+    border: 1px solid var(--pg-line); border-radius: 9px; padding: 3px; gap: 3px;
+  }
+  .seg button {
+    font-family: var(--f-mono); font-size: 12px; font-weight: 600;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 7px 16px; border: 0; border-radius: 6px; cursor: pointer;
+    background: transparent; color: var(--pg-ink-3);
+  }
+  .seg button[aria-pressed="true"] {
+    background: var(--pg-surface); color: var(--pg-ink);
+    box-shadow: 0 1px 3px rgb(0 0 0 / .13);
+  }
+  .seg button .sw {
+    display: inline-block; width: 9px; height: 9px; border-radius: 50%;
+    margin-right: 7px; vertical-align: -1px; border: 1px solid var(--pg-line-2);
+  }
+  .cutbar .hint { font-size: 12.5px; color: var(--pg-ink-3); }
+
+  /* ── The reel's palettes ─────────────────────────────────── */
+  .mock[data-cut="dark"] {
+    --r-ground:#0c0e12; --r-panel:#13161b; --r-raised:#1a1d24;
+    --r-line:#22262f;   --r-line-strong:#344054;
+    --r-head:#f7f7f7;   --r-body:#cecfd2;  --r-muted:#85888e; --r-faint:#6b7079;
+    --r-a:#00c8ff;      --r-a-fill:#00c8ff;
+    --r-b:#826AFB;      --r-b-fill:#4F2DEA;
+    --r-refuse:#ff5d8b; --r-amber:#fde272; --r-green:#22c55e;
+    --r-glow: rgb(0 200 255 / .09);
+    --r-btn-ink: #ffffff;
+  }
+  .mock[data-cut="light"] {
+    --r-ground:#ffffff; --r-panel:hsl(210 40% 98%); --r-raised:hsl(210 40% 96%);
+    --r-line:#d1d5db;   --r-line-strong:hsl(215 20% 65%);
+    --r-head:#0c0e12;   --r-body:#344054;  --r-muted:hsl(215 16% 44%); --r-faint:hsl(215 16% 52%);
+    --r-a:#00769d;      --r-a-fill:#009cd4;
+    --r-b:#625df5;      --r-b-fill:#4F2DEA;
+    --r-refuse:#d7004b; --r-amber:#854a0e; --r-green:#095c37;
+    --r-glow: rgb(0 156 212 / .10);
+    --r-btn-ink: #ffffff;
+  }
+
+  /* ── Frames ──────────────────────────────────────────────── */
+  .frame { margin-top: 44px; }
+  .frame-head { display: flex; align-items: flex-start; gap: 17px; margin-bottom: 15px; }
+  .frame-no {
+    font-family: var(--f-mono); font-size: 11.5px; font-weight: 700; letter-spacing: .09em;
+    color: #fff; background: var(--pg-ink-3); border-radius: 5px;
+    padding: 4px 9px; line-height: 1; flex: none; margin-top: 5px;
+  }
+  .frame.a  .frame-no { background: var(--pg-cyan); }
+  .frame.b  .frame-no { background: var(--pg-violet); }
+  .frame.both .frame-no { background: linear-gradient(90deg, var(--pg-cyan), var(--pg-violet)); }
+  :root[data-theme="dark"] .frame-no,
+  :root:not([data-theme="light"]) .frame-no { color: #0a0910; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .frame-no { color: #fff; } }
+
+  .frame-title { flex: 1; min-width: 0; }
+  .frame-tc {
+    font-family: var(--f-mono); font-size: 12px; color: var(--pg-ink-3);
+    font-variant-numeric: tabular-nums; margin-top: 5px;
+  }
+  .frame-body { display: grid; grid-template-columns: 1fr 352px; gap: 26px; align-items: start; }
+  @media (max-width: 880px) { .frame-body { grid-template-columns: 1fr; } }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+  .chip {
+    font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .03em;
+    padding: 4px 9px; border-radius: 5px; white-space: nowrap;
+    border: 1px solid var(--pg-line); color: var(--pg-ink-3); background: var(--pg-surface);
+  }
+  .chip .k { color: var(--pg-line-2); }
+  .chip.bp { border-color: color-mix(in srgb, var(--pg-cyan) 34%, transparent); color: var(--pg-cyan); }
+
+  .note {
+    border-left: 2px solid var(--pg-line-2); padding: 2px 0 2px 15px; margin: 14px 0 0;
+    font-size: 13.5px; color: var(--pg-ink-3); max-width: 62ch;
+  }
+  .note.warn { border-left-color: var(--pg-amber); }
+  .note.stop { border-left-color: var(--pg-pink); }
+  .note b { color: var(--pg-ink-2); }
+
+  /* ── Mock stage · sized in cqw so every value is the real
+        composition's px ÷ 1920 — the tiles are to scale ───────── */
+  .shot { border-radius: 8px; overflow: hidden; border: 1px solid var(--pg-line); line-height: 0;
+          box-shadow: 0 14px 34px -18px rgb(0 0 0 / .3); }
+  .shot img { width: 100%; height: auto; display: block; }
+  .mock {
+    aspect-ratio: 16/9; container-type: inline-size;
+    background: var(--r-ground); border: 1px solid var(--pg-line);
+    border-radius: 8px; overflow: hidden; position: relative; font-family: var(--f-body);
+  }
+  .mock .glow {
+    position: absolute; left: 50%; top: 50%; width: 125%; height: 150%;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(closest-side, var(--r-glow), transparent);
+  }
+  .mock .stage {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 2cqw; padding: 4cqw;
+  }
+  .cap {
+    font-size: 2.29cqw; font-weight: 700; color: var(--r-head);
+    letter-spacing: -.02em; text-align: center; line-height: 1.3;
+  }
+  .cap .dim { color: var(--r-muted); font-weight: 600; }
+  .lbl {
+    font-size: 1.25cqw; font-weight: 600; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--r-muted);
+  }
+
+  .win { width: 100%; background: var(--r-panel); border: .1cqw solid var(--r-line);
+         border-radius: 1cqw; overflow: hidden; }
+  .bar { display: flex; align-items: center; gap: .7cqw; padding: .85cqw 1.1cqw;
+         border-bottom: .1cqw solid var(--r-line); background: var(--r-raised); }
+  .dots { display: flex; gap: .45cqw; flex: none; }
+  .dots i { width: .62cqw; height: .62cqw; border-radius: 50%; background: var(--r-line-strong); display: block; }
+  .bar .ttl { flex: 1; text-align: center; font-family: var(--f-mono); font-size: 1.05cqw; color: var(--r-muted); }
+  .tabs { display: flex; align-items: center; gap: .5cqw; padding: .7cqw 1.1cqw 0; background: var(--r-raised); }
+  .tab { display: flex; align-items: center; gap: .5cqw; background: var(--r-panel);
+         border-radius: .6cqw .6cqw 0 0; padding: .6cqw 1cqw;
+         font-family: var(--f-mono); font-size: 1.02cqw; color: var(--r-body); }
+  .fav { width: 1.15cqw; height: 1.15cqw; border-radius: .22cqw; flex: none;
+         background: linear-gradient(140deg, var(--r-b-fill), var(--r-a-fill)); }
+  .addr { display: flex; align-items: center; gap: .7cqw; padding: .7cqw 1.1cqw;
+          background: var(--r-raised); border-bottom: .1cqw solid var(--r-line); }
+  .pill { flex: 1; background: var(--r-ground); border: .1cqw solid var(--r-line);
+          border-radius: 999px; padding: .42cqw 1cqw;
+          font-family: var(--f-mono); font-size: 1.02cqw; color: var(--r-muted); }
+  .ico { font-size: 1.05cqw; color: var(--r-faint); flex: none; }
+  .body-pad { padding: 1.6cqw 1.8cqw; }
+
+  .row-l { display: flex; align-items: center; justify-content: space-between;
+           font-family: var(--f-mono); font-size: 1.32cqw; color: var(--r-body); padding: .42cqw 0; }
+  .row-l .q { color: var(--r-faint); font-size: 1.14cqw; }
+  .row-l .amt { color: var(--r-head); }
+  .row-l.lead .amt { color: var(--r-a); }
+
+  .cursor { position: absolute; width: 0; height: 0;
+            border-left: .95cqw solid var(--r-head); border-bottom: .62cqw solid transparent;
+            border-right: .48cqw solid transparent; transform: rotate(-16deg);
+            filter: drop-shadow(0 .2cqw .4cqw rgb(0 0 0 / .45)); }
+  .ripple { position: absolute; width: 3.6cqw; height: 3.6cqw; border-radius: 50%;
+            border: .16cqw solid color-mix(in srgb, var(--r-a) 55%, transparent);
+            transform: translate(-50%,-50%); }
+
+  .bubble { width: 62%; background: var(--r-raised); border: .1cqw solid var(--r-line);
+            border-radius: 1.1cqw; padding: 1.3cqw 1.5cqw; }
+  .bub-head { display: flex; align-items: center; gap: .8cqw; margin-bottom: .9cqw; }
+  .av { width: 2.1cqw; height: 2.1cqw; border-radius: 50%; flex: none;
+        background: linear-gradient(140deg, var(--r-b-fill), var(--r-a-fill)); }
+  .bub-head .nm { font-size: 1.25cqw; font-weight: 700; color: var(--r-b); flex: 1; }
+  .bub-head .tm { font-family: var(--f-mono); font-size: 1.05cqw; color: var(--r-faint); }
+  .bub-body { font-family: var(--f-mono); font-size: 1.42cqw; color: var(--r-a); line-height: 1.55; }
+  .bub-body .sub { color: var(--r-muted); font-size: 1.2cqw; }
+
+  .stamp { font-family: var(--f-mono); font-size: 1.85cqw; font-weight: 700;
+           letter-spacing: .3em; text-transform: uppercase; color: var(--r-refuse);
+           border: .18cqw solid color-mix(in srgb, var(--r-refuse) 52%, transparent);
+           background: color-mix(in srgb, var(--r-refuse) 8%, transparent);
+           padding: .8cqw 1.5cqw .8cqw 1.8cqw; border-radius: .7cqw; transform: rotate(-2.2deg); }
+
+  .term { font-family: var(--f-mono); font-size: 1.3cqw; line-height: 1.85; color: var(--r-muted); }
+  .term .cmd { color: var(--r-head); }
+  .term .sig { color: var(--r-a); }
+  .term .tgt { color: var(--r-body); }
+  .term .val { color: var(--r-head); }
+  .term .fall { color: var(--r-a); }
+  .caret { display: inline-block; width: .62cqw; height: 1.45cqw; background: var(--r-a); vertical-align: -.22cqw; }
+  .badge { font-family: var(--f-mono); font-size: 1.12cqw; font-weight: 600;
+           letter-spacing: .12em; text-transform: uppercase;
+           border: .1cqw solid var(--r-line-strong); color: var(--r-body);
+           border-radius: 999px; padding: .55cqw 1.3cqw; }
+
+  .split { position: absolute; inset: 0; }
+  .divider { position: absolute; left: 50%; top: 8%; bottom: 8%; width: .16cqw; transform: translateX(-50%);
+             background: linear-gradient(180deg, transparent, var(--r-line-strong) 14%, var(--r-line-strong) 86%, transparent); }
+  .divider::after { content: ""; position: absolute; inset: -.1cqw;
+    background: linear-gradient(180deg, transparent, var(--r-a-fill) 20%, var(--r-b-fill) 80%, transparent);
+    filter: blur(.55cqw); opacity: .5; }
+  .col { position: absolute; top: 26%; width: 40%; }
+  .col.l { left: 4%; text-align: right; }
+  .col.r { right: 4%; text-align: left; }
+  .col .nm { font-family: var(--f-mono); font-size: 2.4cqw; font-weight: 700; letter-spacing: -.02em; }
+  .col.l .nm { color: var(--r-a); }
+  .col.r .nm { color: var(--r-b); }
+  .col .kk { font-family: var(--f-mono); font-size: 1.15cqw; color: var(--r-faint); margin-top: .6cqw; }
+  .col .vb { font-size: 1.45cqw; color: var(--r-body); margin-top: 1.5cqw; }
+  .col .vd { font-size: 1.5cqw; font-weight: 700; margin-top: 1.2cqw; }
+  .col.l .vd { color: var(--r-refuse); }
+  .col.r .vd { color: var(--r-amber); }
+  .crosser { position: absolute; left: 50%; top: 70%; transform: translateX(-50%);
+             background: var(--r-raised); border: .12cqw solid var(--r-line-strong);
+             border-radius: .8cqw; padding: 1cqw 1.4cqw;
+             font-family: var(--f-mono); font-size: 1.28cqw; color: var(--r-amber); white-space: nowrap; }
+  .crosser .k { color: var(--r-faint); }
+  .lockup-mini { position: absolute; left: 50%; top: 6%; transform: translateX(-50%);
+                 display: flex; flex-direction: column; align-items: center; gap: .55cqw; }
+  .markdot { width: 2.6cqw; height: 2.6cqw; border-radius: .55cqw;
+             background: linear-gradient(140deg, var(--r-b-fill), var(--r-a-fill)); }
+  .markdot.lg { width: 8.4cqw; height: 8.4cqw; border-radius: 1.6cqw; }
+  .standin { font-family: var(--f-mono); font-size: .92cqw; letter-spacing: .1em;
+             text-transform: uppercase; color: var(--r-faint); margin-top: .2cqw; }
+
+  .stepper { display: flex; gap: .5cqw; margin-bottom: 1.4cqw; }
+  .st { flex: 1; }
+  .st .dot { height: .28cqw; border-radius: 999px; background: var(--r-line-strong); }
+  .st.done .dot, .st.now .dot { background: var(--r-a-fill); }
+  .st.now .dot { box-shadow: 0 0 .9cqw var(--r-a-fill); }
+  .st .tx { font-family: var(--f-mono); font-size: .92cqw; color: var(--r-faint); margin-top: .5cqw; text-align: center; }
+  .st.done .tx, .st.now .tx { color: var(--r-body); }
+  .btn { display: inline-block; background: var(--r-b-fill); color: var(--r-btn-ink);
+         font-size: 1.32cqw; font-weight: 700; border-radius: .6cqw; padding: .85cqw 2.4cqw; }
+  .meter { height: .75cqw; border-radius: 999px; background: var(--r-ground);
+           border: .1cqw solid var(--r-line); overflow: hidden; margin-top: .3cqw; }
+  .meter i { display: block; height: 100%; width: 41%; background: var(--r-a-fill); }
+
+  .order { background: var(--r-raised); border: .14cqw solid var(--r-green);
+           border-radius: 1cqw; padding: 1.3cqw 1.6cqw; }
+  .order .oid { font-family: var(--f-mono); font-size: 1.12cqw; letter-spacing: .12em;
+                text-transform: uppercase; color: var(--r-muted); }
+  .order .oid b { color: var(--r-green); }
+  .order .otx { font-family: var(--f-mono); font-size: 1.35cqw; color: var(--r-body); margin-top: .8cqw; }
+  .order .oam { font-family: var(--f-mono); font-size: 3.2cqw; font-weight: 700;
+                letter-spacing: -.03em; color: var(--r-head); margin-top: .3cqw; }
+  .order .opx { font-family: var(--f-mono); font-size: 1.22cqw; color: var(--r-green); margin-top: .7cqw; }
+  .order .hold { display: flex; justify-content: space-between; margin-top: 1cqw;
+                 padding-top: .9cqw; border-top: .1cqw solid var(--r-line);
+                 font-family: var(--f-mono); font-size: 1.15cqw; color: var(--r-faint); }
+  .order .hold b { color: var(--r-amber); }
+
+  .stats { display: flex; justify-content: center; gap: 6cqw; }
+  .stat { text-align: center; }
+  .stat .n { font-family: var(--f-mono); font-size: 5.4cqw; font-weight: 700;
+             letter-spacing: -.035em; color: var(--r-a); line-height: 1; }
+  .stat .t { font-size: 1.15cqw; color: var(--r-muted); margin-top: .8cqw; line-height: 1.45; }
+  .names { display: flex; align-items: center; justify-content: center; gap: 1.8cqw;
+           font-family: var(--f-mono); font-size: 2.1cqw; font-weight: 700; }
+  .names .a { color: var(--r-a); }
+  .names .b { color: var(--r-b); }
+  .names .ar { color: var(--r-faint); font-size: 1.6cqw; }
+
+  /* ── Side-by-side comparison ─────────────────────────────── */
+  .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 760px) { .versus { grid-template-columns: 1fr; } }
+  .versus figcaption {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--pg-ink-3); margin-top: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .versus figure { margin: 0; }
+  .versus .sw { width: 10px; height: 10px; border-radius: 50%; border: 1px solid var(--pg-line-2); display: inline-block; }
+
+  /* ── Palette table ───────────────────────────────────────── */
+  .tbl-scroll { overflow-x: auto; }
+  .pal { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 560px; }
+  .pal th { text-align: left; font-family: var(--f-mono); font-size: 10px;
+            letter-spacing: .16em; text-transform: uppercase; color: var(--pg-ink-3);
+            font-weight: 500; padding: 0 14px 9px 0; border-bottom: 1px solid var(--pg-line); }
+  .pal td { padding: 9px 14px 9px 0; border-bottom: 1px solid var(--pg-line); vertical-align: middle; }
+  .pal tr:last-child td { border-bottom: 0; }
+  .sw-row { display: flex; align-items: center; gap: 9px; }
+  .sw-row i { width: 22px; height: 22px; border-radius: 5px; flex: none;
+              border: 1px solid color-mix(in srgb, var(--pg-ink) 14%, transparent); display: block; }
+  .pal .hex { font-family: var(--f-mono); color: var(--pg-ink-2); font-size: 12px; }
+  .pal .ok { color: var(--pg-green); font-family: var(--f-mono); font-size: 11.5px; white-space: nowrap; }
+  .pal .no { color: var(--pg-pink); font-family: var(--f-mono); font-size: 11.5px; white-space: nowrap; }
+
+  /* ── Allow / forbid ──────────────────────────────────────── */
+  .gate { display: grid; grid-template-columns: 1fr 1fr;
+          border: 1px solid var(--pg-line); border-radius: 12px; overflow: hidden; }
+  @media (max-width: 760px) { .gate { grid-template-columns: 1fr; } }
+  .gate > div { padding: 21px 23px; background: var(--pg-surface); }
+  .gate .yes { border-right: 1px solid var(--pg-line); }
+  .gate h4 { margin: 0 0 13px; font-family: var(--f-mono); font-size: 10.5px;
+             letter-spacing: .17em; text-transform: uppercase; font-weight: 700; }
+  .gate .yes h4 { color: var(--pg-green); }
+  .gate .no h4 { color: var(--pg-pink); }
+  .gate ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; }
+  .gate li { font-size: 13.5px; padding-left: 19px; position: relative; color: var(--pg-ink-2); }
+  .gate li::before { position: absolute; left: 0; top: 0; font-family: var(--f-mono); font-size: 13px; }
+  .gate .yes li::before { content: "+"; color: var(--pg-green); }
+  .gate .no  li::before { content: "\00d7"; color: var(--pg-pink); }
+  .gate li span { color: var(--pg-ink-3); display: block; font-size: 12.5px; }
+
+  /* ── Ruler ───────────────────────────────────────────────── */
+  .ruler-bar { display: flex; height: 60px; gap: 3px; }
+  .rseg { position: relative; border-radius: 4px; overflow: hidden;
+          background: var(--pg-surface); border: 1px solid var(--pg-line);
+          display: flex; flex-direction: column; justify-content: space-between;
+          padding: 7px 8px; min-width: 0; }
+  .rseg .n { font-family: var(--f-mono); font-size: 11px; font-weight: 700; color: var(--pg-ink-3); line-height: 1; }
+  .rseg .d { font-family: var(--f-mono); font-size: 10px; color: var(--pg-ink-3); line-height: 1;
+             font-variant-numeric: tabular-nums; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rseg::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--acc); }
+  .rseg.hold { background: var(--pg-sunk); border-color: var(--pg-line-2); }
+  .rseg.hold .n { color: var(--pg-ink); }
+  .ruler-scale { display: flex; justify-content: space-between; margin-top: 7px;
+                 font-family: var(--f-mono); font-size: 10px; color: var(--pg-ink-3);
+                 font-variant-numeric: tabular-nums; }
+
+  /* ── Decisions ───────────────────────────────────────────── */
+  .dec { border-top: 1px solid var(--pg-line); padding: 23px 0;
+         display: grid; grid-template-columns: 38px 1fr; gap: 20px; }
+  .dec:last-of-type { border-bottom: 1px solid var(--pg-line); }
+  .dec .q { font-family: var(--f-display); font-size: 30px; font-weight: 900;
+            font-stretch: 115%; color: var(--pg-line-2); line-height: 1; }
+  .dec h3 { font-size: 19px; margin-bottom: 8px; }
+  .dec .default { margin-top: 12px; font-family: var(--f-mono); font-size: 12.5px;
+                  color: var(--pg-amber); display: flex; gap: 9px; align-items: baseline; }
+  .dec .default b { color: var(--pg-ink-3); font-weight: 500; letter-spacing: .14em;
+                    text-transform: uppercase; font-size: 10px; flex: none; }
+
+  pre { background: var(--pg-sunk); border: 1px solid var(--pg-line); border-radius: 9px;
+        padding: 15px 17px; overflow-x: auto; font-family: var(--f-mono);
+        font-size: 12.5px; line-height: 1.65; color: var(--pg-ink-2); margin: 16px 0; }
+  pre b { color: var(--pg-accent); font-weight: 600; }
+
+  blockquote { margin: 16px 0; padding: 3px 0 3px 17px; border-left: 2px solid var(--pg-accent);
+               color: var(--pg-ink-2); font-size: 14px; max-width: 64ch; }
+
+  .closing { margin-top: 50px; padding: 25px 27px; border-radius: 12px;
+             background: var(--pg-surface); border: 1px solid var(--pg-line);
+             border-left: 2px solid var(--pg-cyan); }
+  .closing h3 { font-size: 19px; margin-bottom: 10px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .caret { animation: blink 1.06s steps(1,end) infinite; }
+  }
+  @keyframes blink { 0%,50% { opacity: 1; } 50.01%,100% { opacity: 0; } }
+</style>
+
+<div class="wrap">
+  <div class="spine" aria-hidden="true"></div>
+
+  <header class="bay">
+    <div class="eyebrow">
+      <span>Shipped</span><span>&middot;</span>
+      <span>price-watcher &rarr; ticket-autobuy</span>
+      <span class="chip-live" style="color:var(--pg-green);border-color:color-mix(in srgb,var(--pg-green) 40%,transparent);background:color-mix(in srgb,var(--pg-green) 9%,transparent)">Built &mdash; both cuts rendered</span>
+    </div>
+    <h1>One system.<br>Two halves.<br>One line.</h1>
+    <p class="thesis">A 45-second replacement for a reel that had <em>no UI, no mark and no
+      identity</em> &mdash; rebuilt in the surfaces these two tools actually touch, and cut
+      for <em>both</em> themes. Every still below is the real render.</p>
+
+    <div class="slate">
+      <div><dt>Format</dt><dd>1920&times;1080</dd></div>
+      <div><dt>Duration</dt><dd>45.0s</dd></div>
+      <div><dt>Frame rate</dt><dd>30 fps</dd></div>
+      <div><dt>Frames</dt><dd>8</dd></div>
+      <div><dt>Cuts</dt><dd>dark + light</dd></div>
+      <div><dt>Gate</dt><dd>check passed</dd></div>
+    </div>
+  </header>
+
+  <div class="cutbar bay">
+    <span class="lede">Showing</span>
+    <div class="seg" role="group" aria-label="Which cut to preview">
+      <button type="button" data-cut-btn="dark" aria-pressed="true">
+        <span class="sw" style="background:#0c0e12"></span>Dark cut
+      </button>
+      <button type="button" data-cut-btn="light" aria-pressed="false">
+        <span class="sw" style="background:#ffffff"></span>Light cut
+      </button>
+    </div>
+    <span class="hint">Swaps all eight stills. Both cuts came from one source file.</span>
+  </div>
+
+  <!-- ── WHY ──────────────────────────────────────────────── -->
+  <section class="bay">
+    <div class="sec-head"><h2>Why v2</h2><div class="rule"></div></div>
+    <p>I pulled frames from the rendered v1 at <code>t=2.8</code>, <code>11.0</code>,
+      <code>15.6</code> and <code>19.4</code>. All five scenes are typographic slides on a flat
+      ground &mdash; no chrome, no mark, no surface. It reads as generic cyan-on-dark, which
+      HyperFrames' own <code>house-style.md</code> lists by name as the first lazy default to
+      question.</p>
+    <p>Three things change. <b>The mark exists now</b> &mdash;
+      <code>assets/vector-nobg.svg</code> (1254&sup2;, 111 paths) has never once appeared in
+      the reel; it opens and closes v2 and does a job in between. <b>Every scene sits in real
+      UI furniture</b> &mdash; a terminal, a Telegram thread, a browser under automation, all
+      built in HTML rather than captured. And <b>one brand, one journey</b>: per your call the
+      two repos aren't rivals, they're step A and step B of the same system, so one mark covers
+      both and the line between them is a handoff rather than a wall.</p>
+  </section>
+
+  <!-- ── TWO CUTS ─────────────────────────────────────────── -->
+  <section class="bay">
+    <div class="sec-head"><h2>Two cuts, one source</h2><div class="rule"></div></div>
+    <p>They are not two compositions &mdash; that would let the timing drift the first time one
+      was edited alone. One <code>index.html</code> declares a <code>theme</code> variable and
+      the CLI renders both from it in a single command:</p>
+<pre>// themes.json
+[ { "theme": "dark" }, { "theme": "light" } ]
+
+$ npx hyperframes render <b>--batch</b> themes.json <b>--strict-variables</b></pre>
+    <p><code>--batch</code> renders one output per variable row; <code>--strict-variables</code>
+      fails the render if <code>theme</code> is ever undeclared or mistyped rather than quietly
+      warning. Layout, timing and motion are physically the same source, so the two cuts cannot
+      desynchronise.</p>
+    <p><b>Why both is the right answer, not just twice the work:</b> GitHub honours
+      <code>prefers-color-scheme</code> in a README via <code>&lt;picture&gt;</code> &mdash; the
+      very pattern the HyperFrames README uses for its own logo. Today's single dark hero floats
+      as a black slab for every reader on GitHub's default light theme, in both repos. And the
+      portfolio already ships a <code>data-theme</code> switch, so the case-study hero can match
+      the page it sits in.</p>
+
+    <div class="versus" style="margin-top:26px">
+      <figure>
+        <div class="shot"><img src="frames/dark_05.webp" alt="Frame 5, the handoff — dark cut"></div>
+        <figcaption><span class="sw" style="background:#0c0e12"></span>Dark cut &mdash; ground #0c0e12</figcaption>
+      </figure>
+      <figure>
+        <div class="shot"><img src="frames/light_05.webp" alt="Frame 5, the handoff — light cut"></div>
+        <figcaption><span class="sw" style="background:#fff"></span>Light cut &mdash; ground #ffffff</figcaption>
+      </figure>
+    </div>
+    <p class="note" style="margin-top:16px">Frame 5 in both, from the actual render. These two stay
+      pinned for comparison &mdash; the toggle above does not move them.</p>
+  </section>
+
+  <!-- ── HONESTY GATE ─────────────────────────────────────── -->
+  <section class="bay">
+    <div class="sec-head"><h2>The constraint that governs every frame</h2><div class="rule"></div></div>
+    <p>Your own case-study memory files this record as <code>featured: false</code> for a stated
+      reason: <em>&ldquo;zero design evidence &mdash; two CLIs, no interface.&rdquo;</em> That is
+      still true. Adding UI to fix &ldquo;no UI&rdquo; must not quietly contradict it, so the
+      reel may only depict surfaces these tools genuinely touch.</p>
+    <div class="gate">
+      <div class="yes">
+        <h4>May appear</h4>
+        <ul>
+          <li>A terminal window <span><code>watch.py</code> &mdash; the literal interface</span></li>
+          <li>A Telegram message <span>the real notification sink</span></li>
+          <li>A browser under Playwright <span><code>buy.py</code> drives a real one</span></li>
+          <li>A JSON payload / target file <span>what the adapter actually parses</span></li>
+        </ul>
+      </div>
+      <div class="no">
+        <h4>May not appear</h4>
+        <ul>
+          <li>A price-watcher dashboard <span>does not exist</span></li>
+          <li>A settings or admin panel <span>does not exist</span></li>
+          <li>A charting or analytics app <span>does not exist</span></li>
+          <li>Seller branding, CPF, phone, cookie, chat id <span>carried over from frame.md</span></li>
+        </ul>
+      </div>
+    </div>
+    <p class="note stop"><b>Inventing an interface to fix &ldquo;no UI&rdquo; would be the same
+      kind of lie the reel exists to avoid.</b> Everything below is a surface that is really there.</p>
+  </section>
+
+  <!-- ── PALETTE ──────────────────────────────────────────── -->
+  <section class="bay">
+    <div class="sec-head"><h2>Palette &mdash; both grounds, every value already a token</h2><div class="rule"></div></div>
+    <p>The light column is not invented. <code>tokens.css</code> already carries a complete
+      <code>:root[data-theme="light"]</code> semantic layer written for exactly this problem
+      &mdash; and its comment, sitting in the <em>dark</em> block, says so:</p>
+    <blockquote><code>--primary</code> is the fill; <code>--primary-ink</code> is foreground ink.
+      They happen to be identical on the dark canvas, but separating them <b>prevents cyan text
+      from failing contrast against the light canvas.</b></blockquote>
+    <p>That is the whole light-theme problem, already solved: <code>#00c8ff</code> measures
+      <b>1.96:1 on white</b> and cannot be type there. The design system routes around it, so v2 does too.</p>
+
+    <div class="tbl-scroll">
+      <table class="pal">
+        <thead><tr><th>Role</th><th>Dark cut</th><th>Light cut</th></tr></thead>
+        <tbody>
+          <tr><td>Ground</td>
+            <td><div class="sw-row"><i style="background:#0c0e12"></i><span class="hex">#0c0e12</span></div></td>
+            <td><div class="sw-row"><i style="background:#ffffff"></i><span class="hex">#ffffff</span></div></td></tr>
+          <tr><td>Heading ink</td>
+            <td><div class="sw-row"><i style="background:#f7f7f7"></i><span class="hex">#f7f7f7</span></div><span class="ok">19.4:1 &check;</span></td>
+            <td><div class="sw-row"><i style="background:#0c0e12"></i><span class="hex">#0c0e12</span></div><span class="ok">19.4:1 &check;</span></td></tr>
+          <tr><td><b>A-side &mdash; the watcher</b> <span style="color:var(--pg-ink-3)">(type)</span></td>
+            <td><div class="sw-row"><i style="background:#00c8ff"></i><span class="hex">#00c8ff</span></div><span class="ok">9.9:1 &check;</span></td>
+            <td><div class="sw-row"><i style="background:#00769d"></i><span class="hex">#00769d</span></div><span class="ok">5.2:1 &check;</span></td></tr>
+          <tr><td><b>B-side &mdash; the buyer</b> <span style="color:var(--pg-ink-3)">(type)</span></td>
+            <td><div class="sw-row"><i style="background:#826AFB"></i><span class="hex">#826AFB</span></div><span class="ok">5.0:1 &check;</span></td>
+            <td><div class="sw-row"><i style="background:#625df5"></i><span class="hex">#625df5</span></div><span class="ok">4.8:1 &check;</span></td></tr>
+          <tr><td>B-side <b>fill &amp; glow only</b></td>
+            <td><div class="sw-row"><i style="background:#4F2DEA"></i><span class="hex">#4F2DEA</span></div><span class="no">2.67:1 never type</span></td>
+            <td><div class="sw-row"><i style="background:#4F2DEA"></i><span class="hex">#4F2DEA</span></div><span class="ok">7.2:1 &check;</span></td></tr>
+          <tr><td>The refusal</td>
+            <td><div class="sw-row"><i style="background:#ff5d8b"></i><span class="hex">#ff5d8b</span></div></td>
+            <td><div class="sw-row"><i style="background:#d7004b"></i><span class="hex">#d7004b</span></div><span class="ok">5.3:1 &check;</span></td></tr>
+          <tr><td>The armed ceiling &mdash; the key that crosses</td>
+            <td><div class="sw-row"><i style="background:#fde272"></i><span class="hex">#fde272</span></div></td>
+            <td><div class="sw-row"><i style="background:#854a0e"></i><span class="hex">#854a0e</span></div><span class="ok">7.0:1 &check;</span></td></tr>
+          <tr><td>The confirmed order &mdash; <b>once, Frame 7</b></td>
+            <td><div class="sw-row"><i style="background:#22c55e"></i><span class="hex">#22c55e</span></div></td>
+            <td><div class="sw-row"><i style="background:#095c37"></i><span class="hex">#095c37</span></div><span class="ok">8.0:1 &check;</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note stop" style="margin-top:18px"><b><code>#4F2DEA</code> is a fill, a stroke and
+      a glow &mdash; never type on the dark ground</b>, where it measures 2.67:1. On white it
+      passes at 7.2:1 and becomes real type. This inversion is the rule most likely to get broken
+      during the build, so it is written down twice.</p>
+    <p class="note"><b>The teal is gone.</b> v1 had none, and I had proposed one for the
+      <code>0 dependencies</code> badge. There is no contrast-safe teal token for the light
+      ground, and spending a sixth hue on a claim that is not a status was wrong anyway. The
+      badge is neutral ink in both cuts &mdash; which keeps green meaning <em>exactly one
+      thing</em>: the order in Frame 7.</p>
+    <p class="note warn"><b>&#9940; Do not apply <code>--brand-mark-filter</code>.</b> The light
+      theme sets it to <code>invert(1)</code>, correct for the monochrome wordmark it was written
+      for and catastrophic here &mdash; inverting a full-colour violet illustration yields
+      yellow-green sludge. And the mark needs no help: <code>png.png</code> shows it on white and
+      it is plainly where it was designed to live, its near-white interior held inside a violet
+      outline that does all the work. <b>The light cut is the mark's home ground.</b></p>
+  </section>
+
+  <!-- ── RULER ────────────────────────────────────────────── -->
+  <section class="bay">
+    <div class="sec-head"><h2>45 seconds, allocated</h2><div class="rule"></div></div>
+    <div class="ruler-bar">
+      <div class="rseg" style="flex:4.2;--acc:var(--pg-line-2)"><span class="n">1</span><span class="d">4.2s</span></div>
+      <div class="rseg" style="flex:6.8;--acc:var(--pg-cyan)"><span class="n">2</span><span class="d">6.8s</span></div>
+      <div class="rseg" style="flex:6.6;--acc:var(--pg-cyan)"><span class="n">3</span><span class="d">6.6s</span></div>
+      <div class="rseg" style="flex:5.6;--acc:var(--pg-pink)"><span class="n">4</span><span class="d">5.6s</span></div>
+      <div class="rseg hold" style="flex:7.2;--acc:linear-gradient(90deg,var(--pg-cyan),var(--pg-violet))"><span class="n">5</span><span class="d">7.2s &mdash; longest</span></div>
+      <div class="rseg" style="flex:6.2;--acc:var(--pg-violet)"><span class="n">6</span><span class="d">6.2s</span></div>
+      <div class="rseg" style="flex:4.4;--acc:var(--pg-green)"><span class="n">7</span><span class="d">4.4s</span></div>
+      <div class="rseg" style="flex:4.0;--acc:var(--pg-line-2)"><span class="n">8</span><span class="d">4.0s</span></div>
+    </div>
+    <div class="ruler-scale"><span>0s</span><span>10s</span><span>20s</span><span>30s</span><span>40s</span><span>45s</span></div>
+    <p class="note" style="margin-top:16px">Frame 5 carries the longest hold because it carries
+      the argument &mdash; <code>frame.md</code> already says so, and v1 honoured it. Everything
+      left of it is the watcher; everything right of it is the buyer.</p>
+  </section>
+
+  <!-- ══ FRAMES ══════════════════════════════════════════ -->
+  <section class="bay">
+    <div class="sec-head"><h2>The eight frames</h2><div class="rule"></div></div>
+
+    <!-- F1 -->
+    <article class="frame both">
+      <div class="frame-head"><span class="frame-no">01</span>
+        <div class="frame-title"><h3>The mark</h3>
+          <div class="frame-tc">00:00.0 &rarr; 00:04.2 &nbsp;&middot;&nbsp; 4.2s &nbsp;&middot;&nbsp; in: cut</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_01.webp" alt="Frame 1 — The mark, dark cut" loading="lazy"><img data-cut="light" src="frames/light_01.webp" alt="Frame 1 — The mark, light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">logo-assemble-lockup</span>
+            <span class="chip"><span class="k">rule</span> svg-path-draw</span>
+            <span class="chip"><span class="k">rule</span> ambient-glow-bloom</span></div>
+          <p>Cold open on bare ground. The ticket's outer contour draws on as a stroke, the
+            interior fills cross-fade up underneath it, and a violet bloom lifts and settles.
+            The arrow between the names draws left to right &mdash; the journey stated once,
+            in one gesture.</p>
+          <p class="note"><b>The exit is a match cut, not a wipe.</b> The mark shrinks and
+            travels to the top-left, where it lands as the favicon in Frame&nbsp;2. The brand
+            doesn't get introduced and then abandoned; it becomes the furniture.</p>
+          <p class="note warn">Build risk: drawing all 111 paths would be soup. Only the outer
+            contour draws; the rest cross-fades. Fallback is a masked wipe across the whole mark.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- F2 -->
+    <article class="frame a">
+      <div class="frame-head"><span class="frame-no">02</span>
+        <div class="frame-title"><h3>One price. Nineteen in the payload.</h3>
+          <div class="frame-tc">00:04.2 &rarr; 00:11.0 &nbsp;&middot;&nbsp; 6.8s &nbsp;&middot;&nbsp; in: match-cut</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_02.webp" alt="Frame 2 — One price. Nineteen in the payload., dark cut" loading="lazy"><img data-cut="light" src="frames/light_02.webp" alt="Frame 2 — One price. Nineteen in the payload., light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">cursor-ui-demo</span>
+            <span class="chip"><span class="k">rule</span> cursor-click-ripple</span>
+            <span class="chip"><span class="k">rule</span> anchored-layout-expand</span>
+            <span class="chip"><span class="k">reg</span> browser-device-stage</span></div>
+          <p>Real browser chrome &mdash; tab strip carrying the mark as favicon, address pill,
+            reload. The page shows what a human sees: the event, and <b>one</b> number. The
+            cursor travels in, presses the disclosure, and the drawer opens onto the JSON
+            underneath.</p>
+          <p>That is the adapter's actual claim: the site is Next.js SSR and ships the whole
+            matrix in its payload, which is exactly why a CSS scraper would be worse than useless.</p>
+          <p class="note stop"><b>A real defect being fixed, not a restyle.</b> v1 tweens
+            <code>#s1-matrix { height }</code>. The animation rules contract forbids
+            <code>width</code>/<code>height</code>/<code>top</code>/<code>left</code> tweens
+            outright &mdash; they snap to integer device pixels and stutter under the
+            seek-by-frame renderer. v2 opens the drawer with a mask and a counter-scale.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- F3 -->
+    <article class="frame a">
+      <div class="frame-head"><span class="frame-no">03</span>
+        <div class="frame-title"><h3>The watcher runs</h3>
+          <div class="frame-tc">00:11.0 &rarr; 00:17.6 &nbsp;&middot;&nbsp; 6.6s &nbsp;&middot;&nbsp; in: vertical travel</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_03.webp" alt="Frame 3 — The watcher runs, dark cut" loading="lazy"><img data-cut="light" src="frames/light_03.webp" alt="Frame 3 — The watcher runs, light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">prompt-type-submit-generate</span>
+            <span class="chip"><span class="k">rule</span> discrete-text-sequence</span>
+            <span class="chip"><span class="k">rule</span> context-sensitive-cursor</span>
+            <span class="chip"><span class="k">reg</span> terminal-simulator</span></div>
+          <p>The browser travels up and out; a terminal rises into its place. Real window chrome,
+            muted dots, a true title bar. The command <b>types</b>, character by character, with
+            a blinking caret.</p>
+          <p>Log lines arrive on a beat rather than as a dump &mdash; a watcher is a thing that
+            runs <em>over time</em>, and a single paste would read as a static list. The
+            record-low line updating in place is the rule firing: edge-triggered, which is the
+            repo's own stated invariant.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- F4 -->
+    <article class="frame a">
+      <div class="frame-head"><span class="frame-no">04</span>
+        <div class="frame-title"><h3>The alert, and the refusal</h3>
+          <div class="frame-tc">00:17.6 &rarr; 00:23.2 &nbsp;&middot;&nbsp; 5.6s &nbsp;&middot;&nbsp; in: rack-focus</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_04.webp" alt="Frame 4 — The alert, and the claim, dark cut" loading="lazy"><img data-cut="light" src="frames/light_04.webp" alt="Frame 4 — The alert, and the claim, light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">agent-progress-theater</span>
+            <span class="chip"><span class="k">rule</span> depth-of-field-blur</span>
+            <span class="chip"><span class="k">rule</span> press-release-spring</span>
+            <span class="chip"><span class="k">reg</span> chat-message</span></div>
+          <p>The terminal stays on screen and racks <b>out</b> of focus. A Telegram bubble rises
+            into the sharp plane, carrying the mark as the bot's avatar &mdash; so the brand is
+            doing a job rather than sitting in a corner.</p>
+          <p class="note stop"><b><code>NEVER BUYS</code> gets its own beat.</b> It is the
+            load-bearing claim of the whole piece, and v1 spends it as one badge in a row of two
+            at the bottom of a frame. Here it stamps: a press-spring overshoot, then dead still.</p>
+          <p class="note">No chat id, no handle, no phone number. The timestamp is authored.
+            Where the mark must sit on an uncertain ground, <code>png-profile-nobg.png</code>
+            carries its own blue disc and works on either cut.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- F5 -->
+    <article class="frame both">
+      <div class="frame-head"><span class="frame-no">05</span>
+        <div class="frame-title"><h3>The line</h3>
+          <div class="frame-tc">00:23.2 &rarr; 00:30.4 &nbsp;&middot;&nbsp; 7.2s &mdash; longest hold &nbsp;&middot;&nbsp; in: wipe</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_05.webp" alt="Frame 5 — The handoff, dark cut" loading="lazy"><img data-cut="light" src="frames/light_05.webp" alt="Frame 5 — The handoff, light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">comparison-split</span>
+            <span class="chip"><span class="k">rule</span> svg-path-draw</span>
+            <span class="chip"><span class="k">rule</span> split-tilt-cards</span>
+            <span class="chip"><span class="k">rule</span> depth-of-field-blur</span></div>
+          <p>The centre of the argument, and the frame a reader pauses on. The divider
+            <b>draws</b> top-to-bottom on <code>stroke-dashoffset</code> &mdash; a boundary being
+            <em>decided</em>, which is what actually happened. The halves then open out from it
+            with mirrored book-open tilts, each away from the centre, so the motion itself says
+            <em>these are two things and the line is between them</em>.</p>
+          <p class="note"><b>This is where your &ldquo;one system&rdquo; reframe lands.</b> The
+            Frame&nbsp;1 lockup returns &mdash; small, centred, straddling the line. One mark
+            above, two halves below. The <code>buy</code> block materialises <b>on</b> the
+            divider and stays there: the only object in 45 seconds that touches both sides.</p>
+          <p class="note">v1 scales the divider in on <code>scaleY</code>. Drawing it is both the
+            rule-sanctioned mechanism and the better read. ~2.2s of authored stillness before the exit.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- F6 -->
+    <article class="frame b">
+      <div class="frame-head"><span class="frame-no">06</span>
+        <div class="frame-title"><h3>The walk</h3>
+          <div class="frame-tc">00:30.4 &rarr; 00:36.6 &nbsp;&middot;&nbsp; 6.2s &nbsp;&middot;&nbsp; in: vertical travel, the line persists</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_06.webp" alt="Frame 6 — The walk, dark cut" loading="lazy"><img data-cut="light" src="frames/light_06.webp" alt="Frame 6 — The walk, light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">agent-progress-theater</span>
+            <span class="chip"><span class="k">rule</span> cursor-click-ripple</span>
+            <span class="chip"><span class="k">rule</span> physics-press-reaction</span>
+            <span class="chip"><span class="k">reg</span> state-chip-rail</span></div>
+          <p>Your in-UI navigation lives here: a real five-step stepper that advances screen by
+            screen at the measured cadence, a cursor that travels to <code>Reservar</code> and
+            presses with a ripple, and a budget bar filling to 18.37 of its 45s ceiling.</p>
+          <p class="note stop"><b>&#9940; Everything in this frame lives right of the line.</b>
+            Your v1 post-mortem records this as the one error caught in a contact sheet and not
+            by the linter: the order card had been sitting over the <em>watcher's</em> column,
+            which reads as &ldquo;the watcher bought it&rdquo; &mdash; the single claim the piece
+            exists to deny. <code>check</code> rated it <code>info</code>. It was nearly shipped.</p>
+          <p class="note warn">No green anywhere in this frame. The steps tick cyan.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- F7 -->
+    <article class="frame b">
+      <div class="frame-head"><span class="frame-no">07</span>
+        <div class="frame-title"><h3>Left unpaid on purpose</h3>
+          <div class="frame-tc">00:36.6 &rarr; 00:41.0 &nbsp;&middot;&nbsp; 4.4s &nbsp;&middot;&nbsp; in: cut</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_07.webp" alt="Frame 7 — You approve the payment, dark cut" loading="lazy"><img data-cut="light" src="frames/light_07.webp" alt="Frame 7 — You approve the payment, light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">titlecard-reveal</span>
+            <span class="chip"><span class="k">rule</span> success-check</span>
+            <span class="chip"><span class="k">rule</span> counting-dynamic-scale</span></div>
+          <p>Still right of the line. The order card resolves under the walk that produced it and
+            its border goes <b>green &mdash; the only green in 45 seconds</b>.</p>
+          <p>The hold ticks down from 10:00, measured on order <code>#7707X57Q</code> where the
+            checkout says <em>&ldquo;Voc&ecirc; tem 10 minutos para completar sua compra&rdquo;</em>.
+            It ticking is the point: something is running out, and the tool has deliberately
+            handed it to a person.</p>
+          <p class="note warn">The Pix payload is greeked. <b>10 minutes, not 30</b> &mdash; the
+            README records that an earlier draft said 30, which is three times the real margin a
+            human actually gets.</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- F8 -->
+    <article class="frame both">
+      <div class="frame-head"><span class="frame-no">08</span>
+        <div class="frame-title"><h3>The count, and the mark</h3>
+          <div class="frame-tc">00:41.0 &rarr; 00:45.0 &nbsp;&middot;&nbsp; 4.0s &nbsp;&middot;&nbsp; in: vertical travel</div></div></div>
+      <div class="frame-body">
+        <div class="shot"><img data-cut="dark" src="frames/dark_08.webp" alt="Frame 8 — The count, and the mark, dark cut" loading="lazy"><img data-cut="light" src="frames/light_08.webp" alt="Frame 8 — The count, and the mark, light cut" loading="lazy" hidden></div>
+                <div>
+          <div class="chips"><span class="chip bp">dataviz-countup</span>
+            <span class="chip bp">logo-assemble-lockup</span>
+            <span class="chip"><span class="k">rule</span> counting-dynamic-scale</span></div>
+          <p>Numbers count up and <b>stop on their real value</b>. Nothing rolls past its own
+            figure and settles back &mdash; that would be a lie about precision in a piece whose
+            whole argument is that the figures are checkable.</p>
+          <p>All three are verified: <code>228 + 196 = 424</code> was re-run against both suites
+            on 2026-09-12, after the READMEs were caught claiming 187 and 114.</p>
+          <p class="note">The divider outlives everything it separated, and is the last thing
+            still lit.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ── DECISIONS ────────────────────────────────────────── -->
+  <section class="bay">
+    <div class="sec-head"><h2>What shipped</h2><div class="rule"></div></div>
+    <div class="tbl-scroll">
+      <table class="pal">
+        <thead><tr><th>Artifact</th><th>Spec</th><th>Weight</th><th>Lands in</th></tr></thead>
+        <tbody>
+          <tr><td><code>&hellip;-showcase-{dark,light}.mp4</code></td><td>1920&times;1080 &middot; 30fps &middot; 45.0s</td><td class="hex">5.7 MB</td><td>archive &middot; case study</td></tr>
+          <tr><td><code>&hellip;-showcase-{dark,light}.webp</code></td><td>1080p &middot; 12fps &middot; q40 &middot; loop&nbsp;0</td><td class="hex">1.68 / 1.82 MB</td><td>both repo READMEs</td></tr>
+          <tr><td><code>&hellip;-preview-{dark,light}.mp4</code></td><td>1280&times;720 &middot; crf&nbsp;26</td><td class="hex">0.87 / 0.90 MB</td><td>the site</td></tr>
+          <tr><td><code>&hellip;-{dark,light}-poster.webp</code></td><td>still at t=28s</td><td class="hex">0.08 MB</td><td>poster &middot; OG</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:18px">Both WebPs measured <b>45.00s</b> and <code>loop=0</code>
+      by summing their ANMF chunk durations &mdash; <code>ffprobe</code> reports
+      <code>duration=N/A</code> for an animated WebP, so it cannot confirm this and was not trusted to.</p>
+    <p class="note">The two cuts were proved genuinely different, not just differently encoded:
+      mean luminance at t=2/8/25/38s reads <b>~22/255</b> dark against <b>~245/255</b> light.</p>
+    <p class="note warn">⛔ One thing I did <b>not</b> do: the site's case-study hero takes fixed
+      filenames and has no theme logic, so it now carries the <b>dark</b> cut under its existing
+      names. Making that hero theme-aware needs a change in <code>[slug].astro</code> /
+      <code>projects.ts</code> that you haven't asked for.</p>
+
+  <div class="bay">
+    <div class="closing">
+      <h3>Four changes you called, all in both cuts</h3>
+      <p><b>The host is named</b> &mdash; <code>buyticketbrasil.com</code> reads in full in the
+        address bar. <b>The copy is positive throughout</b> &mdash; <code>NEVER BUYS</code> became
+        <code>ALWAYS PRECISE</code>, <code>cannot buy</code> became <code>get instant prices</code>,
+        and <code>left unpaid on purpose</code> became <code>you approve the payment</code>.
+        <b>That stamp is success green</b>, not error red. And <b>the divider only appears where
+        there are genuinely two columns</b> &mdash; it draws at F6, holds through F7, retracts at
+        F8, and is gone from F5 and F8 entirely, at two thirds of its old length.</p>
+      <p style="margin-top:14px">&#11088; The contact sheet earned its keep again: the checker
+        passed a composition that was using about 60% of a 1080p frame. Everything was scaled up
+        and the watcher's dead half now holds the real
+        <code>history/&lt;target&gt;.jsonl</code> it writes.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var KEY = "pw-reel-cut";
+    var btns = document.querySelectorAll("[data-cut-btn]");
+    // Frame 5's side-by-side pair is pinned and must ignore the toggle.
+    var mocks = document.querySelectorAll(".mock:not([data-pin])");
+
+    function apply(cut) {
+      mocks.forEach(function (m) { m.setAttribute("data-cut", cut); });
+      document.querySelectorAll(".shot img").forEach(function (img) {
+        img.hidden = img.dataset.cut !== cut;
+      });
+      btns.forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.cutBtn === cut));
+      });
+      try { localStorage.setItem(KEY, cut); } catch (e) {}
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener("click", function () { apply(b.dataset.cutBtn); });
+    });
+
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    if (saved === "light" || saved === "dark") apply(saved);
+  })();
+</script>

@@ -9,13 +9,25 @@ mode: collaborative
 workflow: general-video
 storyboard: yes
 variants: dark + light — one source, two rows through `render --batch`
-status: awaiting review — nothing built, nothing rendered
+status: BUILT & APPROVED 2026-09-13 — both cuts rendered, check passed
 ---
 
 # price-watcher → ticket-autobuy — showcase v2
 
-Supersedes the 20s cut in `out/`. **Nothing here is built yet.** This board is the review
-surface; on approval it becomes 8 sub-compositions under `compositions/frames/`.
+> **Archived board — this is the plan that was actually built.** Superseded the 20s v1.
+> Approved by Juan 2026-09-13; both cuts rendered and shipped.
+>
+> - **Composition:** [`../../price-watcher-ticket-autobuy-showcase/`](../../price-watcher-ticket-autobuy-showcase/)
+>   — design truth is its `frame.md`; the build is a single `index.html`.
+> - **Visual board:** `price-watcher-ticket-autobuy-showcase.storyboard.html` (sibling, opens
+>   locally — it reads `frames/`) · published at
+>   <https://claude.ai/code/artifact/b1e66aed-4e93-4f9c-9306-6f3de13ffd3f>
+> - **Contact sheets:** `contact-sheet-{dark,light}.png` · stills in `frames/`
+>
+> ⛔ **One correction to the plan below:** it proposed 8 sub-compositions under
+> `compositions/frames/`. That is **not** what was built — the persistent divider spanning F6→F7
+> required one timeline, so the piece is a single `index.html` with 8 view blocks. Frame numbering,
+> timings and motion citations below are otherwise as shipped.
 
 ---
 
@@ -480,19 +492,17 @@ The divider outlives everything it separated and is the last thing still lit.
 
 ---
 
-## What I need a decision on
+## Decisions — all settled 2026-09-13
 
-1. **The elided host** (`•••••••••`). Deliberate redaction, or name the site? Its own README
-   links `buyticketbrasil.com` publicly, but `frame.md` bans its branding. I've defaulted to
-   eliding.
-2. **The README loop seam.** v2 opens on bare ground and closes on a lockup, so the animated
-   WebP will hard-cut when it loops — same as v1. Making it seamless costs the end lockup.
-   I've defaulted to keeping the lockup.
-3. **WebP weight — now doubled.** v1 is 866 KB for 282 frames. At 45s with dense UI a naive
-   re-encode lands around 2.5–4 MB, and with two variants both READMEs now carry **two**
-   heroes. I'd drop the WebP to ~15fps at 960px and keep the MP4 full-rate — GitHub renders
-   it the same and nobody frame-steps a README hero. That puts the pair back near v1's
-   single-file weight. Flag if you'd rather trade length for weight instead.
+1. ~~**The elided host.**~~ → **Named in full.** `buyticketbrasil.com` reads in the address bar in
+   F2 and F6; the elision was lifted by Juan. `frame.md`'s ban now covers the seller's *branding
+   and identity*, not the hostname their own README links publicly.
+2. ~~**The README loop seam.**~~ → **Lockup kept, seam accepted.** One single video is mirrored to
+   both READMEs rather than cutting a separate short loop.
+3. ~~**WebP weight.**~~ → **1080p kept; compressed on quality, never downscaled.** Juan's call:
+   render at full size, then compress only the README derivative. Shipped at 1080p · 12fps · q40
+   via `libwebp_anim` → **1.68 MB** (dark) / **1.82 MB** (light), both **45.00s, `loop=0`**
+   (verified by summing ANMF chunks — `ffprobe` reports `duration=N/A` for animated WebP).
 
 ## What ships
 
@@ -521,3 +531,25 @@ review — the order card sitting over the watcher's column — was rated `info`
 caught by eye in a contact sheet. Two variants means two sheets to actually look at.
 
 Render only after you approve the sheet.
+
+---
+
+## Late changes, after the board was written
+
+All four were Juan's calls during the build, and all landed in **both** cuts. `frame.md` carries
+them as design truth:
+
+1. **Positive register is now a hard copy rule.** `NEVER BUYS` → **`ALWAYS PRECISE`**;
+   `cannot buy` → **`get instant prices`**; `left unpaid on purpose` → **`you approve the
+   payment`**. ⛔ The substance is unchanged — the human still holds the trigger; it is said
+   forward instead of as a refusal. Frames 4, 5, 6 and 7 below predate this and still show the
+   old wording in their sketches.
+2. **`ALWAYS PRECISE` is success green**, not the pink refusal colour. Green is therefore a
+   *family* now (the stamp **and** the order), not the single spend the palette section describes.
+   The red/pink accent ends up **unused** in v2.
+3. **The divider only appears where there are genuinely two columns** — it draws at F6, holds
+   through F7, retracts at F8. ⛔ Absent from **F5** (the two cards *are* the columns) and F8.
+   Length reduced to **581px**, two thirds of frame height, centred on 540.
+4. **The watcher's half of F6/F7 holds real UI** — the `history/<target>.jsonl` the watcher
+   actually writes. The contact sheet showed the composition using ~60% of a 1080p frame;
+   everything was scaled up and that dead half filled.
