@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import SourceCodeButton from "./SourceCodeButton.astro";
 import StackBadge from "./StackBadge.astro";
 import { localizedPath, t, type Locale } from "../i18n";
-import { SIGNAL_FACETS, formatTimeframe, isVideoPreview, previewFor, projectActions } from "../lib/projects";
+import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, formatTimeframe, isVideoPreview, motionPreviewFor, previewFor, projectActions } from "../lib/projects";
 import "../styles/evidence-rail.css";
 import "../styles/action-row.css";
 
@@ -32,6 +32,12 @@ const [primary, secondary] = projectActions({
   // case study" for records whose `caseStudy` is null, while the index called
   // the very same record "View project". The schema makes `caseStudy` either
   // null or both locales, so this one check is complete.
+  //
+  // ⛔ This label now sits on the PRIMARY control, which raises the cost of
+  // breaking the tie-up: `ProjectsIndex.tsx` renders the identical ternary for
+  // the same record. Hard-coding one string here — "View project" on every
+  // card regardless of whether a narrative exists — re-opens exactly the drift
+  // the paragraph above records, and does it on the loudest button we have.
   caseLabel:
     d.caseStudy !== null ? copy.projects.index.caseStudy : copy.projects.index.caseStudySoon,
   liveFallbackLabel: copy.projects.liveProjectFallback,
@@ -46,12 +52,24 @@ const [primary, secondary] = projectActions({
 if (d.evidenceSignals.sourceCode && !d.evidenceLink) {
   console.warn(
     `[projects] ${project.id}: evidenceSignals.sourceCode is true but the ` +
-      `record carries no evidenceLink — second action fell back to the case study.`,
+      `record carries no evidenceLink — second action fell back to the live site.`,
   );
 }
 
 const preview = previewFor(d, lang);
 const isVideo = isVideoPreview(preview);
+
+/**
+ * The card's moving preview, where the record ships one. It sits on the still
+ * until the pointer arrives, so the homepage costs three images at rest rather
+ * than three videos — `preload="none"` means nothing is fetched until a hover
+ * actually happens, and on a touch device nothing is fetched at all.
+ *
+ * Takes precedence over `isVideo`, which is the older single-source shape
+ * (`price-watcher`, whose `preview` IS an .mp4). That one has no still to fall
+ * back to, so it must autoplay; this one must not.
+ */
+const motion = motionPreviewFor(d, lang);
 
 // The reference's chip is compact metadata, not a repeat of what sits below it:
 // the stack badges already name the stack two rows down.
@@ -83,28 +101,40 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     }
 
     <div class="case-card__actions">
-      <a
-        class="button"
-        href={primary.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={primary.label}
-      >
+      {/*
+        Slot one is the case study, and it is the one action on this card that
+        stays on the site — so no target and no rel, unlike the sibling below.
+
+        It carries the SAME `case-cta` class as that sibling, which is the whole
+        point: the two halves of the pair run one motion, and sharing the class
+        rather than copying its rules is what stops them drifting apart later.
+        `--primary` only swaps the colour roles. The old box-and-arrow
+        external-link glyph is gone with the behaviour it advertised — this slot
+        used to hold the live URL.
+      */}
+      <a class="button case-cta case-cta--primary" href={primary.href}>
         <svg
-          class="action-primary__icon"
-          viewBox="0 0 20 20"
-          fill="none"
+          class="case-cta__arr case-cta__arr--in"
+          viewBox="0 0 24 24"
           aria-hidden="true"
           focusable="false"
         >
           <path
-            d="M17.5 7.50001L17.5 2.50001M17.5 2.50001H12.5M17.5 2.50001L10 10M8.33333 2.5H6.5C5.09987 2.5 4.3998 2.5 3.86502 2.77248C3.39462 3.01217 3.01217 3.39462 2.77248 3.86502C2.5 4.3998 2.5 5.09987 2.5 6.5V13.5C2.5 14.9001 2.5 15.6002 2.77248 16.135C3.01217 16.6054 3.39462 16.9878 3.86502 17.2275C4.3998 17.5 5.09987 17.5 6.5 17.5H13.5C14.9001 17.5 15.6002 17.5 16.135 17.2275C16.6054 16.9878 16.9878 16.6054 17.2275 16.135C17.5 15.6002 17.5 14.9001 17.5 13.5V11.6667"
-            stroke="currentColor"
-            stroke-width="1.66667"
-            stroke-linecap="round"
-            stroke-linejoin="round"></path>
+            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+          ></path>
         </svg>
-        {primary.label}
+        <span class="case-cta__text">{primary.label}</span>
+        <span class="case-cta__circle" aria-hidden="true"></span>
+        <svg
+          class="case-cta__arr case-cta__arr--out"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
+          ></path>
+        </svg>
       </a>
 
       {
@@ -147,7 +177,55 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
 
   <div class="case-card__visual">
     {
-      isVideo ? (
+      motion ? (
+        <div class="pv" data-preview-motion={String(motion.hoverStart ?? 0)}>
+          {/*
+            The still is a <picture>, not a bare <img>: `preview` is the JPEG
+            every surface can read and `motion.poster` is the WebP this one
+            prefers. Both are encoded from the same source frame — see
+            `PreviewMotion` — so which one a browser picks is invisible.
+          */}
+          <picture>
+            <source srcset={motion.poster} type="image/webp" />
+            <img
+              class="pv__still"
+              src={preview}
+              alt={projectCopy.previewAlt}
+              width={motion.width}
+              height={motion.height}
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+          {/*
+            Decorative: the <picture> above already carries the alt text, and
+            this is the same photograph in motion. Hidden from the tree and
+            untabbable rather than given a second, near-duplicate label.
+
+            The source types come from `PREVIEW_MOTION_TYPES` so this and the
+            case-study hero cannot declare the same file differently. Unlike the
+            case-study video BLOCKS, this WebM is VP9 *Profile 0* (4:2:0): a
+            photographic device mockup has none of the UI-glyph fringing that
+            bought 4:4:4 its cost there, and Profile 0 is the profile Safari
+            actually plays.
+          */}
+          <video
+            class="pv__motion"
+            muted
+            loop
+            playsinline
+            preload="none"
+            poster={motion.poster}
+            width={motion.width}
+            height={motion.height}
+            aria-hidden="true"
+            tabindex="-1"
+          >
+            <source src={motion.webm} type={PREVIEW_MOTION_TYPES.webm} />
+            <source src={motion.mp4} type={PREVIEW_MOTION_TYPES.mp4} />
+          </video>
+        </div>
+      ) : isVideo ? (
         <video src={preview} muted loop playsinline autoplay aria-label={projectCopy.previewAlt} />
       ) : (
         <img
@@ -162,6 +240,133 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     }
   </div>
 </article>
+
+{/*
+  Deliberately NOT `is:inline`, unlike the theme and splash scripts. Those run
+  once per page and must run before paint; this component renders once per
+  featured card, and an inline script would be emitted three times. Astro hoists
+  and bundles a plain <script>, so all three cards are wired by one copy of it.
+
+  ⛔ That choice also means this file IS type-checked, which `is:inline` scripts
+  are not — the identical `instanceof` guard in ThemeToggle passes only because
+  nothing checks it. Bindings the guards narrow are `const` for that reason: a
+  `var` loses its narrowing at every closure boundary below, and every use of
+  `video` inside these handlers then reads as possibly-null.
+
+  Everything here is an enhancement over markup that is already correct: with no
+  JS at all the card shows its still, which is the same picture the video opens
+  on and carries the same alt text.
+*/}
+<script>
+  // Attached only where a pointer can genuinely hover. On a touch screen
+  // `pointerenter` fires on tap, which would spend megabytes of someone's
+  // mobile data on a video they cannot even see play.
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  document.querySelectorAll("[data-preview-motion]").forEach((node) => {
+    if (!(node instanceof HTMLElement)) return;
+    const frame = node;
+    const found = frame.querySelector("video");
+    if (!(found instanceof HTMLVideoElement)) return;
+    const video = found;
+
+    // The card, not the media box: the pointer emphasis at >=1280px is on the
+    // whole card, and a preview that only woke over the right-hand column
+    // would contradict it.
+    const card = frame.closest(".case-card") ?? frame;
+    const start = Number(frame.dataset.previewMotion) || 0;
+    let armed = false;
+
+    const paint = () => frame.classList.add("is-playing");
+
+    // Fade in on the first DECODED frame, not on play(). play() resolves when
+    // playback begins, which can precede the first composited frame — fading
+    // there shows the card's background through the crossfade.
+    const reveal = () => {
+      const rvfc = Reflect.get(video, "requestVideoFrameCallback");
+      if (typeof rvfc === "function") rvfc.call(video, paint);
+      else paint();
+    };
+
+    /*
+     * ⛔ The crossfade waits for the clip to BE past its fade-in; it does not
+     * trust the seek that tried to put it there.
+     *
+     * A seek is only honoured where the source is seekable, and that is a
+     * property of the SERVER, not the file: without HTTP Range, `seekable` stays
+     * [0, 0] and `currentTime = start` is silently clamped back to 0 — the
+     * `seeked` event fires anyway, so nothing reports a failure. R2 answers 206
+     * and seeks fine, but a card that trusted that would open on upOS's closed
+     * laptop the day anything served this differently. Gating on the position
+     * itself degrades to "waits a beat, then fades" instead.
+     *
+     * One stable listener: re-adding an identical handler is a no-op per spec,
+     * so repeated hovers cannot stack them.
+     */
+    const tick = () => {
+      if (video.currentTime >= start) {
+        video.removeEventListener("timeupdate", tick);
+        reveal();
+      }
+    };
+
+    const revealPastFadeIn = () => {
+      if (start <= 0 || video.currentTime >= start) reveal();
+      else video.addEventListener("timeupdate", tick);
+    };
+
+    const go = () => {
+      // Seek forward past the fade-in, once. Only ever forward: a hover
+      // returning mid-clip resumes where it was rather than snapping back.
+      if (start > 0 && video.readyState >= 1 && video.currentTime < start) {
+        try {
+          video.currentTime = start;
+        } catch {
+          /* A refused seek costs the wait above, not the preview. */
+        }
+      }
+      const played = video.play();
+      if (played && typeof played.then === "function") {
+        played.then(revealPastFadeIn, () => {
+          /* Autoplay refused even muted — the still stays, which is correct. */
+        });
+      } else {
+        revealPastFadeIn();
+      }
+    };
+
+    const enter = () => {
+      if (reduce.matches) return;
+      if (!armed) {
+        armed = true;
+        // preload="none" in the markup, so nothing was fetched until now.
+        video.preload = "auto";
+        video.load();
+      }
+      if (video.readyState >= 1) go();
+      else video.addEventListener("loadedmetadata", go, { once: true });
+    };
+
+    const leave = () => {
+      // Drop the pending gate too: left mid-wait, it would otherwise fire the
+      // crossfade on a card the pointer had already abandoned.
+      video.removeEventListener("timeupdate", tick);
+      frame.classList.remove("is-playing");
+      video.pause();
+    };
+
+    if (canHover.matches) {
+      card.addEventListener("pointerenter", enter);
+      card.addEventListener("pointerleave", leave);
+    }
+    // Keyboard parity, the same rule `.case-cta` follows for its own hover
+    // effect: the card's two actions are focusable, so tabbing onto one wakes
+    // the preview exactly as pointing at it would.
+    card.addEventListener("focusin", enter);
+    card.addEventListener("focusout", leave);
+  });
+</script>
 
 <style>
   /* A bordered editorial container, not a shadowed dashboard widget. */
@@ -246,8 +451,13 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
   }
 
   /*
-   * uiverse-6 — the case-study CTA, ported from the binder note's
-   * `.animated-button`.
+   * uiverse-6 — the outlined half of the action pair, ported from the binder
+   * note's `.animated-button`.
+   *
+   * It was written as the case-study CTA and is named for that. It no longer
+   * is: the case study took the filled primary slot, and what lands here is the
+   * live-site fallback — the records with a repo render `SourceCodeButton`
+   * instead. The treatment is unchanged, only what stands in it.
    *
    * ⛔ K0.2: the note's own URL repeats uiverse-5's `loud-chicken-53` and
    * points at a different component entirely. Everything below is built from
@@ -385,10 +595,61 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     box-shadow: 0 0 0 var(--space-px-4) var(--case-accent);
   }
 
+  /*
+   * The primary, wearing the identical motion with the colour roles reversed.
+   * Everything above still drives it — travel, easing, durations, the
+   * reduced-motion opt-out — and only the four colour decisions differ:
+   *
+   *   secondary   rest: outlined, accent ink   hover: accent floods, ink inverts
+   *   primary     rest: accent FILL, ink on it hover: SURFACE floods, ink inverts
+   *
+   * Selector depth is load-bearing, not habit: `action-row.css` reaches these
+   * controls at `.case-card__actions .button:not(...)`, so a bare
+   * `.case-cta--primary` would lose to it on specificity even though it opts
+   * out there. Two classes under the row wins.
+   */
+  .case-card__actions .case-cta--primary {
+    --case-ink-rest: var(--on-primary);
+    --case-ink-active: var(--primary-ink);
+
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--case-ink-rest);
+  }
+
+  /* The disc is the inverse of the secondary's: surface arriving over accent. */
+  .case-card__actions .case-cta--primary .case-cta__circle {
+    background: var(--surface);
+  }
+
+  /*
+   * ⛔ The fill has to SURVIVE the hover. The shared rule clears the background
+   * so the secondary's transparent rest state stays transparent while its disc
+   * grows — but here the background IS the rest state, and clearing it would
+   * show the card straight through the corners for the whole 800ms the disc
+   * takes to cover them.
+   */
+  .case-card__actions .case-cta--primary:hover,
+  .case-card__actions .case-cta--primary:focus-visible {
+    background: var(--primary);
+    color: var(--case-ink-active);
+  }
+
+  /*
+   * Stacked, the media leads. The copy stays first in the DOM — it carries the
+   * heading and both actions, so it is what a screen reader and a crawler
+   * should meet first — and only the PAINT order is reversed. A card whose
+   * picture arrives after three paragraphs and two buttons is a card whose
+   * picture is never seen on a phone.
+   *
+   * Reset explicitly at the two-column breakpoint below; `order` does not
+   * unset itself when the grid changes shape.
+   */
   .case-card__visual {
     display: flex;
     overflow: hidden;
     min-height: var(--space-px-252);
+    order: -1;
     background: var(--background-deep);
   }
 
@@ -398,6 +659,73 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     height: 100%;
     object-fit: cover;
     object-position: top left;
+  }
+
+  /*
+   * The hover preview. Two layers in one frame, so the swap changes which
+   * element paints and never the geometry — the <video> carries the record's
+   * own width/height, identical to the still's, and both are `cover`.
+   */
+  .pv {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /*
+   * The X anchor, and only the X — the vertical stays where the card default
+   * put it.
+   *
+   * Measured: at 1440px the media column is 570x599, so a 16:9 frame under
+   * `cover` keeps ~53% of its width. Anchored left, that cut the upOS laptop
+   * clean in half. Sampling the crop at 0 / 40 / 50 / 60% put the whole screen
+   * in frame from 40% on and centred it at 50%.
+   *
+   * ⛔ Scoped to `.pv`, never to the card default. syd and psiativa ship flat
+   * screenshots composed FOR the top-left anchor; re-centring those would move
+   * a composition nobody asked to move. Two classes under `.case-card__visual`
+   * because the default is `.case-card__visual :global(img)`, which a single
+   * class does not outrank.
+   */
+  .case-card__visual .pv__still,
+  .case-card__visual .pv__motion {
+    object-position: 50% top;
+  }
+
+  /*
+   * Stacked rather than toggled with `display`, because a display:none video
+   * cannot be buffered ahead of being shown — it would pop in mid-fade. It
+   * also cannot take the pointer: the card's own hover must not flicker when
+   * the cursor crosses from the copy onto the media.
+   */
+  .pv__motion {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--motion-base) var(--ease-standard);
+  }
+
+  /*
+   * Set by the script only once the video has actually painted a frame, never
+   * on `play()`. Fading to a element that has decoded nothing yet shows the
+   * card's background through the crossfade — a grey flash where the whole
+   * point was continuity from the still.
+   */
+  .pv.is-playing .pv__motion {
+    opacity: 1;
+  }
+
+  /*
+   * The clip is decoration with a still that says the same thing, so reduced
+   * motion gets the still and nothing else — and the script checks the same
+   * query before it ever fetches, so this is belt-and-braces over a video that
+   * should not have loaded in the first place.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    .pv__motion {
+      display: none;
+    }
   }
 
   @media (min-width: 768px) {
@@ -424,14 +752,35 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
     }
   }
 
-  @media (min-width: 1280px) {
+  /*
+   * Two columns from LAPTOP up; one column is the tablet and phone shape.
+   *
+   * ⛔ 1080, not 1280. The query measures the VIEWPORT, and a 1280-wide laptop
+   * window never reports 1280 to it: a classic scrollbar takes ~15px, and
+   * browser zoom takes far more — 110% turns 1280 into ~1164 CSS px, 125% into
+   * 1024. `min-width: 1280px` therefore passed only in a headless browser,
+   * which reserves no scrollbar (measured: 1280 two columns, 1279 one), and
+   * dropped real laptops to the stacked layout. 1080 is Juan's floor, set from
+   * his own machine after 1200 still came up one column.
+   *
+   * 1024 tablet landscape stays stacked, which is what it wants to be.
+   */
+  @media (min-width: 1080px) {
     /* The reference's asymmetric emphasis: copy leads, media supports. */
     .case-card {
       grid-template-columns: 1.15fr 0.85fr;
     }
 
+    /* Side by side, the copy leads again — undoing the stacked media-first
+     * flip. Both orders are stated so the even-card mirror below inverts a
+     * known pair rather than a mix of set and unset values. */
     .case-card__copy {
       padding: var(--space-px-48);
+      order: 1;
+    }
+
+    .case-card__visual {
+      order: 2;
     }
 
     .case-card__title {
@@ -440,16 +789,24 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
 
     /* Alternating direction, so a run of cards reads as a rhythm. The column
      * template mirrors along with the order, otherwise the copy inherits the
-     * narrow .85fr track and the emphasis inverts on every second card. */
-    .case-card:nth-child(even) {
+     * narrow .85fr track and the emphasis inverts on every second card.
+     *
+     * ⛔ `nth-of-type`, NOT `nth-child`. This component now carries a hoisted
+     * <script>, and Astro emits that as a real element SIBLING of the cards —
+     * measured: `.projects__list` children came back article, script, article,
+     * article, so the cards sat at nth-child 1, 3 and 4 and the rhythm went
+     * copy|media, copy|media, media|copy. The script is `display: none`, so it
+     * costs no layout and no gap; it only shifts the count. Matching on the
+     * element TYPE ignores it, and ignores anything else injected later. */
+    .case-card:nth-of-type(even) {
       grid-template-columns: 0.85fr 1.15fr;
     }
 
-    .case-card:nth-child(even) .case-card__copy {
+    .case-card:nth-of-type(even) .case-card__copy {
       order: 2;
     }
 
-    .case-card:nth-child(even) .case-card__visual {
+    .case-card:nth-of-type(even) .case-card__visual {
       order: 1;
     }
 

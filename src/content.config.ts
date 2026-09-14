@@ -49,6 +49,33 @@ const hrefSchema = z.string().min(1).refine(
   "Use an absolute URL or a root-relative path",
 );
 
+/**
+ * The moving half of a record's thumbnail: what the homepage card plays when it
+ * is hovered, and what the case-study page runs as its hero.
+ *
+ * Host-pinned like the case-study media, and for the same reason — these are
+ * multi-megabyte objects that live on the CDN, and a signed URL from anywhere
+ * else expires quietly weeks after the build that accepted it.
+ *
+ * `poster` is the WebP source of the `<picture>` whose `<img>` fallback is the
+ * record's own `preview`. Both must be the same photograph. Nothing here can
+ * check that, so encode the pair from one file.
+ *
+ * Optional throughout. A record without it renders exactly as it did before:
+ * a still card, and a still hero.
+ */
+const previewMotionSchema = z
+  .object({
+    webm: caseAssetSrcSchema,
+    mp4: caseAssetSrcSchema,
+    poster: caseAssetSrcSchema,
+    width: z.number().int().positive(),
+    height: z.number().int().positive(),
+    /** Hover seek, in seconds. See `PreviewMotion` in `src/lib/projects.ts`. */
+    hoverStart: z.number().nonnegative().optional(),
+  })
+  .strict();
+
 const localizedProjectCopySchema = z
   .object({
     title: z.string().trim().min(1),
@@ -63,6 +90,8 @@ const localizedProjectCopySchema = z
      * Absent, the locale falls back to the record's top-level `preview`.
      */
     preview: hrefSchema.optional(),
+    /** Per-locale moving preview, on the same fallback rule as `preview`. */
+    previewMotion: previewMotionSchema.optional(),
     liveLabel: z.string().trim().min(1),
     /** Present only alongside `evidenceLink`. */
     evidenceLabel: z.string().trim().min(1).optional(),
@@ -209,6 +238,11 @@ export const projectSchema = z
     evidenceLink: hrefSchema.optional(),
     featured: z.boolean(),
     preview: hrefSchema,
+    /**
+     * Optional. The card sits on `preview` until it is hovered, then plays
+     * this; the case-study hero plays it in place of the still image.
+     */
+    previewMotion: previewMotionSchema.optional(),
 
     /**
      * Ordering + filter facets for /projects, derived by the exporter from the

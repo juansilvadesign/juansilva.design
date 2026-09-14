@@ -7,7 +7,7 @@ import TypedHead from "../../components/text/TypedHead";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { localeStaticPaths, localizedPath, pageTitle, t, type Locale } from "../../i18n";
 import type { ProjectSummary } from "../../lib/projects";
-import { byEvidence, previewFor } from "../../lib/projects";
+import { byEvidence, motionPreviewFor, previewFor } from "../../lib/projects";
 import "../../styles/projects-index.css";
 import "../../styles/text-type.css";
 
@@ -39,6 +39,7 @@ const projects: ProjectSummary[] = (await getCollection("projects"))
       tagline: c.tagline,
       stack: d.stack,
       preview: previewFor(d, lang),
+      previewMotion: motionPreviewFor(d, lang) ?? null,
       previewAlt: c.previewAlt,
       liveUrl: d.liveUrl,
       liveLabel: c.liveLabel,

@@ -12,6 +12,10 @@ interface Props {
   description: string;
   canonicalPath: string;
   image?: string;
+  /** Travel with `image`; see the note on SEOHead's Props. */
+  imageWidth?: number;
+  imageHeight?: number;
+  imageAlt?: string;
   noindex?: boolean;
   showNavigation?: boolean;
 }
@@ -22,6 +26,9 @@ const {
   description,
   canonicalPath,
   image,
+  imageWidth,
+  imageHeight,
+  imageAlt,
   noindex,
   showNavigation = true,
 } = Astro.props;
@@ -29,7 +36,20 @@ const copy = t(lang);
 ---
 
 <!doctype html>
-<html lang={localeInfo[lang].htmlLang}>
+{/*
+  `no-js` ships in the markup and is removed by the inline script below, which
+  already runs before first paint for the theme. It is the only way CSS can ask
+  "did scripting actually run?", and it is load-bearing for anything whose
+  fallback differs from its enhanced state — today the case-study inline loops,
+  which drop `autoplay` so a 31.6 MB clip is not fetched for a reader who never
+  scrolls to it, and would otherwise leave a no-JS visitor staring at a video
+  that never starts.
+
+  ⛔ Removed in the same inline block as the theme, NOT from a bundled module.
+  A module is deferred by definition, so the class would survive first paint and
+  every enhanced element would flash its fallback before disappearing.
+*/}
+<html lang={localeInfo[lang].htmlLang} class="no-js">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -43,6 +63,8 @@ const copy = t(lang);
     <script is:inline>
       (function () {
         var root = document.documentElement;
+        // First statement in the file that touches the DOM: scripting is on.
+        root.classList.remove("no-js");
         var KEY = "jsd:theme";
         var theme = null;
 
@@ -65,7 +87,17 @@ const copy = t(lang);
         root.dataset.theme = theme;
       })();
     </script>
-    <SEOHead {lang} {title} {description} {canonicalPath} {image} {noindex} />
+    <SEOHead
+      {lang}
+      {title}
+      {description}
+      {canonicalPath}
+      {image}
+      {imageWidth}
+      {imageHeight}
+      {imageAlt}
+      {noindex}
+    />
     <Analytics part="head" />
     <slot name="head" />
   </head>

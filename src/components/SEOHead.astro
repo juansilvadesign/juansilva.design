@@ -15,6 +15,19 @@ interface Props {
   description: string;
   canonicalPath: string;
   image?: string;
+  /**
+   * Required together with `image` whenever it is not the default.
+   *
+   * ⛔ These were literals until a page first shipped its own artwork. The
+   * default og-image really is 1200x630, so they were true — but a case study's
+   * hero poster is 1920x1080, and an unfurler that is TOLD 1200x630 lays out and
+   * crops against a box the file does not have. Wrong dimensions are worse than
+   * absent ones, which is why they travel with the image rather than beside it.
+   */
+  imageWidth?: number;
+  imageHeight?: number;
+  /** Defaults to the site-wide line, which describes the default image only. */
+  imageAlt?: string;
   noindex?: boolean;
 }
 
@@ -24,6 +37,9 @@ const {
   description,
   canonicalPath,
   image = siteConfig.defaultOgImage,
+  imageWidth = 1200,
+  imageHeight = 630,
+  imageAlt,
   noindex = false,
 } = Astro.props;
 
@@ -33,6 +49,9 @@ if (!Astro.site) {
 
 const copy = t(lang);
 const canonicalUrl = new URL(localizedPath(canonicalPath, lang), Astro.site);
+// The site-wide line describes the site-wide picture; a page that brings its
+// own must describe that one instead, or the alt text names the wrong image.
+const ogImageAlt = imageAlt ?? copy.meta.ogImageAlt;
 const imageUrl = URL.canParse(image) ? new URL(image) : new URL(image, Astro.site);
 const defaultUrl = new URL(localizedPath(canonicalPath, defaultLocale), Astro.site);
 ---
@@ -72,16 +91,16 @@ const defaultUrl = new URL(localizedPath(canonicalPath, defaultLocale), Astro.si
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={imageUrl} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={copy.meta.ogImageAlt} />
+<meta property="og:image:width" content={String(imageWidth)} />
+<meta property="og:image:height" content={String(imageHeight)} />
+<meta property="og:image:alt" content={ogImageAlt} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content={`@${siteConfig.twitterHandle}`} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
-<meta name="twitter:image:alt" content={copy.meta.ogImageAlt} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
 
 <link rel="manifest" href={new URL("/site.webmanifest", Astro.site)} />
 <link rel="icon" type="image/png" sizes="32x32" href={new URL("/favicon-32x32.png", Astro.site)} />

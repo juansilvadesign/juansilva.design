@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import CountUp from "../text/CountUp";
 import BorderGlow from "./BorderGlow";
 import PillChip from "./PillChip";
 import SpotlightCard from "./SpotlightCard";
 import {
   EMPTY_FILTERS,
+  PREVIEW_MOTION_TYPES,
   SIGNAL_FACETS,
   SIGNAL_FILTER_FACETS,
   applyFilters,
@@ -12,6 +13,7 @@ import {
   recommend,
   stackFacets,
   type Filters,
+  type PreviewMotion,
   type ProjectSummary,
   type SignalFacet,
   type SortKey,
@@ -106,11 +108,187 @@ function ViewIcon({ name }: { name: "grid" | "list" }) {
   );
 }
 
-function Card({ p, copy, view }: { p: ProjectSummary; copy: IndexCopy; view: "grid" | "list" }) {
-  const inner = (
-    <a className="pcard__link" href={p.href}>
-      <span className="pcard__media">
+/**
+ * The hover preview, shared by the grid tile and the recommendation.
+ *
+ * Same contract as the homepage card's script: nothing is fetched until a
+ * pointer that can genuinely hover arrives, the clip seeks past its fade-in so
+ * it appears to wake the still rather than replace it, and reduced motion never
+ * starts it at all.
+ *
+ * ⛔ Hooks run before the `motion` branch, never inside it — a project without
+ * a moving preview must call exactly the same hooks in the same order as one
+ * with it, or the whole grid unmounts on the first filter keystroke.
+ */
+function useHoverPreview(motion: PreviewMotion | null) {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const armed = useRef(false);
+  /** Detaches a pending reveal gate, if one is waiting. */
+  const tickRef = useRef<(() => void) | null>(null);
+  const [playing, setPlaying] = useState(false);
+  const start = motion?.hoverStart ?? 0;
+
+  const enter = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // `onPointerEnter` fires on a touch tap, where there is no hover to serve.
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+
+    if (!armed.current) {
+      armed.current = true;
+      video.preload = "auto";
+      video.load();
+    }
+    /*
+     * ⛔ Reveal on the clip BEING past its fade-in, never on the seek that tried
+     * to put it there. Seekability is a property of the server: without HTTP
+     * Range, `seekable` stays [0, 0] and `currentTime = start` is silently
+     * clamped to 0 while `seeked` still fires, so nothing reports the failure.
+     * Gating on the position degrades to a short wait instead of opening on
+     * upOS's closed laptop. Mirrors the homepage card's script exactly.
+     */
+    const reveal = () => {
+      if (start <= 0 || video.currentTime >= start) {
+        setPlaying(true);
+        return;
+      }
+      const tick = () => {
+        if (video.currentTime >= start) {
+          video.removeEventListener("timeupdate", tick);
+          setPlaying(true);
+        }
+      };
+      tickRef.current?.();
+      tickRef.current = () => video.removeEventListener("timeupdate", tick);
+      video.addEventListener("timeupdate", tick);
+    };
+
+    const go = () => {
+      if (start > 0 && video.readyState >= 1 && video.currentTime < start) {
+        try {
+          video.currentTime = start;
+        } catch {
+          /* A refused seek costs the wait above, not the preview. */
+        }
+      }
+      video.play().then(reveal, () => {
+        /* Autoplay refused even muted — the still stays, which is correct. */
+      });
+    };
+    if (video.readyState >= 1) go();
+    else video.addEventListener("loadedmetadata", go, { once: true });
+  }, [start]);
+
+  const leave = useCallback(() => {
+    // Drop any pending reveal: left mid-wait, it would fade a tile the pointer
+    // had already abandoned.
+    tickRef.current?.();
+    tickRef.current = null;
+    setPlaying(false);
+    videoRef.current?.pause();
+  }, []);
+
+  // Unmounting mid-wait (a filter keystroke hides the tile) must not leave a
+  // listener behind on a detached element.
+  useEffect(() => () => tickRef.current?.(), []);
+
+  return { videoRef, playing, enter, leave };
+}
+
+function Thumb({
+  p,
+  videoRef,
+  playing,
+}: {
+  p: ProjectSummary;
+  videoRef: React.RefObject<HTMLVideoElement | null>;
+  playing: boolean;
+}) {
+  const motion = p.previewMotion;
+  // `alt=""` throughout: the card's own title carries the meaning, and the
+  // whole tile is one link. That is why the video is aria-hidden too.
+  if (!motion) {
+    return <img src={p.preview} alt="" width="800" height="450" loading="lazy" decoding="async" />;
+  }
+  return (
+    <>
+      <picture>
+        <source srcSet={motion.poster} type="image/webp" />
         <img src={p.preview} alt="" width="800" height="450" loading="lazy" decoding="async" />
+      </picture>
+      <video
+        ref={videoRef}
+        className={playing ? "pcard__motion is-playing" : "pcard__motion"}
+        muted
+        loop
+        playsInline
+        preload="none"
+        poster={motion.poster}
+        width={motion.width}
+        height={motion.height}
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        <source src={motion.webm} type={PREVIEW_MOTION_TYPES.webm} />
+        <source src={motion.mp4} type={PREVIEW_MOTION_TYPES.mp4} />
+      </video>
+    </>
+  );
+}
+
+/**
+ * Its own component purely so the hover hook can be called unconditionally.
+ * Inline under `{pick && …}` the hooks would mount and unmount with the
+ * recommendation itself, which appears and disappears as the filters narrow.
+ */
+function Recommendation({
+  pick,
+  copy,
+}: {
+  pick: NonNullable<ReturnType<typeof recommend>>;
+  copy: IndexCopy;
+}) {
+  const { videoRef, playing, enter, leave } = useHoverPreview(pick.project.previewMotion);
+  return (
+    <section className="rec" aria-label={copy.recommended}>
+      <p className="rec__eyebrow">{copy.recommended}</p>
+      <a
+        className="rec__link"
+        href={pick.project.href}
+        onPointerEnter={enter}
+        onPointerLeave={leave}
+        onFocus={enter}
+        onBlur={leave}
+      >
+        <span className="rec__media">
+          <Thumb p={pick.project} videoRef={videoRef} playing={playing} />
+        </span>
+        <span className="rec__body">
+          <h3 className="rec__title">{pick.project.title}</h3>
+          <p className="rec__tagline">{pick.project.tagline}</p>
+          <p className="rec__why">
+            {copy.recommendedWhy} {pick.reasons.map((r) => copy.signalsShort[r]).join(" · ")}
+          </p>
+        </span>
+      </a>
+    </section>
+  );
+}
+
+function Card({ p, copy, view }: { p: ProjectSummary; copy: IndexCopy; view: "grid" | "list" }) {
+  const { videoRef, playing, enter, leave } = useHoverPreview(p.previewMotion);
+  const inner = (
+    <a
+      className="pcard__link"
+      href={p.href}
+      onPointerEnter={enter}
+      onPointerLeave={leave}
+      onFocus={enter}
+      onBlur={leave}
+    >
+      <span className="pcard__media">
+        <Thumb {...{ p, videoRef, playing }} />
       </span>
       <span className="pcard__body">
         <h3 className="pcard__title">{p.title}</h3>
@@ -415,24 +593,7 @@ export default function ProjectsIndex({ projects, copy }: Props) {
         {visible.length === 1 ? copy.countOne : copy.countMany.replace("{n}", String(visible.length))}
       </p>
 
-      {pick && (
-        <section className="rec" aria-label={copy.recommended}>
-          <p className="rec__eyebrow">{copy.recommended}</p>
-          <a className="rec__link" href={pick.project.href}>
-            <span className="rec__media">
-              <img src={pick.project.preview} alt="" width="800" height="450" loading="lazy" decoding="async" />
-            </span>
-            <span className="rec__body">
-              <h3 className="rec__title">{pick.project.title}</h3>
-              <p className="rec__tagline">{pick.project.tagline}</p>
-              <p className="rec__why">
-                {copy.recommendedWhy}{" "}
-                {pick.reasons.map((r) => copy.signalsShort[r]).join(" · ")}
-              </p>
-            </span>
-          </a>
-        </section>
-      )}
+      {pick && <Recommendation pick={pick} copy={copy} />}
 
       {visible.length === 0 ? (
         <div className="empty">

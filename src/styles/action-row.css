@@ -19,8 +19,20 @@
  * this off the secondary in both containers, which carries `.button` too.
  */
 
-.case-card__actions .button:not(.button--secondary),
-.brief__actions .button:not(.button--secondary) {
+/*
+ * ⛔ `:not(.case-cta--primary)` opts the homepage card's primary OUT of this
+ * flat treatment, because it now wears uiverse-6's full motion instead — the
+ * same class as its outlined sibling, with only the colour roles inverted. It
+ * supplies its own fill, ring and radius; leaving it in here would overwrite
+ * the ring and, worse, replace the `box-shadow` transition below with one that
+ * omits it, so the ring would snap while everything around it eased.
+ *
+ * Matches nothing in `.brief__actions` — the case-study pages keep the flat
+ * filled primary — and the selector is carried there only so the two rows go on
+ * reading as one rule.
+ */
+.case-card__actions .button:not(.button--secondary):not(.case-cta--primary),
+.brief__actions .button:not(.button--secondary):not(.case-cta--primary) {
   border-color: var(--primary);
   border-radius: var(--radius-pill);
   background: var(--primary);
@@ -40,10 +52,10 @@
  * same pill → control morph, so hovering either half of the pair speaks the
  * same motion language.
  */
-.case-card__actions .button:not(.button--secondary):hover,
-.case-card__actions .button:not(.button--secondary):focus-visible,
-.brief__actions .button:not(.button--secondary):hover,
-.brief__actions .button:not(.button--secondary):focus-visible {
+.case-card__actions .button:not(.button--secondary):not(.case-cta--primary):hover,
+.case-card__actions .button:not(.button--secondary):not(.case-cta--primary):focus-visible,
+.brief__actions .button:not(.button--secondary):not(.case-cta--primary):hover,
+.brief__actions .button:not(.button--secondary):not(.case-cta--primary):focus-visible {
   border-radius: var(--radius-control);
   background: var(--color-transparent);
   color: var(--primary-ink);
@@ -61,8 +73,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .case-card__actions .button:not(.button--secondary),
-  .brief__actions .button:not(.button--secondary) {
+  .case-card__actions .button:not(.button--secondary):not(.case-cta--primary),
+  .brief__actions .button:not(.button--secondary):not(.case-cta--primary) {
     transition: none;
   }
 }

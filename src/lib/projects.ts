@@ -31,6 +31,13 @@ export interface ProjectSummary {
   tagline: string;
   stack: string[];
   preview: string;
+  /**
+   * The moving thumbnail, or null. Three CDN URLs plus dimensions — display
+   * data that is already in the page's own markup, so it does not widen the
+   * surface the comment on `projects.astro` guards: that rule is about the
+   * store's attribution and impact PROSE, which still never crosses.
+   */
+  previewMotion: PreviewMotion | null;
   previewAlt: string;
   liveUrl: string;
   liveLabel: string;
@@ -71,32 +78,42 @@ export interface ProjectActionInput {
 /**
  * The two actions a card shows, and only two.
  *
- * Cards used to render three: live, evidence, and a case-study link that read
- * "Case study soon" on every record that had none. The rule now is
- *   asserts source code → live site + source code
- *   everything else     → live site + case study
- * every project has a case-study page, so slot two is never empty.
+ * The card sends you to the case study first, and the case study sends you
+ * out. That is the whole rule, and it is deliberately the inverse of what the
+ * detail page does with the same record:
  *
- * ⛔ The verdict is `evidenceSignals.sourceCode` and nothing else. This used to
- * re-derive it in the template layer — a code-looking stack crossed with a
- * repo-host allowlist over `evidenceLink` — which meant the store said one
- * thing and the page decided another. The exporter already owns that call, so
- * two answers could only ever drift. `evidenceLink` supplies the destination;
- * it is never consulted about whether the button belongs.
+ *   card         primary → case study   secondary → source code, else live site
+ *   case study   primary → live site    secondary → source code
  *
- * A record asserting the flag with no link is a store defect. Slot two falls
- * back to the case study rather than rendering a button that goes nowhere, and
+ * Before this the card's primary was the live site, which meant the homepage
+ * spent its strongest control shipping the visitor off-site before they had
+ * read a word about the work. The case study is the thing being sold; the live
+ * site is what it cites. Every project has a case-study page — records with no
+ * written narrative get the honest "coming soon" body — so slot one is never
+ * empty, and slot two is never empty either.
+ *
+ * ⛔ The source-code verdict is `evidenceSignals.sourceCode` and nothing else.
+ * This used to re-derive it in the template layer — a code-looking stack
+ * crossed with a repo-host allowlist over `evidenceLink` — which meant the
+ * store said one thing and the page decided another. The exporter already owns
+ * that call, so two answers could only ever drift. `evidenceLink` supplies the
+ * destination; it is never consulted about whether the button belongs.
+ *
+ * The live site is the fallback rather than a third button: a record with no
+ * repo (`psiativa-ai-operations`) would otherwise lose its only outward link
+ * when the primary stopped being the live site. A record that asserts the
+ * source flag with no link is a store defect — it falls back the same way, and
  * the caller reports it at build time.
  */
 export function projectActions(p: ProjectActionInput): [ProjectAction, ProjectAction] {
-  const live: ProjectAction = {
-    href: p.liveUrl,
-    label: p.liveLabel || p.liveFallbackLabel,
-    external: true,
-    kind: "live",
+  const primary: ProjectAction = {
+    href: p.caseHref,
+    label: p.caseLabel,
+    external: false,
+    kind: "case",
   };
 
-  const second: ProjectAction =
+  const secondary: ProjectAction =
     p.sourceCode && p.evidenceLink
       ? {
           href: p.evidenceLink,
@@ -104,9 +121,14 @@ export function projectActions(p: ProjectActionInput): [ProjectAction, ProjectAc
           external: true,
           kind: "source",
         }
-      : { href: p.caseHref, label: p.caseLabel, external: false, kind: "case" };
+      : {
+          href: p.liveUrl,
+          label: p.liveLabel || p.liveFallbackLabel,
+          external: true,
+          kind: "live",
+        };
 
-  return [live, second];
+  return [primary, secondary];
 }
 
 /**
@@ -131,6 +153,124 @@ export function previewFor(
   lang: string,
 ): string {
   return data.copy[lang]?.preview ?? data.preview;
+}
+
+/**
+ * The moving version of a record's preview, where one exists.
+ *
+ * Distinct from a `preview` that is itself a video file (`price-watcher`, whose
+ * `preview` is a bare `.mp4`). That older shape has one source and no still, so
+ * a card can only autoplay it or show nothing; this one pairs a codec-complete
+ * video with the poster that stands in for it, which is what lets the card sit
+ * still until it is hovered and lets the detail page honour reduced motion.
+ *
+ * `poster` is the modern still (WebP) and the record's own `preview` is the
+ * universal one (JPEG) — the two halves of a `<picture>`. They must be the same
+ * photograph; the build asserts nothing about that, so encode both from one
+ * source file rather than extracting each separately.
+ */
+export interface PreviewMotion {
+  webm: string;
+  mp4: string;
+  poster: string;
+  width: number;
+  height: number;
+  /**
+   * Where a hover starts the clip, in seconds. Zero means the first frame.
+   *
+   * It exists because a poster is chosen to look good and a first frame is
+   * whatever the animation opens on, and those are frequently not the same
+   * picture — upOS opens on an unlit laptop and posters a lit one, so a hover
+   * from zero flashes the card black before it recovers. Seeking past the
+   * fade-in makes the still appear to come alive instead. The detail-page hero
+   * ignores this and always plays from zero: there the fade-in is the intended
+   * opening, not an artefact to skip.
+   */
+  hoverStart?: number;
+}
+
+/**
+ * The `type` attributes a `previewMotion` pair is served under.
+ *
+ * ⛔ The codecs strings are load-bearing, not decoration. A bare
+ * `type="video/webm"` lets a browser claim support by MIME, fail to decode, and
+ * paint nothing — with the mp4 fallback never firing, because as far as the
+ * element is concerned the first source was accepted.
+ *
+ * They describe ONE encode recipe, which every `previewMotion` asset is
+ * expected to follow: VP9 Profile 0 (4:2:0), level 4.0, 8-bit — 1920x1080 at
+ * 30fps sits inside level 4.0 — and H.264 High, level 4.0, 8-bit. That is
+ * deliberately not the recipe behind the case-study `video` BLOCKS, whose WebM
+ * is VP9 Profile 1 at level 4.1 and declares itself as such at the call site.
+ *
+ * A record encoded to anything else needs its own declaration, not a widened
+ * one here: loosening these back toward a bare MIME type restores the silent
+ * blank-box failure for every record at once.
+ */
+export const PREVIEW_MOTION_TYPES = {
+  webm: 'video/webm; codecs="vp09.00.40.08"',
+  mp4: 'video/mp4; codecs="avc1.640028"',
+} as const;
+
+export function motionPreviewFor(
+  data: { previewMotion?: PreviewMotion; copy: Record<string, { previewMotion?: PreviewMotion }> },
+  lang: string,
+): PreviewMotion | undefined {
+  return data.copy[lang]?.previewMotion ?? data.previewMotion;
+}
+
+export interface OgImage {
+  url: string;
+  width: number;
+  height: number;
+}
+
+/**
+ * Formats a social scraper will actually render. WebP is deliberately absent:
+ * browsers have supported it for years, WhatsApp and several LinkedIn paths
+ * still do not unfurl it, and SVG — which 36 of the 51 records currently carry
+ * as a placeholder `preview` — is rejected outright. A page that offered one of
+ * those would unfurl WORSE than the site-wide default it replaced.
+ */
+const OG_RENDERABLE = /\.(jpe?g|png)$/i;
+
+/**
+ * The card a case-study link should unfurl as: its own hero poster, or nothing.
+ *
+ * Returning null is the common case and the safe one — the caller then falls
+ * through to `siteConfig.defaultOgImage`, which is a real 1200x630 image.
+ *
+ * Gated on `previewMotion` for a reason beyond taste: `og:image:width` and
+ * `og:image:height` must be TRUE or unfurlers crop against the wrong box, and
+ * this is the only place a record states the dimensions of its own artwork.
+ * `previewMotion.poster` and `preview` are the same photograph by contract, so
+ * those numbers describe the JPEG this returns. A record with a hand-made
+ * poster and no clip needs its own dimensions before it can join.
+ *
+ * ⛔ Costs page weight nothing. `og:image` is fetched by crawlers and chat
+ * unfurlers, never by a browser rendering the page.
+ */
+export function ogImageFor(
+  data: {
+    preview: string;
+    previewMotion?: PreviewMotion;
+    copy: Record<string, { preview?: string; previewMotion?: PreviewMotion }>;
+  },
+  lang: string,
+): OgImage | null {
+  const motion = motionPreviewFor(data, lang);
+  if (!motion) return null;
+  const url = previewFor(data, lang);
+  // Root-relative and absolute both arrive here; the dummy base only exists so
+  // one parser handles the pair, and a querystring cannot fool the extension.
+  let pathname: string;
+  try {
+    pathname = new URL(url, "https://example.invalid").pathname;
+  } catch {
+    return null;
+  }
+  if (!OG_RENDERABLE.test(pathname)) return null;
+  return { url, width: motion.width, height: motion.height };
 }
 
 /**

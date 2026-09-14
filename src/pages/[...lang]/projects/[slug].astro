@@ -8,7 +8,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { locales, defaultLocale, localizedPath, pageTitle, t } from "../../../i18n";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { SIGNAL_FACETS, byEvidence, formatTimeframe, isVideoPreview, posterFor, previewFor } from "../../../lib/projects";
+import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, byEvidence, formatTimeframe, isVideoPreview, motionPreviewFor, ogImageFor, posterFor, previewFor } from "../../../lib/projects";
 import "../../../styles/evidence-rail.css";
 import "../../../styles/action-row.css";
 
@@ -38,8 +38,38 @@ const timeframe = formatTimeframe(d.dates, lang, detail);
  * moving hero to a still frame.
  */
 const preview = previewFor(d, lang);
+
+/**
+ * The record's moving preview, where it ships one — the same asset the homepage
+ * card plays on hover, so a visitor who arrived by clicking that card already
+ * holds it in cache.
+ *
+ * It takes precedence over the two branches below and brings its own poster, so
+ * neither `posterFor`'s naming convention nor its build-time existence check
+ * applies: `previewMotion.poster` is a schema field the store validates.
+ *
+ * Unlike the card, this one plays from the first frame. The card seeks past the
+ * fade-in because it is swapping out of a still and a dark opening reads as the
+ * card breaking; here the fade-in IS the opening of the piece.
+ */
+const motion = motionPreviewFor(d, lang);
+
 const isVideo = isVideoPreview(preview);
 const poster = isVideo ? posterFor(preview) : undefined;
+
+/**
+ * This page's own social card: the hero poster, where the record ships one.
+ *
+ * Null on every record that does not, and null is the right answer — the caller
+ * then falls through to the site-wide og-image, which is a real 1200x630 file.
+ * Handing a scraper the SVG placeholder that 36 records carry as their preview
+ * would unfurl worse than the default it replaced, so `ogImageFor` refuses
+ * anything but JPEG and PNG.
+ *
+ * Costs a visitor nothing: `og:image` is fetched by crawlers and chat
+ * unfurlers, never by a browser rendering this page.
+ */
+const ogImage = ogImageFor(d, lang);
 
 /**
  * `posterFor` is a naming convention, not a schema field, so nothing else can
@@ -103,6 +133,10 @@ const indexHref = localizedPath("/projects/", lang);
   title={pageTitle(c.title, lang)}
   description={c.tagline}
   canonicalPath={`/projects/${entry.id}/`}
+  image={ogImage?.url}
+  imageWidth={ogImage?.width}
+  imageHeight={ogImage?.height}
+  imageAlt={ogImage ? c.previewAlt : undefined}
 >
   <main id="main-content" class="page-shell">
     <article class="case">
@@ -117,7 +151,61 @@ const indexHref = localizedPath("/projects/", lang);
       </header>
 
       <figure class="case__media">
-        {isVideo ? (
+        {motion ? (
+          /*
+            Same two-element shape as the `cs-loop` figures further down, and for
+            the same reason: `media` on <source> is NOT honoured inside <video>
+            (only inside <picture>), so the reduced-motion branch has to be a CSS
+            display swap over a real image. That keeps this page at zero
+            first-party JS — the hero autoplays or it doesn't, and either way
+            what stands in its place is the poster rather than a black box.
+          */
+          <div class="hero-loop">
+            {/*
+              Started by the observer, like the body loops — even though this one
+              is above the fold and its IntersectionObserver fires on the first
+              frame, so there is no perceptible delay.
+
+              ⛔ It is here for the reduced-motion case, not for laziness.
+              MEASURED: with `autoplay`, this clip was fetched in full (9.4 MB) by
+              viewers who had asked for less motion and were being shown the still
+              instead — `display: none` does not stop a fetch that `autoplay`
+              started. The script returns early on that query, so now nothing is
+              requested at all.
+            */}
+            <video
+              class="hero-loop__motion"
+              data-scroll-loop
+              muted
+              loop
+              playsinline
+              preload="none"
+              poster={motion.poster}
+              width={motion.width}
+              height={motion.height}
+              aria-label={c.previewAlt}
+            >
+              <source src={motion.webm} type={PREVIEW_MOTION_TYPES.webm} />
+              <source src={motion.mp4} type={PREVIEW_MOTION_TYPES.mp4} />
+            </video>
+            {/*
+              The still a reduced-motion viewer gets instead. WebP first, the
+              record's own `preview` as the universal fallback — the same pair
+              the homepage card sits on, encoded from one source frame.
+            */}
+            <picture>
+              <source srcset={motion.poster} type="image/webp" />
+              <img
+                class="hero-loop__still"
+                src={preview}
+                alt={c.previewAlt}
+                width={motion.width}
+                height={motion.height}
+                decoding="async"
+              />
+            </picture>
+          </div>
+        ) : isVideo ? (
           <video
             src={preview}
             poster={posterHref}
@@ -250,13 +338,28 @@ const indexHref = localizedPath("/projects/", lang);
                   MIME, fail to decode the profile, and render nothing, with the mp4
                   fallback never firing.
                 */}
+                {/*
+                  ⛔ NO `autoplay`, and that is the whole optimisation. MEASURED
+                  2026-09-13: with it, this clip was fetched IN FULL on load —
+                  31.6 MB, readyState 4 — while sitting 1330px below the fold and
+                  paused, taking the page to 40.2 MB. The browser defers offscreen
+                  auto*play* but not the auto*load* that `autoplay` implies.
+                  `preload` does NOT govern this: "none" and "metadata" both
+                  fetched all 31.6 MB. Removing the attribute drops the same page
+                  to 9.3 MB, and the observer below starts the clip when a reader
+                  actually reaches it.
+
+                  ⛔ Do not re-add `autoplay` to "fix" a clip that does not play,
+                  and do not touch `preload` — it is inert while autoplay is set.
+                  If it stopped playing, the script is what broke.
+                */}
                 <video
                   class="cs-loop__motion"
-                  autoplay
+                  data-scroll-loop
                   muted
                   loop
                   playsinline
-                  preload="metadata"
+                  preload="none"
                   poster={b.poster}
                   width={b.width}
                   height={b.height}
@@ -320,6 +423,51 @@ const indexHref = localizedPath("/projects/", lang);
   {/* uiverse-5. Outside <main> so the fixed control is not itself a target
       of the #main-content jump it performs. */}
   <BackToTop {lang} />
+
+  {/*
+    The only first-party script this page carries, and it buys 31.6 MB back on
+    the upOS case study. It starts each inline loop when the reader reaches it
+    and pauses it when they leave.
+
+    ⛔ Reduced motion returns before observing anything. Those viewers are served
+    the still by CSS, so the clip must never be fetched for them at all — and a
+    `display: none` element has no intersection box, which would silently do the
+    right thing here and be the wrong thing to rely on.
+
+    With no JS the loop never starts, which is exactly why `<html>` ships
+    `no-js`: the stylesheet then paints the still instead, the same one reduced
+    motion gets.
+  */}
+  <script>
+    (() => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const loops = document.querySelectorAll("video[data-scroll-loop]");
+      if (loops.length === 0) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const video = entry.target;
+            if (!(video instanceof HTMLVideoElement)) continue;
+            if (entry.isIntersecting) {
+              // preload="none" in the markup, so this is the first byte fetched.
+              if (video.preload !== "auto") video.preload = "auto";
+              video.play().catch(() => {
+                /* Refused even muted — the poster stands in, which is correct. */
+              });
+            } else {
+              video.pause();
+            }
+          }
+        },
+        // A margin, so the clip is already running by the time it is on screen
+        // rather than starting the moment its first pixel appears.
+        { rootMargin: "200px 0px" },
+      );
+
+      for (const loop of loops) observer.observe(loop);
+    })();
+  </script>
 </BaseLayout>
 
 <style>
@@ -386,6 +534,49 @@ const indexHref = localizedPath("/projects/", lang);
     width: 100%;
     height: auto;
     border-radius: var(--radius-media);
+  }
+
+  /*
+   * The hero's motion/still swap. A display toggle rather than an overlay: both
+   * elements carry the record's own width/height and the rule above sizes them
+   * identically, so whichever one paints occupies exactly the same box and the
+   * page does not reflow between them.
+   *
+   * ⛔ Scoped through `.case__media` on purpose. `.hero-loop__still` alone is
+   * one class and loses to `.case__media img` above, which is a class plus a
+   * type — the still would then paint over the video on every visit, which is
+   * the precise opposite of what this rule is for.
+   */
+  .case__media .hero-loop__still {
+    display: none;
+  }
+
+  /*
+   * An autoplaying loop has no controls and no pause, so a viewer who asked for
+   * less motion has no way out of it. Serve the poster instead — the same call
+   * the `cs-loop` figures make, for the same reason.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    .case__media .hero-loop__motion {
+      display: none;
+    }
+
+    .case__media .hero-loop__still {
+      display: block;
+    }
+  }
+
+  /*
+   * The hero no longer carries `autoplay` — see the note at its markup — so
+   * without scripting it would sit on a poster that never moves. Paint the
+   * still instead, exactly as reduced motion does.
+   */
+  :global(.no-js) .case__media .hero-loop__motion {
+    display: none;
+  }
+
+  :global(.no-js) .case__media .hero-loop__still {
+    display: block;
   }
 
   .case__statement {
@@ -645,6 +836,24 @@ const indexHref = localizedPath("/projects/", lang);
     .case__body :global(.cs-loop .cs-loop__still) {
       display: block;
     }
+  }
+
+  /*
+   * Same swap, different reason: these loops dropped `autoplay` so a 31.6 MB
+   * clip is not fetched for a reader who never scrolls to it, which means
+   * without scripting nothing ever starts them. Painting the still is the
+   * honest fallback — a paused, controlless video is just a frozen frame.
+   *
+   * `:global(.no-js)` because the class lives on <html>, outside this
+   * component's scope. It out-specifies the base rules by the extra class it
+   * carries, which is what makes the still win here and lose everywhere else.
+   */
+  :global(.no-js) .case__body :global(.cs-loop .cs-loop__motion) {
+    display: none;
+  }
+
+  :global(.no-js) .case__body :global(.cs-loop .cs-loop__still) {
+    display: block;
   }
 
   .case__body :global(.cs-figure figcaption) {

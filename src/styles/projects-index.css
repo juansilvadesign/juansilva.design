@@ -833,6 +833,54 @@
   border-radius: var(--radius-media);
 }
 
+/*
+ * The hover preview, on the records that ship one. Same two-layer shape as the
+ * homepage card: the still holds the box and the clip is laid over it, so the
+ * crossfade changes which element paints and never the geometry.
+ *
+ * These two spans have to become positioning contexts for that, which they were
+ * not before — without it the clip would escape to the nearest positioned
+ * ancestor and cover the whole tile, text and all.
+ */
+.rec__media,
+.pcard__media {
+  position: relative;
+  display: block;
+}
+
+/*
+ * `object-fit` is here as insurance, not as a crop: the still is `height: auto`
+ * so the box already carries the source's own 16:9, and the clip is the same
+ * 16:9. Nothing is cut, which is why this needs no `object-position` nudge —
+ * unlike the homepage card, whose media column is portrait.
+ */
+.pcard__motion {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-media);
+  object-fit: cover;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--motion-base) var(--ease-standard);
+}
+
+/* The grid tile squares its thumbnail off; the clip has to follow it. */
+.pcard[data-view="grid"] .pcard__motion {
+  border-radius: 0;
+}
+
+.pcard__motion.is-playing {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard__motion {
+    display: none;
+  }
+}
+
 .rec__title {
   margin: 0 0 var(--space-px-8);
   font-family: var(--font-display);

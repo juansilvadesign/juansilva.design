@@ -18,7 +18,15 @@
   "liveUrl": "https://upos.juanpablosilva.com.br/",
   "evidenceLink": "https://github.com/zokuWebDesign/upOS",
   "featured": true,
-  "preview": "/assets/images/upos-preview.webp",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase-mockup.jpg",
+  "previewMotion": {
+    "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase-mockup.webm",
+    "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase-mockup.mp4",
+    "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/upos/upos-lp-app-showcase-mockup.webp",
+    "width": 1920,
+    "height": 1080,
+    "hoverStart": 2.4
+  },
   "copy": {
     "en": {
       "title": "Field-Service Operations Product & Marketing Site",

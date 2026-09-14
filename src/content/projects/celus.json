@@ -37,14 +37,14 @@
       "evidenceLabel": "Código-fonte"
     }
   },
-  "evidenceWeight": 8,
+  "evidenceWeight": 9,
   "evidenceSignals": {
     "liveSite": false,
     "sourceCode": true,
     "designAndCode": true,
     "productStack": true,
     "storeListing": false,
-    "designArtifact": false
+    "designArtifact": true
   },
   "caseStudy": null
 }
