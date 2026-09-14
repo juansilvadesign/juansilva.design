@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Inter:wght@400;500;600;700&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #FFFFFF;
+        font-family: "Lato", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #020817;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Full-bleed stage ground with subtle warm-lavender gradient */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 30%, rgba(100, 96, 190, 0.05) 0%, #F8F9FD 70%, #EFF2F9 100%);
+      }
+
+      /* Decorative ambient brand glows */
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        pointer-events: none;
+      }
+      #glow-1 {
+        top: 20px;
+        left: 200px;
+        width: 500px;
+        height: 500px;
+        background: rgba(100, 96, 190, 0.07);
+      }
+      #glow-2 {
+        bottom: 20px;
+        right: 250px;
+        width: 550px;
+        height: 550px;
+        background: rgba(245, 158, 11, 0.05);
+      }
+
+      /* Global stage container */
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* Camera scaler to prevent transform-origin drift */
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* --- Browser Window Mockup (Desktop 1440 & Laptop 1280) --- */
+      .browser-window {
+        position: absolute;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 30px 80px -20px rgba(2, 8, 23, 0.16), 0 0 0 1px rgba(2, 8, 23, 0.08);
+        overflow: hidden;
+      }
+
+      .browser-bar {
+        height: 42px;
+        background: #F1F4F9;
+        border-bottom: 1px solid rgba(2, 8, 23, 0.08);
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        gap: 12px;
+      }
+
+      .traffic-lights {
+        display: flex;
+        gap: 7px;
+      }
+      .light {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .light.red { background: #FF5F56; border: 1px solid #E0443E; }
+      .light.yellow { background: #FFBD2E; border: 1px solid #DEA123; }
+      .light.green { background: #27C93F; border: 1px solid #1AAB29; }
+
+      .url-bar {
+        flex: 1;
+        max-width: 480px;
+        margin: 0 auto;
+        height: 26px;
+        background: #FFFFFF;
+        border-radius: 6px;
+        border: 1px solid rgba(2, 8, 23, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-family: "Inter", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        color: #64748B;
+      }
+
+      .url-bar svg {
+        width: 12px;
+        height: 12px;
+        fill: #6460BE;
+      }
+
+      .browser-content {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .browser-content img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* Specific window sizing */
+      #win-desktop {
+        width: 1440px;
+        height: 880px;
+        left: 240px;
+        top: 110px;
+      }
+
+      #win-laptop {
+        width: 1280px;
+        height: 800px;
+        left: 320px;
+        top: 140px;
+        opacity: 0;
+      }
+
+      /* --- Mobile Phone Chassis (375px) --- */
+      #phone-chassis {
+        position: absolute;
+        width: 375px;
+        height: 812px;
+        left: 772px;
+        top: 134px;
+        background: #FFFFFF;
+        border-radius: 46px;
+        box-shadow: 0 35px 90px -15px rgba(2, 8, 23, 0.22), 0 0 0 10px #1E293B, 0 0 0 11px rgba(255, 255, 255, 0.2);
+        overflow: hidden;
+        opacity: 0;
+      }
+
+      .phone-notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 124px;
+        height: 28px;
+        background: #1E293B;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .camera-lens {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #090D16;
+        margin-left: 45px;
+      }
+
+      .phone-home-indicator {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 134px;
+        height: 5px;
+        border-radius: 100px;
+        background: rgba(2, 8, 23, 0.25);
+        z-index: 10;
+      }
+
+      .phone-content {
+        position: relative;
+        width: 375px;
+        height: 812px;
+        overflow: hidden;
+      }
+
+      .phone-content img {
+        display: block;
+        width: 375px;
+        height: auto;
+      }
+
+      /* --- Floating Badges & Indicators --- */
+      #badge-dock {
+        position: absolute;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 50;
+      }
+
+      .badge-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 18px;
+        border-radius: 100px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 10px 25px -5px rgba(2, 8, 23, 0.08), 0 0 0 1px rgba(2, 8, 23, 0.06);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #020817;
+      }
+
+      .badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #6460BE;
+      }
+
+      .breakpoint-tag {
+        font-family: "Inter", monospace;
+        font-size: 12px;
+        font-weight: 600;
+        color: #6460BE;
+        background: rgba(100, 96, 190, 0.10);
+        padding: 4px 10px;
+        border-radius: 6px;
+      }
+
+      /* --- Overlay Banner Callout --- */
+      #callout-banner {
+        position: absolute;
+        bottom: 34px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 28px;
+        border-radius: 100px;
+        background: #020817;
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 20px 40px -10px rgba(2, 8, 23, 0.3);
+        z-index: 60;
+        opacity: 0;
+      }
+
+      #callout-text {
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        color: #FFFFFF;
+      }
+      #callout-text strong {
+        color: #FEF08A;
+        font-weight: 700;
+      }
+
+      /* --- Multi-Device Trio for Scene 5 --- */
+      #trio-stage {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .trio-device {
+        position: absolute;
+        box-shadow: 0 35px 80px -20px rgba(2, 8, 23, 0.2), 0 0 0 1px rgba(2, 8, 23, 0.08);
+        border-radius: 12px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+
+      #trio-mobile {
+        width: 280px;
+        height: 606px;
+        left: 140px;
+        top: 237px;
+        border-radius: 36px;
+        box-shadow: 0 25px 60px -15px rgba(2, 8, 23, 0.25), 0 0 0 8px #1E293B;
+      }
+      #trio-mobile img {
+        width: 280px;
+        height: auto;
+      }
+
+      #trio-desktop {
+        width: 1080px;
+        height: 675px;
+        left: 420px;
+        top: 150px;
+      }
+      #trio-desktop img {
+        width: 1080px;
+        height: auto;
+      }
+
+      #trio-laptop {
+        width: 768px;
+        height: 480px;
+        left: 1012px;
+        top: 450px;
+      }
+      #trio-laptop img {
+        width: 768px;
+        height: auto;
+      }
+
+      /* Stat Summary Card for Scene 5 */
+      #stat-matrix {
+        position: absolute;
+        bottom: 48px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 16px;
+        z-index: 70;
+        opacity: 0;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(14px);
+        border: 1px solid rgba(100, 96, 190, 0.2);
+        padding: 14px 24px;
+        border-radius: 14px;
+        box-shadow: 0 15px 35px -5px rgba(2, 8, 23, 0.08);
+        text-align: center;
+      }
+
+      .stat-num {
+        font-size: 26px;
+        font-weight: 900;
+        color: #6460BE;
+        line-height: 1.1;
+      }
+
+      .stat-lbl {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #64748B;
+        margin-top: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="25" data-width="1920" data-height="1080">
+      <div id="stage" class="clip" data-start="0" data-duration="25">
+        <div id="ground"></div>
+        <div id="glow-1" class="ambient-glow" data-layout-allow-overflow=""></div>
+        <div id="glow-2" class="ambient-glow" data-layout-allow-overflow=""></div>
+
+        <!-- Dynamic Header Badge Dock -->
+        <div id="badge-dock" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <div class="badge-pill">
+            <div class="badge-dot"></div>
+            <span id="badge-audience">PACIENTE</span>
+          </div>
+          <div class="badge-pill">
+            <span id="badge-breakpoint" class="breakpoint-tag">1440px · DESKTOP</span>
+          </div>
+        </div>
+
+        <!-- Floating Callout Banner -->
+        <div id="callout-banner" data-layout-allow-overlap="">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FEF08A">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+          <span id="callout-text">Atendimento urgente ou agendamento imediato: <strong>R$ 1,99 / minuto</strong></span>
+        </div>
+
+        <!-- Camera Scaling and Movement Hierarchy -->
+        <div id="camera-scaler" data-layout-allow-overflow="">
+          <div id="camera-track" data-layout-allow-overflow="">
+
+            <!-- Primary 1440px Desktop Window -->
+            <div id="win-desktop" class="browser-window" data-layout-allow-overflow="" data-layout-allow-overlap="">
+              <div class="browser-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="traffic-lights">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+                <div class="url-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                  <span id="url-text">sydapp.com.br</span>
+                </div>
+              </div>
+              <div class="browser-content" id="desktop-content" data-layout-allow-overflow="">
+                <img id="img-paciente-1440" src="assets/paciente-hero-1440.png" alt="Paciente Desktop" data-layout-allow-overflow="">
+                <img id="img-profissional-1440" style="display: none;" src="assets/profissional-hero-1440.png" alt="Profissional Desktop" data-layout-allow-overflow="">
+                <img id="img-rh-1440" style="display: none;" src="assets/rh-hero-1440.png" alt="RH Desktop" data-layout-allow-overflow="">
+                <img id="img-paciente-1440-end" style="display: none;" src="assets/paciente-hero-1440-end.png" alt="Paciente Desktop Loop Join" data-layout-allow-overflow="">
+              </div>
+            </div>
+
+            <!-- Laptop 1280px Window -->
+            <div id="win-laptop" class="browser-window" data-layout-allow-overflow="" data-layout-allow-overlap="">
+              <div class="browser-bar" data-layout-allow-overlap="">
+                <div class="traffic-lights">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+                <div class="url-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                  <span data-layout-allow-overlap="">sydapp.com.br</span>
+                </div>
+              </div>
+              <div class="browser-content" data-layout-allow-overflow="">
+                <img id="img-paciente-1280" src="assets/paciente-laptop-1280.png" alt="Paciente Laptop" data-layout-allow-overflow="">
+              </div>
+            </div>
+
+            <!-- Mobile 375px Chassis -->
+            <div id="phone-chassis" data-layout-allow-overflow="" data-layout-allow-overlap="">
+              <div class="phone-notch">
+                <div class="camera-lens"></div>
+              </div>
+              <div class="phone-content" data-layout-allow-overflow="">
+                <img id="img-paciente-375" src="assets/paciente-mobile-375.png" alt="Paciente Mobile" data-layout-allow-overflow="">
+              </div>
+              <div class="phone-home-indicator"></div>
+            </div>
+
+            <!-- Scene 5 Multi-Device Matrix -->
+            <div id="trio-stage" data-layout-allow-overflow="" data-layout-allow-overlap="">
+              <div id="trio-mobile" class="trio-device" data-layout-allow-overflow="">
+                <img src="assets/rh-mobile-375.png" alt="RH Mobile" data-layout-allow-overflow="">
+              </div>
+              <div id="trio-desktop" class="trio-device" data-layout-allow-overflow="">
+                <img src="assets/paciente-hero-1440-trio.png" alt="Paciente Desktop Center" data-layout-allow-overflow="">
+              </div>
+              <div id="trio-laptop" class="trio-device" data-layout-allow-overflow="">
+                <img src="assets/profissional-laptop-1280.png" alt="Profissional Laptop" data-layout-allow-overflow="">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 9-State Stat Matrix in Scene 5 -->
+        <div id="stat-matrix" data-layout-allow-overlap="">
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Audience Pages</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3</div>
+            <div class="stat-lbl">Breakpoints Each</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">9</div>
+            <div class="stat-lbl">Designed States</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">2</div>
+            <div class="stat-lbl">Vite → Next.js</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+
+      // Selectors
+      const scaler = "#camera-scaler";
+      const track = "#camera-track";
+      const winDesktop = "#win-desktop";
+      const winLaptop = "#win-laptop";
+      const phone = "#phone-chassis";
+      const trio = "#trio-stage";
+      const statMatrix = "#stat-matrix";
+      const callout = "#callout-banner";
+      const calloutText = "#callout-text";
+      const badgeAudience = "#badge-audience";
+      const badgeBreakpoint = "#badge-breakpoint";
+      const urlText = "#url-text";
+
+      const imgPaciente1440 = "#img-paciente-1440";
+      const imgProfissional1440 = "#img-profissional-1440";
+      const imgRh1440 = "#img-rh-1440";
+      const imgPaciente1440End = "#img-paciente-1440-end";
+
+      // =========================================================================
+      // SCENE 1: PACIENTE 1440 DESKTOP (t=0.0s to 5.0s)
+      // =========================================================================
+      // Frame 0 is crisp and settled: scale 1.0, winDesktop at (240, 110)
+      tl.set(scaler, { scale: 1.0, transformOrigin: "960px 540px" }, 0);
+      tl.set(track, { x: 0, y: 0 }, 0);
+      tl.set(winDesktop, { opacity: 1, x: 0, y: 0, scale: 1.0 }, 0);
+      tl.set(winLaptop, { opacity: 0 }, 0);
+      tl.set(phone, { opacity: 0 }, 0);
+      tl.set(trio, { opacity: 0 }, 0);
+      tl.set(statMatrix, { opacity: 0, y: 20 }, 0);
+      tl.set(callout, { opacity: 0, y: 20 }, 0);
+      tl.set(badgeAudience, { textContent: "PACIENTE" }, 0);
+      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 0);
+      tl.set(urlText, { textContent: "sydapp.com.br" }, 0);
+
+      // Value callout appears at t=1.2s
+      tl.to(callout, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 1.2);
+
+      // Camera gently punches into the urgency headline & booking action (subtle move)
+      tl.to(scaler, { scale: 1.03, duration: 2.2, ease: "power1.inOut" }, 1.5);
+      tl.to(track, { y: -10, duration: 2.2, ease: "power1.inOut" }, 1.5);
+
+      // Prepare transition to Scene 2
+      tl.to(callout, { opacity: 0, y: 15, duration: 0.5, ease: "power2.in" }, 4.3);
+      tl.to(scaler, { scale: 1.0, duration: 0.7, ease: "power2.inOut" }, 4.3);
+      tl.to(track, { y: 0, duration: 0.7, ease: "power2.inOut" }, 4.3);
+
+      // =========================================================================
+      // SCENE 2: RESPONSIVE BREAKPOINT SHIFT 1440 → 1280 → 375 (t=5.0s to 10.0s)
+      // =========================================================================
+      // Switch breakpoint tag to 1280px Laptop at t=5.0s
+      tl.set(badgeBreakpoint, { textContent: "1280px · LAPTOP" }, 5.0);
+      tl.set(urlText, { textContent: "sydapp.com.br" }, 5.0);
+
+      // Smooth cross-morph: Desktop contracts into Laptop 1280
+      tl.to(winDesktop, { opacity: 0, scale: 0.94, duration: 0.6, ease: "power2.inOut" }, 5.0);
+      tl.fromTo(winLaptop, { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 5.0);
+
+      // Laptop callout banner
+      tl.set(calloutText, { innerHTML: "Layout responsivo fluído: <strong>sem perda de intenção</strong>" }, 5.8);
+      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 5.8);
+
+      // Morph Laptop into Mobile Phone (375px) at t=7.0s
+      tl.set(badgeBreakpoint, { textContent: "375px · MOBILE" }, 7.0);
+      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 6.8);
+
+      tl.to(winLaptop, { opacity: 0, scale: 0.7, duration: 0.7, ease: "power2.inOut" }, 7.0);
+      tl.fromTo(phone, { opacity: 0, scale: 0.85, y: 40 }, { opacity: 1, scale: 1.0, y: 0, duration: 0.7, ease: "power2.out" }, 7.1);
+
+      // Mobile callout banner
+      tl.set(calloutText, { innerHTML: "Menu retrátil, CTAs empilhados: <strong>ergonomia de polegar</strong>" }, 7.8);
+      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.8);
+
+      // Subtle phone push
+      tl.to(scaler, { scale: 1.04, duration: 1.5, ease: "power1.inOut" }, 7.8);
+
+      // Prepare transition to Scene 3
+      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 9.4);
+      tl.to(phone, { opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.in" }, 9.5);
+      tl.to(scaler, { scale: 1.0, duration: 0.5, ease: "power2.inOut" }, 9.5);
+
+      // =========================================================================
+      // SCENE 3: AUDIENCE TWO — PROFISSIONAL (t=10.0s to 15.0s)
+      // =========================================================================
+      tl.set(badgeAudience, { textContent: "PROFISSIONAL" }, 10.0);
+      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 10.0);
+      tl.set(urlText, { textContent: "sydapp.com.br/profissional" }, 10.0);
+
+      // Reveal desktop window with Profissional content
+      tl.set(imgPaciente1440, { display: "none" }, 10.0);
+      tl.set(imgProfissional1440, { display: "block" }, 10.0);
+      tl.set(imgRh1440, { display: "none" }, 10.0);
+
+      tl.fromTo(winDesktop, { opacity: 0, x: 60, scale: 0.98 }, { opacity: 1, x: 0, scale: 1.0, duration: 0.7, ease: "power2.out" }, 10.0);
+
+      // Callout for therapist recruitment & autonomy
+      tl.set(calloutText, { innerHTML: "Lado da oferta: <strong>autonomia, agenda livre e remuneração justa por minuto</strong>" }, 10.8);
+      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 10.8);
+
+      // Camera pan across the value proposition
+      tl.to(scaler, { scale: 1.02, duration: 2.5, ease: "power1.inOut" }, 11.2);
+      tl.to(track, { x: -15, y: -10, duration: 2.5, ease: "power1.inOut" }, 11.2);
+
+      // Prepare transition to Scene 4
+      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 14.3);
+      tl.to(scaler, { scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 14.3);
+      tl.to(track, { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" }, 14.3);
+
+      // =========================================================================
+      // SCENE 4: AUDIENCE THREE — RH CORPORATIVO (t=15.0s to 20.0s)
+      // =========================================================================
+      tl.set(badgeAudience, { textContent: "RH CORPORATIVO" }, 15.0);
+      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 15.0);
+      tl.set(urlText, { textContent: "sydapp.com.br/rh" }, 15.0);
+
+      // Cross-dissolve into RH Desktop
+      tl.to(winDesktop, { opacity: 0.4, duration: 0.3, ease: "power1.in" }, 14.7);
+      tl.set(imgProfissional1440, { display: "none" }, 15.0);
+      tl.set(imgRh1440, { display: "block" }, 15.0);
+      tl.to(winDesktop, { opacity: 1, duration: 0.4, ease: "power1.out" }, 15.0);
+
+      // Callout for enterprise wellness benefit
+      tl.set(calloutText, { innerHTML: "Benefício corporativo sem burocracia: <strong>métricas claras e proteção da equipe</strong>" }, 15.8);
+      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 15.8);
+
+      // Subtle focus on corporate value metrics
+      tl.to(scaler, { scale: 1.02, duration: 2.5, ease: "power1.inOut" }, 16.2);
+      tl.to(track, { y: -10, duration: 2.5, ease: "power1.inOut" }, 16.2);
+
+      // Prepare transition to Scene 5
+      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 19.3);
+      tl.to(scaler, { scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 19.3);
+      tl.to(track, { y: 0, duration: 0.6, ease: "power2.inOut" }, 19.3);
+
+      // =========================================================================
+      // SCENE 5: 9-STATE MATRIX & SEAMLESS LOOP RESOLUTION (t=20.0s to 25.0s)
+      // =========================================================================
+      tl.set(badgeAudience, { textContent: "MATRIZ RESPONSIVA" }, 20.0);
+      tl.set(badgeBreakpoint, { textContent: "3 PÚBLICOS × 3 BREAKPOINTS" }, 20.0);
+
+      // Pull back into 3-device orchestra
+      tl.to(winDesktop, { opacity: 0, scale: 0.85, duration: 0.6, ease: "power2.inOut" }, 20.0);
+      tl.fromTo(trio, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1.0, duration: 0.7, ease: "power2.out" }, 20.1);
+      tl.fromTo(statMatrix, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 20.4);
+
+      // Subtle hover float in trio
+      tl.to("#trio-mobile", { y: -8, duration: 1.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 20.5);
+      tl.to("#trio-laptop", { y: 8, duration: 1.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 20.5);
+
+      // RESOLUTION BACK TO OPENING HERO (t=23.2s to 25.0s)
+      // Switch desktop window back to Paciente opening asset
+      tl.set(imgRh1440, { display: "none" }, 23.0);
+      tl.set(imgPaciente1440End, { display: "block" }, 23.0);
+      tl.set(urlText, { textContent: "sydapp.com.br" }, 23.5);
+
+      // Fade out trio and stat matrix
+      tl.to(trio, { opacity: 0, scale: 1.05, duration: 1.0, ease: "power2.inOut" }, 23.4);
+      tl.to(statMatrix, { opacity: 0, y: 20, duration: 0.8, ease: "power2.in" }, 23.4);
+
+      // Reset badge dock to opening values at t=24.5s
+      tl.set(badgeAudience, { textContent: "PACIENTE" }, 24.5);
+      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 24.5);
+
+      // Smoothly zoom in and restore winDesktop to exact frame 0 coordinates (scale 1.0, x: 0, y: 0, opacity 1)
+      tl.to(winDesktop, { opacity: 1, scale: 1.0, x: 0, y: 0, duration: 1.2, ease: "power2.inOut" }, 23.6);
+      tl.to(scaler, { scale: 1.0, duration: 1.0, ease: "power2.inOut" }, 23.8);
+      tl.to(track, { x: 0, y: 0, duration: 1.0, ease: "power2.inOut" }, 23.8);
+    </script>
+  </body>
+</html>

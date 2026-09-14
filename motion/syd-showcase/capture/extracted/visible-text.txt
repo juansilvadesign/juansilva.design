@@ -1,0 +1,112 @@
+[a] Como funciona
+[a] Benefícios
+[span] Entrar
+[span] Agendar consulta
+[h2] Atendimento psicológico quando você mais precisa.
+[p] Está enfrentando um momento difícil e precisa de ajuda agora? No SYD, você pode iniciar uma vídeo chamada urgente com profissionais qualificados ou agendar sua consulta com poucos cliques.
+[span] A sua saúde emocional não pode esperar, e você também não precisa.
+[a] Baixe na Play Store
+[a] Baixe na App Store
+[h2] Cuidar da sua saúde emocional nunca foi tão simples
+[p] Com o SYD, você tem acesso a atendimentos psicológicos online no momento em que mais precisa ou, se preferir, com hora marcada. Sem filas de espera, sem burocracia.
+[p] Tudo direto do seu celular ou computador, com praticidade e acolhimento desde o primeiro clique.
+[h3] Escolha atendimento
+[h3] imediato ou agende
+[h3] Conecte com psicólogo
+[h3] disponível em poucos minutos
+[h3] Pague só pelo
+[h3] tempo que usar
+[a] Comece agora
+[p] Benefícios
+[h2] Por que escolher o SYD?
+[p] Porque sua saúde mental merece
+[span] praticidade
+[span] acolhimento
+[span] liberdade
+[p] No SYD, você encontra uma forma segura de cuidar do seu bem-estar emocional.
+[span] Sem burocracias
+[p] , com
+[span] total flexibilidade
+[span] profissionais confiáveis
+[p] sempre à disposição.
+[a] Iniciar atendimento
+[h4] Atendimento por minuto
+[p] Pague apenas pelos minutos que utilizará, e tenha total controle do seu tempo e investimento.
+[h4] Urgência 24h
+[p] Precisa de ajuda agora? Conecte-se com psicólogos disponíveis em qualquer horário, sem necessidade de agendamento.
+[h4] Profissionais verificados
+[p] Todos os atendimentos são realizados por psicólogos com CRP ativo, segurança e ética garantidas.
+[h4] Sem mensalidade
+[p] Use como quiser, quando precisar. Nenhuma taxa fixa.
+[h4] Acesso em qualquer dispositivo
+[p] Seja atendido de onde estiver, com conforto e praticidade em qualquer dispositivo.
+[a] Iniciar atendimento
+[p] Planos e Preços
+[h2] Transparência e liberdade para você escolher como cuidar da sua saúde mental.
+[p] No SYD, você decide como e quanto investir no seu bem-estar emocional.
+[span] Mais popular
+[h4] Atendimento avulso
+[p] Ideal para quem busca flexibilidade total, a partir de R$1,99 o minuto.
+[h1] R$1,99
+[span] /minuto
+[p] Escolha sessões de 20, 40 ou 60 minutos, sem mensalidades.
+[a] Agendar consulta
+[p] Acesso a atendimento de urgência 24h
+[p] Atendimento com ou sem agendamento prévio.
+[p] Liberdade total de uso: você escolhe quando e quanto tempo deseja.
+[p] O valor total será calculado com base no tempo escolhido no momento do agendamento. OU (Pague apenas pelos minutos que deseja utilizar)
+[p] Sem mensalidade, sem fidelidade.
+[h4] Convênio com empresas
+[p] Cuidado com colaboradores, benefícios para os negócios.
+[h2] Personalizado
+[p] Entre em contato e receba uma proposta personalizada para sua empresa.
+[a] Entrar em contato
+[p] Acesso imediato e 24h ao suporte emocional
+[p] Modelo de uso sob demanda ou agendamento
+[p] Suporte personalizado para o RH
+[p] Sem mensalidade obrigatória ou contratos engessados
+[p] Valorização do Employer Branding
+[p] Relatórios de tempo de uso e indicadores de bem-estar organizacional (sem quebra de sigilo)
+[h2] Sua empresa cuida da saúde mental dos colaboradores?
+[span] Ofereça um benefício que realmente faz a diferença.
+[p] O SYD ajuda empresas a promoverem bem-estar emocional com um atendimento psicológico acessível, imediato e sem burocracias. Invista em um time mais saudável, produtivo e engajado. Fale com nosso time.
+[a] Quero indicar minha empresa
+[h2] Fale conosco
+[p] Estamos aqui para te ajudar com o que for preciso.
+[p] Se você tem dúvidas, quer entender melhor como funciona ou deseja levar o SYD para sua empresa, é só chamar. Nosso time está pronto para te atender com atenção e cuidado.
+[label] Nome
+[label] E-mail
+[label] Mensagem
+[button] Enviar mensagem
+[p] Ao enviar este formulário, você concorda com nossos
+[a] Termos de Uso
+[a] Política de Privacidade
+[blockquote] A funcionalidade de urgência é sensacional! Em situações que eu não podia esperar dias por uma consulta, o SYD me deu suporte na hora. Recomendo para todos que precisam de apoio imediato.
+[span] Thaís Moura
+[h2] Perguntas Frequentes
+[p] Separamos as dúvidas mais comuns de quem está começando no SYD. Caso ainda tenha alguma pergunta, nosso time está pronto para te ajudar.
+[h4] Como funciona o atendimento por minuto?
+[h4] Preciso agendar com antecedência?
+[h4] É seguro e sigiloso?
+[h4] Posso acessar pelo celular?
+[h4] Preciso pagar alguma mensalidade?
+[h4] O que acontece se eu cancelar uma consulta agendada?
+[h3] Ainda tem dúvidas?
+[p] Entre contato conosco! Estamos aqui para te ajudar com o que for preciso.
+[a] Entrar em contato
+[h2] Leve o SYD com você
+[p] Baixe o app do SYD e tenha acesso a atendimentos psicológicos imediatos, agendamentos, histórico de consultas e suporte sempre à mão. Tudo com segurança, praticidade e acolhimento no seu bolso.
+[p] Endereço:
+[p] Sorocaba-SP.
+[p] Contato:
+[p] +55 15 99694-5695
+[p] suporte@sydapp.com.br
+[h6] Links rápidos
+[a] Como funciona
+[a] Benefícios
+[h6] Relacionado
+[a] Para empresas
+[a] Para profissionais
+[div] © 2025 SYD. Todos os direitos reservados.
+[a] Política de Privacidade
+[a] Termos de Uso
