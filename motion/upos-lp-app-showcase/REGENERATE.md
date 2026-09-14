@@ -57,3 +57,80 @@ sha256sum snapshots/frame-00-at-0s.png snapshots/frame-*-at-29.98s.png
 
 ⭐ The seam test is not "they look similar": frame 0 and frame 29.98 must be **byte-identical**.
 They were, at `4f8573ffc03622cf…`, on 2026-09-12.
+
+## 4. The `-mockup` web-delivery set (2026-09-13)
+
+A second, separate asset from the 30s loop above: a 41.7s device-mockup showcase that opens on a
+**closed** laptop, lifts the lid, tours the LP and all eight modules, and fades back down. It feeds
+the homepage card's hover preview, the `/projects` tile's hover preview, and the case-study hero.
+
+The 4K render out of HyperFrames is the **master** and stays local, gitignored, under
+`renders/out/upos-lp-app-showcase-mockup.master-2160p.{mp4,jpg}` — 3840×2160, 78.5 MB. It is never
+served: a 78 MB hover is not a hover.
+
+```
+D=motion/upos-lp-app-showcase/renders/out
+S=$D/upos-lp-app-showcase-mockup.master-2160p
+
+# 1080p H.264 High L4.0 — 14.5 MB
+ffmpeg -i $S.mp4 -vf scale=1920:1080:flags=lanczos -an \
+  -c:v libx264 -profile:v high -level 4.0 -pix_fmt yuv420p -crf 24 -preset slow \
+  -color_primaries bt709 -color_trc bt709 -colorspace bt709 -movflags +faststart \
+  $D/upos-lp-app-showcase-mockup.mp4
+
+# 1080p VP9 Profile 0, 2-pass — 9.6 MB   (⛔ Profile 0, NOT the loop's Profile 1)
+ffmpeg -i $S.mp4 -vf scale=1920:1080:flags=lanczos -an -c:v libvpx-vp9 -pix_fmt yuv420p \
+  -profile:v 0 -crf 36 -b:v 0 -row-mt 1 -deadline good -cpu-used 2 \
+  -color_primaries bt709 -color_trc bt709 -colorspace bt709 -pass 1 -f null /dev/null
+#   …then the identical line with -pass 2 and the output path.
+
+# Both stills from the SAME master jpg, so the <picture> pair cannot be two pictures
+ffmpeg -i $S.jpg -vf scale=1920:1080:flags=lanczos -c:v libwebp -quality 82 -preset picture \
+  $D/upos-lp-app-showcase-mockup.webp
+ffmpeg -i $S.jpg -vf scale=1920:1080:flags=lanczos -q:v 4 $D/upos-lp-app-showcase-mockup.jpg
+```
+
+⭐ **CRF chosen on measurement, not taste.** SSIM against a lossless 1080p downscale of the master:
+mp4 crf21 0.99113 @ 21.9 MB vs **crf24 0.98824 @ 14.5 MB**; webm crf32 0.97436 @ 13.1 MB vs
+**crf36 0.97340 @ 9.6 MB**. A 1:1 crop of the densest text (the permissions matrix at t=26s) is
+indistinguishable across all four, so the cheaper pair wins.
+
+⛔ **Profile 0, deliberately.** The 30s loop is VP9 Profile 1 (4:4:4) because full-frame UI glyphs
+fringed at 4:2:0. This is a photographic device mockup, the 4K→1080p downscale averages that away,
+and Profile 1 is the exact thing that lets Safari claim support by MIME and then paint a blank box.
+The `<source type>` strings live in `PREVIEW_MOTION_TYPES` (`src/lib/projects.ts`) and describe THIS
+recipe — `vp09.00.40.08` and `avc1.640028`. Re-encode at other settings and those must change with it.
+
+⛔ **The poster is not frame 0, on purpose.** Frame 0 is an unlit, closed laptop; the poster is the
+settled open one. That is why the record carries `previewMotion.hoverStart: 2.4` — measured at 0.25s
+steps, the lid is up and sharp by 2.25s. The hero ignores it and plays the lift from zero, which is
+the intended opening there.
+
+### Upload
+
+⛔ The `.mp4` and `.jpg` **overwrite** the 4K objects already on R2. The masters survive only in
+`renders/out/*.master-2160p.*`, which is gitignored — do not clear that folder before this lands.
+
+⛔ Upload **before** deploying. Until the objects exist, `.webp` and `.webm` 404 and the page falls
+back to the `.jpg` and the **78 MB** 4K `.mp4` still sitting at that path.
+
+```
+npx wrangler r2 bucket list                      # the bucket behind cdn.juanpablosilva.com.br
+B=<bucket>; P=juansilva.design/cases/upos; D=motion/upos-lp-app-showcase/renders/out
+for f in webm:video/webm mp4:video/mp4 webp:image/webp jpg:image/jpeg; do
+  npx wrangler r2 object put "$B/$P/upos-lp-app-showcase-mockup.${f%%:*}" \
+    --file "$D/upos-lp-app-showcase-mockup.${f%%:*}" --content-type "${f##*:}" --remote
+done
+
+# Then confirm all four, and that mp4 is the 14.5 MB one rather than the old 78.5 MB object:
+for f in webm mp4 webp jpg; do
+  curl -sI "https://cdn.juanpablosilva.com.br/$P/upos-lp-app-showcase-mockup.$f" \
+    | grep -iE "^HTTP|content-length|content-type"
+done
+```
+
+⭐ Seeking needs HTTP Range. R2 answers `206`; `python3 -m http.server` answers `200` and the seek is
+then **silently clamped to 0** with `seeked` still firing. Both hover surfaces therefore gate their
+crossfade on `currentTime >= hoverStart` rather than trusting the seek — so a server without Range
+costs a short wait, never a card that opens on a closed laptop. Test on `npx astro preview`, not on
+`http.server`.
