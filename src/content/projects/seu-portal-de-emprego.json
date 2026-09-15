@@ -41,5 +41,198 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI/UX designer for a comprehensive 3-role employment and talent placement platform (Candidate, Hiring Company, and Admin Back Office) spanning 265 design nodes in a 350-node artifact. Designed candidate search with conditional screening questions, a 3-stage company onboarding funnel, an integrated calendar interview scheduler with reschedule/cancel popups, subscription management (Pix/Boleto/Card), and dedicated empty states for all zero-data dashboard views.",
+      "context": "Agency engagement at Sagitta between February 9 and May 7, 2024. Delivered as UI/UX designer within a team alongside engineering. The platform was built to modernize regional talent placement in Brazil, connecting local job seekers with companies via automated screening and interview booking, monetized through recurring subscription tiers.",
+      "outcome": "Handed off to engineering with full specifications and responsive mobile views (Review page with iPhone SE inspection specs). The client business subsequently ceased operations and closed all activities, and seuportaldeempregos.com.br is defunct. No production metrics exist; the project stands as verified evidence of 3-role marketplace architecture and empty-state resilience.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the UI/UX designer responsible for the candidate, company, and administrative portals, interview scheduling workflows, subscription billing UI, and mobile viewports. I do not claim backend development, payment processing infrastructure, or operational ownership of the recruitment service. Delivery reality: the project was delivered to development; the business subsequently ceased operations and its web domain is offline."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Three-role architecture: candidate discovery, company screening, and back office"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "265",
+              "label": "design nodes on the core product canvas",
+              "icon": "📐"
+            },
+            {
+              "value": "3",
+              "label": "permissioned platform roles (Candidate, Company, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "13",
+              "label": "semantic document color styles",
+              "icon": "🎨"
+            },
+            {
+              "value": "3",
+              "label": "dedicated empty-state recovery views",
+              "icon": "🛡️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Regional recruitment platforms face a dual challenge: job seekers need fast, low-friction application experiences, while small-and-medium businesses require automated filtering to avoid drowning in unqualified résumés. I architected Seu Portal de Emprego around three independent user spaces (Candidatos, Empresas, and Administradores), ensuring each stakeholder had tailored tools for discovery, evaluation, or financial oversight."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Core workflows: conditional qualification and the 3-stage company onboarding"
+        },
+        {
+          "type": "prose",
+          "body": "The application structures end-to-end recruitment interactions across dedicated functional flows:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Candidate Job Discovery & Conditional Questions — Searchable vacancy feeds coupled with PerguntasEmpresa, dynamic employer questionnaires presented during application submission to verify prerequisite qualifications before résumé dispatch.",
+            "3-Stage Company Onboarding — A guided intake funnel (Empresa stage1, stage2, and stage3) capturing corporate credentials, hiring categories, and initial job openings.",
+            "Vacancy and Applicant Pipeline — Recruiter management consoles (Minhas vagas, Currículos, and multi-state Lista tables) for triaging submissions and reviewing applicant profiles.",
+            "Monetization and Subscriptions — Comprehensive billing consoles (Gerenciar Planos, Plano Grátis, Planos editar, and Assinatura pix) handling recurring access tiers via Pix, bank slip, and credit card.",
+            "Administrative Governance — Operations hub featuring KPI analytics (Métricas, DASH) and direct push messaging (Enviar notificação personalizada)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The interview scheduling engine and calendar workflows"
+        },
+        {
+          "type": "prose",
+          "body": "A critical differentiator of the platform was its built-in interview scheduler. Rather than bouncing candidates to external calendar tools, recruiters could propose interview slots directly within the portal (Agenda de entrevistas and Agenda das entrevistas). I designed modal workflows for slot confirmation (Pop-up agendar entrevista) and cancellation handling with structured reason inputs (Pop-up cancelar entrevista), synchronized with candidate notifications."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Defensive design: dedicated empty states and error resilience"
+        },
+        {
+          "type": "prose",
+          "body": "Most digital products fail when zero data is present. In Seu Portal de Emprego, every primary view features a dedicated, designed empty state: Home - Empty State, Agenda de entrevistas - Empty State, and Curriculos enviados - Empty State. Rather than showing blank tables or broken layouts, these states provide clear educational guidance on how to publish vacancies or initiate job searches."
+        },
+        {
+          "type": "quote",
+          "text": "Designing a multi-role marketplace means designing for day zero as thoroughly as day one hundred. Empty states aren't placeholders; they are onboarding prompts."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Tokenized color system and mobile inspection specs"
+        },
+        {
+          "type": "prose",
+          "body": "The artifact defines 13 local semantic color styles structured across primary brand tones (Azul Primário #1E1A51, Roxo Primário #412682, Laranja Primário #EE7D00), standard interface neutrals (Preto, Branco, Cinza, and Stroke #EBEB39), and functional alerts (Amarelo, Vermelho, Verde). In addition, I created a dedicated Review page with 19 frames, including detailed inspection specifications (Specs) and iPhone SE mobile viewports to streamline developer implementation."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI/UX de uma plataforma de empregos e colocação profissional com três perfis (Candidato, Empresa Contratante e Back Office Administrativo), totalizando 265 nós na página de design em um artefato de 350 nós. Desenvolveu busca de vagas com perguntas condicionais, funil de onboarding empresarial em três etapas, agendador integrado de entrevistas com modais de cancelamento/reagendamento, gestão de assinaturas (Pix/Boleto/Cartão) e estados vazios dedicados para todas as telas sem dados.",
+      "context": "Atuação na agência Sagitta entre 9 de fevereiro e 7 de maio de 2024. Atuou como designer de UI/UX em equipe integrada ao desenvolvimento. A plataforma foi criada para modernizar a intermediação de mão de obra regional no Brasil, conectando profissionais a empresas por meio de triagem automatizada e agendamento de entrevistas, monetizada por planos de assinatura recorrentes.",
+      "outcome": "Entregue ao time de engenharia com especificações completas e pranchas de revisão mobile (página Review com pranchas de inspeção em iPhone SE). A empresa encerrou suas operações comerciais posteriormente e o domínio seuportaldeempregos.com.br foi desativado. Não existem métricas de produção; o projeto permanece como comprovação auditada de arquitetura de marketplace com três perfis e resiliência de estados vazios.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer de UI/UX responsável pelos portais de candidato, empresa e administração, fluxos de agendamento de entrevistas, interface de assinaturas e adaptação mobile. Não reivindico desenvolvimento backend, processamento de pagamentos ou operação do serviço de vagas. Realidade de entrega: o projeto foi entregue ao desenvolvimento; posteriormente, a empresa encerrou atividades e o domínio saiu do ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura com três perfis: busca de vagas, triagem corporativa e back office"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "265",
+              "label": "nós de design na prancha principal de produto",
+              "icon": "📐"
+            },
+            {
+              "value": "3",
+              "label": "perfis de acesso (Candidato, Empresa, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "13",
+              "label": "estilos de cor semânticos no documento",
+              "icon": "🎨"
+            },
+            {
+              "value": "3",
+              "label": "telas dedicadas de recuperação em estado vazio",
+              "icon": "🛡️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Plataformas regionais de emprego enfrentam um dilema duplo: os candidatos demandam processos rápidos de candidatura, enquanto empresas de pequeno e médio porte precisam de filtros automáticos para não se sobrecarregarem com currículos fora do perfil. Estruturei o Seu Portal de Emprego em três áreas de acesso independentes (Candidatos, Empresas e Administradores), garantindo que cada parte contasse com ferramentas sob medida para busca, triagem ou controle financeiro."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Fluxos principais: qualificação condicional e onboarding em 3 etapas"
+        },
+        {
+          "type": "prose",
+          "body": "A aplicação organiza a rotina de contratação através de fluxos funcionais detalhados:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Busca de Vagas e Perguntas Condicionais — Feed de vagas associado ao componente PerguntasEmpresa, questionários dinâmicos da empresa exibidos na candidatura para validar pré-requisitos antes do envio do currículo.",
+            "Onboarding de Empresas em 3 Etapas — Funil de cadastro assistido (Empresa stage1, stage2 e stage3) registrando dados da empresa, ramos de atuação e criação da primeira vaga.",
+            "Gestão de Vagas e Candidaturas — Painéis para recrutadores (Minhas vagas, Currículos e tabelas em múltiplos estados Lista) para triagem de candidatos e análise de currículos recebidos.",
+            "Monetização e Planos de Assinatura — Módulo de faturamento (Gerenciar Planos, Plano Grátis, Planos editar e Assinatura pix) viabilizando planos de acesso via Pix, boleto e cartão.",
+            "Governança Administrativa — Console de gestão com métricas de uso (Métricas, DASH) e disparador de notificações push personalizadas (Enviar notificação personalizada)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O agendador de entrevistas e calendário integrado"
+        },
+        {
+          "type": "prose",
+          "body": "Um diferencial importante da plataforma foi o motor de agendamento de entrevistas. Em vez de direcionar candidatos para ferramentas externas de calendário, os recrutadores propunham datas e horários diretamente no portal (Agenda de entrevistas e Agenda das entrevistas). Desenhei modais de confirmação de agendamento (Pop-up agendar entrevista) e fluxos de cancelamento com justificativa estruturada (Pop-up cancelar entrevista), sincronizados com alertas para o candidato."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design defensivo: estados vazios e resiliência a falhas"
+        },
+        {
+          "type": "prose",
+          "body": "Muitos produtos digitais falham quando o usuário não possui dados cadastrados. No Seu Portal de Emprego, cada visualização principal conta com um estado vazio desenhado especificamente: Home - Empty State, Agenda de entrevistas - Empty State e Curriculos enviados - Empty State. Em vez de tabelas em branco, esses estados orientam claramente como publicar a primeira oportunidade ou iniciar candidaturas."
+        },
+        {
+          "type": "quote",
+          "text": "Desenhar um marketplace de múltiplos perfis exige pensar no dia zero com o mesmo rigor do dia cem. Estados vazios não são enfeites; são convites para a primeira ação."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Sistema de cores semântico e especificações mobile"
+        },
+        {
+          "type": "prose",
+          "body": "O arquivo estabelece 13 estilos de cor semânticos divididos entre tons primários (Azul Primário #1E1A51, Roxo Primário #412682, Laranja Primário #EE7D00), neutros de interface (Preto, Branco, Cinza e Stroke #EBEB39) e estados de suporte (Amarelo, Vermelho, Verde). Além disso, estruturei uma página dedicada de Review com 19 pranchas, incluindo especificações detalhadas para desenvolvedores (Specs) e layouts de iPhone SE para acelerar a implementação."
+        }
+      ]
+    }
+  }
 }

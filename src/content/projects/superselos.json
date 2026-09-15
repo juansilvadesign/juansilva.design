@@ -41,5 +41,220 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Mobile-only collectibles management and marketplace application for Brazilian philately (postage stamp collecting). Spans 14 modules (Authentication, Home, Collections, Issue Details, Collection Progress, My Collection, Auctions, Highlights, Popular, Order Summary, Profile, Monthly Ranking, Balance Top-Up, and Home Delivery), fusing completionist album-tracking with a transactional marketplace, powered by a two-tier 158-variable token system with zero broken aliases across Light and Dark modes.",
+      "context": "Agency employment at Spaceapps, a no-code product studio. The engagement was commissioned by a private client named Rodrigo who arrived with an initial concept and no pre-existing brand, assets, or software. Thiago (tech lead) ran FigJam discovery and created the logo; I took the project from the discovery board onward as sole product designer. The build was scoped for Bubble/FlutterFlow across a 15-phase delivery process. Planned from April to June 2025.",
+      "outcome": "Fully designed, tokenized, prototyped with click and hover interactions, and packaged into a formal 28-point developer handoff. However, the application was never built into production: the agency's Bubble engineering layer stalled at Fase 8 (Passagem para DEV), and superselos.com.br never went live. This project exemplifies high-fidelity mobile product design and complete tokenized theming that remained unbuilt due to no-code development limitations.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole product designer for the 14-module mobile application, the design token architecture, and the typographic direction. Thiago (tech lead) ran Discovery and designed the logo mark. Note on delivery: the product was designed and handed off, but never built by the agency's development team; nothing is or was live. The five desktop frames in the file are layout-approval screens and direction specimens, not a desktop product."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Fusing philatelic collecting with a live marketplace"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "14",
+              "label": "complete mobile modules spanning collecting and commerce",
+              "icon": "📱"
+            },
+            {
+              "value": "158",
+              "label": "design variables across 5 collections with zero broken aliases",
+              "icon": "🎨"
+            },
+            {
+              "value": "131",
+              "label": "bespoke product components authored without vendor kits",
+              "icon": "🧩"
+            },
+            {
+              "value": "3",
+              "label": "integrated payment methods (Credit Card, Pix, Boleto)",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "The Brazilian philately hobby suffered from fragmented legacy ecosystems. Collectors relied on static catalog reference sites like FILABRAS that lacked purchasing capabilities, while buying and selling occurred in unverified generic marketplaces like Mercado Livre or WhatsApp groups without authenticity guarantees or structured condition grading."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Research-driven information architecture: two distinct personas"
+        },
+        {
+          "type": "prose",
+          "body": "The 14-module architecture directly serves two contrasting collector profiles identified during discovery:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Carlos Antunes (58, retired history teacher) — The emotional collector who values historical heritage, collection completeness, and community prestige. Served by Coleções, Minha coleção, Progresso (album completion scores), and Detalhes Emissão.",
+            "Lucas Neves (32, investment analyst) — The commercial trader approaching philately as alternative collectibles with resale potential. Served by Leilão (live bidding auctions), Destaques, Populares, Recarga, and physical home fulfillment (Receber em casa).",
+            "Gamified Progression System — Tiered collector ranking (Ouro, Prata, Bronze) and monthly scoreboards driving recurring community engagement.",
+            "Visual Grading and Rarity Standards — Explanatory pop-up cards for stamp rarity and preservation condition, demystifying technical evaluation for newer collectors."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A two-tier token architecture: Light, Dark, and zero broken aliases"
+        },
+        {
+          "type": "prose",
+          "body": "SuperSelos features the most rigorous token architecture in this portfolio: 158 variables organized into five distinct collections (0. Primitives, 1. Colors, 2. Semantic, 3. Typography, 4. Dimensions). The system operates on strict two-tier aliasing — semantic tokens (Background/primary, Text/secondary) resolve through variables to underlying primitive palettes with 0 resolution issues."
+        },
+        {
+          "type": "prose",
+          "body": "Theming is an active product feature rather than a cosmetic afterthought. While the primary product interface is dark mode, light mode resolves dynamically because all components bind to semantic variables rather than hardcoded hex values. Furthermore, brand tokens (Button/brand amber #FFC655) remain mode-invariant, while container backgrounds invert intelligently (#F6FEFB in Light, #461302 in Dark)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Typographic identity and bespoke component engineering"
+        },
+        {
+          "type": "prose",
+          "body": "I defined the typographic system as bound variables: Merriweather for headings (conveying the historical prestige of postal heritage) paired with Outfit for high-legibility interface body copy, selected after testing against IBM Plex Serif, Lora, and DM Serif Display."
+        },
+        {
+          "type": "prose",
+          "body": "Unlike agency files that rely on pre-packaged vendor kits, all 131 product components on the Mobile page were authored specifically for SuperSelos across 24 authoring sessions, including versioned accordion items (contentAccordion v1 and v2), stamp cards, barcode readers, and rarity badge indicators."
+        },
+        {
+          "type": "quote",
+          "text": "Dark mode was the product decision; light mode comes free because every element is bound to semantic variables rather than raw hex values."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The developer handoff and the unbuilt reality"
+        },
+        {
+          "type": "prose",
+          "body": "I assembled a complete developer handoff package (Passagem para os devs, 818 nodes) featuring social sharing assets, theme previews, and a 28-point handoff standard covering responsive states, contrast compliance, and interaction feedbacks. The checkout flow within Home models full Brazilian payment rails: credit card, dynamic Pix QR codes, and bank boleto slips."
+        },
+        {
+          "type": "prose",
+          "body": "The project plan clearly documents where execution broke down: Phases 1–7 were completed on schedule through late June 2025, but Phase 8 (handoff to dev) was left undated as the agency's Bubble engineering team failed to execute the build. This project stands as an uncompromised demonstration of mobile product design and design token engineering."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Aplicativo mobile de gestão de acervo e marketplace para o mercado brasileiro de filatelia (colecionismo de selos postais). Estruturado em 14 módulos (Autenticação, Home, Coleções, Detalhes Emissão, Progresso, Minha coleção, Leilão, Destaques, Populares, Resumo, Perfil, Ranking Mensal, Recarga e Receber em casa), unindo a experiência de completude de álbuns ao comércio transacional, sobre um sistema de tokens em duas camadas com 158 variáveis e zero aliases quebrados em modos Claro e Escuro.",
+      "context": "Atuação como designer contratado pela agência Spaceapps, focada em desenvolvimento no-code. O projeto foi contratado por um cliente individual chamado Rodrigo, que chegou com uma ideia inicial e nenhum ativo prévio de marca ou produto. Thiago (tech lead) conduziu o discovery no FigJam e desenhou o logotipo; assumi o projeto a partir do board como designer único do produto. O desenvolvimento estava previsto para Bubble/FlutterFlow em um cronograma de 15 fases. Planejado entre abril e junho de 2025.",
+      "outcome": "Completamente desenhado, tokenizado, com protótipo navegável em interações de clique e hover, e empacotado em um kit formal de entrega para desenvolvimento com 28 itens de validação. No entanto, o aplicativo nunca foi programado em produção: a engenharia no-code em Bubble estagnou na Fase 8 (Passagem para DEV) e o domínio superselos.com.br nunca foi ao ar. Este case demonstra design de produto mobile de alto nível e arquitetura avançada de tokens que não chegaram ao mercado por limitações de desenvolvimento.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer único do aplicativo mobile de 14 módulos, da arquitetura de design tokens e da direção tipográfica. Thiago (tech lead) conduziu o discovery e desenhou o logotipo. Nota sobre a entrega: o produto foi desenhado e entregue aos programadores, mas nunca construído pela agência; o domínio não está no ar. As cinco pranchas desktop no arquivo são telas de aprovação estética da Fase 4 e testes visuais, não um produto para desktop."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Unindo o colecionismo de selos a um marketplace ativo"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "14",
+              "label": "módulos mobile integrando catálogo e compra e venda",
+              "icon": "📱"
+            },
+            {
+              "value": "158",
+              "label": "variáveis em 5 coleções com zero aliases quebrados",
+              "icon": "🎨"
+            },
+            {
+              "value": "131",
+              "label": "componentes autorais criados sem kits prontos de terceiros",
+              "icon": "🧩"
+            },
+            {
+              "value": "3",
+              "label": "meios de pagamento brasileiros (Cartão, Pix, Boleto)",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A filatelia no Brasil sofria com a fragmentação de canais arcaicos. Os colecionadores consultavam catálogos estáticos como a FILABRAS que não ofereciam transações comerciais, enquanto compras e vendas ocorriam em marketplaces generalistas (Mercado Livre, Shopee) ou grupos informais de WhatsApp sem garantia de autenticidade nem critérios padronizados de conservação."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de informação orientada por duas personas reais"
+        },
+        {
+          "type": "prose",
+          "body": "A estrutura de 14 módulos atende diretamente aos dois perfis de usuários identificados na etapa de discovery:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Carlos Antunes (58 anos, professor de história aposentado) — Representa a paixão tradicional pelo hobby, valorizando o valor histórico, a completude do álbum e a comunidade. Atendido por Coleções, Minha coleção, Progresso (pontuação de preenchimento) e Detalhes Emissão.",
+            "Lucas Neves (32 anos, analista de investimentos) — Usuário dinâmico vindo de cripto e colecionáveis modernos, focado em compra e revenda com liquidez. Atendido por Leilão (lances em tempo real), Destaques, Populares, Recarga e entrega física segura (Receber em casa).",
+            "Sistema de Gamificação e Ranqueamento — Classificação em níveis (Ouro, Prata, Bronze) e ranking mensal de colecionadores para impulsionar a retenção da base.",
+            "Padronização Visual de Raridade e Conservação — Modais explicativos de apoio que ensinam novos usuários a avaliar a conservação do papel e a raridade da emissão sem necessidade de conhecimento prévio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Sistema de tokens em duas camadas: Modo Claro, Escuro e zero erros"
+        },
+        {
+          "type": "prose",
+          "body": "O SuperSelos possui a arquitetura de tokens mais sofisticada deste portfólio: 158 variáveis organizadas em cinco coleções (0. Primitives, 1. Colors, 2. Semantic, 3. Typography, 4. Dimensions). O sistema adota amarração estrita em duas camadas — tokens semânticos (Background/primary, Text/secondary) resolvem via alias para as paletas primitivas, totalizando zero inconformidades de resolução."
+        },
+        {
+          "type": "prose",
+          "body": "A troca de temas é uma decisão de engenharia de design. Embora o produto tenha sido concebido com foco no modo escuro, o modo claro funciona instantaneamente porque cada superfície está conectada a variáveis semânticas, e não a valores hexadecimais fixos. Além disso, tokens de destaque de marca (Button/brand âmbar #FFC655) permanecem estáveis em ambos os modos, enquanto fundos invertem com equilíbrio visual (#F6FEFB no Claro, #461302 no Escuro)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Direção tipográfica autoral e componentes de domínio"
+        },
+        {
+          "type": "prose",
+          "body": "Estruturei a tipografia como variáveis integradas: Merriweather para títulos (trazendo o registro histórico e solene da filatelia) combinada à Outfit para textos de apoio e dados numéricos, escolhida após validação comparativa contra IBM Plex Serif, Lora e DM Serif Display."
+        },
+        {
+          "type": "prose",
+          "body": "Diferente de projetos de agência que reutilizam bibliotecas externas inteiras, todos os 131 componentes da página Mobile foram desenhados especificamente para o SuperSelos ao longo de 24 sessões de trabalho no Figma, incluindo sanfonas versionadas (contentAccordion v1 e v2), cartões de selos, leitores de código e selos de raridade."
+        },
+        {
+          "type": "quote",
+          "text": "O modo escuro foi a escolha de produto; o modo claro veio de brinde porque toda a interface foi construída amarrada em variáveis semânticas, e não em cores estáticas."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Handoff para desenvolvimento e o produto não construído"
+        },
+        {
+          "type": "prose",
+          "body": "Estruturei a entrega para desenvolvimento (Passagem para os devs, 818 nós) incluindo imagens de compartilhamento, prévias de temas e uma checklist de 28 pontos cobrindo estados responsivos, contraste de acessibilidade e estados de componente (hover, foco, desabilitado). O checkout dentro do módulo Home resolve os métodos de pagamento brasileiros: cartão de crédito, Pix dinâmico e boleto."
+        },
+        {
+          "type": "prose",
+          "body": "O cronograma do projeto revela onde o processo parou: as Fases 1 a 7 foram concluídas no prazo até o final de junho de 2025, mas a Fase 8 (handoff para engenharia) ficou sem data e a equipe Bubble não concluiu o build. O SuperSelos permanece como um testemunho impecável de design de produto mobile e arquitetura de design tokens."
+        }
+      ]
+    }
+  }
 }

@@ -30,16 +30,16 @@
   "copy": {
     "en": {
       "title": "On-Demand Therapy Platform — Three-Audience Landing Layer",
-      "tagline": "Three audience landing pages, designed and coded at three breakpoints each.",
-      "description": "Wireframed, designed and then coded the public face of an on-demand therapy platform: three audience-specific landing pages — patient, practitioner and corporate HR — each at three breakpoints. This is the landing layer only; the product behind it is another designer's work and another team's build.",
+      "tagline": "Three audience landing pages, designed and coded to reflow across three breakpoints.",
+      "description": "Wireframed, designed and then coded the public face of an on-demand therapy platform: three audience-specific landing pages — patient, practitioner and corporate HR — each built to reflow across three breakpoints. This is the landing layer only; the product behind it is another designer's work and another team's build.",
       "previewAlt": "SYD on-demand therapy platform landing page",
       "liveLabel": "Live site",
       "evidenceLabel": "Source code"
     },
     "pt": {
       "title": "Plataforma de terapia sob demanda — camada de landing pages",
-      "tagline": "Três landing pages por público, desenhadas e programadas em três breakpoints.",
-      "description": "Fiz wireframe, design e código da face pública de uma plataforma de terapia sob demanda: três landing pages por público — paciente, profissional e RH corporativo — cada uma em três breakpoints. É apenas a camada de landing; o produto por trás é design de outra pessoa e build de outro time.",
+      "tagline": "Três landing pages por público, desenhadas e programadas para se adaptar a três breakpoints.",
+      "description": "Fiz wireframe, design e código da face pública de uma plataforma de terapia sob demanda: três landing pages por público — paciente, profissional e RH corporativo — cada uma construída para se adaptar a três breakpoints. É apenas a camada de landing; o produto por trás é design de outra pessoa e build de outro time.",
       "previewAlt": "Landing page da plataforma de terapia SYD",
       "liveLabel": "Site no ar",
       "evidenceLabel": "Código-fonte"
@@ -58,7 +58,7 @@
     "en": {
       "brief": "An on-demand therapy platform needed a public face for three different audiences: the patient looking for a session tonight, the practitioner deciding whether to take the platform seriously, and the corporate HR buyer evaluating it as a staff benefit. Three landing pages, three different arguments, one product behind all of them.",
       "context": "Agency work at Spaceapps. The client relationship belonged to the agency and I delivered as staff, joining after the product design was already finished. The app itself — its screens, its role surfaces, and the discovery that produced them — is the tech lead's work. My stage was the landing layer, and this case study is about that layer only.",
-      "outcome": "The three pages were wireframed, designed at three breakpoints each, built in Vite, migrated to Next.js and shipped. They are still serving at the project's domain, which I host today — I took the hosting over in 2026, roughly ten months after the build ended, for reasons that have nothing to do with the engagement, and serving the files now says nothing about what I was hired to do then. In August 2026 all six routes were captured by the Wayback Machine, so the work no longer depends on the domain surviving. No performance metric exists for this project, or for any project in this portfolio; that is a confirmed absence rather than an uncollected one.",
+      "outcome": "The three pages were wireframed, designed at 1280 and 375, built in Vite, migrated to Next.js and shipped. They are still serving at the project's domain, which I host today — I took the hosting over in 2026, roughly ten months after the build ended, for reasons that have nothing to do with the engagement, and serving the files now says nothing about what I was hired to do then. In August 2026 all six routes were captured by the Wayback Machine, so the work no longer depends on the domain surviving. No performance metric exists for this project, or for any project in this portfolio; that is a confirmed absence rather than an uncollected one.",
       "blocks": [
         {
           "type": "video",
@@ -68,7 +68,7 @@
           "width": 1920,
           "height": 1080,
           "alt": "SYD landing page layer across three audiences (Patient, Practitioner, Corporate HR) and three responsive breakpoints (1440, 1280, 375).",
-          "caption": "Twenty-five seconds, silent and looping — the three audience landing pages and responsive continuity across nine designed states."
+          "caption": "Twenty-five seconds, silent and looping — the three audience landing pages and responsive continuity across the built layer."
         },
         {
           "type": "callout",
@@ -93,12 +93,12 @@
             },
             {
               "value": "3",
-              "label": "breakpoints each — 1440, 1280, 375",
+              "label": "built breakpoints — 1440, 1280, 375",
               "icon": "📐"
             },
             {
-              "value": "9",
-              "label": "designed page states in total",
+              "value": "6",
+              "label": "designed page states — at 1280 and 375",
               "icon": "🖼️"
             },
             {
@@ -132,7 +132,7 @@
         },
         {
           "type": "prose",
-          "body": "Each page went wireframe first, then design at 1440, 1280 and 375, then code. Nine designed states, all of them mine, and then the build of all nine. This is the strongest responsive evidence in my portfolio and it is worth being precise about why: not because three breakpoints is a large number, but because the same person carried every one of them from wireframe through to shipped markup, so there is no handoff at which the responsive intent could have been lost."
+          "body": "Each page went wireframe first, then design, then code: six designed states across three audiences, at 1280 and 375, and then a built layer that reflows across 1440, 1280 and 375. This is the strongest responsive evidence in my portfolio and it is worth being precise about why: not because three breakpoints is a large number, but because the same person carried every one of them from wireframe through to shipped markup, so there is no handoff at which the responsive intent could have been lost."
         },
         {
           "type": "heading",
@@ -192,7 +192,7 @@
     "pt": {
       "brief": "Uma plataforma de terapia sob demanda precisava de uma face pública para três públicos diferentes: o paciente que procura uma sessão hoje à noite, o profissional decidindo se leva a plataforma a sério, e o comprador de RH avaliando a coisa como benefício para os funcionários. Três landing pages, três argumentos diferentes, um mesmo produto por trás.",
       "context": "Trabalho de agência na Spaceapps. A relação com o cliente era da agência e eu entreguei como funcionário, entrando depois que o design do produto já estava pronto. O aplicativo em si — suas telas, suas superfícies de papel e a discovery que as gerou — é trabalho do líder técnico. A minha etapa era a camada de landing pages, e este estudo de caso trata apenas dessa camada.",
-      "outcome": "As três páginas foram prototipadas em wireframe, desenhadas em três breakpoints cada, construídas em Vite, migradas para Next.js e publicadas. Elas continuam no ar no domínio do projeto, que hoje sou eu quem hospeda — assumi a hospedagem em 2026, cerca de dez meses depois do fim do build, por razões que não têm nada a ver com o trabalho contratado; servir os arquivos hoje não diz nada sobre o que fui contratado para fazer na época. Em agosto de 2026 as seis rotas foram capturadas pelo Wayback Machine, então o trabalho não depende mais da sobrevivência do domínio. Não existe nenhuma métrica de desempenho para este projeto, nem para nenhum outro deste portfólio; é uma ausência confirmada, não uma ausência por falta de coleta.",
+      "outcome": "As três páginas foram prototipadas em wireframe, desenhadas em 1280 e 375, construídas em Vite, migradas para Next.js e publicadas. Elas continuam no ar no domínio do projeto, que hoje sou eu quem hospeda — assumi a hospedagem em 2026, cerca de dez meses depois do fim do build, por razões que não têm nada a ver com o trabalho contratado; servir os arquivos hoje não diz nada sobre o que fui contratado para fazer na época. Em agosto de 2026 as seis rotas foram capturadas pelo Wayback Machine, então o trabalho não depende mais da sobrevivência do domínio. Não existe nenhuma métrica de desempenho para este projeto, nem para nenhum outro deste portfólio; é uma ausência confirmada, não uma ausência por falta de coleta.",
       "blocks": [
         {
           "type": "video",
@@ -202,7 +202,7 @@
           "width": 1920,
           "height": 1080,
           "alt": "Camada de landing pages do SYD em três públicos (Paciente, Profissional, RH) e três breakpoints responsivos (1440, 1280, 375).",
-          "caption": "Vinte e cinco segundos, silencioso e em loop contínuo — as três landing pages por público e a continuidade responsiva nos nove estados desenvolvidos."
+          "caption": "Vinte e cinco segundos, silencioso e em loop contínuo — as três landing pages por público e a continuidade responsiva da camada construída."
         },
         {
           "type": "callout",
@@ -227,12 +227,12 @@
             },
             {
               "value": "3",
-              "label": "breakpoints cada — 1440, 1280, 375",
+              "label": "breakpoints construídos — 1440, 1280, 375",
               "icon": "📐"
             },
             {
-              "value": "9",
-              "label": "estados de página desenhados",
+              "value": "6",
+              "label": "estados de página desenhados — em 1280 e 375",
               "icon": "🖼️"
             },
             {
@@ -266,7 +266,7 @@
         },
         {
           "type": "prose",
-          "body": "Cada página passou por wireframe, depois design em 1440, 1280 e 375, depois código. Nove estados desenhados, todos meus, e depois o build dos nove. Esta é a evidência de responsividade mais forte do meu portfólio, e vale ser preciso sobre o motivo: não porque três breakpoints seja um número grande, mas porque a mesma pessoa levou cada um deles do wireframe até o markup publicado, então não existe handoff em que a intenção responsiva pudesse ter se perdido."
+          "body": "Cada página passou por wireframe, depois design, depois código: seis estados desenhados em três públicos, em 1280 e 375, e depois uma camada construída que se adapta a 1440, 1280 e 375. Esta é a evidência de responsividade mais forte do meu portfólio, e vale ser preciso sobre o motivo: não porque três breakpoints seja um número grande, mas porque a mesma pessoa levou cada um deles do wireframe até o markup publicado, então não existe handoff em que a intenção responsiva pudesse ter se perdido."
         },
         {
           "type": "heading",

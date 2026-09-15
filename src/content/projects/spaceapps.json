@@ -46,5 +46,276 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "The agency's own marketing shopfront, built as a trilingual static Next.js 14 application backed by a resilient Node/Express lead-capture microservice on Render. Engineered to turn a supplied, unbuildable homepage design into production code, author the undesigned legal and localized surfaces outright, and maintain dual-sheet lead redundancy that remains live and executable today.",
+      "context": "Internal agency project at Spaceapps; the owner, payer, and client were the same entity, meaning this work is strictly excluded from third-party client project totals. The homepage visual direction was designed by Thiago, our tech lead. My role was full-spectrum design engineering: remediating the unbuildable homepage handoff in Figma, hand-coding all eleven marketing sections in Next.js, authoring three Portuguese legal pages and a custom 404 with zero design input, and building the backend lead pipeline.",
+      "outcome": "The platform launched in September 2025 and served as Spaceapps' public presence until the agency wound down. While the original domain spaceapps.com.br expired and now returns NXDOMAIN, the static build is durably preserved on my self-hosted mirror (spaceapps.juanpablosilva.com.br) and archived on the Wayback Machine. The lead-capture service on Render (api-site-space.onrender.com/health) remains active and answers HTTP 200 today, outliving the frontend, the agency, and the domain registration itself.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Spaceapps was the agency's own website, not a third-party client delivery. Thiago designed the homepage; I remediated the layout to make it buildable, programmed all eleven marketing sections, and authored the legal pages, the custom 404, and the trilingual routing architecture with no upstream design. Crucially, the lead-capture microservice I deployed on Render is the portfolio's only live, independently executable proof — still returning HTTP 200 eleven months after the last commit."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design remediation and authoring undesigned surfaces"
+        },
+        {
+          "type": "prose",
+          "body": "Spaceapps represents the third documented instance of the design-file remediation pattern in this portfolio (following AllPrice and Gestrif). Once again, the initial homepage handoff contained structural layout flaws that could not survive responsive implementation. I ran a comprehensive remediation pass to enforce auto-layout, establish fluid breakpoint behavior, and align token hierarchies before writing code."
+        },
+        {
+          "type": "prose",
+          "body": "More significantly, Spaceapps is the only project in the portfolio where I authored critical production surfaces with zero design input. The client needed legal compliance and localized routing, but no Figma files existed beyond the homepage. I authored, structured, and styled three Portuguese legal pages totaling 731 lines (Terms of Use, Privacy Policy, Cookie Policy), engineered a custom 404 error experience, and mapped the entire localized route tree directly in code."
+        },
+        {
+          "type": "quote",
+          "text": "On a project where the core design belonged to someone else, I authored the legal, error, and localization surfaces outright. That is the honest middle of design engineering: respecting the primary design direction while having the technical autonomy to author the unscripted pieces."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "authored marketing sections (1,961 lines)",
+              "icon": "🧩"
+            },
+            {
+              "value": "731 lines",
+              "label": "of authored legal copy across 3 pages",
+              "icon": "⚖️"
+            },
+            {
+              "value": "3 locales",
+              "label": "route-based i18n (PT, EN-US, ES-AR)",
+              "icon": "🌐"
+            },
+            {
+              "value": "HTTP 200",
+              "label": "live /health response on Render today",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Frontend architecture: Next.js 14 App Router and route-based i18n"
+        },
+        {
+          "type": "prose",
+          "body": "Unlike AllPrice and Gestrif (which were Vite SPAs), Spaceapps is a genuine Next.js 14 App Router application deployed as a clean static export (output: 'export'). Built with React 18, TypeScript, Tailwind CSS, Radix UI, and react-hook-form + Zod, the frontend organizes 1,961 lines of code across eleven bespoke section components:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Header with responsive drawer navigation and language switcher.",
+            "Hero section highlighting agency positioning and primary call to action.",
+            "Crawling banner and client logo showcase.",
+            "Mission, About Us, and Team sections presenting agency capabilities and staff.",
+            "Checklist and Testimonials sections structuring social proof.",
+            "Contact form with real-time validation via react-hook-form and Zod schemas.",
+            "Footer with legal links, social channels, and institutional credentials."
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "To satisfy the agency's requirement for English and Spanish internationalization without duplicating component trees, I built a route-based localization architecture. A typed useTranslations() hook reads usePathname() to resolve the active locale (pt default, /en-us, /es-ar), mapping dynamic strings across three structurally identical 162-line translation dictionaries."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Lead-capture pipeline: Self-healing dual Google Sheets & Mailgun"
+        },
+        {
+          "type": "prose",
+          "body": "Rather than relying on third-party form webhooks, I engineered a dedicated 300-line Express microservice (server/server.js) hosted on Render. Designed for lead durability and zero data loss, the pipeline features:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Dual-Spreadsheet Redundancy — Authenticates via a Google Service Account and writes each submission to both a primary and backup Google Sheet in isolated try/catch blocks, preventing a failure in one sheet from compromising the other.",
+            "Self-Healing Targets — Automatically verifies sheet existence via ensureSheetExists(), creating the target tab ('Contatos Site Space') if missing, and initializing column headers with createHeadersIfNeeded() on empty sheets.",
+            "Mailgun Alert System — Dispatches formatted notification emails to agency stakeholders upon submission, with dedicated /email-test diagnostics.",
+            "Health Telemetry — Exposes a public GET /health endpoint that confirms the active configuration status of both Mailgun and Google Sheets."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Live executable evidence: An endpoint that outlived its domain"
+        },
+        {
+          "type": "prose",
+          "body": "Production web surfaces are often fragile, but code deployed on modern cloud infrastructure can endure. When Spaceapps wound down operations, its domain spaceapps.com.br was surrendered and no longer resolves (NXDOMAIN). However, the Express service on Render remains operational. Anyone can query https://api-site-space.onrender.com/health and receive an immediate HTTP 200 confirming that both integrations are configured. It is the portfolio's sole independently executable piece of proof."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not a third-party client project. Spaceapps was the agency itself; payer and client were identical, so this is excluded from client project counts.",
+            "Not Juan's homepage design. The visual direction for the homepage was created by Thiago; Juan remediated the file and engineered the frontend.",
+            "Not an application backend. It is a specialized lead-capture pipeline. The file app/api/contact/route.ts is 0 bytes and does not run under static export; the working service is Express.",
+            "Not Supabase, Bubble, or n8n. Past repository drafts incorrectly listed these technologies; they are absent from the codebase.",
+            "Not the localization strategy decision. The agency mandated three languages; only the route-based architecture was Juan's design.",
+            "Not verifiable on spaceapps.com.br Wayback snapshots. Captures for that domain ended in March 2025 before this build shipped; those archives show an older, unrelated site.",
+            "Not a CI-ready repository. The clean script relies on a Windows-specific PowerShell file and fails on Linux CI environments.",
+            "Not proof of production lead volume. No marketing analytics or conversion volumes were retained before the agency closed."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of end-to-end design engineering"
+        },
+        {
+          "type": "prose",
+          "body": "Spaceapps demonstrates the breadth of a design engineer's contribution to an organization. When an agency needed a comprehensive digital asset, the scope extended far beyond translating a single canvas into HTML. It required remediating unbuildable mockups, authoring missing legal and internationalized surfaces, structuring modular React components, and engineering a resilient lead-capture pipeline. The resulting asset outlasted the agency that commissioned it."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "O site institucional da própria agência, desenvolvido como uma aplicação estática em Next.js 14 trilíngue, conectada a um microsserviço resiliente de captura de leads em Node e Express hospedado no Render. Criado para transformar um design inconstruível de página inicial em código de produção, redigir do zero as superfícies legais e rotas localizadas e manter um pipeline redundante de captação que segue ativo e executável até hoje.",
+      "context": "Projeto interno da agência Spaceapps; o proprietário, a agência pagadora e o cliente eram a mesma entidade, de modo que este trabalho não é contabilizado no total de projetos de clientes. A direção visual da página inicial foi desenhada pelo Thiago, líder técnico. Minha atuação cobriu todo o ciclo de design engineering: remediar o layout inconstruível no Figma, programar as onze seções em Next.js, redigir três páginas legais e o 404 personalizado sem qualquer referência visual prévia e construir o pipeline de captura de leads.",
+      "outcome": "O site entrou no ar em setembro de 2025 e serviu como a presença digital da Spaceapps até o encerramento da agência. Embora o domínio spaceapps.com.br tenha expirado e hoje retorne NXDOMAIN, o build estático está preservado em mirror próprio (spaceapps.juanpablosilva.com.br) e arquivado no Wayback Machine. O microsserviço de captura no Render (api-site-space.onrender.com/health) permanece ativo e responde HTTP 200 até hoje, sobrevivendo ao front-end, à agência e ao próprio registro do domínio.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "O site da Spaceapps foi a vitrine institucional da própria agência, e não uma entrega para terceiros. O Thiago desenhou a página inicial; eu corrigi o layout para torná-lo construível, programei as onze seções de marketing e redigi do zero as páginas legais, o 404 personalizado e as rotas trilíngues. O microsserviço de captura que programei no Render é a única prova viva e executável de todo o portfólio — respondendo HTTP 200 onze meses após o último commit."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Remediação de layout e autoria de superfícies não desenhadas"
+        },
+        {
+          "type": "prose",
+          "body": "O projeto da Spaceapps representa a terceira ocorrência documentada do padrão de remediação de arquivos de design neste acervo (após AllPrice e Gestrif). Mais uma vez, o layout da página inicial continha problemas estruturais que inviabilizavam uma implementação responsiva direta. Realizei uma revisão completa no Figma para introduzir auto-layout, determinar o comportamento em diferentes viewports e unificar a escala de tokens antes de codificar."
+        },
+        {
+          "type": "prose",
+          "body": "Além disso, a Spaceapps é o único projeto do portfólio onde assumi a autoria integral de telas de produção sem nenhum suporte de design. A agência necessitava de conformidade jurídica e suporte a idiomas, mas não havia arquivo de Figma além da página inicial. Redigi, estruturei e estilizei do zero três páginas legais em português totalizando 731 linhas (Termos de Uso, Política de Privacidade e Cookies), criei a página de erro 404 personalizada e estruturei a árvore de rotas localizadas diretamente em código."
+        },
+        {
+          "type": "quote",
+          "text": "Em um projeto cujo design visual principal pertencia a outra pessoa, assumi a autoria das páginas legais, de erro e de rotas localizadas. Este é o ponto de equilíbrio honesto do Engenheiro de Design: respeitar o projeto principal e ter autonomia técnica para conceber as superfícies complementares."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "seções autorais programadas (1.961 linhas)",
+              "icon": "🧩"
+            },
+            {
+              "value": "731 linhas",
+              "label": "de texto legal autoral em 3 páginas",
+              "icon": "⚖️"
+            },
+            {
+              "value": "3 idiomas",
+              "label": "i18n por rota (PT, EN-US, ES-AR)",
+              "icon": "🌐"
+            },
+            {
+              "value": "HTTP 200",
+              "label": "resposta ao vivo no /health no Render",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura front-end: Next.js 14 App Router e i18n por rotas"
+        },
+        {
+          "type": "prose",
+          "body": "Diferente do AllPrice e do Gestrif (que eram SPAs em Vite), a Spaceapps é uma aplicação genuína em Next.js 14 App Router distribuída como exportação estática (output: 'export'). Construído com React 18, TypeScript, Tailwind CSS, componentes Radix e react-hook-form com validação em Zod, o front-end organiza 1.961 linhas de código em onze componentes de seção:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cabeçalho com navegação mobile responsiva em gaveta e seletor de idiomas.",
+            "Seção Hero destacando o posicionamento da agência e chamada principal para contato.",
+            "Banner contínuo (marquee) e grade de logos de clientes atendidos.",
+            "Seções Missão, Sobre Nós e Equipe apresentando os profissionais e a cultura da empresa.",
+            "Seções de Checklist e Depoimentos organizando a prova social da agência.",
+            "Formulário de contato com validação em tempo real via react-hook-form e esquemas Zod.",
+            "Rodapé com links legais, canais de contato e dados institucionais."
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Para atender à exigência da agência de suportar inglês e espanhol sem duplicar a árvore de componentes, desenvolvi uma arquitetura de internacionalização baseada na rota da URL. Um hook tipado useTranslations() consulta usePathname() para identificar o idioma ativo (pt padrão, /en-us, /es-ar), consumindo chaves tipadas em três módulos de tradução estruturalmente idênticos de 162 linhas cada."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Pipeline de captura: Redundância no Google Sheets e Mailgun"
+        },
+        {
+          "type": "prose",
+          "body": "Em vez de recorrer a webhooks genéricos ou ferramentas de terceiros desprotegidas, construí um microsserviço dedicado de 300 linhas em Express (server/server.js) hospedado no Render. Projetado para máxima tolerância a falhas, o serviço opera com:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Redundância com Duas Planilhas — Autentica-se com Conta de Serviço do Google e grava cada lead simultaneamente em uma planilha principal e uma secundária em blocos try/catch isolados, impedindo que a indisponibilidade de uma afete a outra.",
+            "Autorrecuperação de Destinos — A função ensureSheetExists() detecta e cria a aba 'Contatos Site Space' caso ela não exista, enquanto createHeadersIfNeeded() insere a linha de cabeçalhos em planilhas recém-criadas.",
+            "Notificação Imediata por Mailgun — Dispara alertas estruturados por e-mail para a equipe interna a cada novo contato, com rota de diagnóstico /email-test.",
+            "Telemetria de Saúde — Disponibiliza um endpoint público GET /health que reporta se o Mailgun e o Google Sheets estão devidamente conectados e operacionais."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Evidência viva: O endpoint que sobreviveu ao próprio domínio"
+        },
+        {
+          "type": "prose",
+          "body": "A infraestrutura web nem sempre é perene, mas códigos bem implantados na nuvem resistem ao tempo. Quando a Spaceapps encerrou suas atividades, o domínio spaceapps.com.br expirou e deixou de responder (NXDOMAIN). Entretanto, o microsserviço Express no Render continua operacional. Qualquer pessoa pode consultar https://api-site-space.onrender.com/health e receber imediatamente um HTTP 200 comprovando as integrações ativas. É o único artefato de execução independente de todo o acervo do portfólio."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é um projeto de cliente externo. A Spaceapps era a própria agência; empresa pagadora e cliente eram a mesma entidade, logo não entra na contagem comercial.",
+            "Não é a minha criação do design da home. A direção visual da página inicial foi criada pelo Thiago; revisei o layout e programei a interface.",
+            "Não é um back-end corporativo genérico. É um microsserviço focado em captura e notificação de leads. O arquivo app/api/contact/route.ts tem 0 bytes e não funciona em exportação estática; o serviço real é o Express.",
+            "Não utiliza Supabase, Bubble ou n8n. Versões antigas do README citavam essas tecnologias equivocadamente; o código não contém nenhuma delas.",
+            "Não é uma estratégia de localização autoral. A decisão por três idiomas veio da agência; minha contribuição foi a arquitetura técnica baseada em rotas.",
+            "Não é comprovável pelo Wayback Machine no domínio original. As capturas de spaceapps.com.br terminaram em março de 2025, antes deste site ser lançado; esses registros mostram uma versão anterior.",
+            "Não é um repositório pronto para CI Linux. O script de limpeza usa um arquivo PowerShell específico de Windows e falha em ambientes Linux.",
+            "Não possui métricas comerciais verificadas. Nenhum dado analítico de conversão foi retido antes do encerramento da agência."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O valor da engenharia de design integral"
+        },
+        {
+          "type": "prose",
+          "body": "A Spaceapps ilustra a extensão do papel de um engenheiro de design. Diante da necessidade de lançar a presença institucional de uma agência, o trabalho ultrapassou a simples conversão de telas em HTML. Exigiu destravar designs inconstruíveis, conceber do zero páginas institucionais e estruturas de idiomas, arquitetar componentes modulares e erguer uma infraestrutura resiliente de captação de leads. O resultado sobreviveu à própria empresa que o encomendou."
+        }
+      ]
+    }
+  }
 }

@@ -41,5 +41,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Custom enterprise CRM for Banco Safra's investment-advisory arm (KAT), spanning 14 financial verticals (Home Equity, Real Estate Credit, Consórcio, FX, Wealth, Life Insurance, and Investment Guarantees). Owned the operator-facing Assessor (Advisor) and Head flows end to end across 722 desktop and 764 mobile frames, including 11 Head vertical dashboards, 43 signed developer annotations, role-restricted pipeline visibility, and a stakeholder Maze usability test.",
+      "context": "Agency employment at Sagitta, delivering for Banco Safra as end client within a 5-person team (1 tech lead, 2 designers, 2 developers). The platform was divided into separate role files: I owned the Assessor and Head workflows in their own file (Safra - Assessor & Head), while Gestor, Líder, Team Líder, and Admin flows were assigned to the second designer in a separate repository. Documented between May and November 2024.",
+      "outcome": "Delivered to the development team and built in Bubble. The design survived contact with the build: when developers hit Bubble platform workload bottlenecks, the challenges were resolved through architectural design adaptations (reworking cargo/filial inputs and multi-user filial permissions). Stakeholder usability was validated in a Maze testing session before handoff, confirming the workflow matched advisors' mental models. Because I rolled off before public deployment, production rollout status remains unconfirmed.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: In a team of five, I was the sole owner of two of the six platform roles: Assessor and Head. The remaining four roles (Gestor, Líder, Team Líder, Admin) were designed by a second designer in a separate file. While the file contains 4,094 component nodes, roughly 3,849 are inherited from Untitled UI; my authored contribution comprises ~245 bespoke domain component variants and the mobile architecture. I do not claim end-to-end design of the entire platform or unconfirmed post-launch usage metrics."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Enterprise investment advisory across 14 verticals"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "1,486",
+              "label": "total frames designed across desktop (722) and mobile (764)",
+              "icon": "📐"
+            },
+            {
+              "value": "14",
+              "label": "financial product verticals mapped end to end",
+              "icon": "💼"
+            },
+            {
+              "value": "43",
+              "label": "in-canvas developer annotations signed 'Juan Pablo'",
+              "icon": "📝"
+            },
+            {
+              "value": "30",
+              "label": "process stages in the HomeEquity workflow",
+              "icon": "🔄"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Private banking and investment advisory cannot function on generic CRM pipelines. Advisors triage complex client holdings, balance capital commitments, and route multi-million-real transactions across highly specialized desks — from offshore wealth structures and foreign exchange to home equity and consórcio. Each vertical operates under its own legal compliance checkpoints, credit review cycles, and documentation requirements."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The dual-role architecture: Assessor execution and Head governance"
+        },
+        {
+          "type": "prose",
+          "body": "The Assessor & Head system isolates operational triage from vertical leadership across two dedicated roles:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Assessor Operations — The frontline advisor tracks leads through a multi-stage Kanban pipeline, evaluates portfolio liquidity, logs preliminary meetings, and packages credit dossiers for desk review.",
+            "Head Vertical Governance — Vertical department heads monitor pipeline throughput across 11 dedicated dashboards (Crédito, Câmbio, Consórcio, Seguro, Auto, Convênio PF, Convênio PJ, Offshore DCS, Wealth, and main DashboardHead).",
+            "Restricted Visibility Logic — Implemented directly into the interface ('Compartilhar processo com Head?') ensuring Heads only access deals explicitly shared by advisors within their specific product line.",
+            "Deal Cancellation Safety — Enforced business rule ensuring cancelled processes terminate pipeline cards without ever purging underlying lead intelligence."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Deep mobile architecture: 764 frames, not a desktop afterthought"
+        },
+        {
+          "type": "prose",
+          "body": "Rather than treating mobile as a responsive compromise, the mobile surface (Design Mobile) was engineered as an autonomous 764-frame product covering all 14 verticals. Advisors visiting high-net-worth clients required full mobile capability: 28 mobile Kanban boards, client study views (estudoCliente, estudoLista), calendar scheduling, and 9 mobile-specific component definitions (NavBarAssessorMobile, NavBarHeadMobile, pendênciasAssessorMobile)."
+        },
+        {
+          "type": "prose",
+          "body": "The depth of workflow modeling is evident in HomeEquity: a 30-step progression spanning NovoProcesso, Alinhamento, Proposta, Reunião, AnáliseCrédito, DocumentosImóvel, Vistoria, Contrato, Assinatura, and Registro. Every transition maps to explicit database stage changes."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Developer handoff: 43 in-canvas specs and Maze validation"
+        },
+        {
+          "type": "prose",
+          "body": "To eliminate guesswork for the engineering team, I embedded 43 in-canvas sticky notes directly alongside the mobile artboards. Each note is signed 'Juan Pablo' and articulates operational business logic in plain Portuguese — establishing meeting confirmation hierarchies, manual advancement triggers for FX heads, and multi-desk cancellation rules."
+        },
+        {
+          "type": "prose",
+          "body": "Prior to dev handoff, we conducted an interactive Maze usability test with primary stakeholders. Testing confirmed that the multi-role routing matched advisors' mental models, validating the UX before developers began configuring Bubble databases."
+        },
+        {
+          "type": "quote",
+          "text": "On an enterprise banking platform, design isn't about pretty cards. It's about ensuring a 30-step credit workflow never loses document integrity or leaks client visibility across competing desks."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design system foundations and Bubble platform realities"
+        },
+        {
+          "type": "prose",
+          "body": "The design was built upon an Untitled UI foundation, rebranded with a bespoke KAT token system: primary teal (#008F81), forest green (#0E5E59), dark teal (#022824), and gold accent (#CDA56C), paired with Sora typography. When the engineering team encountered Bubble database performance constraints during development, we iterated directly through design — redesigning bulk filial management into performant per-user controls."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "CRM corporativo sob medida para o braço de assessoria de investimentos do Banco Safra (KAT), abrangendo 14 verticais financeiras (Home Equity, Crédito Imobiliário, Consórcio, Câmbio, Wealth, Seguro de Vida e Garantias de Investimento). Responsável integral pelos fluxos de Assessor e Head em 722 frames desktop e 764 mobile, incluindo 11 dashboards de Head por vertical, 43 anotações de regras de negócio para desenvolvedores, controle de visibilidade restrita e teste de usabilidade no Maze.",
+      "context": "Atuação como designer contratado pela agência Sagitta, atendendo o Banco Safra como cliente final em equipe de 5 pessoas (1 tech lead, 2 designers, 2 desenvolvedores). A plataforma foi dividida em arquivos distintos por perfil: assumi os fluxos de Assessor e Head em arquivo próprio (Safra - Assessor & Head), enquanto Gestor, Líder, Team Líder e Admin ficaram com o segundo designer em outro arquivo. Documentado entre maio e novembro de 2024.",
+      "outcome": "Entregue à equipe de desenvolvimento e construído em Bubble. O design resistiu ao contato com o código: quando os desenvolvedores enfrentaram gargalos de processamento no banco de dados do Bubble, os desafios foram solucionados por redesign arquitetural (revisão de campos de filial e gestão de acessos por usuário). A usabilidade foi validada em teste no Maze com os stakeholders antes do handoff, confirmando a aderência ao modelo mental dos assessores. Como me desliguei antes do lançamento comercial, o status pós-lançamento não é rastreado.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Em uma equipe de cinco pessoas, fui o único responsável por dois dos seis perfis da plataforma: Assessor e Head. Os quatro perfis restantes (Gestor, Líder, Team Líder, Admin) foram criados pelo segundo designer em arquivo separado. Embora o arquivo reporte 4.094 nós de componentes, cerca de 3.849 são do kit base Untitled UI; minha autoria compreende ~245 variantes de componentes de domínio e toda a arquitetura mobile. Não reivindico o design de toda a plataforma nem métricas não auditadas pós-lançamento."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Assessoria de investimentos corporativa em 14 verticais"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "1.486",
+              "label": "telas desenhadas entre desktop (722) e mobile (764)",
+              "icon": "📐"
+            },
+            {
+              "value": "14",
+              "label": "verticais financeiras mapeadas de ponta a ponta",
+              "icon": "💼"
+            },
+            {
+              "value": "43",
+              "label": "post-its de regras de negócio assinados 'Juan Pablo'",
+              "icon": "📝"
+            },
+            {
+              "value": "30",
+              "label": "etapas operacionais no fluxo de Home Equity",
+              "icon": "🔄"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A assessoria de investimentos de alta renda não opera com pipelines genéricos de vendas. Os assessores gerenciam alocações patrimoniais complexas, equilibram compromissos de aporte e direcionam transações milionárias para mesas operacionais ultraespecializadas — de fundos offshore e câmbio a home equity e consórcio. Cada vertical possui seus próprios marcos de conformidade regulatória, análise de crédito e exigências documentais."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de papéis duplos: execução do Assessor e gestão do Head"
+        },
+        {
+          "type": "prose",
+          "body": "A plataforma Safra - Assessor & Head separa a triagem operacional da liderança executiva em dois papéis coordenados:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Operação do Assessor — O assessor de ponta conduz leads por um funil Kanban em múltiplos estágios, estuda o perfil do cliente, agenda reuniões preliminares e monta a pasta de crédito para análise da mesa.",
+            "Governança dos Heads — Líderes de departamento supervisionam o volume da esteira através de 11 dashboards dedicados (Crédito, Câmbio, Consórcio, Seguro, Auto, Convênio PF, Convênio PJ, Offshore DCS, Wealth e o DashboardHead geral).",
+            "Regra de Visibilidade Restrita — Implementada diretamente na interface ('Compartilhar processo com Head?'), garantindo que cada Head visualize apenas as oportunidades compartilhadas explicitamente na sua esteira.",
+            "Preservação de Inteligência no Cancelamento — Regra de negócio que assegura que o cancelamento de um processo descarte o card da esteira sem jamais apagar os dados do lead."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura mobile profunda: 764 telas, não uma adaptação"
+        },
+        {
+          "type": "prose",
+          "body": "Em vez de tratar o mobile como um ajuste responsivo secundário, a página mobile (Design Mobile) foi projetada como um produto completo de 764 telas cobrindo as 14 verticais. Assessores em visita externa necessitavam de recursos completos: 28 quadros Kanban mobile, telas de estudo de cliente (estudoCliente, estudoLista), calendário e 9 conjuntos de componentes próprios (NavBarAssessorMobile, NavBarHeadMobile, pendênciasAssessorMobile)."
+        },
+        {
+          "type": "prose",
+          "body": "A profundidade de modelagem é visível em Home Equity: uma jornada de 30 etapas cobrindo NovoProcesso, Alinhamento, Proposta, Reunião, AnáliseCrédito, DocumentosImóvel, Vistoria, Contrato, Assinatura e Registro. Cada transição reflete mudanças precisas de status no banco de dados."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Handoff técnico: 43 notas em tela e validação no Maze"
+        },
+        {
+          "type": "prose",
+          "body": "Para eliminar ambiguidades na equipe de desenvolvimento, inseri 43 post-its com regras de negócio diretamente ao lado das telas mobile. Cada nota é assinada por 'Juan Pablo' e redige a lógica em português claro — definindo papéis em reuniões preliminares, avanço manual por heads de câmbio e travas de cancelamento."
+        },
+        {
+          "type": "prose",
+          "body": "Antes da entrega final, conduzimos um teste de usabilidade no Maze com os stakeholders do projeto. O teste confirmou que a navegação e a distribuição de papéis correspondiam perfeitamente ao modelo mental dos assessores, validando a arquitetura antes da programação em Bubble."
+        },
+        {
+          "type": "quote",
+          "text": "Em um sistema bancário corporativo, design não é sobre estética superficial. É sobre garantir que um fluxo de crédito de 30 etapas nunca perca integridade de dados nem exponha informações sigilosas entre mesas concorrentes."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design system e adaptação aos limites do Bubble"
+        },
+        {
+          "type": "prose",
+          "body": "O design foi construído sobre a base Untitled UI, reformatado com tokens específicos da KAT: verde primário (#008F81), verde floresta (#0E5E59), verde escuro (#022824) e dourado (#CDA56C), aliados à tipografia Sora. Quando a equipe técnica encontrou limitações de carga no Bubble durante a construção, fizemos o ajuste diretamente no design — transformando a gestão em massa de filiais em listas de inclusão unitária para otimizar o banco de dados."
+        }
+      ]
+    }
+  }
 }

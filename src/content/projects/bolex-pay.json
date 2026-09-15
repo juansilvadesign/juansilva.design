@@ -41,5 +41,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Bolex Pay, a digital payment gateway, merchant transaction processor, and financial services provider. Designed 5 multi-resolution canvas layouts across desktop (1920x1080 and 1280x832) and mobile (375x812) viewports, including dedicated pricing plan comparison matrices (Planos and Planos - Mobile), supported by a 34-node Style Guide specifying brand application, 3D credit card mockups, mobile device frames, and financial transaction iconography in Figma (file key aHFhZTnToTlBOSCxFwUHmw).",
+      "context": "Agency employment at Sagitta delivering from July 20, 2023 to August 2, 2023. Juan acted as the sole website UI designer within a defined team structure: Kelvin Bezerra created the Bolex Pay brand identity and logo, Juan authored the responsive marketing and pricing page layouts, and a no-code developer handled the WordPress CMS implementation. Requirements were scoped by Ramon.",
+      "outcome": "The landing page was completed, delivered, and briefly launched into production before the client abandoned the commercial venture. The domain bolexpay.com.br no longer resolves and unrestricted Wayback Machine queries return zero snapshots across all time. No commercial conversion or transaction metrics exist. This case study documents the commercial conversion architecture, pricing matrices, and responsive layout engineering for a fintech payment processor.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the marketing landing page layouts, pricing comparison tables, and mobile viewports in Figma. I do not claim the Bolex Pay logo or brand identity (created by Kelvin Bezerra), the WordPress deployment (handled by a no-code developer), the financial backend, or payment gateway engineering (APIs, acquirer integrations, or transaction processing). Delivery status: delivered and briefly launched, but the venture was subsequently abandoned and the domain is offline. No metrics survive."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Merchant acquisition in a competitive payment gateway market"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "5",
+              "label": "multi-resolution canvas layouts designed",
+              "icon": "📐"
+            },
+            {
+              "value": "34",
+              "label": "style guide design tokens and brand presentation assets",
+              "icon": "🎨"
+            },
+            {
+              "value": "2",
+              "label": "dedicated pricing comparison viewports (Desktop & Mobile)",
+              "icon": "📊"
+            },
+            {
+              "value": "14 days",
+              "label": "from design kickoff to final implementation handoff",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "In the Brazilian merchant services landscape, payment gateways face severe competition against incumbents (Stone, Cielo, PagBank, Asaas). Converting e-commerce merchants and physical store owners requires eliminating uncertainty around three decisive factors: per-transaction MDR processing rates, liquidity settlement timing (instant Pix versus D+1 or D+30 card payouts), and developer API integration friction. Bolex Pay required an acquisition landing page that established instant credibility and communicated fee structures with absolute transparency."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Responsive layout engineering: 1920px, 1280px, and 375px"
+        },
+        {
+          "type": "prose",
+          "body": "The Figma artifact was engineered across five deliberate canvas layouts to guarantee pixel-accurate translation to code across major display environments:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Desktop 1920x1080 — Full-width canvas utilizing generous whitespace, structured grid alignment, 3D embossed credit card visuals, and highlighted developer API code snippets.",
+            "Desktop 1280x832 — Compact laptop viewport carefully proportioned so that key value propositions, processing fee highlights, and the primary registration CTA remain visible above the fold.",
+            "Mobile 375x812 — Mobile smartphone layout re-architecting complex comparison tables into stacked, readable card lists with full touch-friendly tap targets.",
+            "Dedicated Pricing Viewports (Planos & Planos - Mobile) — Standalone comparison matrix detailing monthly gateway subscription tiers, volume-based discount breaks, and per-brand processing fee splits."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never present this as payments engineering or gateway integration work. It is the commercial marketing surface of a payments product: I designed the page layouts, visual hierarchy, and pricing structure, not the transaction processing rails."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide and brand asset curation"
+        },
+        {
+          "type": "prose",
+          "body": "To support the landing page implementation, the file includes a 34-node Style Guide page (node 1:16). This provided the developer with tokenized typography scales, dark and light brand logo assets authored by Kelvin Bezerra, official card network badges (Visa, Mastercard), vector financial transfer iconography, and device mockup frames for product context."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not payments engineering or API infrastructure. I designed the commercial front-end UI in Figma; I did not write payment gateway software, webhook processors, or banking integrations.",
+            "Not brand identity or logo design. Kelvin Bezerra authored the Bolex Pay logo and visual identity.",
+            "Not WordPress implementation. A no-code developer was responsible for building the page in WordPress.",
+            "Not an active or verifiable live website. The project was abandoned by the client shortly after delivery; the domain does not resolve and has no Wayback captures.",
+            "Not supported by conversion analytics. No transaction volume, lead conversion rates, or traffic analytics were retained.",
+            "Not discovery or user research. Product scoping and client requirements were conducted by Ramon."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Conversion clarity in fintech landing pages"
+        },
+        {
+          "type": "prose",
+          "body": "Bolex Pay demonstrates how visual clarity and honest pricing architecture form the foundation of fintech commercial design. By presenting complex fee structures through intuitive comparative matrices and engineering layouts across three key device viewports, the project established a high-converting digital presence for an emerging payment processor."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI do site para a Bolex Pay, gateway de pagamentos digitais, processadora de transações para lojistas e fornecedora de soluções financeiras. Desenvolvi 5 layouts em múltiplas resoluções no Figma (arquivo aHFhZTnToTlBOSCxFwUHmw) cobrindo viewports desktop (1920x1080 e 1280x832) e mobile (375x812), incluindo páginas dedicadas de matriz comparativa de planos (Planos e Planos - Mobile), com suporte de um Style Guide com 34 nós especificando aplicação de marca, mockups de cartão 3D e iconografia financeira.",
+      "context": "Atuação como funcionário na agência Sagitta de 20 de julho de 2023 a 2 de agosto de 2023. Juan atuou como designer único de UI do site em uma estrutura clara de equipe: Kelvin Bezerra criou a identidade visual e o logotipo da Bolex Pay, Juan desenvolveu os layouts responsivos da landing page e da tabela de preços, e um desenvolvedor no-code realizou a implementação no CMS WordPress. O escopo do projeto foi definido por Ramon.",
+      "outcome": "A landing page foi concluída, entregue e chegou a ir brevemente ao ar antes de o cliente descontinuar o empreendimento comercial. O domínio bolexpay.com.br não responde mais e consultas irrestritas no Wayback Machine retornam zero capturas ao longo do tempo. Não existem métricas comerciais ou de transações. Este estudo de caso documenta a arquitetura de conversão comercial, as matrizes de precificação e o design de layout responsivo para um gateway de pagamentos.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei os layouts da landing page de marketing, tabelas comparativas de preços e viewports mobile no Figma. Não reivindico o logotipo ou identidade visual da Bolex Pay (criados por Kelvin Bezerra), a implementação em WordPress (conduzida por um desenvolvedor no-code) nem a engenharia de back-end ou do gateway de pagamentos (APIs, conexões com adquirentes ou processamento de transações). Status de entrega: entregue e brevemente publicado, mas o projeto foi descontinuado e o domínio está offline. Nenhuma métrica sobrevive."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Aquisição de lojistas em um mercado competitivo de meios de pagamento"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "5",
+              "label": "layouts em múltiplas resoluções desenhados",
+              "icon": "📐"
+            },
+            {
+              "value": "34",
+              "label": "tokens e elementos visuais no Style Guide",
+              "icon": "🎨"
+            },
+            {
+              "value": "2",
+              "label": "telas dedicadas para comparação de planos (Desktop e Mobile)",
+              "icon": "📊"
+            },
+            {
+              "value": "14 dias",
+              "label": "do início do design à entrega para implementação",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "No cenário brasileiro de serviços para comerciantes, gateways de pagamento enfrentam concorrência acirrada contra empresas consolidadas (Stone, Cielo, PagBank, Asaas). Converter donos de e-commerce e varejistas físicos exige eliminar incertezas em torno de três fatores decisivos: taxas de intermediação (MDR) por bandeira, velocidade de repasse da liquidez (Pix imediato versus D+1 ou D+30 para recebíveis de cartão) e facilidade de integração via API para desenvolvedores. A Bolex Pay necessitava de uma landing page comercial capaz de gerar confiança imediata e apresentar custos com total transparência."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Engenharia de layout responsivo: 1920px, 1280px e 375px"
+        },
+        {
+          "type": "prose",
+          "body": "O arquivo Figma foi estruturado em cinco pranchetas estratégicas para garantir fidelidade de implementação nos principais formatos de tela do mercado:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Desktop 1920x1080 — Layout para telas amplas com uso generoso de respiro, alinhamento em grid rigoroso, representações 3D de cartões de crédito e destaque para trechos de código da API.",
+            "Desktop 1280x832 — Viewport para laptops compactos, proporcionado para manter a proposta de valor, taxas em destaque e o CTA principal visíveis acima da dobra.",
+            "Mobile 375x812 — Layout para smartphones reorganizando tabelas densas em cards verticais empilhados com alvos de toque ergonomicamente adequados.",
+            "Páginas Dedicadas de Planos (Planos e Planos - Mobile) — Matriz comparativa independente detalhando planos mensais de assinatura, faixas de desconto por volume e taxas por bandeira de cartão."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca apresente este projeto como engenharia de pagamentos ou integração de gateway. Trata-se da superfície de marketing e conversão de um produto financeiro: desenhei o layout da página, a hierarquia visual e a estrutura de planos, e não os trilhos de processamento bancário."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Curadoria do Style Guide e elementos visuais"
+        },
+        {
+          "type": "prose",
+          "body": "Para fornecer diretrizes completas ao desenvolvedor, o arquivo possui uma página de Style Guide com 34 nós (nó 1:16). Ela especificou escalas tipográficas, variações do logotipo para fundo claro e escuro criadas por Kelvin Bezerra, selos oficiais das bandeiras de cartão (Visa, Mastercard), iconografia vetorial de transferências financeiras e molduras de dispositivos para demonstração do produto."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é engenharia de pagamentos ou infraestrutura de API. Desenhei a interface comercial no Figma; não programei software de gateway, webhooks ou integrações bancárias.",
+            "Não é criação de identidade visual ou logotipo. Kelvin Bezerra concebeu o logotipo e a identidade da Bolex Pay.",
+            "Não é implementação em WordPress. A construção da página no CMS foi executada por um desenvolvedor no-code.",
+            "Não é um site ativo ou verificável no ar. O projeto foi descontinuado pelo cliente pouco após a entrega; o domínio não resolve e não possui capturas no Wayback Machine.",
+            "Não possui dados de conversão comercial. Nenhuma métrica de volume de transações, captação de leads ou tráfego foi retida.",
+            "Não é pesquisa ou discovery. O escopo e o levantamento de requisitos foram conduzidos por Ramon."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Clareza de conversão em interfaces de fintech"
+        },
+        {
+          "type": "prose",
+          "body": "A Bolex Pay exemplifica como hierarquia visual e clareza na exposição de preços constituem a espinha dorsal do design comercial em serviços financeiros. Ao traduzir estruturas complexas de taxas em matrizes comparativas compreensíveis e garantir consistência em três resoluções fundamentais, o projeto estruturou uma presença digital eficiente para o lançamento da marca."
+        }
+      ]
+    }
+  }
 }

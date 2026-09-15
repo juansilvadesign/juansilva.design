@@ -44,5 +44,210 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Brand & Visual Designer for Labore Coworking, a shared workspace, meeting room rental, and private office provider. Authored a 2-page, 15-node Figma asset production system (file key spgFs734QwgWQ0d4yapcfM): structured multi-resolution digital marketing display banners in Full HD (node 3:19958) and 8K Ultra-HD (node 3:21903), designed an exportable workspace iconography library in both scalable vector format (SVG, node 1:13714) and raster graphics (PNG, node 1:13715), and created website hero visual assets and 3D architectural meeting room render references.",
+      "context": "Agency employment at Sagitta delivering on September 1, 2023. Juan served as brand and visual designer. The coworking provider required high-resolution digital display banners for on-site physical displays and web marketing, alongside a custom icon library to visually represent office amenities (high-speed fiber, meeting rooms, private phone booths, dedicated desks, and virtual office registrations).",
+      "outcome": "The coworking business is active and operates at laborecoworking.com.br, featuring Juan's hero visual design assets. No business booking or conversion metrics exist. This case study documents high-resolution digital display banner production (Full HD and 8K), vector icon system design, and spatial brand assets.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I created the high-resolution digital display banners (8K and Full HD), vector icon system (SVG and PNG), and website hero visual assets in Figma. I do not claim a complex multi-step SaaS booking application, full website code, or coworking facility management. Delivery status: hero visual design live at laborecoworking.com.br. This is a visual design and brand asset production credit."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Visual design for shared workspaces: 8K displays and icon systems"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "15",
+              "label": "structured asset groups across 2 Figma pages",
+              "icon": "📐"
+            },
+            {
+              "value": "8K & FHD",
+              "label": "multi-resolution display banner assets produced",
+              "icon": "🖥️"
+            },
+            {
+              "value": "SVG + PNG",
+              "label": "exportable icon suites formatted for web and signage",
+              "icon": "🎨"
+            },
+            {
+              "value": "Live",
+              "label": "hero visual assets featured on laborecoworking.com.br",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Coworking spaces sell an environment of productivity, modern amenities, and professional prestige. Communicating this value requires visual assets that maintain absolute sharpness across radically diverse media—from large-scale 8K digital display totems in building lobbies to compact amenity icons on mobile booking screens."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Multi-resolution banner production and iconography suite"
+        },
+        {
+          "type": "prose",
+          "body": "On the Assets page (node 0:1), I structured a unified visual delivery package for Labore Coworking:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Ultra-HD 8K Display Banners (Banner 8K, node 3:21903) — High-resolution marketing displays engineered with crisp vector geometric layouts and bold promotional typography, calibrated for lobby display screens.",
+            "Full HD Digital Displays (Banner Full HD, node 3:19958) — Standard 1080p promotional assets formatted for web display advertising and corporate presentations.",
+            "Web Marketing Banners (Banner, node 1:13718) — Dynamic web banner variations highlighting private office availability, hot desk plans, and daily pass offers.",
+            "Scalable Vector Icon System (SVG, node 1:13714) — Clean, minimalist iconography package representing workspace amenities: fiber optic internet, conference room projectors, coffee bar, soundproof call booths, and biometric access.",
+            "Raster Icon Package (PNG, node 1:13715) — Pre-rendered raster icon sets formatted with transparent backgrounds for direct CMS and social media application."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never claim a complex multi-step SaaS application, full site build, or commercial operations from this record: the source explicitly defines it as a dedicated brand asset package and digital display system. The business is live at laborecoworking.com.br featuring Juan's hero visual design."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Website visual references and 3D architectural mockups"
+        },
+        {
+          "type": "prose",
+          "body": "The file includes spatial concept references (Site_Labore_versão_azul, node 1:14734) and 3D office meeting room renders (nodes 2:15679 and 2:15680), demonstrating how the icon system and corporate color palette translate into physical environments and website hero sections."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not a complex SaaS booking application. This is a dedicated visual asset production package, not a custom room-reservation software platform.",
+            "Not website coding or development. I created the high-resolution visual assets and icon systems in Figma, not the web code.",
+            "Not coworking facility operations. I was the visual designer for the marketing assets, not the manager of the shared workspace.",
+            "Not supported by desk rental metrics. No office occupancy rates or revenue metrics exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The utility of comprehensive visual asset systems"
+        },
+        {
+          "type": "prose",
+          "body": "Labore Coworking illustrates how disciplined visual asset production supports real estate and flexible office brands. By providing 8K displays, Full HD web banners, and dual-format icon systems, the project delivered a versatile, cohesive visual kit for both digital channels and physical spaces."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer Visual e de Marca para a Labore Coworking, empresa de espaços de trabalho compartilhado, salas de reunião e escritórios privativos. Desenvolvi um sistema de produção visual de 2 páginas e 15 nós no Figma (arquivo spgFs734QwgWQ0d4yapcfM): estruturei banners digitais de alta resolução em Full HD (nó 3:19958) e Ultra-HD 8K (nó 3:21903), criei uma biblioteca de ícones de comodidades exportável em formato vetorial (SVG, nó 1:13714) e gráfico rasterizado (PNG, nó 1:13715), além de referências visuais de Hero e renders 3D de salas de reunião.",
+      "context": "Atuação como funcionário na agência Sagitta em 1 de setembro de 2023. Juan atuou como designer visual e de marca. O espaço de coworking demandava peças promocionais em altíssima resolução para totens digitais físicos e campanhas web, além de uma família de ícones personalizados para representar comodidades do espaço (internet dedicada, salas de conferência, cabines telefônicas acústicas e endereço fiscal).",
+      "outcome": "O espaço de coworking está em atividade e opera em laborecoworking.com.br, exibindo os ativos visuais de Hero desenvolvidos por Juan. Não existem métricas de locação de salas ou conversão. Este estudo de caso documenta a produção de banners digitais em múltiplas resoluções (Full HD e 8K), design de sistemas de ícones vetoriais e ativos visuais espaciais.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei os banners promocionais de alta resolução (8K e Full HD), a biblioteca de ícones (SVG e PNG) e as peças visuais de Hero no Figma. Não reivindico um software SaaS complexo de reservas, desenvolvimento do site ou a gestão física do coworking. Status de entrega: visual de Hero ativo no site laborecoworking.com.br. Crédito de design visual e produção de ativos de marca."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design visual para coworking: displays em 8K e iconografia"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "15",
+              "label": "grupos de ativos estruturados em 2 páginas no Figma",
+              "icon": "📐"
+            },
+            {
+              "value": "8K e FHD",
+              "label": "banners de exibição em altíssima resolução produzidos",
+              "icon": "🖥️"
+            },
+            {
+              "value": "SVG + PNG",
+              "label": "pacotes de ícones preparados para web e sinalização física",
+              "icon": "🎨"
+            },
+            {
+              "value": "No ar",
+              "label": "ativos visuais de Hero integrados a laborecoworking.com.br",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Espaços de coworking vendem um ecossistema de produtividade, comodidade e credibilidade corporativa. Comunicar esses atributos exige materiais visuais que mantenham nitidez em suportes variados — de grandes totens digitais em 8K na recepção do edifício a ícones compactos em telas de smartphone."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Produção de banners em múltiplas resoluções e pacote de ícones"
+        },
+        {
+          "type": "prose",
+          "body": "Na página de Assets (nó 0:1), organizei o pacote completo de entregáveis visuais da Labore Coworking:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Banners Ultra-HD 8K (Banner 8K, nó 3:21903) — Peças em altíssima definição com traços vetoriais precisos e tipografia destacada, calibradas para displays físicos de grande porte.",
+            "Displays Full HD (Banner Full HD, nó 3:19958) — Peças em formato 1080p para divulgação web e apresentações comerciais da empresa.",
+            "Banners Digitais para Campanhas (Banner, nó 1:13718) — Variações promocionais destacando planos de posições rotativas, escritórios privativos e diárias.",
+            "Sistema de Ícones Vetoriais (SVG, nó 1:13714) — Pacote de ícones minimalistas representando facilidades: internet de alta velocidade, salas com projetor, café cortesia, cabines acústicas e biometria.",
+            "Pacote de Ícones em Bitmap (PNG, nó 1:13715) — Exportações com fundo transparente para aplicação direta no CMS e materiais de mídias sociais."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca reivindique um software SaaS complexo de reservas ou a operação do coworking a partir deste registro: a fonte define o escopo como um pacote dedicado de ativos de marca e displays digitais. A empresa está ativa em laborecoworking.com.br utilizando os ativos visuais de Hero desenhados por Juan."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Conceitos de layout web e renders 3D do espaço"
+        },
+        {
+          "type": "prose",
+          "body": "O arquivo inclui estudos de aplicação web (Site_Labore_versão_azul, nó 1:14734) e renders 3D de salas de reunião corporativas (nós 2:15679 e 2:15680), demonstrando a harmonia entre o sistema de ícones, a paleta institucional e o ambiente físico."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é um software SaaS de reservas de salas. Trata-se de um pacote de produção visual e identidade, não de uma aplicação de agendamento.",
+            "Não é desenvolvimento de código. Produzi as peças visuais e ícones no Figma, não o código do site.",
+            "Não é a gestão do coworking. Fui o designer visual das peças, não o operador do espaço físico.",
+            "Não possui métricas de locação. Nenhum dado de ocupação de mesas ou faturamento consta nos registros do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A versatilidade de ativos visuais bem estruturados"
+        },
+        {
+          "type": "prose",
+          "body": "A Labore Coworking exemplifica como a padronização de ativos de marca fortalece negócios de espaços compartilhados. Ao entregar peças em 8K, banners Full HD e uma família completa de ícones, o projeto forneceu um enxoval visual versátil para uso tanto no ambiente digital quanto no espaço físico."
+        }
+      ]
+    }
+  }
 }

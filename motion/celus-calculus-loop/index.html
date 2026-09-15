@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #F8FAF9;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #181D27;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+
+      /* Clean high-key clinical ground */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 35%, rgba(53, 180, 139, 0.08) 0%, #F8FAF9 70%, #EFF4F2 100%);
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      #glow-1 {
+        top: 60px;
+        left: 200px;
+        width: 500px;
+        height: 500px;
+        background: rgba(53, 180, 139, 0.09);
+      }
+      #glow-2 {
+        bottom: 80px;
+        right: 220px;
+        width: 540px;
+        height: 540px;
+        background: rgba(16, 139, 106, 0.07);
+      }
+
+      #grid-overlay {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(16, 139, 106, 0.12) 1px, transparent 1px);
+        background-size: 32px 32px;
+        opacity: 0.45;
+        pointer-events: none;
+      }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* --- Top HUD Header Bar --- */
+      #header-bar {
+        position: absolute;
+        top: 36px;
+        left: 64px;
+        right: 64px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 100;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-logo-badge {
+        height: 44px;
+        padding: 6px 16px;
+        background: #FFFFFF;
+        border: 1px solid rgba(209, 213, 219, 0.8);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(16, 24, 40, 0.04);
+      }
+
+      .brand-logo-badge img {
+        height: 28px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .brand-title-wrap {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand-title {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #181D27;
+        text-transform: uppercase;
+      }
+
+      .brand-subtitle {
+        font-size: 11px;
+        font-weight: 500;
+        color: #535862;
+        letter-spacing: 0.02em;
+      }
+
+      .hud-badges {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .hud-pill {
+        height: 38px;
+        padding: 0 16px;
+        background: #FFFFFF;
+        border: 1px solid rgba(209, 213, 219, 0.8);
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+        font-size: 12px;
+        font-weight: 600;
+        color: #181D27;
+      }
+
+      .hud-pill.highlight {
+        background: #EDFCF6;
+        border-color: #A6F4C5;
+        color: #087443;
+      }
+
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #108B6A;
+        box-shadow: 0 0 0 3px rgba(16, 139, 106, 0.2);
+      }
+
+      /* --- Bottom Floating Callout Pill --- */
+      #bottom-callout {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        height: 48px;
+        max-width: 1080px;
+        padding: 0 26px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(209, 213, 219, 0.9);
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 16px 36px -8px rgba(16, 24, 40, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
+        z-index: 100;
+      }
+
+      #callout-icon {
+        font-size: 16px;
+      }
+
+      #callout-text {
+        font-size: 13px;
+        font-weight: 500;
+        color: #344054;
+      }
+
+      #callout-text strong {
+        color: #0F8666;
+        font-weight: 600;
+      }
+
+      /* --- Mobile Phone Chassis (iPhone 16 Pro Style) --- */
+      #phone-chassis {
+        position: absolute;
+        width: 390px;
+        height: 844px;
+        left: 765px;
+        top: 122px;
+        background: #000000;
+        border-radius: 50px;
+        box-shadow: 0 32px 80px -16px rgba(16, 24, 40, 0.22),
+                    0 0 0 9px #E4E7EC,
+                    0 0 0 11px rgba(16, 24, 40, 0.08);
+        overflow: hidden;
+        z-index: 20;
+      }
+
+      .dynamic-island {
+        position: absolute;
+        top: 13px;
+        left: 141px;
+        width: 108px;
+        height: 28px;
+        background: #000000;
+        border-radius: 20px;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 9px;
+      }
+
+      .camera-lens {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #111B27;
+        box-shadow: inset 0 0 2px #003366;
+      }
+
+      #phone-screen {
+        position: absolute;
+        inset: 0;
+        border-radius: 46px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+
+      .phone-layer-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .phone-layer-wrap img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* --- Flanking Panel: Left (Clinical Step Inspector) --- */
+      #panel-left {
+        position: absolute;
+        left: 130px;
+        top: 240px;
+        width: 540px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(209, 213, 219, 0.9);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.08);
+        backdrop-filter: blur(10px);
+        z-index: 30;
+      }
+
+      .panel-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 999px;
+        background: #EDFCF6;
+        border: 1px solid #A6F4C5;
+        color: #087443;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 16px;
+      }
+
+      .panel-title {
+        font-size: 24px;
+        font-weight: 800;
+        color: #181D27;
+        line-height: 1.25;
+        margin-bottom: 12px;
+      }
+
+      .panel-desc {
+        font-size: 14px;
+        color: #535862;
+        line-height: 1.55;
+        margin-bottom: 24px;
+      }
+
+      .criteria-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .criteria-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        background: #F9FAFB;
+        border: 1px solid #EAECF0;
+        border-radius: 10px;
+        font-size: 13px;
+        color: #344054;
+      }
+
+      .criteria-item.selected {
+        background: #EDFCF6;
+        border-color: #35B48B;
+        color: #087443;
+        font-weight: 600;
+      }
+
+      .criteria-score {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 2px 8px;
+        border-radius: 6px;
+        background: #FFFFFF;
+        border: 1px solid #D0D5DD;
+        color: #344054;
+      }
+
+      .criteria-item.selected .criteria-score {
+        background: #0F8666;
+        border-color: #0F8666;
+        color: #FFFFFF;
+      }
+
+      /* --- Flanking Panel: Right (Dynamic Score Ledger) --- */
+      #panel-right {
+        position: absolute;
+        right: 130px;
+        top: 240px;
+        width: 540px;
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(209, 213, 219, 0.9);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.08);
+        backdrop-filter: blur(10px);
+        z-index: 30;
+      }
+
+      .ledger-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #EAECF0;
+      }
+
+      .ledger-title {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #535862;
+      }
+
+      .total-points-display {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+      }
+
+      .total-points-number {
+        font-size: 32px;
+        font-weight: 800;
+        color: #0F8666;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .total-points-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #535862;
+        text-transform: uppercase;
+      }
+
+      .ledger-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+
+      .ledger-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        color: #667085;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: #FAFAFA;
+      }
+
+      .ledger-row.active-row {
+        background: #EDFCF6;
+        color: #087443;
+        font-weight: 600;
+      }
+
+      .ledger-val {
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+      }
+
+      .result-banner {
+        padding: 18px 20px;
+        border-radius: 14px;
+        background: #FEF3F2;
+        border: 1px solid #FECDCA;
+        display: none;
+      }
+
+      .result-banner.visible {
+        display: block;
+      }
+
+      .result-tag {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #B42318;
+        margin-bottom: 4px;
+      }
+
+      .result-headline {
+        font-size: 18px;
+        font-weight: 800;
+        color: #912018;
+        margin-bottom: 6px;
+      }
+
+      .result-sub {
+        font-size: 12px;
+        color: #B42318;
+        line-height: 1.45;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div id="ground"></div>
+        <div class="ambient-glow" id="glow-1" data-layout-allow-overflow=""></div>
+        <div class="ambient-glow" id="glow-2" data-layout-allow-overflow=""></div>
+        <div id="grid-overlay"></div>
+
+        <div id="camera-scaler">
+          <div id="camera-track">
+
+            <!-- Top HUD Header Bar -->
+            <header id="header-bar" data-layout-allow-overlap="">
+              <div class="brand-lockup">
+                <div class="brand-logo-badge">
+                  <img src="assets/celus-logo.png" alt="Celus Logo">
+                </div>
+                <div class="brand-title-wrap">
+                  <span class="brand-title">CELUS · CALCULUS ENGINE</span>
+                  <span class="brand-subtitle">Estratificação Diagnóstica ACR TI-RADS</span>
+                </div>
+              </div>
+              <div class="hud-badges">
+                <div class="hud-pill">
+                  <span>DIRETRIZ CLÍNICA ACR 2017</span>
+                </div>
+                <div class="hud-pill" id="step-pill">
+                  <div class="pulse-dot"></div>
+                  <span id="step-pill-text">ETAPA 1/5 · COMPOSIÇÃO</span>
+                </div>
+                <div class="hud-pill highlight" id="score-pill">
+                  <span id="score-pill-text">0 PONTOS</span>
+                </div>
+              </div>
+            </header>
+
+            <!-- Left Flanking Inspector Panel -->
+            <aside id="panel-left" data-layout-allow-overlap="">
+              <div class="crit-step-card" id="step-card-1">
+                <div class="panel-tag">Etapa 1 de 5</div>
+                <div class="panel-title">Composição do Nódulo</div>
+                <div class="panel-desc">Avaliação da proporção sólida versus cística ou espongiforme na ultrassonografia de tireoide.</div>
+                <div class="criteria-list">
+                  <div class="criteria-item"><span>Cístico ou quase totalmente cístico</span><span class="criteria-score">0 pts</span></div>
+                  <div class="criteria-item"><span>Espongiforme (≥ 50% de microcistos)</span><span class="criteria-score">0 pts</span></div>
+                  <div class="criteria-item"><span>Misto cístico e sólido</span><span class="criteria-score">+1 pt</span></div>
+                  <div class="criteria-item selected"><span>Sólido ou quase totalmente sólido</span><span class="criteria-score">+2 pts</span></div>
+                </div>
+              </div>
+              <div class="crit-step-card" id="step-card-2" style="display: none;">
+                <div class="panel-tag">Etapa 2 de 5</div>
+                <div class="panel-title">Ecogenicidade</div>
+                <div class="panel-desc">Comparação do nível de cinza do nódulo em relação ao parênquima tireoidiano adjacente.</div>
+                <div class="criteria-list">
+                  <div class="criteria-item"><span>Anecóico (conteúdo líquido)</span><span class="criteria-score">0 pts</span></div>
+                  <div class="criteria-item"><span>Hiperecóico ou isoecóico</span><span class="criteria-score">+1 pt</span></div>
+                  <div class="criteria-item"><span>Hipoecóico em relação ao parênquima</span><span class="criteria-score">+2 pts</span></div>
+                  <div class="criteria-item selected"><span>Muito hipoecóico (mais escuro que a musculatura)</span><span class="criteria-score">+3 pts</span></div>
+                </div>
+              </div>
+              <div class="crit-step-card" id="step-card-3" style="display: none;">
+                <div class="panel-tag">Etapa 3 de 5</div>
+                <div class="panel-title">Forma e Orientação</div>
+                <div class="panel-desc">Relação entre os eixos anteroposterior (AP) e transversal do nódulo em corte axial.</div>
+                <div class="criteria-list">
+                  <div class="criteria-item"><span>Mais largo que alto (diâmetro AP < transversal)</span><span class="criteria-score">0 pts</span></div>
+                  <div class="criteria-item selected"><span>Mais alto que largo (diâmetro AP > transversal)</span><span class="criteria-score">+3 pts</span></div>
+                </div>
+              </div>
+              <div class="crit-step-card" id="step-card-4" style="display: none;">
+                <div class="panel-tag">Etapa 4 de 5</div>
+                <div class="panel-title">Margens do Nódulo</div>
+                <div class="panel-desc">Definição do contorno e transição com o tecido tireoidiano adjacente.</div>
+                <div class="criteria-list">
+                  <div class="criteria-item"><span>Suaves e bem definidas</span><span class="criteria-score">0 pts</span></div>
+                  <div class="criteria-item"><span>Mal definidas</span><span class="criteria-score">0 pts</span></div>
+                  <div class="criteria-item selected"><span>Lobuladas ou irregulares</span><span class="criteria-score">+2 pts</span></div>
+                  <div class="criteria-item"><span>Extensão extratireoidiana</span><span class="criteria-score">+3 pts</span></div>
+                </div>
+              </div>
+              <div class="crit-step-card" id="step-card-5" style="display: none;">
+                <div class="panel-tag">Etapa 5 de 5</div>
+                <div class="panel-title">Focos Ecogênicos</div>
+                <div class="panel-desc">Presença de calcificações, artefatos em cauda de cometa ou microcalcificações.</div>
+                <div class="criteria-list">
+                  <div class="criteria-item"><span>Nenhum ou grandes artefatos em cauda de cometa</span><span class="criteria-score">0 pts</span></div>
+                  <div class="criteria-item"><span>Macrocalcificações</span><span class="criteria-score">+1 pt</span></div>
+                  <div class="criteria-item"><span>Calcificações periféricas em casca</span><span class="criteria-score">+2 pts</span></div>
+                  <div class="criteria-item selected"><span>Focos ecogênicos puntiformes</span><span class="criteria-score">+3 pts</span></div>
+                </div>
+              </div>
+              <div class="crit-step-card" id="step-card-result" style="display: none;">
+                <div class="panel-tag">Conduta Diagnóstica</div>
+                <div class="panel-title">ACR TI-RADS 5 · Alta Suspeita</div>
+                <div class="panel-desc">Pontuação total ≥ 7 pontos classifica o nódulo como alta suspeita de malignidade (risco estimado > 35%).</div>
+                <div class="criteria-list">
+                  <div class="criteria-item selected"><span>Biópsia por PAAF indicada se nódulo ≥ 1.0 cm</span><span class="criteria-score">PAAF</span></div>
+                  <div class="criteria-item"><span>Acompanhamento ecográfico anual se nódulo ≥ 0.5 cm</span><span class="criteria-score">USG</span></div>
+                </div>
+              </div>
+            </aside>
+
+            <!-- Center Mobile Chassis -->
+            <main id="phone-chassis" data-layout-allow-overlap="">
+              <div class="dynamic-island">
+                <div class="camera-lens"></div>
+              </div>
+              <div id="phone-screen" data-layout-allow-overflow="">
+                <div class="phone-layer-wrap" id="layer-step1" data-layout-allow-overflow="">
+                  <img id="img-step1" src="assets/calculus-step1.png" alt="CalculUS Step 1">
+                </div>
+                <div class="phone-layer-wrap" id="layer-step2" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-step2" src="assets/calculus-step2.png" alt="CalculUS Step 2">
+                </div>
+                <div class="phone-layer-wrap" id="layer-step3" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-step3" src="assets/calculus-step3.png" alt="CalculUS Step 3">
+                </div>
+                <div class="phone-layer-wrap" id="layer-step4" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-step4" src="assets/calculus-step4.png" alt="CalculUS Step 4">
+                </div>
+                <div class="phone-layer-wrap" id="layer-step5" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-step5" src="assets/calculus-step5.png" alt="CalculUS Step 5">
+                </div>
+                <div class="phone-layer-wrap" id="layer-result" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-result" src="assets/calculus-result.png" alt="CalculUS Result">
+                </div>
+                <div class="phone-layer-wrap" id="layer-step1-end" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-step1-end" src="assets/calculus-step1-end.png" alt="CalculUS Step 1 End Loop">
+                </div>
+              </div>
+            </main>
+
+            <!-- Right Flanking Score Accumulator Panel -->
+            <aside id="panel-right" data-layout-allow-overlap="">
+              <div class="ledger-header">
+                <span class="ledger-title">Acumulador de Pontos</span>
+                <div class="total-points-display">
+                  <span class="total-points-number" id="total-score-num">0</span>
+                  <span class="total-points-label">pts</span>
+                </div>
+              </div>
+              <div class="ledger-steps">
+                <div class="ledger-row active-row" id="ledger-step1">
+                  <span>1. Composição: Sólido</span>
+                  <span class="ledger-val" id="ledger-val-1">—</span>
+                </div>
+                <div class="ledger-row" id="ledger-step2">
+                  <span>2. Ecogenicidade: Muito hipoecóico</span>
+                  <span class="ledger-val" id="ledger-val-2">—</span>
+                </div>
+                <div class="ledger-row" id="ledger-step3">
+                  <span>3. Forma: Mais alto que largo</span>
+                  <span class="ledger-val" id="ledger-val-3">—</span>
+                </div>
+                <div class="ledger-row" id="ledger-step4">
+                  <span>4. Margem: Lobulada</span>
+                  <span class="ledger-val" id="ledger-val-4">—</span>
+                </div>
+                <div class="ledger-row" id="ledger-step5">
+                  <span>5. Focos: Microcalcificações</span>
+                  <span class="ledger-val" id="ledger-val-5">—</span>
+                </div>
+              </div>
+
+              <div class="result-banner" id="result-banner" style="display: none;">
+                <div class="result-tag">Classificação ACR TI-RADS</div>
+                <div class="result-headline" id="res-tier">TR5 · Altamente Suspeito</div>
+                <div class="result-sub" id="res-sub">Risco de malignidade > 35%. Indicação formal de Biópsia por Punção Aspirativa por Agulha Fina (PAAF) se nódulo ≥ 1.0 cm.</div>
+              </div>
+            </aside>
+
+            <!-- Bottom Floating Callout Pill -->
+            <footer id="bottom-callout" data-layout-allow-overlap="">
+              <span id="callout-icon">⚡</span>
+              <span id="callout-text">CalculUS Celus: <strong>Estratificação em 5 passos com cálculo dinâmico de risco em tempo real</strong></span>
+            </footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Immediate GSAP setups outside timeline for initial states
+      gsap.set("#bottom-callout", { xPercent: -50 });
+
+      // DOM Elements
+      const scaler = document.getElementById("camera-scaler");
+      const track = document.getElementById("camera-track");
+      const phoneChassis = document.getElementById("phone-chassis");
+
+      const layerStep1 = document.getElementById("layer-step1");
+      const layerStep2 = document.getElementById("layer-step2");
+      const layerStep3 = document.getElementById("layer-step3");
+      const layerStep4 = document.getElementById("layer-step4");
+      const layerStep5 = document.getElementById("layer-step5");
+      const layerResult = document.getElementById("layer-result");
+      const layerStep1End = document.getElementById("layer-step1-end");
+      const imgResult = document.getElementById("img-result");
+
+      const stepPillText = document.getElementById("step-pill-text");
+      const scorePillText = document.getElementById("score-pill-text");
+      const calloutIcon = document.getElementById("callout-icon");
+      const calloutText = document.getElementById("callout-text");
+
+      const panelLeft = document.getElementById("panel-left");
+      const panelStepTag = document.getElementById("panel-step-tag");
+      const panelTitle = document.getElementById("panel-title");
+      const panelDesc = document.getElementById("panel-desc");
+      const criteriaList = document.getElementById("criteria-list");
+
+      const panelRight = document.getElementById("panel-right");
+      const totalScoreNum = document.getElementById("total-score-num");
+      const ledgerStep1 = document.getElementById("ledger-step1");
+      const ledgerStep2 = document.getElementById("ledger-step2");
+      const ledgerStep3 = document.getElementById("ledger-step3");
+      const ledgerStep4 = document.getElementById("ledger-step4");
+      const ledgerStep5 = document.getElementById("ledger-step5");
+      const ledgerVal1 = document.getElementById("ledger-val-1");
+      const ledgerVal2 = document.getElementById("ledger-val-2");
+      const ledgerVal3 = document.getElementById("ledger-val-3");
+      const ledgerVal4 = document.getElementById("ledger-val-4");
+      const ledgerVal5 = document.getElementById("ledger-val-5");
+      const resultBanner = document.getElementById("result-banner");
+
+      // GSAP Master Timeline (15.0s, 60fps)
+      const tl = gsap.timeline({ id: "main", paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines.main = tl;
+
+      // =========================================================================
+      // FRAME 0 SETUP (t=0.0s)
+      // =========================================================================
+      tl.set(scaler, { scale: 1.0, x: 0, y: 0 }, 0.0);
+      tl.set(track, { x: 0, y: 0 }, 0.0);
+      tl.set(phoneChassis, { x: 0, y: 0, scale: 1.0, opacity: 1.0 }, 0.0);
+      tl.set(panelLeft, { opacity: 1, x: 0, y: 0 }, 0.0);
+      tl.set(panelRight, { opacity: 1, x: 0, y: 0 }, 0.0);
+
+      tl.set(layerStep1, { display: "block" }, 0.0);
+      tl.set(imgResult, { y: 0 }, 0.0);
+
+      tl.set(stepPillText, { textContent: "ETAPA 1/5 · COMPOSIÇÃO" }, 0.0);
+      tl.set(scorePillText, { textContent: "0 PONTOS" }, 0.0);
+      tl.set(totalScoreNum, { textContent: "0" }, 0.0);
+      tl.set(calloutIcon, { textContent: "⚡" }, 0.0);
+      tl.set(calloutText, { innerHTML: "CalculUS Celus: <strong>Estratificação em 5 passos com cálculo dinâmico de risco em tempo real</strong>" }, 0.0);
+
+      tl.set("#step-card-1", { display: "block" }, 0.0);
+      tl.set("#step-card-2, #step-card-3, #step-card-4, #step-card-5, #step-card-result", { display: "none" }, 0.0);
+
+      tl.set(ledgerStep1, { className: "ledger-row active-row" }, 0.0);
+      tl.set(ledgerStep2, { className: "ledger-row" }, 0.0);
+      tl.set(ledgerStep3, { className: "ledger-row" }, 0.0);
+      tl.set(ledgerStep4, { className: "ledger-row" }, 0.0);
+      tl.set(ledgerStep5, { className: "ledger-row" }, 0.0);
+      tl.set(ledgerVal1, { textContent: "—" }, 0.0);
+      tl.set(ledgerVal2, { textContent: "—" }, 0.0);
+      tl.set(ledgerVal3, { textContent: "—" }, 0.0);
+      tl.set(ledgerVal4, { textContent: "—" }, 0.0);
+      tl.set(ledgerVal5, { textContent: "—" }, 0.0);
+      tl.set(resultBanner, { className: "result-banner", display: "none", opacity: 0, y: 0 }, 0.0);
+
+      // S1 Score selection (t=1.0s)
+      tl.set(ledgerVal1, { textContent: "+2 pts" }, 1.0);
+      tl.set(totalScoreNum, { textContent: "2" }, 1.0);
+      tl.set(scorePillText, { textContent: "2 PONTOS" }, 1.0);
+
+      // =========================================================================
+      // STEP 2: ECHOGENICITY (t=2.2s to 4.8s)
+      // =========================================================================
+      tl.set(layerStep1, { display: "none" }, 2.2);
+      tl.set(layerStep2, { display: "block" }, 2.2);
+      tl.set("#step-card-1", { display: "none" }, 2.2);
+      tl.set("#step-card-2", { display: "block" }, 2.2);
+      tl.fromTo(phoneChassis, { scale: 0.99 }, { scale: 1.03, duration: 0.35, ease: "back.out(1.4)" }, 2.2);
+
+      tl.set(stepPillText, { textContent: "ETAPA 2/5 · ECOGENICIDADE" }, 2.2);
+      tl.set(ledgerStep1, { className: "ledger-row" }, 2.2);
+      tl.set(ledgerStep2, { className: "ledger-row active-row" }, 2.2);
+      tl.set(ledgerVal2, { textContent: "+3 pts" }, 3.0);
+      tl.set(totalScoreNum, { textContent: "5" }, 3.0);
+      tl.set(scorePillText, { textContent: "5 PONTOS" }, 3.0);
+
+      // =========================================================================
+      // STEP 3: SHAPE / ORIENTATION (t=4.8s to 7.2s)
+      // =========================================================================
+      tl.set(layerStep2, { display: "none" }, 4.8);
+      tl.set(layerStep3, { display: "block" }, 4.8);
+      tl.set("#step-card-2", { display: "none" }, 4.8);
+      tl.set("#step-card-3", { display: "block" }, 4.8);
+      tl.fromTo(phoneChassis, { scale: 1.01 }, { scale: 1.03, duration: 0.3, ease: "power1.out" }, 4.8);
+
+      tl.set(stepPillText, { textContent: "ETAPA 3/5 · FORMA / ORIENTAÇÃO" }, 4.8);
+      tl.set(ledgerStep2, { className: "ledger-row" }, 4.8);
+      tl.set(ledgerStep3, { className: "ledger-row active-row" }, 4.8);
+      tl.set(ledgerVal3, { textContent: "+3 pts" }, 5.6);
+      tl.set(totalScoreNum, { textContent: "8" }, 5.6);
+      tl.set(scorePillText, { textContent: "8 PONTOS" }, 5.6);
+
+      // =========================================================================
+      // STEP 4: MARGIN (t=7.2s to 9.5s)
+      // =========================================================================
+      tl.set(layerStep3, { display: "none" }, 7.2);
+      tl.set(layerStep4, { display: "block" }, 7.2);
+      tl.set("#step-card-3", { display: "none" }, 7.2);
+      tl.set("#step-card-4", { display: "block" }, 7.2);
+      tl.fromTo(phoneChassis, { scale: 1.01 }, { scale: 1.03, duration: 0.3, ease: "power1.out" }, 7.2);
+
+      tl.set(stepPillText, { textContent: "ETAPA 4/5 · MARGENS" }, 7.2);
+      tl.set(ledgerStep3, { className: "ledger-row" }, 7.2);
+      tl.set(ledgerStep4, { className: "ledger-row active-row" }, 7.2);
+      tl.set(ledgerVal4, { textContent: "+2 pts" }, 8.0);
+      tl.set(totalScoreNum, { textContent: "10" }, 8.0);
+      tl.set(scorePillText, { textContent: "10 PONTOS" }, 8.0);
+
+      // =========================================================================
+      // STEP 5: ECHOGENIC FOCI (t=9.5s to 11.5s)
+      // =========================================================================
+      tl.set(layerStep4, { display: "none" }, 9.5);
+      tl.set(layerStep5, { display: "block" }, 9.5);
+      tl.set("#step-card-4", { display: "none" }, 9.5);
+      tl.set("#step-card-5", { display: "block" }, 9.5);
+      tl.fromTo(phoneChassis, { scale: 1.01 }, { scale: 1.03, duration: 0.3, ease: "power1.out" }, 9.5);
+
+      tl.set(stepPillText, { textContent: "ETAPA 5/5 · FOCOS ECOGÊNICOS" }, 9.5);
+      tl.set(ledgerStep4, { className: "ledger-row" }, 9.5);
+      tl.set(ledgerStep5, { className: "ledger-row active-row" }, 9.5);
+      tl.set(ledgerVal5, { textContent: "+3 pts" }, 10.3);
+      tl.set(totalScoreNum, { textContent: "13" }, 10.3);
+      tl.set(scorePillText, { textContent: "13 PONTOS · TR5" }, 10.3);
+
+      // =========================================================================
+      // RESULT SCREEN: TR5 RECOMMENDATION & BIOPSY THRESHOLD (t=11.5s to 14.2s)
+      // =========================================================================
+      tl.set(layerStep5, { display: "none" }, 11.5);
+      tl.set(layerResult, { display: "block" }, 11.5);
+      tl.set("#step-card-5", { display: "none" }, 11.5);
+      tl.set("#step-card-result", { display: "block" }, 11.5);
+      tl.fromTo(phoneChassis, { scale: 1.01 }, { scale: 1.05, duration: 0.4, ease: "back.out(1.2)" }, 11.5);
+
+      tl.set(stepPillText, { textContent: "RESULTADO FINAL · TI-RADS" }, 11.5);
+      tl.set(ledgerStep5, { className: "ledger-row" }, 11.5);
+      tl.set(resultBanner, { className: "result-banner visible" }, 11.5);
+      tl.fromTo(resultBanner, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 11.5);
+
+      tl.set(calloutIcon, { textContent: "🎯" }, 11.5);
+      tl.set(calloutText, { innerHTML: "Resultado: <strong>TR5 (Alta suspeita) · Risco > 35% · Indicação formal de biópsia por PAAF</strong>" }, 11.5);
+
+      // Smooth downward scroll on result screen to show full recommendation
+      tl.to(imgResult, { y: -220, duration: 2.2, ease: "power1.inOut" }, 12.0);
+
+      // =========================================================================
+      // SEAMLESS RESOLUTION BACK TO STEP 1 OPENING (t=13.8s to 15.0s)
+      // =========================================================================
+      tl.to(resultBanner, { opacity: 0, y: 10, duration: 0.4, ease: "power2.in" }, 13.8);
+      tl.to(phoneChassis, { scale: 1.0, duration: 0.4, ease: "power2.inOut" }, 13.9);
+
+      // Reset ledger values to frame 0 state at 14.3s
+      tl.set(resultBanner, { className: "result-banner", display: "none", opacity: 0, y: 0 }, 14.3);
+      tl.set(ledgerVal1, { textContent: "—" }, 14.3);
+      tl.set(ledgerVal2, { textContent: "—" }, 14.3);
+      tl.set(ledgerVal3, { textContent: "—" }, 14.3);
+      tl.set(ledgerVal4, { textContent: "—" }, 14.3);
+      tl.set(ledgerVal5, { textContent: "—" }, 14.3);
+      tl.set(totalScoreNum, { textContent: "0" }, 14.3);
+      tl.set(scorePillText, { textContent: "0 PONTOS" }, 14.3);
+      tl.set(stepPillText, { textContent: "ETAPA 1/5 · COMPOSIÇÃO" }, 14.3);
+      tl.set(ledgerStep1, { className: "ledger-row active-row" }, 14.3);
+
+      // Reset left panel cards at 14.3s
+      tl.set("#step-card-result", { display: "none" }, 14.3);
+      tl.set("#step-card-1", { display: "block" }, 14.3);
+
+      tl.set(calloutIcon, { textContent: "⚡" }, 14.3);
+      tl.set(calloutText, { innerHTML: "CalculUS Celus: <strong>Estratificação em 5 passos com cálculo dinâmico de risco em tempo real</strong>" }, 14.3);
+
+      // Crossfade result to step 1 end frame at 14.3s
+      tl.set(layerResult, { display: "none" }, 14.3);
+      tl.set(layerStep1End, { display: "block" }, 14.3);
+      tl.set(imgResult, { y: 0 }, 14.3);
+
+      // Completely settled at Frame 0 state from 14.4s to 15.0s
+      tl.set(phoneChassis, { scale: 1.0, x: 0, y: 0, opacity: 1.0 }, 14.4);
+      tl.set(scaler, { scale: 1.0, x: 0, y: 0 }, 14.4);
+      tl.set(track, { x: 0, y: 0 }, 14.4);
+    </script>
+  </body>
+</html>

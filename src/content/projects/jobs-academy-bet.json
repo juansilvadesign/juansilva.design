@@ -44,5 +44,234 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Co-designed two interconnected platforms for the global iGaming sector (Jobs.bet recruitment marketplace and Academy.bet learning platform) totaling 649 frames across seven permissioned roles and seven wired prototype flows. Authored the portfolio's most extensive responsive matrix (~180 purpose-built phone frames across 4 device sizes, plus 3 laptop sizes) and designed localized card and PIX checkouts with dedicated waiting and success states.",
+      "context": "Agency engagement at Sagitta between February and July 2024, working in continuous pair design with João Chagas. Tech lead Ramon managed UX discovery and client meetings; product and engineering were led by Silas, Daniel, and Samuel. Juan and João worked simultaneously inside the same Figma file, interleaving at component level within shared screens to meet compressed delivery milestones. Following staged platform approvals, the client signed a formal contract addendum on 2024-03-13 as scope expanded.",
+      "outcome": "Fully approved across staged reviews in February–April 2024 and verified against a comprehensive Bubble QA checklist on 2024-07-11. Jobs.bet is live in production with a public web shell. Designed 7 complete prototype user flows across Candidate, Company, HeadHunter, Jobs Admin, Student, Tutor, and Academy Admin. Demonstrates proven capability to deliver collaboratively inside high-velocity multi-role products without individual ego.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Co-Design Notice: This project was co-designed with João Chagas. We worked simultaneously inside the same file and interleaved at the component level within screens (e.g., one built dashboard cards while the other designed data charts). Therefore, I always say 'we' and never claim individual screen ownership. Ramon led UX discovery and client presentations; Sagitta's engineering team built the Bubble software. Production status: jobs.bet is live in production; the design file represents the verified source artifact."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Two interconnected platforms: 7 roles and operational moderation"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "649",
+              "label": "total frames designed across Jobs.bet (374) and Academy.bet (275)",
+              "icon": "📐"
+            },
+            {
+              "value": "7",
+              "label": "permissioned role surfaces across both products",
+              "icon": "👥"
+            },
+            {
+              "value": "~180",
+              "label": "purpose-built mobile phone frames across 4 device sizes",
+              "icon": "📱"
+            },
+            {
+              "value": "7",
+              "label": "wired prototype flows covering every platform stakeholder",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Jobs.bet and Academy.bet form a dual ecosystem for the global iGaming recruitment and education market. Jobs.bet connects specialized candidates, employers, headhunters, and platform operators, while Academy.bet delivers professional coursework, cohort tracking, and certification. Spanning 649 frames across both design spaces, the product integrates monetization mechanisms and back-office governance into a unified operational flow."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Jobs.bet: marketplace dynamics and moderation workflows"
+        },
+        {
+          "type": "prose",
+          "body": "The recruitment marketplace (374 frames) balances four distinct roles:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Candidato (Job Seeker) — Profile management, professional experience timelines, application tracking (minhas candidaturas), notification alerts, and responsive vacancy details (vagaDetalhes).",
+            "Empresa (Employer) — Candidate directory, interview calendar scheduling (agenda de entrevistas), and paid job publishing supported by dedicated credit card checkout frames (Pagamento - Cartão).",
+            "HeadHunter — Specialized multi-company recruitment dashboard, pipeline management (Empresa stage1/stage2), and direct interview scheduling.",
+            "Admin and Operational Moderation — Financial dashboards with 1-year historical analytics, permission management, and a robust moderation queue (VagasPendentes → VerDetalhes → AceitarVaga or RecusarVaga with a mandatory structured rejection reason RecusarVaga/motivo)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Academy.bet: cohort management, Brazilian PIX, and student tracking"
+        },
+        {
+          "type": "prose",
+          "body": "Academy.bet (275 frames) structures three specialized education surfaces:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Aluno (Student) — Single-step streamlined registration, course dashboard (Painel de cursos), video lesson player, calendar, and purchase history (Histórico de compras).",
+            "Tutor (Instructor) — Course catalog, five-state cohort management (Minhas turmas), student progress inspection (alunoProgresso), and direct student messaging.",
+            "Admin (Operations) — End-to-end course creation and editing CRUD, lead pipeline tracking, financial revenue reporting, and instructor onboarding workflows.",
+            "Dual Payment Rails (Card and PIX) — Complete localized Brazilian checkout with distinct waiting and success states for both Credit Card (Pagamento - Cartão/Espera) and instant PIX (Pagamento - Pix and Pagamento - Pix/Sucesso)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Benchmark responsive coverage: 180 dedicated mobile frames"
+        },
+        {
+          "type": "prose",
+          "body": "Jobs and Academy.bet represent the benchmark responsive achievement in this portfolio. Rather than relying on generic fluid scaling, we authored roughly 180 dedicated phone frames across four distinct device viewports: iPhone 13 mini (110 frames on Jobs, 70 on Academy), iPhone SE, iPhone 8 Plus, and iPhone 14/15 Pro Max, alongside desktop adaptations across MacBook Air (15 frames) and MacBook Pro 16/17. Every complex table, filter bar, and moderation screen was purpose-architected for each screen class."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Collaborative pairing inside a single production file"
+        },
+        {
+          "type": "prose",
+          "body": "Agencies frequently struggle with version conflicts and siloed designers. On Jobs and Academy.bet, João Chagas and I maintained continuous synchronization inside a single Figma workspace, establishing shared naming conventions and dividing tasks dynamically at the component level to beat tight client milestones. The client validated every milestone, and when project scope grew mid-engagement, signed a commercial contract addendum on 2024-03-13 — proving the commercial velocity and reliability of our paired workflow."
+        },
+        {
+          "type": "quote",
+          "text": "Agencies don't just hire solo designers; they need professionals who can open someone else's file, adapt to existing conventions without ego, and deliver in tight synchronization. We proved that across 649 frames and seven prototype flows."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Verified production status and visual documentation"
+        },
+        {
+          "type": "prose",
+          "body": "The style guide documents positive and negative logo variations for both brands (Jobs.bet and Academy.bet), primary Congress Blue and Web Orange color ramps, typography rules, spacing scales, and a CTA fade gradient. While implemented as visual documentation rather than a bound token library, the platform was audited against a formal Bubble QA verification checklist on 2024-07-11. Jobs.bet is deployed live in production, serving as an audited public proof point of enterprise-scale recruitment software."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Co-desenhou duas plataformas interconectadas para o setor de iGaming (o marketplace de vagas Jobs.bet e a plataforma de ensino Academy.bet), totalizando 649 frames em sete perfis de acesso e sete fluxos de protótipo navegáveis. Desenvolveu a matriz responsiva mais abrangente do portfólio (~180 telas de celular dedicadas em 4 tamanhos de dispositivo e 3 formatos de laptop) e desenhou checkouts com cartão e PIX com estados de espera e confirmação.",
+      "context": "Atuação na agência Sagitta entre fevereiro e julho de 2024, operando em design pareado contínuo com João Chagas. O tech lead Ramon liderou o discovery e reuniões com o cliente; produto e engenharia foram geridos por Silas, Daniel e Samuel. Juan e João trabalharam de forma simultânea no mesmo arquivo Figma, intercalando o trabalho no nível de componentes para atender a um cronograma agressivo. Após aprovações em etapas, o cliente assinou um aditivo contratual formal em 13/03/2024 expandindo o escopo.",
+      "outcome": "Totalmente aprovado em revisões escalonadas entre fevereiro e abril de 2024 e auditado contra um checklist detalhado de QA em Bubble em 11/07/2024. O Jobs.bet está no ar em produção com shell web público ativo. Entregou 7 fluxos completos de protótipo navegável para Candidato, Empresa, HeadHunter, Admin Jobs, Aluno, Tutor e Admin Academy. Comprova capacidade madura de atuar em equipe em produtos complexos com rapidez e sem vaidade autoral.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Design em Dupla: Este projeto foi desenhado em dupla com João Chagas. Trabalhamos simultaneamente dentro do mesmo arquivo e intercalamos o design no nível de componente (por exemplo, enquanto um estruturava os cards do dashboard, o outro desenhava os gráficos). Portanto, sempre uso 'nós' e nunca reivindico autoria isolada de telas. Ramon liderou o discovery de UX e as reuniões; o time técnico da Sagitta construiu o software em Bubble. Status em produção: o jobs.bet está no ar; o arquivo de design representa o artefato de origem auditado."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Duas plataformas integradas: 7 perfis e moderação operacional"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "649",
+              "label": "telas totais desenhadas entre o Jobs.bet (374) e Academy.bet (275)",
+              "icon": "📐"
+            },
+            {
+              "value": "7",
+              "label": "perfis de permissão independentes nos dois produtos",
+              "icon": "👥"
+            },
+            {
+              "value": "~180",
+              "label": "pranchas de celular desenhadas sob medida em 4 formatos",
+              "icon": "📱"
+            },
+            {
+              "value": "7",
+              "label": "fluxos de protótipo navegáveis cobrindo todos os perfis",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O Jobs.bet e o Academy.bet formam um ecossistema integrado para recrutamento e capacitação profissional no setor global de iGaming. O Jobs.bet conecta candidatos especializados, empresas, headhunters e administradores da plataforma, enquanto o Academy.bet viabiliza cursos profissionalizantes, acompanhamento de turmas e certificações. Totalizando 649 telas nas duas áreas de design, o produto une monetização ativa e governança operacional em um fluxo contínuo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Jobs.bet: dinâmica de marketplace e filas de moderação"
+        },
+        {
+          "type": "prose",
+          "body": "O marketplace de recrutamento (374 telas) equilibra quatro perfis com atribuições claras:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Candidato — Gestão de perfil, histórico de experiências profissionais, acompanhamento de candidaturas (minhas candidaturas), alertas de vagas e visualização responsiva de oportunidades (vagaDetalhes).",
+            "Empresa — Diretório de currículos, agendamento de entrevistas (agenda de entrevistas) e publicação de vagas pagas suportada por telas dedicadas de checkout com cartão (Pagamento - Cartão).",
+            "HeadHunter — Dashboard de recrutamento multicliente, gestão de etapas do processo seletivo (Empresa stage1/stage2) e envio de notificações personalizadas.",
+            "Admin e Fila de Moderação — Dashboards financeiros com visão consolidada de 1 ano, controle de permissões e uma fila estruturada de moderação (VagasPendentes → VerDetalhes → AceitarVaga ou RecusarVaga exigindo justificativa obrigatória RecusarVaga/motivo)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Academy.bet: gestão de turmas, PIX nativo e progresso do aluno"
+        },
+        {
+          "type": "prose",
+          "body": "O Academy.bet (275 telas) organiza três superfícies educacionais dedicadas:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Aluno — Cadastro simplificado em etapa única, painel de cursos ativos, ambiente de reprodução de aulas, calendário de atividades e histórico financeiro de compras (Histórico de compras).",
+            "Tutor — Gestão de turmas em cinco estados (Minhas turmas), acompanhamento individual de progresso dos estudantes (alunoProgresso) e caixa de mensagens direta com alunos.",
+            "Admin — CRUD completo de criação e edição de cursos, gestão de leads, relatórios de faturamento e fluxo de credenciamento e admissão de novos tutores.",
+            "Checkout Bicorredor (Cartão e PIX) — Fluxo financeiro com estados dedicados de processamento e confirmação para Cartão de Crédito (Pagamento - Cartão/Espera) e pagamento instantâneo via PIX (Pagamento - Pix e Pagamento - Pix/Sucesso)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Referência em responsividade: 180 telas mobile dedicadas"
+        },
+        {
+          "type": "prose",
+          "body": "O Jobs e o Academy.bet constituem a maior referência de design responsivo deste portfólio. Em vez de depender de ajustes fluidos genéricos, desenhamos cerca de 180 telas de celular dedicadas em quatro viewports distintos: iPhone 13 mini (110 telas no Jobs, 70 no Academy), iPhone SE, iPhone 8 Plus e iPhone 14/15 Pro Max, além de adaptações para MacBook Air (15 pranchas) e MacBook Pro 16/17. Cada tabela complexa, barra de filtros e tela de moderação foi planejada sob medida para cada classe de dispositivo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design pareado colaborativo em um único arquivo de produção"
+        },
+        {
+          "type": "prose",
+          "body": "Agências frequentemente sofrem com conflitos de versão e designers isolados. No Jobs e no Academy.bet, João Chagas e eu mantivemos sincronização contínua em um único arquivo Figma, alinhando convenções de nomenclatura e dividindo tarefas no nível de componente para antecipar prazos agressivos do cliente. O cliente validou cada entrega e, quando o escopo se expandiu, assinou um aditivo contratual em 13/03/2024 — atestando a solidez e a eficiência do trabalho em dupla."
+        },
+        {
+          "type": "quote",
+          "text": "Agências não contratam apenas designers solo; elas precisam de profissionais capazes de abrir o arquivo de outro designer, assimilar as convenções existentes sem vaidade e entregar em sincronia perfeita. Provamos isso em 649 telas e sete fluxos navegáveis."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Status verificado em produção e documentação visual"
+        },
+        {
+          "type": "prose",
+          "body": "O style guide documenta variantes positivas e negativas de logotipo para ambas as marcas (Jobs.bet e Academy.bet), paletas primárias Congress Blue e Web Orange, tipografia, escalas de espaçamento e o gradiente CTA fade. Embora estruturado como documentação visual e não como tokens vinculados, o software foi auditado contra um checklist formal de QA em Bubble em 11/07/2024. O Jobs.bet está no ar em produção, servindo como comprovação pública de software de recrutamento em escala corporativa."
+        }
+      ]
+    }
+  }
 }

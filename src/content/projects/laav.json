@@ -44,5 +44,226 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Two-tier management ERP for an automotive franchise network specializing in body repair, paintless dent repair, and express detailing. 572 top-level nodes in v2 across six pages, separating local workshop floor operations (347 screens: work orders, quotes, supplies, tools, cashier) from franchisor headquarters governance (168 screens: candidate pipeline, quality compliance audits, royalty collection, and 15-day critical KPI alerts).",
+      "context": "Agency employment at Sagitta, delivering as UI/UX designer alongside a development team. The client relationship belonged to the agency. The project originated before my arrival and delivered in two major versions: v1 in March 2024 (484 nodes) and v2 in March 2025 (572 nodes), branched into a separate file for client safety after live viewing access was granted on first delivery.",
+      "outcome": "The franchise network operates actively nationwide with its brand live at laavfranquia.com.br. The internal ERP system designed in these files is deployed internally behind employee and franchisee authentication. No external operational or financial metrics exist in this portfolio — a confirmed absence across this corpus. The design demonstrates multi-tier automotive operational architecture, complex table density variants, and version-controlled workflow evolution.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "I designed the UI/UX across the franchisee and franchisor suites in v1 and v2. I did not write the backend code, operate the workshops, or own the franchise network. Furthermore, while the system manages estimates, billing comparisons, and work orders, this record does not prove native fiscal invoice (NF-e) generation, and no operational adoption metrics are claimed."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Two-tier automotive franchise architecture"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "572",
+              "label": "top-level canvas nodes in v2",
+              "icon": "📐"
+            },
+            {
+              "value": "347",
+              "label": "franchisee workshop operational screens",
+              "icon": "🔧"
+            },
+            {
+              "value": "168",
+              "label": "franchisor headquarters governance screens",
+              "icon": "🏢"
+            },
+            {
+              "value": "14",
+              "label": "tokenized color styles in design system",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Automotive franchise operations present a severe dual-audience challenge: the shop floor and the corporate boardroom require fundamentally different software architectures under the same brand umbrella. Workshop managers need high-efficiency data entry that withstands noisy, fast-paced bay operations, while network executives require high-density comparative tables, audit trails, and early-warning financial indicators."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Franchisee operations: from check-in to tool checkout"
+        },
+        {
+          "type": "prose",
+          "body": "The franchisee application (Design - Franquias) accounts for 347 screens in v2, mapping the complete lifecycle of a vehicle inside a local franchise unit:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Work Order Lifecycle (O.S.) — Detailed work order creation, real-time status updates, part attachment (Pop-up Cadastrar OS Peça), technician assignment, and mobile inspection views (Detalhes da O.S - edit mobile).",
+            "Automotive Repair Estimates — Multi-item damage quotes, labor calculations, client approvals, and structured denial documentation (Detalhes do orçamento-negado).",
+            "Supplies and Consumables — Granular stock decrement tracking for paint, abrasives, and primers (saída de insumo-detalhe, saída de insumo-detalhe-histórico).",
+            "Tool Control and Accountability — Active tool checkout logging tracking equipment custody per technician (Ferramentas-em estoque, Ferramentas-com colaborador).",
+            "Workshop Cashier and Daily Routines — Cash reconciliation (Admin Caixa), technician productivity statements (Colaborador-extrato), and opening/closing operational checklists (Rotinas-lista de tarefas)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Franchisor HQ: network compliance and royalty governance"
+        },
+        {
+          "type": "prose",
+          "body": "The franchisor governance application (Design - Franqueadora) comprises 168 screens in v2, establishing centralized control across all distributed franchise units:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Franchise Expansion Pipeline — Comprehensive candidate lead tracking (Lista de interessados), interview evaluations, territorial qualification, and unit onboarding (Cadastro nova unidade - sucesso).",
+            "Quality and Compliance Auditing — Standardized network inspection workflows where field auditors log operational deficiencies (Inadequação adicionada, Detalhes inadequação - Editar), categorize infraction severity, and track mandatory remediation plans.",
+            "Financial Control and Royalty Reconciliation — Multi-unit royalty billing comparison (Financeiro-boletos-comparativo), collection status tracking (Financeiro-cobrança-comparativo), and aggregate network revenue reports.",
+            "15-Day Critical Indicator Monitors — Early-warning dashboards (Painel crítico 15 dias) tracking workshop revenue deviations, average repair tickets, and forward booking deficits before they threaten unit viability."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The v1 to v2 evolution and client-safety fork"
+        },
+        {
+          "type": "prose",
+          "body": "The project delivered in two distinct milestones: v1 (concluded March 2024 with 484 nodes) and v2 (concluded March 2025 with 572 nodes). Because the client had been given active viewing permissions on the v1 file for initial delivery, Sagitta branched the project into a dedicated Laav-v2 file. This isolated production design work, allowing our team to safely stage internal critique sticky notes, audit flags, and expanded workflow variations without disrupting client review."
+        },
+        {
+          "type": "prose",
+          "body": "V2 introduced 43 new screens to the franchisee suite and 41 new screens to the franchisor suite. Key functional additions included multi-density data table variants (Tipos de tabela), explicit modal response-editing confirmations (Pop-up - Editar resposta - Sucesso), and refined mobile views for service advisors walking the shop floor."
+        },
+        {
+          "type": "quote",
+          "text": "A franchise management system cannot survive on generic admin templates. It has to solve the dirty reality of physical bay logistics on one screen and the legal precision of royalty audits on the next."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Verifiable evidence and design discipline"
+        },
+        {
+          "type": "prose",
+          "body": "The work is verified across two preserved Figma master files containing 1,056 total nodes. The public brand operates at laavfranquia.com.br, while the software itself serves authenticated users in production. In keeping with this portfolio's strict evidence standards, no native NF-e generation engine or unverified network adoption figures are claimed."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "ERP de gestão em dois níveis para rede de franquias automotivas especializada em funilaria rápida, martelinho de ouro e estética automotiva. 572 nós de primeiro nível na v2 distribuídos em seis páginas, separando a operação de chão de oficina (347 telas: ordens de serviço, orçamentos, insumos, ferramentas, caixa) da governança da franqueadora (168 telas: funil de candidatos, auditoria de conformidade, cobrança de royalties e alertas de KPIs críticos de 15 dias).",
+      "context": "Atuação como designer de UI/UX contratado pela agência Sagitta, entregando junto a uma equipe de desenvolvimento. O relacionamento comercial com o cliente pertencia à agência. O projeto iniciou antes da minha entrada e foi entregue em duas versões principais: a v1 concluída em março de 2024 (484 nós) e a v2 concluída em março de 2025 (572 nós), bifurcada em arquivo separado por segurança operacional após liberação de visualização ao cliente.",
+      "outcome": "A rede de franquias opera ativamente em escala nacional com site institucional no ar em laavfranquia.com.br. O ERP interno desenhado nestes arquivos está implantado em ambiente autenticado para colaboradores e franqueados. Não existem métricas operacionais ou financeiras públicas neste portfólio — uma ausência confirmada em todo este acervo. O projeto evidencia arquitetura operacional automotiva multinível, variantes de tabelas de alta densidade e evolução de fluxos controlada por versão.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Desenhei a UI/UX das suítes de franqueados e franqueadora na v1 e na v2. Não programei o backend, não operei oficinas e não sou proprietário da rede de franquias. Além disso, embora o sistema faça gestão de orçamentos, conciliação de faturamento e ordens de serviço, este registro não comprova emissão nativa de notas fiscais (NF-e), e nenhuma métrica de adoção operacional é reivindicada."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de ERP de franquia em dois níveis"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "572",
+              "label": "nós de primeiro nível no Figma v2",
+              "icon": "📐"
+            },
+            {
+              "value": "347",
+              "label": "telas operacionais da unidade franqueada",
+              "icon": "🔧"
+            },
+            {
+              "value": "168",
+              "label": "telas de governança da franqueadora",
+              "icon": "🏢"
+            },
+            {
+              "value": "14",
+              "label": "estilos de cor documentados no design system",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A gestão de franquias automotivas impõe um desafio de público duplo: o chão da oficina e a diretoria corporativa exigem linguagens de software radicalmente distintas sob a mesma marca. O gerente de oficina precisa de agilidade extrema de entrada de dados capaz de suportar a rotina acelerada dos boxes de reparo, enquanto os executivos da rede necessitam de tabelas comparativas densas, trilhas de auditoria e indicadores precoces de saúde financeira."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Operação da franquia: do checklist ao controle de ferramentas"
+        },
+        {
+          "type": "prose",
+          "body": "A aplicação da unidade franqueada (Design - Franquias) reúne 347 telas na v2, cobrindo o ciclo operacional completo de um veículo dentro da oficina:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Ciclo de Vida da Ordem de Serviço (O.S.) — Abertura detalhada de O.S., atualização de status em tempo real, inclusão de peças e serviços (Pop-up Cadastrar OS Peça), atribuição de técnicos e visualização responsiva de inspeção (Detalhes da O.S - edit mobile).",
+            "Orçamentos de Reparo Automotivo — Composição detalhada de avarias, cálculo de mão de obra e insumos, aprovações de clientes e formalização estruturada de recusas (Detalhes do orçamento-negado).",
+            "Baixa de Insumos e Estoque — Rastreamento granular de consumo de tintas, abrasivos, massas e vernizes (saída de insumo-detalhe, saída de insumo-detalhe-histórico).",
+            "Controle e Cautela de Ferramentas — Registro ativo de retirada e devolução de ferramentas especiais por colaborador (Ferramentas-em estoque, Ferramentas-com colaborador).",
+            "Caixa da Unidade e Rotinas Operacionais — Conciliação de caixa diário (Admin Caixa), extrato de produtividade por técnico (Colaborador-extrato) e rotinas de abertura/fechamento (Rotinas-lista de tarefas)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Franqueadora: auditoria de conformidade e governança de royalties"
+        },
+        {
+          "type": "prose",
+          "body": "A suíte de governança da franqueadora (Design - Franqueadora) soma 168 telas na v2, garantindo o controle corporativo sobre as unidades distribuídas:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Funil de Expansão e Captação de Franquias — Triagem e qualificação de interessados (Lista de interessados), entrevistas com candidatos, estudo territorial e homologação de novas unidades (Cadastro nova unidade - sucesso).",
+            "Auditoria de Qualidade e Conformidade — Fluxo padronizado de fiscalização onde consultores de campo registram inconformidades da unidade (Inadequação adicionada, Detalhes inadequação - Editar), atribuem prazos e monitoram planos de ação corretiva.",
+            "Gestão Financeira e Cobrança de Royalties — Comparativo de boletos de royalties emitidos por unidade (Financeiro-boletos-comparativo), relatórios de adimplência da rede (Financeiro-cobrança-comparativo) e consolidado de faturamento.",
+            "Painel de Indicadores Críticos de 15 Dias — Telas de alerta preventivo (Painel crítico 15 dias) monitorando oscilações de faturamento, ticket médio de funilaria e déficit de agendamentos futuros antes que comprometam a solvência da franquia."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A evolução da v1 para a v2 e a bifurcação de segurança"
+        },
+        {
+          "type": "prose",
+          "body": "O projeto foi entregue em dois marcos: a v1 (concluída em março de 2024 com 484 nós) e a v2 (concluída em março de 2025 com 572 nós). Como o cliente havia recebido permissões de visualização no arquivo v1 na primeira entrega, a Sagitta criou o arquivo Laav-v2 como medida de segurança operacional. Isso permitiu que a equipe de design inserisse post-its de anotação, sinalizações de auditoria e novos fluxos de teste sem expor o processo intermediário ao cliente."
+        },
+        {
+          "type": "prose",
+          "body": "A v2 incorporou 43 novas telas para as oficinas e 41 novas telas para a franqueadora. Entre as adições centrais destacam-se novos tipos de tabela com densidades variadas (Tipos de tabela), confirmações explícitas de edição de resposta (Pop-up - Editar resposta - Sucesso) e refinamentos mobile para consultores que atendem clientes na pista de entrada."
+        },
+        {
+          "type": "quote",
+          "text": "Um software de franquia não se sustenta com templates genéricos de dashboard. Ele precisa resolver a rotina pesada da oficina em uma tela e a precisão contábil e jurídica da auditoria na tela seguinte."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Evidências verificáveis e disciplina de design"
+        },
+        {
+          "type": "prose",
+          "body": "O trabalho está documentado em dois arquivos mestres preservados no Figma, totalizando 1.056 nós auditados. A marca pública opera em laavfranquia.com.br, enquanto o ERP roda em produção para usuários autenticados. Seguindo a regra de honestidade rigorosa deste portfólio, não se reivindica motor nativo de NF-e nem métricas não auditadas de adoção da rede."
+        }
+      ]
+    }
+  }
 }

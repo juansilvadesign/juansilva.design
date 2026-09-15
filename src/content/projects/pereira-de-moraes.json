@@ -44,5 +44,210 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Pereira de Moraes Advocacia, a specialized legal practice focusing on Administrative, Constitutional, and Electoral Law. Designed 3 core responsive layouts in Figma (file key 1ULmeElnpP2m2Azma9UJZL): an editorial desktop landing page (LP - Desktop) and two mobile viewport adaptations (LP - Mobile and LP - Mobile versão 2), backed by a 32-node Style Guide establishing typography scales, high-contrast legal styling, and positioning guidelines highlighting senior partner credentials (UFSC Master of Laws and OAB-SC commission presidency).",
+      "context": "Agency employment at Sagitta delivering from September 18, 2023 to September 27, 2023. Juan served as sole website UI designer within the agency team: Kelvin Bezerra created the firm's visual identity and logo, Juan designed the complete single-page responsive landing page in Figma, and an external no-code developer implemented and published the site on WordPress. Scoped by Ramon.",
+      "outcome": "The landing page was implemented and published to production: pereirademoraes.com.br answered HTTP 200 with 124,883 B and 119 client-name hits when audited on 2026-08-21. Juan grades the live build as Tier B: the production site evidences public shipping, but represents a poor visual rendering of what was delivered in Figma due to no-code implementation shortcomings. The Figma file stands as the true design proof. No consultation or conversion metrics exist. This case study documents minimalist legal landing page design, partner authority positioning, and mobile layout variations.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the responsive institutional landing page, mobile adaptations, and style guide in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress deployment (handled by a no-code developer), or user research (Ramon's). Delivery status: published to production at pereirademoraes.com.br (HTTP 200 verified); the live rendering suffered from CMS implementation flaws (Tier B), so the Figma artifact reflects the authored design quality."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Minimalist legal landing page design for public law practice"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "3",
+              "label": "responsive layout variations designed (Desktop + 2 Mobile versions)",
+              "icon": "📐"
+            },
+            {
+              "value": "32",
+              "label": "style guide tokens, typography scales, and brand guidelines",
+              "icon": "🎨"
+            },
+            {
+              "value": "124 KB",
+              "label": "verified live HTML at pereirademoraes.com.br",
+              "icon": "🏛️"
+            },
+            {
+              "value": "10 days",
+              "label": "from design kickoff to final implementation handoff",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Specialized practices in Administrative, Constitutional, and Electoral Law cater to a distinct clientele: public officials, corporate government contractors, political candidates, and municipal entities. In these sectors, multi-page corporate websites with generic marketing language fail to resonate. What decision-makers demand is immediate clarity regarding the partner's academic pedigree, published jurisprudence, and direct strategic availability."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Positioning partner seniority and practice areas"
+        },
+        {
+          "type": "prose",
+          "body": "The single-page landing page was structured around editorial hierarchy and academic authority:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Hero Section — Direct institutional headline emphasizing legal excellence, paired with an executive portrait establishing immediate personal accountability.",
+            "Academic & Institutional Credentials — Prominently featuring the lead partner's master's degree from UFSC (Federal University of Santa Catarina) and presidency of the Electoral Law Commission at OAB-SC.",
+            "Public Law Practice Focus — Three clearly delimited service pillars: Administrative Law (public tenders, civil service disciplinary processes, administrative compliance), Constitutional Law (constitutional injunctions, direct actions of unconstitutionality), and Electoral Law (campaign advisory, candidate registration defense, electoral litigation).",
+            "Two Mobile Adaptations — Designed two distinct mobile layouts (LP - Mobile and LP - Mobile versão 2) to test alternative mobile hero hierarchies and contact button placements."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan grades this project Tier B: pereirademoraes.com.br answers HTTP 200 with 124 KB and 119 client-name mentions, proving that the page shipped to production. However, the no-code developer introduced spacing inconsistencies and degraded typography in WordPress. Cite the URL as proof of shipping; view the Figma file for the true design."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide and typography scales"
+        },
+        {
+          "type": "prose",
+          "body": "The 32-node Style Guide page (node 1:16) documented Kelvin Bezerra's brand logo, high-contrast dark navy and off-white color tokens, editorial serif typography for headings, clean sans-serif body scales, and client-approved positioning copy guidelines."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra created the Pereira de Moraes visual identity and logo.",
+            "Not WordPress implementation. A no-code developer was responsible for building the page in WordPress.",
+            "Not legal counsel. I authored the front-end layout and content hierarchy, not the legal opinions.",
+            "Not user research or discovery. Project parameters were scoped by Ramon.",
+            "Not supported by conversion metrics. No lead counts or consultation statistics exist in the record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The power of focused institutional landing pages"
+        },
+        {
+          "type": "prose",
+          "body": "Pereira de Moraes Advocacia highlights the efficiency of a well-executed single-page format for high-specialization legal practices. By prioritizing partner authority, clear academic credentials, and distinct practice pillars, the design created a credible, elegant digital presence for a public law advocate."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a Pereira de Moraes Advocacia, banca jurídica especializada em Direito Administrativo, Constitucional e Eleitoral. Desenvolvi 3 layouts responsivos principais no Figma (arquivo 1ULmeElnpP2m2Azma9UJZL): uma landing page editorial para desktop (LP - Desktop) e duas versões de adaptação mobile (LP - Mobile e LP - Mobile versão 2), acompanhadas por um Style Guide com 32 nós estabelecendo escalas tipográficas, paleta de alto contraste e diretrizes destacando a senioridade do sócio titular (Mestre pela UFSC e presidente de comissão da OAB-SC).",
+      "context": "Atuação como funcionário na agência Sagitta de 18 de setembro de 2023 a 27 de setembro de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra concebeu a identidade visual e o logotipo, Juan desenhou a landing page institucional responsiva no Figma, e um desenvolvedor no-code implementou e publicou o site no WordPress. Escopo levantado por Ramon.",
+      "outcome": "A landing page foi implementada e publicada em produção: pereirademoraes.com.br respondeu com HTTP 200 (124.883 B e 119 menções ao nome do cliente) em auditoria de 21/08/2026. Juan classifica o build no ar como Tier B: a presença do site comprova a entrega comercial, mas a montagem em WordPress pelo desenvolvedor no-code gerou inconsistências visuais em relação ao design entregue. O arquivo Figma é a referência autêntica do design. Não existem métricas de agendamento de consultas. Este estudo de caso documenta o design de landing pages jurídicas minimalistas, posicionamento de autoridade e variações mobile.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei a landing page institucional responsiva, as variações mobile e o style guide no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação em WordPress (feita por um desenvolvedor no-code) nem a pesquisa de discovery (conduzida por Ramon). Status de entrega: publicado em produção em pereirademoraes.com.br (HTTP 200 verificado); o build no ar sofreu desvios visuais de CMS (Tier B), fazendo do Figma a prova fidedigna do layout."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design de landing page jurídica minimalista para o Direito Público"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "3",
+              "label": "variações de layout responsivo desenhadas (Desktop + 2 versões Mobile)",
+              "icon": "📐"
+            },
+            {
+              "value": "32",
+              "label": "tokens, escalas tipográficas e diretrizes no Style Guide",
+              "icon": "🎨"
+            },
+            {
+              "value": "124 KB",
+              "label": "de HTML em produção verificado em pereirademoraes.com.br",
+              "icon": "🏛️"
+            },
+            {
+              "value": "10 dias",
+              "label": "do início do layout à entrega final para implementação",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A advocacia especializada em Direito Administrativo, Constitucional e Eleitoral atende a um perfil específico de clientes: agentes públicos, fornecedores em licitações governamentais, candidatos políticos e órgãos de classe. Nesses segmentos, portais extensos com textos genéricos de marketing não geram tração. Decisores públicos exigem clareza imediata sobre a formação acadêmica do advogado, sua atuação institucional e a linha estratégica da banca."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Posicionamento da senioridade do sócio e áreas de atuação"
+        },
+        {
+          "type": "prose",
+          "body": "A estrutura em página única foi desenhada com hierarquia editorial sóbria:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Seção Hero — Mensagem direta de compromisso com a excelência jurídica, acompanhada de foto corporativa transmitindo segurança e proximidade.",
+            "Credenciais Acadêmicas e Institucionais — Destaque para o título de Mestre em Direito pela UFSC (Universidade Federal de Santa Catarina) e a atuação na presidência de comissão da OAB-SC.",
+            "Pilares de Atuação no Direito Público — Apresentação clara de três áreas: Direito Administrativo (licitações, processos disciplinares e compliance público), Direito Constitucional (ações diretas e mandados de segurança) e Direito Eleitoral (registro de candidaturas, prestação de contas e contencioso eleitoral).",
+            "Duas Alternativas Mobile — Desenvolvimento de duas versões mobile (LP - Mobile e LP - Mobile versão 2) para testar diferentes hierarquias de cabeçalho e posicionamento de botão de contato."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan classifica este projeto como Tier B: o site no ar em pereirademoraes.com.br responde HTTP 200 com 124 KB, comprovando que a landing page foi ao ar em produção. No entanto, o desenvolvedor no-code gerou inconsistências de espaçamento e tipografia no WordPress. Cite o domínio como prova de publicação; veja o Figma para conferir o design autêntico."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide e escala tipográfica institucional"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 32 nós (nó 1:16) documentou o logotipo criado por Kelvin Bezerra, tokens de alto contraste em azul marinho e off-white, tipografia clássica com serifa para títulos e diretrizes de redação institucional validadas com o cliente."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra desenhou o logotipo e a identidade visual da banca.",
+            "Não é programação em WordPress. O desenvolvimento da página no CMS foi executado por um desenvolvedor no-code.",
+            "Não é consultoria jurídica. Criei o design visual e a hierarquia da página, não as peças processuais.",
+            "Não é pesquisa ou discovery. Os parâmetros foram alinhados por Ramon.",
+            "Não possui métricas de conversão comercial. Nenhum dado de consultas agendadas consta nos registros."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A eficiência de landing pages institucionais objetivas"
+        },
+        {
+          "type": "prose",
+          "body": "A Pereira de Moraes Advocacia demonstra como uma landing page em página única pode ser eficaz para bancas jurídicas altamente especializadas. Ao destacar a senioridade acadêmica do titular e delimitar áreas de atuação no Direito Público, o projeto forneceu um canal digital institucional preciso e sóbrio."
+        }
+      ]
+    }
+  }
 }

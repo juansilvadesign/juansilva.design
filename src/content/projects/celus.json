@@ -18,7 +18,15 @@
   "liveUrl": "https://celus.juanpablosilva.com.br/",
   "evidenceLink": "https://github.com/zokuWebDesign/Celus",
   "featured": false,
-  "preview": "/assets/images/celus-preview.webp",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.jpg",
+  "previewMotion": {
+    "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.mp4",
+    "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.webm",
+    "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.webp",
+    "hoverStart": 0,
+    "width": 1920,
+    "height": 1080
+  },
   "copy": {
     "en": {
       "title": "Point-of-Care Ultrasound Suite & Marketing Site",
@@ -46,5 +54,414 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Point-of-care ultrasound (POCUS) clinical decision-support suite for medical practitioners — bridging diagnostic protocols, biometry reference tables, and multi-step risk scoring into a high-utility bedside tool. Nineteen modules designed across two surfaces (an 11-module clinical app and an 8-module administrative back office), built on a two-layer design token system, plus the marketing landing page coded in Next.js.",
+      "context": "Agency employment at Spaceapps; the commercial client relationship belonged to the agency and I delivered as staff. The discovery workshop was run by Thiago, our tech lead, in FigJam and handed to me as a completed board. From that board onward, the product design across every module was mine alone — and the marketing landing page was mine to design and build.",
+      "outcome": "The product was delivered and went live with real medical practitioners before the agency's hosting lapsed. The original domain (salus-celus.com.br) is dead and was never archived, making the self-hosted mirror on my domain and its Wayback Machine snapshot the only surviving proof of the coded landing page. The application itself was built in Bubble by another developer, evidencing my product design rather than my engineering. No quantitative clinical conversion or engagement metrics exist — a confirmed absence across this corpus, not an uncollected one.",
+      "blocks": [
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Celus clinical ultrasound suite overview: clinician mobile app, fetal biometry reference tables, ACR TI-RADS risk calculator, standardized reports, and admin CMS.",
+          "caption": "Fifty-five seconds, silent and looping — the 19-module clinical suite, bedside decision tools, two-layer design tokens, and admin content governance."
+        },
+        {
+          "type": "callout",
+          "body": "I did not build Celus. I designed the 19-module clinical suite and admin back-office, and I coded the landing page in Next.js. The clinical application, calculation engines, and administrative database were built in Bubble by another developer. As with upOS, the split between who designs and who builds is the standard shape of this portfolio, not an awkward exception inside it."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Clinical decision support at the bedside"
+        },
+        {
+          "type": "prose",
+          "body": "Point-of-care ultrasound (POCUS) happens directly at the patient's bedside in emergency rooms, intensive care units, and outpatient practices. Unlike elective radiology exams reviewed hours later at a diagnostic workstation, bedside ultrasound is an immediate, goal-directed physical examination tool. A clinician holding a transducer in one hand cannot navigate deep hierarchical menus, squint at crowded prose, or perform complex mental arithmetic under pressure. The interface must deliver definitive guidance in seconds."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "19",
+              "label": "modules designed across two surfaces",
+              "icon": "🩺"
+            },
+            {
+              "value": "11",
+              "label": "bedside modules in the clinician app",
+              "icon": "📱"
+            },
+            {
+              "value": "8",
+              "label": "content and governance modules in admin",
+              "icon": "💻"
+            },
+            {
+              "value": "158",
+              "label": "design tokens across 5 collections",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The clinical suite: 11 modules at the point of care"
+        },
+        {
+          "type": "prose",
+          "body": "The practitioner app (web+responsivo) is structured to place reference standards, calculation engines, and procedural guidance within thumb reach without cognitive overhead:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Autenticação — Secure clinical practitioner sign-in, account creation, and password recovery.",
+            "Home — High-urgency bedside dashboard prioritizing active calculations, high-frequency protocol shortcuts, and recent clinical history.",
+            "MEDUltra — Clinical reference database with multi-parameter filtering and structured tables, including fetal biometry standards (such as 1st trimester Crown-Rump Length / Comprimento Cabeça-Nádega [CCN] percentiles).",
+            "CalculUS — Interactive multi-step clinical calculation engine, leading with ACR TI-RADS thyroid nodule risk stratification across five diagnostic criteria.",
+            "LaudUS — Standardized ultrasound reporting templates and pictorial ultrasound guides (e.g. abdominal wall endometriosis) indexed by medical specialty tags.",
+            "ResumUS — Curated evidence digests and literature summaries translating dense studies into rapid bedside reference cards.",
+            "ProtocolUS — Step-by-step procedural guidelines (e.g. first-line post-operative renal transplant ultrasound imaging protocol) tagged by specialty.",
+            "Perfil — Practitioner credentials, medical registry records, and system preferences.",
+            "Salvos — Dedicated offline-capable repository for bookmarked clinical guidelines and reference charts.",
+            "Favoritos — One-tap shortcuts for frequently referenced clinical scoring tools and calculators.",
+            "Últimas lidas — Chronological history of recently consulted clinical protocols and articles."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Translating ACR TI-RADS into an interactive clinical workflow"
+        },
+        {
+          "type": "prose",
+          "body": "The repository description summarized Celus as a thyroid nodule calculator, which drastically understates the product while highlighting its most technically demanding clinical module. The American College of Radiology Thyroid Imaging Reporting and Data System (ACR TI-RADS) standardizes ultrasound evaluation to determine whether a nodule warrants fine-needle aspiration (FNA / PAAF) biopsy or routine surveillance."
+        },
+        {
+          "type": "prose",
+          "body": "In medical literature, ACR TI-RADS is presented as a dense scoring grid across five categories: Composition (0–2 pts), Echogenicity (0–3 pts), Shape (0–3 pts), Margin (0–3 pts), and Echogenic Foci (0–3 pts). Clinicians sum the points to classify the nodule from TR1 (benign) to TR5 (high suspicion of malignancy). The point total combined with maximum nodule diameter dictates the clinical action threshold."
+        },
+        {
+          "type": "prose",
+          "body": "Designing CalculUS required translating that tabular scoring logic into a tactile 5-step stepper (CalculUS-step1 through CalculUS-step5-2). Each step presents mutually exclusive morphological choices with explicit ultrasound feature illustrations. As the clinician selects findings, the point tally recalculates dynamically. Upon completion, the result screen presents the TR tier, malignancy risk percentage, and actionable threshold criteria (biopsy recommended vs follow-up ultrasound vs no further testing) without requiring the physician to cross-reference static textbook charts."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-calculus-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-calculus-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-calculus-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Interactive 5-step ACR TI-RADS calculation engine: composition, echogenicity, shape, margin, and echogenic foci accumulating points to TR4 moderately suspicious biopsy threshold.",
+          "caption": "Fifteen seconds, silent and looping — the 5-step ACR TI-RADS risk stratification stepper accumulating points in real time to clinical threshold recommendation."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The back office: Governing medical knowledge without code deployments"
+        },
+        {
+          "type": "prose",
+          "body": "Medical guidelines, reporting standards, and literature summaries are not static software features; they evolve continuously as clinical societies publish new consensuses. If updating a post-op transplant protocol or modifying a diagnostic report template requires engineering tickets and code releases, a clinical platform stagnates."
+        },
+        {
+          "type": "prose",
+          "body": "The 8-module administrative back-office (Admin) was designed to give clinical editors direct operational control. Beyond user credentialing and analytics tracking calculator invocation frequency, the core of the admin suite is dedicated content management across the three primary clinical knowledge types: LaudUS CMS, ResumUS CMS, and ProtocolUS CMS. Medical leads could draft, peer-review, tag, and publish updated imaging protocols and report templates directly to clinicians' devices."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-admin-cms-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-admin-cms-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-admin-cms-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Celus admin back-office: 8-module suite governing clinical knowledge, rich protocol CMS editing, specialty tagging, and real-time calculator telemetry.",
+          "caption": "Twelve seconds, silent and looping — the administrative back-office enabling clinical leads to manage imaging protocols and report templates without code deployments."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Production-grade token architecture: 158 variables and two-tier aliasing"
+        },
+        {
+          "type": "prose",
+          "body": "Celus sits on Spaceapps' design-system starter file, which originated from a DesignBoost course template with an Untitled UI neutral gray ramp. My contribution was transforming an academic template into a production-grade variable architecture that the agency subsequently adopted across all client projects:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "0. Primitives — Spaceapps starter metadata plus project-specific table primitives (MEDUltra/tabela, Salvos/MEDUltra).",
+            "1. Colors — 112 primitive color variables defining the brand green spectrum (Main/Primary/400 = #35b48b, Main/Primary/600 = #108b6a), semantic neutral ramps, and transparency alphas.",
+            "2. Semantic — 36 semantic tokens (Background/*, Text/*, Stroke/*, Button/*, Logo/*) mapped directly into primitives, resolving across both Light and Dark modes with zero broken aliases.",
+            "3. Typography — Inter font family for both headings and body copy, optimized for clinical legibility on high-DPI displays.",
+            "4. Dimensions — Responsive viewport modes for Laptop (1280×700) and Mobile (360×630) with synchronized layout grids."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "A single leftover variable — alpha/primary/8 = #7f56d914, an Untitled UI purple token that was never repointed to Celus green — remains in the Figma file. A sharp design reviewer will spot it immediately. Disclosing the template origin openly costs nothing and validates every other claim of craft."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The marketing surface and form capture"
+        },
+        {
+          "type": "prose",
+          "body": "While the clinical app lived in Bubble, the marketing landing page was mine to design and code in Next.js 14 App Router (zokuWebDesign/Celus). The page showcased the clinical modules, interactive calculator previews, subscription tiers, practitioner testimonials, App Store / Google Play badges, and a contact capture section."
+        },
+        {
+          "type": "prose",
+          "body": "The contact form connects to an 86-line Express microservice (server/server.js) deployed on Render, exposing POST /newsletter and GET /health. This was straightforward form ingestion rather than clinical backend engineering, and it is worth naming honestly: marketing capture, not patient health records."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Developer handoff in practice: The empty checklist"
+        },
+        {
+          "type": "prose",
+          "body": "Page 👨‍💻 • Passagem para os devs in the Figma file contains a handoff checklist widget sitting at Completed 0 of 28. This was not an oversight or incomplete delivery. The Bubble developer explicitly stated that the Figma dev mode tab, auto-layout structure, and token inspector provided all the specification they needed, requesting that we skip formal documentation. Adapting to the builder's actual workflow rather than manufacturing unread 30-page spec documents is practical collaboration."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not my build of the clinical application. I designed 100% of the UI across 19 modules; a Bubble developer built the app, calculators, and back office.",
+            "Not my discovery workshop. Thiago, our tech lead, conducted the FigJam research sessions with stakeholders and handed me the board.",
+            "Not a design system invented from scratch. I inherited a course template with an Untitled UI gray ramp, restructured it with auto-layout and a two-tier token architecture, and productionized it for agency-wide reuse.",
+            "Not a medical backend or API integration. The Next.js repository holds a marketing landing page wired to an 86-line Express form-capture service on Render.",
+            "Not just an ACR TI-RADS calculator. The thyroid risk calculator is one calculation engine inside CalculUS, which is one of eleven modules in the bedside app.",
+            "Not backed by clinical conversion or adoption metrics. The project shipped and was used by real clinicians, but no quantitative metrics exist — a confirmed absence across this portfolio.",
+            "Not currently live at the client's original domain. Spaceapps' hosting lapsed and salus-celus.com.br is gone; the self-hosted mirror and Wayback snapshot are the surviving records."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Clinical rigour as a design discipline"
+        },
+        {
+          "type": "prose",
+          "body": "Designing for healthcare enforces a discipline that consumer software rarely demands: ambiguity is an unacceptable failure mode. A misread score, an unclear threshold, or a misplaced biometry chart directly impairs clinical judgment. Celus demonstrates the ability to assimilate dense medical guidelines, translate algorithmic scoring systems into intuitive interfaces, and deliver production-ready token systems that engineers can implement with precision."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Uma suíte clínica de apoio à decisão em ultrassom point-of-care (POCUS) para médicos — transformando protocolos diagnósticos complexos, tabelas de referência biométrica e pontuações de risco em uma ferramenta prática à beira do leito. Dezenove módulos desenhados em duas superfícies (um app clínico de 11 módulos e um back-office administrativo de 8 módulos), estruturados sobre um sistema de tokens em duas camadas, mais a landing page programada em Next.js.",
+      "context": "Trabalho de agência na Spaceapps; a relação comercial com o cliente pertencia à agência e eu entreguei como funcionário. A etapa de discovery foi conduzida pelo Thiago, nosso líder técnico, no FigJam e entregue como um quadro pronto. A partir daquele quadro, o design de produto de todos os módulos foi meu, sozinho — e a landing page de marketing foi minha para desenhar e programar.",
+      "outcome": "O produto foi entregue e chegou a operar em produção com médicos reais antes de a hospedagem da agência expirar. O domínio original do cliente (salus-celus.com.br) está fora do ar e nunca foi arquivado, tornando o mirror no meu próprio domínio e seu registro no Wayback Machine as únicas provas sobreviventes da landing page que programei. A aplicação em si foi construída em Bubble por outro desenvolvedor, evidenciando o meu design de produto e não a minha engenharia. Não existem métricas quantitativas de conversão ou engajamento clínico — uma ausência confirmada neste portfólio, e não uma falta de coleta.",
+      "blocks": [
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Visão geral da suíte de ultrassom clínico Celus: aplicativo móvel do médico, tabelas de biometria fetal, calculadora ACR TI-RADS, laudos padronizados e CMS administrativo.",
+          "caption": "Cinquenta e cinco segundos em loop contínuo — a suíte clínica de 19 módulos, ferramentas à beira do leito, tokens em duas camadas e governança de conteúdo no admin."
+        },
+        {
+          "type": "callout",
+          "body": "Eu não construí o Celus. Eu desenhei toda a suíte clínica de 19 módulos e o back-office administrativo, e programei a landing page em Next.js. A aplicação médica, os motores de cálculo e a base administrativa foram construídos em Bubble por outro desenvolvedor. Como no upOS, a divisão entre quem desenha e quem constrói é o formato normal deste portfólio, não uma exceção constrangedora dentro dele."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Apoio à decisão clínica à beira do leito"
+        },
+        {
+          "type": "prose",
+          "body": "O ultrassom point-of-care (POCUS) acontece diretamente à beira do leito do paciente — em prontos-socorros, UTIs e consultórios ambulatoriais. Diferente de exames eletivos de radiologia analisados horas depois em estações de laudo dedicadas, o ultrassom point-of-care é uma extensão imediata e direcionada do exame físico. Um médico segurando o transdutor com uma das mãos não pode navegar em menus hierárquicos complexos, ler parágrafos densos ou fazer contas de cabeça sob pressão. A interface precisa entregar a resposta diagnóstica em poucos segundos."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "19",
+              "label": "módulos desenhados em duas superfícies",
+              "icon": "🩺"
+            },
+            {
+              "value": "11",
+              "label": "módulos clínicos no app do médico",
+              "icon": "📱"
+            },
+            {
+              "value": "8",
+              "label": "módulos de gestão e conteúdo no admin",
+              "icon": "💻"
+            },
+            {
+              "value": "158",
+              "label": "variáveis de design em 5 coleções",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A suíte clínica: 11 módulos no ponto de atendimento"
+        },
+        {
+          "type": "prose",
+          "body": "O aplicativo do médico (web+responsivo) foi estruturado para colocar referências diagnósticas, motores de cálculo e diretrizes procedimentais ao alcance de um toque, sem fricção cognitiva:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Autenticação — Login seguro para médicos, criação de conta e recuperação de senha.",
+            "Home — Painel clínico focado em agilidade, priorizando calculadoras frequentes, atalhos de protocolos e histórico recente.",
+            "MEDUltra — Base de referência clínica com filtros avançados e tabelas estruturadas, incluindo padrões de biometria fetal (como percentis de Comprimento Cabeça-Nádega [CCN] no 1º trimestre).",
+            "CalculUS — Motor interativo de cálculos clínicos, com destaque para a estratificação de risco de nódulos tireoidianos ACR TI-RADS em cinco passos.",
+            "LaudUS — Modelos padronizados de laudos e ensaios pictóricos de achados ecográficos (como endometriose de parede abdominal), organizados por especialidade.",
+            "ResumUS — Sínteses de literatura médica e resumos de evidências para consulta rápida à beira do leito.",
+            "ProtocolUS — Protocolos procedimentais passo a passo (como a avaliação ultrassonográfica de transplante renal no pós-operatório), com tags por especialidade médica.",
+            "Perfil — Credenciais médicas, CRM e preferências de conta.",
+            "Salvos — Repositório dedicado para protocolos e tabelas salvos para acesso rápido e offline.",
+            "Favoritos — Acesso direto e em um clique às calculadoras e escores de maior uso no plantão.",
+            "Últimas lidas — Linha do tempo com o histórico recente de protocolos e artigos consultados."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Traduzindo o ACR TI-RADS em um fluxo clínico interativo"
+        },
+        {
+          "type": "prose",
+          "body": "A descrição do repositório resumia o Celus como uma calculadora de nódulos tireoidianos, o que reduz drasticamente o escopo do produto, mas evidencia seu módulo de maior exigência técnica. O ACR TI-RADS (Thyroid Imaging Reporting and Data System do American College of Radiology) padroniza a avaliação ultrassonográfica para determinar se um nódulo na tireoide deve ser submetido à punção aspirativa por agulha fina (PAAF) ou acompanhado por ultrassom de rotina."
+        },
+        {
+          "type": "prose",
+          "body": "Na literatura médica, o ACR TI-RADS se apresenta como uma grade densa distribuída em cinco categorias morfológicas: Composição (0–2 pts), Ecogenicidade (0–3 pts), Forma (0–3 pts), Margem (0–3 pts) e Focos Ecogênicos (0–3 pts). Os médicos somam os pontos de cada categoria para classificar o nódulo de TR1 (benigno) a TR5 (alta suspeita de malignidade). A soma dos pontos, combinada ao maior diâmetro do nódulo, define a conduta clínica recomendada."
+        },
+        {
+          "type": "prose",
+          "body": "Desenhar o CalculUS exigiu transformar essa lógica tabular em um stepper interativo de 5 etapas (CalculUS-step1 até CalculUS-step5-2). Cada etapa exibe opções morfológicas mutualmente exclusivas com ilustrações claras dos achados ultrassonográficos. Conforme o médico seleciona as características, a pontuação acumula em tempo real. Ao final, a tela de resultado entrega o nível TR, a porcentagem de risco de malignidade e a conduta recomendada (critério de biópsia por PAAF vs acompanhamento por ultrassom vs nenhuma intervenção necessária), eliminando consultas manuais a tabelas estáticas de diretrizes."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-calculus-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-calculus-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-calculus-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Motor de cálculo ACR TI-RADS em 5 etapas: composição, ecogenicidade, forma, margens e focos ecogênicos acumulando pontuação até o limiar de biópsia TR4.",
+          "caption": "Quinze segundos em loop contínuo — o stepper de estratificação de risco ACR TI-RADS acumulando pontos em tempo real até a conduta clínica recomendada."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O back-office: Gestão de conteúdo clínico sem dependência de deploys"
+        },
+        {
+          "type": "prose",
+          "body": "Diretrizes médicas, protocolos de conduta e modelos de laudo não são funcionalidades de software estáticas; eles evoluem conforme novas pesquisas e consensos de sociedades médicas são publicados. Se atualizar um protocolo de transplante ou revisar um modelo de laudo exigisse abrir chamados de engenharia e subir novas versões de código, a plataforma perderia sua utilidade clínica."
+        },
+        {
+          "type": "prose",
+          "body": "O back-office administrativo de 8 módulos (Admin) foi desenhado para conceder autonomia à equipe médica gestora. Além de gerenciar acessos de profissionais e acompanhar métricas de invocação das calculadoras, o coração do painel é o CMS dedicado às três frentes de conteúdo: LaudUS CMS, ResumUS CMS e ProtocolUS CMS. Editores médicos podiam redigir, revisar, categorizar e publicar diretrizes atualizadas diretamente para a ponta clínica."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-admin-cms-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-admin-cms-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/celus/celus-admin-cms-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Back-office administrativo do Celus: suíte de 8 módulos para governança do conhecimento médico, editor rico de protocolos, marcação de especialidades e telemetria de uso.",
+          "caption": "Doze segundos em loop contínuo — o painel administrativo que permite aos médicos gestores atualizar protocolos e laudos sem necessidade de deploys de código."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design system de produção: 158 variáveis e tokens em duas camadas"
+        },
+        {
+          "type": "prose",
+          "body": "O Celus foi estruturado sobre o arquivo starter da Spaceapps, que tinha como base um template do curso DesignBoost com uma escala de cinzas neutras da Untitled UI. Minha contribuição foi transformar um template acadêmico em uma arquitetura de variáveis pronta para produção, que a agência adotou posteriormente em todos os seus projetos de clientes:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "0. Primitives — Metadados de base da agência e primitivas específicas de tabelas (MEDUltra/tabela, Salvos/MEDUltra).",
+            "1. Colors — 112 variáveis primitivas de cor definindo a escala verde da marca (Main/Primary/400 = #35b48b, Main/Primary/600 = #108b6a), neutros e escalas de transparência alpha.",
+            "2. Semantic — 36 tokens semânticos (Background/*, Text/*, Stroke/*, Button/*, Logo/*) mapeados diretamente nas primitivas, resolvendo em modo Claro e Escuro sem nenhum alias quebrado.",
+            "3. Typography — Família Inter para títulos e corpo de texto, garantindo legibilidade imediata em telas de alta densidade.",
+            "4. Dimensions — Modos responsivos para Laptop (1280×700) e Mobile (360×630) com grids de layout alinhados."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Uma variável remanescente — alpha/primary/8 = #7f56d914, um token roxo da Untitled UI que nunca foi remapeado para o verde do Celus — continua no arquivo do Figma. Um avaliador atento perceberá imediatamente. Reconhecer abertamente a origem do template não custa nada e chancela a credibilidade de todo o restante do trabalho."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A superfície de marketing e captura de formulário"
+        },
+        {
+          "type": "prose",
+          "body": "Enquanto o aplicativo médico rodava em Bubble, a landing page institucional era minha para desenhar e programar em Next.js 14 com App Router (zokuWebDesign/Celus). A página apresentava as ferramentas clínicas, demonstrações interativas da calculadora, planos de assinatura, depoimentos de médicos, badges para download na App Store e Google Play, e captura de contato."
+        },
+        {
+          "type": "prose",
+          "body": "O formulário de contato se conectava a um microserviço em Express de 86 linhas (server/server.js) hospedado no Render, expondo as rotas POST /newsletter e GET /health. Trata-se de uma captura simples de leads, e não de engenharia de backend clínico — vale nomear com precisão: captura de formulário institucional, não prontuário eletrônico."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Passagem para os devs na prática: O checklist vazio"
+        },
+        {
+          "type": "prose",
+          "body": "Na página 👨‍💻 • Passagem para os devs do Figma, o widget de checklist de entrega está em Completed 0 of 28. Isso não foi um esquecimento ou entrega incompleta. O desenvolvedor Bubble declarou expressamente que a aba de Dev Mode do Figma, a organização do auto-layout e o inspetor de tokens eram suficientes para a montagem, dispensando documentações externas. Adaptar-se ao fluxo de trabalho real de quem constrói o código, em vez de produzir PDFs de especificação de 30 páginas que ninguém lê, é maturidade de colaboração."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é a minha construção do aplicativo clínico. Eu desenhei 100% da interface dos 19 módulos; um desenvolvedor Bubble construiu a aplicação, calculadoras e banco administrativo.",
+            "Não é a minha discovery. O Thiago, líder técnico, realizou o workshop de pesquisa no FigJam com os stakeholders e me entregou o quadro pronto.",
+            "Não é um design system inventado do zero. Herdei um template de curso com escala da Untitled UI, estruturei com auto-layout, organizei tokens em duas camadas com modos Claro/Escuro e tornei-o o padrão de produção da agência.",
+            "Não é um backend médico ou integração de API clínica. O repositório Next.js é uma landing page de marketing conectada a um serviço Express de 86 linhas no Render para captura de e-mails.",
+            "Não é apenas uma calculadora de tireoide. O motor ACR TI-RADS é um dos módulos de cálculo dentro do CalculUS, que é 1 de 11 módulos do aplicativo clínico.",
+            "Não possui métricas quantitativas de conversão ou engajamento clínico. O produto foi entregue e operou com médicos reais, mas nenhuma métrica numérica foi registrada antes de o serviço expirar — uma ausência confirmada neste portfólio.",
+            "Não está mais no ar no domínio original do cliente. A hospedagem da agência expirou e salus-celus.com.br não responde mais; o mirror em domínio próprio e o arquivo no Wayback Machine são as evidências preservadas."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Rigor clínico como disciplina de design"
+        },
+        {
+          "type": "prose",
+          "body": "Projetar para a área da saúde impõe um rigor que produtos de consumo raramente exigem: a ambiguidade é um risco à segurança do paciente. Uma pontuação mal interpretada, um limiar de corte confuso ou uma tabela biométrica de difícil localização afetam diretamente a decisão médica. O Celus comprova a capacidade de assimilar literatura técnica densa, traduzir diretrizes clínicas em interfaces intuitivas e entregar sistemas de tokens consistentes que a engenharia consegue reproduzir sem ruídos."
+        }
+      ]
+    }
+  }
 }

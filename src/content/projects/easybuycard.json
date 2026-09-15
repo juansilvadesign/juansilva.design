@@ -44,5 +44,234 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for EasyBuyCard, a corporate credit card fintech and financial solutions provider. Designed a 5-page, 144-node Figma product suite (file PV1a0t9B4S7cmNAUEeX8QD): 65 canvas nodes on the main Design page spanning three marketing landing page iterations (v1, v2, v3), 3D physical card presentation mockups, and back-office portal dashboards across four distinct user roles (Admin, Gestor, Assessor, Cliente), paired with a dedicated 79-component Design System page—the deepest tokenized component library in the 15-website Sagitta agency batch.",
+      "context": "Agency employment at Sagitta delivering from August 2024 to September 2, 2024. Juan delivered as sole website UI designer within a three-way team split: Kelvin Bezerra created the visual identity and logo, Juan designed the complete website UI, multi-role portal layouts, and design system, and an external no-code developer was tasked with WordPress implementation. Product discovery and client research belonged to Ramon.",
+      "outcome": "The product provably did not launch during the engagement era. The sole surviving Wayback Machine archive from the period (2024-05-26) is a 24 KB 'Em breve' holding page, and the domain easybuycard.com.br is dead today. The design was completed and delivered for CMS implementation, standing as an authentic design artifact for multi-role SaaS architecture and fintech design systems, not a shipped product.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer for EasyBuyCard's marketing pages, multi-role portal layouts, and design system. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress build (assigned to a no-code developer), or user research/discovery (conducted by Ramon). Delivery status: designed and delivered for implementation; the product did not launch publicly and only a holding page ever resolved. This is a design artifact credit."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Multi-role SaaS architecture for corporate card management"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "65",
+              "label": "canvas nodes on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "79",
+              "label": "component sets on the dedicated Design System page",
+              "icon": "🧩"
+            },
+            {
+              "value": "4",
+              "label": "distinct portal personas (Admin, Gestor, Assessor, Cliente)",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "landing page iterations with 3D card presentations",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Corporate credit cards require a fundamentally different information architecture than consumer cards. Rather than a single balance and statement view, a corporate card ecosystem operates across four interconnected permission levels, each with radically different operational priorities and data density requirements:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Master Administrator (Admin) — System-wide financial oversight, aggregate liquidity views, total credit limit allocation, default risk parameters, and partner company onboarding.",
+            "Corporate Manager (Gestor) — Enterprise operational control: setting departmental spending limits, issuing physical and virtual cards to employees, establishing category-level merchant blocks (e.g., fuel vs. travel), and reviewing monthly corporate statements.",
+            "Commercial Advisor (Assessor) — Pipeline dashboard tracking corporate client acquisition, card distribution quotas, active activation rates, and commercial commission reporting.",
+            "End Cardholder (Cliente) — Personal mobile and web cardholder portal: current available balance, real-time transaction feed, instant card lock/unlock, and virtual card generation for online business purchases."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The dedicated 79-component design system"
+        },
+        {
+          "type": "prose",
+          "body": "Across the fifteen corporate websites designed during my tenure at Sagitta, EasyBuyCard was the only engagement that received a standalone, dedicated Design System page (node 1:14, containing 79 machine-read component sets). Rather than scattering unlinked instances across artboards, I structured a unified design foundation to ensure visual coherence between the public marketing surface and the dense internal portal screens."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Financial Data Tables — High-density tables with multi-column sorting, transaction status chips (Approved, Pending, Flagged), date-range filters, and pagination controls.",
+            "Metric Summary Cards — Executive KPI blocks displaying aggregate expenditure, limit utilization ratios, active card counts, and period-over-period delta indicators.",
+            "Progress Indicators — Tokenized circular and linear progress gauges communicating credit limit consumption at both corporate and individual cardholder levels.",
+            "Contextual Form Inputs — Structured numeric inputs with currency masking, card number formatters, search inputs, and customized role-selection dropdowns.",
+            "Interactive Pricing Switches — Tabbed toggles allowing prospective enterprise clients to compare basic vs. premium corporate card subscription tiers on the marketing landing page."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never quote '79 components' as fully authored without separating the Sagitta base kit from domain-specific engineering. The 79 is a machine-read node count on the Design System page, representing a combination of adapted agency primitives and newly authored fintech data tables, progress circles, and multi-role navigation structures."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Marketing landing page iterations and physical card visualization"
+        },
+        {
+          "type": "prose",
+          "body": "On the marketing front, the project called for establishing immediate institutional trust. Fintech credit solutions face intense scrutiny from corporate financial officers who require assurance of financial stability, clear fee structures, and enterprise-grade security. I designed three distinct landing page variations (Landing Page v1, v2, v3), experimenting with dark-mode versus high-contrast light-mode visual tones, 3D embossed physical card renders, and responsive mobile adaptations at 375px."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not a shipped or live product. Checked on 2026-08-21: the only historical archive is an 'Em breve' tapume holding page (24 KB) from May 2024. The product was designed and delivered for implementation, but never reached a public launch.",
+            "Not brand identity or logo design. Kelvin Bezerra created the EasyBuyCard logo and visual branding across this entire agency cohort.",
+            "Not WordPress development. Implementation was assigned to an external no-code developer.",
+            "Not user research or discovery. Product discovery and requirements were handled by Ramon.",
+            "Not auth flow novelty. The onboarding and authentication screens (Cadastro, Login, Recuperar Senha) in the file used the standardized Sagitta agency auth kit and are not original to this project.",
+            "Not a greenfield file built from scratch. Like most Sagitta agency deliverables, it adapted an agency base kit with custom domain-level fintech architectures."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of comprehensive portal design"
+        },
+        {
+          "type": "prose",
+          "body": "EasyBuyCard illustrates how complex multi-stakeholder fintech products are structured before code is written. By separating four operational roles, standardizing 79 UI components, and iterating across three responsive landing page concepts, the design provided a complete, actionable technical blueprint for a modern corporate credit ecosystem."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI do site para a EasyBuyCard, fintech de soluções de cartão de crédito corporativo e gestão financeira empresarial. Desenvolvi um ecossistema completo de 5 páginas e 144 nós no Figma (arquivo PV1a0t9B4S7cmNAUEeX8QD): 65 nós na página principal de Design abrangendo três iterações de landing page (v1, v2, v3), mockups de apresentação de cartões físicos em 3D e dashboards de back office para quatro perfis de usuário (Admin, Gestor, Assessor, Cliente), acompanhados por uma página dedicada de Design System com 79 componentes — a biblioteca de componentes mais profunda do lote de 15 sites da agência Sagitta.",
+      "context": "Atuação como funcionário na agência Sagitta de agosto de 2024 a 2 de setembro de 2024. Juan atuou como designer único de UI do site em uma divisão de equipe tripartite: Kelvin Bezerra criou a identidade visual e o logotipo, Juan desenhou a UI do site, as telas do portal multiperfil e o design system, e um desenvolvedor no-code externo ficou encarregado da implementação em WordPress. A pesquisa e descoberta do cliente pertenciam ao Ramon.",
+      "outcome": "O produto comprovadamente não foi ao ar durante o período de contratação. O único registro histórico no Wayback Machine (26/05/2024) é uma página tapume de 24 KB com a mensagem 'Em breve', e o domínio easybuycard.com.br encontra-se inativo. O design foi concluído e entregue para implementação em CMS, configurando-se como uma prova autêntica de design de arquitetura SaaS multiperfil e design systems para fintechs, e não como um produto lançado.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Fui o designer único de UI do site para as landing pages comerciais, layouts do portal multiperfil e design system da EasyBuyCard. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação em WordPress (atribuída a um desenvolvedor no-code) nem a pesquisa de usuários/discovery (conduzida pelo Ramon). Status de entrega: desenhado e entregue para implementação; o produto não foi lançado publicamente e apenas uma página de espera esteve ativa. É um crédito de design de artefato."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura SaaS multiperfil para gestão de cartões corporativos"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "65",
+              "label": "nós na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "79",
+              "label": "conjuntos de componentes no Design System dedicado",
+              "icon": "🧩"
+            },
+            {
+              "value": "4",
+              "label": "perfis de portal distintos (Admin, Gestor, Assessor, Cliente)",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "versões de landing page com cartões em 3D",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Cartões de crédito corporativos demandam uma arquitetura de informação fundamentalmente diferente de cartões de consumo para pessoa física. Em vez de uma visualização única de saldo e extrato, o ecossistema corporativo opera através de quatro níveis hierárquicos de permissão, cada um com prioridades operacionais e densidade de dados específicas:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Administrador Geral (Admin) — Visão global da liquidez do sistema, concessão de limites agregados de crédito, parâmetros de risco de inadimplência e credenciamento de empresas parceiras.",
+            "Gestor Empresarial (Gestor) — Controle operacional da empresa cliente: definição de limites por departamento, emissão de cartões físicos e virtuais para colaboradores, bloqueios por categoria de estabelecimento (ex: combustível vs. viagens) e conferência de faturas consolidadas.",
+            "Assessor Comercial (Assessor) — Painel de prospecção e acompanhamento de clientes empresariais, metas de distribuição de cartões, taxa de ativação de contas e comissionamento comercial.",
+            "Titular do Cartão (Cliente) — Área do colaborador no mobile e web: consulta de limite disponível em tempo real, extrato instantâneo de transações, bloqueio/desbloqueio do cartão e geração de cartão virtual para compras corporativas online."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Página dedicada de Design System com 79 componentes"
+        },
+        {
+          "type": "prose",
+          "body": "Entre os quinze sites corporativos desenhados durante minha atuação na Sagitta, o EasyBuyCard foi o único projeto que recebeu uma página exclusiva de Design System (nó 1:14, contendo 79 conjuntos de componentes lidos via automação). Em vez de dispersar instâncias desconexas pelas pranchetas, estruturei uma biblioteca unificada para garantir consistência visual rigorosa entre as páginas públicas de marketing e os painéis densos do portal interno."
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Tabelas de Dados Financeiros — Tabelas de alta densidade com ordenação por múltiplas colunas, tags de status da transação (Aprovada, Pendente, Suspeita), filtros por período e controles de paginação.",
+            "Cards de Resumo de Métricas — Blocos executivos com KPIs de despesas consolidadas, taxa de utilização do limite, contagem de cartões ativos e comparativos percentuais mês a mês.",
+            "Indicadores de Progresso — Medidores circulares e lineares tokenizados para exibir visualmente o consumo de crédito tanto no nível global da empresa quanto no cartão individual.",
+            "Campos de Formulário Contextuais — Entradas numéricas estruturadas com máscara de moeda, formatadores de número de cartão, campos de busca e seletores suspensos de perfil de acesso.",
+            "Alternadores Interativos de Planos — Chaves de seleção que permitem ao decisor financeiro alternar entre planos empresariais básicos e avançados diretamente na landing page."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca cite '79 componentes' como se fossem todos criados do zero sem separar o kit base da agência da camada de domínio. O número 79 é uma contagem de nós lida no Figma, representando uma combinação de primitivas adaptadas da agência com tabelas financeiras, gráficos de limite e estruturas de navegação multiperfil concebidas para o projeto."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Iterações da landing page e visualização do cartão físico"
+        },
+        {
+          "type": "prose",
+          "body": "No escopo institucional e de vendas, o desafio era transmitir solidez institucional imediata. Soluções financeiras B2B enfrentam rígida avaliação por parte de diretores financeiros e controllers, que exigem clareza sobre taxas, estabilidade operacional e segurança. Desenvolvi três variações completas de landing page (Landing Page v1, v2 e v3), testando composições em modo escuro e claro com alto contraste, representações tridimensionais do cartão físico e adaptações responsivas em 375px."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é um produto lançado ou no ar. Verificado em 21/08/2026: o único registro arquivado é uma página tapume 'Em breve' (24 KB) de maio de 2024. O produto foi projetado e entregue para implementação, mas não teve lançamento público.",
+            "Não é a criação da marca ou logotipo. Kelvin Bezerra foi o autor do logotipo e identidade visual da EasyBuyCard.",
+            "Não é implementação em WordPress. A programação em CMS foi atribuída a um desenvolvedor no-code.",
+            "Não é pesquisa com usuários ou discovery. O levantamento de requisitos foi conduzido por Ramon.",
+            "Não é inovação no fluxo de login. As telas de autenticação (Cadastro, Login, Recuperar Senha) no arquivo utilizaram o módulo padronizado da Sagitta presente em outros projetos da agência.",
+            "Não é um arquivo construído 100% do zero. Como a maioria dos projetos de agência da época, adaptou um kit base licenciado, adicionando a arquitetura financeira de domínio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O valor de um design de portal estruturado"
+        },
+        {
+          "type": "prose",
+          "body": "O EasyBuyCard exemplifica como soluções financeiras multi-stakeholder são estruturadas antes de chegarem ao código. Ao mapear claramente quatro perfis de acesso, padronizar 79 componentes de UI e validar três alternativas de conversão comercial, o projeto forneceu uma especificação técnica sólida e organizada para uma operação de crédito corporativo."
+        }
+      ]
+    }
+  }
 }

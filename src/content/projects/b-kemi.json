@@ -44,5 +44,162 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole website UI designer for a deep-tech green chemistry startup transforming agricultural residues into microfibrillated cellulose for sustainable cosmetics, alongside in-company scientific training programs. Designed 13 high-fidelity responsive frames across desktop and mobile pairing scientific clarity with premium cosmetic aesthetics (Início, Sobre nós with Karla Feu's research credentials, Treinamentos In Company, Treinamentos, Contact, and editorial Blog templates), supported by a 48-node style guide with lead capture modals and cookie banners.",
+      "context": "Agency engagement at Sagitta between November 22, 2023 and January 24, 2024. Delivered as sole website UI designer within a three-way team: Kelvin Bezerra authored the brand identity and logo; Juan designed all website, B2B training, and editorial layouts; a no-code developer implemented and published the platform on WordPress.",
+      "outcome": "Implemented on WordPress and successfully launched into production, verified via historical Wayback Machine snapshots (September 23, 2024, 164 KB on WordPress 6.6.2 and Elementor, faithfully matching the Figma section structure). The client subsequently redesigned the site with another agency. No business metrics exist; this project stands as audited evidence of deep-tech biotechnology portal design and B2B corporate training UI.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer for the scientific institutional portal, in-company training pages, and blog reading layouts. Kelvin Bezerra designed the logo and visual identity. A no-code developer implemented the WordPress build. Shipping proof: verified via historical Wayback archive from September 2024; the live website today has been rebuilt by another firm and does not represent this design artifact."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Biotech green chemistry: bridging scientific thesis and commercial beauty"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "13",
+              "label": "responsive layout frames across desktop and mobile",
+              "icon": "📐"
+            },
+            {
+              "value": "48",
+              "label": "style guide component nodes including lead capture modals",
+              "icon": "🎨"
+            },
+            {
+              "value": "B2B",
+              "label": "in-company corporate training & scientific thesis portal",
+              "icon": "🔬"
+            },
+            {
+              "value": "Archived",
+              "label": "production deployment verified via Wayback Machine",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Nanotechnology and green chemistry startups operate in an unforgiving design intersection: their interfaces must convey academic rigor and peer-reviewed scientific credibility to cosmetic formulation chemists, while presenting the sleek, aspirational luxury demanded by the high-end beauty industry. B. Kemi (Kemi Nanomateriais) specializes in upcycling agricultural waste into microfibrillated cellulose — a sustainable substitute for synthetic polymers in cosmetics."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Scientific storytelling: academic credentials and B2B training"
+        },
+        {
+          "type": "prose",
+          "body": "I structured the platform to articulate both scientific discovery and commercial B2B services:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Nossa Tese & Início — High-contrast narrative explaining microfibrillated cellulose extraction, sustainable circular economy benefits, and performance metrics in cosmetic formulations.",
+            "Founder & Research Credentials (Sobre nós) — Scientific pedigree highlighted through founder Karla Feu's academic background, research publications, and laboratory standards.",
+            "B2B Corporate Training (Treinamentos In Company & Treinamentos) — Commercial offering detailing customized educational programs on green chemistry and sustainable formulations for corporate cosmetic R&D teams.",
+            "Scientific Blog & Editorial Layouts (Blog #14 & Blog) — High-legibility technical article layouts designed for reading academic findings, chemical safety reports, and regulatory updates.",
+            "Lead Capture & Compliance (Style Guide) — 48-node foundation incorporating contact forms, inquiry modals, and LGPD-compliant cookie banners."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Verified historical shipping proof"
+        },
+        {
+          "type": "prose",
+          "body": "The website was built and made public on WordPress. Historical proof of shipping is preserved in the Wayback Machine snapshot from September 23, 2024: an intact 164,779-byte build on WordPress 6.6.2 and Elementor bearing the exact section sequence authored in Figma (Treinamentos, Nossos valores, Nossa fundação Karla Feu, and Novidades/Blog). This confirms the design's full transit from Figma into live production."
+        },
+        {
+          "type": "quote",
+          "text": "Designing for deep tech means avoiding generic stock lab beakers. The interface must communicate the molecular innovation clearly enough that an R&D chemist respects it, while looking refined enough for a cosmetics brand executive."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI exclusivo do website de uma startup de química verde e nanotecnologia que transforma resíduos agrícolas em celulose microfibrilada para cosméticos sustentáveis, além de oferecer treinamentos científicos in-company. Desenvolveu 13 pranchas responsivas no Figma unindo rigor acadêmico e estética cosmética premium (Início, Sobre nós com histórico da pesquisadora Karla Feu, Treinamentos In Company, Treinamentos, Contato e templates de Blog), amparadas por um style guide de 48 nós com modais de captação e banner de cookies.",
+      "context": "Atuação na agência Sagitta entre 22 de novembro de 2023 e 24 de janeiro de 2024. Atuou como designer exclusivo da interface em um modelo de entrega tripartite: Kelvin Bezerra desenhou o logotipo e a identidade visual; Juan desenhou todas as páginas institucionais, educacionais e blog; um desenvolvedor no-code publicou o portal em WordPress.",
+      "outcome": "Implementado em WordPress e lançado publicamente em produção, comprovado por registros históricos do Wayback Machine (captura de 23 de setembro de 2024 em WordPress 6.6.2 e Elementor, refletindo com fidelidade a sequência de seções do Figma). O cliente posteriormente refez o site com outra agência. Não existem métricas de negócio; o projeto serve como comprovação auditada de design para biotecnologia e treinamentos corporativos B2B.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer exclusivo da interface do portal institucional, das páginas de treinamento B2B e dos layouts do blog. Kelvin Bezerra desenhou a marca e a identidade visual. Um desenvolvedor no-code subiu o site em WordPress. Comprovação de lançamento: validada pelo arquivo histórico do Wayback Machine em setembro de 2024; o site no ar atualmente foi refeito por terceiros e não reflete este trabalho."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Biotecnologia e química verde: unindo tese científica e cosmética premium"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "13",
+              "label": "pranchas responsivas estruturadas no Figma",
+              "icon": "📐"
+            },
+            {
+              "value": "48",
+              "label": "nós no style guide com modais de captação e cookies",
+              "icon": "🎨"
+            },
+            {
+              "value": "B2B",
+              "label": "portal de treinamentos corporativos e tese científica",
+              "icon": "🔬"
+            },
+            {
+              "value": "Wayback",
+              "label": "lançamento comprovado em arquivo público de 2024",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Startups de nanotecnologia e química verde operam em uma intersecção visual desafiadora: suas interfaces precisam transmitir rigor técnico e respaldo científico a químicos formuladores de cosméticos, sem abrir mão da sofisticação e elegância exigidas pela indústria da beleza. A B. Kemi (Kemi Nanomateriais) desenvolveu tecnologia para reaproveitar resíduos agrícolas na fabricação de celulose microfibrilada, substituindo polímeros sintéticos em dermocosméticos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Narrativa técnica: autoridade científica e capacitação B2B"
+        },
+        {
+          "type": "prose",
+          "body": "Estruturei a plataforma para dar visibilidade tanto à propriedade intelectual quanto às frentes de monetização corporativa:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Nossa Tese & Início — Apresentação da extração de celulose microfibrilada, princípios de economia circular e ganhos de estabilidade em formulações cosméticas sustentáveis.",
+            "Autoridade Científica (Sobre nós) — Destaque para a trajetória acadêmica da fundadora Karla Feu, evidenciando artigos científicos e credenciais laboratoriais.",
+            "Treinamentos Corporativos (Treinamentos In Company & Treinamentos) — Apresentação de programas de capacitação científica para equipes de pesquisa e desenvolvimento (P&D) de grandes indústrias.",
+            "Blog Editorial e Divulgação (Blog #14 & Blog) — Layouts de leitura técnica com alta legibilidade para publicação de ensaios, relatórios de biodegradabilidade e normas regulatórias.",
+            "Captura de Leads e Conformidade (Style Guide) — Sistema de 48 nós integrando formulários de contato corporativo, modais de interesse e banner de consentimento de cookies da LGPD."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Comprovação histórica de lançamento"
+        },
+        {
+          "type": "prose",
+          "body": "O site foi implementado e colocado no ar em WordPress. A comprovação de publicação está preservada no snapshot do Wayback Machine de 23 de setembro de 2024: um build íntegro de 164.779 bytes rodando WordPress 6.6.2 e Elementor com a exata estrutura de seções do Figma (Treinamentos, Nossos valores, Nossa fundação Karla Feu e Novidades/Blog), atestando a entrega completa do design para o ambiente de produção."
+        },
+        {
+          "type": "quote",
+          "text": "Desenhar para deep tech exige fugir de fotos genéricas de laboratório. A interface precisa comunicar inovação molecular com clareza suficiente para convencer um químico de P&D e sofisticação para encantar o executivo de uma marca de beleza."
+        }
+      ]
+    }
+  }
 }

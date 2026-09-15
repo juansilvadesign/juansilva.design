@@ -44,5 +44,204 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Two-sided marketplace for the audiovisual production industry connecting producers (Produtoras) with freelance crew members (Freelancers), supported by a platform administration suite (Admin). 447 frames on the main Design canvas covering geographic crew discovery via interactive map view, folder-based candidate shortlisting, a bilateral negotiation loop with counter-proposals and chat threads, in-platform contracts and card payments with designed failure states, plus a release-scoped MVP handoff artifact (Priorização Desenvolvimento).",
+      "context": "Agency employment at Sagitta; the commercial relationship belonged to the agency. I was the mostly sole product designer and sole author of the project's component system and marketing site; my colleague João Chagas assisted by reusing my components on select screens. Documented from discovery in May 2024 through revisions in November 2024.",
+      "outcome": "Shipped to production and operating in Beta at cinemafia.com.br, confirming the platform mechanics designed in Figma. However, the agency's no-code Bubble developer shipped the build with severe visual defects — incorrect padding, broken grid gaps, and absent clip-content rules. Therefore, the live URL serves exclusively as proof of shipping, while the Figma file is the definitive proof of craft. This exact breakdown became the catalyst for my transition into front-end engineering.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Show Rule: I designed most of the product, authored the component system, designed the marketing site, and prepared the release-scoped MVP cut. João Chagas reused my components on select screens. Note on the build: cinemafia.com.br proves the platform shipped, but the Bubble developer introduced spacing and container defects during implementation. Show the Figma for design craft; cite the live URL for shipping verification."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A transactional marketplace for audiovisual production"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "447",
+              "label": "canvas frames on the primary Design page",
+              "icon": "🎬"
+            },
+            {
+              "value": "3",
+              "label": "role surfaces (Producer, Freelancer, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "~130",
+              "label": "designed state, popup, and confirmation frames",
+              "icon": "🧱"
+            },
+            {
+              "value": "2",
+              "label": "deliverable Figma files (Full suite + MVP handoff)",
+              "icon": "📦"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Audiovisual hiring differs fundamentally from generic gig-economy marketplaces. Productions operate on immutable shooting schedules, precise geographic locations, specialized gear requirements, and union-adjacent contractual obligations. A simple directory with a contact button cannot support production companies who must assemble crews under strict budget and timeframe constraints."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Geographic discovery, folder shortlists, and bilateral negotiation"
+        },
+        {
+          "type": "prose",
+          "body": "CineMafia moves beyond basic directories by embedding negotiations directly within the application:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Interactive Map-Based Discovery — Geographic search (home/verMapa) and multi-parameter filtering (filtros avançados, range sliders) allowing producers to find technicians residing near specific shooting locations.",
+            "Folder-Based Shortlisting — Custom user-created collections (favoritos/editarPastas, criar pasta) enabling producers to organize candidate pools by project, department, or shoot date rather than maintaining an unorganized favorites list.",
+            "Two-Sided Counter-Proposal Engine — Complete negotiation loop (fazerproposta, fazerContra-proposta, minhasPropostas/verContraproposta) paired with in-context proposal messaging (mensagensProposta/chat), enabling rates, dates, and overtime terms to be settled on-platform.",
+            "Peer Reviews and Production Ratings — Structured post-wrap evaluation system with a dedicated star-rating component (886:44152) and dispute rejection handling (popupWarning/recusarServiço2)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "In-platform contracts, payments, and designed failure paths"
+        },
+        {
+          "type": "prose",
+          "body": "The platform locks commercial commitment directly inside the workflow (contratos x6, meiosdePagamento x2, pagamentoCartão x2). Crucially, the design accounts for real-world transaction friction: rather than stubbing payment confirmations, the system models explicit failure paths (popupError/pagamento) and payment retry mechanisms. Over 130 state frames (popupSucess x87, popupWarning x23, popupAsk x4) ensure every user action yields an unambiguous system response."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Release scoping as a deliverable: Priorização Desenvolvimento"
+        },
+        {
+          "type": "prose",
+          "body": "Recognizing the risk of scope creep on a 447-frame system, I delivered a second, dedicated Figma file: CineMafia (Priorização Desenvolvimento). Rather than expecting developers to interpret abstract priority tags across hundreds of artboards, this artifact presented an exact, release-scoped slice containing only the screens required for the first shippable release. This established scope control as an explicit design deliverable."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The no-code gap and the catalyst for code"
+        },
+        {
+          "type": "prose",
+          "body": "CineMafia launched to production at cinemafia.com.br, confirming that the client acquired real users and deployed the workflow. However, the agency's Bubble developer failed to maintain layout integrity: containers lacked clip-content, padding was altered arbitrarily, and responsive breakpoints exhibited awkward element collisions."
+        },
+        {
+          "type": "prose",
+          "body": "Watching my detailed designs degrade in a no-code visual builder was the pivotal moment in my career. It proved that handing off clean Figma artboards is insufficient if developers cannot preserve the craft. That realization drove me to master TypeScript, React, Next.js, and Tailwind — transforming my practice into design engineering so I could implement and safeguard the software I design."
+        },
+        {
+          "type": "quote",
+          "text": "Watching a no-code build ruin component padding and responsive containers was the turning point. It made me realize that to protect the design craft, I had to learn to write the front-end code myself."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Marketplace de dois lados para o setor audiovisual conectando produtoras de vídeo e cinema (Produtoras) a técnicos e artistas freelancers (Freelancers), com retaguarda operacional completa (Admin). 447 frames na página principal de Design contemplando busca geográfica por mapa interativo, organização de favoritos em pastas, ciclo de negociação bilateral com contraproposta e chat dedicado, contratos e pagamento por cartão dentro da plataforma com tratamento de erros, além de arquivo específico de recorte para MVP (Priorização Desenvolvimento).",
+      "context": "Atuação como designer contratado pela agência Sagitta; o relacionamento comercial com o cliente pertencia à agência. Atuei como designer de produto quase integral e autor único do sistema de componentes do projeto e do site institucional; meu colega João Chagas colaborou reutilizando meus componentes em telas pontuais. Trabalho documentado desde o discovery em maio de 2024 até revisões em novembro de 2024.",
+      "outcome": "Publicado e em operação em estágio Beta em cinemafia.com.br, confirmando a mecânica de produto desenhada no Figma. Contudo, o desenvolvedor Bubble da agência entregou o build com falhas visuais graves — espaçamentos incorretos, quebras de alinhamento e falta de clip-content em contêineres responsivos. Por essa razão, a URL pública serve exclusivamente como comprovação de lançamento, enquanto o arquivo no Figma é a evidência real de refinamento visual. Esse descompasso foi o catalisador para minha transição definitiva para o front-end.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Atribuição e Regra de Exibição: Desenhei a maior parte do produto, criei o sistema de componentes, elaborei o site institucional e montei o arquivo de recorte para o MVP. João Chagas reutilizou meus componentes em telas específicas. Nota sobre o build: cinemafia.com.br atesta que o produto foi ao ar, mas o desenvolvedor Bubble comprometeu espaçamentos e contêineres na implementação. Mostre o Figma para avaliar o design; use a URL apenas para comprovar a publicação."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Um marketplace transacional para a produção audiovisual"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "447",
+              "label": "frames na página principal de Design",
+              "icon": "🎬"
+            },
+            {
+              "value": "3",
+              "label": "perfis de acesso (Produtora, Freelancer, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "~130",
+              "label": "frames de estado, popups e confirmações",
+              "icon": "🧱"
+            },
+            {
+              "value": "2",
+              "label": "arquivos Figma entregues (Suíte completa + MVP)",
+              "icon": "📦"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A contratação no audiovisual possui dinâmicas que plataformas tradicionais de freelancers não atendem. Diárias de filmagem não admitem atraso, locações exigem proximidade geográfica, equipamentos demandam especificações exatas e acordos comerciais precisam de segurança jurídica imediata. Um catálogo simples com botão de contato não atende produtoras que precisam fechar equipes inteiras em prazos exíguos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Busca por mapa, pastas de favoritos e ciclo de contraproposta"
+        },
+        {
+          "type": "prose",
+          "body": "O CineMafia supera diretórios genéricos integrando a negociação comercial à experiência de busca:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Busca Geográfica em Mapa — Localização de profissionais em mapa interativo (home/verMapa) combinada a filtros avançados de função, diária e equipamentos, permitindo contratar técnicos próximos ao set.",
+            "Favoritos Estruturados em Pastas — Criação de pastas personalizadas pelo usuário (favoritos/editarPastas, criar pasta), viabilizando organizar equipes por projeto, departamento ou diária em vez de acumular listas soltas.",
+            "Mecanismo Bilateral de Contraproposta — Ciclo completo de negociação (fazerproposta, fazerContra-proposta, minhasPropostas/verContraproposta) articulado a um chat de mensagens da proposta (mensagensProposta/chat), resolvendo valores e termos contratuais na própria plataforma.",
+            "Avaliações e Reputação Pós-Diária — Sistema de nota com componente dedicado de estrelas (886:44152) e fluxo de recusa fundamentada de serviço (popupWarning/recusarServiço2)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Contratos na plataforma, pagamentos e caminhos de falha desenhados"
+        },
+        {
+          "type": "prose",
+          "body": "O sistema fecha o compromisso financeiro dentro da plataforma (contratos x6, meiosdePagamento x2, pagamentoCartão x2). Mais importante: o design contempla as falhas do mundo real. Em vez de prever apenas o fluxo perfeito de sucesso, foram desenhados estados explícitos de erro de processamento (popupError/pagamento) e recuperação de pagamento. Cerca de 130 frames de modais e avisos (popupSucess x87, popupWarning x23, popupAsk x4) garantem resposta inequívoca do sistema para qualquer ação do usuário."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Gestão de escopo como entrega: Priorização Desenvolvimento"
+        },
+        {
+          "type": "prose",
+          "body": "Diante da densidade de um sistema com 447 frames, produzi um segundo arquivo autônomo no Figma: CineMafia (Priorização Desenvolvimento). Em vez de obrigar o time de engenharia a navegar por marcações confusas no arquivo geral, entreguei uma versão filtrada estritamente com as telas que deveriam subir na primeira entrega funcional. A gestão de escopo foi tratada como um entregável formal de design."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O descompasso do no-code e o catalisador para o código"
+        },
+        {
+          "type": "prose",
+          "body": "O CineMafia foi publicado e opera em cinemafia.com.br, provando que o fluxo de produto foi colocado na mão de usuários reais. Entretanto, o desenvolvedor Bubble da agência não respeitou os princípios fundamentais do layout: contêineres sem clip-content gerando vazamento visual, paddings alterados arbitrariamente e quebras responsivas desordenadas."
+        },
+        {
+          "type": "prose",
+          "body": "Ver telas milimetricamente planejadas serem desfiguradas em um construtor visual foi o divisor de águas na minha trajetória profissional. Ficou evidente que entregar protótipos impecáveis no Figma não basta se a execução técnica degradar o trabalho. Essa constatação me motivou a dominar TypeScript, React, Next.js e Tailwind — tornando-me um design engineer capaz de programar e assegurar a fidelidade de tudo o que desenho."
+        },
+        {
+          "type": "quote",
+          "text": "Assistir a uma implementação no-code destruir espaçamentos e contêineres responsivos foi o ponto de virada. Percebi que, para proteger o padrão de design, eu precisava aprender a construir o código do front-end com minhas próprias mãos."
+        }
+      ]
+    }
+  }
 }

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #F8FAF9;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #181D27;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Clean high-key clinical ground */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 35%, rgba(53, 180, 139, 0.07) 0%, #F8FAF9 72%, #EFF4F2 100%);
+      }
+
+      /* Subtle ambient brand glows */
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      #glow-1 {
+        top: 30px;
+        left: 240px;
+        width: 550px;
+        height: 550px;
+        background: rgba(53, 180, 139, 0.08);
+      }
+      #glow-2 {
+        bottom: 40px;
+        right: 280px;
+        width: 600px;
+        height: 600px;
+        background: rgba(16, 139, 106, 0.06);
+      }
+
+      /* Subtle clinical dot-grid watermark */
+      #grid-overlay {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(16, 139, 106, 0.12) 1px, transparent 1px);
+        background-size: 32px 32px;
+        opacity: 0.45;
+        pointer-events: none;
+      }
+
+      /* Global stage container */
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* Camera scaler to prevent transform-origin drift */
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* --- Top HUD Header Bar --- */
+      #header-bar {
+        position: absolute;
+        top: 36px;
+        left: 64px;
+        right: 64px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 100;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-logo-badge {
+        height: 44px;
+        padding: 6px 16px;
+        background: #FFFFFF;
+        border: 1px solid rgba(209, 213, 219, 0.8);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(16, 24, 40, 0.04);
+      }
+
+      .brand-logo-badge img {
+        height: 28px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .brand-title-wrap {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand-title {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #181D27;
+        text-transform: uppercase;
+      }
+
+      .brand-subtitle {
+        font-size: 11px;
+        font-weight: 500;
+        color: #535862;
+        letter-spacing: 0.02em;
+      }
+
+      .hud-badges {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .hud-pill {
+        height: 38px;
+        padding: 0 16px;
+        background: #FFFFFF;
+        border: 1px solid rgba(209, 213, 219, 0.8);
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+        font-size: 12px;
+        font-weight: 600;
+        color: #181D27;
+      }
+
+      .hud-pill.highlight {
+        background: #EDFCF6;
+        border-color: #A6F4C5;
+        color: #087443;
+      }
+
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #108B6A;
+        box-shadow: 0 0 0 3px rgba(16, 139, 106, 0.2);
+      }
+
+      /* --- Bottom Floating Callout Pill --- */
+      #bottom-callout {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        height: 48px;
+        max-width: 980px;
+        padding: 0 24px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(209, 213, 219, 0.9);
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 16px 36px -8px rgba(16, 24, 40, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
+        z-index: 100;
+      }
+
+      #callout-icon {
+        font-size: 16px;
+      }
+
+      #callout-text {
+        font-size: 13px;
+        font-weight: 500;
+        color: #344054;
+      }
+
+      #callout-text strong {
+        color: #0F8666;
+        font-weight: 600;
+      }
+
+      /* --- Mobile Phone Chassis (iPhone 16 Pro Style) --- */
+      #phone-chassis {
+        position: absolute;
+        width: 390px;
+        height: 844px;
+        left: 765px;
+        top: 118px;
+        background: #000000;
+        border-radius: 50px;
+        box-shadow: 0 32px 80px -16px rgba(16, 24, 40, 0.2),
+                    0 0 0 9px #E4E7EC,
+                    0 0 0 11px rgba(16, 24, 40, 0.08);
+        overflow: hidden;
+        z-index: 20;
+      }
+
+      /* Dynamic Island */
+      .dynamic-island {
+        position: absolute;
+        top: 13px;
+        left: 141px;
+        width: 108px;
+        height: 28px;
+        background: #000000;
+        border-radius: 20px;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 9px;
+      }
+
+      .camera-lens {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #111B27;
+        box-shadow: inset 0 0 2px #003366;
+      }
+
+      /* Phone Screen Viewport */
+      #phone-screen {
+        position: absolute;
+        inset: 0;
+        border-radius: 46px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+
+      /* Screen layers container for vertical scroll */
+      .phone-layer-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: none;
+      }
+
+      .phone-layer-wrap.active {
+        display: block;
+      }
+
+      .phone-layer-wrap img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* --- Desktop Window Chassis (MacBook Pro Window Style) --- */
+      #win-desktop {
+        position: absolute;
+        width: 1380px;
+        height: 840px;
+        left: 270px;
+        top: 118px;
+        background: #FFFFFF;
+        border-radius: 14px;
+        box-shadow: 0 32px 80px -20px rgba(16, 24, 40, 0.18), 0 0 0 1px rgba(209, 213, 219, 0.8);
+        overflow: hidden;
+        opacity: 0;
+        z-index: 10;
+      }
+
+      .browser-bar {
+        height: 44px;
+        background: #F8F9FA;
+        border-bottom: 1px solid #E4E7EC;
+        display: flex;
+        align-items: center;
+        padding: 0 18px;
+        gap: 16px;
+      }
+
+      .traffic-lights {
+        display: flex;
+        gap: 8px;
+      }
+      .light {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .light.red { background: #FF5F56; border: 1px solid #E0443E; }
+      .light.yellow { background: #FFBD2E; border: 1px solid #DEA123; }
+      .light.green { background: #27C93F; border: 1px solid #1AAB29; }
+
+      .url-bar {
+        flex: 1;
+        max-width: 520px;
+        margin: 0 auto;
+        height: 28px;
+        background: #FFFFFF;
+        border-radius: 6px;
+        border: 1px solid #D1D5DB;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        color: #535862;
+      }
+
+      .url-bar svg {
+        width: 12px;
+        height: 12px;
+        fill: #108B6A;
+      }
+
+      .desktop-screen-content {
+        position: relative;
+        width: 100%;
+        height: calc(840px - 44px);
+        overflow: hidden;
+        background: #FAFAFA;
+      }
+
+      .desktop-layer-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: none;
+      }
+
+      .desktop-layer-wrap.active {
+        display: block;
+      }
+
+      .desktop-layer-wrap img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* --- Stat Matrix Card Stack (Scene 6) --- */
+      #stat-matrix {
+        position: absolute;
+        bottom: 110px;
+        left: 50%;
+        display: flex;
+        gap: 16px;
+        opacity: 0;
+        z-index: 80;
+      }
+
+      .matrix-card {
+        background: #FFFFFF;
+        border: 1px solid #D1D5DB;
+        border-radius: 12px;
+        padding: 14px 20px;
+        box-shadow: 0 12px 28px -6px rgba(16, 24, 40, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 150px;
+      }
+
+      .matrix-val {
+        font-size: 26px;
+        font-weight: 800;
+        color: #108B6A;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+      }
+
+      .matrix-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #535862;
+        text-transform: uppercase;
+        margin-top: 4px;
+        letter-spacing: 0.03em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="55" data-width="1920" data-height="1080">
+      <div id="stage" class="clip" data-start="0" data-duration="55">
+        <div id="ground"></div>
+        <div id="glow-1" class="ambient-glow" data-layout-allow-overflow=""></div>
+        <div id="glow-2" class="ambient-glow" data-layout-allow-overflow=""></div>
+        <div id="grid-overlay"></div>
+
+        <!-- Top HUD Header -->
+        <header id="header-bar" data-layout-allow-overlap="">
+          <div class="brand-lockup">
+            <div class="brand-logo-badge">
+              <img src="assets/celus-logo.png" alt="Celus Logo">
+            </div>
+            <div class="brand-title-wrap">
+              <span class="brand-title">Celus · Clinical Ultrasound Suite</span>
+              <span class="brand-subtitle">Point-of-Care Bedside Decision Support</span>
+            </div>
+          </div>
+          <div class="hud-badges">
+            <div id="hud-mode-pill" class="hud-pill highlight">
+              <span class="pulse-dot"></span>
+              <span id="hud-mode-text">BEDSIDE CLINICAL APP</span>
+            </div>
+            <div id="hud-module-pill" class="hud-pill">
+              <span id="hud-module-text">MODULE 02 · HOME</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Bottom Contextual Callout Pill -->
+        <div id="bottom-callout" data-layout-allow-overlap="">
+          <span id="callout-icon">🩺</span>
+          <span id="callout-text">Apoio à decisão clínica imediata à beira do leito: calculadoras e atalhos diagnósticos</span>
+        </div>
+
+        <!-- Camera Scaling and Movement Hierarchy -->
+        <div id="camera-scaler" data-layout-allow-overflow="">
+          <div id="camera-track" data-layout-allow-overflow="">
+
+            <!-- Desktop Browser Window Chassis (Admin & Landing Page) -->
+            <div id="win-desktop">
+              <div class="browser-bar">
+                <div class="traffic-lights">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+                <div class="url-bar">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/></svg>
+                  <span id="url-text">admin.salus-celus.com.br</span>
+                </div>
+              </div>
+              <div class="desktop-screen-content">
+                <!-- Admin Dashboard -->
+                <div id="layer-admin-dashboard" class="desktop-layer-wrap active">
+                  <img id="img-admin-dashboard" src="assets/admin-dashboard.png" alt="Admin Dashboard">
+                </div>
+                <!-- Admin ProtocolUS CMS -->
+                <div id="layer-admin-protocolus" class="desktop-layer-wrap">
+                  <img id="img-admin-protocolus" src="assets/admin-protocolus-cms.png" alt="Admin ProtocolUS CMS">
+                </div>
+                <!-- Admin Analytics -->
+                <div id="layer-admin-analytics" class="desktop-layer-wrap">
+                  <img id="img-admin-analytics" src="assets/admin-analytics.png" alt="Admin Analytics">
+                </div>
+                <!-- Coded Next.js Landing Page -->
+                <div id="layer-landing-desktop" class="desktop-layer-wrap">
+                  <img id="img-landing-desktop" src="assets/landing-desktop-1440.png" alt="Landing Page">
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Phone Chassis (iPhone 16 Pro) -->
+            <div id="phone-chassis">
+              <div class="dynamic-island">
+                <div class="camera-lens"></div>
+              </div>
+              <div id="phone-screen">
+                <!-- Bedside Home -->
+                <div id="layer-home" class="phone-layer-wrap active">
+                  <img id="img-home" src="assets/clinician-home.png" alt="Home Dashboard">
+                </div>
+                <!-- MEDUltra Biometry Database -->
+                <div id="layer-medultra" class="phone-layer-wrap">
+                  <img id="img-medultra" src="assets/medultra-list.png" alt="MEDUltra List">
+                </div>
+                <!-- CalculUS Step 1 -->
+                <div id="layer-step1" class="phone-layer-wrap">
+                  <img id="img-step1" src="assets/calculus-step1.png" alt="CalculUS Step 1">
+                </div>
+                <!-- CalculUS Step 2 -->
+                <div id="layer-step2" class="phone-layer-wrap">
+                  <img id="img-step2" src="assets/calculus-step2.png" alt="CalculUS Step 2">
+                </div>
+                <!-- CalculUS Step 3 -->
+                <div id="layer-step3" class="phone-layer-wrap">
+                  <img id="img-step3" src="assets/calculus-step3.png" alt="CalculUS Step 3">
+                </div>
+                <!-- CalculUS Step 4 -->
+                <div id="layer-step4" class="phone-layer-wrap">
+                  <img id="img-step4" src="assets/calculus-step4.png" alt="CalculUS Step 4">
+                </div>
+                <!-- CalculUS Step 5 -->
+                <div id="layer-step5" class="phone-layer-wrap">
+                  <img id="img-step5" src="assets/calculus-step5.png" alt="CalculUS Step 5">
+                </div>
+                <!-- CalculUS Result Screen -->
+                <div id="layer-step5-result" class="phone-layer-wrap">
+                  <img id="img-step5-result" src="assets/calculus-result.png" alt="CalculUS Result">
+                </div>
+                <!-- LaudUS Templates -->
+                <div id="layer-laudus" class="phone-layer-wrap">
+                  <img id="img-laudus" src="assets/laudus-list.png" alt="LaudUS List">
+                </div>
+                <!-- ProtocolUS Detail -->
+                <div id="layer-protocolus" class="phone-layer-wrap">
+                  <img id="img-protocolus" src="assets/protocolus-detail.png" alt="ProtocolUS Detail">
+                </div>
+                <!-- Bedside Home Loop End Frame (Byte duplicate) -->
+                <div id="layer-home-end" class="phone-layer-wrap">
+                  <img id="img-home-end" src="assets/clinician-home-end.png" alt="Home Dashboard End">
+                </div>
+              </div>
+            </div>
+
+            <!-- Stat Matrix Card Stack (Scene 6) -->
+            <div id="stat-matrix">
+              <div class="matrix-card">
+                <span class="matrix-val">19</span>
+                <span class="matrix-label">Módulos Totais</span>
+              </div>
+              <div class="matrix-card">
+                <span class="matrix-val">11</span>
+                <span class="matrix-label">App do Médico</span>
+              </div>
+              <div class="matrix-card">
+                <span class="matrix-val">8</span>
+                <span class="matrix-label">Back-Office CMS</span>
+              </div>
+              <div class="matrix-card">
+                <span class="matrix-val">158</span>
+                <span class="matrix-label">Tokens em 2 Camadas</span>
+              </div>
+              <div class="matrix-card">
+                <span class="matrix-val">Next.js</span>
+                <span class="matrix-label">Landing Page</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Animation Logic (GSAP Timeline Registration for HyperFrames) -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+
+      // Selectors
+      const scaler = "#camera-scaler";
+      const track = "#camera-track";
+      const phoneChassis = "#phone-chassis";
+      const winDesktop = "#win-desktop";
+      const statMatrix = "#stat-matrix";
+      const bottomCallout = "#bottom-callout";
+
+      // HUD elements
+      const modeText = "#hud-mode-text";
+      const moduleText = "#hud-module-text";
+      const calloutText = "#callout-text";
+      const calloutIcon = "#callout-icon";
+      const urlText = "#url-text";
+
+      // Phone layers
+      const layerHome = "#layer-home";
+      const imgHome = "#img-home";
+      const layerMedultra = "#layer-medultra";
+      const imgMedultra = "#img-medultra";
+      const layerStep1 = "#layer-step1";
+      const layerStep2 = "#layer-step2";
+      const layerStep3 = "#layer-step3";
+      const layerStep4 = "#layer-step4";
+      const layerStep5 = "#layer-step5";
+      const layerStep5Result = "#layer-step5-result";
+      const layerLaudus = "#layer-laudus";
+      const layerProtocolus = "#layer-protocolus";
+      const imgProtocolus = "#img-protocolus";
+      const layerHomeEnd = "#layer-home-end";
+      const imgHomeEnd = "#img-home-end";
+
+      // Desktop layers
+      const layerAdminDashboard = "#layer-admin-dashboard";
+      const imgAdminDashboard = "#img-admin-dashboard";
+      const layerAdminProtocolus = "#layer-admin-protocolus";
+      const layerAdminAnalytics = "#layer-admin-analytics";
+      const layerLandingDesktop = "#layer-landing-desktop";
+
+      // =========================================================================
+      // SCENE 1: POINT-OF-CARE BEDSIDE URGENCY — HOME DASHBOARD (t=0.0s to 8.0s)
+      // =========================================================================
+      // Initial settled state at t=0.0s (Poster frame at t=0.5s)
+      tl.set(phoneChassis, { x: 0, y: 0, scale: 1.0, opacity: 1 }, 0.0);
+      tl.set(imgHome, { y: 0 }, 0.0);
+      tl.set(winDesktop, { opacity: 0, scale: 0.9, x: 0, y: 0 }, 0.0);
+      tl.set(bottomCallout, { xPercent: -50 }, 0.0);
+      tl.set(statMatrix, { opacity: 0, xPercent: -50, y: 30 }, 0.0);
+      tl.set(modeText, { textContent: "BEDSIDE CLINICAL APP" }, 0.0);
+      tl.set(moduleText, { textContent: "MODULE 02 · HOME" }, 0.0);
+      tl.set(calloutIcon, { textContent: "🩺" }, 0.0);
+      tl.set(calloutText, { innerHTML: "Apoio à decisão clínica imediata: <strong>calculadoras frequentes e atalhos diagnósticos</strong>" }, 0.0);
+
+      // S1 Motion: gentle punch-in to calculators & downward scroll
+      tl.to(scaler, { scale: 1.04, duration: 2.0, ease: "power1.inOut" }, 1.0);
+      tl.to(imgHome, { y: -260, duration: 3.5, ease: "power1.inOut" }, 3.5);
+      tl.to(scaler, { scale: 1.0, duration: 1.0, ease: "power2.inOut" }, 7.0);
+
+      // =========================================================================
+      // SCENE 2: STRUCTURED KNOWLEDGE — MEDULTRA BIOMETRY DATABASE (t=8.0s to 18.0s)
+      // =========================================================================
+      tl.set(layerHome, { display: "none" }, 8.0);
+      tl.set(layerMedultra, { display: "block" }, 8.0);
+      tl.set(modeText, { textContent: "CLINICAL REFERENCE" }, 8.0);
+      tl.set(moduleText, { textContent: "MODULE 03 · MEDULTRA" }, 8.0);
+      tl.set(calloutIcon, { textContent: "📊" }, 8.0);
+      tl.set(calloutText, { innerHTML: "Tabelas de referência e percentis: <strong>Comprimento Cabeça-Nádega (CCN 1º Trimestre)</strong>" }, 8.0);
+
+      // Subtle pan & vertical scroll across biometry cards
+      tl.fromTo(imgMedultra, { opacity: 0.6, y: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 8.0);
+      tl.to(scaler, { scale: 1.05, y: -10, duration: 2.5, ease: "sine.inOut" }, 9.0);
+      tl.to(imgMedultra, { y: -180, duration: 3.5, ease: "power1.inOut" }, 11.5);
+      tl.to(scaler, { scale: 1.0, y: 0, duration: 1.2, ease: "power2.inOut" }, 16.5);
+
+      // =========================================================================
+      // SCENE 3: ACR TI-RADS INTERACTIVE CLINICAL STEPPER (t=18.0s to 30.0s)
+      // =========================================================================
+      tl.set(modeText, { textContent: "CALCULUS ENGINE" }, 18.0);
+      tl.set(moduleText, { textContent: "MODULE 04 · TI-RADS STEPPER" }, 18.0);
+      tl.set(calloutIcon, { textContent: "⚡" }, 18.0);
+      tl.set(calloutText, { innerHTML: "Estratificação ACR TI-RADS em 5 etapas: <strong>cálculo dinâmico sem tabelas estáticas</strong>" }, 18.0);
+
+      // Step 1: Composition (18.0s – 20.2s)
+      tl.set(layerMedultra, { display: "none" }, 18.0);
+      tl.set(layerStep1, { display: "block" }, 18.0);
+      tl.fromTo(phoneChassis, { scale: 0.98 }, { scale: 1.03, duration: 0.4, ease: "back.out(1.4)" }, 18.0);
+
+      // Step 2: Echogenicity (20.2s – 22.4s)
+      tl.set(layerStep1, { display: "none" }, 20.2);
+      tl.set(layerStep2, { display: "block" }, 20.2);
+      tl.fromTo(phoneChassis, { scale: 1.02 }, { scale: 1.04, duration: 0.3, ease: "power1.out" }, 20.2);
+
+      // Step 3: Shape (22.4s – 24.6s)
+      tl.set(layerStep2, { display: "none" }, 22.4);
+      tl.set(layerStep3, { display: "block" }, 22.4);
+      tl.fromTo(phoneChassis, { scale: 1.02 }, { scale: 1.04, duration: 0.3, ease: "power1.out" }, 22.4);
+
+      // Step 4: Margin (24.6s – 26.8s)
+      tl.set(layerStep3, { display: "none" }, 24.6);
+      tl.set(layerStep4, { display: "block" }, 24.6);
+      tl.fromTo(phoneChassis, { scale: 1.02 }, { scale: 1.04, duration: 0.3, ease: "power1.out" }, 24.6);
+
+      // Step 5: Echogenic Foci (26.8s – 28.5s)
+      tl.set(layerStep4, { display: "none" }, 26.8);
+      tl.set(layerStep5, { display: "block" }, 26.8);
+      tl.fromTo(phoneChassis, { scale: 1.02 }, { scale: 1.04, duration: 0.3, ease: "power1.out" }, 26.8);
+
+      // Step 5 Result: TR Tier & Biopsy Threshold (28.5s – 30.0s)
+      tl.set(layerStep5, { display: "none" }, 28.5);
+      tl.set(layerStep5Result, { display: "block" }, 28.5);
+      tl.set(moduleText, { textContent: "MODULE 04 · TI-RADS RESULTADO" }, 28.5);
+      tl.set(calloutText, { innerHTML: "Resultado imediato: <strong>TR5 (Alta suspeita) · Risco 35% · Biópsia por PAAF indicada</strong>" }, 28.5);
+      tl.fromTo(phoneChassis, { scale: 1.01 }, { scale: 1.05, duration: 0.5, ease: "back.out(1.2)" }, 28.5);
+
+      // =========================================================================
+      // SCENE 4: LAUDUS REPORTS & PROTOCOLUS GUIDELINES (t=30.0s to 38.0s)
+      // =========================================================================
+      tl.set(layerStep5Result, { display: "none" }, 30.0);
+      tl.set(layerLaudus, { display: "block" }, 30.0);
+      tl.to(phoneChassis, { scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 30.0);
+      tl.set(modeText, { textContent: "STANDARDIZED REPORTS" }, 30.0);
+      tl.set(moduleText, { textContent: "MODULE 05 · LAUDUS" }, 30.0);
+      tl.set(calloutIcon, { textContent: "📋" }, 30.0);
+      tl.set(calloutText, { innerHTML: "Modelos padronizados de laudos e <strong>ensaios pictóricos de achados ecográficos</strong>" }, 30.0);
+
+      // Transition to ProtocolUS renal transplant protocol (33.5s)
+      tl.set(layerLaudus, { display: "none" }, 33.5);
+      tl.set(layerProtocolus, { display: "block" }, 33.5);
+      tl.set(modeText, { textContent: "PROCEDURAL GUIDELINES" }, 33.5);
+      tl.set(moduleText, { textContent: "MODULE 07 · PROTOCOLUS" }, 33.5);
+      tl.set(calloutText, { innerHTML: "Diretrizes passo a passo: <strong>avaliação ultrassonográfica de transplante renal</strong>" }, 33.5);
+      tl.fromTo(imgProtocolus, { y: 0 }, { y: -340, duration: 3.5, ease: "power1.inOut" }, 34.0);
+
+      // =========================================================================
+      // SCENE 5: THE ADMINISTRATIVE BACK OFFICE (t=38.0s to 48.0s)
+      // =========================================================================
+      tl.set(modeText, { textContent: "ADMIN BACK OFFICE" }, 38.0);
+      tl.set(moduleText, { textContent: "GOVERNANÇA CLÍNICA CMS" }, 38.0);
+      tl.set(calloutIcon, { textContent: "💻" }, 38.0);
+      tl.set(calloutText, { innerHTML: "Governança clínica: <strong>editores médicos atualizam diretrizes sem dependência de código</strong>" }, 38.0);
+      tl.set(urlText, { textContent: "admin.salus-celus.com.br/dashboard" }, 38.0);
+
+      // Morph from phone to desktop window
+      tl.to(phoneChassis, { opacity: 0, scale: 0.85, duration: 0.6, ease: "power2.in" }, 38.0);
+      tl.set(layerAdminDashboard, { display: "block" }, 38.4);
+      tl.fromTo(winDesktop, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1.0, duration: 0.7, ease: "power2.out" }, 38.4);
+
+      // Pan slightly on Admin Dashboard metrics (38.8s – 42.5s)
+      tl.to(scaler, { scale: 1.03, y: -10, duration: 2.5, ease: "power1.inOut" }, 39.5);
+
+      // Switch to ProtocolUS CMS rich editor (42.5s)
+      tl.set(layerAdminDashboard, { display: "none" }, 42.5);
+      tl.set(layerAdminProtocolus, { display: "block" }, 42.5);
+      tl.set(urlText, { textContent: "admin.salus-celus.com.br/protocolus" }, 42.5);
+      tl.set(calloutText, { innerHTML: "Gestão direta de conteúdo: <strong>CMS dedicado para LaudUS, ResumUS e ProtocolUS</strong>" }, 42.5);
+      tl.fromTo(winDesktop, { opacity: 0.8 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 42.5);
+
+      // Switch to Admin Analytics (45.5s)
+      tl.set(layerAdminProtocolus, { display: "none" }, 45.5);
+      tl.set(layerAdminAnalytics, { display: "block" }, 45.5);
+      tl.set(urlText, { textContent: "admin.salus-celus.com.br/analytics" }, 45.5);
+      tl.set(calloutText, { innerHTML: "Telemetria de uso: <strong>frequência de invocação de calculadoras e diretrizes</strong>" }, 45.5);
+      tl.fromTo(winDesktop, { opacity: 0.85 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 45.5);
+
+      // Prepare transition to Scene 6
+      tl.to(scaler, { scale: 1.0, y: 0, duration: 0.8, ease: "power2.inOut" }, 47.2);
+
+      // =========================================================================
+      // SCENE 6: MULTI-SURFACE ORCHESTRA & SEAMLESS LOOP RESOLUTION (t=48.0s to 55.0s)
+      // =========================================================================
+      tl.set(modeText, { textContent: "ARQUITETURA COMPLETA" }, 48.0);
+      tl.set(moduleText, { textContent: "19 MÓDULOS · TOKENS · NEXT.JS" }, 48.0);
+      tl.set(calloutIcon, { textContent: "✨" }, 48.0);
+      tl.set(calloutText, { innerHTML: "Suíte clínica completa: <strong>19 módulos · 158 tokens de design · Landing page em Next.js</strong>" }, 48.0);
+      tl.set(urlText, { textContent: "celus.juanpablosilva.com.br" }, 48.0);
+
+      // Pull desktop window to right flank and show Landing Page
+      tl.set(layerAdminAnalytics, { display: "none" }, 48.0);
+      tl.set(layerLandingDesktop, { display: "block" }, 48.0);
+      tl.to(winDesktop, { scale: 0.76, x: 260, y: 15, duration: 0.8, ease: "power2.inOut" }, 48.0);
+
+      // Re-introduce phone chassis on left flank displaying the bedside app
+      tl.set(layerProtocolus, { display: "none" }, 48.0);
+      tl.set(layerHomeEnd, { display: "block" }, 48.0);
+      tl.set(imgHomeEnd, { y: 0 }, 48.0);
+      tl.fromTo(phoneChassis, { opacity: 0, scale: 0.72, x: -360, y: 20 }, { opacity: 1, scale: 0.82, x: -360, y: 20, duration: 0.8, ease: "power2.out" }, 48.1);
+
+      // Reveal stat matrix stack
+      tl.fromTo(statMatrix, { opacity: 0, xPercent: -50, y: 35 }, { opacity: 1, xPercent: -50, y: 0, duration: 0.6, ease: "power2.out" }, 48.6);
+
+      // Micro-float during orchestra display
+      tl.to(phoneChassis, { y: 12, duration: 1.4, yoyo: true, repeat: 1, ease: "sine.inOut" }, 49.0);
+      tl.to(winDesktop, { y: 22, duration: 1.4, yoyo: true, repeat: 1, ease: "sine.inOut" }, 49.0);
+
+      // RESOLUTION BACK TO OPENING HERO (t=52.4s to 55.0s)
+      // Fade out desktop window and stat matrix
+      tl.to(winDesktop, { opacity: 0, scale: 0.70, duration: 0.9, ease: "power2.in" }, 52.4);
+      tl.to(statMatrix, { opacity: 0, xPercent: -50, y: 25, duration: 0.7, ease: "power2.in" }, 52.4);
+
+      // Reset HUD badges to Frame 0 values before loop seam
+      tl.set(modeText, { textContent: "BEDSIDE CLINICAL APP" }, 54.0);
+      tl.set(moduleText, { textContent: "MODULE 02 · HOME" }, 54.0);
+      tl.set(calloutIcon, { textContent: "🩺" }, 54.0);
+      tl.set(calloutText, { innerHTML: "Apoio à decisão clínica imediata: <strong>calculadoras frequentes e atalhos diagnósticos</strong>" }, 54.0);
+
+      // Move and scale phone chassis smoothly back to exact Frame 0 coordinates
+      // Frame 0 coordinates: x: 0, y: 0, scale: 1.0, opacity: 1.0
+      tl.to(phoneChassis, { x: 0, y: 0, scale: 1.0, opacity: 1.0, duration: 1.5, ease: "power2.inOut" }, 53.0);
+      tl.to(scaler, { scale: 1.0, x: 0, y: 0, duration: 1.0, ease: "power2.inOut" }, 53.5);
+      tl.to(track, { x: 0, y: 0, duration: 1.0, ease: "power2.inOut" }, 53.5);
+    </script>
+  </body>
+</html>

@@ -41,5 +41,200 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole designer of an advanced medical learning management system (586 desktop frames) for clinical dermatology education. Architected five distinct role portals (Admin, Moderador, Professor, Aluno, Aluno Free) and engineered the portfolio's deepest variable token system (Main/Primary 25–800 with #982cff primary, Support/Neutral, Gradient/Purple) bound directly inside custom domain components, complemented by a 127-screen linear presentation deck (Slides Admin) built to resolve stakeholder review navigation.",
+      "context": "Agency engagement at Sagitta between December 2024 and January 2025 as the latest-running project in the agency set. Built for a specialized medical education provider training physicians in dermatology. While the foundational primitive kit was adapted from Sagitta's shared base (node-identical to KAT/Safra), the entire domain layer on Design Desktop (exam engine, question bank, spaced-repetition flashcards, clinical case forum, audit logs) was authored from scratch with Portuguese-named components and bound variables. Desktop-only scope; mobile development had not started prior to Juan's departure.",
+      "outcome": "Formally approved by the client through structured Loom video walkthroughs and two follow-up alignment calls in January 2025. Handed off to engineering prior to Juan's departure from Sagitta; public deployment status remains unconfirmed. Re-authoring 127 admin screens into Slides Admin eliminated stakeholder review confusion, demonstrating an adaptable, solution-oriented approach to client communication.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole designer of the entire product on Design Desktop (586 frames), the 127-frame Slides Admin deck, and the bound token system. The underlying design system was adapted from a shared agency base kit (Untitled UI primitives shared with KAT/Banco Safra); my contribution is the bespoke medical domain layer and token variable bindings. Desktop-only constraint: do not cite this project for responsive design; the Design Mobile page exists but is empty as I rolled off before mobile began. Auth screen notice: login, password recovery, and onboarding screens share agency template node IDs and are not claimed as unique work. Delivery status: approved and handed to development; never claimed shipped."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Medical education architecture: five permissioned role surfaces"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "586",
+              "label": "desktop frames designed across five distinct role surfaces",
+              "icon": "📐"
+            },
+            {
+              "value": "5",
+              "label": "permissioned roles (Admin, Moderador, Professor, Aluno, Aluno Free)",
+              "icon": "👥"
+            },
+            {
+              "value": "127",
+              "label": "screens manually re-sequenced in Slides Admin for linear reviews",
+              "icon": "📊"
+            },
+            {
+              "value": "39",
+              "label": "in-canvas developer sticky notes detailing interaction rules",
+              "icon": "📝"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Dermatology postgraduate education requires far more than passive video streaming. Medical practitioners require rigorous assessment environments, question banks with clinical rationales, spaced-repetition retention tools, and discussion boards for de-identified clinical cases. I architected Mente Dermatológica across five distinct role surfaces — each backed by its own dedicated navigation component set (sideBar, navbar, dropdown for Aluno, AlunoFree, Professor, Moderador, and Admin) — creating strict structural differentiation between content consumption, clinical moderation, and course authoring."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Domain depth: clinical exam engine, question bank, and medical case forum"
+        },
+        {
+          "type": "prose",
+          "body": "The desktop environment contains six deeply engineered clinical subsystems:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Full-Featured Exam Engine — Multiple exam formats iterated across versions (Prova 1.0.1 through 2.2) with configurable test settings (Formato de prova, Configurações da prova), randomized question pools, detailed exam scorecards (Relatório da prova), and expandable explanation cards (accordionExplicação) presenting clinical rationale.",
+            "MenteBank Question Bank — A specialized question bank with full administrative CRUD (Novo MenteBank, Nova Questão, editarQuestão), filtering, and meticulously designed empty states (detalhesEmptyState).",
+            "Spaced-Repetition Flashcards — A study subsystem modeling card difficulty tiers (dificuldade, _dificuldadeBase, Flashcards 1.2/1.3) and administrative card creation (AdicionarFlashcard) for memorizing dermatological pathologies and pharmacological dosages.",
+            "Clinical Case Forum (Fórum Casos Clínicos) — A peer-to-peer clinical discussion forum (Fórum/casoView, PostarCaso, cardForum, imagemForum) built specifically for doctors to debate diagnoses and clinical photographic evidence.",
+            "Formal Onboarding and Contract Acceptance — Complete student contract flow (primeiroAcesso → liberarAcesso 1.1/1.2 → liberarAcesso/Contrato → Contrato), fulfilling legal compliance requirements highlighted in client briefings.",
+            "Compliance-Grade Administrative Audit Logs — Comprehensive audit screens (Auditoria) tracking student examination logs and faculty grading modifications, complemented by an extensive 40-frame destructive/success confirmation popup matrix."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design token architecture: variable bindings inside bespoke components"
+        },
+        {
+          "type": "prose",
+          "body": "Mente Dermatológica provides the most rigorous token evidence in this portfolio. Rather than maintaining an unbound variable collection, tokens are directly connected to custom domain components: Button, cardCurso, flashcard, and cardQuestão all bind to native Figma variables. The color architecture defines Juan-authored token families including Main/Primary/25→800 (with active brand primary Main/Primary/600 - P at #982cff), Main/Terciary/400 (#4ec5ff), Support/Neutral/50–500, and Gradient/Purple, layered transparently over inherited gray and alert primitives."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Stakeholder empathy: the 127-screen Slides Admin deck"
+        },
+        {
+          "type": "prose",
+          "body": "During initial client walkthroughs, the stakeholder repeatedly got disoriented trying to navigate the deep administrative back office through interactive prototype hotspots. Recognizing the stakeholder's cognitive friction, I extracted and restructured the entire admin surface into a dedicated 127-frame presentation page named Slides Admin. By organizing every screen into a strict linear narrative sequence, the client could review every administrative screen simply by pressing the keyboard arrow keys. Feedback immediately became targeted, positive, and productive. Mirroring the 119 unrolled screens in Pro Personal, this highlights a consistent habit of diagnosing friction and reshaping deliverables around user needs."
+        },
+        {
+          "type": "quote",
+          "text": "When a client gets lost inside an interactive prototype, arguing about how to click is a waste of time. I reorganized 127 admin screens into a sequential slide deck he could review with his keyboard arrows. Confusion disappeared, and approval followed immediately."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A proven benchmark in specialized e-learning"
+        },
+        {
+          "type": "prose",
+          "body": "Mente Dermatológica, paired with Jobs/Academy.bet, cements specialized education as a proven domain expertise. While Academy.bet proved co-design agility at scale across web and mobile, Mente Dermatológica demonstrates autonomous end-to-end design ownership in a highly regulated clinical vertical. Backed by formal video approvals and 39 technical developer annotations, it stands as a model of structured design systems and domain complexity."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer solo de um LMS médico de alta complexidade (586 frames desktop) para especialização em dermatologia clínica. Estruturou cinco portais com permissões distintas (Admin, Moderador, Professor, Aluno, Aluno Free) e implementou o sistema de variáveis e tokens mais profundo do portfólio (Main/Primary 25–800 com primária #982cff, Support/Neutral, Gradient/Purple) vinculado diretamente aos componentes de domínio, complementado por um deck linear de 127 telas (Slides Admin) criado para facilitar a navegação do cliente nas revisões.",
+      "context": "Atuação na agência Sagitta entre dezembro de 2024 e janeiro de 2025, sendo o projeto de ciclo mais recente da agência. Desenvolvido para uma instituição de pós-graduação médica para médicos em dermatologia. Embora o kit base de primitivos tenha sido herdado do repositório da Sagitta (idêntico em nós ao KAT/Safra), toda a camada de domínio em Design Desktop (motor de exames, banco de questões, flashcards espaçados, fórum clínico e trilha de auditoria) foi desenhada do zero com componentes próprios e variáveis vinculadas. Escopo exclusivo desktop; a adaptação mobile não foi iniciada antes da saída de Juan.",
+      "outcome": "Aprovado formalmente pelo cliente por meio de revisões em vídeo gravadas no Loom e duas reuniões de alinhamento em janeiro de 2025. Entregue à engenharia antes da saída de Juan da Sagitta; o lançamento público em produção não foi verificado. A reestruturação de 127 telas administrativas no Slides Admin eliminou a desorientação do cliente nas apresentações, demonstrando uma postura prática e adaptável na condução de stakeholders.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer solo de todo o produto em Design Desktop (586 frames), do deck Slides Admin (127 frames) e do sistema de tokens vinculados. O design system base foi adaptado de um kit licenciado da agência (primitivos de Untitled UI compartilhados com KAT/Banco Safra); minha autoria abrange toda a camada médica de domínio e a amarração das variáveis. Restrição desktop-only: nunca cite este projeto para design responsivo; a página Design Mobile existe mas está vazia pois me desliguei antes do início do mobile. Telas de autenticação: login e recuperação de senha herdam nós padrão da agência e não são trabalho autoral. Status de entrega: aprovado e entregue para desenvolvimento; nunca dito lançado."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura para educação médica: cinco portais com controle de permissão"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "586",
+              "label": "telas desktop desenhadas entre cinco perfis de usuário",
+              "icon": "📐"
+            },
+            {
+              "value": "5",
+              "label": "perfis de permissão (Admin, Moderador, Professor, Aluno, Aluno Free)",
+              "icon": "👥"
+            },
+            {
+              "value": "127",
+              "label": "telas organizadas linearmente no Slides Admin para validação",
+              "icon": "📊"
+            },
+            {
+              "value": "39",
+              "label": "notas técnicas em canvas detalhando regras de negócio e interação",
+              "icon": "📝"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A especialização médica em dermatologia exige muito mais do que transmissão passiva de vídeo. Médicos demandam ambientes rigorosos de prova, bancos de questões com justificativas clínicas, ferramentas de retenção por repetição espaçada e fóruns de discussão de casos clínicos. Estruturei a Mente Dermatológica em cinco superfícies de perfil independentes — cada uma com seu próprio conjunto de navegação (sideBar, navbar, dropdown para Aluno, AlunoFree, Professor, Moderador e Admin) — estabelecendo diferenciação estrutural entre consumo de conteúdo, moderação clínica e gestão acadêmica."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Profundidade de domínio: motor de provas, banco de questões e fórum de casos"
+        },
+        {
+          "type": "prose",
+          "body": "O ambiente desktop contempla seis subsistemas clínicos de alta densidade:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Motor Completo de Provas — Diversos formatos de avaliação iterados nas versões Prova 1.0.1 a 2.2 com configurações de prova personalizáveis, geração de simulados, relatórios de desempenho do aluno (Relatório da prova) e sanfonas de justificativa clínica (accordionExplicação).",
+            "Banco de Questões MenteBank — Banco de questões médicas com CRUD administrativo completo (Novo MenteBank, Nova Questão, editarQuestão), filtros por tema e estados vazios detalhadamente desenhados (detalhesEmptyState).",
+            "Flashcards com Repetição Espaçada — Módulo de memorização clínica estruturado com níveis de dificuldade (dificuldade, _dificuldadeBase, Flashcards 1.2/1.3) e gestão de cartões (AdicionarFlashcard) para fixação de diagnósticos dermatológicos e farmacologia.",
+            "Fórum de Casos Clínicos — Espaço estruturado de discussão médica (Fórum/casoView, PostarCaso, cardForum, imagemForum) voltado para análise colaborativa de condutas e imagens de manifestações dermatológicas.",
+            "Contrato Formal no Primeiro Acesso — Fluxo regulatório de aceite contratual obrigatório (primeiroAcesso → liberarAcesso 1.1/1.2 → liberarAcesso/Contrato → Contrato), atendendo a requisitos legais levantados pelo cliente.",
+            "Trilha de Auditoria e Back Office — Telas de registro e auditoria (Auditoria) para monitoramento de tentativas de prova e alterações de notas por professores, amparadas por uma matriz de mais de 40 pop-ups de confirmação e exclusão."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de tokens: variáveis vinculadas em componentes de domínio"
+        },
+        {
+          "type": "prose",
+          "body": "A Mente Dermatológica traz a evidência mais consistente de design tokens deste portfólio. Em vez de manter variáveis soltas sem uso, os tokens estão amarrados diretamente aos componentes de domínio: Button, cardCurso, flashcard e cardQuestão possuem variáveis nativas do Figma conectadas às suas camadas. A arquitetura define famílias autorais como Main/Primary/25→800 (com a primária real Main/Primary/600 - P em #982cff), Main/Terciary/400 (#4ec5ff), Support/Neutral/50–500 e Gradient/Purple, aplicadas de forma consistente sobre primitivos de alerta e neutros de apoio."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Empatia com stakeholders: o deck linear de 127 telas em Slides Admin"
+        },
+        {
+          "type": "prose",
+          "body": "Durante as validações iniciais, o cliente se perdeu repetidamente ao tentar navegar pelo painel administrativo através dos botões interativos do protótipo. Identificando essa dificuldade cognitiva de navegação, extraí e reorganizei todo o back office em uma página dedicada de 127 frames chamada Slides Admin. Ao estruturar cada tela em uma sequência linear estrita, o cliente pôde validar todas as permissões e funcionalidades administrativas apenas avançando as setas do teclado. O feedback tornou-se imediatamente focado, positivo e resolutivo. Refletindo as 119 telas desdobradas do Pro Personal, isso evidencia o hábito constante de diagnosticar atritos e adaptar a entrega para quem está do outro lado."
+        },
+        {
+          "type": "quote",
+          "text": "Quando um cliente se perde dentro de um protótipo interativo, discutir sobre como clicar é perda de tempo. Reorganizei 127 telas administrativas em um deck linear que ele podia passar com as setas do teclado. A confusão sumiu e a aprovação veio em seguida."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Referência comprovada em e-learning especializado"
+        },
+        {
+          "type": "prose",
+          "body": "A Mente Dermatológica, combinada ao Jobs/Academy.bet, consolida a educação especializada como uma competência madura de domínio. Enquanto o Academy.bet comprovou agilidade em design em dupla em escala web e mobile, a Mente Dermatológica demonstra autonomia total em um segmento clínico altamente regulado. Respaldada por aprovações gravadas e 39 anotações técnicas para desenvolvimento, permanece como referência de design de sistemas e complexidade funcional."
+        }
+      ]
+    }
+  }
 }

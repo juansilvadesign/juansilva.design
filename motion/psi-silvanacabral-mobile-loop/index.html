@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Silvana Cabral — Mobile Responsiveness Loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Cormorant";
+        src: url("assets/fonts/cormorant-garamond-600.woff2") format("woff2");
+        font-weight: 600 700;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #FAF8F2;
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #1A1F26;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* ⛔ Opaque ground layer */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 30%, rgba(20, 103, 94, 0.05) 0%, rgba(199, 100, 40, 0.035) 45%, #FAF8F2 70%, #F4EFEA 100%),
+          #FFFFFF;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      #glow-teal { top: -60px; left: 240px; width: 620px; height: 620px; background: rgba(20, 103, 94, 0.08); }
+      #glow-amber { bottom: -40px; right: 260px; width: 640px; height: 640px; background: rgba(199, 100, 40, 0.06); }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* HUD Header */
+      #narrative-hud {
+        position: absolute;
+        top: 36px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        z-index: 100;
+        pointer-events: none;
+      }
+      .hud-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(20, 103, 94, 0.15);
+        border-radius: 9999px;
+        padding: 6px 20px;
+        box-shadow: 0 4px 20px rgba(20, 103, 94, 0.08);
+      }
+      .hud-phase {
+        font-size: 11px;
+        font-weight: 700;
+        color: #14675E;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .hud-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #C76428;
+      }
+      .hud-title {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1A1F26;
+      }
+      #narrative-caption {
+        font-size: 14px;
+        color: #475569;
+        font-weight: 500;
+        text-align: center;
+        max-width: 900px;
+      }
+      #narrative-caption strong {
+        color: #14675E;
+        font-weight: 700;
+      }
+
+      /* Tech Stack Pills */
+      #stack-pills {
+        position: absolute;
+        bottom: 30px;
+        right: 48px;
+        display: flex;
+        gap: 10px;
+        z-index: 90;
+        pointer-events: none;
+      }
+      .stack-pill {
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 6px;
+        padding: 5px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #475569;
+        letter-spacing: 0.04em;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+
+      /* Mobile Showcase Layout */
+      #mobile-layout {
+        position: absolute;
+        top: 120px;
+        left: 120px;
+        width: 1680px;
+        height: 860px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      /* Left Side: Code & Architectural Rationale */
+      #code-column {
+        width: 760px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .code-card {
+        background: #111827;
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .code-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 12px;
+      }
+      .code-tag {
+        font-family: monospace;
+        font-size: 12px;
+        font-weight: 600;
+        color: #34D399;
+        letter-spacing: 0.05em;
+      }
+      .code-body {
+        font-family: monospace;
+        font-size: 13px;
+        line-height: 1.7;
+        color: #E2E8F0;
+      }
+      .code-kw { color: #F472B6; }
+      .code-fn { color: #60A5FA; }
+      .code-str { color: #FBBF24; }
+      .code-cm { color: #94A3B8; font-style: italic; }
+
+      .stat-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+      .stat-badge-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 16px 40px -10px rgba(20, 103, 94, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .stat-badge-num {
+        font-family: "Cormorant", serif;
+        font-size: 36px;
+        font-weight: 700;
+        color: #14675E;
+        line-height: 1;
+      }
+      .stat-badge-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1A1F26;
+      }
+      .stat-badge-desc {
+        font-size: 12px;
+        color: #475569;
+        line-height: 1.4;
+      }
+
+      /* Right Side: iPhone Device Mockup */
+      #phone-container {
+        position: relative;
+        width: 414px;
+        height: 840px;
+        background: #1E293B;
+        border-radius: 52px;
+        padding: 14px;
+        box-shadow: 0 35px 80px -15px rgba(20, 103, 94, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .phone-outer-rim {
+        position: absolute;
+        inset: 0;
+        border-radius: 52px;
+        border: 4px solid #334155;
+        pointer-events: none;
+        z-index: 50;
+      }
+      .phone-notch-bar {
+        position: absolute;
+        top: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 130px;
+        height: 28px;
+        background: #111827;
+        border-radius: 0 0 16px 16px;
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      .phone-camera-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #1E293B;
+        border: 1px solid #334155;
+      }
+      .phone-speaker-pill {
+        width: 40px;
+        height: 4px;
+        border-radius: 2px;
+        background: #334155;
+      }
+
+      .phone-screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 40px;
+        overflow: hidden;
+        background: #FAF8F2;
+      }
+
+      #phone-strip {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+      #phone-strip img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* SVG Cursor */
+      #touch-cursor {
+        position: absolute;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: rgba(20, 103, 94, 0.45);
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-fps="60" data-width="1920" data-height="1080">
+      <div id="ground"></div>
+      <div class="ambient-glow" id="glow-teal" data-layout-allow-overflow></div>
+      <div class="ambient-glow" id="glow-amber" data-layout-allow-overflow></div>
+
+      <div id="stage">
+        <div id="camera-scaler" data-layout-allow-overflow>
+          <div id="camera-track">
+
+            <div id="mobile-layout">
+
+              <!-- Left Side: Architectural Highlights -->
+              <div id="code-column">
+
+                <div class="code-card">
+                  <div class="code-card-header">
+                    <span class="code-tag">RESPONSIVE TAILWIND ARCHITECTURE</span>
+                    <span style="font-size:11px; color:#94A3B8;">Direct in Browser</span>
+                  </div>
+                  <div class="code-body">
+                    <span class="code-cm">// Sem prancheta mobile no Figma:</span><br>
+                    <span class="code-kw">const</span> <span class="code-fn">HeroSection</span> = () =&gt; (<br>
+                    &nbsp;&nbsp;&lt;<span class="code-kw">div</span> <span class="code-fn">className</span>=<span class="code-str">"flex flex-col lg:flex-row items-center gap-8 px-6 lg:px-16"</span>&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-kw">h1</span> <span class="code-fn">className</span>=<span class="code-str">"text-3xl md:text-5xl lg:text-6xl font-serif text-teal-900"</span>&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Acolhimento Clínico<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;/<span class="code-kw">h1</span>&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;<span class="code-kw">WhatsAppCTA</span> <span class="code-fn">className</span>=<span class="code-str">"w-full sm:w-auto min-h-[48px] touch-target"</span> /&gt;<br>
+                    &nbsp;&nbsp;&lt;/<span class="code-kw">div</span>&gt;<br>
+                    );
+                  </div>
+                </div>
+
+                <div class="stat-cards-grid">
+                  <div class="stat-badge-card" id="stat-1">
+                    <div class="stat-badge-num">177</div>
+                    <div class="stat-badge-label">Utilitários Responsivos</div>
+                    <div class="stat-badge-desc">Breakpoints gerenciados via código sem duplicação de layouts.</div>
+                  </div>
+
+                  <div class="stat-badge-card" id="stat-2">
+                    <div class="stat-badge-num">48px</div>
+                    <div class="stat-badge-label">Área de Toque Mínima</div>
+                    <div class="stat-badge-desc">Botões e links de WhatsApp adaptados ergonomicamente para polegares.</div>
+                  </div>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.92); border-radius:14px; padding:16px 20px; border:1px solid rgba(20,103,94,0.15); display:flex; align-items:center; gap:14px;">
+                  <span style="font-size:22px;">📱</span>
+                  <span style="font-size:13px; color:#475569; line-height:1.5;">
+                    Cards de sentimentos empilhados verticalmente com espaçamento clínico e navegação simplificada.
+                  </span>
+                </div>
+
+              </div>
+
+              <!-- Right Side: iPhone Frame with Full Page Strip -->
+              <div id="phone-container">
+                <div class="phone-outer-rim"></div>
+                <div class="phone-notch-bar">
+                  <div class="phone-speaker-pill"></div>
+                  <div class="phone-camera-dot"></div>
+                </div>
+
+                <div class="phone-screen">
+                  <div id="phone-strip" data-layout-allow-overflow>
+                    <img src="assets/live/mobile-375-full.png" alt="Silvana Cabral Mobile Viewport">
+                  </div>
+
+                  <!-- Interactive Touch Circle -->
+                  <div id="touch-cursor"></div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Persistent HUD Header -->
+      <div id="narrative-hud">
+        <div class="hud-pill">
+          <span class="hud-phase">RESPONSIVIDADE EM CÓDIGO</span>
+          <span class="hud-dot"></span>
+          <span class="hud-title">Silvana Cabral · Navegação Mobile & Touch Targets</span>
+        </div>
+        <div id="narrative-caption">Prancheta mobile vazia no Figma: <strong>177 utilitários responsivos implementados direto no browser</strong>.</div>
+      </div>
+
+      <!-- Tech Stack Pills -->
+      <div id="stack-pills">
+        <div class="stack-pill">TAILWIND BREAKPOINTS</div>
+        <div class="stack-pill">NEXT.JS 14</div>
+        <div class="stack-pill">TOUCH ERGONOMICS</div>
+        <div class="stack-pill">MOBILE VIEWPORT</div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      const scaler      = document.querySelector("#camera-scaler");
+      const track       = document.querySelector("#camera-track");
+      const pStrip      = document.querySelector("#phone-strip");
+      const touchCursor = document.querySelector("#touch-cursor");
+      const phoneCont   = document.querySelector("#phone-container");
+      const stat1       = document.querySelector("#stat-1");
+      const stat2       = document.querySelector("#stat-2");
+
+      // =======================================================================
+      // TIMELINE (0.0s – 12.0s) · Perfectly Seamless 1080p Loop
+      // =======================================================================
+
+      // 0.0s - 2.0s: Settle and initial hero viewport
+      tl.to(scaler, { scale: 1.02, duration: 2.0, ease: "sine.inOut" }, 0.5);
+
+      // 2.0s - 4.5s: Mobile scroll to Sentimentos cards
+      tl.to(pStrip, { y: -780, duration: 2.2, ease: "power2.inOut" }, 2.0);
+      tl.to(stat1,  { scale: 1.03, boxShadow: "0 20px 50px -10px rgba(20, 103, 94, 0.15)", duration: 0.8 }, 2.5);
+
+      // Touch indicator on mobile Sentimentos card
+      tl.set(touchCursor, { opacity: 0, x: 200, y: 380, scale: 0.6 }, 3.8);
+      tl.to(touchCursor,  { opacity: 1, scale: 1.0, duration: 0.25 }, 3.9);
+      tl.to(touchCursor,  { scale: 0.8, duration: 0.15, yoyo: true, repeat: 1 }, 4.2);
+      tl.to(touchCursor,  { opacity: 0, duration: 0.3 }, 4.5);
+
+      // 4.5s - 7.5s: Scroll down to Abordagem TCC & FAQ
+      tl.to(pStrip, { y: -2400, duration: 2.8, ease: "power2.inOut" }, 4.8);
+      tl.to(stat1,  { scale: 1.0, boxShadow: "0 16px 40px -10px rgba(20, 103, 94, 0.08)", duration: 0.5 }, 4.9);
+      tl.to(stat2,  { scale: 1.03, boxShadow: "0 20px 50px -10px rgba(20, 103, 94, 0.15)", duration: 0.8 }, 5.5);
+
+      // Touch indicator on mobile WhatsApp booking CTA
+      tl.set(touchCursor, { opacity: 0, x: 190, y: 560, scale: 0.6 }, 6.8);
+      tl.to(touchCursor,  { opacity: 1, scale: 1.0, duration: 0.25 }, 6.9);
+      tl.to(touchCursor,  { scale: 0.82, duration: 0.15, yoyo: true, repeat: 1 }, 7.2);
+      tl.to(touchCursor,  { opacity: 0, duration: 0.3 }, 7.5);
+
+      // 7.5s - 9.4s: Smooth scroll down to Contact & Location
+      tl.to(pStrip, { y: -4200, duration: 1.8, ease: "power2.inOut" }, 7.6);
+      tl.to(stat2,  { scale: 1.0, boxShadow: "0 16px 40px -10px rgba(20, 103, 94, 0.08)" }, 7.8);
+
+      // 9.5s - 12.0s: Ease smoothly back to exact initial frame-0 state
+      tl.to(pStrip, { y: 0, duration: 2.0, ease: "power2.inOut" }, 9.5);
+      tl.to(scaler, { scale: 1.0, duration: 2.0, ease: "power2.inOut" }, 9.5);
+
+      // Hard-set all animated properties to frame-0 values by 11.5s
+      tl.set(scaler,      { scale: 1.0, clearProps: "transform" }, 11.5);
+      tl.set(track,       { x: 0, y: 0, clearProps: "transform" }, 11.5);
+      tl.set(pStrip,      { y: 0, clearProps: "transform" }, 11.5);
+      tl.set(touchCursor, { opacity: 0, x: 200, y: 380, scale: 1.0, clearProps: "all" }, 11.5);
+      tl.set(stat1,       { scale: 1.0, boxShadow: "0 16px 40px -10px rgba(20, 103, 94, 0.08)", clearProps: "all" }, 11.5);
+      tl.set(stat2,       { scale: 1.0, boxShadow: "0 16px 40px -10px rgba(20, 103, 94, 0.08)", clearProps: "all" }, 11.5);
+    </script>
+  </body>
+</html>

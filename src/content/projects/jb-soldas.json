@@ -44,5 +44,210 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for JB Soldas, a specialized industrial welding, metal fabrication, and electrical busbars manufacturer (Barramento para painéis elétricos). Designed 11 responsive frames on the primary Design page across desktop, tablet, and mobile viewports (Homepage, Homepage1, Serviços, Sobre nós, Contato, and mobile counterparts) backed by a 16-node Style Guide documenting multi-breakpoint layout rules (Tablet 1024/641px, Mobile 640/320px), typography scales, and industrial color palettes in Figma (file key 6d6oqPNLo3gfpPiCu2iYBo).",
+      "context": "Agency employment at Sagitta delivering in June 2023 (concluded June 30, 2023). Juan served as the sole website UI designer within the agency team: Kelvin Bezerra created the JB Soldas logo and brand identity, Juan designed the complete multi-page responsive website in Figma, and an external no-code developer implemented and published the site on WordPress using Elementor. Scoped by Ramon.",
+      "outcome": "The website was implemented and published to production. The company subsequently ceased operations and the domain jbsoldas.com.br is offline today (verified curl 000). Historical delivery is verified via an era Wayback Machine archive (2024-03-20, 222 KB on WordPress 6.4.3 / Hello Elementor) whose section structure matches the audited Figma file. No commercial inquiry or sales metrics exist. This case study documents B2B industrial catalog design and multi-breakpoint responsive engineering.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer for JB Soldas's industrial website, service catalog, and mobile viewports. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress/Elementor implementation (handled by a no-code developer), or user research (Ramon's). Delivery status: shipped to production; business later ceased operations and the domain is offline. Proved via era Wayback snapshot (2024-03-20)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "B2B industrial catalog design: heavy welding and electrical busbars"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "responsive layout frames on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "4",
+              "label": "device breakpoints specified (1024px, 641px, 640px, 320px)",
+              "icon": "📱"
+            },
+            {
+              "value": "16",
+              "label": "style guide design tokens and breakpoint specifications",
+              "icon": "🎨"
+            },
+            {
+              "value": "100%",
+              "label": "production match verified via historical Wayback archive",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Industrial B2B buyers—procurement managers, electrical engineers, and factory plant supervisors—do not browse websites for entertainment. They evaluate suppliers based on technical capability, machinery precision, and commercial responsiveness. JB Soldas required a robust digital catalog to showcase specialized capabilities: TIG/MIG welding, custom sheet metal fabrication, and copper/aluminum electrical busbars for industrial switchboards."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Multi-breakpoint layout engineering across 11 frames"
+        },
+        {
+          "type": "prose",
+          "body": "The Figma file structured complete desktop and mobile parity across the site's primary operational surfaces:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Commercial Homepage (Homepage & Homepage1) — High-impact hero section highlighting manufacturing infrastructure, followed by technical capability grids and trust credentials.",
+            "Technical Service Catalog (Serviços & Serviços - Mobile) — Detailed breakdown of specialized welding processes, material tolerances, and electrical panel busbar specifications.",
+            "Institutional Credibility (Sobre nós & Sobre nós - Mobile) — Company history, engineering certifications, quality control protocols, and plant safety standards.",
+            "B2B Quote Request Funnel (Contato & Contato - Mobile) — Direct quote inquiry form structured to capture technical project specifications, file attachments, and delivery urgency."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Shipping is evidenced: the 2024-03-20 Wayback snapshot (222,969 B on WordPress 6.4.3 / Hello Elementor) verifies public deployment with section runs matching Figma. But 'shipped' means the design was implemented and made public—never that Juan built the code, hosted the server, or created the brand logo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Breakpoint documentation in the Style Guide"
+        },
+        {
+          "type": "prose",
+          "body": "The 16-node Style Guide page (node 1:16) provided the developer with explicit breakpoint thresholds: Tablet layouts at 1024px and 641px, and Mobile layouts at 640px and 320px. By documenting column collapse rules and touch target minimums directly in Figma, the handoff eliminated guesswork during WordPress Elementor assembly."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra authored the JB Soldas logo and brand visual identity.",
+            "Not WordPress or Elementor implementation. The website was assembled in WordPress by an external no-code developer.",
+            "Not user research or discovery. Requirements and client parameters were scoped by Ramon.",
+            "Not currently accessible on the live web. The business ceased operations and jbsoldas.com.br is offline; delivery is proven through the 2024-03-20 Wayback capture.",
+            "Not supported by sales metrics. No lead counts, RFQ volumes, or commercial figures were retained."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Clarity and structure in industrial web design"
+        },
+        {
+          "type": "prose",
+          "body": "JB Soldas exemplifies disciplined B2B web design: presenting heavy industrial manufacturing with technical rigor and clear lead capture. By pairing detailed service documentation with strict multi-breakpoint responsive rules, the project delivered a professional digital presence for an industrial manufacturer."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a JB Soldas, indústria especializada em soldas industriais, caldeiraria e fabricação de barramentos para painéis elétricos. Desenvolvi 11 pranchetas responsivas na página principal de Design abrangendo desktop, tablet e mobile (Homepage, Homepage1, Serviços, Sobre nós, Contato e versões mobile), com suporte de um Style Guide com 16 nós documentando regras de layout para múltiplos breakpoints (Tablet 1024/641px, Mobile 640/320px), escalas tipográficas e paleta industrial no Figma (arquivo 6d6oqPNLo3gfpPiCu2iYBo).",
+      "context": "Atuação como funcionário na agência Sagitta em junho de 2023 (concluído em 30 de junho de 2023). Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou o logotipo e a identidade visual da JB Soldas, Juan desenhou todo o site responsivo no Figma, e um desenvolvedor no-code implementou e publicou as páginas em WordPress com Elementor. Escopo conduzido por Ramon.",
+      "outcome": "O site foi implementado e publicado em produção. A empresa encerrou suas atividades posteriormente e o domínio jbsoldas.com.br encontra-se inativo (curl 000 verificado). A entrega histórica é comprovada via snapshot do Wayback Machine (20/03/2024, 222 KB em WordPress 6.4.3 / Hello Elementor), cuja estrutura de seções coincide exatamente com o arquivo Figma auditado. Não existem métricas de vendas ou pedidos de orçamento. Este estudo de caso documenta o design de catálogo B2B industrial e a engenharia de layouts responsivos.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Fui o designer único de UI do site para a estrutura institucional, catálogo de serviços e viewports mobile da JB Soldas. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação em WordPress/Elementor (executada por um desenvolvedor no-code) nem a pesquisa de discovery (feita por Ramon). Status de entrega: publicado em produção; a empresa encerrou atividades e o domínio está offline. Comprovado via snapshot histórico do Wayback Machine (20/03/2024)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design de catálogo industrial B2B: soldas pesadas e barramentos elétricos"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "pranchetas responsivas na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "4",
+              "label": "breakpoints de tela especificados (1024px, 641px, 640px, 320px)",
+              "icon": "📱"
+            },
+            {
+              "value": "16",
+              "label": "tokens e especificações técnicas no Style Guide",
+              "icon": "🎨"
+            },
+            {
+              "value": "100%",
+              "label": "de conformidade comprovada no snapshot histórico do Wayback",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Compradores industriais B2B — gerentes de suprimentos, engenheiros eletricistas e supervisores de fábrica — avaliam fornecedores com base em capacidade técnica instalada, precisão dimensional e velocidade de resposta comercial. A JB Soldas necessitava de um catálogo institucional sólido para evidenciar seus diferenciais técnicos: soldagem especializada TIG/MIG, caldeiraria sob medida e barramentos de cobre e alumínio para quadros elétricos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Estrutura de layouts responsivos em 11 pranchetas"
+        },
+        {
+          "type": "prose",
+          "body": "O arquivo Figma estruturou paridade visual completa entre as versões para computador e smartphones nas principais páginas institucionais:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Página Inicial Comercial (Homepage e Homepage1) — Destaque visual da infraestrutura fabril, seguido por grade de capacidades técnicas e credenciais de segurança.",
+            "Catálogo Técnico de Serviços (Serviços e Serviços - Mobile) — Detalhamento dos processos de solda, tolerâncias metalúrgicas e especificações de barramentos para painéis.",
+            "Credibilidade Institucional (Sobre nós e Sobre nós - Mobile) — Trajetória da empresa, certificações de qualidade e normas regulamentadoras atendidas.",
+            "Captura de Orçamentos B2B (Contato e Contato - Mobile) — Formulário preparado para envio de especificações de projeto, arquivos técnicos e prazos de entrega."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "A publicação histórica está comprovada: o snapshot de 20/03/2024 no Wayback Machine (222.969 B em WordPress 6.4.3 / Hello Elementor) atesta a presença online com seções fiéis ao Figma. Contudo, 'publicado' significa que o layout foi codificado e foi ao ar — nunca que Juan programou o código, hospedou o servidor ou desenhou o logotipo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Documentação de breakpoints no Style Guide"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 16 nós (nó 1:16) especificou faixas de transição para o desenvolvedor: layouts para tablet em 1024px e 641px, e mobile em 640px e 320px. Ao documentar regras de quebra de colunas e áreas mínimas de toque diretamente no Figma, o handoff eliminou ambiguidades durante a montagem no Elementor."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra foi o autor do logotipo e identidade visual da JB Soldas.",
+            "Não é programação em WordPress ou Elementor. O site foi montado no CMS por um desenvolvedor no-code.",
+            "Não é pesquisa ou discovery. O escopo e parâmetros foram levantados por Ramon.",
+            "Não está acessível no domínio ao vivo hoje. A empresa encerrou atividades e o site está offline; a entrega é comprovada pelo snapshot histórico de 2024.",
+            "Não possui dados de vendas. Nenhuma métrica de leads ou solicitações de cotação foi retida."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Clareza e solidez no design para a indústria"
+        },
+        {
+          "type": "prose",
+          "body": "A JB Soldas exemplifica o rigor exigido no design web para o setor industrial: apresentar processos pesados de manufatura com clareza técnica e direcionamento objetivo para cotações. Ao combinar especificações detalhadas com regras sólidas de responsividade, o projeto forneceu um canal digital profissional para a metalúrgica."
+        }
+      ]
+    }
+  }
 }

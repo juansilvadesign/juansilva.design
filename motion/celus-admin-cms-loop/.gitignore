@@ -1,0 +1,9 @@
+renders/
+snapshots/
+*.master-*
+*.mp4
+*.webm
+*.jpg
+*.webp
+node_modules/
+.DS_Store

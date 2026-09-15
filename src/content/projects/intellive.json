@@ -41,5 +41,178 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI/UX designer for a hybrid digital physiotherapy and clinical rehabilitation platform (403-child Design page in a 6-page, 699-node artifact) architected for patients (B2C), employers (B2B corporate ergonomics and absenteeism reduction), and healthcare practitioners. Designed an automated 117-step clinical assessment decision tree, real-time diagnostic synthesis calculation states (Gerando diagnóstico), automated rehabilitation schedule generation (Gerando cronograma), active treatment trackers, remote specialist booking, and a clinical design system with specialized icons for eight physiotherapy fields.",
+      "context": "Agency engagement at Sagitta delivering up to May 6, 2024. The platform was conceived to bridge digital and physical clinical therapy ('Fisioterapia híbrida: o melhor de dois mundos'), combining self-guided rehabilitation protocols with teleconsultation access to certified physical therapists. Juan was the UI/UX designer within a multidisciplinary team alongside engineering.",
+      "outcome": "The platform was built and launched into production. The venture subsequently ceased commercial activities, and intellive.com.br is defunct. No clinical or business metrics exist; this project stands as audited evidence of high-complexity clinical decision trees, dynamic treatment generators, and multi-audience healthcare UI design.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the UI/UX designer for the patient diagnostic engine, treatment schedule generator, active therapy dashboards, specialist teleconsultation flows, corporate health views, and landing pages. I do not claim medical compliance certification, EHR clinical integration, backend development, or platform operations. Delivery status: launched to production; the startup later closed and its domain went offline."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Hybrid digital healthcare: patients, employers, and clinicians"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "699",
+              "label": "canvas nodes across 6 Figma pages (403 on core Design)",
+              "icon": "📐"
+            },
+            {
+              "value": "117",
+              "label": "screen steps in the automated clinical assessment engine",
+              "icon": "🩺"
+            },
+            {
+              "value": "8",
+              "label": "physiotherapy specialty component sets",
+              "icon": "🧬"
+            },
+            {
+              "value": "3",
+              "label": "distinct audiences (Patients B2C, Corporate B2B, Clinicians)",
+              "icon": "👥"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Digital musculoskeletal care requires careful triage. Self-directed exercises without proper clinical evaluation risk worsening patient injuries, while clinic visits present geographical and scheduling hurdles. Intellive was designed around a hybrid philosophy: automating initial clinical symptom mapping while keeping certified physical therapists in the loop for complex diagnoses and teleconsultation oversight."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The 117-step clinical assessment and dynamic diagnosis engine"
+        },
+        {
+          "type": "prose",
+          "body": "The core of the patient onboarding experience is an automated 117-step clinical questionnaire (Questionário 1 through Questionário 117). Rather than using static survey forms, the intake maps pain locations, symptom duration, movement limitations, previous surgeries, and ergonomic work habits. Upon completion, the interface guides the patient through dynamic synthesis states:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Diagnostic Synthesis Loading States — Dedicated calculation screens (Gerando diagnóstico and Gerando diagnóstico - Mobile) providing animated visual feedback while clinical logic compiles symptom clusters.",
+            "Automated Schedule Generation — Multi-stage loading states (Gerando cronograma) synthesizing diagnostic findings into personalized multi-week exercise sequences.",
+            "Active Rehabilitation Dashboard — Central patient management hub (Meus tratamentos and Perfil Paciente-ativo) displaying prescribed daily therapy videos, posture correction drills, and pain score logs.",
+            "Teleconsultation and Specialist Booking — Remote appointment booking modal (Consultar um especialista, node 4812:13296) and physician profile views (Doctor) connecting patients directly to physical therapists for manual intervention."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Clinical taxonomy: 8 physiotherapy specialty component sets"
+        },
+        {
+          "type": "prose",
+          "body": "In the 25-child Style Guide, I engineered 16 specialized component sets. This included a bespoke medical taxonomy across eight distinct physical therapy disciplines: Ortopédico (orthopedic rehabilitation), Pélvico (pelvic floor therapy), Reativo (post-trauma acute recovery), Preventivo (ergonomic injury prevention), Neuro (neurological rehabilitation), Cardio (cardiovascular conditioning), Respiratório (respiratory physiotherapy), and Cirurgia (pre/post-surgical recovery). Each specialty carries customized vector icon sets and clinical color indicators."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Multi-audience positioning: B2C patient, B2B corporate, and clinician"
+        },
+        {
+          "type": "prose",
+          "body": "Intellive operated on a three-tier business model reflected directly in the component architecture. On the Landing Page (4794:12124), dedicated card components articulated value propositions for three distinct audiences: CardSlidePaciente (at-home recovery for individuals), CardSlideEmpresa (corporate health programs targeting repetitive strain injury LER/DORT and workplace absenteeism reduction), and CardSlideProfissionais (clinical SaaS tools for independent physiotherapists)."
+        },
+        {
+          "type": "quote",
+          "text": "In digital health, interface clarity directly affects clinical compliance. If an intake questionnaire feels clinical without feeling intimidating, patients finish their assessments and commit to rehabilitation."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI/UX de uma plataforma de fisioterapia digital e reabilitação clínica híbrida (403 pranchas na tela principal em um artefato de 699 nós) estruturada para pacientes (B2C), empresas (B2B saúde corporativa e redução de absenteísmo) e profissionais de saúde. Desenvolveu uma anamnese clínica automatizada em 117 etapas, estados visuais de cálculo diagnóstico (Gerando diagnóstico), geração automática de cronograma de tratamento (Gerando cronograma), dashboards de acompanhamento da reabilitação, agendamento de teleconsultas e design system clínico com taxonomia para oito especialidades.",
+      "context": "Atuação na agência Sagitta com entregas concluídas em 6 de maio de 2024. A plataforma nasceu sob o conceito de 'Fisioterapia híbrida: o melhor de dois mundos', unindo exercícios digitais prescritos com acesso remoto a fisioterapeutas certificados. Juan atuou como designer de UI/UX em equipe integrada aos desenvolvedores.",
+      "outcome": "A plataforma foi desenvolvida e lançada em produção. Posteriormente, a empresa encerrou as atividades comerciais e o domínio intellive.com.br saiu do ar. Não existem métricas clínicas ou de faturamento auditáveis; o projeto serve como comprovação de design para árvores de decisão clínica de alta complexidade, geradores de cronograma e interfaces de saúde para múltiplos públicos.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer de UI/UX responsável pela anamnese de diagnóstico, gerador de cronograma de tratamento, telas de reabilitação ativa, agendamento de teleconsultas com especialistas, módulo corporativo e landing pages. Não reivindico certificação regulatória médica, integração clínica com prontuários eletrônicos (EHR), desenvolvimento backend ou operação clínica. Status de entrega: colocado em produção; a startup posteriormente fechou e o domínio está fora do ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Saúde digital híbrida: pacientes, empresas e profissionais"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "699",
+              "label": "nós em 6 páginas no Figma (403 na tela de Design)",
+              "icon": "📐"
+            },
+            {
+              "value": "117",
+              "label": "etapas de tela na anamnese clínica automatizada",
+              "icon": "🩺"
+            },
+            {
+              "value": "8",
+              "label": "conjuntos de componentes por especialidade de fisioterapia",
+              "icon": "🧬"
+            },
+            {
+              "value": "3",
+              "label": "públicos atendidos (Paciente B2C, Empresas B2B, Clínicos)",
+              "icon": "👥"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O cuidado musculoesquelético digital impõe triagem rigorosa. Exercícios autônomos sem anamnese adequada aumentam o risco de lesões, enquanto o comparecimento a consultórios físicos esbarra em limitações de tempo e deslocamento. A Intellive foi concebida sob o modelo híbrido: automatizar a identificação de sintomas e mapeamento postural, mantendo fisioterapeutas qualificados disponíveis para intervenções e teleconsultas de acompanhamento."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A anamnese de 117 etapas e o motor de diagnóstico dinâmico"
+        },
+        {
+          "type": "prose",
+          "body": "O núcleo da jornada do paciente é um questionário clínico automatizado de 117 telas (Questionário 1 ao Questionário 117). Em vez de formulários estáticos, o fluxo mapeia localização exata da dor, intensidade, fatores agravantes, histórico cirúrgico e hábitos posturais de trabalho. Ao concluir o preenchimento, a interface apresenta estados de síntese em tempo real:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Estados de Cálculo do Diagnóstico — Telas de processamento com animações de carregamento (Gerando diagnóstico e Gerando diagnóstico - Mobile) que informam visualmente a compilação do quadro do paciente.",
+            "Geração Automática do Cronograma — Telas de síntese (Gerando cronograma) organizando os achados em planos terapêuticos personalizados com progressão de semanas.",
+            "Dashboard de Tratamento Ativo — Painel central do paciente (Meus tratamentos e Perfil Paciente-ativo) com rotinas diárias de exercícios guiados por vídeo, correções ergonômicas e registro de evolução de dor.",
+            "Agendamento de Teleconsultas — Modal para marcação de consultas remotas (Consultar um especialista, nó 4812:13296) e perfil de especialistas (Doctor) para suporte clínico individualizado."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Taxonomia clínica: 8 conjuntos de componentes por especialidade"
+        },
+        {
+          "type": "prose",
+          "body": "No Style Guide com 25 pranchas, desenvolvi 16 conjuntos de componentes dedicados. Isso incluiu uma taxonomia visual para oito campos da fisioterapia: Ortopédico, Pélvico, Reativo (reabilitação pós-trauma), Preventivo (ergonomia e prevenção laboral), Neuro, Cardio, Respiratório e Cirurgia (pré e pós-operatório). Cada especialidade conta com ícones vetoriais exclusivos e codificação de cor padronizada."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura para múltiplos públicos: B2C, B2B e Clínicos"
+        },
+        {
+          "type": "prose",
+          "body": "A Intellive operava sob um modelo de negócio em três frentes refletido na componentização da interface. Na Landing Page (4794:12124), cards específicos destacavam propostas de valor segmentadas: CardSlidePaciente (recuperação domiciliar para indivíduos), CardSlideEmpresa (programas corporativos focados em ergonomia, prevenção de LER/DORT e redução de absenteísmo) e CardSlideProfissionais (ferramentas clínicas para consultórios e profissionais liberais)."
+        },
+        {
+          "type": "quote",
+          "text": "Em saúde digital, a clareza da interface impacta diretamente a adesão ao tratamento. Se a anamnese transmite segurança médica sem intimidar o paciente, ele responde com precisão e cumpre o plano de reabilitação."
+        }
+      ]
+    }
+  }
 }

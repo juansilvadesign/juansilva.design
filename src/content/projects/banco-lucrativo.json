@@ -41,5 +41,214 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Cross-border remittance and currency-exchange (FX) fintech platform facilitating money movement between Brazil and Nigeria. 302 frames designed mobile-first across two complete user roles: a customer banking application (PIX send/QR, multi-corridor transfers with a 10-frame compliance check, bill payments, balance management, and receipt sharing) and an operations back office (FX order clearing with per-corridor pending/settled/cancelled queues, customer administration, and financial reporting).",
+      "context": "Agency employment at Sagitta, delivering as sole designer across the entire product, brand identity, and marketing site. The project was conceived and designed mobile-first; desktop views were added subsequently as a layout resize rather than a redesign per managerial directive. Documented between June and September 2024.",
+      "outcome": "Shipped to production and launched live as the second confirmed deployed product in the Sagitta agency corpus. However, the business ultimately folded because the client failed to secure the necessary commercial banking license to operate in Nigeria. I had personally identified and flagged this market-viability risk prior to project kickoff, observing that major global remittance services like Wise did not support Nigerian corridors for that exact regulatory constraint. The venture proceeded on faith and collapsed on that precise risk.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Nuance: I was the sole designer for the entire platform, the brand layer, and the marketing website. Scoping note: the application was designed mobile-first; the desktop views were mechanically resized on a manager's timeline directive. Always evaluate this project on its mobile screens. Regulatory note: I raised the Nigerian licensing blocker before kickoff; the client chose to proceed, and the venture later closed due to that exact licensing failure."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Fintech architecture for emerging-market remittances"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "302",
+              "label": "frames designed across customer and admin surfaces",
+              "icon": "💳"
+            },
+            {
+              "value": "10",
+              "label": "compliance verification screens for Nigerian transfers",
+              "icon": "🛡️"
+            },
+            {
+              "value": "2",
+              "label": "complete user roles (Customer Banking & FX Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "marketing site breakpoints with interactive motion",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Remittance corridors between emerging markets present severe operational friction. Fluctuating foreign exchange rates, local payment rails, anti-money-laundering (AML) compliance, and banking illiquidity demand specialized interfaces that give users absolute transparency while providing operations teams with rigorous transaction clearing tools."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The Customer app: dual-corridor transfers and Brazilian PIX"
+        },
+        {
+          "type": "prose",
+          "body": "The customer application structures everyday banking alongside cross-border transfers:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cross-Border Corridors — Dedicated, first-class transfer paths for Brazil (Transferência/Brasil) and Nigeria (Transferência/Nigéria), featuring currency rate conversions and recipient routing.",
+            "Ten-Frame Compliance Verification — A dedicated validation sequence (TransferenciaNigéria/check) guiding senders through identity checks, recipient bank verification, and purpose-of-transfer declarations.",
+            "Full PIX Integration — Complete modeling of Brazil's instant payment rail (EnviarPix01–11, PixQRcode01), including dynamic QR generation, key lookup, and real-time confirmations.",
+            "Bill Payments and Balance Management — Utility barcode scanning (Pagar 01–12), mobile top-ups (Recarga), insufficient funds handling (Saldo indisponível), and shareable transaction receipts (popupComprovante/Compartilhar)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The Operations back office: the FX clearing desk"
+        },
+        {
+          "type": "prose",
+          "body": "The administrative application equips financial operators with real-time settlement mechanisms:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Corridor-Segmented FX Desks — Real-time order queues split by market corridor and transaction status: pending, executed, and cancelled queues for Brazil (cambioBR) and Nigeria (cambioNGR).",
+            "Spread and Conversion Controls — Dynamic rate adjustments (conversão, popupConversão) allowing operators to peg exchange spreads to live market benchmarks.",
+            "Entity Management and Financial Audits — Granular customer directory (clientes), administrative staff controls, support chat threads, and recharge/payment balance sheets."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Brand identity and early motion design"
+        },
+        {
+          "type": "prose",
+          "body": "Beyond the product UI, I authored the brand system: four logo variations, typography, spacing hierarchies, and custom geometric surface patterns (Texturas and Pattern) — the only project in this portfolio featuring bespoke surface textures. For the marketing site, I designed an interactive hero motion component in Figma (header_component 2999:36597) that astonished the client during presentation, marking the inception of my motion design capabilities."
+        },
+        {
+          "type": "quote",
+          "text": "I flagged before we started that the Nigerian banking license would likely be denied — I use Wise daily and knew Nigeria was unsupported for that exact reason. The client went ahead anyway. We shipped the app, and the venture collapsed when the license never came."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Commercial judgement and production realities"
+        },
+        {
+          "type": "prose",
+          "body": "Banco Lucrativo represents a critical demonstration of commercial product judgement. A designer is not merely an executor of visual requests; understanding market viability and regulatory context is paramount. The product shipped and proved the design was technically sound, and the agency later reused 300 of these 302 frames to scaffold an in-house FX platform (CâmbioFlow) — validating the architectural durability of the component system."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Plataforma fintech de remessas internacionais e câmbio facilitando transferências financeiras entre o Brasil e a Nigéria. 302 telas desenhadas em mobile-first cobrindo dois perfis de usuário completos: aplicativo bancário do cliente (envio/QR de PIX, transferências bicorredor com verificação de compliance de 10 telas, pagamento de boletos, gestão de saldo e extrato com comprovantes) e back office de operações (mesa de ordens de câmbio com filas de pedidos pendentes/liquidados/cancelados por país, administração de clientes e relatórios).",
+      "context": "Atuação como designer contratado pela agência Sagitta, assumindo com exclusividade todo o produto, a identidade de marca e o site institucional. O projeto foi concebido e desenhado mobile-first; a visualização para desktop foi adicionada posteriormente como um redimensionamento de pranchetas por determinação da liderança da agência. Documentado entre junho e setembro de 2024.",
+      "outcome": "Publicado em produção e lançado como o segundo produto comprovadamente colocado no ar no acervo da agência Sagitta. No entanto, a empresa encerrou as operações porque o cliente nunca obteve a licença bancária necessária para operar na Nigéria. Eu havia apontado esse risco regulatório antes do início do projeto, observando que serviços globais como a Wise não operavam na Nigéria por esse mesmo impedimento legal. O cliente optou por seguir em frente e o negócio ruiu exatamente sobre esse obstáculo.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Nuance de Escopo: Fui o designer único de toda a plataforma, da identidade visual e do site institucional. Nota de escopo: o aplicativo foi planejado mobile-first; as telas desktop foram redimensionadas mecanicamente por diretriz da gestão. Avalie este projeto sempre pelas telas mobile. Nota regulatória: apontei o risco da licença na Nigéria antes do início; o cliente decidiu avançar e o negócio encerrou por falta da homologação."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura fintech para remessas em mercados emergentes"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "302",
+              "label": "telas desenhadas entre aplicativo do cliente e painel admin",
+              "icon": "💳"
+            },
+            {
+              "value": "10",
+              "label": "telas no fluxo de checagem de compliance para a Nigéria",
+              "icon": "🛡️"
+            },
+            {
+              "value": "2",
+              "label": "perfis completos (App do Cliente e Mesa de Câmbio)",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "breakpoints do site institucional com motion interativo",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Corredores de remessa entre mercados emergentes impõem atritos operacionais severos. Oscilações cambiais bruscas, trilhas locais de pagamento, exigências de prevenção à lavagem de dinheiro (AML) e liquidez bancária exigem interfaces com total clareza para o cliente e ferramentas rigorosas de compensação para as mesas financeiras."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "App do Cliente: transferências bicorredor e PIX nativo"
+        },
+        {
+          "type": "prose",
+          "body": "A aplicação do cliente organiza serviços bancários essenciais e remessas transfronteiriças:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Corredores Internacionais Dedicados — Fluxos independentes de primeiro nível para o Brasil (Transferência/Brasil) e para a Nigéria (Transferência/Nigéria), calculando taxas de conversão e dados bancários do destinatário.",
+            "Checagem de Compliance em 10 Telas — Sequência estruturada (TransferenciaNigéria/check) guiando o usuário por validação de identidade, verificação da conta de destino e declaração da finalidade da transferência.",
+            "Integração Completa ao PIX — Modelagem integral do meio de pagamento instantâneo brasileiro (EnviarPix01–11, PixQRcode01), contemplando leitura e geração de QR code dinâmico, chaves e comprovantes em tempo real.",
+            "Pagamentos e Gestão de Saldo — Leitura de código de barras de boletos (Pagar 01–12), recarga de saldo, tratamento de saldo insuficiente (Saldo indisponível) e extrato com comprovantes compartilháveis (popupComprovante/Compartilhar)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Back office de operações: a mesa de ordens de câmbio"
+        },
+        {
+          "type": "prose",
+          "body": "O painel administrativo capacita operadores financeiros a liquidar transações em tempo real:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Mesas de Câmbio Segmentadas por Corredor — Filas operacionais divididas por país e status: ordens pendentes, liquidadas e canceladas para o Brasil (cambioBR) e para a Nigéria (cambioNGR).",
+            "Controle de Spread e Conversão — Painel de ajuste dinâmico de taxas (conversão, popupConversão) permitindo aos operadores calibrar a margem cambial sobre a cotação oficial.",
+            "Gestão de Contas e Auditoria — Diretório detalhado de clientes (clientes), controle de permissões de administradores, chat de suporte integrado e balanço financeiro de entradas e saídas."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Identidade de marca e o primeiro projeto de motion"
+        },
+        {
+          "type": "prose",
+          "body": "Além da UI do produto, estruturei a identidade da marca: quatro variações de logo, tipografia, espaçamentos e padrões gráficos de superfície exclusivos (Texturas e Pattern) — o único projeto no portfólio com trabalho autoral de texturas. Para o site institucional, desenhei uma animação interativa no hero em Figma (header_component 2999:36597) que entusiasmou o cliente e inaugurou minha atuação em motion design."
+        },
+        {
+          "type": "quote",
+          "text": "Alertei antes de começarmos que a licença bancária na Nigéria dificilmente sairia — uso a Wise diariamente e sabia que a Nigéria não era atendida por essa exata restrição regulatória. O cliente preferiu arriscar. Lançamos o app, e a empresa fechou quando a licença nunca foi concedida."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Visão de negócios e solidez arquitetural"
+        },
+        {
+          "type": "prose",
+          "body": "O Banco Lucrativo demonstra visão prática de viabilidade comercial. Um designer sênior não atua apenas como desenhista de telas; compreender o contexto de mercado e barreiras regulatórias é fundamental. O software foi entregue e colocado em produção, e a agência posteriormente reaproveitou 300 das 302 telas para estruturar uma plataforma própria de câmbio (CâmbioFlow) — atestando a qualidade e reutilização do sistema de componentes."
+        }
+      ]
+    }
+  }
 }

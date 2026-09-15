@@ -41,5 +41,196 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI/UX designer for an on-demand laundry and dry-cleaning gig-economy marketplace connecting urban consumers with independent washing partners (Lavadeiras) and operational administrators. Authored 718 total top-level nodes across nine Figma pages, including a 401-node master product suite, dedicated 70-node consumer mobile app, 55-node partner washer app, and a 44-node investor relations pitch landing page.",
+      "context": "Agency engagement at Sagitta delivering up to March 3, 2024. Benchmarked against US and Brazilian leaders Rinse and Washout. Built to deliver an Uber-like service model for home laundry in Brazil: customer scheduling and recurring subscription tiers on one side, independent washer onboarding, order queues, and supplies logistics on the other, backed by investor fundraising materials.",
+      "outcome": "The marketplace launched into production and went live. However, the startup subsequently ceased operations and closed business (Instagram handle remains archived at @alvalavanderiaonline). No production metrics survive; the project demonstrates verified multi-surface gig-economy product design, partner vetting workflows, and investor pitch deck architecture.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the UI/UX designer for the entire 718-node multi-surface suite, covering the consumer mobile app, partner washer app, master product views, investor pitch landing page, and design system. I do not claim backend development, delivery logistics operations, or business ownership. Delivery status: the platform launched live to production, but the venture later ceased operations and its domain is offline."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Two-sided gig economy: consumer convenience meets partner enablement"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "718",
+              "label": "top-level canvas nodes across 9 specialized Figma pages",
+              "icon": "📐"
+            },
+            {
+              "value": "3",
+              "label": "distinct stakeholder environments (Customer, Partner Washer, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "21",
+              "label": "screens in the partner washer vetting & onboarding funnel",
+              "icon": "📋"
+            },
+            {
+              "value": "10",
+              "label": "semantic color styles and desktop grid foundation",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "On-demand laundry logistics present unique marketplace friction. Unlike ride-hailing or food delivery, laundry turnaround spans multiple days and involves variable garment weights, delicate fabric treatments, and physical detergent supplies. Inspired by global pioneers like Rinse and local player Washout, Alva Lavanderia was structured as a decentralized gig-economy network where urban households outsource weekly laundry to certified home washers."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The partner washer mobile experience: onboarding, queues, and supplies"
+        },
+        {
+          "type": "prose",
+          "body": "A gig-economy marketplace collapses if service partners are unsupported. On the dedicated 55-node Lavadeira page, I designed a specialized partner mobile application focused on operational clarity:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "21-Screen Partner Onboarding & Vetting — Multi-stage registration funnel (Cadastro - Mobile 1–21) capturing personal identification, home laundry infrastructure, machine capacity, and sanitization verification.",
+            "Order Queue Management — Transparent order intake and status updates (Home - Mobile and Welcome - Mobile) with pickup/dropoff confirmations.",
+            "Supplies Inventory Tracking — Specialized tracking interface (Meus produtos - Mobile) enabling washers to monitor detergents, fabric softeners, and branded packaging provided by the network.",
+            "Earnings and Payment Overview — Clear accounting views showing completed wash batches and scheduled financial payouts."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Customer mobile app: subscriptions, scheduling, and card checkout"
+        },
+        {
+          "type": "prose",
+          "body": "For urban consumers (70 nodes on the Cliente page), the focus was effortless subscription management. Users configure their profile (Seleção de perfil - Mobile), choose from seven recurring laundry subscription plans (Planos - Mobile) based on monthly bag quotas, enter pickup schedules, and complete payment via credit card (Pagamento - Cartão). The flow includes full customer support and FAQ integrations (Suporte-dúvidas frequentes)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The fundraising suite: investor landing page and unit economics"
+        },
+        {
+          "type": "prose",
+          "body": "Beyond consumer interfaces, the project included a dedicated 44-node page named Landing Page Investidor. Built specifically for venture capital and angel presentations, this page translated Alva's business model into visual narrative: Total Addressable Market (TAM), bag unit economics, operational gross margin models, customer retention cohorts, and partner acquisition economics."
+        },
+        {
+          "type": "quote",
+          "text": "A two-sided marketplace is only as reliable as its partner experience. If the partner app doesn't make supply tracking and order queueing frictionless, the customer service promise falls apart."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Visual foundations and interactive components"
+        },
+        {
+          "type": "prose",
+          "body": "The 35-child Style Guide page establishes a clean, water-inspired aesthetic: 10 local color styles spanning primary blues (1 primário #0071BD, 2 primário #39DBEA, 3 primário #23B4D8), translucent card overlays, and a linear cyan-to-navy gradient. The component system incorporates interactive slider components (ImageSlider, HeaderSlider), partner profile cards (card-lavadeira), and dual navigation bars for both marketing surfaces and web app environments."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI/UX de um marketplace de lavanderia sob demanda e gig economy conectando clientes urbanos a lavadeiras parceiras independentes e administradores da operação. Desenvolveu 718 nós de primeiro nível em nove páginas no Figma, incluindo uma suíte-mestra de 401 nós, aplicativo mobile exclusivo do cliente (70 nós), app da lavadeira parceira (55 nós) e landing page de apresentação para investidores (44 nós).",
+      "context": "Atuação na agência Sagitta com entrega final concluída em 3 de março de 2024. Teve como referência de mercado as operações da americana Rinse e da brasileira Washout. Estruturado para operar um modelo de gig economy para lavanderia residencial no Brasil: agendamento e planos de assinatura para clientes de um lado, e credenciamento de lavadeiras, fila de pedidos e suprimentos do outro, respaldado por materiais de captação de investimento.",
+      "outcome": "O marketplace foi lançado e entrou em produção no mercado. No entanto, a startup posteriormente encerrou suas atividades comerciais e fechou o negócio (perfil arquivado no Instagram em @alvalavanderiaonline). Não restam métricas públicas de produção; o projeto demonstra competência comprovada em design de produto de gig economy multisuperfície, credenciamento de parceiros e landing pages de captação de investimentos.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer de UI/UX de todo o ecossistema de 718 nós, abrangendo o app do cliente, app da lavadeira parceira, suíte-mestra de produto, landing page para investidores e style guide. Não reivindico desenvolvimento de software, operação logística ou propriedade do negócio. Status de entrega: a plataforma foi lançada comercialmente, mas a startup encerrou suas operações posteriormente e o domínio está fora do ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Gig economy de dois lados: conveniência do cliente e empoderamento da parceira"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "718",
+              "label": "nós totais distribuídos em 9 páginas especializadas no Figma",
+              "icon": "📐"
+            },
+            {
+              "value": "3",
+              "label": "ambientes distintos de usuário (Cliente, Lavadeira Parceira, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "21",
+              "label": "telas no funil de credenciamento e validação de parceiras",
+              "icon": "📋"
+            },
+            {
+              "value": "10",
+              "label": "estilos de cor semânticos e grid desktop estruturado",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A logística de lavanderia sob demanda impõe desafios operacionais únicos. Diferente de corridas por aplicativo ou entrega de refeições, o ciclo de lavanderia dura dias e envolve pesagem de peças, cuidados com tecidos delicados e controle de insumos químicos. Inspirada em modelos consolidados como a americana Rinse e a brasileira Washout, a Alva Lavanderia nasceu para descentralizar a lavagem doméstica em uma rede de lavadeiras residenciais qualificadas."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O app da lavadeira parceira: credenciamento, fila de pedidos e insumos"
+        },
+        {
+          "type": "prose",
+          "body": "Um marketplace de serviços falha se a experiência de quem executa o trabalho for negligenciada. Na página dedicada Lavadeira (55 nós), projetei uma aplicação mobile focada em simplificar a rotina da parceira:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Funil de Credenciamento em 21 Telas — Cadastro em etapas (Cadastro - Mobile 1 a 21) coletando documentos pessoais, infraestrutura de lavagem disponível, capacidade da máquina e padrões de secagem.",
+            "Fila Operacional de Pedidos — Acompanhamento em tempo real de coletas e entregas agendadas (Home - Mobile e Welcome - Mobile) com confirmações de recebimento.",
+            "Gestão de Insumos e Produtos — Interface para controle de sabão, amaciante e embalagens padronizadas fornecidas pela rede (Meus produtos - Mobile).",
+            "Painel de Repasses Financeiros — Extrato transparente de lotes de roupas lavadas e datas de pagamento."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Aplicativo do cliente: assinaturas, agendamento e checkout"
+        },
+        {
+          "type": "prose",
+          "body": "Para o consumidor residencial (70 nós na página Cliente), o foco foi a simplicidade da assinatura. O usuário configura seu perfil (Seleção de perfil - Mobile), escolhe entre sete planos de recorrência (Planos - Mobile) baseados em cotas de sacolas mensais, agenda a coleta no endereço e conclui o pagamento com cartão de crédito (Pagamento - Cartão), com suporte integrado a dúvidas frequentes."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A suíte para captação: landing page de investidores e unit economics"
+        },
+        {
+          "type": "prose",
+          "body": "Além das interfaces de operação, o projeto contou com a página Landing Page Investidor (44 nós). Criada para apresentações de captação com fundos de venture capital e investidores-anjo, a página traduzia os fundamentos do negócio em narrativa visual: tamanho de mercado (TAM), unit economics por sacola lavada, projeções de margem bruta, retenção de clientes e custo de aquisição de parceiras."
+        },
+        {
+          "type": "quote",
+          "text": "Um marketplace de dois lados é tão sólido quanto a experiência de quem presta o serviço. Se o app da parceira não tornar a gestão de insumos e a fila de pedidos simples, a promessa feita ao cliente final não se sustenta."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Identidade visual e componentes interativos"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 35 nós estrutura uma identidade leve e aquática: 10 estilos de cor com tons azuis destacados (1 primário #0071BD, 2 primário #39DBEA, 3 primário #23B4D8), fundos translúcidos e gradientes lineares. A biblioteca inclui sliders interativos de imagem (ImageSlider, HeaderSlider), cartões de apresentação de lavadeiras (card-lavadeira) e barras de navegação responsivas para landing pages e app web."
+        }
+      ]
+    }
+  }
 }

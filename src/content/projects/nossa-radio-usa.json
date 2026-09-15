@@ -44,5 +44,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole UI Designer for the dedicated 'Copinha & Placares de Futebol' tournament and live scoreboards feature branch of Nossa Rádio USA, a major Brazilian community radio station in the United States. Designed 93 canvas nodes on the dedicated Placares de Futebol page (node 1775:32 in Figma file pHbnXgEdjlZyFQ8BbVOd8h): authored the tournament public landing page, team registration intake with confirmation popups, multi-round bracket visualizations (Chaveamento 1.1 to 1.5 across desktop and mobile), group standings tables (Tabela), sponsor spotlights, and the tournament administrative management back-office (Admin, Adicionar equipe, Placar) across desktop and mobile viewports, backed by 13 dedicated component sets.",
+      "context": "Agency employment at Sagitta delivering from December 12, 2023 to January 15, 2024. Juan served as the feature branch lead UI designer. ATTRIBUTION SPLIT: Esther designed the original Nossa Rádio USA radio station website before Juan joined Sagitta (pages 'Design' [85 children] and 'Alterações | Ester' [19 children]). Juan was brought in exclusively to design the entire new tournament branch. NOTE ON SOURCES: The Whimsical briefing for this project contained mixed boilerplate text from a school management system (Piaget Escola) and must be permanently disregarded.",
+      "outcome": "The main radio station remains live at nossaradiousa.com. The Copinha tournament landing page and live scores hub were deployed and active during the competition event, and were subsequently retired after the tournament concluded. No live archive of the temporary event subpage survives. No match engagement metrics exist. This case study documents complex tournament bracket UX (Chaveamento), sports standings tables, and tournament admin consoles.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the entire 'Copinha / Placares de Futebol' event branch (node 1775:32, 93 canvas nodes), including tournament brackets, standings tables, team registration, and the admin console. I do not claim the main radio station website (designed by Esther prior to my involvement). Source note: the Whimsical briefing contained corrupted Piaget Escola school text and is discarded. Delivery status: deployed and active during the tournament event; retired post-competition."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Sports tournament UX: live scoreboards and multi-stage brackets"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "93",
+              "label": "canvas nodes on Juan's dedicated Placares de Futebol page",
+              "icon": "⚽"
+            },
+            {
+              "value": "5 rounds",
+              "label": "bracket visualizations designed (Chaveamento 1.1 to 1.5)",
+              "icon": "🏆"
+            },
+            {
+              "value": "13",
+              "label": "component sets authored (Brackets, Scoreboards, Cards, Admin)",
+              "icon": "🧩"
+            },
+            {
+              "value": "100%",
+              "label": "dedicated sports feature branch, not the radio station portal",
+              "icon": "🎯"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Community sports tournaments generate intense local passion, but tracking matches across disparate social media posts creates confusion for fans, coaches, and sponsors. For the 'Copinha' soccer tournament organized by Nossa Rádio USA for the Brazilian diaspora, the station required a dedicated digital platform where fans could track live scores, view knockout bracket progressions, consult group standings, and review match schedules on mobile devices at the field."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Bracket visualization and tournament engine across 93 nodes"
+        },
+        {
+          "type": "prose",
+          "body": "On the dedicated Placares de Futebol page (node 1775:32), I designed a comprehensive sports platform:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Multi-Stage Knockout Brackets (Chaveamento 1.1 to 1.5) — Complex responsive bracket visualization tracking group stages, quarterfinals, semifinals, and finals on desktop and mobile, with custom connector lines (LineAnimation) and match format rules ('Round One Best of 3').",
+            "Live Group Standings Tables (Tabela) — Comprehensive league tables tracking points, matches played, goal difference, goals scored, and qualification badges on both desktop and mobile viewports.",
+            "Tournament Landing & Team Registration — Event discovery page with team registration forms (Inscrição 1.1 and 1.2), rulebook downloads, sponsor showcases (Patrocinadores), and registration confirmation dialogs (Pop-up sucesso).",
+            "Floating Live Scoreboard (PlacarFlutuante & Placar) — Real-time match score indicators allowing fans to monitor live game scores while browsing news and team rosters.",
+            "Tournament Administrative Console (Section Admin) — Back-office interface enabling tournament organizers to register teams (Adicionar equipe), input match scores, and update group standings in real time."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never say Juan designed Nossa Rádio USA: he designed its Copinha tournament branch. Esther authored the original radio station website before Juan joined Sagitta. And never use the project's Whimsical briefing: it contains corrupted text from a school management system (Piaget Escola boilerplate) describing a different system entirely."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Component architecture for sports interfaces"
+        },
+        {
+          "type": "prose",
+          "body": "To maintain visual consistency between tournament brackets, scorecards, and administrative forms, I authored 13 dedicated component sets: CardIcons, Card, Button, Placar, PlacarFlutuante, Team, Status, TopBanner, LineAnimation, NavIcons, Select, Hamburger Menu Hero, and Menu Item NavBar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not the main radio station website. Esther designed the primary Nossa Rádio USA radio station website and its visual identity.",
+            "Not the Whimsical briefing. The briefing file was corrupted with Piaget Escola school boilerplate and does not describe this project.",
+            "Not live today. The tournament platform was deployed during the competition event and retired after its conclusion.",
+            "Not backend live scoring software. I designed the UI and admin workflows in Figma, not the real-time WebSocket infrastructure.",
+            "Not supported by tournament analytics. No spectator attendance or web traffic metrics were retained."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The complexity of tournament bracket UX"
+        },
+        {
+          "type": "prose",
+          "body": "Nossa Rádio USA highlights the information design challenges of competitive sports platforms. By translating multi-round knockout brackets, real-time scoreboards, and league standings into a responsive mobile-first interface, the design provided an engaging tournament hub for the community."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI da branch especializada 'Copinha e Placares de Futebol' da Nossa Rádio USA, emissora da comunidade brasileira nos Estados Unidos. Designer único responsável pelos 93 nós da página exclusiva Placares de Futebol (nó 1775:32 no arquivo Figma pHbnXgEdjlZyFQ8BbVOd8h): desenvolvi a landing page do torneio, o fluxo de inscrição de equipes com pop-ups de confirmação, visualizações de chaveamento de mata-mata em múltiplas fases (Chaveamento 1.1 a 1.5 em desktop e mobile), tabelas de classificação de grupos (Tabela), vitrine de patrocinadores e o painel administrativo de gestão do torneio (Admin, Adicionar equipe, Placar), sustentados por 13 conjuntos de componentes dedicados.",
+      "context": "Atuação como funcionário na agência Sagitta de 12 de dezembro de 2023 a 15 de janeiro de 2024. Juan atuou como designer líder da nova funcionalidade esportiva. DIVISÃO DE ESCOPO: Esther desenhou o site institucional original da emissora de rádio antes da entrada de Juan na agência (páginas 'Design' [85 filhos] e 'Alterações | Ester' [19 filhos]). Juan foi alocado exclusivamente para criar a plataforma do torneio 'Copinha'. NOTA DE BRIEFING: O briefing do Whimsical deste projeto continha texto misturado de um sistema de gestão escolar (boilerplate da Escola Piaget) e deve ser permanentemente desconsiderado.",
+      "outcome": "A rádio principal permanece no ar em nossaradiousa.com. A landing page da Copinha e a central de placares foram implementadas e operaram durante o evento esportivo, sendo desativadas após o encerramento do campeonato. Não restam arquivos online da página temporária do torneio. Não existem métricas de audiência dos jogos. Este estudo de caso documenta a UX para chaveamento esportivo (mata-mata), tabelas de classificação e painéis administrativos de campeonatos.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei toda a branch de campeonato 'Copinha / Placares de Futebol' (nó 1775:32, 93 nós no Figma), incluindo chaveamentos, tabelas de classificação, inscrições de times e painel admin. Não reivindico o site da emissora de rádio (desenhado por Esther antes da minha chegada). Nota sobre fontes: o briefing no Whimsical continha texto de escola e foi descartado. Status de entrega: implementado e ativo durante o campeonato; desativado pós-evento."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UX para eventos esportivos: placares ao vivo e chaveamento de mata-mata"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "93",
+              "label": "nós na página exclusiva de Placares de Futebol desenhada por Juan",
+              "icon": "⚽"
+            },
+            {
+              "value": "5 fases",
+              "label": "de chaveamento de mata-mata estruturadas (Chaveamento 1.1 a 1.5)",
+              "icon": "🏆"
+            },
+            {
+              "value": "13",
+              "label": "conjuntos de componentes criados (Placares, Tabelas, Cards, Admin)",
+              "icon": "🧩"
+            },
+            {
+              "value": "100%",
+              "label": "foco na branch do torneio, e não no portal da emissora",
+              "icon": "🎯"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Campeonatos esportivos comunitários despertam grande engajamento, mas acompanhar resultados dispersos em redes sociais gera frustração para torcedores, atletas e patrocinadores. Para a 'Copinha' de futebol society organizada pela Nossa Rádio USA para a comunidade brasileira no exterior, a emissora necessitava de uma plataforma digital em que o público pudesse conferir placares ao vivo, o chaveamento de mata-mata e a classificação de grupos na beira do gramado pelo celular."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Motor de chaveamento e acompanhamento em 93 nós"
+        },
+        {
+          "type": "prose",
+          "body": "Na página exclusiva de Placares de Futebol (nó 1775:32), projetei a plataforma completa do torneio:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Visualização de Chaveamento (Chaveamento 1.1 a 1.5) — Estrutura de mata-mata para desktop e mobile cobrindo oitavas, quartas, semifinais e final, com linhas de conexão dinâmicas (LineAnimation) e formatos de confronto ('Round One Best of 3').",
+            "Tabela de Classificação de Grupos (Tabela) — Listagem com pontuação, vitórias, saldo de gols e zonas de classificação direta para o mata-mata.",
+            "Landing Page e Inscrição de Equipes — Página do evento com regulamento, ficha de inscrição (Inscrição 1.1 e 1.2), vitrine de patrocinadores (Patrocinadores) e pop-ups de confirmação (Pop-up sucesso).",
+            "Placar Flutuante de Jogos (PlacarFlutuante e Placar) — Indicador de partidas em andamento que acompanha a navegação sem cobrir o conteúdo.",
+            "Painel Administrativo do Torneio (Seção Admin) — Interface para a organização cadastrar times (Adicionar equipe), atualizar placares e lançar cartões em tempo real."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca diga que Juan desenhou a Nossa Rádio USA: ele desenhou a branch do torneio da Copinha. Esther concebeu o site da emissora antes da entrada de Juan na agência. E nunca use o briefing do Whimsical: ele continha textos de um sistema escolar (Escola Piaget) e descreve outro projeto."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Biblioteca de 13 componentes dedicados"
+        },
+        {
+          "type": "prose",
+          "body": "Para assegurar consistência visual entre as tabelas, os cards de jogo e os formulários administrativos, criei 13 conjuntos de componentes: CardIcons, Card, Button, Placar, PlacarFlutuante, Team, Status, TopBanner, LineAnimation, NavIcons, Select, Hamburger Menu Hero e Menu Item NavBar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é o site principal da emissora de rádio. Esther foi a autora do site institucional e da marca da rádio.",
+            "Não é o briefing do Whimsical. O arquivo continha dados corrompidos da Escola Piaget e não representa o projeto.",
+            "Não está ativo hoje. A plataforma do campeonato foi publicada durante o evento e desativada após o término da competição.",
+            "Não é infraestrutura de WebSockets ou placares em tempo real. Desenvolvi o design da interface no Figma, não o código do servidor.",
+            "Não possui métricas de audiência do torneio. Nenhum dado de visitantes ou visualizações de jogos foi retido."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A complexidade da arquitetura de chaveamentos esportivos"
+        },
+        {
+          "type": "prose",
+          "body": "A Nossa Rádio USA exemplifica os desafios de design de informação em eventos esportivos. Ao traduzir chaveamentos de mata-mata, placares flutuantes e tabelas de classificação em uma interface responsiva, o projeto entregou uma experiência esportiva completa para a comunidade."
+        }
+      ]
+    }
+  }
 }

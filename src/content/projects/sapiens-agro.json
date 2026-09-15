@@ -44,5 +44,218 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Comprehensive market-intelligence platform redesign for Brazilian agribusiness (Agrosap), serving producers, trading firms, and agricultural resellers. Established the architectural foundation for the web application: authentication and registration chains, trial-conversion homepage states, commercial subscription back office (plans, coupons, commercial partner affiliates, PF/PJ paths), and the modular design component library scaled across agricultural commodities, livestock, freight, FX, and weather.",
+      "context": "Agency employment at Sagitta, delivering under a sequential collaboration model with colleague João Chagas. Sapiens Agro already operated a live dashboard (sapiensagro.com/dashboardsapiens); this engagement was an end-to-end modernization of their existing commercial product. I established the founding design architecture (auth flows, application homepage, and core component library) before transitioning to another project, after which João Chagas expanded desktop data modules and completed mobile screens. Documented from August to October 2024.",
+      "outcome": "Shipped and actively trading under the Agrosap brand at sapiensagro.com/agrosap with over 200 corporate clients (producers, cooperatives, and financial institutions). Crucially, the public product screenshot featured on the client's live marketing homepage is my Figma homepage design displayed on a laptop, proving that my direct work reached production and is used by the client for sales acquisition. The commercial model designed in this file (7-day trial and reseller partner network) remains the company's live business model.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Foundation Boundary: I was the founding designer on this redesign. I built the desktop authentication flow, the application homepage with its trial-conversion states, and the component foundation. My colleague João Chagas completed subsequent desktop data modules and the mobile screens from my components. Public proof: the laptop product screenshot displayed on the client's live Agrosap marketing page (sapiensagro.com/agrosap) is my designed homepage."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Agribusiness intelligence across complex market views"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "167",
+              "label": "desktop interface frames on Design Desktop",
+              "icon": "🌾"
+            },
+            {
+              "value": "200+",
+              "label": "active corporate clients utilizing the live Agrosap platform",
+              "icon": "📈"
+            },
+            {
+              "value": "3",
+              "label": "commodity market views (Physical, Exchange, Port Premiums)",
+              "icon": "📊"
+            },
+            {
+              "value": "1",
+              "label": "public client marketing screenshot featuring my homepage design",
+              "icon": "💻"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Agtech market intelligence requires deep domain fluency. Agricultural commodities are not evaluated through generic stock charts: grain producers and trading firms trade across physical cash prices (cotaçõesFísicas), exchange futures (cotaçõesEmBolsa on B3 and CBOT), and port export premiums (prêmiosPorto at Santos and Paranaguá). The interface had to present multi-variable price discovery alongside freight logistics, fertilizer costs, and micro-climate forecasts."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The homepage foundation: onboarding, personalization, and trial conversion"
+        },
+        {
+          "type": "prose",
+          "body": "My direct authored contribution centered on the application homepage and conversion mechanics:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "First-Run Experience (Home - Primeiro acesso) — Guided user onboarding orienting new agribusiness subscribers to complex data tables.",
+            "Commodity Personalization (Home - Preferências) — Customization panel allowing farm managers to pin specific crops (Soy, Corn, Wheat) and regional physical markets to their main dashboard.",
+            "Seven-Day Trial Conversion (Home - Término 7 dias) — Urgency-focused expiration state prompting trial users to subscribe to commercial tiers before data access lapses.",
+            "Bom Dia Agro News Card — Real-time agricultural newsfeed integrated directly onto the dashboard home, aggregating sector updates over RSS.",
+            "Interactive Utilities — In-dashboard agricultural metric calculators and unit converters tailored to metric bags (sacas) and dollar-per-bushel calculations."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Commercial back office and partner distribution"
+        },
+        {
+          "type": "prose",
+          "body": "To support Sapiens Agro's commercial expansion, the system incorporates a complete administration suite:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Reseller Partner Network (Cadastro de parceiro comercial) — Four-state onboarding flow enabling agricultural input distributors and agronomy consultancies to resell platform subscriptions.",
+            "Discount and Coupon Engine (popupCriarCupom, Associados) — Promotional code management for partner campaigns and industry trade shows.",
+            "Dual Entity Onboarding — Segregated sign-up and contracting flows tailored for individual growers (ClientePF) and corporate agricultural enterprises (ClientePJ).",
+            "Notification Center and Platform Auditing — Custom broadcast dispatcher (Enviar notificação personalizada) and historical log management."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Sequential collaboration: founding vs. scaling"
+        },
+        {
+          "type": "prose",
+          "body": "Sapiens Agro illustrates a healthy sequential design partnership. Rather than two designers tangling within the same screens, I established the visual foundations, color ramps, typography, and component structures. When agency priorities shifted, João Chagas picked up the project and extended those components across the remaining data views (Livestock, Road Freight, Fertilizers) and adapted the screens to mobile."
+        },
+        {
+          "type": "quote",
+          "text": "On Sapiens Agro, the public marketing page at sapiensagro.com/agrosap displays my designed homepage on a laptop hero asset. It is an airtight confirmation that my foundation design reached production."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Verifiable production impact"
+        },
+        {
+          "type": "prose",
+          "body": "The client successfully launched the platform under the Agrosap brand name. Today, Sapiens Agro serves over 200 institutional agribusiness clients. Notably, the product architecture proved so robust that individual modules—such as Fretes Rodoviários (Road Freight)—eventually spun off into independent enterprise product lines (Sapiens Fretes). This engagement stands as verified proof of design craft powering commercial SaaS in Latin American agtech."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Redesign completo da plataforma de inteligência de mercado para o agronegócio brasileiro (Agrosap), atendendo produtores rurais, tradings e revendas agrícolas. Estruturei a fundação arquitetural da aplicação web: fluxos de autenticação e cadastro, estados de conversão e expiração de teste na home, back office comercial (gestão de planos, cupons, canais de revenda parceira, caminhos PF/PJ) e a biblioteca de componentes de design escalada para cotações de commodities, pecuária, frete rodoviário, câmbio e clima.",
+      "context": "Atuação como designer contratado pela agência Sagitta, entregando sob um modelo de colaboração sequencial com o colega João Chagas. A Sapiens Agro já operava um painel comercial no ar (sapiensagro.com/dashboardsapiens); o projeto tratou-se da modernização integral do produto ativo. Criei a arquitetura visual inicial (fluxos de autenticação, home da aplicação e biblioteca de componentes base) antes de ser remanejado para outro projeto, após o que João Chagas expandiu os módulos de dados desktop e finalizou as telas mobile. Documentado entre agosto e outubro de 2024.",
+      "outcome": "Lançado e em plena operação comercial sob a marca Agrosap em sapiensagro.com/agrosap, atendendo mais de 200 clientes corporativos (produtores, cooperativas e tradings). Fato central de comprovação: a captura de tela do produto exibida na página pública institucional do cliente é o layout da minha tela de home em um notebook, provando que meu trabalho direto foi para produção e é usado ativamente na captação comercial da empresa. O modelo comercial desenhado (7 dias de teste e rede de parceiros revendedores) permanece ativo.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Fundação: Atuei como designer fundador deste redesign. Desenhei os fluxos de autenticação no desktop, a home da aplicação com os estados de conversão de teste e a base de componentes de design. Meu colega João Chagas concluiu os módulos analíticos seguintes e as telas mobile a partir dos meus componentes. Evidência pública: o mockup de notebook na página institucional da Agrosap (sapiensagro.com/agrosap) exibe a tela de home que desenhei."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Inteligência no agronegócio em múltiplas visões de mercado"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "167",
+              "label": "telas desktop desenhadas no Figma (Design Desktop)",
+              "icon": "🌾"
+            },
+            {
+              "value": "200+",
+              "label": "clientes corporativos atendidos pela plataforma Agrosap",
+              "icon": "📈"
+            },
+            {
+              "value": "3",
+              "label": "visões de mercado para commodities (Físico, Bolsa, Porto)",
+              "icon": "📊"
+            },
+            {
+              "value": "1",
+              "label": "mockup oficial no site da empresa exibindo a minha tela de home",
+              "icon": "💻"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A inteligência de mercado no agro exige conhecimento técnico aprofundado do setor. Commodities agrícolas não são avaliadas como ações convencionais: produtores de grãos e tradings operam cruzando cotações no mercado físico (cotaçõesFísicas), contratos futuros em bolsa (cotaçõesEmBolsa na B3 e CBOT) e prêmios de exportação nos portos (prêmiosPorto em Santos e Paranaguá). A interface precisava unificar a formação de preços com fretes rodoviários, insumos fertilizantes e previsão climática regional."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A fundação da Home: primeiro acesso, personalização e teste grátis"
+        },
+        {
+          "type": "prose",
+          "body": "Minha contribuição direta concentrou-se na tela inicial da aplicação e nas mecânicas de conversão de usuários:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Experiência de Primeiro Acesso (Home - Primeiro acesso) — Onboarding guiado orientando novos assinantes a navegar pela densidade das matrizes de cotações.",
+            "Personalização de Culturas (Home - Preferências) — Painel de seleção permitindo ao gestor rural fixar suas principais culturas (Soja, Milho, Trigo) e praças físicas de interesse na tela inicial.",
+            "Conversão de Teste Grátis (Home - Término 7 dias) — Estado de alerta de expiração do período de testes incentivando a contratação dos planos comerciais antes do bloqueio das cotações.",
+            "Card de Notícias 'Bom Dia Agro' — Bloco de notícias agropecuárias em tempo real integrado à tela inicial via RSS.",
+            "Ferramentas e Conversores Agro — Calculadoras de conversão de sacas, peso e paridade cambial integradas diretamente à rotina do produtor."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Back office comercial e rede de parceiros revendedores"
+        },
+        {
+          "type": "prose",
+          "body": "Para alavancar a distribuição comercial da Sapiens Agro, o sistema incorpora ferramentas completas de administração:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rede de Canais e Revendas (Cadastro de parceiro comercial) — Fluxo em quatro etapas para credenciamento de revendas agrícolas e consultorias agronômicas que revendem acessos da plataforma.",
+            "Motor de Cupons Promocionais (popupCriarCupom, Associados) — Criação e rastreamento de cupons de desconto para feiras do setor e cooperativas parceiras.",
+            "Segmentação Cadastral PF e PJ — Fluxos diferenciados para produtores pessoa física (ClientePF) e tradings ou agroindústrias corporativas (ClientePJ).",
+            "Central de Suporte e Disparos — Ferramenta para envio de notificações segmentadas à base (Enviar notificação personalizada) e auditoria de acessos."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Colaboração sequencial: fundar e escalar"
+        },
+        {
+          "type": "prose",
+          "body": "A entrega da Sapiens Agro é um exemplo claro de colaboração sequencial estruturada. Em vez de dois designers interferirem nas mesmas telas simultaneamente, estabeleci as fundações visuais, paleta de cores, tipografia e componentes base. Ao ser alocado em outra frente, meu colega João Chagas assumiu a continuidade, estendendo os componentes para as demais telas de dados (Pecuária, Fretes, Fertilizantes) e construindo a versão mobile."
+        },
+        {
+          "type": "quote",
+          "text": "Na Sapiens Agro, a página institucional em sapiensagro.com/agrosap estampa a tela de home que desenhei como imagem principal do produto. É a comprovação pública e definitiva de que o trabalho de fundação foi para o ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Impacto real de mercado"
+        },
+        {
+          "type": "prose",
+          "body": "A empresa colocou a plataforma no ar sob a marca Agrosap. Hoje, a ferramenta atende mais de 200 clientes institucionais do agronegócio nacional. A robustez da arquitetura desenhada foi tão expressiva que módulos internos — como o de Fretes Rodoviários — ganharam maturidade e foram desmembrados em produtos independentes (Sapiens Fretes). Um registro auditável de design de produto viabilizando SaaS no agronegócio brasileiro."
+        }
+      ]
+    }
+  }
 }

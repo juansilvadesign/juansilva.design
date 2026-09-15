@@ -44,5 +44,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for JK Construfaz (later rebranded as Casa Construfaz), a local building materials, construction supplies, and hardware retail store ('Produtos de A a Z'). Designed 11 responsive e-commerce screen layouts on the primary Design page spanning product discovery, department categories, search overlay, customer ratings (Avaliações), shopping cart, customer authentication, and checkout (Início, Produtos, Todos os Produtos, Carrinho, Checkout, Criar Conta, Login, Sobre nós, Mobile, MenuOverlay) supported by a 31-node Style Guide in Figma (file key 8rWAKIOTfPylYY6aRi4WaZ).",
+      "context": "Agency employment at Sagitta delivering in July 2023. Juan served as the sole website UI designer within the agency team: Kelvin Bezerra created the brand identity and logo, Juan designed the complete retail e-commerce storefront and purchasing funnel in Figma, and an external no-code developer implemented and published the store. PLATFORM CORRECTION: The era storefront was implemented on TRAY (a Brazilian hosted e-commerce platform), NOT WordPress/WooCommerce.",
+      "outcome": "The e-commerce storefront was implemented and shipped to production. The company subsequently rebranded from JK Construfaz to Casa Construfaz and rebuilt their storefront with a third party. Historical shipping is verified via an era Wayback Machine capture (2024-07-14, 351 KB running on Tray with zero Elementor markers), validating the retail layout. No sales or transaction volume metrics exist. This case study documents retail e-commerce UX, product catalog navigation, and shopping cart flows.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the retail e-commerce storefront, product discovery catalog, shopping cart, authentication modals, and checkout funnel in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the e-commerce build (implemented on the Tray platform by a no-code developer), payment gateway integration, or store logistics. Note on platform: the era storefront ran on Tray, not WordPress. Delivery status: shipped to production; later rebuilt by a third party following a rebrand."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Retail e-commerce UX: construction materials from A to Z"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "commerce screen layouts on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "31",
+              "label": "e-commerce design tokens and retail components in Style Guide",
+              "icon": "🛒"
+            },
+            {
+              "value": "Tray",
+              "label": "e-commerce platform hosting the verified era storefront",
+              "icon": "📦"
+            },
+            {
+              "value": "100%",
+              "label": "purchasing funnel designed (Search → Cart → Checkout)",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Retail hardware and building supply stores manage vast, diverse inventories—ranging from bulk construction cement and hydraulic pipes to precision power tools and decorative finishes. Designing an effective e-commerce experience for this sector requires fast product findability: a contractor on a job site needing urgent plumbing fittings has zero patience for buried categories or unreadable search results."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Full purchasing funnel across 11 responsive screens"
+        },
+        {
+          "type": "prose",
+          "body": "On the primary Design page (node 1:15), I designed the complete end-to-end commerce experience:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Storefront Homepage (Início) — Featured promotional top banner (TopBanner), seasonal department spotlights, brand value propositions (fast regional delivery, installment options), and bestselling items.",
+            "Product Discovery & Filtering (Produtos & Todos os Produtos) — Departmental category grids with faceted sidebar filters (brand, price, availability) and star ratings (Avaliações).",
+            "Search & Mobile Navigation (MenuOverlay & Search Box) — Prominent search bar with instant keyword matching and a full-screen mobile drawer menu for handheld browsing.",
+            "Cart & Checkout Funnel (Carrinho & Checkout) — Clean shopping cart drawer showing order line items, quantity steppers, regional freight calculator, and streamlined single-page checkout.",
+            "Customer Account Flow (Criar Conta & Login) — Lightweight authentication views for order tracking and repeat purchasing."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never say this one was built on WordPress. The archived era storefront (2024-07-14) runs on Tray with zero Elementor markers. The 'no-code developer on WordPress' line is accurate for other agency websites in this cohort, but factually wrong for this record. Accurate platform attribution matters."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide tokens for retail e-commerce"
+        },
+        {
+          "type": "prose",
+          "body": "The 31-node Style Guide page (node 1:16) standardized retail UI components: promotional banners, cart quantity badges, product review star scales, payment method logos, primary and secondary brand colors, and structured typography hierarchies designed to keep product prices clearly readable across mobile screens."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not a WordPress or WooCommerce build. The era storefront was implemented on Tray, an enterprise Brazilian e-commerce platform.",
+            "Not brand identity or logo design. Kelvin Bezerra created the JK Construfaz logo and visual assets.",
+            "Not the current live website. The client rebranded to Casa Construfaz and replaced the site with a later third-party rebuild; historical delivery is verified via the 2024-07-14 Wayback snapshot.",
+            "Not e-commerce inventory management or logistics. I designed the front-end user experience, not ERP inventory sync or warehouse operations.",
+            "Not supported by revenue metrics. No transaction numbers, GMV, or sales figures exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The impact of structured retail e-commerce"
+        },
+        {
+          "type": "prose",
+          "body": "JK Construfaz demonstrates how thoughtful UI architecture translates heavy physical retail into an accessible online storefront. By structuring intuitive product discovery, prominent search, and frictionless checkout, the design provided a clear, effective digital sales channel for a regional building supply store."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a JK Construfaz (posteriormente renomeada para Casa Construfaz), loja varejista regional de materiais de construção, ferramentas e acabamentos ('Produtos de A a Z'). Desenvolvi 11 pranchetas responsivas de e-commerce na página principal de Design cobrindo busca de produtos, departamentos, avaliações, carrinho de compras, cadastro e checkout (Início, Produtos, Todos os Produtos, Carrinho, Checkout, Criar Conta, Login, Sobre nós, Mobile, MenuOverlay), com suporte de um Style Guide com 31 nós no Figma (arquivo 8rWAKIOTfPylYY6aRi4WaZ).",
+      "context": "Atuação como funcionário na agência Sagitta em julho de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou a identidade visual e o logotipo, Juan desenhou a loja virtual completa e o funil de compra no Figma, e um desenvolvedor no-code implementou e publicou a loja virtual. CORREÇÃO DE PLATAFORMA: A loja virtual publicada na época rodava na plataforma TRAY (e-commerce hospedado brasileiro), e NÃO em WordPress/WooCommerce.",
+      "outcome": "A loja virtual foi implementada e publicada em produção. Posteriormente, a empresa passou por um rebranding de JK Construfaz para Casa Construfaz e reconstruiu sua loja com terceiros. A publicação histórica é confirmada via snapshot do Wayback Machine (14/07/2024, 351 KB rodando na Tray com zero marcadores de Elementor), comprovando a estrutura de varejo. Não existem métricas de vendas ou pedidos. Este estudo de caso documenta a UX para e-commerce de varejo, navegação por catálogo e fluxo de checkout.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei a loja virtual de varejo, o catálogo de produtos, o carrinho de compras, os modais de autenticação e o funil de checkout no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação do e-commerce (feita na plataforma Tray por um desenvolvedor no-code), a integração de meios de pagamento ou a logística física da loja. Correção técnica: a loja rodava em Tray, não em WordPress. Status de entrega: publicado em produção; posteriormente reconstruído por terceiros após rebranding da marca."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UX para e-commerce de varejo: materiais de construção de A a Z"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "pranchetas de e-commerce na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "31",
+              "label": "tokens e componentes de varejo no Style Guide",
+              "icon": "🛒"
+            },
+            {
+              "value": "Tray",
+              "label": "plataforma de e-commerce do build publicado na época",
+              "icon": "📦"
+            },
+            {
+              "value": "100%",
+              "label": "do funil de compra desenhado (Busca → Carrinho → Checkout)",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Lojas de materiais de construção atendem a inventários extensos e heterogêneos — de cimento e tubos de PVC a ferramentas elétricas de precisão e itens de iluminação. Desenvolver uma boa experiência de e-commerce para esse segmento exige rápida localização de produtos: um mestre de obras ou instalador que precisa de uma conexão hidráulica específica não tolera categorias confusas ou barras de busca ineficientes."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Funil de compra completo em 11 pranchetas responsivas"
+        },
+        {
+          "type": "prose",
+          "body": "Na prancheta principal de Design (nó 1:15), estruturei toda a jornada de compra do consumidor:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Página Inicial da Loja (Início) — Banner promocional superior (TopBanner), vitrines por departamento, pilares de confiança (entrega rápida na região, parcelamento sem juros) e produtos mais vendidos.",
+            "Navegação e Filtros (Produtos e Todos os Produtos) — Listagem de departamentos com filtros laterais (marca, faixa de preço, disponibilidade) e notas de avaliação por estrelas (Avaliações).",
+            "Busca e Menu Mobile (MenuOverlay e Search Box) — Caixa de pesquisa em posição de destaque e gaveta de menu mobile em tela cheia para navegação confortável com uma mão.",
+            "Carrinho e Checkout (Carrinho e Checkout) — Resumo de pedido com controle de quantidade, cálculo de frete por CEP e finalização de compra simplificada.",
+            "Área do Cliente (Criar Conta e Login) — Telas diretas para criação de conta e acompanhamento de pedidos anteriores."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca diga que este projeto foi feito em WordPress. A loja arquivada da época (14/07/2024) rodava em Tray sem nenhuma menção ao Elementor. O histórico de 'desenvolvedor no-code em WordPress' é verdadeiro para outros projetos deste período, mas incorreto para este registro. A precisão técnica sobre a plataforma é fundamental."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Tokens de Style Guide para comércio eletrônico"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 31 nós (nó 1:16) padronizou elementos essenciais para o varejo: banners de oferta, badges de quantidade no carrinho, componentes de avaliação por estrelas, ícones de bandeiras de pagamento e hierarquia tipográfica focada na legibilidade de preços em telas de smartphone."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é um build em WordPress ou WooCommerce. A loja histórica foi implementada na Tray, plataforma brasileira de e-commerce.",
+            "Não é criação de marca ou logotipo. Kelvin Bezerra desenhou o logotipo e a identidade visual da JK Construfaz.",
+            "Não é o site atual no ar. O cliente mudou de nome para Casa Construfaz e reconstruiu o site com outra empresa; a entrega original é atestada pelo snapshot de 2024.",
+            "Não é gestão de estoque ou logística. Projetei a interface de usuário, não a integração de ERP ou a expedição de mercadorias.",
+            "Não possui dados de faturamento. Nenhuma métrica de vendas ou volume transacionado foi retida no registro do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O valor de um e-commerce estruturado para o varejo"
+        },
+        {
+          "type": "prose",
+          "body": "A JK Construfaz demonstra como um design de interface funcional organiza catálogos complexos de materiais de construção no ambiente digital. Ao priorizar busca ágil, vitrines segmentadas e checkout descomplicado, o projeto entregou uma estrutura de vendas sólida para o comércio regional."
+        }
+      ]
+    }
+  }
 }

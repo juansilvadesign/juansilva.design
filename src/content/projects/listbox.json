@@ -44,5 +44,196 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI/UX designer for a comprehensive B2B wholesale fashion marketplace and digital showroom suite connecting apparel manufacturers (Fabricantes), retail buyers (Lojistas), visitors, and platform administrators across 402 design canvas nodes (386 frames). Engineered deep dual-viewport coverage (~117 MacBook Air desktop screens and ~72 iPhone 13 mobile companion screens), catalog bulk import, pre-order issuing, wholesale tiered billing, event showrooms, and buyer interest heatmaps.",
+      "context": "Agency engagement at Sagitta between October 25, 2023 and April 30, 2024. Benchmarked against global wholesale leaders JOOR and NuORDER. Built to digitize Brazil's massive wholesale fashion trade fairs (such as Mega Polo Moda and São Paulo fashion districts): manufacturers showcasing seasonal collections and taking wholesale pre-orders, retailers buying across size curves and colorways, and platform admins tracking buyer demand through analytical heatmaps.",
+      "outcome": "Shipped to production and deployed live at listbox.com.br, faithfully reflecting Juan's Figma designs in the live software. While a contractual dispute later arose between the client and the agency, the application remains live and operational. Stands as verified evidence of high-density B2B wholesale workflows, multi-role permissions, and dual-viewport desktop/mobile execution.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Production Boundary: I was the UI/UX designer for the complete multi-role desktop and mobile platform, digital showroom workflows, and style guide extension. I do not claim backend development, marketplace commercial operations, or business ownership. Production status: the software was deployed live at listbox.com.br, matching the Figma designs. A contractual dispute subsequently occurred between the client and the agency, but the application remains live."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "B2B wholesale fashion: seasonal discovery and size-curve orders"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "402",
+              "label": "design nodes on the core product canvas across 386 frames",
+              "icon": "📐"
+            },
+            {
+              "value": "4",
+              "label": "permissioned roles (Manufacturer, Retailer, Visitor, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "117 / 72",
+              "label": "desktop MacBook Air screens paired with iPhone 13 mobile views",
+              "icon": "📱"
+            },
+            {
+              "value": "Live",
+              "label": "production deployment matching design at listbox.com.br",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Wholesale fashion commerce operates under completely different dynamics than consumer retail. Rather than purchasing individual garments, boutique owners buy entire seasonal collections months in advance, selecting size curves (P/M/G/GG), minimum order quantities (MOQ), and specialized color palettes. Inspired by global platforms like JOOR and NuORDER, ListBox was designed to digitize Brazil's bustling fashion wholesale fairs and industrial apparel showrooms."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Fabricante vs. Lojista: two symmetrical commercial workflows"
+        },
+        {
+          "type": "prose",
+          "body": "The core product coordinates symmetrical commercial operations across four stakeholder roles:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Fabricante / Fornecedor (Apparel Manufacturer) — Digital storefront setup, bulk catalog import (Produtos importados todos juntos), production batch lead times, wholesale pre-order management, and multi-version invoicing (faturamento v1, v2, v3).",
+            "Lojista (Retail Buyer) — Category-based seasonal collection browsing, granular attribute filtering in modal overlays, wholesale wishlist curation, size-curve cart assembly, and pre-order issuance.",
+            "Feiras e Eventos / Visitante — Trade fair guides, digital showroom access pass, event schedule directories, and QR code badges for in-person showroom visits.",
+            "Admin Governance — Central control console managing supplier verification, product approvals, automated broadcast notifications (Notificações Enviar / Sucesso), and supplier ranking matrices."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Trade fairs, digital showrooms, and demand heatmaps"
+        },
+        {
+          "type": "prose",
+          "body": "Fashion wholesale is heavily anchored around physical trade fairs. ListBox bridged physical and digital presence: buyers attending in-person showrooms could scan garment QR codes to add collections to their digital carts. Furthermore, for manufacturers and administrators, I designed analytical demand heatmaps (Mapa de Calor 2430:7539 and Metric Item 2828:15616) that mapped buyer interest, page dwell times, and pre-order volume across garment categories in real time."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Dual-viewport rigor: 117 desktop screens and 72 mobile screens"
+        },
+        {
+          "type": "prose",
+          "body": "I architected the application with balanced dual-viewport parity: roughly 117 MacBook Air desktop screens paired with 72 iPhone 13 mobile companion screens. High-density data tables, wholesale pricing matrices, and inventory dashboards live on desktop for administrative back-office work, while mobile views provide on-the-go showroom browsing with bottom-sheet filter trays and fast pre-order authorizations."
+        },
+        {
+          "type": "quote",
+          "text": "Wholesale fashion isn't consumer shopping. Buyers order across size curves, months ahead of delivery, often walking trade show floors. The software has to be as fast on a phone in a showroom as it is dense on a desktop in a back office."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Verified live production deployment"
+        },
+        {
+          "type": "prose",
+          "body": "ListBox is one of the distinct projects in the agency portfolio where the live software faithfully mirrors the Figma designs. The platform was built and launched to production at listbox.com.br. Even though the client subsequently initiated a contractual dispute with the agency, the deployed web application remains active and operational, serving as an audited public proof point of enterprise B2B marketplace design."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI/UX de um marketplace B2B de moda no atacado e showroom digital conectando confecções/fabricantes, lojistas compradores, visitantes e administradores em 402 nós na página de design (386 telas). Desenvolveu cobertura integral em dois viewports (~117 telas desktop em MacBook Air e ~72 telas mobile em iPhone 13), importação em lote de catálogos, emissão de pré-pedidos, faturamento atacadista, showrooms de eventos e mapas de calor de interesse comercial.",
+      "context": "Atuação na agência Sagitta entre 25 de outubro de 2023 e 30 de abril de 2024. Teve como referência plataformas globais líderes de atacado como JOOR e NuORDER. Criado para digitalizar o circuito de atacado de moda no Brasil (como o polo do Brás e Bom Retiro): confecções apresentando coleções sazonais e coletando pré-pedidos, lojistas comprando por grade e cor, e administradores monitorando demanda por mapas de calor.",
+      "outcome": "Lançado em produção e colocado no ar em listbox.com.br, refletindo com fidelidade visual o design do Figma no software em produção. Embora tenha ocorrido uma disputa contratual posterior entre o cliente e a agência, a plataforma permaneceu no ar e em operação. Constitui comprovação auditada de fluxos B2B atacadistas de alta densidade, permissões para múltiplos perfis e execução dual desktop/mobile.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Produção: Fui o designer de UI/UX de toda a plataforma para múltiplos perfis em desktop e mobile, fluxos de showroom e extensão do guia de estilos. Não reivindico desenvolvimento backend, operações comerciais do marketplace ou propriedade da empresa. Status em produção: o software foi colocado no ar em listbox.com.br com alta fidelidade ao design do Figma. Uma disputa contratual ocorreu posteriormente entre cliente e agência, mas a aplicação segue no ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Moda no atacado B2B: coleções sazonais e pedidos por grade"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "402",
+              "label": "nós de design no canvas principal ao longo de 386 telas",
+              "icon": "📐"
+            },
+            {
+              "value": "4",
+              "label": "perfis com permissões específicas (Fabricante, Lojista, Visitante, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "117 / 72",
+              "label": "telas desktop em MacBook Air pareadas com iPhone 13",
+              "icon": "📱"
+            },
+            {
+              "value": "No ar",
+              "label": "aplicação em produção ativa e fiel ao design em listbox.com.br",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O comércio atacadista de confecção opera sob regras completamente diferentes do varejo tradicional. Lojistas e boutiques não compram peças individuais; adquirem coleções sazonais inteiras com meses de antecedência, selecionando grades de tamanho (P/M/G/GG), quantidades mínimas de pedido (MOQ) e variações de cor. Inspirado em plataformas internacionais como JOOR e NuORDER, o ListBox foi desenhado para digitalizar feiras de moda e showrooms industriais no Brasil."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Fabricante versus Lojista: dois fluxos comerciais simétricos"
+        },
+        {
+          "type": "prose",
+          "body": "O núcleo da plataforma coordena operações comerciais simétricas entre quatro perfis:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Fabricante / Fornecedor — Configuração do perfil da marca, importação de catálogos em lote (Produtos importados todos juntos), prazos de produção, gestão de pré-pedidos e faturamento atacadista em múltiplos formatos (faturamento v1, v2, v3).",
+            "Lojista — Navegação por coleções e categorias, filtros detalhados de atributos em overlay, lista de desejos (Wishlist), montagem de carrinho com seleção de grade de tamanhos e emissão de pré-pedidos.",
+            "Feiras & Eventos / Visitante — Guia de feiras presenciais, credenciamento de compradores, agenda de desfiles e emissão de crachás virtuais com QR Code para visitação a estandes físicos.",
+            "Governança Administrativa — Painel de controle operacional para homologação de fornecedores, moderação de produtos, disparo de notificações em massa (Notificações Enviar / Sucesso) e ranking de vendas."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Feiras físicas, showrooms digitais e mapas de calor"
+        },
+        {
+          "type": "prose",
+          "body": "O atacado de moda é fortemente dependente de eventos presenciais. O ListBox integrou os dois mundos: compradores circulando em feiras podiam escanear o QR Code de uma peça física para adicioná-la à sacola digital. Para confecções e gestores, desenhei mapas analíticos de calor (Mapa de Calor 2430:7539 e Metric Item 2828:15616) que revelavam em tempo real as categorias e fornecedores com maior tempo de retenção e intenção de compra."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Rigor em dois viewports: 117 telas desktop e 72 telas mobile"
+        },
+        {
+          "type": "prose",
+          "body": "Estruturei a aplicação com paridade responsiva cuidadosa: cerca de 117 telas desktop para MacBook Air pareadas com 72 telas mobile para iPhone 13. Tabelas densas de faturamento, matrizes de preço por atacado e gestão de estoque foram privilegiadas no desktop, enquanto o mobile oferece navegação rápida em feiras, com filtros em bottom-sheet e emissão imediata de pré-pedidos."
+        },
+        {
+          "type": "quote",
+          "text": "Comprar moda no atacado não é fazer compras de shopping. O lojista compra por grade, com meses de antecedência, muitas vezes caminhando pelos corredores de uma feira. O software precisa ser tão ágil no celular dentro de um estande quanto denso no computador do escritório."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Implementação verificada em produção"
+        },
+        {
+          "type": "prose",
+          "body": "O ListBox é um dos projetos do portfólio de agência onde o produto final em produção reflete rigorosamente o design do Figma. A plataforma foi programada e lançada no ar no domínio listbox.com.br. Mesmo com uma disputa contratual posterior entre a empresa contratante e a agência, o site segue ativo e navegável, funcionando como prova pública de design para marketplaces B2B corporativos."
+        }
+      ]
+    }
+  }
 }

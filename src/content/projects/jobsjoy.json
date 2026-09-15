@@ -41,5 +41,198 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI/UX designer for a two-sided talent acquisition platform and job board connecting candidates with hiring companies. Designed the 96-child core design page and 51 component sets across a 76-child design system, engineering a 5-step structured candidate résumé wizard, multi-device candidate onboarding, recruiter job administration, and a dedicated AI-assisted vacancy creation flow (Minhas-vagas/vaga/ia).",
+      "context": "Agency engagement at Sagitta between July 11 and November 5, 2024. Designed as an internal initiative for agency leadership, adapting and refining proven recruitment patterns from earlier Sagitta projects (Seu Portal de Emprego and Jobs.bet) into a standalone HR-tech platform with AI-assisted authoring capabilities. Juan authored all candidate, recruiter, and design system interfaces; base UI primitives extended Sagitta's licensed Untitled UI kit.",
+      "outcome": "Completed all candidate and recruiter user flows, desktop and mobile responsive viewports, and the 51-component-set design system. The initiative was subsequently retired and shelved internally by agency leadership without a public production launch. No business metrics exist; this project stands as evidence of AI-feature interface design and structured multi-step intake wizards.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the UI/UX designer for the candidate and recruiter portals, the résumé builder wizard, and the AI-assisted job authoring interface. I do not claim building, training, or fine-tuning any machine learning models; my contribution is the interface design for an AI-assisted feature. Delivery status: this was an internal Sagitta Digital initiative that was subsequently shelved; no production launch or user metrics are claimed."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Two-sided recruitment architecture: candidates and hiring teams"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "96",
+              "label": "frames on the core Design canvas",
+              "icon": "📐"
+            },
+            {
+              "value": "51",
+              "label": "component sets in the Design System library",
+              "icon": "🧩"
+            },
+            {
+              "value": "5",
+              "label": "steps in the structured candidate résumé builder",
+              "icon": "📝"
+            },
+            {
+              "value": "1",
+              "label": "dedicated AI vacancy creation workflow (Minhas-vagas/vaga/ia)",
+              "icon": "🤖"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Recruitment platforms often suffer from asymmetric complexity: candidates want straightforward profile creation and clear application feedback, while recruiters require high-speed vacancy distribution and candidate filtering. JobsJoy was designed to address this balance, introducing automated assistance into the job posting workflow to reduce the time needed to draft thorough job specifications."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "AI-assisted vacancy authoring: interface for automated job descriptions"
+        },
+        {
+          "type": "prose",
+          "body": "The centerpiece of the recruiter experience is Minhas-vagas/vaga/ia (node 284:4012), a dedicated workflow for AI-assisted job authoring. Rather than staring at blank text boxes, hiring managers enter basic parameters (role title, seniority, tech stack, and location), and the interface generates structured sections: role overview, core responsibilities, prerequisite qualifications, and competitive benefits. Recruiters retain full editing control via integrated WYSIWYG controls before publishing."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Structured qualification: the 5-step candidate résumé builder"
+        },
+        {
+          "type": "prose",
+          "body": "To ensure standardized applicant data for hiring teams, I designed a multi-step candidate onboarding intake divided into five progressive stages:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "1. Informações Profissionais — Basic occupational summary and desired career categories.",
+            "2. Escolaridade — Academic background, degree levels, and institutional certifications.",
+            "3. Dados Profissionais — Target compensation, employment model preferences (CLT/PJ), and availability.",
+            "4. Experiências Profissionais — Chronological employment history with responsibilities and accomplishments.",
+            "5. Atividades Complementares — Language proficiencies, technical certifications, and specialized courses."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design system engineering: 51 component sets and custom controls"
+        },
+        {
+          "type": "prose",
+          "body": "The 76-child Design System page establishes a robust component foundation: 51 variant sets adapting Sagitta's base primitives with bespoke domain componentry. Key assets include WYSIWYG editor toolbars (WYSIWYG toolbar/tooltip), segmented verification code inputs, circular qualification progress indicators (Progress circle), recruitment cards (cardLP), and mobile store badges, ensuring consistent visual execution across desktop and mobile devices."
+        },
+        {
+          "type": "quote",
+          "text": "Designing for AI features isn't about claiming the model; it's about giving users transparent controls, preview confidence, and effortless editing before publishing."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Internal product evolution and design patterns"
+        },
+        {
+          "type": "prose",
+          "body": "JobsJoy was developed as an internal initiative for Sagitta's leadership to synthesize recruitment patterns previously deployed on Seu Portal de Emprego and Jobs.bet. Although the agency subsequently decided to shelve the project, the file represents a refined synthesis of multi-role marketplace workflows, structured onboarding wizards, and AI-assisted enterprise tooling."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI/UX de uma plataforma bilateral de atração de talentos e mural de empregos conectando candidatos a empresas contratantes. Desenhou a página principal com 96 pranchas e 51 conjuntos de componentes em um design system de 76 pranchas, estruturando um wizard de currículo em cinco etapas, onboarding multidispositivo para candidatos, gestão de vagas para recrutadores e um fluxo de criação de vagas assistido por IA (Minhas-vagas/vaga/ia).",
+      "context": "Atuação na agência Sagitta entre 11 de julho e 5 de novembro de 2024. Desenvolvido como uma iniciativa interna da liderança da agência, adaptando e aprimorando padrões consolidados de projetos anteriores (Seu Portal de Emprego e Jobs.bet) em uma plataforma de HR-tech independente com suporte a criação assistida por IA. Juan desenhou todas as interfaces de candidato, recrutador e design system; os primitivos de interface estenderam a base licenciada de Untitled UI.",
+      "outcome": "Concluiu todos os fluxos de candidatos e recrutadores, pranchas responsivas para desktop e mobile e o design system com 51 conjuntos de componentes. A iniciativa foi posteriormente descontinuada internamente pela agência sem lançamento público. Não existem métricas de negócio; o projeto permanece como comprovação de design de interface para recursos de inteligência artificial e wizards estruturados de qualificação.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer de UI/UX responsável pelos portais de candidato e recrutador, pelo wizard de currículo e pela interface de criação de vagas com IA. Não reivindico criação ou treino de modelos de inteligência artificial; minha contribuição restringe-se ao design da interface. Status de entrega: tratou-se de uma iniciativa interna da Sagitta posteriormente arquivada; nenhum lançamento público ou métrica de adoção é alegada."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de recrutamento de dois lados: candidatos e empresas"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "96",
+              "label": "telas na prancha principal de design",
+              "icon": "📐"
+            },
+            {
+              "value": "51",
+              "label": "conjuntos de componentes no Design System",
+              "icon": "🧩"
+            },
+            {
+              "value": "5",
+              "label": "etapas no construtor estruturado de currículo",
+              "icon": "📝"
+            },
+            {
+              "value": "1",
+              "label": "módulo dedicado de criação de vaga com IA (Minhas-vagas/vaga/ia)",
+              "icon": "🤖"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Plataformas de recrutamento frequentemente enfrentam complexidades assimétricas: candidatos exigem um cadastro simples e transparência no status das candidaturas, enquanto recrutadores precisam de velocidade para publicar vagas e triar perfis. O JobsJoy foi planejado para equilibrar essa relação, introduzindo automação assistida na redação de oportunidades para reduzir o tempo de publicação das empresas."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Criação de vagas assistida por IA: interface para descrições automatizadas"
+        },
+        {
+          "type": "prose",
+          "body": "O ponto central da experiência do recrutador é o módulo Minhas-vagas/vaga/ia (nó 284:4012), um fluxo desenhado para geração assistida de anúncios de vaga. Em vez de preencher formulários extensos do zero, o recrutador informa parâmetros básicos (título, senioridade, habilidades exigidas e modalidade), e a interface gera blocos estruturados: resumo da função, responsabilidades, requisitos obrigatórios e benefícios. O usuário conta com total liberdade de edição via barra de ferramentas WYSIWYG integrada antes de publicar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Qualificação estruturada: o wizard de currículo em 5 etapas"
+        },
+        {
+          "type": "prose",
+          "body": "Para garantir que as empresas recebam dados padronizados e fáceis de comparar, estruturei o cadastro do candidato em um wizard guiado de cinco passos:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "1. Informações Profissionais — Resumo de atuação e áreas de interesse do profissional.",
+            "2. Escolaridade — Formação acadêmica, cursos superiores e certificados de conclusão.",
+            "3. Dados Profissionais — Pretensão salarial, modelo de contratação preferencial (CLT/PJ) e disponibilidade.",
+            "4. Experiências Profissionais — Histórico profissional cronológico com descrição de projetos e entregas.",
+            "5. Atividades Complementares — Nível de proficiência em idiomas, cursos extracurriculares e certificações técnicas."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Engenharia de design system: 51 conjuntos de componentes"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Design System com 76 nós consolida uma biblioteca completa: 51 conjuntos de variantes adaptando primitivos da agência com componentes próprios do domínio. Os destaques incluem barras de edição de texto rico (WYSIWYG toolbar/tooltip), campos de código de verificação por SMS, indicadores circulares de progresso de perfil (Progress circle), cards de apresentação e badges de lojas de aplicativos para mobile."
+        },
+        {
+          "type": "quote",
+          "text": "Desenhar interfaces para IA não é sobre programar o modelo; é sobre entregar ao usuário controle claro, pré-visualização confiável e facilidade de ajuste antes de colocar qualquer conteúdo no ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Evolução de produto interno e padrões de mercado"
+        },
+        {
+          "type": "prose",
+          "body": "O JobsJoy nasceu como uma evolução interna da Sagitta para sintetizar e refinar padrões testados anteriormente no Seu Portal de Emprego e no Jobs.bet. Embora a liderança da agência tenha decidido arquivar o produto posteriormente, o projeto reflete uma modelagem madura de marketplaces bilaterais, wizards de qualificação e ferramentas corporativas com suporte de IA."
+        }
+      ]
+    }
+  }
 }

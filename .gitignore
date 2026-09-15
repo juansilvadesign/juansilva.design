@@ -43,8 +43,9 @@ yarn-error.log*
 .dev.vars*
 !.dev.vars.example
 
-# vercel
+# vercel / cloudflare
 .vercel
+.wrangler/
 
 # typescript
 *.tsbuildinfo

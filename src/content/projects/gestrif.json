@@ -45,5 +45,280 @@
     "storeListing": false,
     "designArtifact": false
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "A high-conversion marketing landing page for a cloud business-management and complaint-handling platform, built to turn a supplied, unbuildable design file into a responsive, production-hardened React application. Built across twenty-one days with nineteen hand-authored section components on a React + Vite + shadcn base, paired with a security-hardened Express form-capture service on Render.",
+      "context": "Agency subcontract at Spaceapps; the commercial client relationship belonged to the agency and I delivered as staff. The landing page design was originated by Thiago, our tech lead, and the cloud ERP behind the authentication gate was built by a separate development team on Supabase and Bubble. My contribution was design engineering: remediating the Figma file to make it buildable, hand-coding all nineteen marketing sections, and deploying the hardened form service.",
+      "outcome": "The product shipped and operates in production: gestrif.com answers and redirects to /login behind an authentication gate. The repository contains the marketing front end, evidencing my design remediation and front-end engineering, not the application behind the gate. The client-rendered Vite build is preserved and inspectable via the self-hosted mirror on my domain. No quantitative conversion or engagement metrics exist — a confirmed absence across this corpus, not an uncollected one.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "I did not design Gestrif from scratch, and I did not build the cloud platform behind the login. The product is an ERP and complaint-management system built on Supabase and Bubble by another development team. The original design was handed to me by Thiago. My role was design engineering: fixing a file that could not be built as drawn, hand-coding nineteen responsive sections in React, and engineering a hardened form-capture microservice on Render."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Design remediation: Making handoffs buildable"
+        },
+        {
+          "type": "prose",
+          "body": "In agency client work, design handoffs frequently arrive in a state that looks finished on canvas but falls apart in code: missing auto-layout constraints, arbitrary absolute positioning, rigid desktop containers that collapse on responsive viewports, and components with inconsistent padding logic. Gestrif is the second documented instance of this pattern in the portfolio (alongside AllPrice). Rather than flagging blockers back to the team, I ran a comprehensive remediation pass directly in Figma — fixing hierarchy, flexbox alignment, and responsive container rules before writing the first line of code."
+        },
+        {
+          "type": "quote",
+          "text": "Unlike AllPrice, where the 'LP otimizada' frame remains inspectable, I no longer have active access to Gestrif's Figma workspace. The remediation exists as a verified historical pass rather than a retrievable artifact. When evaluating design remediation, lead with AllPrice's inspectable file; cite Gestrif as the second paying client where the exact same practice was applied."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "19",
+              "label": "authored section components",
+              "icon": "🧩"
+            },
+            {
+              "value": "50",
+              "label": "shadcn UI primitives integrated",
+              "icon": "📦"
+            },
+            {
+              "value": "5 req / 15m",
+              "label": "IP rate limit on form capture",
+              "icon": "🛡️"
+            },
+            {
+              "value": "21 days",
+              "label": "first commit to production deployment",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The front-end architecture: 19 sections, not 69 components"
+        },
+        {
+          "type": "prose",
+          "body": "The repository contains 69 component files, and claiming that total without qualification would overstate authorship. The actual architecture splits cleanly between 50 CLI-generated shadcn/Radix UI primitives (buttons, dialogs, form fields, dropdowns) and nineteen hand-authored section components built to translate Gestrif's feature hierarchy:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Header navigation with responsive mobile menu drawer.",
+            "Hero section featuring value proposition, primary CTA, and social proof trust marks.",
+            "Five feature-image deep dives highlighting module capabilities with alternating visual flow.",
+            "Two multi-column feature grids detailing business tools and complaint-handling workflows.",
+            "Interactive comparison table contrasting Gestrif against traditional, fragmented business spreadsheets.",
+            "'Como Funciona' step-by-step onboarding walkthrough.",
+            "Crawling marquee banner displaying ecosystem integrations.",
+            "Pricing tier cards with monthly/annual billing toggles and feature matrices.",
+            "Customer testimonial carousel and social proof cards.",
+            "Comprehensive FAQ accordion addressing security, migration, and compliance.",
+            "Lead-capture contact section wired to backend validation.",
+            "Footer with legal links, sitemap navigation, and corporate disclosures."
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "The project began from a Lovable scaffold (lovable-tagger in devDependencies, with vite_react_shadcn_ts in package.json). The scaffold supplied the initial Vite and shadcn boilerplate; all nineteen section components were coded by hand against the remediated Figma specifications."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Production backend: Hardened form capture on Render"
+        },
+        {
+          "type": "prose",
+          "body": "Many marketing sites treat form submission as an afterthought — embedding unauthenticated third-party webhooks or bare mailto scripts that invite spam floods and downtime. For Gestrif, I engineered a dedicated Express service deployed on Render (server/start.js and server/index.js) and applied production-grade defensive hardening:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rate Limiting — Configured strict IP throttling limiting requests to 5 per IP per 15-minute window, effectively neutralizing automated bot submissions.",
+            "Content Security Policy (CSP) & Headers — Implemented Helmet with an explicit CSP directive whitelist, blocking cross-site scripting and unauthorized iframe framing.",
+            "Payload Caps — Enforced a strict 10 KB limit on incoming JSON payloads to prevent memory exhaustion and buffer overflow attacks.",
+            "Reverse-Proxy Trust — Configured Express trust proxy specifically for Render's edge architecture, ensuring accurate client IP resolution for rate limiters.",
+            "Telemetry & Compression — Gzip compression enabled across all responses, paired with structured Morgan logging separating development debugging from high-signal production error streams."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Client feedback and rapid iteration"
+        },
+        {
+          "type": "prose",
+          "body": "The repository commit log documents an active agency iteration cycle rather than a static handoff: initial structure (22/07), client review revisions (30/07), new section additions and responsive updates (06/08), and final server hardening (12/08). Commit entries mentioning 'new sections added' reflect new sections coded against evolving client requirements, not sections designed from scratch. Adapting to shifting scope while preserving clean code and delivery deadlines is standard agency execution."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not my original visual design. Thiago designed the original landing page; I remediated the file and made it buildable.",
+            "Not the cloud business-management platform. The ERP behind gestrif.com/login was built on Supabase and Bubble by a different engineering team.",
+            "Not a Next.js application. The stack is a client-rendered React 18 + Vite SPA; next-themes was a dependency, not the Next.js framework.",
+            "Not 69 bespoke components. It is 19 hand-crafted sections built on top of 50 CLI-generated shadcn primitives.",
+            "Not an enterprise backend. The Express service on Render is a hardened contact-capture gateway, not a financial database.",
+            "Not inspectable in Figma today. Active access to the Gestrif workspace has lapsed; the design remediation claim is an honest historical record, while AllPrice remains the inspectable proof.",
+            "Not supported by commercial conversion numbers. No marketing metrics were tracked or retained — a confirmed absence across this corpus.",
+            "Not the full platform described in the repository README. The README quotes the client's commercial product description, which covers the entire ERP, not just the landing page."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of a design-aware engineer"
+        },
+        {
+          "type": "prose",
+          "body": "Gestrif represents the essential subcontract and agency overflow dynamic: receiving an imperfect, unbuildable design file and delivering a pixel-accurate, responsive, and secure web application without friction. It proves the ability to bridge design flaws before they reach code, write disciplined TypeScript and Tailwind components, and harden deployments against real-world production risks."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Uma landing page institucional para uma plataforma em nuvem de gestão empresarial e tratamento de reclamações, desenvolvida para transformar um design recebido não construível em uma aplicação React responsiva e pronta para produção. Construída em vinte e um dias com dezenove componentes de seção autorais sobre uma base React + Vite + shadcn, acompanhada por um microsserviço em Express no Render com proteções de segurança.",
+      "context": "Subcontrato de agência na Spaceapps; o relacionamento comercial com o cliente pertencia à agência e eu entreguei como funcionário. O design original da landing page foi criado pelo Thiago, nosso líder técnico, e o sistema de gestão em nuvem atrás do login foi construído por outra equipe em Supabase e Bubble. Minha contribuição foi em design engineering: corrigir o arquivo no Figma para torná-lo viável, programar manualmente todas as dezenove seções e estruturar o serviço de captura com hardening.",
+      "outcome": "O produto foi entregue e opera em produção: gestrif.com responde e redireciona para /login atrás de uma barreira de autenticação. O repositório contém o front-end institucional, evidenciando a minha correção de design e engenharia de front-end, e não o sistema interno atrás do login. O build SPA em Vite está preservado e inspecionável no mirror em meu próprio domínio. Não existem métricas quantitativas de conversão ou engajamento — uma ausência confirmada neste portfólio, e não uma falta de coleta.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Eu não criei o design do Gestrif do zero e não construí a plataforma em nuvem atrás do login. O produto é um sistema ERP e de gestão de reclamações desenvolvido em Supabase e Bubble por outra equipe. O design original me foi entregue pelo Thiago. Minha função foi de design engineering: corrigir um arquivo que não podia ser construído como estava desenhado, programar dezenove seções responsivas em React e estruturar um microsserviço seguro de captura no Render."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Correção de design: Tornando entregas construíveis"
+        },
+        {
+          "type": "prose",
+          "body": "No trabalho de agência, entregas de design frequentemente chegam em um estado que parece pronto no canvas, mas quebra no código: ausência de auto-layout, posicionamentos absolutos arbitrários, contêineres rígidos que quebram em telas menores e espaçamentos inconsistentes. O Gestrif é o segundo caso documentado dessa prática no portfólio (ao lado do AllPrice). Em vez de devolver o arquivo com atritos, realizei uma revisão direta no Figma — corrigindo hierarquias, alinhamentos flexbox e regras de contêiner responsivo antes de escrever a primeira linha de código."
+        },
+        {
+          "type": "quote",
+          "text": "Diferente do AllPrice, onde o frame 'LP otimizada' permanece acessível para inspeção, não tenho mais acesso ao arquivo Figma do Gestrif. A correção de design existe como um registro histórico verificado, mas sem o arquivo original disponível para inspeção direta. Para avaliar essa prática de correção, tome o AllPrice como referência visual inspecionável; cite o Gestrif como o segundo projeto real onde o mesmo rigor foi aplicado."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "19",
+              "label": "seções autorais programadas",
+              "icon": "🧩"
+            },
+            {
+              "value": "50",
+              "label": "primitivas shadcn integradas",
+              "icon": "📦"
+            },
+            {
+              "value": "5 req / 15m",
+              "label": "limite de taxa anti-spam no formulário",
+              "icon": "🛡️"
+            },
+            {
+              "value": "21 dias",
+              "label": "do primeiro commit ao deploy em produção",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura front-end: 19 seções, não 69 componentes"
+        },
+        {
+          "type": "prose",
+          "body": "O repositório contém 69 arquivos de componentes, e declarar esse número sem critério inflaria a autoria real. A arquitetura divide-se claramente entre 50 primitivas de UI shadcn/Radix geradas via CLI (botões, modais, campos de entrada, seletores) e dezenove componentes de seção autorais desenvolvidos para estruturar a narrativa comercial do Gestrif:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cabeçalho de navegação com menu mobile lateral responsivo.",
+            "Seção Hero destacando a proposta de valor, CTA principal e selos de credibilidade.",
+            "Cinco seções aprofundadas com imagens alternadas demonstrando as funcionalidades do sistema.",
+            "Dois grids de cards estruturando os recursos operacionais e o fluxo de tratamento de reclamações.",
+            "Tabela comparativa interativa contrastando o Gestrif com planilhas e processos manuais dispersos.",
+            "Passo a passo 'Como Funciona' guiando o processo de adesão à plataforma.",
+            "Faixa contínua (marquee) exibindo as integrações do ecossistema.",
+            "Tabela de preços com alternância entre faturamento mensal e anual.",
+            "Carrossel de depoimentos e cards de validação social.",
+            "Acordeão completo de FAQ cobrindo segurança, migração de dados e conformidade.",
+            "Seção de captura de leads conectada à validação de back-end.",
+            "Rodapé institucional com termos legais, mapa do site e dados da empresa."
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O projeto foi iniciado a partir de um scaffold Lovable (lovable-tagger em devDependencies, com vite_react_shadcn_ts no package.json). O scaffold forneceu a estrutura inicial de Vite e shadcn; todas as dezenove seções visuais foram codificadas manualmente a partir do Figma corrigido."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Back-end de produção: Captura protegida no Render"
+        },
+        {
+          "type": "prose",
+          "body": "Muitas landing pages tratam o envio de formulários de forma descuidada — utilizando webhooks de terceiros desprotegidos ou links mailto que atraem robôs de spam e geram instabilidade. Para o Gestrif, programei um serviço dedicado em Express hospedado no Render (server/start.js e server/index.js), aplicando camadas reais de segurança:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rate Limiting — Limite estrito de 5 requisições por IP a cada 15 minutos, bloqueando envios em massa automatizados.",
+            "Content Security Policy (CSP) & Cabeçalhos — Configuração do Helmet com lista explícita de origens permitidas, prevenindo injeções de script (XSS) e cliques fantasma (clickjacking).",
+            "Limite de Carga (Payload Cap) — Teto rígido de 10 KB para o corpo das requisições JSON, prevenindo sobrecarga de memória do servidor.",
+            "Suporte a Proxy Reverso — Configuração de trust proxy no Express para a infraestrutura do Render, garantindo a leitura correta do IP real do usuário.",
+            "Telemetria e Compressão — Compressão gzip ativa em todas as respostas e logs estruturados via Morgan com formatação diferenciada para produção."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Iteração contínua e retorno do cliente"
+        },
+        {
+          "type": "prose",
+          "body": "O histórico de commits documenta um ciclo de desenvolvimento ágil de agência: montagem inicial (22/07), ajustes solicitados pelo cliente (30/07), adição de novas seções e refinamento responsivo (06/08) e hardening final do servidor (12/08). Os registros de 'novas seções adicionadas' referem-se a seções programadas para atender a demandas comerciais do cliente, e não a telas criadas do zero. Ajustar-se a mudanças de escopo mantendo o código limpo e o prazo intacto é a essência do trabalho profissional de agência."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é a minha criação do design original. O Thiago concebeu o layout inicial; eu revisei o arquivo, corrigi o que era inviável e o tornei construível.",
+            "Não é a plataforma em nuvem de gestão. O sistema operacional atrás de gestrif.com/login foi desenvolvido em Supabase e Bubble por outra equipe de engenharia.",
+            "Não é uma aplicação Next.js. A stack é uma SPA em React 18 e Vite renderizada no cliente; next-themes foi apenas uma dependência instalada.",
+            "Não são 69 componentes autorais. São 19 seções construídas à mão sobre 50 primitivas shadcn geradas via CLI.",
+            "Não é um back-end corporativo complexo. O serviço Express no Render é uma camada segura de captura de contatos, e não uma API de dados financeiros.",
+            "Não é inspecionável no Figma hoje. O acesso ao arquivo daquele período expirou; a revisão de design é um fato histórico verificado, enquanto o AllPrice é a prova visual que pode ser inspecionada.",
+            "Não possui métricas de conversão comercial. Nenhum dado analítico de vendas foi retido antes da transição — uma ausência confirmada neste portfólio.",
+            "Não é a plataforma completa descrita no README do repositório. O README reproduz o texto de vendas do cliente para o produto final, não o escopo restrito da landing page."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O valor de um engenheiro com olhar de design"
+        },
+        {
+          "type": "prose",
+          "body": "O Gestrif exemplifica a dinâmica clássica de transbordo em agências: receber um arquivo de design com inconsistências e entregar uma aplicação web precisa, responsiva e segura sem repassar atritos para a equipe. Comprova a habilidade de identificar e corrigir falhas de layout antes de tocar no código, programar componentes sólidos em TypeScript e Tailwind e blindar o serviço contra riscos comuns em produção."
+        }
+      ]
+    }
+  }
 }

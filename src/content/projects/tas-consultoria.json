@@ -44,5 +44,246 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI/UX Designer for Tas Consultoria, a corporate management, tax, and advisory consulting firm. Architected a 5-page, 159-node Figma product system (file UY7MnW3bFBRrqxU2QPHpC6): 138 canvas nodes on the master Design page structuring an internal enterprise web platform and mobile companion application for consultant timesheet logging (Novo apontamento, Apontamento pendente, Calendar Container), consulting rate and fee scheduling (Cadastrar taxas, Lista de Taxas), process implementation tracking, and multi-role dashboards for Partners (Admin) and Consultants (Colaborador), backed by 35 semantic color tokens and 5 responsive grid presets.",
+      "context": "Agency employment at Sagitta delivering from January 8, 2024 to March 1, 2024. Juan served as UI/UX designer within the agency team alongside engineering. The client required an internal operations hub to replace disparate spreadsheets with a unified system for logging billable hours, managing client-specific rate cards, and tracking process audit compliance.",
+      "outcome": "The consulting firm is active and operates at tasconsultoria.com. The client approved the design deliverables and deployed the internal timesheet and operations suite behind corporate authentication for internal staff. No operational efficiency or billing volume metrics exist. This case study documents internal B2B operations UX, timesheet interaction models, and multi-resolution grid systems.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the internal web operations platform, mobile companion app, timesheet submission workflows, rate card management, process implementation tracker, and administrator dashboards. I do not claim backend ERP development, database engineering, accounting integrations, or firm operations. Delivery status: deployed internally behind client authentication; the public domain serves their corporate site. UI/UX design credit."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Internal operations UX for professional advisory firms"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "138",
+              "label": "canvas nodes on the primary Design application page",
+              "icon": "📐"
+            },
+            {
+              "value": "35",
+              "label": "semantic document color styles defined",
+              "icon": "🎨"
+            },
+            {
+              "value": "5",
+              "label": "responsive grid tokens (Desktop, Desktop 2.0, Tablet, Mobile 24/8px)",
+              "icon": "📏"
+            },
+            {
+              "value": "2",
+              "label": "core user roles (Admin Partners & Staff Consultants)",
+              "icon": "👥"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Consulting and tax advisory practices lose substantial revenue to friction in time tracking. When consultants find timesheet software cumbersome, hours are logged retroactively at the end of the month, resulting in forgotten billable tasks, imprecise invoices, and delayed client billing. Tas Consultoria needed an operational system that made logging hours immediate on both mobile and desktop while giving partners real-time visibility into project budgets."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The timesheet and activity logging engine"
+        },
+        {
+          "type": "prose",
+          "body": "The primary operational workflow on the Design page (node 1:15) centers on making daily activity logging frictionless for staff consultants:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Frictionless Time Logging (Novo apontamento) — Fast intake modal allowing consultants to select client, project, activity type, billable status, and precise duration with integrated calendar date picker (Calendar Container).",
+            "Mobile Companion Viewports (iPhone 13 mini) — Dedicated mobile screens (screens 1 through 12) enabling on-site consultants to log travel, client meetings, and advisory sessions directly from their phones.",
+            "Pending Review Queue (Apontamento pendente) — Partner review dashboard where engagement leads inspect, edit, approve, or reject logged hours before invoicing.",
+            "Instant Success Feedback (Apontamento-sucesso) — Clear confirmation dialogs preventing duplicate entries and confirming sync with project budgets."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Consulting fee management and implementation tracking"
+        },
+        {
+          "type": "prose",
+          "body": "Beyond hour logging, the platform centralized commercial client terms and operational deliverables:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rate Card Scheduling (Cadastrar taxas & Lista de Taxas) — Configurable billing parameters supporting fixed-fee retainers, blended hourly rates, partner rates, and client-specific discount overrides.",
+            "Audit Trail (Histórico-editar) — Complete change log recording rate adjustments and billing amendments across client accounts.",
+            "Process Compliance Tracker (Implantação - Lista de processos) — Project management view tracking tax restructuring milestones, diagnostic deliverables, and operational discrepancies (Inadequação adicionada).",
+            "Consultant Directory (Cadastrar colaborador & Perfil) — Internal staff registry managing professional titles, departmental billing tags, and role-based permissions."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never claim backend ERP or accounting integration: the source explicitly does not prove it. Never claim production deployment, internal rollout, adoption, or billing outcomes. Deployment was internal behind client auth; what is backed is the audited 159-node UI/UX system."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Tokenized design foundation and 5-grid hierarchy"
+        },
+        {
+          "type": "prose",
+          "body": "To ensure absolute layout discipline between desktop dashboards and mobile companion views, I defined 5 formal responsive grid presets (Desktop/Desktop, Desktop/Desktop 2.0, Mobile/Tablet, Mobile/Mobile 24px, and Mobile/Mobile 8px) alongside 35 semantic color tokens, including metallic gold gradients (#E9BF60 to #D6A747) that reflected the firm's corporate advisory prestige."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not backend ERP or accounting software. I designed the UI and interaction workflows in Figma; I did not engineer SQL databases or ERP integrations.",
+            "Not a public consumer website. This is an internal enterprise platform deployed behind corporate authentication for Tas Consultoria's staff.",
+            "Not brand identity creation. The corporate visual identity and logo existed prior to the engagement.",
+            "Not supported by billing metrics. No operational time savings, invoice volume, or revenue figures exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of purpose-built enterprise tools"
+        },
+        {
+          "type": "prose",
+          "body": "Tas Consultoria illustrates how bespoke internal tooling can eliminate administrative friction in professional services. By combining desktop depth for billing managers with mobile speed for consultants in the field, the design transformed cumbersome time tracking into an intuitive operational asset."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI/UX para a Tas Consultoria, empresa de consultoria em gestão empresarial, planejamento tributário e assessoria corporativa. Desenvolvi um sistema de 5 páginas e 159 nós no Figma (arquivo UY7MnW3bFBRrqxU2QPHpC6): 138 nós na página principal de Design estruturando uma plataforma web corporativa interna e aplicativo mobile complementar para apontamento de horas (Novo apontamento, Apontamento pendente, Calendar Container), gestão de taxas e precificação (Cadastrar taxas, Lista de Taxas), acompanhamento de implantação de processos e dashboards com dois perfis (Admin para sócios e Colaborador para consultores), sustentados por 35 tokens de cor e 5 presets de grid responsivo.",
+      "context": "Atuação na agência Sagitta de 8 de janeiro de 2024 a 1 de março de 2024. Juan atuou como designer de UI/UX na equipe da agência ao lado dos desenvolvedores. O cliente necessitava de uma ferramenta interna para substituir planilhas dispersas por um fluxo unificado de registro de horas faturáveis, parametrização de tabelas de honorários e auditoria de implantação de processos.",
+      "outcome": "A consultoria está ativa e opera em tasconsultoria.com. O cliente aprovou os entregáveis de design e implantou o sistema interno de timesheet e operações corporativas atrás de login institucional para uso de sua equipe. Não existem métricas de eficiência operacional ou de volume de faturamento. Este estudo de caso documenta o design de operações internas B2B, modelos de interação para timesheet e sistemas de grid multi-resolução.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei a plataforma web de operações internas, o aplicativo mobile complementar, os fluxos de apontamento de horas, a gestão de taxas e honorários, o painel de implantação de processos e os dashboards administrativos. Não reivindico desenvolvimento de back-end, banco de dados, integrações com ERP contábil ou a operação da consultoria. Status de entrega: implantado internamente atrás de login do cliente; o domínio público serve ao site institucional. Crédito de design de UI/UX."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UX para operações internas em consultorias empresariais"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "138",
+              "label": "nós na página principal de Design da aplicação",
+              "icon": "📐"
+            },
+            {
+              "value": "35",
+              "label": "estilos semânticos de cor definidos no documento",
+              "icon": "🎨"
+            },
+            {
+              "value": "5",
+              "label": "presets de grid responsivo (Desktop, Desktop 2.0, Tablet, Mobile 24/8px)",
+              "icon": "📏"
+            },
+            {
+              "value": "2",
+              "label": "perfis operacionais (Sócios Admin e Consultores Colaboradores)",
+              "icon": "👥"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Consultorias de negócios e auditorias tributárias enfrentam perdas de receita causadas pelo atrito no registro de horas. Quando o software de timesheet é burocrático, os consultores deixam para preencher suas atividades no fim do mês, gerando esquecimento de tarefas faturáveis, faturamento impreciso e atrasos na cobrança. A Tas Consultoria demandava um sistema ágil para registro no celular e no computador, garantindo aos sócios controle em tempo real da alocação da equipe."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O motor de timesheet e apontamento de atividades"
+        },
+        {
+          "type": "prose",
+          "body": "O fluxo operacional central na página de Design (nó 1:15) focou em remover barreiras no apontamento diário de tarefas pelos consultores:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Apontamento Ágil (Novo apontamento) — Modal rápido permitindo escolher cliente, projeto, tipo de atividade, status faturável e duração precisa com seletor de datas integrado (Calendar Container).",
+            "Telas Mobile Complementares (iPhone 13 mini) — Telas mobile dedicadas (telas 1 a 12) para que consultores em campo registrem reuniões, deslocamentos e sessões de consultoria diretamente do celular.",
+            "Fila de Revisão de Pendências (Apontamento pendente) — Painel onde os sócios e gestores de projeto conferem, aprovam ou devolvem apontamentos antes do envio da fatura.",
+            "Confirmação Imediata (Apontamento-sucesso) — Feedback visual que impede lançamentos duplicados e confirma a sincronização com o orçamento do cliente."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Gestão de taxas de honorários e controle de implantação"
+        },
+        {
+          "type": "prose",
+          "body": "Além do registro de horas, o sistema integrou a parametrização comercial e o controle das entregas da consultoria:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cadastro de Taxas (Cadastrar taxas e Lista de Taxas) — Configuração de modelos de cobrança por valor fixo, horas mistas, taxa de sócio e descontos negociados por cliente.",
+            "Trilha de Auditoria (Histórico-editar) — Histórico registrando revisões de taxas e alterações em contratos de clientes.",
+            "Acompanhamento de Processos (Implantação - Lista de processos) — Painel de controle de entregas acompanhando marcos de reestruturação tributária e não-conformidades (Inadequação adicionada).",
+            "Gestão da Equipe (Cadastrar colaborador e Perfil) — Cadastro de analistas e consultores com cargos, departamentos e permissões de acesso."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca reivindique desenvolvimento de ERP de back-end ou integração contábil: a fonte não comprova isso. Nunca afirme implantação em produção externa ou métricas financeiras. A entrega foi interna atrás de autenticação; o que é comprovado é o sistema de design de UI/UX com 159 nós."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Fundação tokenizada e sistema com 5 grids responsivos"
+        },
+        {
+          "type": "prose",
+          "body": "Para assegurar disciplina técnica entre as telas desktop e as interfaces mobile, estruturei 5 presets de grid (Desktop/Desktop, Desktop/Desktop 2.0, Mobile/Tablet, Mobile/Mobile 24px e Mobile/Mobile 8px) combinados a 35 tokens de cor semânticos, incluindo gradientes dourados metálicos (#E9BF60 a #D6A747) alinhados ao posicionamento institucional da firma."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é desenvolvimento de software de ERP ou contabilidade. Desenhei a UI e as interações no Figma; não programei bancos de dados SQL ou conectores de ERP.",
+            "Não é um site público institucional. É uma aplicação interna de operações implantada atrás de login corporativo para a equipe da Tas Consultoria.",
+            "Não é criação de logotipo ou marca. A identidade visual corporativa já existia antes do projeto.",
+            "Não possui métricas de faturamento. Nenhum dado de horas economizadas ou volume faturado foi retido no registro do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O impacto de ferramentas internas dedicadas"
+        },
+        {
+          "type": "prose",
+          "body": "A Tas Consultoria evidencia como o design de sistemas internos resolve atritos operacionais no setor de serviços profissionais. Ao unir a profundidade analítica do desktop para os gestores com a rapidez mobile para os consultores em campo, o projeto transformou o controle de horas em um fluxo ágil e sem fricção."
+        }
+      ]
+    }
+  }
 }

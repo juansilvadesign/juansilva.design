@@ -44,5 +44,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Pmedias Marketing, a digital performance and marketing agency. Designed 4 responsive layout frames in Figma (file key LYa8fGabEI2ax9wrTkZnOm) including full desktop and mobile landing pages (Pmedias - Desktop, Pmedias - Landing Page, and navigation overlay), supported by a 43-node Style Guide specifying button component sets, typography scales, and Kelvin Bezerra's brand logo and high-energy color palette.",
+      "context": "Agency employment at Sagitta delivering from July 3, 2023 to July 13, 2023. Juan served as the sole website UI designer within the agency team: Kelvin Bezerra created the Pmedias brand identity and logo, Juan designed the complete responsive agency landing page in Figma, and an external no-code developer implemented and published the site on WordPress using Elementor. Scoped by Ramon.",
+      "outcome": "The website was implemented and published to production. The current live domain pmedias.com.br serves an unrelated 1.5 KB Vite/React SPA shell built later by another vendor. Historical shipping is verified via an era Wayback Machine archive (2024-08-16, 140 KB on WordPress 6.6.1 / Hello Elementor with 421 Elementor references and a Copyright 2023 line), whose section sequence (Nossas Soluções, Estratégia de Marketing, Branding, Performance Online) matches the audited Figma file. No lead or client metrics exist. This case study documents agency portfolio UI, performance service positioning, and responsive landing page design.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the commercial marketing agency landing page layouts and mobile navigation in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress/Elementor implementation (handled by a no-code developer), or marketing campaign management. Delivery status: shipped to production in 2023 (evidenced by 2024-08-16 Wayback archive on WordPress/Elementor); current live domain serves an unrelated rebuild by another company."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Agency portfolio UI: communicating performance and conversion"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "4",
+              "label": "responsive layout frames on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "43",
+              "label": "style guide tokens, typography scales, and button component sets",
+              "icon": "🎨"
+            },
+            {
+              "value": "140 KB",
+              "label": "verified historical WordPress/Elementor build on Wayback Machine",
+              "icon": "🏛️"
+            },
+            {
+              "value": "10 days",
+              "label": "from design kickoff to final implementation handoff",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Digital marketing agencies are judged mercilessly by their own websites: if an agency's digital front door is slow, generic, or visually cluttered, prospective clients assume their client campaigns will suffer from the same weaknesses. Pmedias required an institutional landing page that projected technical sharpness, structured marketing services clearly, and drove inbound consultation inquiries."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Section architecture matching verified production build"
+        },
+        {
+          "type": "prose",
+          "body": "The section hierarchy on the Design page (node 1:15)—which exactly matches the verified 2024 Wayback capture—was structured for rapid commercial qualification:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Hero Header — Dynamic headline highlighting traffic generation and sales growth, paired with clear primary CTAs for strategy diagnostic requests.",
+            "Service Capabilities (Nossas Soluções) — Clean multi-column breakdown of core agency offerings: Performance Marketing (paid search and Meta ads), Social Media Management, and Corporate Branding.",
+            "Strategic Methodology (Estratégia de Marketing) — Step-by-step walkthrough detailing how the agency conducts audience research, creative testing, and funnel optimization.",
+            "Performance Metrics & Proof — Data-driven proof points showcasing client ROI multipliers and campaign scalability.",
+            "Responsive Mobile Funnel — Complete mobile adaptation ensuring touch-friendly button targets, readable typography, and instant WhatsApp contact integration."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "The live domain pmedias.com.br now serves an unrelated Vite/React SPA shell built by another company. What carries this record is the verified era Wayback snapshot (2024-08-16, 140,342 B on WordPress / Hello Elementor with 421 Elementor references and a Copyright 2023 line), whose section run exactly matches the audited Figma file."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide tokens and interactive buttons"
+        },
+        {
+          "type": "prose",
+          "body": "The 43-node Style Guide page (node 1:16) organized Kelvin Bezerra's brand assets: dark background contrast rules, high-visibility orange accent buttons with hover and active states, modern geometric sans-serif typography, and mobile drawer menu styling."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra created the Pmedias logo and visual identity.",
+            "Not WordPress or Elementor implementation. The website was assembled in WordPress by an external no-code developer.",
+            "Not marketing campaign operations. I designed the agency's website UI; I did not manage client ad accounts or media buying.",
+            "Not the current live website. The domain now serves an unrelated third-party rebuild; historical shipping is proven via the 2024-08-16 Wayback archive.",
+            "Not supported by lead analytics. No inbound agency lead numbers or conversion metrics exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of high-converting agency landing pages"
+        },
+        {
+          "type": "prose",
+          "body": "Pmedias Marketing illustrates how clean typography, structured service definitions, and focused call-to-action blocks create an authoritative digital presence for a performance agency. Delivered within a tight 10-day agency sprint, the design provided a proven commercial asset."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a Pmedias Marketing, agência de marketing digital e tráfego de performance. Desenvolvi 4 pranchetas de layout responsivo no Figma (arquivo LYa8fGabEI2ax9wrTkZnOm) cobrindo landing page completa para desktop e mobile (Pmedias - Desktop, Pmedias - Landing Page e menu de navegação), com suporte de um Style Guide com 43 nós especificando conjuntos de botões, escalas tipográficas e aplicação do logotipo e paleta vibrante criados por Kelvin Bezerra.",
+      "context": "Atuação como funcionário na agência Sagitta de 3 de julho de 2023 a 13 de julho de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou a identidade visual e o logotipo da Pmedias, Juan desenhou a landing page institucional responsiva no Figma, e um desenvolvedor no-code implementou e publicou o site no CMS WordPress com Elementor. Escopo alinhado por Ramon.",
+      "outcome": "O site foi implementado e publicado em produção. O domínio atual pmedias.com.br serve uma aplicação SPA em Vite/React não relacionada, criada posteriormente por outra empresa. A publicação histórica original é confirmada via snapshot do Wayback Machine (16/08/2024, 140 KB em WordPress 6.6.1 / Hello Elementor com 421 referências ao Elementor e linha Copyright 2023), cuja ordem das seções (Nossas Soluções, Estratégia de Marketing, Branding, Performance Online) coincide com o arquivo Figma auditado. Não existem métricas de captação de leads. Este estudo de caso documenta o design de sites para agências e a estruturação de serviços de marketing digital.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei os layouts da landing page institucional e o menu mobile no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação em WordPress/Elementor (conduzida por um desenvolvedor no-code) nem a gestão de campanhas de marketing. Status de entrega: publicado em produção em 2023 (atestado pelo snapshot histórico de 16/08/2024 no Wayback Machine); o domínio atual serve um build diferente criado por outra empresa."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UI para agências de marketing: comunicando performance e conversão"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "4",
+              "label": "pranchetas responsivas na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "43",
+              "label": "tokens e componentes de botões no Style Guide",
+              "icon": "🎨"
+            },
+            {
+              "value": "140 KB",
+              "label": "de build histórico em WordPress/Elementor verificado no Wayback",
+              "icon": "🏛️"
+            },
+            {
+              "value": "10 dias",
+              "label": "do início do layout à entrega para implementação",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Agências de marketing digital enfrentam julgamento imediato por meio de seus próprios sites: se a presença digital da agência for pesada, confusa ou genérica, potenciais clientes presumem que as campanhas de tráfego sofrerão dos mesmos problemas. A Pmedias demandava uma landing page comercial com visual moderno, serviços claramente discriminados e foco em geração de contatos comerciais."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Estrutura de seções coincidente com o build histórico verificado"
+        },
+        {
+          "type": "prose",
+          "body": "A narrativa comercial na prancheta de Design (nó 1:15) — perfeitamente alinhada com a versão arquivada no Wayback Machine — organizou a proposta de valor para qualificação de prospects:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cabeçalho de Destaque — Proposta de valor focada em geração de tráfego e vendas, combinada a botões de ação para agendamento de diagnóstico.",
+            "Soluções da Agência (Nossas Soluções) — Apresentação dos serviços principais: Tráfego Pago (Google Ads e Meta Ads), Gestão de Redes Sociais e Identidade de Marca.",
+            "Metodologia Estratégica (Estratégia de Marketing) — Visão passo a passo explicando como a agência conduz pesquisa de público, testes criativos e otimização de conversão.",
+            "Geração de Credibilidade e Métricas — Destaques gráficos comunicando foco em ROI e crescimento previsível para clientes.",
+            "Adaptação Mobile Integrada — Layout responsivo garantindo leitura confortável e botão para contato rápido via WhatsApp."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O domínio atual pmedias.com.br serve hoje uma casca em Vite/React criada por terceiros. O que comprova a entrega comercial deste projeto é o snapshot histórico do Wayback Machine (16/08/2024, 140.342 B em WordPress / Hello Elementor com 421 marcadores de Elementor e linha Copyright 2023), cuja sequência de seções corresponde perfeitamente ao Figma auditado."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Tokens do Style Guide e botões interativos"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 43 nós (nó 1:16) estruturou os elementos visuais criados por Kelvin Bezerra: fundo escuro de alto contraste, botões de ação com estados normais e de hover, tipografia sem serifa geométrica e menus mobile."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra concebeu a identidade visual e o logotipo da Pmedias.",
+            "Não é programação em WordPress ou Elementor. A montagem do site no CMS foi executada por um desenvolvedor no-code.",
+            "Não é gestão de tráfego pago. Projetei a interface institucional da agência; não gerenciei anúncios ou contas de clientes.",
+            "Não é o site atual no ar. O domínio hoje hospeda uma reconstrução não relacionada; a entrega original é atestada pelo arquivo histórico de 2024.",
+            "Não possui métricas de conversão. Nenhum número sobre leads gerados para a agência consta nos registros."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O impacto de um design comercial direto para agências"
+        },
+        {
+          "type": "prose",
+          "body": "A Pmedias Marketing exemplifica como clareza tipográfica, definição direta de serviços e chamadas estratégicas para ação geram uma presença online confiável para negócios de serviços digitais. Desenvolvido em um sprint ágil de 10 dias, o projeto entregou um layout comercial eficiente."
+        }
+      ]
+    }
+  }
 }

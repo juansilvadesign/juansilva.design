@@ -44,5 +44,216 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Messias & Almada, an established full-service corporate law firm. Designed 82 responsive canvas nodes on the primary Design page across five distinct legal practice areas (Direito da Saúde, Família & Sucessões, Direito Penal, Direito Civil, Leilão de Imóveis), partner profiles (Equipe / Acompanhamento sócios), mission narrative, and timed Hero states with context-aware navigation bars (NavBar do Hero vs NavBar do restante do site), backed by a 38-node Style Guide specifying legal inputs, custom checkboxes, and interactive banner sets in Figma (file key QbkG2JXoTQZyDKls9SwQo6).",
+      "context": "Agency employment at Sagitta delivering from September 13, 2023 to November 21, 2023. Juan acted as sole website UI designer within the agency team: Kelvin Bezerra authored the brand visual identity and logo, Juan designed the complete multi-page responsive legal portal in Figma, and an external no-code developer implemented and published the site on WordPress. Requirements were scoped by Ramon.",
+      "outcome": "The website was implemented and published to production: messias.adv.br answered HTTP 200 with 92,654 B, displaying the verified client CNPJ in the footer. Juan grades the live build as Tier B: it proves that the design was shipped publicly, but contains implementation deviations by the no-code developer. The Figma file serves as the definitive design proof. No lead conversion or consultation metrics exist. This case study documents multi-practice legal IA, high-trust typography, and complex practice area navigation.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer for Messias & Almada's multi-practice legal website, practice area subpages, partner profiles, and mobile layouts. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress implementation (handled by a no-code developer), or user research (Ramon's). Delivery status: published to production at messias.adv.br (HTTP 200 verified); live build contains developer styling deviations (Tier B), so the Figma artifact represents the authored design baseline."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Information architecture for a multi-practice law firm"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "82",
+              "label": "canvas nodes on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "5",
+              "label": "dedicated legal practice verticals designed",
+              "icon": "⚖️"
+            },
+            {
+              "value": "38",
+              "label": "style guide design tokens and interactive component sets",
+              "icon": "🎨"
+            },
+            {
+              "value": "92 KB",
+              "label": "production HTML verified on messias.adv.br with client CNPJ",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Corporate legal websites operate under strict ethical and professional standards (including Brazilian Bar Association / OAB guidelines that prohibit aggressive sales promotions). High-net-worth individuals and corporate counsel evaluating a firm look for specialization depth, academic authority, and clear partner attribution. Messias & Almada required a digital portal capable of presenting five distinct legal practice areas without diluting the firm's cohesive institutional identity."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Five specialized practice verticals across 82 nodes"
+        },
+        {
+          "type": "prose",
+          "body": "Rather than collapsing all legal services into a generic bulleted list, I architected standalone practice pages and responsive frames on the Design page (node 1:15):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Health Law (Direito da Saúde) — Focused on medical litigation, health insurance claim denials, high-cost medication injunctions, and patient advocacy.",
+            "Family & Succession (Família & Sucessões) — Sensitive structuring for estate planning, probate, divorce mediation, and asset distribution.",
+            "Criminal Law (Direito Penal) — Corporate white-collar defense, compliance defense, and habeas corpus representation.",
+            "Civil Litigation (Direito Civil) — Strategic breach of contract, commercial liability, and indemnification disputes.",
+            "Real Estate Auctions (Leilão de Imóveis) — Specialized advisory for judicial and extrajudicial real estate asset acquisition and title regularization.",
+            "Partner Profiles & Team (Equipe) — Individual partner biographies highlighting academic backgrounds, bar admissions, published articles, and direct consultation channels.",
+            "Dual Navigation Architecture — Engineered distinct navigation states: a transparent hero navbar (NavBar do Hero) blending with editorial photography, transitioning to a high-contrast sticky navbar (NavBar do restante do site) on content scrolls."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan grades this tier B: the live website at messias.adv.br (HTTP 200 with verified client CNPJ) proves public shipping, but the no-code developer introduced visual deviations during CMS implementation. Cite the live domain as shipping proof; evaluate the Figma file for the true design fidelity."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide and legal interaction tokens"
+        },
+        {
+          "type": "prose",
+          "body": "The 38-node Style Guide page (node 1:16) established a high-trust palette balancing deep corporate navy and gold tones, refined serif and sans-serif typography scales, customized legal intake form fields with privacy consent checkboxes, and responsive banner component sets."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra authored the Messias & Almada logo and visual identity.",
+            "Not WordPress implementation. A no-code developer was responsible for building and publishing the site on WordPress.",
+            "Not legal counsel or compliance advice. I designed the user interface and content architecture, not the legal content.",
+            "Not user research or discovery. Client requirements were scoped by Ramon.",
+            "Not supported by lead conversion analytics. No consultation requests or client acquisition metrics were retained."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The authority of dedicated practice area design"
+        },
+        {
+          "type": "prose",
+          "body": "Messias & Almada illustrates how multi-practice professional firms can project authority across varied disciplines. By creating dedicated practice verticals, dual-state navigation, and partner-centric profiles, the design established a distinguished digital home for a high-stakes law firm."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a Messias & Almada, escritório de advocacia multidisciplinar. Desenvolvi 82 nós na página principal de Design abrangendo cinco áreas de atuação especializadas (Direito da Saúde, Família & Sucessões, Direito Penal, Direito Civil, Leilão de Imóveis), perfis dos sócios (Equipe / Acompanhamento sócios), narrativa institucional e estados de Hero com barras de navegação contextuais (NavBar do Hero vs NavBar do restante do site), sustentados por um Style Guide com 38 nós no Figma (arquivo QbkG2JXoTQZyDKls9SwQo6).",
+      "context": "Atuação como funcionário na agência Sagitta de 13 de setembro de 2023 a 21 de novembro de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra concebeu a identidade visual e o logotipo, Juan projetou o portal jurídico responsivo no Figma, e um desenvolvedor no-code implementou e publicou o site no CMS WordPress. Escopo definido por Ramon.",
+      "outcome": "O site foi implementado e publicado em produção: messias.adv.br respondeu com HTTP 200 (92.654 B) com o CNPJ do cliente exibido no rodapé. Juan classifica o build publicado como Tier B: comprova que o design foi ao ar, mas apresenta desvios visuais introduzidos na montagem pelo desenvolvedor no-code. O arquivo Figma é a referência autêntica do design. Não existem métricas de conversão de clientes. Este estudo de caso documenta a arquitetura de informação jurídica, tipografia de alta credibilidade e navegação contextual.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Fui o designer único de UI do site para o portal jurídico, páginas das verticais de atuação, biografias dos sócios e layouts mobile da Messias & Almada. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação em WordPress (feita por um desenvolvedor no-code) nem o levantamento de discovery (conduzido por Ramon). Status de entrega: publicado em produção em messias.adv.br (HTTP 200 verificado); o build no ar possui desvios visuais do desenvolvedor (Tier B), tornando o Figma a referência fidedigna do layout."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de informação para um escritório de advocacia multidisciplinar"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "82",
+              "label": "nós na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "5",
+              "label": "áreas de atuação jurídica estruturadas",
+              "icon": "⚖️"
+            },
+            {
+              "value": "38",
+              "label": "tokens e componentes interativos no Style Guide",
+              "icon": "🎨"
+            },
+            {
+              "value": "92 KB",
+              "label": "de HTML em produção verificado em messias.adv.br com CNPJ",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Websites jurídicos corporativos operam sob rígidos padrões éticos e normativos (incluindo as diretrizes da OAB, que vedam apelos comerciais agressivos). Clientes de alto patrimônio e diretores jurídicos corporativos buscam profundidade técnica, autoridade acadêmica e clareza sobre quem são os sócios responsáveis por cada causa. A Messias & Almada necessitava de um portal capaz de apresentar cinco áreas de atuação distintas sem fragmentar a imagem institucional sólida da banca."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Cinco áreas de atuação estruturadas em 82 nós"
+        },
+        {
+          "type": "prose",
+          "body": "Em vez de resumir os serviços a uma lista genérica de tópicos, projetei páginas e seções aprofundadas na prancheta de Design (nó 1:15):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Direito da Saúde — Foco em litígios contra planos de saúde, negativas de cobertura, liminares para remédios de alto custo e erro médico.",
+            "Família e Sucessões — Tratamento reservado para planejamento sucessório, inventários judiciais e extrajudiciais, divórcios e guarda.",
+            "Direito Penal — Defesa em crimes empresariais, crimes contra a ordem tributária e atuação em inquéritos policiais.",
+            "Direito Civil — Ações de inadimplemento contratual, responsabilidade civil e contencioso estratégico.",
+            "Leilão de Imóveis — Assessoria na análise de riscos jurídicos para arrematação e regularização de imóveis em leilão.",
+            "Perfis da Equipe (Equipe) — Apresentação dos sócios com currículo acadêmico, especializações, artigos publicados e canal direto para consulta.",
+            "Navegação Dupla Contextual — Barra de navegação transparente integrada à foto editorial do Hero (NavBar do Hero), que transiciona suavemente para uma barra fixa de alto contraste na rolagem (NavBar do restante do site)."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan classifica este projeto como Tier B: o site no ar em messias.adv.br (HTTP 200 com CNPJ comprovado) atesta a publicação em produção, mas o desenvolvedor no-code introduziu desvios visuais durante a montagem no WordPress. O domínio comprova que foi ao ar; o Figma comprova a qualidade do design original."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide e elementos visuais de confiança"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 38 nós (nó 1:16) definiu uma paleta sóbria em azul corporativo e tons dourados, tipografia com serifas equilibradas para títulos, campos de formulário com caixas de consentimento LGPD e conjuntos de banners informativos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de logotipo ou identidade visual. Kelvin Bezerra concebeu o logotipo e os elementos gráficos da marca.",
+            "Não é programação em WordPress. O desenvolvimento do site no CMS foi executado por um desenvolvedor no-code.",
+            "Não é consultoria jurídica. Desenvolvi o design da interface e a arquitetura de conteúdo, não o texto das teses jurídicas.",
+            "Não é discovery ou pesquisa com usuários. Os requisitos foram alinhados por Ramon.",
+            "Não possui métricas de conversão. Nenhum número sobre consultas agendadas ou clientes captados foi retido."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A sobriedade de um portal jurídico especializado"
+        },
+        {
+          "type": "prose",
+          "body": "A Messias & Almada demonstra como escritórios de advocacia podem projetar autoridade em diversas verticais do Direito sem perder a coesão. Ao estruturar páginas dedicadas por área, navegação contextual inteligente e foco na experiência dos sócios, o projeto entregou um portal condizente com a seriedade da prática jurídica."
+        }
+      ]
+    }
+  }
 }

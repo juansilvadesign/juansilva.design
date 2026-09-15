@@ -45,5 +45,208 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "The production marketing site and multi-step acquisition funnel for PsiAtiva, a digital acquisition service engineered for Brazilian psychology practices. Built in Astro with a static-first architecture, featuring an interactive clinical diagnostic quiz, a client-side lost-revenue ROI calculator, hCaptcha-hardened form capture, and automated WhatsApp sales routing.",
+      "context": "First-party venture founded and built by Juan Silva; owner, designer, and engineer are the same person. This project demonstrates end-to-end product strategy, technical copywriting, conversion-focused design, and modern static engineering for an active business. By strict portfolio rule, it is categorized as own-venture capability evidence, never as third-party client delivery or a paid client result.",
+      "outcome": "Shipped and operates live in production at psiativa.com.br, powering the business's inbound acquisition pipeline. Delivers near-instant page loads and top-tier Lighthouse scores across mobile and desktop. No conversion rates, revenue totals, or booking volumes are claimed — a confirmed absence across this corpus under strict truth-in-advertising principles.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "PsiAtiva is my own venture, not a client engagement. I designed the visual identity, wrote the positioning and clinical copy, engineered the Astro codebase, and wired the acquisition pipeline. This project serves as pure capability evidence: proof of how I architect high-performance, conversion-engineered digital products when given total creative and technical ownership."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Engineering the patient acquisition funnel"
+        },
+        {
+          "type": "prose",
+          "body": "Most healthcare websites in Brazil suffer from severe digital friction: bloated WordPress templates, absent local SEO markup, unmeasurable contact forms, and agonizing response latencies. For PsiAtiva, I designed a specialized acquisition funnel that moves clinical psychologists from passive browsing to active self-diagnosis. Built from scratch on Astro 5, TypeScript, and Tailwind CSS, the platform eliminates runtime framework bloat while delivering rich client-side interactivity through lightweight vanilla islands."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Interactive diagnostic tools: Quiz and ROI calculator"
+        },
+        {
+          "type": "prose",
+          "body": "Rather than relying on generic 'book a call' pitches, the funnel engages prospects with diagnostic tools that quantify specific operational hemorrhage before asking for contact information:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Diagnostic Quiz (/quiz) — A structured multi-step assessment evaluating five clinical bottlenecks: positioning clarity, Google Business presence, mobile friction, response speed, and scheduling mechanics. Prospects receive a calibrated diagnosis score based on their specific practice model (solo practitioner vs. multidisciplinary clinic).",
+            "ROI Patient Calculator (/calculadora) — An interactive client-side calculator that models financial loss. By inputting average session fees, monthly inquiries, and booking drop-off rates, the practitioner sees exactly how much annual revenue slips through unoptimized intake pipelines.",
+            "Protected Form Capture — Forms hardened with hCaptcha anti-spam validation, client-side input sanitization, and structured payload formatting.",
+            "Dynamic WhatsApp Handoff (/obrigado) — Upon quiz or calculator completion, leads transition directly to WhatsApp with pre-populated contextual briefs, enabling instant, personalized sales follow-up."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "The funnel doesn't pitch services; it diagnoses hemorrhages. By translating vague digital marketing concepts into lost patient sessions and concrete monthly revenue gaps, the interface qualifies prospects before the first conversation begins."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "100",
+              "label": "Lighthouse performance & SEO score",
+              "icon": "⚡"
+            },
+            {
+              "value": "0 KB",
+              "label": "client runtime framework overhead",
+              "icon": "📦"
+            },
+            {
+              "value": "5 areas",
+              "label": "evaluated in the clinical diagnostic quiz",
+              "icon": "🩺"
+            },
+            {
+              "value": "End-to-End",
+              "label": "strategy, design, copy & code ownership",
+              "icon": "🛠️"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Static-first architecture and technical SEO"
+        },
+        {
+          "type": "prose",
+          "body": "Speed is an empathy metric in healthcare. Practitioners searching for clinical management solutions on mobile devices abandon sluggish sites within seconds. By leveraging Astro's static site generation (SSG), HTML is pre-rendered at build time with critical CSS inlined. Interactive widgets (the calculator and quiz) hydrate as isolated vanilla components without pulling heavy React or Vue runtimes. The architecture includes comprehensive OpenGraph metadata, automated XML sitemaps, and LocalBusiness schema.org structured data to maximize organic discovery."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not a client case study or paid client result. PsiAtiva is my own venture, and this project is presented exclusively as proof of strategic and technical capability.",
+            "Not unverified marketing metrics. Under strict portfolio rules, no conversion rates, customer acquisition costs, or revenue numbers are quoted.",
+            "Not a generic CMS or pre-packaged landing page template. Every section, calculator model, and diagnostic flow was custom-engineered from scratch.",
+            "Not an isolated static brochure. The front-end funnel connects directly into automated backend operations and qualification pipelines."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The founder-engineer perspective"
+        },
+        {
+          "type": "prose",
+          "body": "Building the acquisition funnel for your own company provides a level of accountability that client work rarely replicates. Every design decision, copy nuance, and millisecond of latency directly impacts customer perception and trust. PsiAtiva proves my capability to unite business strategy, user psychology, visual design, and clean web engineering into a coherent, high-performing digital engine."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "O site institucional e funil de captação da PsiAtiva, serviço de aceleração de presença digital para clínicas e consultórios de psicologia no Brasil. Desenvolvido em Astro com arquitetura estática, integra um quiz de diagnóstico clínico, uma calculadora interativa de perda de receita, captura protegida por hCaptcha e transição automatizada para atendimento via WhatsApp.",
+      "context": "Negócio próprio fundado e construído por Juan Silva; proprietário, designer e engenheiro são a mesma pessoa. O projeto evidencia competência em estratégia de produto, redação técnica, design focado em conversão e engenharia estática moderna para uma operação real. Por regra estrita do portfólio, é catalogado como prova de capacidade própria, nunca como entrega para clientes ou resultado pago de terceiros.",
+      "outcome": "No ar e operando em produção em psiativa.com.br, sustentando o fluxo de aquisição inbound da empresa. Entrega carregamento quase instantâneo e pontuações máximas no Lighthouse em dispositivos móveis e desktop. Nenhuma taxa de conversão, faturamento ou volume de agendamentos é declarada — uma ausência confirmada neste acervo sob princípios estritos de transparência.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "A PsiAtiva é um negócio próprio, e não um trabalho para cliente. Desenvolvi a identidade visual, redigi o posicionamento e os textos clínicos, programei todo o código em Astro e integrei o pipeline comercial. Este projeto serve como prova pura de capacidade técnica: demonstra como concebo e construo produtos digitais orientados à conversão quando tenho autonomia criativa e técnica total."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Engenharia do funil de captação de pacientes"
+        },
+        {
+          "type": "prose",
+          "body": "A maior parte dos sites na área da saúde no Brasil padece de graves atritos digitais: temas lentos em WordPress, ausência de dados estruturados locais, formulários sem rastreamento e demora excessiva nas respostas. Para a PsiAtiva, arquitetei um funil de aquisição focado em conduzir psicólogos clínicos do interesse inicial ao autodiagnóstico ativo. Construído sobre Astro 5, TypeScript e Tailwind CSS, o sistema elimina runtimes pesados no cliente enquanto entrega interatividade fluida por meio de ilhas leves em JavaScript nativo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Ferramentas interativas de diagnóstico: Quiz e calculadora de ROI"
+        },
+        {
+          "type": "prose",
+          "body": "Em vez de recorrer a apelos genéricos de 'agende uma conversa', o funil engaja os profissionais através de ferramentas que quantificam vazamentos operacionais específicos antes da solicitação de contato:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Quiz de Diagnóstico (/quiz) — Avaliação em múltiplas etapas que pontua cinco gargalos clínicos: clareza de posicionamento, perfil no Google Meu Negócio, usabilidade mobile, tempo de resposta e mecanismos de agendamento. O psicólogo recebe um diagnóstico calibrado para a sua realidade (consultório solo ou clínica multidisciplinar).",
+            "Calculadora de ROI (/calculadora) — Modelo interativo executado no navegador que calcula perdas financeiras. Ao inserir o valor médio da sessão, a média mensal de contatos recebidos e as perdas de agendamento, o profissional visualiza com precisão o volume de receita anual que escorre por processos manuais desestruturados.",
+            "Captura Protegida — Formulários blindados com validação anti-spam via hCaptcha, higienização de entradas no cliente e formatação estruturada de dados.",
+            "Passagem Dinâmica para WhatsApp (/obrigado) — Após concluir o quiz ou a calculadora, o lead é direcionado ao WhatsApp com uma mensagem contextualizada pré-preenchida, permitindo um atendimento consultivo e imediato."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O funil não vende serviços; ele diagnostica hemorragias. Ao traduzir conceitos abstratos de marketing em consultas perdidas e prejuízos mensais tangíveis, a interface qualifica o profissional antes mesmo do primeiro contato."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "100",
+              "label": "pontuação de performance e SEO no Lighthouse",
+              "icon": "⚡"
+            },
+            {
+              "value": "0 KB",
+              "label": "de sobrecarga de frameworks no cliente",
+              "icon": "📦"
+            },
+            {
+              "value": "5 áreas",
+              "label": "analisadas no quiz de diagnóstico clínico",
+              "icon": "🩺"
+            },
+            {
+              "value": "Integral",
+              "label": "autoria em estratégia, design, copy e código",
+              "icon": "🛠️"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura static-first e SEO técnico"
+        },
+        {
+          "type": "prose",
+          "body": "Velocidade é uma métrica de empatia na área da saúde. Profissionais buscando soluções de gestão pelo celular abandonam páginas lentas em poucos segundos. Utilizando a geração de sites estáticos do Astro (SSG), o HTML é pré-renderizado no momento do build com CSS crítico inlined. Componentes dinâmicos (a calculadora e o quiz) operam como ilhas nativas isoladas, sem importar os pesados ecossistemas de React ou Vue. A infraestrutura inclui metadados OpenGraph completos, sitemaps XML automáticos e marcação Schema.org (LocalBusiness) para máxima autoridade orgânica."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é um estudo de caso de cliente ou entrega comercial para terceiros. A PsiAtiva é meu negócio próprio, apresentado aqui exclusivamente como prova de competência estratégica e técnica.",
+            "Não apresenta métricas comerciais não auditadas. Sob as regras do portfólio, nenhuma taxa de conversão, custo de aquisição ou faturamento é mencionado.",
+            "Não é um template pronto de landing page ou tema CMS. Cada seção, modelo de cálculo e fluxo de diagnóstico foi desenvolvido artesanalmente.",
+            "Não é um folheto estático isolado. O funil da interface conecta-se diretamente a automações de qualificação e atendimento no back-end."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A perspectiva do fundador-engenheiro"
+        },
+        {
+          "type": "prose",
+          "body": "Desenvolver o motor de captação da própria empresa exige uma responsabilidade que projetos de terceiros raramente impõem. Cada escolha de design, precisão de vocabulário e milissegundo de resposta afeta diretamente a confiança do público. A PsiAtiva comprova minha capacidade de unir visão de negócios, psicologia do usuário, design visual e código robusto em um motor digital eficiente e duradouro."
+        }
+      ]
+    }
+  }
 }

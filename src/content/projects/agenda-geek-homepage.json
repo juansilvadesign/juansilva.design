@@ -44,5 +44,222 @@
     "storeListing": false,
     "designArtifact": false
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "A responsive, single-page reconstruction of the Agenda Geek homepage, hand-coded in HTML and CSS from a team Figma file and deployed to GitHub Pages. Built as a self-taught learning project in May 2023 when the winning competition design had no path to code — marking the exact moment I pivoted from pure designer to design engineer. The first lines of code I ever wrote.",
+      "context": "Self-directed learning roughly one year after the 'Desafio Ajude uma ONG' hackathon concluded. There was no client, no contract, and no commercial commission: the NGO lacked resources to hire developers, so the winning 8-screen platform design was never built. I decided to learn front-end development by independently coding the homepage screen. While the visual design was co-created live on call with my hackathon teammates, the code is mine alone across nine commits.",
+      "outcome": "Shipped to GitHub Pages in May 2023 and preserved across two independent, byte-identical origins (juansilvadesign.github.io/Agenda-Geek-homepage and agendageek.juanpablosilva.com.br). Three years later, it remains the most durable artifact in the portfolio, answering HTTP 200 without third-party hosting dependencies. It had no users and was never used by the NGO — its value is honest biographical proof of the transition from mockups to code.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "This page is not the NGO's official website — Agenda Geek never launched one. It is a personal, hand-coded reconstruction of a single screen, created in May 2023 so I could teach myself front-end development. My team designed the screen; I wrote the code. It is kept in this portfolio because it represents the beginning: the first time I refused to let a design die on canvas and taught myself how to build."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The pivot: Why I learned to build"
+        },
+        {
+          "type": "prose",
+          "body": "The opening sentence of my design-engineer positioning is: 'I spent two years designing products that never shipped because no-code tools and dev handoffs couldn't execute them. So I learned to build.' Agenda Geek is the timestamped receipt for that statement. In 2022, our design won 1st place out of 14 teams in a national NGO competition, complete with a gamified e-waste collection system, school rankings, and an extensive token system. But like dozens of student and junior concepts, it stalled because the organization could not find developers willing to code an 8-screen platform for free."
+        },
+        {
+          "type": "prose",
+          "body": "A year later, tired of watching designs languish in Figma, I opened a code editor, read web development documentation, and spent two weeks manually translating the team's Home screen into HTML and CSS. It was not commissioned work; it was a deliberate personal bridge into software engineering."
+        },
+        {
+          "type": "quote",
+          "text": "The gap between a Figma file that looks ready and a webpage that actually renders on mobile is where design engineers live. This single screen was where I crossed that gap for the first time."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "2 weeks",
+              "label": "of self-taught study & initial build (May 2023)",
+              "icon": "⏱️"
+            },
+            {
+              "value": "5 breakpoints",
+              "label": "responsive coverage from 320px to >1700px",
+              "icon": "📱"
+            },
+            {
+              "value": "485 lines",
+              "label": "of semantic HTML written from scratch",
+              "icon": "📄"
+            },
+            {
+              "value": "100% durable",
+              "label": "still live on GitHub Pages after 3 years",
+              "icon": "💎"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The technical anatomy of a first build"
+        },
+        {
+          "type": "prose",
+          "body": "The repository reflects the raw, unvarnished discipline of someone learning fundamental web technologies without starter templates or automated CLI generators:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Responsive Discipline — Five explicit CSS media queries (320px, 600px, 768px, 1440px, and min-width 1700px), ensuring the interface holds together on small mobile screens and ultra-wide desktop monitors alike.",
+            "Layout Mechanics — 77 flexbox declarations handling vertical rhythm, card grids, and navigation items without relying on CSS Grid or modern clamp() functions.",
+            "Vanilla DOM Manipulation — A single 12-line JavaScript event listener that toggles expanded view states on article cards and animates chevron rotation.",
+            "Deliberate Syntax Experimentation — Two weeks after the initial deployment, a single follow-up commit introduced CSS :is() pseudo-class selectors — concrete evidence of reading CSS specifications and testing new learnings in git.",
+            "Asset Hygiene — 27 vector and raster assets hand-exported from Figma, mapped directly to design system color tokens (including Inter 300 typography)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Durability: Surviving when client domains vanish"
+        },
+        {
+          "type": "prose",
+          "body": "Across agency portfolios, client projects frequently vanish when domains expire, hosting subscriptions lapse, or businesses shut down. Agenda Geek represents the complete inverse. Because it was published directly to GitHub Pages on my personal account, it carries zero hosting bills and zero agency dependencies. Three years later, both the GitHub Pages deploy and my self-hosted mirror serve byte-identical (sha256-matched) responses with zero maintenance."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not the NGO's official product. The Agenda Geek platform was never built; this is a personal reconstruction of a single screen.",
+            "Not my sole design. The Home screen was designed collaboratively by three team members during the hackathon. My contribution was coding it alone.",
+            "Not client or paid work. It was a self-directed educational project undertaken a year after the competition ended.",
+            "Not advanced software engineering. It contains beginner markup patterns (href='#' navigation, div-heavy containers) and no modern component frameworks.",
+            "Not a 28-month build. Commits span two weeks in May 2023; a cosmetic username update in 2025 does not represent ongoing engineering.",
+            "Not evidence of user traction. It had zero users and zero analytics — kept purely as biographical origin evidence."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The receipt of the origin"
+        },
+        {
+          "type": "prose",
+          "body": "Every design engineer has a starting point. Showing Agenda Geek alongside production Next.js architectures like Celus or AllPrice is not an apology; it is a demonstration of trajectory. It proves that my instinct to cross the disciplinary boundary between design and code is not a marketing posture — it was born years ago, out of the necessity to bring an abandoned design to life."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Uma reconstrução responsiva de página única da homepage da Agenda Geek, codificada à mão em HTML e CSS a partir do Figma da equipe e publicada no GitHub Pages. Desenvolvida como um projeto autodidata em maio de 2023, quando o design vencedor da competição não tinha como sair do papel — marcando o momento exato em que passei de designer visual a engenheiro de design. As primeiras linhas de código que escrevi na vida.",
+      "context": "Estudo autodidata cerca de um ano após o encerramento do hackathon 'Desafio Ajude uma ONG'. Não houve cliente, contrato ou encomenda comercial: a ONG não tinha recursos para contratar desenvolvedores, de modo que a plataforma completa de oito telas nunca foi programada. Decidi aprender front-end sozinho reconstruindo a tela inicial. Enquanto o design visual foi concebido em conjunto com meus colegas de equipe durante o desafio, o código foi escrito inteiramente por mim ao longo de nove commits.",
+      "outcome": "Publicado no GitHub Pages em maio de 2023 e preservado em dois servidores independentes com conteúdo idêntico (juansilvadesign.github.io/Agenda-Geek-homepage e agendageek.juanpablosilva.com.br). Três anos depois, permanece como o artefato mais durável do portfólio, respondendo HTTP 200 sem depender de contas de clientes. Não teve tráfego nem foi adotado pela ONG — seu valor é o recibo biográfico transparente da transição do design para o código.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Esta página não é o site oficial da ONG — a Agenda Geek nunca lançou um site. Trata-se de uma reconstrução pessoal de uma única tela, programada à mão em maio de 2023 para que eu aprendesse front-end. Meu time desenhou a tela; eu escrevi o código. Permanece neste portfólio por representar a origem: a primeira vez em que me recusei a deixar um design morrer no canvas e decidi aprender a programar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O ponto de virada: Por que aprendi a programar"
+        },
+        {
+          "type": "prose",
+          "body": "A frase de abertura do meu posicionamento como engenheiro de design é: 'Passei dois anos desenhando produtos que nunca saíram do papel porque ferramentas no-code e repasses para devs não conseguiam executá-los. Então aprendi a construir.' A Agenda Geek é o recibo carimbado dessa afirmação. Em 2022, nosso projeto conquistou o 1º lugar entre 14 equipes em um desafio nacional para ONGs, com sistema de coleta gamificada de lixo eletrônico, ranking de escolas e um sistema completo de design tokens. Mas, como dezenas de projetos de estudantes e juniores, empacou porque a entidade não tinha como pagar desenvolvedores para programar uma plataforma de oito telas de graça."
+        },
+        {
+          "type": "prose",
+          "body": "Um ano depois, inconformado em ver projetos parados no Figma, abri um editor de código, estudei documentações web e dediquei duas semanas para converter manualmente a tela Home do time em HTML e CSS. Não foi um trabalho encomendado; foi uma travessia deliberada para a engenharia de software."
+        },
+        {
+          "type": "quote",
+          "text": "O abismo entre um arquivo Figma bonito e uma página que realmente renderiza no celular é onde o Engenheiro de Design habita. Esta tela única foi onde atravessei esse abismo pela primeira vez."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "2 semanas",
+              "label": "de estudo autodidata e build (maio de 2023)",
+              "icon": "⏱️"
+            },
+            {
+              "value": "5 breakpoints",
+              "label": "responsividade cobrindo de 320px a >1700px",
+              "icon": "📱"
+            },
+            {
+              "value": "485 linhas",
+              "label": "de HTML escrito à mão do zero",
+              "icon": "📄"
+            },
+            {
+              "value": "100% durável",
+              "label": "ativo no GitHub Pages após 3 anos",
+              "icon": "💎"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A anatomia técnica de um primeiro build"
+        },
+        {
+          "type": "prose",
+          "body": "O repositório reflete a disciplina crua e autêntica de quem aprendeu os fundamentos da web sem templates prontos ou geradores automatizados:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rigor Responsivo — Cinco media queries explícitas (320px, 600px, 768px, 1440px e min-width 1700px), garantindo estabilidade desde telas pequenas de celular até monitores ultra-wide.",
+            "Mecânica de Layout — 77 declarações de flexbox estruturando ritmo vertical, grades de cards e menus, sem recorrer a CSS Grid ou funções clamp().",
+            "Manipulação Nativa do DOM — Um único event listener em JavaScript de 12 linhas que expande cards de artigos e rotaciona o ícone de chevron.",
+            "Experimentação Consciente — Duas semanas após a publicação inicial, um commit isolado introduziu o seletor pseudo-classe :is() — evidência factual de estudo de especificações CSS testado diretamente no código.",
+            "Tratamento de Ativos — 27 ícones e ilustrações exportados manualmente do Figma, preservando a escala tipográfica Inter 300 do design original."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Durabilidade: Resistindo quando domínios de clientes desaparecem"
+        },
+        {
+          "type": "prose",
+          "body": "Em portfólios de agência, projetos de clientes frequentemente desaparecem quando contratos expiram, empresas encerram atividades ou hospedagens são canceladas. A Agenda Geek representa o oposto. Publicada diretamente no GitHub Pages sob minha própria conta, ela não possui contas a pagar nem dependências de terceiros. Três anos depois, tanto o deploy no GitHub quanto o mirror próprio servem arquivos com sha256 idêntico, sem qualquer necessidade de manutenção."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é o produto oficial da ONG. A plataforma da Agenda Geek nunca foi desenvolvida; trata-se de uma reconstrução pessoal de uma única tela.",
+            "Não é um design de minha autoria exclusiva. A tela inicial foi concebida por três integrantes da equipe durante o hackathon. Minha autoria reside na programação.",
+            "Não é trabalho comercial ou remunerado. Foi um exercício de estudo independente realizado um ano após o encerramento da competição.",
+            "Não é engenharia de software avançada. Apresenta marcações típicas de iniciante (links com href='#', excesso de divs) e nenhum framework moderno.",
+            "Não foi construído em 28 meses. Os commits concentram-se em duas semanas em maio de 2023; um commit cosmético em 2025 não constitui desenvolvimento contínuo.",
+            "Não possui métricas de tração ou usuários. Teve zero tráfego — mantido no portfólio exclusivamente como recibo biográfico de origem."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O recibo da origem"
+        },
+        {
+          "type": "prose",
+          "body": "Todo engenheiro de design tem um ponto de partida. Apresentar a Agenda Geek ao lado de arquiteturas complexas em Next.js como Celus ou AllPrice não é um pedido de desculpas; é a demonstração de uma trajetória. Comprova que meu instinto de cruzar a fronteira entre design e código não é uma postura comercial recente — nasceu há anos, da necessidade de não deixar um bom design morrer no papel."
+        }
+      ]
+    }
+  }
 }

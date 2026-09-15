@@ -41,5 +41,170 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole website UI designer for a multidisciplinary health, facial aesthetics, weight-loss, and detox SPA clinic. Designed 25 responsive nodes across desktop and mobile in Figma, architecting dual purpose-separated navigations (clinic portal vs aesthetic dermocosmetics shop), treatment menus, product showcase (Produtos), shopping cart (Carrinho), and mobile checkout flow (Pagamento, Checkout - Mobile).",
+      "context": "Agency engagement at Sagitta between January 9 and February 9, 2024. Executed as sole website UI designer within a collaborative delivery team: Kelvin Bezerra designed the brand identity and logo mark; Juan designed the website and commerce interfaces; a no-code developer implemented and shipped the site on WordPress / WooCommerce.",
+      "outcome": "Delivered to development and shipped to production. The client business subsequently ceased commercial operations and closed, and the domain clinicacastelo.clinic is defunct. No business metrics exist; this project stands as verified evidence of dual-navigation clinic/e-commerce digital architecture.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer responsible for the clinic website, treatment catalogs, dermocosmetics shop, and mobile checkout flows. Kelvin Bezerra designed the visual identity and logo. A no-code developer implemented the WordPress/WooCommerce site. Delivery status: delivered and launched to production; the business later ceased operations and its domain went offline."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Hybrid digital clinic: healthcare services and dermocosmetics commerce"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "25",
+              "label": "responsive canvas nodes across desktop and mobile",
+              "icon": "📐"
+            },
+            {
+              "value": "2",
+              "label": "purpose-separated navigation systems (Clinic Portal vs. Shop)",
+              "icon": "🧭"
+            },
+            {
+              "value": "5",
+              "label": "pages in the complete e-commerce purchasing sequence",
+              "icon": "🛍️"
+            },
+            {
+              "value": "Woo",
+              "label": "downstream WordPress / WooCommerce deployment",
+              "icon": "⚙️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Premium aesthetic and wellness clinics face a specific information architecture tension: they must present clinical credibility and medical credentials for invasive procedures (facial treatments, clinical peels, detox SPA protocols) while operating a commercial storefront for dermatologist-recommended skincare and dermocosmetics."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Dual navigation architecture: separating consultation from commerce"
+        },
+        {
+          "type": "prose",
+          "body": "To prevent commercial retail from undermining medical authority, I designed two purpose-separated navigation systems: a primary medical navigation (NavBar) for clinic services, medical staff bios, and treatment protocols, and a specialized secondary retail header (Menu Item NavBar Black Loja) that activates when patients enter the dermocosmetics catalog. This structural separation preserved clinical authority while providing standard e-commerce affordances."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The e-commerce funnel: catalog discovery to mobile checkout"
+        },
+        {
+          "type": "prose",
+          "body": "The commercial section was structured as an integrated purchasing sequence across desktop and mobile viewports:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Dermocosmetics Catalog (Produtos) — Product showcases featuring clinical ingredient summaries, dermatologist recommendations, and skin-type filtering.",
+            "Product Details (Compra) — High-conversion product pages highlighting application instructions, clinical benefits, and dosage guidelines.",
+            "Cart and Order Review (Carrinho) — Transparent order summary with volume discounts and shipping calculation.",
+            "Payment and Mobile Checkout (Pagamento / Checkout - Mobile) — Streamlined checkout flow optimized for mobile payment completion."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Cross-functional agency collaboration"
+        },
+        {
+          "type": "prose",
+          "body": "Clínica Castelo exemplifies disciplined agency teamwork: Kelvin Bezerra developed the brand identity, color palette, and typography; I translated those visual foundations into an interactive, multi-viewport digital experience; and a no-code developer deployed the resulting screens to WordPress and WooCommerce. Reusing shared component hierarchies ensured that the final production site matched the design without friction."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI exclusivo do website de uma clínica multidisciplinar de saúde, estética facial, emagrecimento e SPA detox. Desenvolveu 25 nós responsivos entre desktop e mobile no Figma, estruturando duas navegações separadas por propósito (portal da clínica vs loja de dermocosméticos), catálogo de tratamentos, vitrine de produtos (Produtos), carrinho de compras (Carrinho) e checkout mobile (Pagamento, Checkout - Mobile).",
+      "context": "Atuação na agência Sagitta entre 9 de janeiro e 9 de fevereiro de 2024. Atuou como designer exclusivo da interface do site em uma entrega colaborativa: Kelvin Bezerra assinou a identidade visual e o logotipo; Juan desenhou todas as interfaces do site e e-commerce; um desenvolvedor no-code implementou e publicou a solução em WordPress / WooCommerce.",
+      "outcome": "Entregue para desenvolvimento e lançado em produção. A clínica encerrou suas atividades comerciais posteriormente e o domínio clinicacastelo.clinic foi desativado. Não restam métricas comerciais públicas; o projeto permanece como comprovação de arquitetura digital com navegação dual unindo clínica e e-commerce.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer exclusivo da interface do website, responsável pelos menus de tratamento, loja de dermocosméticos e fluxos de checkout mobile. Kelvin Bezerra desenhou a identidade visual e o logotipo. Um desenvolvedor no-code construiu e subiu o site em WordPress/WooCommerce. Status de entrega: desenhado e lançado em produção; a empresa posteriormente fechou e o domínio saiu do ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Clínica digital híbrida: serviços de saúde e e-commerce dermocosmético"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "25",
+              "label": "nós responsivos no canvas cobrindo desktop e mobile",
+              "icon": "📐"
+            },
+            {
+              "value": "2",
+              "label": "navegações dedicadas (Portal da Clínica vs Loja)",
+              "icon": "🧭"
+            },
+            {
+              "value": "5",
+              "label": "etapas no funil completo de compras do e-commerce",
+              "icon": "🛍️"
+            },
+            {
+              "value": "Woo",
+              "label": "implementação em WordPress / WooCommerce",
+              "icon": "⚙️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Clínicas de estética avançada e bem-estar enfrentam uma tensão de arquitetura de informação: precisam transmitir autoridade médica e rigor técnico para procedimentos clínicos (estética facial, peelings, protocolos detox de SPA) ao mesmo tempo em que operam uma loja virtual de produtos dermocosméticos indicados para cuidados pós-tratamento."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Navegação dual: separando consulta de atendimento e comércio"
+        },
+        {
+          "type": "prose",
+          "body": "Para evitar que elementos puramente comerciais enfraquecessem a percepção médica da clínica, desenhei duas barras de navegação independentes: uma barra principal institucional (NavBar) focada no agendamento de consultas e detalhes dos tratamentos, e uma barra secundária para a loja (Menu Item NavBar Black Loja), que assume o controle visual quando o usuário navega pelo catálogo de dermocosméticos. Essa separação garantiu clareza de contexto e agilidade de compra."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O funil de compras: da vitrine ao checkout no celular"
+        },
+        {
+          "type": "prose",
+          "body": "A área comercial foi estruturada como uma jornada transacional completa em desktop e mobile:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Catálogo Dermocosmético (Produtos) — Vitrine com filtros por tipo de pele, indicações clínicas e composição de ativos dermatológicos.",
+            "Página de Detalhes do Produto (Compra) — Layout focado em conversão destacando modo de uso, benefícios clínicos e recomendações profissionais.",
+            "Carrinho de Compras (Carrinho) — Resumo de pedido com cálculo de frete transparente e sugestão de produtos complementares.",
+            "Pagamento e Checkout Mobile (Pagamento / Checkout - Mobile) — Fluxo de pagamento com formulários otimizados para preenchimento rápido em celulares."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Colaboração multidisciplinar em agência"
+        },
+        {
+          "type": "prose",
+          "body": "A Clínica Castelo é um exemplo prático de divisão técnica de trabalho em agência: Kelvin Bezerra estabeleceu a identidade de marca e tipografia; assumi a tradução desses conceitos em telas interativas responsivas no Figma; e o desenvolvedor no-code codificou os layouts em WordPress e WooCommerce. A padronização rigorosa dos componentes de card e botões assegurou fidelidade absoluta entre o protótipo e o código publicado."
+        }
+      ]
+    }
+  }
 }

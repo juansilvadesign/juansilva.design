@@ -45,5 +45,208 @@
     "storeListing": false,
     "designArtifact": false
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "The intelligent inbound acquisition and sales qualification engine powering PsiAtiva. Orchestrated across production n8n workflows, it integrates web lead capture, an autonomous conversational WhatsApp SDR agent, PostgreSQL and pgvector semantic retrieval memory, and evidence-based diagnostic scoring.",
+      "context": "First-party operational infrastructure for Juan Silva's own company (PsiAtiva). Juan architected the container stack, database schemas, prompt logic, and multi-step workflow pipelines. Categorized strictly as own-business capability evidence — proof of production AI agent engineering and backend workflow orchestration, not a delivered client contract.",
+      "outcome": "Operates live in production handling PsiAtiva's inbound lead intake and qualification. Connects website diagnostic webhooks to real-time WhatsApp conversational qualification backed by long-term vector memory. Under portfolio transparency standards, zero volume, response speed, or revenue claims are made.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "PsiAtiva's AI operations represent my internal infrastructure, not a client project. I designed the architecture, deployed the Docker environment, wrote the vector retrieval queries, and engineered the conversational SDR agent. It serves as live proof of how I design and deploy autonomous AI pipelines that connect front-end interfaces to operational backend logic."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Architecture: The autonomous WhatsApp SDR agent"
+        },
+        {
+          "type": "prose",
+          "body": "Modern sales automation requires far more than rigid decision trees. At the center of PsiAtiva's acquisition engine is 'Renata', an AI-powered Sales Development Representative (SDR) operating on the WhatsApp Business API. Orchestrated via n8n and powered by large language models, the agent handles asynchronous conversational qualification with potential clinic owners. Rather than forcing rigid multi-choice menus, it engages in natural clinical dialogue, isolates operational pains, and moves qualified prospects toward strategic diagnosis meetings."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Contextual memory: PostgreSQL and pgvector RAG"
+        },
+        {
+          "type": "prose",
+          "body": "To prevent hallucinations and maintain institutional knowledge across multi-day conversations, the SDR agent does not rely solely on transient chat histories. I engineered a retrieval-augmented generation (RAG) subsystem backed by PostgreSQL and pgvector:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Semantic Knowledge Base — Vector embeddings of PsiAtiva's clinical methodologies, CFP ethical compliance regulations, positioning frameworks, and service tiers.",
+            "Session Persistence — Thread-level conversational state stored in structured relational tables, tracking stage progression and identified clinical challenges.",
+            "Real-Time Context Injection — User queries trigger cosine similarity searches against the vector store, dynamically grounding model responses in verified facts.",
+            "Lead Enrichment Pipeline — Ingests intake quiz responses, evaluates digital presence indicators, and synthesizes a structured lead dossier before the conversation opens."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Autonomous agents fail when disconnected from persistent memory. By coupling conversational LLMs with pgvector retrieval and strict domain guardrails, the system operates as a reliable consultative bridge between web capture and human closing."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "n8n",
+              "label": "core workflow orchestration engine",
+              "icon": "⚙️"
+            },
+            {
+              "value": "pgvector",
+              "label": "semantic RAG retrieval & session memory",
+              "icon": "🧠"
+            },
+            {
+              "value": "WhatsApp",
+              "label": "conversational SDR interface (Z-API)",
+              "icon": "💬"
+            },
+            {
+              "value": "Multi-Model",
+              "label": "reasoning and classification pipelines",
+              "icon": "🤖"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Production container infrastructure"
+        },
+        {
+          "type": "prose",
+          "body": "The automation architecture is self-hosted via Docker Compose. The environment isolates the n8n execution service from the dedicated PostgreSQL vector database, maintaining persistent bind-mounted storage to guarantee resilience across host restarts. Environment variables, API keys, and database credentials follow strict principle-of-least-privilege boundaries, ensuring that external webhooks cannot execute arbitrary administrative routines."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not a client case study or customer automation delivery. This is internal operating infrastructure built for my own venture.",
+            "Not an off-the-shelf chatbot tool or no-code widget. The system connects custom vector databases, multi-step LLM chains, and REST APIs.",
+            "Not unverified performance claims. No response speed, lead volume, or conversion metrics are quoted under strict transparency rules.",
+            "Not exposed private data. Workflow IDs, internal credentials, and contact identities are strictly isolated within internal environments."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The design engineer as systems builder"
+        },
+        {
+          "type": "prose",
+          "body": "This project illustrates how modern design engineering extends beyond visual components and layout styling. True user experience encompasses the entire journey — from the initial click on a landing page button to the prompt engineering, latency management, and conversational empathy delivered by an automated system. Building this operational backend demonstrates my ability to engineer full-stack systems where interface and autonomous logic function as a single product."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "O motor de aquisição inbound e qualificação comercial inteligente da PsiAtiva. Orquestrado em workflows de produção no n8n, integra captura de leads da web, um agente SDR autônomo e conversacional no WhatsApp, memória semântica com PostgreSQL e pgvector e pontuação diagnóstica baseada em evidências.",
+      "context": "Infraestrutura operacional própria da PsiAtiva, empresa de Juan Silva. Juan desenhou a arquitetura de contêineres, esquemas de banco de dados, engenharia de prompts e pipelines de orquestração no n8n. Classificado estritamente como evidência de capacidade própria — comprovação de engenharia de agentes de IA e automação de back-end em produção, e não uma entrega de consultoria para clientes.",
+      "outcome": "Opera continuamente em produção processando a entrada e qualificação inbound da PsiAtiva. Conecta webhooks diagnósticos do site a atendimentos conversacionais no WhatsApp apoiados por memória vetorial de longo prazo. Em respeito aos padrões de transparência do acervo, nenhuma métrica de volume, tempo de resposta ou faturamento é alegada.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "As operações de IA da PsiAtiva representam minha própria infraestrutura interna, e não um projeto para clientes. Desenhei a arquitetura, implantei o ambiente Docker, formulei as consultas de recuperação vetorial e programei o agente SDR conversacional. Serve como prova ao vivo de como concebo e implemento pipelines autônomos de IA que conectam interfaces web à inteligência operacional de back-end."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura: O agente SDR autônomo no WhatsApp"
+        },
+        {
+          "type": "prose",
+          "body": "A automação comercial moderna exige muito mais do que árvores rígidas de decisão. No centro da operação da PsiAtiva opera a 'Renata', uma SDR orientada por inteligência artificial conectada à API do WhatsApp Business. Orquestrada via n8n e alimentada por modelos de linguagem avançados, a agente conduz qualificações conversacionais assíncronas com donos de clínicas e psicólogos. Em vez de impor menus numéricos inflexíveis, sustenta um diálogo consultivo, identifica dores operacionais e direciona contatos qualificados para reuniões de diagnóstico."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Memória contextual: RAG com PostgreSQL e pgvector"
+        },
+        {
+          "type": "prose",
+          "body": "Para evitar alucinações e manter a memória institucional ao longo de conversas que se estendem por dias, a agente não depende apenas de históricos efêmeros de mensagens. Programei um subsistema de RAG (geração aumentada por recuperação) estruturado em PostgreSQL com a extensão pgvector:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Base de Conhecimento Semântica — Vetorização das metodologias clínicas da PsiAtiva, normas éticas do CFP, matrizes de posicionamento e escopos de serviço.",
+            "Persistência de Sessão — Histórico conversacional registrado em tabelas relacionais estruturadas, acompanhando a evolução das etapas comerciais e as dores relatadas.",
+            "Injeção Dinâmica de Contexto — Mensagens recebidas disparam buscas por similaridade de cosseno no banco vetorial, ancorando as respostas da IA em dados factuais.",
+            "Pipeline de Enriquecimento de Leads — Captura dados enviados pelo quiz do site, cruza indicadores de presença digital e gera um briefing estruturado antes do início do diálogo."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Agentes autônomos falham quando desconectados de memória persistente. Ao integrar modelos conversacionais à recuperação em pgvector com diretrizes éticas restritas, o sistema opera como uma ponte consultiva confiável entre a captação web e o fechamento comercial."
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "n8n",
+              "label": "motor central de orquestração de fluxos",
+              "icon": "⚙️"
+            },
+            {
+              "value": "pgvector",
+              "label": "recuperação RAG e memória de sessão",
+              "icon": "🧠"
+            },
+            {
+              "value": "WhatsApp",
+              "label": "interface conversacional da SDR (Z-API)",
+              "icon": "💬"
+            },
+            {
+              "value": "Multi-Model",
+              "label": "pipelines de classificação e raciocínio",
+              "icon": "🤖"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Infraestrutura de contêineres em produção"
+        },
+        {
+          "type": "prose",
+          "body": "A arquitetura de automação é auto-hospedada através de Docker Compose. O ambiente isola o contêiner de execução do n8n do banco de dados relacional e vetorial PostgreSQL, utilizando volumes persistentes que resistem a reinicializações do servidor. Variáveis de ambiente, chaves de API e credenciais operam sob rígido isolamento de privilégios, garantindo que webhooks públicos não acessem rotinas administrativas internas."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que isto não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é um estudo de caso de cliente ou serviço prestado a terceiros. Trata-se de infraestrutura interna construída para operação própria.",
+            "Não é um chatbot genérico pronto de mercado. O ecossistema integra bancos vetoriais customizados, cadeias avançadas de LLM e APIs REST.",
+            "Não apresenta alegações de performance não verificadas. Nenhuma métrica de tempo de resposta, volume de mensagens ou conversão é divulgada.",
+            "Não expõe dados confidenciais. IDs de fluxo, chaves de API e dados de contato permanecem estritamente restritos ao ambiente de produção interno."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O engenheiro de design como construtor de sistemas"
+        },
+        {
+          "type": "prose",
+          "body": "Este projeto demonstra como a engenharia de design contemporânea vai muito além de componentes visuais e estilização de layouts. A experiência do usuário abrange a jornada completa — desde o primeiro clique no botão da landing page até a engenharia de prompts, gestão de latência e empatia conversacional de um sistema automatizado. Construir este back-end operacional comprova minha capacidade de arquitetar sistemas completos onde interface e inteligência autônoma funcionam como um único produto."
+        }
+      ]
+    }
+  }
 }

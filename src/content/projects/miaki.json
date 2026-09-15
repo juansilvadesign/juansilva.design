@@ -41,5 +41,198 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole product designer on a massive corporate learning ecosystem (302 screens across five desktop portals and a four-role mobile companion) for architectural coatings manufacturer Miaki Revestimentos. Built an aliased 150-variable token system with zero broken aliases across Light and Dark modes, backed by a 162-component variant library and interactive prototype, translating a rigorous functional specification into production handoff.",
+      "context": "Delivered at Spaceapps between April and July 2025 (Fase 8 Passagem para DEV completed on 18/07/2025). The client, Miaki Revestimentos, required a branded corporate university (Universidade MIAKI) to educate and certify licensed applicators, field technicians, sales managers, and partner architects. Spaceapps tech lead Thiago ran discovery and authored the screen-by-screen functional requirements specification; Juan was the sole designer who touched the Figma file, authoring all UI layouts, information architecture, mobile companion adaptation, token variables, and component variants.",
+      "outcome": "Completed all design milestones (Phases 1–8) on schedule and formally handed off with narrated walkthrough videos and a 28-point handoff standard on 2025-07-18. Target Bubble implementation stalled during development and the project remains an unreleased prototype. Confirmed independently through active client communication channels where build efforts later shifted. Serves as the quintessential evidence for why Juan transitioned into full-stack engineering.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole designer of the entire 302-screen product across desktop and mobile, the 162-component library, the 150-variable token system, and the interactive prototype. Strict boundaries: miaki.com.br is NOT my work (the marketing landing page was pre-existing and its logos were imported directly from WordPress assets). Requirements definition: tech lead Thiago authored the FigJam discovery and the screen-by-screen functional specification; I designed everything between that spec and the buildable product. Delivery reality: the project was handed off in July 2025 but the agency's Bubble build stalled; it remains a prototype and never launched."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The portfolio's largest product: 302 screens across five role portals"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "302",
+              "label": "total screens designed across desktop (169) and mobile (133)",
+              "icon": "📐"
+            },
+            {
+              "value": "5",
+              "label": "permission-scoped role portals (Licenciado, Funcionário, Parceiro, Gestor, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "150",
+              "label": "design variables across 6 collections with zero broken aliases",
+              "icon": "🎨"
+            },
+            {
+              "value": "162",
+              "label": "component library nodes including 22-variant exam components",
+              "icon": "🧩"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Miaki Revestimentos manufactures high-performance resin floor coverings and architectural coatings. To train its nationwide network of certified applicators, sales representatives, and independent architectural specifiers, the company commissioned Universidade MIAKI. At 302 screens (169 desktop screens organized into five sectioned portals, plus a 133-screen mobile companion across four roles), this represents the largest and structurally most complex product in my portfolio."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Differentiated permission architecture: structural absence as design"
+        },
+        {
+          "type": "prose",
+          "body": "The five role portals are not duplicated layouts with renamed headers; they are structurally differentiated by purposeful absences and role-scoped permissions:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Admin (36 screens) — Dedicated solely to authoring and governance. Admins get 13 course management screens (Gestão de cursos 1.0–6.13) and user directories, but have zero course-taking, video player, or exam screens.",
+            "Parceiro / Partner Architects (25 screens) — External architecture firms consume technical application guides and earn specification certificates, but are never subjected to exams and manage no staff. They alone receive a dedicated FAQ.",
+            "Funcionário / Field Applicator (29 screens) — Baseline learning portal. Crucially, this role has no self-registration flow: applicators cannot register themselves because their sponsoring licensee must enroll them.",
+            "Licenciado / Dealer Owner (38 screens) — Full employee management (gestãoFuncionários) and user provisioning (gestãoPerfis) enabling licensed dealer owners to register and manage their application crews.",
+            "Gestor / Regional Commercial Manager (41 screens) — The exclusive analytics hub with KPI dashboards (dash), performance reporting (Relatórios 1.1), and evaluation reviews (Avaliação 1–7) labeled distinctively from student exams (Prova final)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Research-driven mobile companion: the field technician at night"
+        },
+        {
+          "type": "prose",
+          "body": "The 133-screen mobile companion covers four roles (Licenciado, Funcionário, Parceiro, Gestor) and purposefully excludes Admin, recognizing course authoring as an inherently desktop task. The entire mobile experience was justified by user research: persona Rafael Lima (27, field technical support on construction sites) accesses training modules on his phone during work breaks or late at night. To facilitate mobile usability, desktop modals were unpacked into sequential full mobile screens (e.g., gestãoFuncionários expanded from 2 desktop views into 10 mobile steps)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Token system and variant engineering: 150 variables, Light and Dark"
+        },
+        {
+          "type": "prose",
+          "body": "The design system operates on an aliased two-tier token architecture across six collections: 113 Color variables, 18 Semantic tokens, Dimensions, and Typography. Semantic tokens resolve cleanly into primitive ramps with zero broken aliases. Theming incorporates active contrast logic: Background/brand inverts across modes (#effefc in Light, #07c5ba in Dark) while Stroke/brand shifts down the ramp (#07c5ba to #2fd2cc) to preserve boundary contrast. The component library houses 162 centralized components on the style guide page, dominated by deep domain variant sets like alternativa (22 exam answer states) and _sideItem (26 navigation states)."
+        },
+        {
+          "type": "quote",
+          "text": "I spent two years designing products that never shipped because no-code builds couldn't execute them. MIAKI is roughly 300 designed screens, a dated handoff, and a year later still a prototype. That is why I build."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Handoff standards and the unbuilt reality"
+        },
+        {
+          "type": "prose",
+          "body": "I packaged the platform into a formal developer handoff page (Passagem para os devs, 818 nodes) featuring social sharing assets, theme previews, and recorded walkthrough videos for all web and mobile flows. The project plan records Phases 1–8 completed and handed off on 2025-07-18. However, the agency's planned Bubble implementation stalled in Phase 9, and active communication channels confirm the build was later restarted on different tooling without reaching production. Universidade MIAKI stands as the ultimate demonstration of multi-role enterprise design systems that remained unlaunched due to no-code execution limits."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de produto solo de um ecossistema abrangente de capacitação corporativa (302 telas divididas em cinco portais desktop e companion mobile para quatro perfis) para a fabricante de revestimentos Miaki Revestimentos. Desenvolveu um sistema de 150 variáveis com zero aliases quebrados em modos Claro e Escuro, suportado por uma biblioteca de 162 componentes com variantes e protótipo interativo, transformando uma especificação funcional detalhada em handoff para desenvolvimento.",
+      "context": "Desenvolvido na Spaceapps entre abril e julho de 2025 (Fase 8 Passagem para DEV concluída em 18/07/2025). A cliente, Miaki Revestimentos, demandava uma universidade corporativa (Universidade MIAKI) para treinar e certificar aplicadores licenciados, técnicos de campo, gestores comerciais e arquitetos parceiros. O tech lead da Spaceapps, Thiago, conduziu o discovery e redigiu a especificação funcional tela a tela; Juan foi o designer exclusivo a abrir e editar o arquivo Figma, desenhando todas as interfaces, arquitetura de informação, adaptação mobile, variáveis de tokens e variantes de componentes.",
+      "outcome": "Concluiu todas as fases de design (Fases 1 a 8) no prazo e entregou formalmente com vídeos gravados de walkthrough e padrão de handoff de 28 itens em 18/07/2025. A implementação planejada em Bubble estagnou e o projeto permanece como protótipo não lançado. Confirmado diretamente via canais de acompanhamento da equipe, onde as tentativas de desenvolvimento migraram posteriormente de ferramenta. Constitui a evidência definitiva da motivação de Juan para dominar o código full-stack.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer solo de todo o produto de 302 telas (desktop e mobile), da biblioteca de 162 componentes, do sistema de 150 variáveis e do protótipo interativo. Limites estritos: miaki.com.br NÃO é meu trabalho (a landing page institucional já existia e os logotipos foram importados diretamente do WordPress). Definição de requisitos: o tech lead Thiago conduziu o discovery no FigJam e escreveu a especificação funcional tela a tela; desenhei tudo entre a especificação e o produto final. Realidade de entrega: o projeto foi entregue em julho de 2025, mas a engenharia em Bubble da agência travou; segue como protótipo e nunca foi ao ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O maior produto do portfólio: 302 telas em cinco portais de acesso"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "302",
+              "label": "telas totais desenhadas entre desktop (169) e mobile (133)",
+              "icon": "📐"
+            },
+            {
+              "value": "5",
+              "label": "portais independentes por perfil (Licenciado, Funcionário, Parceiro, Gestor, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "150",
+              "label": "variáveis em 6 coleções com zero aliases quebrados",
+              "icon": "🎨"
+            },
+            {
+              "value": "162",
+              "label": "componentes na biblioteca incluindo itens de prova com 22 variantes",
+              "icon": "🧩"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A Miaki Revestimentos fabrica revestimentos monolíticos de resina e pisos industriais de alta performance. Para capacitar sua rede nacional de aplicadores licenciados, representantes comerciais e arquitetos especificadores, a empresa encomendou a Universidade MIAKI. Com 302 telas (169 telas desktop organizadas em cinco seções de portal, mais 133 telas de companion mobile para quatro perfis), este é o maior e mais complexo produto estruturado em todo o meu portfólio."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de permissões: a ausência estrutural como decisão de design"
+        },
+        {
+          "type": "prose",
+          "body": "Os cinco portais não são telas duplicadas com títulos trocados; eles são diferenciados estruturalmente por ausências intencionais e permissões específicas:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Admin (36 telas) — Focado exclusivamente em autoria e governança. Os administradores têm 13 telas de gestão de conteúdo (Gestão de cursos 1.0–6.13) e diretório de usuários, mas não possuem telas de assistir aulas ou prestar exames.",
+            "Parceiro / Arquitetos Especificadores (25 telas) — Escritórios parceiros consom normas técnicas e emitem certificados de especificação, mas não realizam provas nem gerenciam equipe. Recebem exclusivamente uma área de FAQ.",
+            "Funcionário / Aplicador de Obra (29 telas) — Portal de aprendizagem direta. Não possui tela de autocadastro: aplicadores não podem se cadastrar sozinhos, pois seu Licenciado responsável realiza a matrícula.",
+            "Licenciado / Titular da Franquia (38 telas) — Gestão completa de funcionários (gestãoFuncionários) e controle de acessos (gestãoPerfis), permitindo aos donos de revenda cadastrar e acompanhar sua equipe de obra.",
+            "Gestor / Gestor Comercial Miaki (41 telas) — O polo exclusivo de inteligência com dashboards de KPI (dash), relatórios de adesão (Relatórios 1.1) e telas de avaliação (Avaliação 1–7) nomeadas de forma distinta das provas dos alunos (Prova final)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Companion mobile orientado por pesquisa: o técnico de campo à noite"
+        },
+        {
+          "type": "prose",
+          "body": "O companion mobile de 133 telas contempla quatro perfis (Licenciado, Funcionário, Parceiro, Gestor) e exclui deliberadamente o Admin, reconhecendo a autoria de cursos como tarefa tipicamente desktop. Toda a experiência mobile foi fundamentada na pesquisa de usuários: a persona Rafael Lima (27 anos, técnico de aplicação em obras) acessa a plataforma pelo celular nos intervalos ou à noite. Para viabilizar o uso mobile, modais de desktop foram desdobrados em telas sequenciais (ex.: gestãoFuncionários expandiu de 2 telas desktop para 10 telas mobile)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Sistema de tokens e engenharia de variantes: 150 variáveis, Claro e Escuro"
+        },
+        {
+          "type": "prose",
+          "body": "O design system opera em arquitetura de tokens de duas camadas em seis coleções: 113 variáveis de cor, 18 tokens semânticos, dimensões e tipografia. Os tokens semânticos resolvem perfeitamente nos primitivos com zero erros de alias. O sistema de temas incorpora ajustes ativos de contraste: Background/brand inverte entre os modos (#effefc no Claro, #07c5ba no Escuro) enquanto Stroke/brand ajusta a saturação (#07c5ba para #2fd2cc) para manter contraste visual. A biblioteca reúne 162 componentes centralizados no guia de estilos, liderada por conjuntos com muitas variantes como alternativa (22 estados de opção de prova) e _sideItem (26 estados de navegação)."
+        },
+        {
+          "type": "quote",
+          "text": "Passei dois anos desenhando produtos que nunca foram ao ar porque a engenharia no-code não conseguia executá-los. A MIAKI tem cerca de 300 telas desenhadas, um handoff datado e, um ano depois, segue como protótipo. É por isso que eu programo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Padrões de handoff e o produto que não foi construído"
+        },
+        {
+          "type": "prose",
+          "body": "Empacotei a plataforma em uma prancha formal de entrega técnica (Passagem para os devs, 818 nós) contendo imagens de compartilhamento, prévias de temas e vídeos gravados de walkthrough para todos os fluxos web e mobile. O cronograma registra as Fases 1 a 8 concluídas e entregues em 18/07/2025. Contudo, a programação planejada em Bubble estagnou na Fase 9, e os canais de acompanhamento confirmam que o desenvolvimento foi reiniciado em outra ferramenta sem alcançar produção. A Universidade MIAKI permanece como a maior prova de design de sistemas complexos com múltiplos perfis que não foram ao ar por limites da engenharia no-code."
+        }
+      ]
+    }
+  }
 }

@@ -41,5 +41,178 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI designer for an extension scope of an existing service-hiring and project management platform (solicitação de serviços, orçamentos, linha do tempo de obras) connecting clients with specialist contractors. Designed the dedicated Admin back-office section (4701:14752) and the new validated marketing landing page and homepage within an existing design system authored by Tiago Araújo, ensuring seamless visual and token continuity without fracturing the established component architecture.",
+      "context": "Agency engagement at Sagitta between September 2023 and January 2024. Tiago Araújo authored the original product concept, brand identity, and base style guide; Sagitta was contracted for a scope extension divided between two designers: Juan owned Section Admin and the updated landing page; Viviane Batista designed Section Cliente. Juan operated strictly inside the established token and component conventions.",
+      "outcome": "Delivered to engineering and deployed live to production at asent.com.br. The client subsequently abandoned the initiative and the domain went offline. Demonstrates high-value design system discipline: extending a third-party design system and component architecture cleanly without introducing visual fragmentation or design debt.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: Tiago Araújo designed the original product concept, brand identity, and base design system. Viviane Batista authored the Cliente flow. My sole contribution is the extension scope: Section Admin (node 4701:14752) and the new validated Landing Page. I do not claim product-level authorship or design system origination; this case evidences clean design system extension inside an existing team's architecture. Delivery status: launched live to production; the client later abandoned the venture and the domain is offline."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "System extension: designing inside someone else's architecture"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "131",
+              "label": "frames on the core Design canvas across Admin and Cliente",
+              "icon": "📐"
+            },
+            {
+              "value": "2",
+              "label": "collaborative sections authored by two separate designers",
+              "icon": "👥"
+            },
+            {
+              "value": "1",
+              "label": "unified design system extended without visual drift",
+              "icon": "🎨"
+            },
+            {
+              "value": "100%",
+              "label": "token and component reuse from the established style guide",
+              "icon": "🧩"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "In commercial software delivery, designers rarely start from a blank canvas. More commonly, agencies are hired to build complex operational extensions onto established products. The true test of a designer's maturity is whether they can step into an existing design system authored by another designer, absorb its token logic and typographic hierarchy, and deliver substantial new modules without introducing visual drift or component bloat."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The Admin back-office workflow: governance and service oversight"
+        },
+        {
+          "type": "prose",
+          "body": "Asent connects property owners with specialized architectural and construction contractors (Empresas Prestadoras / Especialistas). While the consumer application handles quotes and job timelines, the platform lacked an operational console to govern transactions. Inside Section Admin (node 4701:14752), I architected the back-office management console:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Contractor Verification & Vetting — Multi-stage administrative review workflows for onboarding specialist construction teams and reviewing corporate credentials.",
+            "Quote and Proposal Auditing — Oversight tables allowing administrators to inspect pending quotes, verify price breakdowns, and resolve scope disputes.",
+            "Construction Timeline Monitoring — Milestone tracking consoles linking contractor status updates with client escrow payments.",
+            "Financial Clearing & Billing — Payment status dashboards managing instant Pix and bank boleto clearing states."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The updated landing page: commercial clarity for high-ticket services"
+        },
+        {
+          "type": "prose",
+          "body": "Alongside the admin portal, I designed the new validated marketing landing page and homepage version (Home & Landing Page atualizada e validada). Contracting architectural renovations involves high financial commitment; the previous marketing presence suffered from ambiguous value propositions. The new landing page articulated the step-by-step journey: from quote request to contractor matchmaking, contract formalization, and milestone-based escrow release."
+        },
+        {
+          "type": "quote",
+          "text": "Agencies frequently hire designers to extend existing products. The ultimate test of seniority is whether you can work inside someone else's component library so seamlessly that nobody can tell two different people touched the file."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Disciplined component reuse over bespoke fragmentation"
+        },
+        {
+          "type": "prose",
+          "body": "Rather than drawing detached buttons or arbitrary card wrappers, every administrative table, input field, and navigation header on the Admin page was instantiated directly from Tiago Araújo's existing Style Guide (NavBar 23:10547, NavItem 23:10527, Select 40:13794). This discipline ensured that when engineering began implementation, the developer could reuse existing Bubble/CSS classes, dramatically reducing build time and eliminating maintenance debt."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI para o escopo de extensão de uma plataforma existente de contratação de serviços e gestão de obras (solicitação de serviços, orçamentos, linha do tempo de obras) conectando clientes a fornecedores corporativos e prestadores especializados. Desenvolveu a seção dedicada de back office administrativo (4701:14752) e a nova landing page comercial validada dentro do design system pré-existente criado por Tiago Araújo, assegurando continuidade visual e de tokens sem fragmentar a biblioteca de componentes.",
+      "context": "Atuação na agência Sagitta entre setembro de 2023 e janeiro de 2024. Tiago Araújo criou o conceito original, a identidade visual e o guia de estilos base; a Sagitta foi contratada para um escopo de extensão dividido entre dois designers: Juan assumiu a Seção Admin e a nova landing page; Viviane Batista desenhou a Seção Cliente. Juan operou com rigor dentro das convenções de tokens e componentes já existentes.",
+      "outcome": "Entregue à engenharia e lançado em produção no domínio asent.com.br. O cliente posteriormente descontinuou o projeto e o site saiu do ar. Demonstra disciplina madura de design system: estender um sistema e biblioteca de componentes pré-existentes de terceiros de forma limpa, sem gerar fragmentação visual ou dívida técnica de design.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Tiago Araújo desenhou o conceito original do produto, a identidade visual e o design system base. Viviane Batista foi a autora do fluxo de Cliente. Minha contribuição é o escopo de extensão: a Seção Admin (nó 4701:14752) e a nova Landing Page validada. Não reivindico autoria do produto como um todo nem criação do design system; este case comprova extensão disciplinada de design system na arquitetura de outro time. Status de entrega: colocado em produção; o cliente posteriormente descontinuou a iniciativa e o domínio saiu do ar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Extensão de sistemas: desenhando dentro da arquitetura de outro profissional"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "131",
+              "label": "pranchas na tela de design divididas entre Admin e Cliente",
+              "icon": "📐"
+            },
+            {
+              "value": "2",
+              "label": "seções colaborativas desenhadas por designers diferentes",
+              "icon": "👥"
+            },
+            {
+              "value": "1",
+              "label": "design system unificado estendido sem ruído visual",
+              "icon": "🎨"
+            },
+            {
+              "value": "100%",
+              "label": "reutilização de tokens e componentes do style guide original",
+              "icon": "🧩"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "No desenvolvimento comercial de software, é raro começar um produto do zero. Com frequência, agências são contratadas para construir módulos e extensões operacionais sobre sistemas legados. A maturidade de um designer se revela na capacidade de assimilar o design system de outro profissional, respeitar a hierarquia de tokens e entregar módulos de alta complexidade sem descaracterizar a identidade visual nem inflar a biblioteca de componentes."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O fluxo de Admin: governança operacional e auditoria de serviços"
+        },
+        {
+          "type": "prose",
+          "body": "O Asent conecta proprietários a empresas prestadoras e especialistas da construção civil. Enquanto a aplicação do cliente organiza cotações e cronogramas, a plataforma carecia de um painel de retaguarda para mediação e governança. Dentro da Seção Admin (nó 4701:14752), estruturei a console de gestão:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Homologação e Validação de Prestadores — Fluxos de auditoria cadastral para credenciar empresas e especialistas de reformas e obras.",
+            "Mediação de Orçamentos e Propostas — Telas de acompanhamento permitindo aos administradores analisar cotações pendentes e resolver divergências de escopo.",
+            "Monitoramento da Linha do Tempo de Obras — Painéis de acompanhamento de etapas de entrega vinculados à liberação de pagamentos em garantia.",
+            "Compensação Financeira e Cobrança — Gestão de status de transações cobrindo compensações de Pix e boleto bancário."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A nova landing page: clareza comercial para serviços de alto tíquete"
+        },
+        {
+          "type": "prose",
+          "body": "Em paralelo ao portal de administração, desenhei a nova versão validada da homepage e landing page institucional (Home & Landing Page atualizada e validada). Contratar reformas e obras envolve compromisso financeiro relevante; a versão anterior pecava pela falta de clareza na proposta de valor. A nova página estruturou a jornada de forma transparente: da solicitação de orçamento à seleção do prestador e liberação do pagamento por marcos concluídos."
+        },
+        {
+          "type": "quote",
+          "text": "Agências contratam designers para estender produtos existentes. O teste definitivo de maturidade é trabalhar dentro da biblioteca de outro profissional de forma tão coesa que ninguém consiga distinguir que duas pessoas diferentes mexeram no arquivo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Reaproveitamento de componentes e redução de dívida técnica"
+        },
+        {
+          "type": "prose",
+          "body": "Em vez de criar botões desconectados ou formulários redundantes, cada tabela administrativa, campo de entrada e menu na página de Admin foi instanciado diretamente do Style Guide criado por Tiago Araújo (NavBar 23:10547, NavItem 23:10527, Select 40:13794). Essa disciplina assegurou que o time de desenvolvimento pudesse reaproveitar classes existentes de Bubble e CSS, reduzindo drasticamente o tempo de entrega e impedindo o surgimento de dívida técnica."
+        }
+      ]
+    }
+  }
 }

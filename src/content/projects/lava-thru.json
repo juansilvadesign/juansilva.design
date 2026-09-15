@@ -44,5 +44,246 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI/UX Designer for Lava Thru, an AutoTech express drive-thru automated car wash network and recurring subscription club. Architected a 5-page, 308-top-level-node Figma system (file key UNaM05TzpUnAoWVvnheN9U, node 0:1): 187 canvas nodes on the master Design page covering a multi-tier recurring wash subscription club (Planos with 6 variants), a 12-screen credit card checkout flow (Pagamento - Cartão), a digital voucher creation and gifting engine (HomeVoucher, EditVoucher), and customer dashboards; a dedicated 76-node Validação page engineering granular input validation states (Input/ERRO, Input/CORRETO, Input2.0), HTTP error recovery screens (404, 405), and administrative operator controls; supported by a Style Guide containing built-in system architecture blueprints (Arquitetura_Lava-Thru-1 and 2), 10 semantic color tokens, and elevation drop shadow effects.",
+      "context": "Agency employment at Sagitta delivering from February 6, 2024 to July 23, 2024. Juan served as UI/UX designer within the agency team alongside engineering. The client operated automated physical drive-thru car wash facilities and required a consumer digital membership platform to manage recurring wash plans, license plate vehicle registrations, digital gift vouchers, and retail unit locations.",
+      "outcome": "The car wash network operates and is accessible at lavathru.com.br. However, the agency's no-code developer deployed an earlier build on Bubble without incorporating Juan's refactored, production-ready Figma architecture; that initial Bubble build remains live today. No commercial adoption or subscription revenue metrics exist. This case study documents the comprehensive UI/UX design, edge-case validation architecture, and subscription checkout mechanics of the audited 308-node Figma artifact.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the customer subscription web/mobile interface, multi-variant plan selection, credit card checkout, voucher management system, validation and edge-case error states, and administrative subscriber views. I do not claim the physical car-wash tunnel machinery, hardware IoT optical license-plate readers, barrier automation, payment gateway rails, or service operation. Delivery status: fully designed and audited in Figma (308 nodes); the live website on Bubble diverged from this refactor. This is a UI/UX design credit."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "AutoTech recurring subscription and voucher architecture"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "308",
+              "label": "canvas nodes across 5 Figma pages (187 on Design, 76 on Validação)",
+              "icon": "📐"
+            },
+            {
+              "value": "12",
+              "label": "credit card checkout screens with granular validation",
+              "icon": "💳"
+            },
+            {
+              "value": "6",
+              "label": "recurring wash plan variations designed",
+              "icon": "🚗"
+            },
+            {
+              "value": "10 + 1",
+              "label": "semantic color tokens and CardDashboard elevation effect",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Automated drive-thru car wash facilities rely on high vehicle throughput. In mature automotive markets, recurring monthly membership clubs account for the majority of recurring revenue, replacing unpredictable weather-dependent one-off washes with stable MRR. Translating this model to digital required an interface that allowed drivers to easily choose recurring wash tiers, associate their license plate, complete credit card checkout, and manage single-use gift vouchers for friends and family."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The core product suite on the Design page (187 nodes)"
+        },
+        {
+          "type": "prose",
+          "body": "The primary Design page (node 1:407, containing 187 canvas elements) encompasses the complete driver and subscriber experience:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Recurring Plan Tiers (Planos) — Six distinct plan configurations detailing wash inclusions (Express Wash, Foam Cannon, Wheel Cleaning, Undercarriage Blast, Ceramic Sealant) with transparent monthly billing toggles.",
+            "12-Screen Credit Card Checkout (Pagamento - Cartão) — Comprehensive payment flow covering CVV security formatting, card brand auto-detection (Visa, Mastercard, Elo), billing zip code resolution, installment breakdowns, and animated processing states.",
+            "Digital Voucher Engine (HomeVoucher & EditVoucher) — Dedicated tooling enabling users to purchase wash gift cards, customize recipient messages, set expiration terms, and redeem promotional vouchers at physical drive-thru kiosks.",
+            "Subscriber Management (Detalhes do Assinante & Lista Clientes) — Customer portal displaying active vehicle license plates, past wash histories, next billing date, and one-click plan upgrade/pause options."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Defensive UX: The 76-node validation and error suite"
+        },
+        {
+          "type": "prose",
+          "body": "Many agency design files skip error states, leaving developers to improvise validation logic during implementation. In Lava Thru, I created a dedicated Validação page (node 232:2544, 76 children) specifying explicit visual behavior for every interaction boundary:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Granular Input Feedback — Engineered explicit states for Input/ERRO (node 373:2410), Input/CORRETO (node 373:2459), and the tokenized Input2.0 component set (node 1229:4817), standardizing focus, typing, disabled, and error helper text styling.",
+            "HTTP Error Resilience — Designed branded fallback screens for 404 (Route Not Found) and 405 (Method Not Allowed) errors, preventing users from encountering raw browser error strings.",
+            "Administrative Back-Office — Engineered operator management interfaces including Cadastrar admin, EditarAdmin, Ver colaborador, and administrative notification centers for on-site tunnel operators."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never claim hardware IoT-gate or wash-tunnel integration: the source explicitly does not prove it. Never claim production deployment, launch, or payment processing implementation. The live site at lavathru.com.br diverged on Bubble; what is backed is the audited 308-node UI/UX design system."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "System architecture and tokenized design foundation"
+        },
+        {
+          "type": "prose",
+          "body": "The Style Guide page (node 1:2) incorporates two complete architectural system diagrams (Arquitetura_Lava-Thru-1 and 2), mapping out the relationships between customer onboarding, recurring subscription webhooks, voucher validation, and store locator queries. The visual foundation established 10 semantic color styles (including Royal Blue #041F64, Express Orange #F54F03, and Dark Neutral #1C1C1C) and a standardized CardDashboard elevation drop shadow."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not hardware or IoT automation. I did not design or program physical wash tunnel relays, optical license-plate recognition (ALPR) cameras, or entrance barrier gates.",
+            "Not payment processing implementation. I designed the 12-screen card checkout interface; payment gateway integration and tokenized subscription billing were not my code.",
+            "Not the live Bubble website. While lavathru.com.br is online, the agency's no-code developer deployed an earlier build without incorporating this 308-node refactored design.",
+            "Not a car-wash business operation. I was the UI/UX designer for the digital product, not an owner or operator of the car-wash facilities.",
+            "Not supported by subscriber metrics. No active MRR, member retention rates, or voucher redemption figures exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of exhaustive interface architecture"
+        },
+        {
+          "type": "prose",
+          "body": "Lava Thru represents professional design engineering at scale: anticipating every user journey, edge case, and administrative requirement before engineering begins. Across 308 meticulously organized nodes, the design delivered a complete operational blueprint for an automotive subscription platform."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI/UX para a Lava Thru, rede de lava-rápidos drive-thru automatizados e clube de assinatura automotiva. Projetei um ecossistema completo de 5 páginas e 308 nós de primeiro nível no Figma (arquivo UNaM05TzpUnAoWVvnheN9U, nó 0:1): 187 nós na página principal de Design abrangendo o clube de lavagem recorrente (Planos com 6 variações), fluxo de checkout em cartão com 12 telas (Pagamento - Cartão), motor de emissão e presente de vouchers digitais (HomeVoucher, EditVoucher) e painéis do cliente; uma página dedicada de Validação com 76 nós estruturando estados de validação de formulário (Input/ERRO, Input/CORRETO, Input2.0), telas de erro HTTP (404, 405) e controles administrativos; com suporte de um Style Guide com diagramas de arquitetura de sistema (Arquitetura_Lava-Thru-1 e 2), 10 tokens de cor semânticos e sombra de elevação CardDashboard.",
+      "context": "Atuação na agência Sagitta de 6 de fevereiro de 2024 a 23 de julho de 2024. Juan atuou como designer de UI/UX integrando a equipe da agência ao lado da área de desenvolvimento. O cliente opera túneis de lavagem expressa automatizada e necessitava de uma plataforma digital para gerenciar planos mensais recorrentes, cadastro de placas veiculares, venda de vouchers de presente e localização de unidades físicas.",
+      "outcome": "A rede de lava-rápidos está em operação e acessível em lavathru.com.br. Contudo, o desenvolvedor no-code da agência colocou no ar uma versão inicial em Bubble sem incorporar a arquitetura refatorada do Figma desenhada por Juan; esse build inicial em Bubble permanece ativo hoje. Não existem métricas de adesão comercial ou de faturamento recorrente. Este estudo de caso documenta o design de UI/UX, a arquitetura de validação para casos de borda e o checkout de assinaturas do artefato auditado com 308 nós.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei a interface web e mobile de assinatura, a seleção de planos com múltiplas variações, o checkout em cartão de crédito, o sistema de gestão de vouchers, os estados de validação e erro e as telas administrativas de assinantes. Não reivindico os maquinários físicos dos túneis de lavagem, leitores ópticos de placas (OCR), automação de cancelas, trilhos de gateway de pagamento ou a operação física do lava-rápido. Status de entrega: completamente projetado e auditado no Figma (308 nós); o site no ar em Bubble divergiu da refatoração. É um crédito de design de UI/UX."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura AutoTech para assinaturas recorrentes e vouchers"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "308",
+              "label": "nós em 5 páginas no Figma (187 em Design, 76 em Validação)",
+              "icon": "📐"
+            },
+            {
+              "value": "12",
+              "label": "telas de checkout em cartão com validações minuciosas",
+              "icon": "💳"
+            },
+            {
+              "value": "6",
+              "label": "variações de planos de assinatura mensal estruturados",
+              "icon": "🚗"
+            },
+            {
+              "value": "10 + 1",
+              "label": "tokens semânticos de cor e efeito de sombra CardDashboard",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Lava-rápidos expressos automatizados dependem de alto fluxo contínuo de veículos. Nos mercados automotivos maduros, clubes de assinatura mensal representam a maior fatia da receita recorrente, substituindo a oscilação causada pelo clima por uma receita previsível. Traduzir essa dinâmica para o meio digital exigiu uma plataforma na qual motoristas pudessem selecionar pacotes de lavagem, vincular a placa do veículo, concluir o pagamento em cartão de crédito e presentear amigos com vouchers avulsos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A suíte principal na página de Design (187 nós)"
+        },
+        {
+          "type": "prose",
+          "body": "A prancheta principal de Design (nó 1:407, contendo 187 elementos) cobre toda a experiência do motorista assinante:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Opções de Planos Recorrentes (Planos) — Seis configurações de planos detalhando os serviços incluídos (Lavagem Expressa, Espuma Ativa, Limpeza de Rodas, Lavagem de Chassi, Cera Protetora) com chaveamento claro de cobrança mensal.",
+            "Checkout em Cartão em 12 Telas (Pagamento - Cartão) — Fluxo completo de compra com formatação de segurança para CVV, identificação automática de bandeiras (Visa, Mastercard, Elo), preenchimento de endereço por CEP, opções de parcelamento e telas de processamento animado.",
+            "Motor de Vouchers Digitais (HomeVoucher e EditVoucher) — Funcionalidade que permite ao cliente comprar vales-lavagem, personalizar mensagens de presente, estabelecer prazos de validade e resgatar cupons promocionais nas cancelas dos túneis.",
+            "Gestão de Assinantes (Detalhes do Assinante e Lista Clientes) — Portal do cliente exibindo placas veiculares cadastradas, histórico de lavagens realizadas, data da próxima fatura e opções para pausar ou alterar o plano com um clique."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UX defensiva: A suíte de validação e erros com 76 nós"
+        },
+        {
+          "type": "prose",
+          "body": "Muitos projetos de agência ignoram telas de erro, forçando desenvolvedores a improvisar o comportamento de validação durante o código. Na Lava Thru, criei uma página exclusiva de Validação (nó 232:2544, com 76 filhos) especificando visualmente o comportamento para todas as situações de exceção:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Feedback Detalhado de Campos — Estados explícitos desenhados para Input/ERRO (nó 373:2410), Input/CORRETO (nó 373:2459) e o componente tokenizado Input2.0 (nó 1229:4817), padronizando foco, preenchimento, estados desabilitados e textos de ajuda.",
+            "Telas de Erro HTTP — Criação de telas personalizadas para erros 404 (Página não encontrada) e 405 (Método não permitido), impedindo que o usuário se depare com mensagens genéricas do navegador.",
+            "Back Office Administrativo — Telas de controle operacional incluindo Cadastrar admin, EditarAdmin, Ver colaborador e centrais de notificação para a gerência de cada unidade física."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca reivindique automação de cancelas ou integração de hardware com os túneis de lavagem: a fonte não comprova isso. Nunca afirme que a implementação do gateway foi própria. O site publicado em lavathru.com.br divergiu no Bubble; o que é comprovado é o sistema de design de UI/UX auditado com 308 nós."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de sistema e fundação de design tokenizada"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide (nó 1:2) inclui dois mapas arquiteturais completos (Arquitetura_Lava-Thru-1 e 2), detalhando as conexões entre o cadastro do cliente, webhooks de cobrança recorrente, validação de vouchers e busca de unidades. A identidade visual foi alicerçada em 10 cores semânticas (como Azul Real #041F64, Laranja Expresso #F54F03 e Neutro Escuro #1C1C1C) e no efeito de sombra de elevação CardDashboard."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é automação de hardware ou IoT. Não desenhei relés para os túneis físicos, câmeras de reconhecimento óptico de placas (OCR) ou cancelas automáticas.",
+            "Não é implementação de gateway de pagamento. Projetei a experiência de checkout de 12 telas; a integração da API de pagamentos e a gestão de recorrência não foram código meu.",
+            "Não é o site publicado em Bubble. Embora lavathru.com.br esteja online, o desenvolvedor no-code da agência colocou no ar uma versão anterior que não incorporou esta refatoração com 308 nós.",
+            "Não é a operação de um negócio de lava-rápido. Fui o designer de UI/UX da plataforma digital, e não operador ou proprietário das unidades físicas.",
+            "Não possui métricas de assinantes. Nenhum dado de MRR, retenção de membros ou uso de vouchers consta no registro do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O valor de uma arquitetura visual exaustiva"
+        },
+        {
+          "type": "prose",
+          "body": "A Lava Thru exemplifica o design de interface em escala profissional: antecipando fluxos de usuário, casos de erro e necessidades administrativas antes do início do desenvolvimento. Com 308 nós minuciosamente estruturados, o projeto forneceu um guia de execução completo e detalhado para um clube de assinaturas automotivas."
+        }
+      ]
+    }
+  }
 }

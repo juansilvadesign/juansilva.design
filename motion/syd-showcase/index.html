@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=1920, height=1080">
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Inter:wght@400;500;600;700&display=swap');
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      /* Local font — no network fetch at render time, so frames are deterministic. */
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
       }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
 
       html, body {
         margin: 0;
@@ -19,667 +22,408 @@
         height: 1080px;
         overflow: hidden;
         background: #FFFFFF;
-        font-family: "Lato", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        color: #020817;
+        font-family: "InterVar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #0B1020;
         -webkit-font-smoothing: antialiased;
       }
 
-      /* Full-bleed stage ground with subtle warm-lavender gradient */
+      /* ⛔ MUST stay opaque. The gradient's first stop is rgba(...,0.055), so on its
+         own this element is ~5% opaque at the centre and the frame relies on body's
+         white showing through. A browser composites that fine — an ALPHA-capturing
+         render does not, and png-sequence output measured 17.3% non-opaque pixels
+         with alpha as low as 72. Encoding that composites against BLACK, which puts
+         dark halos through the glows and window shadows of a light-themed piece.
+         The opaque #FFFFFF layer underneath is what makes the master self-contained. */
       #ground {
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at 50% 30%, rgba(100, 96, 190, 0.05) 0%, #F8F9FD 70%, #EFF2F9 100%);
+        background:
+          radial-gradient(circle at 50% 28%, rgba(100, 96, 190, 0.055) 0%, #F8F9FD 68%, #EEF1F8 100%),
+          #FFFFFF;
       }
 
-      /* Decorative ambient brand glows */
-      .ambient-glow {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(80px);
-        pointer-events: none;
-      }
-      #glow-1 {
-        top: 20px;
-        left: 200px;
-        width: 500px;
-        height: 500px;
-        background: rgba(100, 96, 190, 0.07);
-      }
-      #glow-2 {
-        bottom: 20px;
-        right: 250px;
-        width: 550px;
-        height: 550px;
-        background: rgba(245, 158, 11, 0.05);
-      }
+      .ambient-glow { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
+      #glow-1 { top: -40px; left: 170px; width: 540px; height: 540px; background: rgba(100, 96, 190, 0.075); }
+      #glow-2 { bottom: -30px; right: 210px; width: 580px; height: 580px; background: rgba(245, 158, 11, 0.05); }
 
-      /* Global stage container */
-      #stage {
-        position: absolute;
-        inset: 0;
-        overflow: hidden;
-      }
+      #stage { position: absolute; inset: 0; overflow: hidden; }
 
-      /* Camera scaler to prevent transform-origin drift */
+      /* ⛔ Scale and translate must not share an element — transform-origin resolves
+         in the scrolled space and turns a small centre push into tens of px of drift. */
       #camera-scaler {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1920px;
-        height: 1080px;
+        position: absolute; top: 0; left: 0;
+        width: 1920px; height: 1080px;
         transform-origin: 960px 540px;
       }
+      #camera-track { position: absolute; top: 0; left: 0; width: 1920px; height: 1080px; }
 
-      #camera-track {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 1920px;
-        height: 1080px;
-      }
-
-      /* --- Browser Window Mockup (Desktop 1440 & Laptop 1280) --- */
+      /* ---------- browser chrome ---------- */
       .browser-window {
         position: absolute;
         background: #FFFFFF;
-        border-radius: 12px;
-        box-shadow: 0 30px 80px -20px rgba(2, 8, 23, 0.16), 0 0 0 1px rgba(2, 8, 23, 0.08);
+        border-radius: 13px;
+        box-shadow: 0 34px 90px -22px rgba(11, 16, 32, 0.20), 0 0 0 1px rgba(11, 16, 32, 0.07);
         overflow: hidden;
       }
-
       .browser-bar {
-        height: 42px;
-        background: #F1F4F9;
-        border-bottom: 1px solid rgba(2, 8, 23, 0.08);
-        display: flex;
-        align-items: center;
-        padding: 0 16px;
-        gap: 12px;
+        height: 42px; background: #F2F4F9;
+        border-bottom: 1px solid rgba(11, 16, 32, 0.07);
+        display: flex; align-items: center; padding: 0 16px; gap: 12px;
       }
-
-      .traffic-lights {
-        display: flex;
-        gap: 7px;
-      }
-      .light {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-      }
-      .light.red { background: #FF5F56; border: 1px solid #E0443E; }
-      .light.yellow { background: #FFBD2E; border: 1px solid #DEA123; }
-      .light.green { background: #27C93F; border: 1px solid #1AAB29; }
-
+      .traffic-lights { display: flex; gap: 7px; }
+      .light { width: 10px; height: 10px; border-radius: 50%; }
+      .light.red { background: #FF5F56; }
+      .light.yellow { background: #FFBD2E; }
+      .light.green { background: #27C93F; }
       .url-bar {
-        flex: 1;
-        max-width: 480px;
-        margin: 0 auto;
-        height: 26px;
-        background: #FFFFFF;
-        border-radius: 6px;
-        border: 1px solid rgba(2, 8, 23, 0.08);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        font-family: "Inter", monospace;
-        font-size: 11px;
-        font-weight: 500;
-        color: #64748B;
+        flex: 1; max-width: 460px; margin: 0 auto; height: 26px;
+        background: #FFFFFF; border-radius: 6px; border: 1px solid rgba(11, 16, 32, 0.08);
+        display: flex; align-items: center; justify-content: center; gap: 6px;
+        font-size: 11.5px; font-weight: 500; color: #6A7488; letter-spacing: 0.01em;
       }
+      .browser-content { position: relative; width: 100%; overflow: hidden; }
 
-      .url-bar svg {
-        width: 12px;
-        height: 12px;
-        fill: #6460BE;
+      /* ---------- S1 / S2 / S5 window ---------- */
+      #win-main { width: 1440px; height: 880px; left: 240px; top: 112px; }
+      #main-content { height: 838px; }
+
+      /* The scrolling strip. img is 2880x9200 shown at 1440 wide -> 2.0x headroom. */
+      #s1-scroll { position: absolute; top: 0; left: 0; width: 1440px; }
+      #s1-scroll img { display: block; width: 1440px; height: auto; }
+
+      /* S2 hero stack — three heroes occupying the same box, crossfaded. */
+      #s2-stack { position: absolute; top: 0; left: 0; width: 1440px; height: 838px; }
+      #s2-stack img { position: absolute; top: 0; left: 0; display: block; width: 1440px; height: auto; }
+
+      /* ---------- S3 responsive matrix ---------- */
+      #grid-s3 { position: absolute; inset: 0; opacity: 0; }
+      .grid-col-head {
+        position: absolute; top: 76px;
+        font-size: 20px; font-weight: 650; letter-spacing: 0.14em;
+        color: #4B4794; text-align: center; width: 460px;
       }
-
-      .browser-content {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
+      .grid-row-label {
+        position: absolute; left: 54px; width: 110px;
+        font-size: 15px; font-weight: 600; letter-spacing: 0.05em;
+        /* #8A92A6 measured 2.9:1 against the ground — below WCAG AA. */
+        color: #5A6273; text-align: right;
       }
-
-      .browser-content img {
-        display: block;
-        width: 100%;
-        height: auto;
+      .grid-cell { position: absolute; }
+      .grid-cell img {
+        display: block; border-radius: 7px;
+        box-shadow: 0 14px 34px -12px rgba(11, 16, 32, 0.26), 0 0 0 1px rgba(11, 16, 32, 0.07);
       }
+      /* Each display width is exactly half its source width -> 2.0x headroom. */
+      .grid-cell.w1440 img { width: 430px; height: auto; }
+      .grid-cell.w1280 img { width: 390px; height: auto; }
+      .grid-cell.w375  img { width: 125px; height: auto; border-radius: 13px; }
 
-      /* Specific window sizing */
-      #win-desktop {
-        width: 1440px;
-        height: 880px;
-        left: 240px;
-        top: 110px;
-      }
-
-      #win-laptop {
-        width: 1280px;
-        height: 800px;
-        left: 320px;
-        top: 140px;
+      /* ---------- S4 design -> code ---------- */
+      #frame-s4 {
+        position: absolute; left: 320px; top: 150px;
+        width: 1280px; height: 780px;
+        background: #FFFFFF; border-radius: 12px; overflow: hidden;
+        box-shadow: 0 34px 90px -22px rgba(11, 16, 32, 0.20), 0 0 0 1px rgba(11, 16, 32, 0.07);
         opacity: 0;
       }
+      #frame-s4 img { position: absolute; top: 0; left: 0; display: block; width: 1280px; height: auto; }
+      /* ⛔ No spatial transition works between these two. Both were built and looked at:
+         a CROSSFADE makes both headlines legible at once (2-line design vs 3-line build)
+         and reads as a glitch; a WIPE chops the build's text mid-glyph against the
+         design's at every edge position, and doubles the nav row. The layouts differ
+         too much. A clean CUT with a scale accent is the only artifact-free option,
+         and it is also the honest one: two shots, two origins, one page. */
 
-      /* --- Mobile Phone Chassis (375px) --- */
-      #phone-chassis {
-        position: absolute;
-        width: 375px;
-        height: 812px;
-        left: 772px;
-        top: 134px;
-        background: #FFFFFF;
-        border-radius: 46px;
-        box-shadow: 0 35px 90px -15px rgba(2, 8, 23, 0.22), 0 0 0 10px #1E293B, 0 0 0 11px rgba(255, 255, 255, 0.2);
-        overflow: hidden;
-        opacity: 0;
+      /* ---------- chrome: chips + caption ---------- */
+      #chip-dock {
+        position: absolute; top: 44px; left: 0; width: 1920px;
+        display: flex; justify-content: center; align-items: center; gap: 10px;
       }
+      .chip {
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 6px 14px; border-radius: 999px;
+        font-size: 12.5px; font-weight: 600; letter-spacing: 0.11em;
+      }
+      #chip-audience { background: #6460BE; color: #FFFFFF; }
+      #chip-meta { background: rgba(11, 16, 32, 0.055); color: #5A6273; }
 
-      .phone-notch {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 124px;
-        height: 28px;
-        background: #1E293B;
-        border-bottom-left-radius: 16px;
-        border-bottom-right-radius: 16px;
-        z-index: 10;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      #caption {
+        position: absolute; left: 0; bottom: 44px; width: 1920px;
+        text-align: center; font-size: 16px; font-weight: 500;
+        color: #5A6273; letter-spacing: 0.012em;
       }
-
-      .camera-lens {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #090D16;
-        margin-left: 45px;
-      }
-
-      .phone-home-indicator {
-        position: absolute;
-        bottom: 8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 134px;
-        height: 5px;
-        border-radius: 100px;
-        background: rgba(2, 8, 23, 0.25);
-        z-index: 10;
-      }
-
-      .phone-content {
-        position: relative;
-        width: 375px;
-        height: 812px;
-        overflow: hidden;
-      }
-
-      .phone-content img {
-        display: block;
-        width: 375px;
-        height: auto;
-      }
-
-      /* --- Floating Badges & Indicators --- */
-      #badge-dock {
-        position: absolute;
-        top: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        z-index: 50;
-      }
-
-      .badge-pill {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 18px;
-        border-radius: 100px;
-        background: rgba(255, 255, 255, 0.94);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 10px 25px -5px rgba(2, 8, 23, 0.08), 0 0 0 1px rgba(2, 8, 23, 0.06);
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: #020817;
-      }
-
-      .badge-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #6460BE;
-      }
-
-      .breakpoint-tag {
-        font-family: "Inter", monospace;
-        font-size: 12px;
-        font-weight: 600;
-        color: #6460BE;
-        background: rgba(100, 96, 190, 0.10);
-        padding: 4px 10px;
-        border-radius: 6px;
-      }
-
-      /* --- Overlay Banner Callout --- */
-      #callout-banner {
-        position: absolute;
-        bottom: 34px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 12px 28px;
-        border-radius: 100px;
-        background: #020817;
-        color: #FFFFFF;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        box-shadow: 0 20px 40px -10px rgba(2, 8, 23, 0.3);
-        z-index: 60;
-        opacity: 0;
-      }
-
-      #callout-text {
-        font-size: 15px;
-        font-weight: 500;
-        letter-spacing: -0.01em;
-        color: #FFFFFF;
-      }
-      #callout-text strong {
-        color: #FEF08A;
-        font-weight: 700;
-      }
-
-      /* --- Multi-Device Trio for Scene 5 --- */
-      #trio-stage {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .trio-device {
-        position: absolute;
-        box-shadow: 0 35px 80px -20px rgba(2, 8, 23, 0.2), 0 0 0 1px rgba(2, 8, 23, 0.08);
-        border-radius: 12px;
-        overflow: hidden;
-        background: #FFFFFF;
-      }
-
-      #trio-mobile {
-        width: 280px;
-        height: 606px;
-        left: 140px;
-        top: 237px;
-        border-radius: 36px;
-        box-shadow: 0 25px 60px -15px rgba(2, 8, 23, 0.25), 0 0 0 8px #1E293B;
-      }
-      #trio-mobile img {
-        width: 280px;
-        height: auto;
-      }
-
-      #trio-desktop {
-        width: 1080px;
-        height: 675px;
-        left: 420px;
-        top: 150px;
-      }
-      #trio-desktop img {
-        width: 1080px;
-        height: auto;
-      }
-
-      #trio-laptop {
-        width: 768px;
-        height: 480px;
-        left: 1012px;
-        top: 450px;
-      }
-      #trio-laptop img {
-        width: 768px;
-        height: auto;
-      }
-
-      /* Stat Summary Card for Scene 5 */
-      #stat-matrix {
-        position: absolute;
-        bottom: 48px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 16px;
-        z-index: 70;
-        opacity: 0;
-      }
-
-      .stat-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(14px);
-        border: 1px solid rgba(100, 96, 190, 0.2);
-        padding: 14px 24px;
-        border-radius: 14px;
-        box-shadow: 0 15px 35px -5px rgba(2, 8, 23, 0.08);
-        text-align: center;
-      }
-
-      .stat-num {
-        font-size: 26px;
-        font-weight: 900;
-        color: #6460BE;
-        line-height: 1.1;
-      }
-
-      .stat-lbl {
-        font-size: 11px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #64748B;
-        margin-top: 4px;
-      }
+      #caption strong { color: #4B4794; font-weight: 650; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="25" data-width="1920" data-height="1080">
-      <div id="stage" class="clip" data-start="0" data-duration="25">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-fps="60" data-width="1920" data-height="1080">
+      <div id="stage" class="clip" data-start="0" data-duration="30">
         <div id="ground"></div>
         <div id="glow-1" class="ambient-glow" data-layout-allow-overflow=""></div>
         <div id="glow-2" class="ambient-glow" data-layout-allow-overflow=""></div>
 
-        <!-- Dynamic Header Badge Dock -->
-        <div id="badge-dock" data-layout-allow-overlap="" data-layout-allow-occlusion="">
-          <div class="badge-pill">
-            <div class="badge-dot"></div>
-            <span id="badge-audience">PACIENTE</span>
-          </div>
-          <div class="badge-pill">
-            <span id="badge-breakpoint" class="breakpoint-tag">1440px · DESKTOP</span>
-          </div>
+        <div id="chip-dock" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <span id="chip-audience" class="chip">PACIENTE</span>
+          <span id="chip-meta" class="chip">1440 · SYDAPP.COM.BR</span>
         </div>
 
-        <!-- Floating Callout Banner -->
-        <div id="callout-banner" data-layout-allow-overlap="">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FEF08A">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-          </svg>
-          <span id="callout-text">Atendimento urgente ou agendamento imediato: <strong>R$ 1,99 / minuto</strong></span>
-        </div>
-
-        <!-- Camera Scaling and Movement Hierarchy -->
         <div id="camera-scaler" data-layout-allow-overflow="">
           <div id="camera-track" data-layout-allow-overflow="">
 
-            <!-- Primary 1440px Desktop Window -->
-            <div id="win-desktop" class="browser-window" data-layout-allow-overflow="" data-layout-allow-overlap="">
-              <div class="browser-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <!-- S1 / S2 / S5 -->
+            <div id="win-main" class="browser-window" data-layout-allow-overflow="" data-layout-allow-overlap="">
+              <div class="browser-bar">
                 <div class="traffic-lights">
-                  <div class="light red"></div>
-                  <div class="light yellow"></div>
-                  <div class="light green"></div>
+                  <div class="light red"></div><div class="light yellow"></div><div class="light green"></div>
                 </div>
-                <div class="url-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
-                  <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                  <span id="url-text">sydapp.com.br</span>
-                </div>
+                <div class="url-bar"><span>sydapp.com.br</span></div>
               </div>
-              <div class="browser-content" id="desktop-content" data-layout-allow-overflow="">
-                <img id="img-paciente-1440" src="assets/paciente-hero-1440.png" alt="Paciente Desktop" data-layout-allow-overflow="">
-                <img id="img-profissional-1440" style="display: none;" src="assets/profissional-hero-1440.png" alt="Profissional Desktop" data-layout-allow-overflow="">
-                <img id="img-rh-1440" style="display: none;" src="assets/rh-hero-1440.png" alt="RH Desktop" data-layout-allow-overflow="">
-                <img id="img-paciente-1440-end" style="display: none;" src="assets/paciente-hero-1440-end.png" alt="Paciente Desktop Loop Join" data-layout-allow-overflow="">
+              <div class="browser-content" id="main-content" data-layout-allow-overflow="">
+                <div id="s1-scroll" data-layout-allow-overflow="">
+                  <img src="assets/s1-strip.png" alt="SYD patient landing page, full scroll" data-layout-allow-overflow="">
+                </div>
+                <div id="s2-stack" data-layout-allow-overflow="" data-layout-allow-overlap="">
+                  <img id="s2-pac"  src="assets/s2-pac.png"  alt="Patient landing page hero" data-layout-allow-overflow="">
+                  <img id="s2-prof" src="assets/s2-prof.png" alt="Practitioner landing page hero" data-layout-allow-overflow="">
+                  <img id="s2-rh"   src="assets/s2-rh.png"   alt="Corporate HR landing page hero" data-layout-allow-overflow="">
+                </div>
               </div>
             </div>
 
-            <!-- Laptop 1280px Window -->
-            <div id="win-laptop" class="browser-window" data-layout-allow-overflow="" data-layout-allow-overlap="">
-              <div class="browser-bar" data-layout-allow-overlap="">
-                <div class="traffic-lights">
-                  <div class="light red"></div>
-                  <div class="light yellow"></div>
-                  <div class="light green"></div>
-                </div>
-                <div class="url-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
-                  <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                  <span data-layout-allow-overlap="">sydapp.com.br</span>
-                </div>
-              </div>
-              <div class="browser-content" data-layout-allow-overflow="">
-                <img id="img-paciente-1280" src="assets/paciente-laptop-1280.png" alt="Paciente Laptop" data-layout-allow-overflow="">
-              </div>
+            <!-- S4 -->
+            <div id="frame-s4" data-layout-allow-overflow="" data-layout-allow-overlap="">
+              <img id="s4-figma" src="assets/s4-figma.png" alt="Figma design of the patient landing page at 1280" data-layout-allow-overflow="">
+              <img id="s4-code"  src="assets/s4-code.png"  alt="The same page as built and served at 1280" data-layout-allow-overflow="">
             </div>
 
-            <!-- Mobile 375px Chassis -->
-            <div id="phone-chassis" data-layout-allow-overflow="" data-layout-allow-overlap="">
-              <div class="phone-notch">
-                <div class="camera-lens"></div>
-              </div>
-              <div class="phone-content" data-layout-allow-overflow="">
-                <img id="img-paciente-375" src="assets/paciente-mobile-375.png" alt="Paciente Mobile" data-layout-allow-overflow="">
-              </div>
-              <div class="phone-home-indicator"></div>
-            </div>
+            <!-- S3 -->
+            <div id="grid-s3" data-layout-allow-overflow="" data-layout-allow-overlap="">
+              <!-- Column centres 480 / 960 / 1440. Cell lefts are centre - width/2. -->
+              <div class="grid-col-head" style="left: 250px;">PACIENTE</div>
+              <div class="grid-col-head" style="left: 730px;">PROFISSIONAL</div>
+              <div class="grid-col-head" style="left: 1210px;">RH</div>
 
-            <!-- Scene 5 Multi-Device Matrix -->
-            <div id="trio-stage" data-layout-allow-overflow="" data-layout-allow-overlap="">
-              <div id="trio-mobile" class="trio-device" data-layout-allow-overflow="">
-                <img src="assets/rh-mobile-375.png" alt="RH Mobile" data-layout-allow-overflow="">
-              </div>
-              <div id="trio-desktop" class="trio-device" data-layout-allow-overflow="">
-                <img src="assets/paciente-hero-1440-trio.png" alt="Paciente Desktop Center" data-layout-allow-overflow="">
-              </div>
-              <div id="trio-laptop" class="trio-device" data-layout-allow-overflow="">
-                <img src="assets/profissional-laptop-1280.png" alt="Profissional Laptop" data-layout-allow-overflow="">
-              </div>
+              <div class="grid-row-label" style="top: 254px;">1440</div>
+              <div class="grid-row-label" style="top: 551px;">1280</div>
+              <div class="grid-row-label" style="top: 842px;">375</div>
+
+              <div class="grid-cell w1440" style="left: 265px;  top: 128px;"><img src="assets/s3-pac-1440.png"  alt="Patient at 1440"      data-layout-allow-overflow=""></div>
+              <div class="grid-cell w1440" style="left: 745px;  top: 128px;"><img src="assets/s3-prof-1440.png" alt="Practitioner at 1440" data-layout-allow-overflow=""></div>
+              <div class="grid-cell w1440" style="left: 1225px; top: 128px;"><img src="assets/s3-rh-1440.png"   alt="Corporate HR at 1440" data-layout-allow-overflow=""></div>
+
+              <div class="grid-cell w1280" style="left: 285px;  top: 437px;"><img src="assets/s3-pac-1280.png"  alt="Patient at 1280"      data-layout-allow-overflow=""></div>
+              <div class="grid-cell w1280" style="left: 765px;  top: 437px;"><img src="assets/s3-prof-1280.png" alt="Practitioner at 1280" data-layout-allow-overflow=""></div>
+              <div class="grid-cell w1280" style="left: 1245px; top: 437px;"><img src="assets/s3-rh-1280.png"   alt="Corporate HR at 1280" data-layout-allow-overflow=""></div>
+
+              <div class="grid-cell w375"  style="left: 417px;  top: 715px;"><img src="assets/s3-pac-375.png"   alt="Patient at 375"       data-layout-allow-overflow=""></div>
+              <div class="grid-cell w375"  style="left: 897px;  top: 715px;"><img src="assets/s3-prof-375.png"  alt="Practitioner at 375"  data-layout-allow-overflow=""></div>
+              <div class="grid-cell w375"  style="left: 1377px; top: 715px;"><img src="assets/s3-rh-375.png"    alt="Corporate HR at 375"  data-layout-allow-overflow=""></div>
             </div>
 
           </div>
         </div>
 
-        <!-- 9-State Stat Matrix in Scene 5 -->
-        <div id="stat-matrix" data-layout-allow-overlap="">
-          <div class="stat-card">
-            <div class="stat-num">3</div>
-            <div class="stat-lbl">Audience Pages</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">3</div>
-            <div class="stat-lbl">Breakpoints Each</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">9</div>
-            <div class="stat-lbl">Designed States</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">2</div>
-            <div class="stat-lbl">Vite → Next.js</div>
-          </div>
-        </div>
-
+        <div id="caption" data-layout-allow-overlap="">Uma página que responde à pergunta de <strong>uma</strong> pessoa</div>
       </div>
     </div>
 
     <script>
+      // ---------------------------------------------------------------------
+      // SYD showcase v2 — "Three readers don't share a question"
+      // 1920x1080 · 30.0s · 60fps (1800f) · silent · seamless loop · light
+      //
+      // Scroll targets are the LIVE section offsets measured at a 1440 viewport
+      // on 2026-09-14, not eyeballed off the strip:
+      //   #inicio 97 · #como-funciona 738 · #beneficios 1540 · #planos 2811
+      // ---------------------------------------------------------------------
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
       window.__timelines["main"] = tl;
 
-      // Selectors
-      const scaler = "#camera-scaler";
-      const track = "#camera-track";
-      const winDesktop = "#win-desktop";
-      const winLaptop = "#win-laptop";
-      const phone = "#phone-chassis";
-      const trio = "#trio-stage";
-      const statMatrix = "#stat-matrix";
-      const callout = "#callout-banner";
-      const calloutText = "#callout-text";
-      const badgeAudience = "#badge-audience";
-      const badgeBreakpoint = "#badge-breakpoint";
-      const urlText = "#url-text";
+      const scaler   = "#camera-scaler";
+      const track    = "#camera-track";
+      const winMain  = "#win-main";
+      const s1Scroll = "#s1-scroll";
+      const s2Stack  = "#s2-stack";
+      const s2Pac    = "#s2-pac";
+      const s2Prof   = "#s2-prof";
+      const s2Rh     = "#s2-rh";
+      const gridS3   = "#grid-s3";
+      const frameS4  = "#frame-s4";
+      const s4Figma  = "#s4-figma";
+      const s4Code   = "#s4-code";
+      const chipDock = "#chip-dock";
+      const chipAud  = "#chip-audience";
+      const chipMeta = "#chip-meta";
+      const caption  = "#caption";
 
-      const imgPaciente1440 = "#img-paciente-1440";
-      const imgProfissional1440 = "#img-profissional-1440";
-      const imgRh1440 = "#img-rh-1440";
-      const imgPaciente1440End = "#img-paciente-1440-end";
+      // Measured live section offsets (css px, 1440 viewport).
+      const Y_HERO    = 0;
+      const Y_COMO    = 738;
+      const Y_BENEF   = 1540;
+      const Y_PLANOS  = 2811;
 
-      // =========================================================================
-      // SCENE 1: PACIENTE 1440 DESKTOP (t=0.0s to 5.0s)
-      // =========================================================================
-      // Frame 0 is crisp and settled: scale 1.0, winDesktop at (240, 110)
-      tl.set(scaler, { scale: 1.0, transformOrigin: "960px 540px" }, 0);
-      tl.set(track, { x: 0, y: 0 }, 0);
-      tl.set(winDesktop, { opacity: 1, x: 0, y: 0, scale: 1.0 }, 0);
-      tl.set(winLaptop, { opacity: 0 }, 0);
-      tl.set(phone, { opacity: 0 }, 0);
-      tl.set(trio, { opacity: 0 }, 0);
-      tl.set(statMatrix, { opacity: 0, y: 20 }, 0);
-      tl.set(callout, { opacity: 0, y: 20 }, 0);
-      tl.set(badgeAudience, { textContent: "PACIENTE" }, 0);
-      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 0);
-      tl.set(urlText, { textContent: "sydapp.com.br" }, 0);
+      // =====================================================================
+      // FRAME 0 — the exact state S5 must restore for a byte-identical seam.
+      // =====================================================================
+      tl.set(scaler,   { scale: 1.0, transformOrigin: "960px 540px" }, 0);
+      tl.set(track,    { x: 0, y: 0 }, 0);
+      tl.set(winMain,  { opacity: 1, scale: 1.0, x: 0, y: 0 }, 0);
+      tl.set(s1Scroll, { opacity: 1, y: -Y_HERO }, 0);
+      tl.set(s2Stack,  { opacity: 0 }, 0);
+      tl.set(s2Pac,    { opacity: 1 }, 0);
+      tl.set(s2Prof,   { opacity: 0 }, 0);
+      tl.set(s2Rh,     { opacity: 0 }, 0);
+      tl.set(gridS3,   { opacity: 0, scale: 0.96 }, 0);
+      tl.set(frameS4,  { opacity: 0, scale: 0.97 }, 0);
+      tl.set(s4Figma,  { opacity: 1 }, 0);
+      tl.set(s4Code,   { opacity: 0 }, 0);
+      tl.set(chipDock, { opacity: 1 }, 0);
+      tl.set(chipAud,  { opacity: 1, textContent: "PACIENTE" }, 0);
+      tl.set(chipMeta, { opacity: 1, textContent: "1440 · SYDAPP.COM.BR" }, 0);
+      tl.set(caption,  { opacity: 1 }, 0);
 
-      // Value callout appears at t=1.2s
-      tl.to(callout, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 1.2);
+      // =====================================================================
+      // S1 — A session tonight (0.0–8.0s · f0–480)
+      // A stepped scroll with holds. Constant velocity reads as a screen
+      // recording; eased moves with holds read as authored.
+      // =====================================================================
+      // f0–96 hold on the hero, with a 1.015x push on the strip only —
+      // motion without zoom. Returns to 1.0 before the loop needs it.
+      tl.to(s1Scroll, { scale: 1.015, duration: 1.6, ease: "power1.inOut" }, 0);
+      tl.to(s1Scroll, { scale: 1.0,   duration: 1.5, ease: "power1.inOut" }, 1.6);
 
-      // Camera gently punches into the urgency headline & booking action (subtle move)
-      tl.to(scaler, { scale: 1.03, duration: 2.2, ease: "power1.inOut" }, 1.5);
-      tl.to(track, { y: -10, duration: 2.2, ease: "power1.inOut" }, 1.5);
+      // f96–186 -> #como-funciona
+      tl.to(s1Scroll, { y: -Y_COMO, duration: 1.5, ease: "power2.inOut" }, 1.6);
+      tl.to(caption,  { opacity: 0, duration: 0.3, ease: "power2.in" }, 1.5);
+      tl.set(caption, { innerHTML: "Três telas para chegar a alguém — <strong>sem fila</strong>" }, 1.85);
+      tl.to(caption,  { opacity: 1, duration: 0.35, ease: "power2.out" }, 1.9);
 
-      // Prepare transition to Scene 2
-      tl.to(callout, { opacity: 0, y: 15, duration: 0.5, ease: "power2.in" }, 4.3);
-      tl.to(scaler, { scale: 1.0, duration: 0.7, ease: "power2.inOut" }, 4.3);
-      tl.to(track, { y: 0, duration: 0.7, ease: "power2.inOut" }, 4.3);
+      // f186–228 hold · f228–318 -> #beneficios
+      tl.to(s1Scroll, { y: -Y_BENEF, duration: 1.5, ease: "power2.inOut" }, 3.8);
+      tl.to(caption,  { opacity: 0, duration: 0.3, ease: "power2.in" }, 3.7);
+      tl.set(caption, { innerHTML: "Por que escolher o SYD — <strong>a pergunta que o paciente faz</strong>" }, 4.05);
+      tl.to(caption,  { opacity: 1, duration: 0.35, ease: "power2.out" }, 4.1);
 
-      // =========================================================================
-      // SCENE 2: RESPONSIVE BREAKPOINT SHIFT 1440 → 1280 → 375 (t=5.0s to 10.0s)
-      // =========================================================================
-      // Switch breakpoint tag to 1280px Laptop at t=5.0s
-      tl.set(badgeBreakpoint, { textContent: "1280px · LAPTOP" }, 5.0);
-      tl.set(urlText, { textContent: "sydapp.com.br" }, 5.0);
+      // f318–360 hold · f360–480 -> #planos and settle
+      tl.to(s1Scroll, { y: -Y_PLANOS, duration: 2.0, ease: "power2.inOut" }, 6.0);
+      tl.to(caption,  { opacity: 0, duration: 0.3, ease: "power2.in" }, 5.9);
+      tl.set(caption, { innerHTML: "Preço por minuto — <strong>R$ 1,99</strong>" }, 6.25);
+      tl.to(caption,  { opacity: 1, duration: 0.35, ease: "power2.out" }, 6.3);
 
-      // Smooth cross-morph: Desktop contracts into Laptop 1280
-      tl.to(winDesktop, { opacity: 0, scale: 0.94, duration: 0.6, ease: "power2.inOut" }, 5.0);
-      tl.fromTo(winLaptop, { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 5.0);
+      // =====================================================================
+      // S2 — Three readers don't share a question (8.0–14.0s · f480–840)
+      // The chrome and the illustration hold still. The ARGUMENT changes.
+      // =====================================================================
+      // Cross-dissolve from the scrolled strip to the hero stack.
+      tl.to(s2Stack,  { opacity: 1, duration: 0.25, ease: "none" }, 8.0);
+      tl.to(s1Scroll, { opacity: 0, duration: 0.25, ease: "none" }, 8.0);
+      tl.to(caption,  { opacity: 0, duration: 0.25, ease: "power2.in" }, 7.85);
+      tl.set(caption, { innerHTML: "Três leitores <strong>não compartilham a mesma pergunta</strong>" }, 8.2);
+      tl.to(caption,  { opacity: 1, duration: 0.4, ease: "power2.out" }, 8.25);
 
-      // Laptop callout banner
-      tl.set(calloutText, { innerHTML: "Layout responsivo fluído: <strong>sem perda de intenção</strong>" }, 5.8);
-      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 5.8);
+      // Paciente holds, then -> Profissional at 10.0s
+      tl.to(s2Pac,    { opacity: 0, duration: 0.2, ease: "none" }, 10.0);
+      tl.to(s2Prof,   { opacity: 1, duration: 0.2, ease: "none" }, 10.0);
+      tl.set(chipAud, { textContent: "PROFISSIONAL" }, 10.1);
 
-      // Morph Laptop into Mobile Phone (375px) at t=7.0s
-      tl.set(badgeBreakpoint, { textContent: "375px · MOBILE" }, 7.0);
-      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 6.8);
+      // -> RH at 12.0s. Its CTA is the one that changes the argument.
+      tl.to(s2Prof,   { opacity: 0, duration: 0.2, ease: "none" }, 12.0);
+      tl.to(s2Rh,     { opacity: 1, duration: 0.2, ease: "none" }, 12.0);
+      tl.set(chipAud, { textContent: "RH" }, 12.1);
+      tl.to(caption,  { opacity: 0, duration: 0.25, ease: "power2.in" }, 12.0);
+      tl.set(caption, { innerHTML: "Dois vão para a loja de apps. O RH vai <strong>falar com uma pessoa</strong>" }, 12.35);
+      tl.to(caption,  { opacity: 1, duration: 0.4, ease: "power2.out" }, 12.4);
 
-      tl.to(winLaptop, { opacity: 0, scale: 0.7, duration: 0.7, ease: "power2.inOut" }, 7.0);
-      tl.fromTo(phone, { opacity: 0, scale: 0.85, y: 40 }, { opacity: 1, scale: 1.0, y: 0, duration: 0.7, ease: "power2.out" }, 7.1);
+      // =====================================================================
+      // S3 — The same layer, three widths (14.0–20.0s · f840–1200)
+      // Shows the BUILT layer. Carries no Figma provenance by design.
+      // =====================================================================
+      tl.to(winMain,  { opacity: 0, scale: 0.94, duration: 0.7, ease: "power2.inOut" }, 14.0);
+      tl.to(gridS3,   { opacity: 1, scale: 1.0,  duration: 0.8, ease: "power2.out" }, 14.15);
+      // The grid's own column heads and row labels already name the audiences and
+      // the widths — the chips would be redundant here AND they collide with the
+      // centre column head. Fade them out for the whole of S3.
+      tl.to(chipDock, { opacity: 0, duration: 0.35, ease: "power2.in" }, 14.1);
+      tl.set(chipAud, { textContent: "TRÊS PÚBLICOS" }, 14.5);
+      tl.set(chipMeta,{ textContent: "1440 · 1280 · 375" }, 14.5);
+      tl.to(caption,  { opacity: 0, duration: 0.25, ease: "power2.in" }, 13.9);
+      tl.set(caption, { innerHTML: "A mesma camada, <strong>três larguras</strong> — construída, não espremida" }, 14.3);
+      tl.to(caption,  { opacity: 1, duration: 0.4, ease: "power2.out" }, 14.35);
 
-      // Mobile callout banner
-      tl.set(calloutText, { innerHTML: "Menu retrátil, CTAs empilhados: <strong>ergonomia de polegar</strong>" }, 7.8);
-      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 7.8);
+      // A slow 1.03x drift so the grid is never a static plate.
+      tl.to(scaler,   { scale: 1.03, duration: 4.4, ease: "power1.inOut" }, 15.0);
+      tl.to(scaler,   { scale: 1.0,  duration: 0.9, ease: "power2.inOut" }, 19.4);
 
-      // Subtle phone push
-      tl.to(scaler, { scale: 1.04, duration: 1.5, ease: "power1.inOut" }, 7.8);
+      // =====================================================================
+      // S4 — Designed it, then built it (20.0–26.0s · f1200–1560)
+      // Aligned at the navbar. The differences ARE the argument: the design's
+      // logo lockup is dropped and `Entrar` is added in the build.
+      // =====================================================================
+      tl.to(gridS3,   { opacity: 0, scale: 0.97, duration: 0.6, ease: "power2.in" }, 20.0);
+      tl.to(frameS4,  { opacity: 1, scale: 1.0,  duration: 0.7, ease: "power2.out" }, 20.15);
+      tl.set(chipAud, { textContent: "PACIENTE" }, 20.2);
+      tl.set(chipMeta,{ textContent: "FIGMA · DESIGN" }, 20.2);
+      tl.to(chipDock, { opacity: 1, duration: 0.4, ease: "power2.out" }, 20.3);
+      tl.to(caption,  { opacity: 0, duration: 0.25, ease: "power2.in" }, 19.9);
+      tl.set(caption, { innerHTML: "Desenhei — <strong>e depois construí</strong>" }, 20.3);
+      tl.to(caption,  { opacity: 1, duration: 0.4, ease: "power2.out" }, 20.35);
 
-      // Prepare transition to Scene 3
-      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 9.4);
-      tl.to(phone, { opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.in" }, 9.5);
-      tl.to(scaler, { scale: 1.0, duration: 0.5, ease: "power2.inOut" }, 9.5);
+      // The cut. Instant swap, then a small scale settle so it reads as an authored
+      // shot change rather than a dropped frame.
+      tl.set(s4Figma, { opacity: 0 }, 21.9);
+      tl.set(s4Code,  { opacity: 1 }, 21.9);
+      tl.set(chipMeta,{ textContent: "CÓDIGO · SYDAPP.COM.BR" }, 21.9);
+      tl.fromTo(frameS4, { scale: 1.028 }, { scale: 1.0, duration: 0.45, ease: "power2.out" }, 21.9);
 
-      // =========================================================================
-      // SCENE 3: AUDIENCE TWO — PROFISSIONAL (t=10.0s to 15.0s)
-      // =========================================================================
-      tl.set(badgeAudience, { textContent: "PROFISSIONAL" }, 10.0);
-      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 10.0);
-      tl.set(urlText, { textContent: "sydapp.com.br/profissional" }, 10.0);
+      // Settle on the built page.
+      tl.to(scaler,   { scale: 1.04, duration: 2.0, ease: "power1.inOut" }, 22.6);
+      tl.to(caption,  { opacity: 0, duration: 0.25, ease: "power2.in" }, 23.4);
+      tl.set(caption, { innerHTML: "O lockup saiu, o <strong>Entrar</strong> entrou — decisões de quem constrói" }, 23.75);
+      tl.to(caption,  { opacity: 1, duration: 0.4, ease: "power2.out" }, 23.8);
+      tl.to(scaler,   { scale: 1.0,  duration: 0.9, ease: "power2.inOut" }, 24.9);
 
-      // Reveal desktop window with Profissional content
-      tl.set(imgPaciente1440, { display: "none" }, 10.0);
-      tl.set(imgProfissional1440, { display: "block" }, 10.0);
-      tl.set(imgRh1440, { display: "none" }, 10.0);
+      // =====================================================================
+      // S5 — Back to the top, the seam (26.0–30.0s · f1560–1800)
+      // Everything below must land EXACTLY on the frame-0 values, settled
+      // well before the end so the join is on a still frame, not mid-move.
+      // =====================================================================
+      tl.to(frameS4,  { opacity: 0, scale: 0.97, duration: 0.7, ease: "power2.in" }, 26.0);
+      tl.to(winMain,  { opacity: 1, scale: 1.0,  duration: 0.9, ease: "power2.out" }, 26.2);
 
-      tl.fromTo(winDesktop, { opacity: 0, x: 60, scale: 0.98 }, { opacity: 1, x: 0, scale: 1.0, duration: 0.7, ease: "power2.out" }, 10.0);
+      // Restore the window's content to the S1 strip — but arrive SLOWLY.
+      // ⛔ The first cut of this settled everything by 26.8s and then hard-set at
+      // 28.2s, which measured as 180 pixel-identical tail frames = 3.00s of frozen
+      // image at the loop join. The storyboard asked for ~20. The fix is to keep the
+      // return in motion almost to the end: the strip drifts home from a small offset
+      // over 3.2s, so the last moving frame is ~29.4s.
+      tl.set(s1Scroll, { y: -150, scale: 1.012 }, 26.2);
+      tl.to(s1Scroll,  { opacity: 1, duration: 0.6, ease: "none" }, 26.2);
+      tl.to(s2Stack,   { opacity: 0, duration: 0.6, ease: "none" }, 26.2);
+      tl.to(s1Scroll,  { y: -Y_HERO, scale: 1.0, duration: 3.2, ease: "power2.out" }, 26.2);
 
-      // Callout for therapist recruitment & autonomy
-      tl.set(calloutText, { innerHTML: "Lado da oferta: <strong>autonomia, agenda livre e remuneração justa por minuto</strong>" }, 10.8);
-      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 10.8);
+      tl.to(caption,  { opacity: 0, duration: 0.3, ease: "power2.in" }, 25.9);
+      tl.set(caption, { innerHTML: "Uma página que responde à pergunta de <strong>uma</strong> pessoa" }, 26.3);
+      tl.to(caption,  { opacity: 1, duration: 0.45, ease: "power2.out" }, 26.35);
+      tl.set(chipAud, { textContent: "PACIENTE" }, 26.3);
+      tl.set(chipMeta,{ textContent: "1440 · SYDAPP.COM.BR" }, 26.3);
 
-      // Camera pan across the value proposition
-      tl.to(scaler, { scale: 1.02, duration: 2.5, ease: "power1.inOut" }, 11.2);
-      tl.to(track, { x: -15, y: -10, duration: 2.5, ease: "power1.inOut" }, 11.2);
-
-      // Prepare transition to Scene 4
-      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 14.3);
-      tl.to(scaler, { scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 14.3);
-      tl.to(track, { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" }, 14.3);
-
-      // =========================================================================
-      // SCENE 4: AUDIENCE THREE — RH CORPORATIVO (t=15.0s to 20.0s)
-      // =========================================================================
-      tl.set(badgeAudience, { textContent: "RH CORPORATIVO" }, 15.0);
-      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 15.0);
-      tl.set(urlText, { textContent: "sydapp.com.br/rh" }, 15.0);
-
-      // Cross-dissolve into RH Desktop
-      tl.to(winDesktop, { opacity: 0.4, duration: 0.3, ease: "power1.in" }, 14.7);
-      tl.set(imgProfissional1440, { display: "none" }, 15.0);
-      tl.set(imgRh1440, { display: "block" }, 15.0);
-      tl.to(winDesktop, { opacity: 1, duration: 0.4, ease: "power1.out" }, 15.0);
-
-      // Callout for enterprise wellness benefit
-      tl.set(calloutText, { innerHTML: "Benefício corporativo sem burocracia: <strong>métricas claras e proteção da equipe</strong>" }, 15.8);
-      tl.to(callout, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 15.8);
-
-      // Subtle focus on corporate value metrics
-      tl.to(scaler, { scale: 1.02, duration: 2.5, ease: "power1.inOut" }, 16.2);
-      tl.to(track, { y: -10, duration: 2.5, ease: "power1.inOut" }, 16.2);
-
-      // Prepare transition to Scene 5
-      tl.to(callout, { opacity: 0, y: 15, duration: 0.4, ease: "power2.in" }, 19.3);
-      tl.to(scaler, { scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 19.3);
-      tl.to(track, { y: 0, duration: 0.6, ease: "power2.inOut" }, 19.3);
-
-      // =========================================================================
-      // SCENE 5: 9-STATE MATRIX & SEAMLESS LOOP RESOLUTION (t=20.0s to 25.0s)
-      // =========================================================================
-      tl.set(badgeAudience, { textContent: "MATRIZ RESPONSIVA" }, 20.0);
-      tl.set(badgeBreakpoint, { textContent: "3 PÚBLICOS × 3 BREAKPOINTS" }, 20.0);
-
-      // Pull back into 3-device orchestra
-      tl.to(winDesktop, { opacity: 0, scale: 0.85, duration: 0.6, ease: "power2.inOut" }, 20.0);
-      tl.fromTo(trio, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1.0, duration: 0.7, ease: "power2.out" }, 20.1);
-      tl.fromTo(statMatrix, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 20.4);
-
-      // Subtle hover float in trio
-      tl.to("#trio-mobile", { y: -8, duration: 1.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 20.5);
-      tl.to("#trio-laptop", { y: 8, duration: 1.2, yoyo: true, repeat: 1, ease: "sine.inOut" }, 20.5);
-
-      // RESOLUTION BACK TO OPENING HERO (t=23.2s to 25.0s)
-      // Switch desktop window back to Paciente opening asset
-      tl.set(imgRh1440, { display: "none" }, 23.0);
-      tl.set(imgPaciente1440End, { display: "block" }, 23.0);
-      tl.set(urlText, { textContent: "sydapp.com.br" }, 23.5);
-
-      // Fade out trio and stat matrix
-      tl.to(trio, { opacity: 0, scale: 1.05, duration: 1.0, ease: "power2.inOut" }, 23.4);
-      tl.to(statMatrix, { opacity: 0, y: 20, duration: 0.8, ease: "power2.in" }, 23.4);
-
-      // Reset badge dock to opening values at t=24.5s
-      tl.set(badgeAudience, { textContent: "PACIENTE" }, 24.5);
-      tl.set(badgeBreakpoint, { textContent: "1440px · DESKTOP" }, 24.5);
-
-      // Smoothly zoom in and restore winDesktop to exact frame 0 coordinates (scale 1.0, x: 0, y: 0, opacity 1)
-      tl.to(winDesktop, { opacity: 1, scale: 1.0, x: 0, y: 0, duration: 1.2, ease: "power2.inOut" }, 23.6);
-      tl.to(scaler, { scale: 1.0, duration: 1.0, ease: "power2.inOut" }, 23.8);
-      tl.to(track, { x: 0, y: 0, duration: 1.0, ease: "power2.inOut" }, 23.8);
+      // Hard-set every animated property back to its frame-0 value at 29.55s, so
+      // only ~0.45s (27 frames) is frozen before the join. Measured, not assumed.
+      tl.set(scaler,   { scale: 1.0, transformOrigin: "960px 540px" }, 29.55);
+      tl.set(track,    { x: 0, y: 0 }, 29.55);
+      tl.set(winMain,  { opacity: 1, scale: 1.0, x: 0, y: 0 }, 29.55);
+      tl.set(s1Scroll, { opacity: 1, y: -Y_HERO, scale: 1.0 }, 29.55);
+      tl.set(s2Stack,  { opacity: 0 }, 29.55);
+      tl.set(s2Pac,    { opacity: 1 }, 29.55);
+      tl.set(s2Prof,   { opacity: 0 }, 29.55);
+      tl.set(s2Rh,     { opacity: 0 }, 29.55);
+      tl.set(gridS3,   { opacity: 0, scale: 0.96 }, 29.55);
+      tl.set(frameS4,  { opacity: 0, scale: 0.97 }, 29.55);
+      tl.set(s4Figma,  { opacity: 1 }, 29.55);
+      tl.set(s4Code,   { opacity: 0 }, 29.55);
+      tl.set(chipDock, { opacity: 1 }, 29.55);
+      tl.set(caption,  { opacity: 1 }, 29.55);
     </script>
   </body>
 </html>

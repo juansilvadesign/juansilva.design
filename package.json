@@ -16,6 +16,7 @@
     "stars:refresh": "node scripts/github-stars.mjs",
     "deploy": "node scripts/deploy.mjs",
     "deploy:check": "node scripts/deploy.mjs --check",
+    "deploy:prune": "node scripts/deploy.mjs",
     "deploy:status": "node scripts/deploy.mjs --status",
     "deploy:worker": "wrangler deploy"
   },
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@cloudflare/workers-types": "^5.20260812.1",
+    "@types/node": "^26.5.1",
     "basic-ftp": "^6.2.0",
     "typescript": "^6.0.3",
     "wrangler": "^4.122.0"

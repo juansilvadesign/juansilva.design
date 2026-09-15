@@ -41,5 +41,200 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole product designer translating an exhaustive 500+ page strength-and-conditioning specification from a Universidade de São Paulo (USP) physical education teacher into a 700-frame, 3-role platform (Personal, Aluno, Admin). Engineered the only from-scratch design system in the Sagitta portfolio (448 components, 60 variant sets, 12 semantically named color styles, and named Shadow Cards elevation, with zero Untitled UI), plus 119 manually unrolled full-height handoff screens in Telas do Protótipo.",
+      "context": "Agency engagement at Sagitta spanning eight months of sustained delivery (March to December 2024). The client, a personal trainer and PE professor at USP (Universidade de São Paulo), provided exhaustive domain rules covering PAR-Q medical screening, advanced periodization (GVT, Rest-Pause, Drop Sets, RIR), and dual-mode photo/video assessments. Juan owned the entire product, prototypes, and style system alone; marketing landing pages were authored separately by João Chagas.",
+      "outcome": "Formally approved during client validation on 2024-11-08 with high praise for interface clarity and domain fidelity across seven recorded checkpoints. The project was handed off to engineering, but Bubble no-code development limitations stalled the implementation and prevented public deployment. The frustration of watching an approved, 700-frame design system fail to reach production became the definitive catalyst for Juan's transition into full-stack design engineering.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole product designer for the 700-frame application, its style system, and both prototype pages. The marketing landing page was designed separately by João Chagas and is excluded from my claims. Crucial nuance: the client authored the entire 500+ page specification, so I claim the architectural translation of that dense methodology into a production interface, never the domain science or product requirements. Delivery reality: the design was fully approved, but the no-code development team failed to execute the mathematical logic and custom UI in Bubble, so it never launched publicly."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Translating 500 pages of sports science into a 3-role platform"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "700",
+              "label": "frames designed across trainer, student, and admin surfaces",
+              "icon": "📐"
+            },
+            {
+              "value": "448",
+              "label": "bespoke components built from scratch with zero vendor kits",
+              "icon": "🧩"
+            },
+            {
+              "value": "500+",
+              "label": "pages of technical sports science specification translated",
+              "icon": "📄"
+            },
+            {
+              "value": "119",
+              "label": "full-height screens manually unrolled in Telas do Protótipo for dev handoff",
+              "icon": "🛠️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Fitness coaching platforms frequently degenerate into generic exercise lists and static timers. In contrast, Pro Personal was commissioned by a physical education professor and researcher at Universidade de São Paulo (USP), who delivered an exhaustive, 500-page specification detailing clinical screening, periodized training cycles, and neuromuscular fatigue adaptations. My role was to absorb this deep domain corpus and architect an intuitive digital ecosystem without compromising the rigor of the underlying exercise physiology."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Domain modeling: periodization, clinical screening, and adaptive fatigue"
+        },
+        {
+          "type": "prose",
+          "body": "The platform structures three dedicated role workflows (Personal, Aluno, Admin) with granular domain mechanics:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "PAR-Q Health Screening with Admin Maintenance — Full modeling of the Physical Activity Readiness Questionnaire with trainer evaluation views (visualiza-sim / visualiza-não) and back-office CRUD allowing administrators to add, modify, or deprecate clinical screening questions.",
+            "12-Step Pre/Post Workout Questionnaires — Multi-stage daily check-ins (Questionário pré treino 1–12 and pós treino 1–5.2) evaluating sleep quality, perceived soreness, and mental readiness before session start.",
+            "Adaptive Fatigue Warning Logic — A dedicated 11-frame warning architecture (DiaCansado/AVISO) that dynamically intercepts the athlete's workflow when elevated fatigue scores are logged, prompting load reductions or recovery sessions.",
+            "Advanced Strength Periodization UI — Purpose-built UI tagging and session generation for 11 strength methodologies: Drop Set (DS), German Volume Training (GVT), Rest-Pause (RP), Reps in Reserve (RIR), Cluster Sets (CS), Paused Reps (PC), and 3/7 protocols.",
+            "Comparative Body Tracking — Multi-angle physique assessments supporting side-by-side photo comparison (Comparação de fotos), video movement uploads (input_uploadvídeo), and annotated trainer feedback loops.",
+            "Complete Brazilian Subscription Lifecycle — End-to-end checkout covering Credit Card, Pix, and Boleto, coupled with active subscription management, plan upgrades, and explicit cancellation flows."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Zero vendor primitives: a 448-component system built from scratch"
+        },
+        {
+          "type": "prose",
+          "body": "Pro Personal is the sole project in Sagitta's entire agency catalog built 100% from scratch with zero Untitled UI or imported vendor templates. Across 448 components (388 variants over 60 base component sets), every single element was authored in Portuguese domain terminology: Timer Circle, input_uploadvídeo, OpçõesSelect, buttonSave, and Estado=Ativo, Tipo=Notificação. The file defines 12 semantically named color styles (Purple 1–4 Primary, Black Primary, Grey Primary, Background #FAFAFA, stroke #EBEBEB) and a named Shadow Cards elevation style, backed by a comprehensive 61-frame Style Guide page."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Developer empathy in practice: the 119-screen Telas do Protótipo"
+        },
+        {
+          "type": "prose",
+          "body": "To make the prototype usable across 50 functional sections, I engineered a dedicated prototype component layer (NavBarProtótipo, MenuNavBarProtótipo, NavItemProtótipo, BottomMenuProtótipo) and threaded approximately 20 sticky-note annotations with implementation logic directly into the canvas. When the assigned developer reported that Figma's fixed-height viewports hindered his ability to inspect full-page vertical layouts, I manually duplicated and unrolled all 119 screens to full height on a separate page named Telas do Protótipo. This eliminated the developer's inspection friction at personal time cost, exemplifying practical, low-friction handoff commitment."
+        },
+        {
+          "type": "quote",
+          "text": "I spent two years designing products that never shipped because no-code builds couldn't execute them. Pro Personal was approved and loved by the client, but the build layer broke. That frustration is the exact reason I learned to code: now I hand over designs I can build myself."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The catalyst for full-stack design engineering"
+        },
+        {
+          "type": "prose",
+          "body": "Pro Personal represents the highest standard of UX depth and UI craft in my early agency work, and its ultimate outcome shaped my entire career. Watching a client celebrate an approved 700-frame platform only for a no-code development stack to fail during implementation proved that interface design without technical execution power leaves products vulnerable. This project is the origin of my transition to design engineering, ensuring that complex software specifications are matched by hardened, code-level execution."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de produto solo traduzindo uma especificação técnica de mais de 500 páginas de um professor de educação física da Universidade de São Paulo (USP) em uma plataforma de 700 frames com três perfis (Personal, Aluno, Admin). Construiu o único design system do zero de todo o portfólio da Sagitta (448 componentes, 60 conjuntos de variantes, 12 estilos de cor nomeados semanticamente e elevação Shadow Cards, com zero Untitled UI), além de 119 telas manuais desdobradas em altura total para handoff em Telas do Protótipo.",
+      "context": "Atuação na agência Sagitta ao longo de oito meses de entrega contínua (março a dezembro de 2024). O cliente, personal trainer e professor de Educação Física da Universidade de São Paulo (USP), forneceu diretrizes minuciosas cobrindo triagem médica PAR-Q, periodização avançada (GVT, Rest-Pause, Drop Sets, RIR) e avaliação física comparativa por foto e vídeo. Juan liderou todo o produto, protótipos e style system sozinho; a landing page de marketing foi executada separadamente por João Chagas.",
+      "outcome": "Aprovado formalmente na validação com o cliente em 08/11/2024 com forte reconhecimento pela clareza de interface e fidelidade metodológica ao longo de sete reuniões gravadas. O projeto foi entregue ao time técnico, mas limitações na implementação no-code em Bubble travaram a entrega e impediram o lançamento público. A frustração de ver um design system aprovado de 700 frames não alcançar produção tornou-se o catalisador decisivo para a transição de Juan para a engenharia de design full-stack.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer de produto solo de todo o aplicativo de 700 frames, do sistema de estilos e das duas páginas de protótipo. A landing page institucional foi desenhada separadamente por João Chagas e está excluída das minhas atribuições. Nuance crucial: o cliente redigiu integralmente a especificação de mais de 500 páginas; portanto, reivindico a tradução arquitetural dessa metodologia densa em uma interface funcional, nunca a autoria da ciência do treinamento ou dos requisitos. Realidade de entrega: o design foi formalmente aprovado, mas a equipe de desenvolvimento no-code em Bubble não conseguiu implementar a lógica matemática nem a UI, de modo que o app nunca foi lançado."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Traduzindo 500 páginas de ciência esportiva em uma plataforma de 3 perfis"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "700",
+              "label": "telas desenhadas entre os perfis de personal, aluno e admin",
+              "icon": "📐"
+            },
+            {
+              "value": "448",
+              "label": "componentes autorais feitos do zero sem kits prontos",
+              "icon": "🧩"
+            },
+            {
+              "value": "500+",
+              "label": "páginas de especificação técnica de educação física traduzidas",
+              "icon": "📄"
+            },
+            {
+              "value": "119",
+              "label": "telas completas desdobradas manualmente em Telas do Protótipo para o dev",
+              "icon": "🛠️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Plataformas para personal trainers frequentemente se resumem a listas genéricas de exercícios e cronômetros básicos. Em contrapartida, o Pro Personal foi encomendado por um professor e pesquisador de Educação Física da Universidade de São Paulo (USP), que entregou uma especificação exaustiva de mais de 500 páginas detalhando triagem clínica, ciclos de periodização e adaptações a fadiga neuromuscular. Minha responsabilidade foi absorver esse corpo técnico denso e estruturar um ecossistema digital intuitivo sem diluir o rigor da fisiologia do exercício."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Modelagem de domínio: periodização, triagem clínica e fadiga adaptativa"
+        },
+        {
+          "type": "prose",
+          "body": "A plataforma estrutura fluxos de trabalho específicos para três perfis (Personal, Aluno, Admin) com mecânicas avançadas de domínio:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Triagem Médica PAR-Q com Gestão Administrativa — Modelagem completa do questionário de prontidão para atividade física com visualização para o treinador (visualiza-sim / visualiza-não) e painel administrativo para criar, editar ou desativar perguntas clínicas.",
+            "Questionários Pré e Pós-Treino em 12 Etapas — Checagens diárias em múltiplos passos (Questionário pré treino 1–12 e pós treino 1–5.2) avaliando qualidade do sono, dor muscular percebida e disposição mental antes do início da sessão.",
+            "Lógica de Fadiga Adaptativa — Arquitetura de 11 telas de alerta (DiaCansado/AVISO) que intercepta dinamicamente a rotina do atleta quando níveis elevados de cansaço são reportados, sugerindo ajustes de carga ou treinos regenerativos.",
+            "Interface para Periodização Avançada de Força — Componentização e geração de treinos dedicados para 11 metodologias: Drop Set (DS), German Volume Training (GVT), Rest-Pause (RP), Repetições em Reserva (RIR), Séries em Bloco (CS) e protocolos 3/7.",
+            "Avaliação Física e Comparativo Corporal — Acompanhamento físico multiangular com comparação de fotos lado a lado (Comparação de fotos), upload de vídeos de execução (input_uploadvídeo) e relatórios comentados pelo personal.",
+            "Ciclo Completo de Assinaturas no Brasil — Fluxo de pagamento com Cartão de Crédito, Pix e Boleto bancário, associado à gestão de assinaturas ativas, upgrade de planos e fluxos explícitos de cancelamento."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Zero primitivos terceirizados: um sistema de 448 componentes construído do zero"
+        },
+        {
+          "type": "prose",
+          "body": "O Pro Personal é o único projeto em todo o acervo da agência Sagitta desenvolvido 100% do zero, sem nenhum uso de Untitled UI ou templates importados. Ao longo de 448 componentes (388 variantes em 60 conjuntos de componentes base), cada elemento foi criado em português com terminologia do domínio: Timer Circle, input_uploadvídeo, OpçõesSelect, buttonSave e Estado=Ativo, Tipo=Notificação. O arquivo define 12 estilos de cor com nomes semânticos (Purple 1–4 Primary, Black Primary, Grey Primary, Background #FAFAFA, stroke #EBEBEB) e o estilo de elevação Shadow Cards, estruturados em uma página dedicada de Style Guide com 61 pranchas."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Empatia técnica na prática: as 119 telas de Telas do Protótipo"
+        },
+        {
+          "type": "prose",
+          "body": "Para garantir a navegabilidade do protótipo em ~50 seções funcionais, criei uma camada dedicada de componentes de prototipagem (NavBarProtótipo, MenuNavBarProtótipo, NavItemProtótipo, BottomMenuProtótipo) e distribuí cerca de 20 notas adesivas com especificações técnicas diretamente nas pranchas. Quando o desenvolvedor sinalizou que o viewport fixo do Figma dificultava inspecionar layouts verticais longos, dupliquei e abri manualmente todas as 119 telas em altura total em uma página separada chamada Telas do Protótipo. Isso removeu qualquer atrito de inspeção para a engenharia, evidenciando compromisso real com a entrega do desenvolvedor."
+        },
+        {
+          "type": "quote",
+          "text": "Passei dois anos desenhando produtos que nunca foram ao ar porque os builds no-code não conseguiam executá-los. O Pro Personal foi aprovado e elogiado pelo cliente, mas a engenharia travou. Essa frustração foi a razão exata pela qual aprendi a programar: hoje entrego designs que eu mesmo consigo implementar."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O catalisador para a engenharia de design full-stack"
+        },
+        {
+          "type": "prose",
+          "body": "O Pro Personal representa o ápice de profundidade de UX e rigor de UI do meu período inicial em agência, e seu desfecho moldou minha trajetória profissional. Ver um cliente celebrar uma plataforma aprovada de 700 frames e assistir a engenharia no-code falhar na implementação provou que o design visual sem domínio de código deixa o produto vulnerável. Este projeto foi o estopim da minha transição para design engineering, garantindo que especificações complexas sejam sustentadas por código robusto em produção."
+        }
+      ]
+    }
+  }
 }

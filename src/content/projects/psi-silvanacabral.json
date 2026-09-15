@@ -18,7 +18,15 @@
   "liveUrl": "https://backup.silvanacabral.com.br",
   "evidenceLink": "https://github.com/ZokuWebDesign/psi.silvanacabral",
   "featured": false,
-  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.jpg",
+  "previewMotion": {
+    "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.webm",
+    "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.mp4",
+    "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.webp",
+    "width": 1920,
+    "height": 1080,
+    "hoverStart": 0
+  },
   "copy": {
     "en": {
       "title": "Clinical Psychology Practice Site — Designed and Coded Solo",
@@ -53,12 +61,14 @@
       "outcome": "The build was finished, deployed, and is still inspectable on my own host. It never went live under the client's own domain. The imagery is AI-generated, she did not want it representing her practice, and the root domain was parked to redirect to her Google Business Profile instead. The project went unpaid. I had asked for photographs and been given one 150×150 profile picture, so I generated the imagery rather than let the ship date slip; she turned it down, and that was the end of it. The artifact is real and the source is public. The lesson is worth more than the project was: photography is now a precondition I settle before the work starts, not a dependency I design around.",
       "blocks": [
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
-          "alt": "The deployed one-page practice site at desktop width",
-          "caption": "Placeholder — the deployed page at desktop width.",
-          "width": 800,
-          "height": 450
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "The complete twelve-section clinical psychology practice landing page, showing navigation, smooth scrolls, service details, and the FAQ accordion interaction.",
+          "caption": "Sixty seconds, silent and looping — the full twelve-section landing page designed and built as a static export, from hero to footer."
         },
         {
           "type": "callout",
@@ -112,12 +122,14 @@
           "body": "When the design was settled I marked the file released for development and then built it myself, as a static Next.js export: thirteen bespoke section components sitting on nine shadcn primitives, three legal pages and a custom 404. It was deployed a week in, and the second week was fixes and adjustments she asked for. Designing and building the same page has one specific advantage, and it is not speed. It is that nothing gets designed that cannot be built, and nothing gets built that quietly drops what was designed."
         },
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
-          "alt": "The style guide: palette, type pairing and the twelve-step token ramp",
-          "caption": "Placeholder — the style guide: palette, type pairing and the warm-sand ramp.",
-          "width": 800,
-          "height": 600
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-tokens-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-tokens-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-tokens-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "The design token ramp and style guide: Cormorant Garamond serif headings, Montserrat body typography, and the warm-sand neutral palette.",
+          "caption": "Twelve seconds, silent and looping — the twelve-step warm-sand token ramp and typography pairing authored for the practice."
         },
         {
           "type": "heading",
@@ -151,12 +163,14 @@
           "body": "The mobile artboard in the design file is empty, and that is not an omission I want to hide — it is how this one was made. The desktop page was designed at full fidelity and the responsive behaviour was then written directly in code, where the breakpoints actually live; the deployed HTML carries 177 responsive utility hits. It is a reasonable method when the same person designs and builds, and a bad one to hand to anybody else. On a project with a separate developer, the artboard gets drawn."
         },
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
-          "alt": "The one-page site at mobile width",
-          "caption": "Placeholder — the same page at mobile width, laid out in code rather than in the design file.",
-          "width": 800,
-          "height": 450
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-mobile-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-mobile-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-mobile-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "The responsive mobile experience at 375px width, highlighting 48px touch targets, mobile navigation, and Tailwind responsive layout utilities.",
+          "caption": "Twelve seconds, silent and looping — the mobile viewport laid out directly in code with 177 responsive Tailwind utility classes."
         },
         {
           "type": "heading",
@@ -192,12 +206,14 @@
       "outcome": "O build foi concluído, publicado, e continua inspecionável no meu próprio host. Ele nunca entrou no ar sob o domínio da cliente. As imagens são geradas por IA, ela não quis que representassem o consultório dela, e o domínio raiz acabou estacionado redirecionando para o perfil dela no Google. O projeto não foi pago. Eu tinha pedido fotografias e recebido uma foto de perfil de 150×150, então gerei as imagens em vez de deixar a data de entrega escorrer; ela não aceitou, e a relação terminou ali. O artefato é real e o código é público. A lição vale mais do que o projeto valeu: fotografia hoje é uma precondição que eu resolvo antes de começar, não uma dependência que eu contorno no design.",
       "blocks": [
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
-          "alt": "O site de uma página do consultório em largura desktop",
-          "caption": "Placeholder — a página publicada em largura desktop.",
-          "width": 800,
-          "height": 450
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "A landing page completa de doze seções do consultório de psicologia, demonstrando navegação, rolagem suave, detalhes dos serviços e interação com o acordeão de FAQ.",
+          "caption": "Sessenta segundos, silencioso e em loop — a landing page de doze seções projetada e construída como export estático, do topo ao rodapé."
         },
         {
           "type": "callout",
@@ -251,12 +267,14 @@
           "body": "Com o design fechado, marquei o arquivo como liberado para DEV e construí eu mesmo, como export estático em Next.js: treze componentes de seção próprios sobre nove primitivos shadcn, três páginas legais e um 404 próprio. Ele foi publicado na primeira semana, e a segunda semana foi de ajustes e correções que ela pediu. Desenhar e construir a mesma página tem uma vantagem específica, e não é velocidade. É que nada é desenhado sem poder ser construído, e nada é construído abandonando em silêncio o que foi desenhado."
         },
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
-          "alt": "O guia de estilo: paleta, tipografia e a rampa de doze tokens",
-          "caption": "Placeholder — o guia de estilo: paleta, tipografia e a rampa de areia quente.",
-          "width": 800,
-          "height": 600
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-tokens-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-tokens-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-tokens-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "A rampa de tokens de design e guia de estilo: títulos em Cormorant Garamond, corpo em Montserrat e paleta neutra em areia quente.",
+          "caption": "Doze segundos, silencioso e em loop — a rampa de tokens de doze passos em areia quente e pareamento tipográfico criados para o consultório."
         },
         {
           "type": "heading",
@@ -290,12 +308,14 @@
           "body": "A prancheta de mobile no arquivo de design está vazia, e isso não é uma omissão que eu queira esconder — foi assim que este projeto foi feito. A página desktop foi desenhada em fidelidade total e o comportamento responsivo foi escrito direto no código, onde os breakpoints de fato existem; o HTML publicado carrega 177 ocorrências de utilitários responsivos. É um método razoável quando a mesma pessoa desenha e constrói, e um método ruim para entregar a outra pessoa. Em projeto com desenvolvedor separado, a prancheta é desenhada."
         },
         {
-          "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
-          "alt": "O site de uma página em largura mobile",
-          "caption": "Placeholder — a mesma página em mobile, resolvida em código e não no arquivo de design.",
-          "width": 800,
-          "height": 450
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-mobile-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-mobile-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psi-silvanacabral/psi-silvanacabral-mobile-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "A experiência mobile responsiva em 375px de largura, destacando alvos de toque de 48px, navegação móvel e utilitários de layout responsivo Tailwind.",
+          "caption": "Doze segundos, silencioso e em loop — a visualização mobile resolvida diretamente no código com 177 utilitários responsivos Tailwind."
         },
         {
           "type": "heading",

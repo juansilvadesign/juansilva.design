@@ -44,5 +44,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Mala de Turista (branded live as Mala de Turismo), a travel agency, guided tour operator, and digital nomad content platform. Designed 10 responsive page layouts in Figma (file key pHnKZf5r5Lv4xcwv7M9nLv) spanning destination package showcases (Orlando/Disney, Paris, Lisboa, Buenos Aires, Rio de Janeiro), guided tour booking (Tour guiado), digital nomad resources (Nômade digital), editorial travel guides (Blog #14 and Blogs - Mobile), and consultation contact flows, backed by a 46-node Style Guide establishing destination badge tags, hamburger navigation, and travel color palettes.",
+      "context": "Agency employment at Sagitta delivering from September 29, 2023 to October 10, 2023. Juan served as the sole website UI designer within the agency team: Kelvin Bezerra created the brand identity and logo, Juan designed the complete multi-page responsive travel website in Figma, and an external no-code developer implemented and published the site on WordPress. Scoped by Ramon.",
+      "outcome": "The website was implemented and published to production, and remains live today at maladeturista.com.br (HTTP 200, 157,089 B verified on 2026-08-21). Juan grades this project as Tier A: the live site faithfully reflects the Figma design. Note: the client rebranded the live display name to 'Mala de Turismo' while maintaining the original domain and Figma architecture. No travel booking or sales metrics exist. This case study documents travel portal IA, destination showcase cards, and editorial travel blog design.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the travel agency portal, destination showcase cards, tour booking pages, editorial blog layouts, and mobile viewports in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress deployment (handled by a no-code developer), or travel tour operations. Client rebrand note: the live site title displays 'Mala de Turismo' while preserving the original domain and layout. Delivery status: shipped and live at maladeturista.com.br (Tier A production fidelity)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Travel portal UX: curated destinations and digital nomad itineraries"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "10",
+              "label": "responsive layout frames on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "Tier A",
+              "label": "production fidelity match between Figma and live website",
+              "icon": "⭐"
+            },
+            {
+              "value": "46",
+              "label": "style guide design tokens, destination badges, and components",
+              "icon": "✈️"
+            },
+            {
+              "value": "157 KB",
+              "label": "verified live HTML at maladeturista.com.br",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Travel planning is an aspirational process requiring rich destination photography, transparent itinerary details, and friction-free consultation booking. Mala de Turista needed a digital home that served both family vacationers looking for structured guided tours (e.g., Orlando Disney packages, European cultural circuits) and independent travelers seeking remote work tips and digital nomad guides."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Destination discovery and editorial guides across 10 screens"
+        },
+        {
+          "type": "prose",
+          "body": "On the primary Design page (node 1:15), I structured the travel portal across multiple specialized surfaces:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Portal Homepage (Página Inicial) — Inspiring hero banner with seasonal package spotlights (Paris, Lisboa, Buenos Aires, Gramado), traveler testimonials, and direct travel quote intake.",
+            "Guided Tour Booking (Tour guiado) — Detailed package itinerary breakdown outlining day-by-day schedules, hotel accommodations, included excursions, and pricing tiers.",
+            "Editorial Travel Blog (Blog #14 & Blogs - Mobile) — Long-form article reading templates designed for destination guides, packing checklists, visa requirements, and digital nomad tips.",
+            "Institutional Credibility (Sobre nós) — Agency travel credentials, partner airline/hotel affiliations, and personalized travel concierge introductions.",
+            "Direct Contact Funnel (Contato & Mobile Views) — Clear consultation inquiry forms with direct WhatsApp routing for immediate itinerary customisation."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan grades this project Tier A: the live production site at maladeturista.com.br answers HTTP 200 with 157 KB and preserves the Figma layout, destination cards, and typography. Note that the live brand title reads 'Mala de Turismo' due to a client rebrand, but the domain and design are authentic."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide tokens and travel component system"
+        },
+        {
+          "type": "prose",
+          "body": "The 46-node Style Guide page (node 1:16) documented Kelvin Bezerra's brand identity: vibrant destination category badge tags (Adventure, Cultural, Luxury, Family), responsive navigation bars, hamburger menus, and accessible travel typography scales."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra created the Mala de Turista logo and visual assets.",
+            "Not WordPress implementation. The website was deployed in WordPress by a no-code developer.",
+            "Not travel agency operations or airline booking. I designed the front-end interface, not ticketing systems or tour logistics.",
+            "Not user research or discovery. Requirements were scoped by Ramon.",
+            "Not supported by travel booking metrics. No package sales or traveler lead counts exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The impact of structured travel portal design"
+        },
+        {
+          "type": "prose",
+          "body": "Mala de Turista demonstrates how visual storytelling and organized package information turn casual travel daydreamers into booking inquiries. By pairing immersive destination imagery with clear itinerary details and editorial guides, the design created an engaging digital portal for a modern travel agency."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a Mala de Turista (publicada no ar sob o nome Mala de Turismo), agência de viagens, operadora de passeios guiados e plataforma de conteúdo para nômades digitais. Desenvolvi 10 pranchetas de layout responsivo no Figma (arquivo pHnKZf5r5Lv4xcwv7M9nLv) abrangendo pacotes para destinos nacionais e internacionais (Orlando/Disney, Paris, Lisboa, Buenos Aires, Rio de Janeiro), agendamento de tours guiados (Tour guiado), dicas para trabalho remoto (Nômade digital), blog editorial (Blog #14 e Blogs - Mobile) e formulários de contato, com suporte de um Style Guide com 46 nós estruturando tags de destino e paleta de cores para viagens.",
+      "context": "Atuação como funcionário na agência Sagitta de 29 de setembro de 2023 a 10 de outubro de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou a identidade visual e o logotipo, Juan desenhou todo o portal de viagens no Figma, e um desenvolvedor no-code implementou e publicou o site no WordPress. Escopo alinhado por Ramon.",
+      "outcome": "O site foi implementado e publicado em produção, permanecendo no ar até hoje em maladeturista.com.br (HTTP 200, 157.089 B verificado em 21/08/2026). Juan classifica este projeto como Tier A: o site publicado reflete fielmente o layout entregue no Figma. Nota: o cliente atualizou o nome no ar para 'Mala de Turismo' em um rebranding, mantendo o domínio e a arquitetura originais. Não existem métricas de vendas de pacotes. Este estudo de caso documenta a arquitetura de portais de turismo, vitrines de destinos e design de blogs de viagem.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei o portal de viagens, as vitrines de destinos turísticos, as páginas de passeios guiados, os templates de blog e as telas mobile no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a publicação em WordPress (executada por um desenvolvedor no-code) nem a operação turística dos pacotes. Nota de rebranding: o título no site exibe 'Mala de Turismo', mantendo o domínio e o layout originais. Status de entrega: publicado e ativo em maladeturista.com.br (fidelidade Tier A)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UX para turismo: destinos selecionados e conteúdo para nômades digitais"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "10",
+              "label": "pranchetas de layout responsivo na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "Tier A",
+              "label": "de fidelidade entre o arquivo Figma e o site publicado",
+              "icon": "⭐"
+            },
+            {
+              "value": "46",
+              "label": "tokens de estilo, tags de destino e componentes no Style Guide",
+              "icon": "✈️"
+            },
+            {
+              "value": "157 KB",
+              "label": "de HTML em produção verificado em maladeturista.com.br",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O planejamento de viagens é uma experiência aspiracional que depende de fotografias inspiradoras, transparência no itinerário e facilidade para solicitar orçamentos. A Mala de Turista necessitava de uma presença online que atendesse tanto famílias em busca de roteiros completos (como pacotes para a Disney ou circuitos europeus) quanto viajantes individuais e nômades digitais interessados em dicas práticas de estadia e trabalho remoto."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Descoberta de destinos e guias editoriais em 10 pranchetas"
+        },
+        {
+          "type": "prose",
+          "body": "Na prancheta principal de Design (nó 1:15), estruturei a navegação do portal em páginas temáticas:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Página Inicial (Página Inicial) — Banner com os principais destinos da temporada (Paris, Lisboa, Buenos Aires, Gramado), depoimentos de clientes e chamada para consultoria personalizada.",
+            "Passeios e Roteiros Guiados (Tour guiado) — Detalhamento do roteiro dia a dia, hospedagens incluídas, passeios opcionais e condições de pagamento.",
+            "Blog Editorial de Viagens (Blog #14 e Blogs - Mobile) — Templates para guias de viagem, listas de bagagem, documentação necessária e guias para nômades digitais.",
+            "Institucional e Credibilidade (Sobre nós) — Apresentação da agência, parcerias com operadoras e consultores de viagem dedicados.",
+            "Canal Direto de Atendimento (Contato e Versões Mobile) — Formulários diretos e integração com WhatsApp para montagem ágil de pacotes sob medida."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan classifica este projeto como Tier A: o site publicado em maladeturista.com.br responde HTTP 200 com 157 KB e mantém o layout, os cards de destino e a tipografia do Figma. A mudança de nome para 'Mala de Turismo' decorre de um ajuste de marca do cliente, preservando a autoria original do design."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Tokens do Style Guide e componentes de turismo"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 46 nós (nó 1:16) definiu os elementos da marca concebidos por Kelvin Bezerra: tags coloridas por categoria de viagem (Aventura, Cultural, Luxo, Família), barras de navegação responsivas, menus mobile e tipografia acessível."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra concebeu a identidade visual e o logotipo da Mala de Turista.",
+            "Não é programação em WordPress. O site foi montado no CMS por um desenvolvedor no-code.",
+            "Não é emissão de passagens ou operação turística. Criei o design da interface web, não o sistema de reservas ou logística.",
+            "Não é pesquisa ou discovery. O escopo foi definido por Ramon.",
+            "Não possui métricas de pacotes vendidos. Nenhum dado de receita ou número de viajantes consta nos registros."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O impacto de um portal de viagens bem organizado"
+        },
+        {
+          "type": "prose",
+          "body": "A Mala de Turista exemplifica como a organização visual e a clareza nas informações transformam o interesse de viagem em pedidos reais de orçamento. Ao aliar imagens de destinos com itinerários estruturados e guias de conteúdo, o projeto forneceu uma experiência digital completa para a agência."
+        }
+      ]
+    }
+  }
 }

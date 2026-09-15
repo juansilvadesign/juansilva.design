@@ -41,5 +41,210 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Macedo e Macedo Produções, a media, entertainment, and audiovisual production agency. Designed 13 high-fidelity responsive screens on the primary Design page across desktop and mobile devices (Início - Desktop, About, Contact, Projetos, Blog, Produtos, Compra, Carrinho, Pagamento, and mobile views) combining an audiovisual portfolio showcase with an editorial blog and an integrated merchandise e-commerce purchasing funnel, supported by a 30-node Style Guide in Figma (file key RTrRC2hyqINdbTN93zhCbN).",
+      "context": "Agency employment at Sagitta delivering from March 2023 to April 2023. Juan served as sole website UI designer within the agency team: Kelvin Bezerra created the brand identity and logo, Juan designed the complete agency portfolio, projects library, editorial blog, and e-commerce merchandise checkout in Figma, and an external no-code developer was tasked with WordPress implementation. Scoped by Ramon.",
+      "outcome": "The media production agency subsequently ceased commercial operations and ended all activities. No live production record survives, and the project domain is dead. Never attach a live URL to this record (a same-surname domain was investigated and confirmed to be an unrelated business). No metrics exist. This case study documents creative agency portfolio design, media showcase grids, and hybrid portfolio-commerce architecture.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the media production agency portfolio, audiovisual project showcases, editorial blog, and merchandise checkout flows in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress build (assigned to a no-code developer), or video production. Delivery status: designed and delivered for implementation; the agency ceased operations and the domain is dead. Never attach a live URL to this record."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Hybrid agency architecture: audiovisual portfolio and commerce"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "13",
+              "label": "high-fidelity desktop and mobile layouts designed",
+              "icon": "📐"
+            },
+            {
+              "value": "30",
+              "label": "style guide tokens, social icons, and UI components",
+              "icon": "🎬"
+            },
+            {
+              "value": "3-in-1",
+              "label": "integrated system (Agency Portfolio + Blog + Merchandise Shop)",
+              "icon": "📦"
+            },
+            {
+              "value": "Figma",
+              "label": "audited 5-page design artifact evidencing complete delivery",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Creative and audiovisual production agencies face a unique positioning challenge: their website must serve as an immersive showcase of cinematic work while simultaneously operating as a commercial hub for client inquiries and studio merchandise. Macedo e Macedo Produções required an architecture that balanced media-first portfolio galleries with an integrated commerce funnel for production assets."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Content hierarchy across 13 responsive layouts"
+        },
+        {
+          "type": "prose",
+          "body": "On the primary Design page (node 4:7), I designed an integrated 3-part digital presence:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Audiovisual Project Showcase (Projetos & Início) — Full-bleed video thumbnail grids with category tagging (commercials, music videos, documentaries), director notes, and client attribution credits.",
+            "Studio Identity & Inquiries (About & Contact) — Narrative storytelling outlining production equipment capabilities, post-production suites, and direct RFP quote inquiry forms.",
+            "Editorial Insights (Blog - Desktop & Blog #14) — Clean editorial blog templates for behind-the-scenes filmmaking breakdowns, technical equipment reviews, and industry insights.",
+            "Merchandise & Asset Commerce (Produtos, Compra, Carrinho, Pagamento) — Complete e-commerce checkout flow enabling the studio to sell branded apparel, presets, and digital assets with bag and payment states."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never say this one shipped, and never attach a URL to this record. No production URL was recovered and the original domain is dead. A same-surname domain was checked on 2026-08-21 and positively ruled out as an unrelated business. What is backed is the audited 5-page Figma design artifact."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide and cinematic visual tokens"
+        },
+        {
+          "type": "prose",
+          "body": "The 30-node Style Guide page (node 4:8) defined Kelvin Bezerra's brand assets: dark-mode canvas contrast rules optimized for video playback, custom social media iconography, video carousel navigation arrows, and structured typography hierarchies."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra created the Macedo e Macedo Produções logo and visual assets.",
+            "Not WordPress implementation. Development was assigned to an external no-code developer.",
+            "Not video production or cinematography. I designed the web interface and portfolio layouts, not the films.",
+            "Not a live or verified public website. The agency ceased operations and the domain is dead; this is a design artifact credit.",
+            "Not supported by commercial metrics. No client lead volumes or merchandise sales figures exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The power of media-centric digital portfolios"
+        },
+        {
+          "type": "prose",
+          "body": "Macedo e Macedo Produções demonstrates how creative studios can unify disparate services—video showcases, editorial articles, and commercial merchandise—under a cohesive visual identity. Across 13 detailed screens, the design delivered an expressive, cinematic web presence."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a Macedo e Macedo Produções, produtora audiovisual, agência de mídia e entretenimento. Desenvolvi 13 pranchetas responsivas na página principal de Design abrangendo desktop e mobile (Início - Desktop, About, Contact, Projetos, Blog, Produtos, Compra, Carrinho, Pagamento e versões mobile) combinando portfólio audiovisual de projetos, blog editorial e funil de e-commerce para venda de mercadorias da produtora, com suporte de um Style Guide com 30 nós no Figma (arquivo RTrRC2hyqINdbTN93zhCbN).",
+      "context": "Atuação como funcionário na agência Sagitta de março de 2023 a abril de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou a identidade visual e o logotipo, Juan desenhou todo o portfólio da produtora, a galeria de projetos, o blog e a loja de produtos no Figma, e um desenvolvedor no-code ficou responsável pela implementação em WordPress. Escopo alinhado por Ramon.",
+      "outcome": "A produtora audiovisual encerrou suas atividades comerciais e descontinuou todas as operações. Não restam registros de produção no ar e o domínio original está inativo. Nunca vincule uma URL a este registro (um domínio com sobrenome semelhante foi checado e descartado como empresa não relacionada). Não existem métricas. Este estudo de caso documenta o design de portfólio para produtoras criativas, galerias de mídia e arquitetura híbrida de portfólio e e-commerce.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei o portfólio da produtora audiovisual, a galeria de projetos em vídeo, o blog editorial e as telas de checkout de produtos no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a programação em WordPress (atribuída a um desenvolvedor no-code) nem a produção cinematográfica. Status de entrega: desenhado e entregue para implementação; a produtora encerrou atividades e o domínio está offline. Nunca vincule uma URL a este projeto."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura híbrida para produtoras: portfólio audiovisual e e-commerce"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "13",
+              "label": "layouts de alta fidelidade desenhados para desktop e mobile",
+              "icon": "📐"
+            },
+            {
+              "value": "30",
+              "label": "tokens, ícones sociais e componentes no Style Guide",
+              "icon": "🎬"
+            },
+            {
+              "value": "3 em 1",
+              "label": "sistema integrado (Portfólio de Vídeos + Blog + Loja)",
+              "icon": "📦"
+            },
+            {
+              "value": "Figma",
+              "label": "artefato auditado de 5 páginas comprovando a entrega",
+              "icon": "🎨"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Produtoras de audiovisual e entretenimento precisam de uma presença digital que funcione tanto como uma galeria cinematográfica imersiva para clientes de publicidade quanto como uma plataforma de contato e venda de materiais da marca. A Macedo e Macedo Produções exigia um layout escuro de alto contraste que valorizasse a cor e o dinamismo das produções em vídeo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Hierarquia de conteúdo em 13 pranchetas responsivas"
+        },
+        {
+          "type": "prose",
+          "body": "Na prancheta de Design (nó 4:7), organizei uma experiência digital dividida em três pilares integrados:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Galeria de Projetos Audiovisuais (Projetos e Início) — Grade de vídeos em destaque com filtros por formato (comerciais, clipes musicais, documentários), fichas técnicas e ficha de direção.",
+            "Identidade do Estúdio e Contato (About e Contact) — Narrativa institucional sobre a estrutura técnica de pós-produção, estúdios de gravação e formulário direto para orçamento.",
+            "Blog Editorial de Cinema (Blog - Desktop e Blog #14) — Templates tipográficos para artigos de bastidores, análises de equipamentos e tendências do mercado audiovisual.",
+            "E-commerce de Produtos e Merchandising (Produtos, Compra, Carrinho, Pagamento) — Fluxo completo de compra para venda de itens promocionais da produtora e presets de edição."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca afirme que este projeto foi ao ar e nunca anexe uma URL a este registro. Nenhum domínio de produção foi recuperado e o original está inativo. Um site com sobrenome semelhante foi checado em 21/08/2026 e descartado como empresa diferente. O que é comprovado é o artefato de design auditado de 5 páginas no Figma."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide e tokens visuais cinematográficos"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 30 nós (nó 4:8) padronizou os ativos da marca criados por Kelvin Bezerra: fundo escuro para realce de peças em vídeo, ícones vetoriais de redes sociais, elementos de navegação em carrossel e tipografia moderna sem serifa."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra concebeu o logotipo e a identidade visual da produtora.",
+            "Não é implementação em WordPress. O desenvolvimento foi atribuído a um desenvolvedor no-code.",
+            "Não é captação ou edição de vídeos. Desenvolvi o design da interface web, não os filmes.",
+            "Não é um site público no ar. A produtora encerrou atividades e o domínio está offline; trata-se de um crédito de design de artefato.",
+            "Não possui dados de vendas. Nenhuma métrica comercial consta nos registros do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O valor de portfólios focados em mídia"
+        },
+        {
+          "type": "prose",
+          "body": "A Macedo e Macedo Produções ilustra como estúdios criativos podem reunir produções em vídeo, artigos e comércio em um ecossistema consistente. Ao unir galerias cinematográficas com fluxo de checkout estruturado, o projeto entregou uma identidade web marcante."
+        }
+      ]
+    }
+  }
 }

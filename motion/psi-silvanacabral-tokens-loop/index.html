@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Silvana Cabral — Style Guide & Tokens Loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Cormorant";
+        src: url("assets/fonts/cormorant-garamond-600.woff2") format("woff2");
+        font-weight: 600 700;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #FAF8F2;
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #1A1F26;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* ⛔ Opaque ground layer */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 30%, rgba(20, 103, 94, 0.05) 0%, rgba(199, 100, 40, 0.035) 45%, #FAF8F2 70%, #F4EFEA 100%),
+          #FFFFFF;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      #glow-teal { top: -60px; left: 240px; width: 620px; height: 620px; background: rgba(20, 103, 94, 0.08); }
+      #glow-amber { bottom: -40px; right: 260px; width: 640px; height: 640px; background: rgba(199, 100, 40, 0.06); }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* Separate scaler & track */
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* HUD Header */
+      #narrative-hud {
+        position: absolute;
+        top: 36px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        z-index: 100;
+        pointer-events: none;
+      }
+      .hud-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(20, 103, 94, 0.15);
+        border-radius: 9999px;
+        padding: 6px 20px;
+        box-shadow: 0 4px 20px rgba(20, 103, 94, 0.08);
+      }
+      .hud-phase {
+        font-size: 11px;
+        font-weight: 700;
+        color: #14675E;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .hud-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #C76428;
+      }
+      .hud-title {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1A1F26;
+      }
+      #narrative-caption {
+        font-size: 14px;
+        color: #4A5568;
+        font-weight: 500;
+        text-align: center;
+        max-width: 900px;
+      }
+      #narrative-caption strong {
+        color: #14675E;
+        font-weight: 700;
+      }
+
+      /* Tech Stack Pills */
+      #stack-pills {
+        position: absolute;
+        bottom: 30px;
+        right: 48px;
+        display: flex;
+        gap: 10px;
+        z-index: 90;
+        pointer-events: none;
+      }
+      .stack-pill {
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 6px;
+        padding: 5px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #4A5568;
+        letter-spacing: 0.04em;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+
+      /* Studio Layout */
+      #studio-container {
+        position: absolute;
+        top: 130px;
+        left: 80px;
+        width: 1760px;
+        height: 840px;
+        display: grid;
+        grid-template-columns: 480px 720px 520px;
+        gap: 24px;
+      }
+
+      .token-card {
+        background: #FFFFFF;
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 20px 50px -15px rgba(20, 103, 94, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .card-header-tag {
+        font-size: 11px;
+        font-weight: 700;
+        color: #B95D25;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .card-header-title {
+        font-family: "Cormorant", serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: #14675E;
+        line-height: 1.15;
+      }
+
+      /* Left Card: Typography Hierarchy */
+      #type-card {
+        position: relative;
+      }
+      .type-specimen-box {
+        background: #FAF8F2;
+        border-radius: 12px;
+        padding: 18px;
+        border: 1px solid #EBDCCB;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .type-display-spec {
+        font-family: "Cormorant", serif;
+        font-size: 32px;
+        font-weight: 600;
+        color: #14675E;
+        line-height: 1.2;
+      }
+      .type-meta {
+        font-size: 12px;
+        font-weight: 600;
+        color: #85643A;
+        display: flex;
+        justify-content: space-between;
+      }
+      .type-body-spec {
+        font-family: "Montserrat", sans-serif;
+        font-size: 14px;
+        color: #4A5568;
+        line-height: 1.6;
+      }
+      .code-token {
+        font-family: monospace;
+        font-size: 11.5px;
+        background: #F4EFEA;
+        color: #14675E;
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: 1px solid #EBDCCB;
+      }
+
+      /* Center Card: Warm Sand Tokens Ramp */
+      #ramp-card {
+        display: flex;
+        flex-direction: column;
+      }
+      .ramp-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-top: 6px;
+      }
+      .swatch-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 8px 12px;
+        border-radius: 10px;
+        background: #FAF8F2;
+        border: 1px solid #EBDCCB;
+        transition: transform 0.2s ease;
+      }
+      .swatch-chip {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        flex-shrink: 0;
+      }
+      .swatch-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .swatch-name {
+        font-size: 12px;
+        font-weight: 700;
+        color: #1A1F26;
+      }
+      .swatch-hex {
+        font-family: monospace;
+        font-size: 11px;
+        color: #475569;
+      }
+      .swatch-item.active-highlight {
+        border-color: #14675E;
+        background: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(20, 103, 94, 0.15);
+        transform: scale(1.02);
+      }
+
+      /* Right Card: Components & Emotional Badges */
+      #comp-card {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .comp-section-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #475569;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .btn-preview {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        text-align: center;
+      }
+      .btn-primary {
+        background: #14675E;
+        color: #FFFFFF;
+        box-shadow: 0 4px 14px rgba(20, 103, 94, 0.25);
+        border: none;
+      }
+      .btn-secondary {
+        background: transparent;
+        color: #14675E;
+        border: 1px solid #14675E;
+      }
+      .badge-cluster {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .feel-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #FAF8F2;
+        border: 1px solid #EBDCCB;
+        border-radius: 9999px;
+        padding: 6px 14px;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: #523A24;
+      }
+      .wa-callout {
+        background: rgba(37, 211, 102, 0.08);
+        border: 1px solid rgba(37, 211, 102, 0.25);
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .wa-badge {
+        font-size: 11px;
+        font-weight: 700;
+        color: #075E54;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .wa-msg {
+        font-size: 12px;
+        color: #1F2937;
+        font-style: italic;
+      }
+
+      /* SVG Cursor */
+      #cursor {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        z-index: 200;
+        pointer-events: none;
+        opacity: 0;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-fps="60" data-width="1920" data-height="1080">
+      <div id="ground"></div>
+      <div class="ambient-glow" id="glow-teal" data-layout-allow-overflow></div>
+      <div class="ambient-glow" id="glow-amber" data-layout-allow-overflow></div>
+
+      <div id="stage">
+        <div id="camera-scaler" data-layout-allow-overflow>
+          <div id="camera-track">
+
+            <div id="studio-container" data-layout-allow-overflow>
+
+              <!-- Left Card: Typography Hierarchy -->
+              <div class="token-card" id="type-card" data-layout-allow-overflow>
+                <div class="card-header-tag">Tipografia Editorial</div>
+                <div class="card-header-title">Cormorant & Montserrat</div>
+
+                <div class="type-specimen-box" id="spec-display">
+                  <div class="type-meta">
+                    <span>Display Serif · Cormorant 600</span>
+                    <span class="code-token">32px / 1.2</span>
+                  </div>
+                  <div class="type-display-spec">Acolhimento clínico e autoridade técnica.</div>
+                </div>
+
+                <div class="type-specimen-box" id="spec-body">
+                  <div class="type-meta">
+                    <span>Body UI · Montserrat 400</span>
+                    <span class="code-token">14px / 1.6</span>
+                  </div>
+                  <div class="type-body-spec">
+                    Estrutura de leitura acessível para pacientes em momentos de vulnerabilidade emocional.
+                  </div>
+                </div>
+
+                <div style="margin-top:auto; display:flex; flex-direction:column; gap:6px;">
+                  <span class="comp-section-title">Design Tokens em Código</span>
+                  <div class="code-token" style="padding:8px 12px; font-size:11px;">
+                    --font-display: 'Cormorant Garamond', serif;<br>
+                    --font-body: 'Montserrat', sans-serif;
+                  </div>
+                </div>
+              </div>
+
+              <!-- Center Card: Warm Sand Tokens Ramp -->
+              <div class="token-card" id="ramp-card">
+                <div class="card-header-tag">30 Tokens Autorais</div>
+                <div class="card-header-title">Rampa de Areia Quente (50–950)</div>
+
+                <div class="ramp-grid" id="swatch-grid">
+                  <div class="swatch-item" id="sw-50">
+                    <div class="swatch-chip" style="background:#FAF8F2;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 50</span>
+                      <span class="swatch-hex">#FAF8F2 · Background</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-100">
+                    <div class="swatch-chip" style="background:#F5EFE6;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 100</span>
+                      <span class="swatch-hex">#F5EFE6 · Subtle</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-200">
+                    <div class="swatch-chip" style="background:#EBDCCB;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 200</span>
+                      <span class="swatch-hex">#EBDCCB · Border</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-300">
+                    <div class="swatch-chip" style="background:#DEC3A9;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 300</span>
+                      <span class="swatch-hex">#DEC3A9 · Muted</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-400">
+                    <div class="swatch-chip" style="background:#CFA584;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 400</span>
+                      <span class="swatch-hex">#CFA584 · Accent Soft</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-500">
+                    <div class="swatch-chip" style="background:#BA9255;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 500</span>
+                      <span class="swatch-hex">#BA9255 · Bronze</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-600">
+                    <div class="swatch-chip" style="background:#A57D47;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 600</span>
+                      <span class="swatch-hex">#A57D47 · Earth Mid</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-700">
+                    <div class="swatch-chip" style="background:#85643A;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 700</span>
+                      <span class="swatch-hex">#85643A · Earth Dark</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-800">
+                    <div class="swatch-chip" style="background:#6A4E30;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 800</span>
+                      <span class="swatch-hex">#6A4E30 · Shadow Soft</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-950">
+                    <div class="swatch-chip" style="background:#322218;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Sand 950</span>
+                      <span class="swatch-hex">#322218 · Ink Strong</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-brand">
+                    <div class="swatch-chip" style="background:#14675E;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Brand Teal</span>
+                      <span class="swatch-hex">#14675E · Primary</span>
+                    </div>
+                  </div>
+                  <div class="swatch-item" id="sw-accent">
+                    <div class="swatch-chip" style="background:#C76428;"></div>
+                    <div class="swatch-info">
+                      <span class="swatch-name">Terracotta</span>
+                      <span class="swatch-hex">#C76428 · Focus / CTA</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Card: Components & Emotional Badges -->
+              <div class="token-card" id="comp-card">
+                <div class="card-header-tag">Componentes de Interface</div>
+                <div class="card-header-title">Botões & Badges Emocionais</div>
+
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <span class="comp-section-title">Ações Primárias & Secundárias</span>
+                  <div class="btn-preview btn-primary" id="btn-demo">Agendar Primeira Consulta</div>
+                  <div class="btn-preview btn-secondary">Conhecer Abordagem TCC</div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+                  <span class="comp-section-title">Identificação Imediata (7 Sentimentos)</span>
+                  <div class="badge-cluster">
+                    <span class="feel-badge" id="badge-1">🌧️ Ansiedade</span>
+                    <span class="feel-badge" id="badge-2">💔 Luto</span>
+                    <span class="feel-badge" id="badge-3">😵‍💫 Sobrecarga</span>
+                    <span class="feel-badge" id="badge-4">🧸 Acolhimento</span>
+                    <span class="feel-badge" id="badge-5">👵 Envelhecimento</span>
+                  </div>
+                </div>
+
+                <div class="wa-callout" style="margin-top:auto;">
+                  <span class="wa-badge">Deep Link de Agendamento</span>
+                  <span class="wa-msg">"Olá Silvana, me identifiquei com o site sobre ansiedade..."</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- SVG Cursor -->
+            <svg id="cursor" viewBox="0 0 24 24" fill="none">
+              <path d="M5.5 3.2L18.5 13.5L12.5 14.5L16 20.8L13.2 22.2L9.8 16L5.5 19.8V3.2Z" fill="#14675E" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Persistent HUD Header -->
+      <div id="narrative-hud">
+        <div class="hud-pill">
+          <span class="hud-phase">DESIGN SYSTEM & TOKENS</span>
+          <span class="hud-dot"></span>
+          <span class="hud-title">Silvana Cabral · Sistema de Cores & Tipografia</span>
+        </div>
+        <div id="narrative-caption">30 tokens autorais: rampa de areia quente, Cormorant Garamond editorial e <strong>mecanismo de conversão acolhedor</strong>.</div>
+      </div>
+
+      <!-- Tech Stack Pills -->
+      <div id="stack-pills">
+        <div class="stack-pill">FIGMA TOKENS</div>
+        <div class="stack-pill">TAILWIND CSS</div>
+        <div class="stack-pill">CORMORANT SERIF</div>
+        <div class="stack-pill">MONTSERRAT</div>
+      </div>
+    </div>
+
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      const scaler   = document.querySelector("#camera-scaler");
+      const track    = document.querySelector("#camera-track");
+      const cursor   = document.querySelector("#cursor");
+      const btnDemo  = document.querySelector("#btn-demo");
+      const swBrand  = document.querySelector("#sw-brand");
+      const swAccent = document.querySelector("#sw-accent");
+      const sw50     = document.querySelector("#sw-50");
+      const badge1   = document.querySelector("#badge-1");
+      const badge2   = document.querySelector("#badge-2");
+      const typeCard = document.querySelector("#type-card");
+      const compCard = document.querySelector("#comp-card");
+      const rampCard = document.querySelector("#ramp-card");
+
+      // =======================================================================
+      // TIMELINE (0.0s – 12.0s) · Perfectly Seamless 1080p Loop
+      // =======================================================================
+
+      // 0.0s - 2.5s: Overview settle & gentle breathing
+      tl.to(scaler, { scale: 1.015, duration: 2.5, ease: "sine.inOut" }, 0.5);
+
+      // 2.5s - 5.5s: Push camera towards Typography Card
+      tl.to(track,  { x: 120, y: -20, duration: 2.0, ease: "power2.inOut" }, 2.5);
+      tl.to(scaler, { scale: 1.05, duration: 2.0, ease: "power2.inOut" }, 2.5);
+      tl.to(typeCard, { boxShadow: "0 28px 70px -15px rgba(20, 103, 94, 0.18), 0 0 0 2px rgba(20, 103, 94, 0.2)", duration: 1.0, ease: "power2.out" }, 3.5);
+
+      // 5.5s - 8.5s: Pan over to Warm Sand Ramp and Components
+      tl.to(track,  { x: -140, y: -10, duration: 2.2, ease: "power2.inOut" }, 5.5);
+      tl.to(typeCard, { boxShadow: "0 20px 50px -15px rgba(20, 103, 94, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05)", duration: 0.8 }, 5.6);
+      
+      // Cursor enters and hovers primary button & emotional badges
+      tl.set(cursor, { opacity: 1, x: 1400, y: 700 }, 6.2);
+      tl.to(cursor,  { x: 1550, y: 380, duration: 1.2, ease: "power2.out" }, 6.3);
+      tl.to(btnDemo, { scale: 1.04, boxShadow: "0 8px 24px rgba(20, 103, 94, 0.4)", duration: 0.3 }, 7.4);
+      tl.to(cursor,  { scale: 0.9, duration: 0.12, yoyo: true, repeat: 1 }, 7.6);
+      tl.to(btnDemo, { scale: 1.0, boxShadow: "0 4px 14px rgba(20, 103, 94, 0.25)", duration: 0.4 }, 8.0);
+
+      tl.to(cursor,  { x: 1460, y: 520, duration: 0.8, ease: "power2.out" }, 8.2);
+      tl.to(badge1,  { scale: 1.08, borderColor: "#14675E", backgroundColor: "#FFFFFF", duration: 0.3 }, 8.7);
+      tl.to(badge1,  { scale: 1.0, borderColor: "#EBDCCB", backgroundColor: "#FAF8F2", duration: 0.4 }, 9.3);
+
+      // 9.0s - 12.0s: Ease smoothly back to exact initial frame-0 state
+      tl.to(cursor,  { opacity: 0, duration: 0.5 }, 9.5);
+      tl.to(track,   { x: 0, y: 0, duration: 2.0, ease: "power2.inOut" }, 9.5);
+      tl.to(scaler,  { scale: 1.0, duration: 2.0, ease: "power2.inOut" }, 9.5);
+
+      // Hard-set all animated properties to frame-0 values by 11.5s
+      tl.set(scaler,   { scale: 1.0, clearProps: "transform" }, 11.5);
+      tl.set(track,    { x: 0, y: 0, clearProps: "transform" }, 11.5);
+      tl.set(cursor,   { opacity: 0, x: 1400, y: 700, scale: 1.0, clearProps: "all" }, 11.5);
+      tl.set(btnDemo,  { scale: 1.0, boxShadow: "0 4px 14px rgba(20, 103, 94, 0.25)", clearProps: "all" }, 11.5);
+      tl.set(badge1,   { scale: 1.0, borderColor: "#EBDCCB", backgroundColor: "#FAF8F2", clearProps: "all" }, 11.5);
+      tl.set(typeCard, { boxShadow: "0 20px 50px -15px rgba(20, 103, 94, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05)", clearProps: "boxShadow" }, 11.5);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #F8FAF9;
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #181D27;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+
+      /* Clean high-key clinical ground */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 35%, rgba(53, 180, 139, 0.08) 0%, #F8FAF9 70%, #EFF4F2 100%);
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      #glow-1 {
+        top: 40px;
+        left: 260px;
+        width: 550px;
+        height: 550px;
+        background: rgba(53, 180, 139, 0.08);
+      }
+      #glow-2 {
+        bottom: 60px;
+        right: 280px;
+        width: 600px;
+        height: 600px;
+        background: rgba(16, 139, 106, 0.06);
+      }
+
+      #grid-overlay {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(16, 139, 106, 0.12) 1px, transparent 1px);
+        background-size: 32px 32px;
+        opacity: 0.45;
+        pointer-events: none;
+      }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* --- Top HUD Header Bar --- */
+      #header-bar {
+        position: absolute;
+        top: 36px;
+        left: 64px;
+        right: 64px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 100;
+      }
+
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .brand-logo-badge {
+        height: 44px;
+        padding: 6px 16px;
+        background: #FFFFFF;
+        border: 1px solid rgba(209, 213, 219, 0.8);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(16, 24, 40, 0.04);
+      }
+
+      .brand-logo-badge img {
+        height: 28px;
+        width: auto;
+        object-fit: contain;
+      }
+
+      .brand-title-wrap {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand-title {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #181D27;
+        text-transform: uppercase;
+      }
+
+      .brand-subtitle {
+        font-size: 11px;
+        font-weight: 500;
+        color: #535862;
+        letter-spacing: 0.02em;
+      }
+
+      .hud-badges {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .hud-pill {
+        height: 38px;
+        padding: 0 16px;
+        background: #FFFFFF;
+        border: 1px solid rgba(209, 213, 219, 0.8);
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 2px 8px rgba(16, 24, 40, 0.04);
+        font-size: 12px;
+        font-weight: 600;
+        color: #181D27;
+      }
+
+      .hud-pill.highlight {
+        background: #EDFCF6;
+        border-color: #A6F4C5;
+        color: #087443;
+      }
+
+      .pulse-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #108B6A;
+        box-shadow: 0 0 0 3px rgba(16, 139, 106, 0.2);
+      }
+
+      /* --- Bottom Floating Callout Pill --- */
+      #bottom-callout {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        height: 48px;
+        max-width: 1080px;
+        padding: 0 26px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(209, 213, 219, 0.9);
+        border-radius: 999px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 16px 36px -8px rgba(16, 24, 40, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.03);
+        z-index: 100;
+      }
+
+      #callout-icon {
+        font-size: 16px;
+      }
+
+      #callout-text {
+        font-size: 13px;
+        font-weight: 500;
+        color: #344054;
+      }
+
+      #callout-text strong {
+        color: #0F8666;
+        font-weight: 600;
+      }
+
+      /* --- Desktop Window Chassis (MacBook Pro Window Style) --- */
+      #win-desktop {
+        position: absolute;
+        width: 1480px;
+        height: 850px;
+        left: 220px;
+        top: 114px;
+        background: #FFFFFF;
+        border-radius: 16px;
+        box-shadow: 0 32px 80px -20px rgba(16, 24, 40, 0.18), 0 0 0 1px rgba(209, 213, 219, 0.8);
+        overflow: hidden;
+        z-index: 20;
+      }
+
+      .browser-bar {
+        height: 46px;
+        background: #F8F9FA;
+        border-bottom: 1px solid #E4E7EC;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 18px;
+      }
+
+      .traffic-lights {
+        display: flex;
+        gap: 8px;
+      }
+      .light {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+      .light.red { background: #FF5F56; border: 1px solid #E0443E; }
+      .light.yellow { background: #FFBD2E; border: 1px solid #DEA123; }
+      .light.green { background: #27C93F; border: 1px solid #1AAB29; }
+
+      .url-bar {
+        flex: 1;
+        max-width: 580px;
+        margin: 0 auto;
+        height: 30px;
+        background: #FFFFFF;
+        border-radius: 8px;
+        border: 1px solid #D1D5DB;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        color: #535862;
+      }
+
+      .url-bar svg {
+        width: 13px;
+        height: 13px;
+        fill: #108B6A;
+      }
+
+      .desktop-screen-content {
+        position: relative;
+        width: 100%;
+        height: calc(850px - 46px);
+        overflow: hidden;
+        background: #F8FAF9;
+      }
+
+      .desktop-layer-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .desktop-layer-wrap img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1920" data-height="1080">
+      <div id="stage">
+        <div id="ground"></div>
+        <div class="ambient-glow" id="glow-1" data-layout-allow-overflow=""></div>
+        <div class="ambient-glow" id="glow-2" data-layout-allow-overflow=""></div>
+        <div id="grid-overlay"></div>
+
+        <div id="camera-scaler">
+          <div id="camera-track">
+
+            <!-- Top HUD Header Bar -->
+            <header id="header-bar" data-layout-allow-overlap="">
+              <div class="brand-lockup">
+                <div class="brand-logo-badge">
+                  <img src="assets/celus-logo.png" alt="Celus Logo">
+                </div>
+                <div class="brand-title-wrap">
+                  <span class="brand-title">CELUS · ADMIN BACK OFFICE</span>
+                  <span class="brand-subtitle">Governança Clínica e Gestão de Conhecimento CMS</span>
+                </div>
+              </div>
+              <div class="hud-badges">
+                <div class="hud-pill">
+                  <span>8 MÓDULOS DE CMS</span>
+                </div>
+                <div class="hud-pill highlight" id="module-pill">
+                  <div class="pulse-dot"></div>
+                  <span id="module-pill-text">PAINEL GERAL · TELEMETRIA</span>
+                </div>
+                <div class="hud-pill">
+                  <span>PUBLICAÇÃO AUTÔNOMA</span>
+                </div>
+              </div>
+            </header>
+
+            <!-- Centered Desktop Browser Window -->
+            <main id="win-desktop" data-layout-allow-overlap="">
+              <div class="browser-bar">
+                <div class="traffic-lights">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+                <div class="url-bar">
+                  <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                  <span id="url-text">admin.salus-celus.com.br/dashboard</span>
+                </div>
+              </div>
+              <div class="desktop-screen-content" data-layout-allow-overflow="">
+                <div class="desktop-layer-wrap" id="layer-admin-dashboard" data-layout-allow-overflow="">
+                  <img id="img-admin-dashboard" src="assets/admin-dashboard.png" alt="Admin Dashboard">
+                </div>
+                <div class="desktop-layer-wrap" id="layer-admin-protocolus" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-admin-protocolus" src="assets/admin-protocolus-cms.png" alt="Admin ProtocolUS CMS">
+                </div>
+                <div class="desktop-layer-wrap" id="layer-admin-laudus" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-admin-laudus" src="assets/admin-laudus-cms.png" alt="Admin LaudUS CMS">
+                </div>
+                <div class="desktop-layer-wrap" id="layer-admin-dashboard-end" style="display: none;" data-layout-allow-overflow="">
+                  <img id="img-admin-dashboard-end" src="assets/admin-dashboard-end.png" alt="Admin Dashboard End Loop">
+                </div>
+              </div>
+            </main>
+
+            <!-- Bottom Floating Callout Pill -->
+            <footer id="bottom-callout" data-layout-allow-overlap="">
+              <span id="callout-icon">📊</span>
+              <span id="callout-text">Painel Administrativo: <strong>Visão integrada de usuários clínicos, acessos e telemetria de protocolos</strong></span>
+            </footer>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Immediate GSAP setups outside timeline
+      gsap.set("#bottom-callout", { xPercent: -50 });
+
+      // DOM Elements
+      const scaler = document.getElementById("camera-scaler");
+      const track = document.getElementById("camera-track");
+      const winDesktop = document.getElementById("win-desktop");
+
+      const layerAdminDashboard = document.getElementById("layer-admin-dashboard");
+      const layerAdminProtocolus = document.getElementById("layer-admin-protocolus");
+      const layerAdminLaudus = document.getElementById("layer-admin-laudus");
+      const layerAdminDashboardEnd = document.getElementById("layer-admin-dashboard-end");
+
+      const imgAdminDashboard = document.getElementById("img-admin-dashboard");
+      const imgAdminProtocolus = document.getElementById("img-admin-protocolus");
+      const imgAdminLaudus = document.getElementById("img-admin-laudus");
+      const imgAdminDashboardEnd = document.getElementById("img-admin-dashboard-end");
+
+      const modulePillText = document.getElementById("module-pill-text");
+      const urlText = document.getElementById("url-text");
+      const calloutIcon = document.getElementById("callout-icon");
+      const calloutText = document.getElementById("callout-text");
+
+      // GSAP Master Timeline (12.0s, 60fps)
+      const tl = gsap.timeline({ id: "main", paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines.main = tl;
+
+      // =========================================================================
+      // FRAME 0 SETUP (t=0.0s)
+      // =========================================================================
+      tl.set(scaler, { scale: 1.0, x: 0, y: 0 }, 0.0);
+      tl.set(track, { x: 0, y: 0 }, 0.0);
+      tl.set(winDesktop, { opacity: 1.0, scale: 1.0, x: 0, y: 0 }, 0.0);
+
+      tl.set(layerAdminDashboard, { display: "block" }, 0.0);
+      tl.set(imgAdminDashboard, { y: 0 }, 0.0);
+
+      tl.set(modulePillText, { textContent: "PAINEL GERAL · TELEMETRIA" }, 0.0);
+      tl.set(urlText, { textContent: "admin.salus-celus.com.br/dashboard" }, 0.0);
+      tl.set(calloutIcon, { textContent: "📊" }, 0.0);
+      tl.set(calloutText, { innerHTML: "Painel Administrativo: <strong>Visão integrada de usuários clínicos, acessos e telemetria de protocolos</strong>" }, 0.0);
+
+      // S1 Motion: Subtle pan down on metrics cards (t=0.5s to 2.8s)
+      tl.to(imgAdminDashboard, { y: -180, duration: 2.3, ease: "power1.inOut" }, 0.6);
+
+      // =========================================================================
+      // SCENE 2: PROTOCOLUS CMS EDITOR (t=3.0s to 7.0s)
+      // =========================================================================
+      tl.set(layerAdminDashboard, { display: "none" }, 3.0);
+      tl.set(layerAdminProtocolus, { display: "block" }, 3.0);
+      tl.set(imgAdminProtocolus, { y: 0 }, 3.0);
+      tl.set(modulePillText, { textContent: "CMS PROTOCOLUS · DIRETRIZES" }, 3.0);
+      tl.set(urlText, { textContent: "admin.salus-celus.com.br/protocolus/transplante-renal" }, 3.0);
+      tl.set(calloutIcon, { textContent: "📝" }, 3.0);
+      tl.set(calloutText, { innerHTML: "ProtocolUS CMS: <strong>Atualização em tempo real de diretrizes clínicas e condutas diagnósticas</strong>" }, 3.0);
+      tl.fromTo(winDesktop, { scale: 0.99 }, { scale: 1.02, duration: 0.4, ease: "back.out(1.3)" }, 3.0);
+
+      // Pan slightly inside ProtocolUS editor
+      tl.to(imgAdminProtocolus, { y: -140, duration: 2.8, ease: "power1.inOut" }, 3.8);
+
+      // =========================================================================
+      // SCENE 3: LAUDUS REPORTING TEMPLATES CMS (t=7.0s to 10.5s)
+      // =========================================================================
+      tl.set(layerAdminProtocolus, { display: "none" }, 7.0);
+      tl.set(layerAdminLaudus, { display: "block" }, 7.0);
+      tl.set(imgAdminLaudus, { y: 0 }, 7.0);
+      tl.set(modulePillText, { textContent: "CMS LAUDUS · TEMPLATES" }, 7.0);
+      tl.set(urlText, { textContent: "admin.salus-celus.com.br/laudus/templates" }, 7.0);
+      tl.set(calloutIcon, { textContent: "📋" }, 7.0);
+      tl.set(calloutText, { innerHTML: "LaudUS CMS: <strong>Gestão autônoma de templates de laudos padronizados sem ciclo de deploy</strong>" }, 7.0);
+      tl.fromTo(winDesktop, { scale: 1.01 }, { scale: 1.03, duration: 0.35, ease: "power1.out" }, 7.0);
+
+      // Pan slightly inside LaudUS table
+      tl.to(imgAdminLaudus, { y: -120, duration: 2.5, ease: "power1.inOut" }, 7.6);
+
+      // =========================================================================
+      // SEAMLESS RESOLUTION BACK TO ADMIN DASHBOARD (t=10.5s to 12.0s)
+      // =========================================================================
+      tl.to(winDesktop, { scale: 1.0, duration: 0.6, ease: "power2.inOut" }, 10.5);
+
+      // Switch to dashboard end layer and reset HUD to Frame 0 state at 11.3s
+      tl.set(layerAdminLaudus, { display: "none" }, 11.3);
+      tl.set(layerAdminDashboardEnd, { display: "block" }, 11.3);
+      tl.set(imgAdminDashboardEnd, { y: 0 }, 11.3);
+
+      tl.set(modulePillText, { textContent: "PAINEL GERAL · TELEMETRIA" }, 11.3);
+      tl.set(urlText, { textContent: "admin.salus-celus.com.br/dashboard" }, 11.3);
+      tl.set(calloutIcon, { textContent: "📊" }, 11.3);
+      tl.set(calloutText, { innerHTML: "Painel Administrativo: <strong>Visão integrada de usuários clínicos, acessos e telemetria de protocolos</strong>" }, 11.3);
+
+      // Completely settled at Frame 0 state from 11.3s to 12.0s
+      tl.set(winDesktop, { scale: 1.0, x: 0, y: 0, opacity: 1.0 }, 11.3);
+      tl.set(scaler, { scale: 1.0, x: 0, y: 0 }, 11.3);
+      tl.set(track, { x: 0, y: 0 }, 11.3);
+    </script>
+  </body>
+</html>

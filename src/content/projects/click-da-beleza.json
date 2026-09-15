@@ -44,5 +44,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Click da Beleza, a high-volume cosmetics, beauty, and personal care online retail store transitioning from marketplace operations (2,500+ monthly sales milestone) to a standalone Direct-to-Consumer (D2C) brand. Designed 11 responsive screens on the primary Design page across desktop and mobile devices (Página Inicial, Produtos, Compra, Carrinho, Pagamento, Checkout - Mobile, and mobile views) supported by a 27-node Style Guide specifying e-commerce utility components (NavBar, SearchBox, TopBanner, Sacola bag, Favoritos wishlist, Ajuda chat) in Figma (file key tQvGNS1f5VAefdMxHHKtZe).",
+      "context": "Agency employment at Sagitta delivering from September 13, 2023 to September 26, 2023. Juan served as sole website UI designer within the agency team: Kelvin Bezerra created the brand identity and logo, Juan designed the complete D2C cosmetics e-commerce storefront and purchasing funnel in Figma, and an external no-code developer implemented and published the store on WordPress using WooCommerce and Elementor. Scoped by Ramon.",
+      "outcome": "The e-commerce storefront was implemented and published to production. The website serving clickdabeleza.com.br today was later redesigned and rebuilt from scratch by another company, with only scattered original assets surviving. Historical delivery is verified via an era Wayback Machine archive (2024-09-29, 175 KB on Hello Elementor with 311 Elementor references) whose page hierarchy and 'Ofertas do Dia' catalog match the audited Figma file. No commercial conversion metrics exist. This case study documents marketplace-to-D2C e-commerce migration UX, product discovery, and promotional mechanics.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the D2C cosmetics storefront, catalog browsing, promotional banners, wishlist, shopping bag, and checkout flows in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress/WooCommerce implementation (handled by a no-code developer), or store operations. Critical rule: the 2,500+ monthly orders figure is the client's pre-existing marketplace volume from the briefing, NOT a result of this design. Delivery status: shipped in 2023; the live domain was later rebuilt from scratch by another firm."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Marketplace-to-D2C migration UX: establishing brand independence"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "responsive commerce screens on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "27",
+              "label": "e-commerce utility components and design tokens in Style Guide",
+              "icon": "💄"
+            },
+            {
+              "value": "175 KB",
+              "label": "verified historical Elementor build on Wayback Machine",
+              "icon": "🏛️"
+            },
+            {
+              "value": "13 days",
+              "label": "from design kickoff to final implementation handoff",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Sellers operating exclusively on major marketplaces (Mercado Livre, Shopee, Amazon) face high commission take-rates and zero customer retention. Click da Beleza had reached substantial commercial traction—over 2,500 monthly marketplace orders—and sought to transition into a standalone D2C brand. The challenge was building an e-commerce storefront that provided the same sense of purchasing security, delivery reliability, and instant customer support that shoppers expect from institutional marketplaces."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Cosmetics catalog and purchasing funnel across 11 screens"
+        },
+        {
+          "type": "prose",
+          "body": "On the primary Design page (node 1:15), I designed the full retail shopping experience, benchmarking market leaders like Beleza na Web:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Commercial Storefront (Página Inicial) — Promotional header ticker (TopBanner), daily flash sales ('Ofertas do Dia'), category highlights (hair care, skincare, perfumes, makeup), and customer trust badges.",
+            "Product Catalog Discovery (Produtos & Produtos - Mobile) — Structured grid with brand filters, price brackets, hair/skin type selectors, and instant wishlist heart toggles (Favoritos).",
+            "Product Detail View (Compra & Compra - Mobile) — Clear presentation of product volume, formula benefits, customer reviews, and integrated freight estimator.",
+            "Frictionless Bag & Checkout (Carrinho, Pagamento & Checkout - Mobile) — Slide-out shopping bag (Sacola), transparent installment payment options (Pix, credit card), and mobile-optimized one-step checkout.",
+            "Utility Header Suite — Engineered high-utility navigation bar containing search bar (SearchBox), account login, wishlist counter, and instant customer service widget (Ajuda)."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "The 2,500+ monthly orders figure is the client's pre-existing marketplace volume from the briefing notes on the moodboard page: never present it as a result of this design, and never as a metric Juan moved. And never call the Beleza na Web screens competitive research: they were visual benchmark references kept in the moodboard."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Style guide tokens and retail micro-interactions"
+        },
+        {
+          "type": "prose",
+          "body": "The 27-node Style Guide page (node 1:16) standardized Kelvin Bezerra's brand identity: clean feminine pink and gold accent palettes, search bar component states, promo banner typography, cart bag indicators, and customer support triggers."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra created the Click da Beleza logo and brand styling.",
+            "Not WordPress or WooCommerce development. Implementation was handled by an external no-code developer.",
+            "Not the current live website. The site serving clickdabeleza.com.br today was designed and built from scratch by another firm; historical shipping is proven via the 2024-09-29 Wayback capture.",
+            "Not responsible for the 2,500+ monthly orders. That was the client's pre-existing marketplace baseline before hiring the agency.",
+            "Not supported by D2C conversion metrics. No revenue or order volume metrics were retained."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of brand independence in e-commerce"
+        },
+        {
+          "type": "prose",
+          "body": "Click da Beleza illustrates the UX requirements for migrating marketplace merchants to standalone D2C operations. By establishing institutional credibility, prominent product search, and streamlined checkout, the design provided a viable foundation for proprietary customer acquisition."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a Click da Beleza, loja virtual de cosméticos, perfumaria e cuidados pessoais em transição de operações de marketplace (marco de mais de 2.500 vendas mensais) para uma marca própria Direct-to-Consumer (D2C). Desenvolvi 11 pranchetas responsivas na página principal de Design abrangendo desktop e mobile (Página Inicial, Produtos, Compra, Carrinho, Pagamento, Checkout - Mobile e versões mobile), com suporte de um Style Guide com 27 nós estruturando componentes utilitários de e-commerce (NavBar, SearchBox, TopBanner, Sacola, Favoritos, Ajuda) no Figma (arquivo tQvGNS1f5VAefdMxHHKtZe).",
+      "context": "Atuação como funcionário na agência Sagitta de 13 de setembro de 2023 a 26 de setembro de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou a identidade visual e o logotipo, Juan desenhou a loja virtual D2C e o funil de compra no Figma, e um desenvolvedor no-code implementou e publicou o site no WordPress com WooCommerce e Elementor. Escopo conduzido por Ramon.",
+      "outcome": "A loja virtual foi implementada e publicada em produção. O site que atende ao domínio clickdabeleza.com.br hoje foi posteriormente redesenhado e construído do zero por outra empresa, restando apenas elementos dispersos do trabalho original. A publicação histórica é confirmada via snapshot do Wayback Machine (29/09/2024, 175 KB em Hello Elementor com 311 referências e a seção 'Ofertas do Dia'), cuja ordem das páginas corresponde ao Figma auditado. Não existem métricas de conversão. Este estudo de caso documenta a transição de marketplace para D2C, busca de produtos e mecânica promocional.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei a loja virtual D2C, a navegação do catálogo de cosméticos, banners promocionais, sacola e checkout no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação em WordPress/WooCommerce (feita por um desenvolvedor no-code) nem a operação de vendas. Regra inegociável: o número de mais de 2.500 vendas mensais era o volume pré-existente do cliente em marketplaces, e NÃO resultado deste design. Status de entrega: publicado em 2023; o site atual no ar é um rebuild feito por terceiros."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Transição de marketplace para canal próprio D2C: construindo autoridade de marca"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "11",
+              "label": "pranchetas de e-commerce na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "27",
+              "label": "componentes utilitários de varejo no Style Guide",
+              "icon": "💄"
+            },
+            {
+              "value": "175 KB",
+              "label": "de build histórico em Elementor comprovado no Wayback",
+              "icon": "🏛️"
+            },
+            {
+              "value": "13 dias",
+              "label": "do início do layout à entrega para implementação",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Lojistas que dependem exclusivamente de marketplaces (Mercado Livre, Shopee, Amazon) sofrem com taxas de comissão elevadas e ausência de retenção de clientes. A Click da Beleza já possuía expressivo volume de vendas — mais de 2.500 pedidos mensais nas plataformas — e buscava consolidar sua marca em uma loja própria. O desafio era desenhar um e-commerce que transmitisse a mesma segurança, clareza no frete e suporte ágil que o consumidor encontra nos grandes marketplaces."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Catálogo de beleza e funil de compra em 11 pranchetas"
+        },
+        {
+          "type": "prose",
+          "body": "Na prancheta de Design (nó 1:15), estruturei a jornada de compra tomando como referência grandes e-commerces de cosméticos do mercado, como a Beleza na Web:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Página Inicial Comercial (Página Inicial) — Barra de avisos promocionais (TopBanner), vitrine de promoções relâmpago ('Ofertas do Dia'), navegação por categorias (cabelos, skincare, perfumes, maquiagem) e selos de confiança.",
+            "Navegação do Catálogo (Produtos e Produtos - Mobile) — Listagem de produtos com filtros por marca, faixa de preço, tipo de cabelo/pele e botão de favoritos em formato de coração.",
+            "Página de Produto (Compra e Compra - Mobile) — Detalhamento da volumetria, modo de uso, avaliações de clientes e simulação de prazo de entrega por CEP.",
+            "Sacola e Checkout (Carrinho, Pagamento e Checkout - Mobile) — Gaveta lateral de sacola, opções de pagamento claras (Pix e cartão parcelado) e finalização de compra em poucas etapas.",
+            "Barra de Navegação Utilitária — Cabeçalho com caixa de busca inteligente (SearchBox), acesso à conta, contador de favoritos e canal de suporte (Ajuda)."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O volume de mais de 2.500 vendas mensais era a métrica prévia do cliente em marketplaces registrada no moodboard: nunca apresente esse número como resultado deste design. E nunca chame os prints da Beleza na Web de pesquisa de usuário: eram apenas referências visuais mantidas no moodboard."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Tokens do Style Guide e micro-interações de varejo"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 27 nós (nó 1:16) padronizou os ativos da marca concebidos por Kelvin Bezerra: tons suaves de rosa e dourado, estados da barra de busca, tipografia promocional, marcadores de quantidade na sacola e atalhos de atendimento."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra criou o logotipo e a identidade da Click da Beleza.",
+            "Não é programação em WordPress ou WooCommerce. A implementação foi feita por um desenvolvedor no-code.",
+            "Não é o site atual no ar. O domínio clickdabeleza.com.br foi reconstruído do zero por outra empresa; a entrega original é comprovada pelo snapshot histórico de 2024.",
+            "Não é responsável pelo volume de 2.500 vendas mensais. Esse era o marco prévio do cliente em marketplaces antes da contratação da agência.",
+            "Não possui métricas de faturamento D2C. Nenhum dado de receita ou pedidos diretos foi retido no registro do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O valor da consolidação de marcas no comércio digital"
+        },
+        {
+          "type": "prose",
+          "body": "A Click da Beleza evidencia como o design de interface estrutura a transição de vendedores de marketplace para lojas próprias. Ao priorizar credibilidade institucional, busca destacada e checkout ágil, o projeto estabeleceu um canal D2C sólido para a expansão da marca."
+        }
+      ]
+    }
+  }
 }

@@ -44,5 +44,224 @@
     "storeListing": true,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Two-sided neighbourhood professional-referral mobile marketplace, designed end to end across three full versions (roughly 193 screens, 4 wired prototype flows, and 21 error/success states) plus a dedicated MVP handoff file. Successfully launched on Google Play in two production builds: the Morador resident app (com.mycompany.indicaz) and Profissional service provider app (com.mycompany.indicazprofissionais), both exceeding 1,000 installs with the designed layout and onboarding copy shipped verbatim.",
+      "context": "Agency employment at Sagitta, delivering as staff under an intense 8-project workload. Clear team boundaries: I designed the mobile applications across all versions; my colleague João Chagas designed the marketing website (Site). The client, Mauro, was himself a product designer at another company who acted as his own product lead: he dictated all functional features, rejected designer input, and changed visual styling frequently. Documented between November 2024 and January 2025.",
+      "outcome": "A documented rejection and cancellation cycle that culminated in a shipped production success: Mauro rejected App v1 (68 screens across 12 flows), demanded and rejected App v2 (~125 screens across 18 flows), and cancelled the contract two screens into App v3 demanding a refund. Subsequently, Mauro shipped my App v2 mobile interface and onboarding copy verbatim to Google Play, along with João's landing page copy. Both apps remain live with over 1,000 installs each.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "The Outcome Headline: indicAZ is a live consumer marketplace on Google Play across two production apps with over 1,000 installs each. I personally installed both apps and verified that the mobile UI layout and onboarding copy from my Figma file shipped verbatim. Attribution boundary: I designed the mobile apps (v1, v2, v3, MVP); João Chagas designed the landing page; Mauro (the client) defined the product requirements."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A neighbourhood trust network on Google Play"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "2",
+              "label": "production apps shipped on Google Play",
+              "icon": "📱"
+            },
+            {
+              "value": "1,000+",
+              "label": "installs on each app (Morador & Profissional)",
+              "icon": "📈"
+            },
+            {
+              "value": "193",
+              "label": "screens designed across v1 and v2",
+              "icon": "🎨"
+            },
+            {
+              "value": "4",
+              "label": "wired interactive prototype flows",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Condominium and neighborhood recommendations rely on hyper-local credibility. A generic online review has minimal weight compared to a trusted neighbor's recommendation. indicAZ was conceived to capture this dynamic through a three-tier reputation model distinguishing general ratings (Avaliação Geral), building-level evaluations (Avaliações do Condomínio), and regional scores (Avaliações da Região)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "App v1: foundations, 12 flows, and wired prototyping"
+        },
+        {
+          "type": "prose",
+          "body": "The initial delivery (App v1) encompassed 96 canvas nodes, containing 68 numbered screen frames across 12 complete user flows:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Comprehensive Flow Coverage — Auth, password recovery, progressive resident onboarding (buscar moradia, dados adicionais), contact listings, profile creation, and contact evaluations.",
+            "Designed Failure and Confirmation States — 21 explicit outcome screens (cadastroSuccess, cadastroError, cadastroAvaliaçãoSuccess, atualizaçãoAvaliaçãoSuccess), ensuring users never encountered dead ends.",
+            "Wired Interactive Prototypes — Fully animated Figma prototypes originating at Loading/0 (452:4562) and 1.1 Loading (1033:44134), utilizing slide-in drawer overlays (300ms ease-out) for filters and side navigation.",
+            "Foundation Tokens — An 11-step blue palette ramp (Azul/50…950) paired with component sets for ratings, contact cards, and recommendation badges (selo-nós-indicamos)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "App v2: monetization tiers, quote requests, and trust badges"
+        },
+        {
+          "type": "prose",
+          "body": "When the client rejected v1 and requested a major scope expansion, I designed App v2 (~125 screens across 18 flows), introducing commercial marketplace mechanics:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Three-Tier Professional Subscription Interface — Tiered profile presentations for Free, Pro, and Elite providers (perfilProfissional/Free /Pro /Elite), differentiating contact visibility and profile prominence according to subscription level.",
+            "Orçamentos (Quote Request) Flow — End-to-end quote-bidding mechanic (primeiroAcesso → criarOrçamento → visualizarOrçamentos) enabling residents to request service estimates without exposing personal phone numbers until approved.",
+            "Four-Badge Trust Architecture — Expanded credential badges (selo-nós-indicamos, selo-pontualidade, selo-atendimento, selo-qualidade) and an onboarding education screen (12.6 Selo/ComoFunciona).",
+            "Domain Component Library — Custom project components including AppBarV2, tabmenu, tabcontent, and rating modules built over an Untitled UI base."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The MVP re-cut and first developer handoff"
+        },
+        {
+          "type": "prose",
+          "body": "Mid-flight, the client demanded the expansive system be re-scoped for an immediate initial build. I produced Indicaz - v1: an edited cut containing only the core screens selected by the client for the initial development handoff. This ensured developers received a focused, actionable package rather than navigating the expansive experimental canvases."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The stakeholder cycle: rejection, cancellation, and production reality"
+        },
+        {
+          "type": "prose",
+          "body": "The engagement with Mauro was the most demanding stakeholder dynamic in my agency career. As a practicing product designer at another company, Mauro acted as de facto product lead, insisting on total control over screen specifications, rejecting team recommendations, and changing color palettes weekly. After rejecting both complete app designs, he cancelled the contract two screens into App v3 and demanded a full refund."
+        },
+        {
+          "type": "prose",
+          "body": "Months later, we discovered that Mauro had taken our deliverables and shipped them directly to production. The live Google Play apps featured my App v2 screens and my Figma onboarding copy verbatim, while the landing page used João Chagas's copy word-for-word. While the client could not align internally during the project, the design itself proved robust enough to launch directly into production."
+        },
+        {
+          "type": "quote",
+          "text": "The true measure of a design's viability isn't client consensus in a review meeting; it is what gets deployed to production. In indicAZ, the rejected flows and onboarding copy shipped straight to Google Play."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Marketplace mobile de indicação de profissionais entre vizinhos e condôminos, desenhado de ponta a ponta em três versões completas (cerca de 193 telas, 4 fluxos de protótipo navegável e 21 estados de erro/sucesso) mais um arquivo dedicado de handoff para MVP. Lançado com sucesso no Google Play em dois builds de produção: o app Morador (com.mycompany.indicaz) e o app Profissional (com.mycompany.indicazprofissionais), ambos superando 1.000 instalações com o layout e os textos de onboarding desenhados no Figma publicados sem alterações.",
+      "context": "Atuação como designer contratado pela agência Sagitta, atendendo sob uma carga de trabalho intensa de 8 projetos concorrentes. Divisão de escopo rigorosa: desenhei os aplicativos mobile em todas as suas versões; meu colega João Chagas desenhou a landing page institucional (Site). O cliente, Mauro, era designer de produto em outra empresa e atuou como líder de produto do próprio projeto: determinou todas as decisões funcionais, rejeitou sugestões da equipe e alterava a paleta de cores semanalmente. Documentado entre novembro de 2024 e janeiro de 2025.",
+      "outcome": "Um ciclo documentado de refações e cancelamento que culminou em sucesso público de lançamento: o cliente rejeitou o App v1 (68 telas em 12 fluxos), solicitou e rejeitou o App v2 (~125 telas em 18 fluxos) e cancelou o contrato na segunda tela do App v3 exigindo reembolso. Meses depois, o mesmo cliente colocou em produção no Google Play os layouts e os textos de onboarding do App v2 exatamente como desenhados no Figma, além dos textos da landing page de João Chagas. Os dois apps continuam ativos com mais de 1.000 instalações cada.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "A Manchete do Projeto: O indicAZ é um marketplace de consumo real publicado no Google Play em dois aplicativos com mais de 1.000 downloads cada. Instalei pessoalmente ambos os apps e confirmei que a interface mobile e os textos de onboarding do meu arquivo no Figma foram para produção de forma idêntica. Fronteira de autoria: desenhei os aplicativos mobile (v1, v2, v3, MVP); João Chagas desenhou o site; Mauro (o cliente) determinou os requisitos de produto."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Uma rede de confiança de bairro no Google Play"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "2",
+              "label": "aplicativos publicados e ativos no Google Play",
+              "icon": "📱"
+            },
+            {
+              "value": "1.000+",
+              "label": "instalações em cada app (Morador e Profissional)",
+              "icon": "📈"
+            },
+            {
+              "value": "193",
+              "label": "telas desenhadas nas versões v1 e v2",
+              "icon": "🎨"
+            },
+            {
+              "value": "4",
+              "label": "fluxos interativos com protótipo navegável",
+              "icon": "⚡"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A contratação de prestadores de serviços em condomínios e bairros depende essencialmente de confiança hiperlocal. Avaliações genéricas na internet têm pouco peso diante da indicação de um vizinho de confiança. O indicAZ foi projetado para capturar essa proximidade através de um modelo de reputação em três níveis: avaliação geral (Avaliação Geral), avaliação do próprio condomínio (Avaliações do Condomínio) e avaliação regional (Avaliações da Região)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "App v1: fundamentos, 12 fluxos e prototipagem navegável"
+        },
+        {
+          "type": "prose",
+          "body": "A primeira entrega completa (App v1) somou 96 nós no Figma, estruturando 68 telas numeradas ao longo de 12 fluxos operacionais:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cobertura Integral de Jornada — Autenticação, recuperação de senha, onboarding residencial progressivo (buscar moradia, dados adicionais), listagens de contatos, cadastro de perfil e avaliação de serviços.",
+            "Estados de Confirmação e Exceção Desenhados — 21 telas de desfecho (cadastroSuccess, cadastroError, cadastroAvaliaçãoSuccess, atualizaçãoAvaliaçãoSuccess), prevenindo becos sem saída na navegação.",
+            "Protótipos Interativos Navegáveis — Conexões de protótipo partindo de Loading/0 (452:4562) e 1.1 Loading (1033:44134), utilizando gavetas sobrepostas com animação suave (300ms ease-out) para menus laterais e filtros.",
+            "Tokens e Componentes Base — Rampa de 11 tons de azul (Azul/50…950) associada a conjuntos de componentes de avaliação, cartões de contato e selo de recomendação (selo-nós-indicamos)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "App v2: planos de assinatura, orçamentos e selos de confiança"
+        },
+        {
+          "type": "prose",
+          "body": "Diante da rejeição da v1 pelo cliente com solicitação de expansão de escopo, desenhei o App v2 (~125 telas em 18 fluxos), incorporando mecânicas comerciais robustas:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Interface de Três Níveis de Assinatura para Profissionais — Apresentação diferenciada de perfis para prestadores Free, Pro e Elite (perfilProfissional/Free /Pro /Elite), variando a visibilidade de contato e destaque conforme o plano contratado.",
+            "Fluxo Transacional de Orçamentos — Mecânica de solicitação de orçamentos (primeiroAcesso → criarOrçamento → visualizarOrçamentos) permitindo aos moradores solicitar cotações sem expor dados pessoais ou telefone até aprovação.",
+            "Sistema de Quatro Selos de Confiança — Selos de reputação enriquecidos (selo-nós-indicamos, selo-pontualidade, selo-atendimento, selo-qualidade) acompanhados de tela educativa de onboarding (12.6 Selo/ComoFunciona).",
+            "Biblioteca de Componentes de Domínio — Componentes exclusivos como AppBarV2, tabmenu, tabcontent e módulos de avaliação estruturados sobre a base do Untitled UI."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O recorte para MVP e o primeiro handoff de engenharia"
+        },
+        {
+          "type": "prose",
+          "body": "No meio do processo, o cliente exigiu que o escopo fosse reduzido para viabilizar um lançamento mais rápido pelos desenvolvedores. Estruturei o arquivo Indicaz - v1: um recorte contendo estritamente as telas priorizadas pelo cliente para a primeira entrega de desenvolvimento. Isso assegurou que os programadores recebessem um pacote focado e executável, em vez de se perderem em pranchetas conceituais."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O ciclo com o stakeholder: refações, cancelamento e realidade de produção"
+        },
+        {
+          "type": "prose",
+          "body": "O relacionamento com o cliente foi o caso mais complexo de gestão de stakeholder da minha trajetória em agência. Sendo também designer de produto em outra empresa, Mauro assumiu a liderança informal do projeto, exigiu controle total sobre cada tela, desconsiderou sugestões técnicas da equipe e alterava as diretrizes visuais a cada semana. Após rejeitar duas versões completas do app, cancelou o contrato na segunda tela do App v3 solicitando devolução do valor pago."
+        },
+        {
+          "type": "prose",
+          "body": "Meses depois, constatamos que o cliente pegou os arquivos entregues e os subiu diretamente em produção. Os aplicativos no Google Play trouxeram exatamente as telas da minha v2 e os textos de onboarding do Figma sem qualquer alteração, enquanto o site utilizou o copy de João Chagas palavra por palavra. Embora o cliente não tenha conseguido convergir internamente durante o contrato, o design se provou sólido o bastante para sustentar o produto em produção."
+        },
+        {
+          "type": "quote",
+          "text": "A verdadeira comprovação da solidez de um design não ocorre na aprovação de uma reunião; ela se manifesta no que vai para o ar. No indicAZ, os fluxos e textos rejeitados foram direto para o Google Play."
+        }
+      ]
+    }
+  }
 }

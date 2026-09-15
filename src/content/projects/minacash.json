@@ -44,5 +44,210 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "UI Designer for the dedicated Mobile Experience of MinaCash, a financial rewards and cashback platform. Sole designer responsible for the 46-node Mobile page (node 87:22642 in Figma file wpp9WlwEfw21dmgfwaaAOp), adapting an existing desktop and Bubble web application into a tailored, smartphone-optimized interface. Authored user onboarding flows with automated postal code lookup (buscarCEP), account profile and security controls with password reset modals, and the instant Pix cash-out withdrawal sequence with modal confirmation states across iPhone SE and iPhone 13 mini viewports.",
+      "context": "Agency engagement at Sagitta concluding on May 27, 2024. The client had originally developed and deployed an initial MVP on Bubble before engaging Sagitta to professionalize and expand the platform. Viviane Batista (Vivi) designed the earlier desktop CRM and licensee management screens (90 children on the Desktop page, predating Juan). Juan was brought in specifically to own the mobile product experience.",
+      "outcome": "The mobile application experience was implemented and shipped to production at minacash.com.br, serving Juan's mobile design. Prior to Juan leaving Sagitta, the client directly hired one of Sagitta's developers and terminated their agency contract. No business or cashback volume metrics exist. This case study documents mobile adaptation of existing SaaS platforms, ergonomic small-screen design, and instant transaction UX.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole designer of the dedicated Mobile page (node 87:22642, 46 canvas elements). I do not claim the original Bubble application (built by the client prior to agency engagement), the desktop CRM and licensee portal (designed by Viviane Batista), or user research/discovery (handled by Ramon). Delivery status: implemented and shipped to production at minacash.com.br."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Mobile adaptation vs. responsive desktop scaling"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "46",
+              "label": "mobile canvas nodes on the dedicated Mobile page",
+              "icon": "📱"
+            },
+            {
+              "value": "2",
+              "label": "constrained viewports targeted (iPhone SE & iPhone 13 mini)",
+              "icon": "📐"
+            },
+            {
+              "value": "3",
+              "label": "core mobile flows (Onboarding, Account Security, Pix Cashout)",
+              "icon": "🔄"
+            },
+            {
+              "value": "100%",
+              "label": "dedicated mobile adaptation, not responsive CSS squishing",
+              "icon": "🎯"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A frequent mistake in software design is treating mobile as simply a narrowed desktop layout—compressing dense data tables, hamburger-menus, and desktop form modals into narrow viewports. MinaCash had a dense desktop CRM with multi-column financial statements and licensee management tables created by Viviane Batista. When consumers requested access to check rewards and withdraw cashback on their phones, shrinking the desktop screens was not an option. My mandate was to create a dedicated mobile experience tailored to handheld interaction patterns."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Screen architecture across the 46 mobile nodes"
+        },
+        {
+          "type": "prose",
+          "body": "On the dedicated Mobile page (node 87:22642), I designed 46 distinct screens and reusable states, prioritizing the compact 375pt viewport of the iPhone SE series (screens 19 to 47) and iPhone 13 mini (screens 1 and 2):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Streamlined Onboarding & CEP Auto-Fill — Simplified the sign-up funnel into focused single-column steps (Telas iniciais, Cadastro), integrating Brazilian postal code lookup (buscarCEP and button_cep) to auto-populate neighborhood, city, and state, drastically reducing mobile keyboard fatigue.",
+            "Account Management & Security Controls — Designed the Minha Conta profile view and an interactive change-password modal (Pop-up Alterar Senha), ensuring account credentials and security preferences could be updated without navigating away from the dashboard.",
+            "Pix Cashback Redemption Engine — Designed the end-to-end withdrawal flow, where users input their Pix key, view instantaneous transfer simulation, and confirm via a dedicated confirmation modal (Pop-up Pix and Pop-up Confirmação Pix), providing absolute certainty before financial dispatch.",
+            "Ergonomic Touch Targets — Rebuilt table-based rewards records into tap-friendly list cards with clear financial badges, thumb-zone primary actions, and bottom-aligned modal triggers."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Never say Juan designed MinaCash. He designed its mobile experience. Never cite this as responsive design: it is a dedicated mobile adaptation of an existing desktop product—a different and separately sellable competency."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The discipline of designing for the iPhone SE constraint"
+        },
+        {
+          "type": "prose",
+          "body": "Designing for modern 430px iPhone Pro Max displays allows for lazy spacing decisions. Designing for the 375x667px iPhone SE requires genuine discipline: every pixel of vertical real estate matters when the virtual keyboard occupies half the display. By calibrating MinaCash's mobile flows to the SE form factor, I ensured that confirmation dialogs, input labels, and CTA buttons remained comfortably within the active viewport without awkward scroll bouncing."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not the full MinaCash product. I did not design the desktop platform, licensee management, or partner CRM; Viviane Batista designed those screens prior to my involvement.",
+            "Not the original Bubble build. The client initially developed and deployed their product on Bubble prior to hiring the agency.",
+            "Not simple responsive design. This was a ground-up mobile adaptation of existing product functionality, created on a dedicated Mobile canvas page.",
+            "Not user research or discovery. Requirements and project parameters were scoped by Ramon.",
+            "Not supported by financial metrics. No cashback transaction figures or user adoption counts exist in the record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The power of dedicated mobile product design"
+        },
+        {
+          "type": "prose",
+          "body": "MinaCash highlights how existing desktop SaaS applications can be successfully brought to mobile users without compromise. By re-architecting complex registration, security, and Pix withdrawal workflows into an ergonomic mobile experience, the design delivered a fast, reliable, and accessible interface for consumer cashback redemption."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI para a Experiência Mobile dedicada da MinaCash, plataforma de recompensas financeiras e cashback. Designer único responsável pela página exclusiva Mobile com 46 nós (nó 87:22642 no arquivo Figma wpp9WlwEfw21dmgfwaaAOp), adaptando uma aplicação web existente em Bubble e desktop para uma interface otimizada para smartphones. Desenvolvi os fluxos de onboarding com busca automática de CEP (buscarCEP), gestão de conta e segurança com modal de troca de senha e a sequência de resgate de cashback via Pix instantâneo com estados de confirmação nos viewports de iPhone SE e iPhone 13 mini.",
+      "context": "Atuação na agência Sagitta concluída em 27 de maio de 2024. O cliente havia inicialmente construído e lançado um MVP no Bubble antes de contratar a Sagitta para profissionalizar e expandir a plataforma. Viviane Batista (Vivi) desenhou as telas web anteriores de CRM desktop e gestão de licenciados (90 filhos na página Desktop, em período anterior à entrada de Juan). Juan foi alocado especificamente para liderar a experiência mobile do produto.",
+      "outcome": "A experiência do aplicativo mobile foi implementada e lançada em produção no endereço minacash.com.br, operando com o design mobile desenhado por Juan. Antes da saída de Juan da Sagitta, o cliente contratou diretamente um dos desenvolvedores da agência e rescindiu o contrato com a empresa. Não existem métricas de volume financeiro ou de cashback. Este estudo de caso documenta a adaptação mobile de plataformas SaaS, design ergonômico para telas compactas e UX para transações instantâneas.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Fui o designer único da página exclusiva Mobile (nó 87:22642, com 46 elementos de tela). Não reivindico o aplicativo original em Bubble (construído pelo cliente antes do contrato com a agência), o CRM desktop e portal de licenciados (desenhados por Viviane Batista) nem a pesquisa de usuários/discovery (conduzida por Ramon). Status de entrega: implementado e lançado em produção em minacash.com.br."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Adaptação mobile versus simples compressão responsiva"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "46",
+              "label": "nós na página exclusiva de Mobile",
+              "icon": "📱"
+            },
+            {
+              "value": "2",
+              "label": "tamanhos de tela desafiadores atendidos (iPhone SE e 13 mini)",
+              "icon": "📐"
+            },
+            {
+              "value": "3",
+              "label": "fluxos principais (Onboarding, Segurança da Conta e Saque Pix)",
+              "icon": "🔄"
+            },
+            {
+              "value": "100%",
+              "label": "adaptação mobile dedicada, não esmagamento de layout desktop",
+              "icon": "🎯"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Um erro frequente no design de software é tratar o mobile como uma simples versão estreitada do desktop — comprimindo tabelas extensas, menus hambúrguer improvisados e modais gigantescos em telas pequenas. A MinaCash possuía um CRM desktop complexo, com extratos financeiros densos e gestão de licenciados desenhados por Viviane Batista. Quando os usuários finais demandaram consultar saldos e resgatar recompensas pelo celular, comprimir o desktop era inviável. Minha missão foi criar uma experiência mobile autônoma, calibrada para a interação natural com uma mão."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de telas nos 46 nós da prancheta Mobile"
+        },
+        {
+          "type": "prose",
+          "body": "Na página exclusiva de Mobile (nó 87:22642), projetei 46 telas e estados de interação, priorizando a resolução de 375pt da série iPhone SE (telas 19 a 47) e iPhone 13 mini (telas 1 e 2):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Onboarding Fluido e Preenchimento Automático de CEP — Simplifiquei o fluxo de cadastro em etapas verticais únicas (Telas iniciais, Cadastro), integrando consulta de CEP (buscarCEP e button_cep) para preencher bairro, cidade e estado automaticamente, reduzindo o atrito de digitação no teclado do celular.",
+            "Gestão de Conta e Segurança — Desenvolvi o painel Minha Conta e um modal dedicado para alteração de senha (Pop-up Alterar Senha), permitindo atualização rápida de credenciais sem perda do contexto de navegação.",
+            "Motor de Resgate de Cashback via Pix — Estruturei o fluxo completo de saque, no qual o usuário informa sua chave Pix, visualiza a simulação imediata do repasse e confirma a operação em modal seguro (Pop-up Pix e Pop-up Confirmação Pix), eliminando dúvidas antes da transferência.",
+            "Áreas de Toque Ergonômicas — Transformei registros em tabelas em cards verticais com tags de status destacadas, ações primárias posicionadas na zona do polegar e modais ancorados na base da tela."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Nunca diga que Juan desenhou a MinaCash. Ele desenhou a sua experiência mobile. Nunca cite isso como design responsivo comum: trata-se de uma adaptação mobile dedicada de um produto desktop pré-existente — uma competência distinta e de alto valor de entrega."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A disciplina de projetar sob a restrição do iPhone SE"
+        },
+        {
+          "type": "prose",
+          "body": "Desenhar para telas largas de iPhone Pro Max de 430px permite acomodar elementos com facilidade. Projetar para o espaço compacto de 375x667px do iPhone SE exige rigor técnico: cada pixel de altura é crucial quando o teclado virtual ocupa metade da tela. Ao balizar a experiência da MinaCash por esse formato mais enxuto, assegurei que caixas de confirmação, campos de texto e botões de ação permanecessem sempre visíveis e confortáveis para o usuário."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é a totalidade do produto MinaCash. Não desenhei o sistema desktop, o painel de licenciados ou o CRM de parceiros; essas telas foram criadas por Viviane Batista antes da minha atuação.",
+            "Não é o build original em Bubble. O cliente já havia criado e colocado no ar a versão inicial antes de contratar a agência.",
+            "Não é simples design responsivo. Trata-se de uma adaptação dedicada concebida diretamente para uso em smartphones em uma prancheta exclusiva.",
+            "Não é discovery ou pesquisa com usuários. Os requisitos foram estruturados por Ramon.",
+            "Não possui métricas financeiras. Nenhum dado sobre volume de cashback ou quantidade de usuários ativos consta nos registros."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O impacto de um design mobile especializado"
+        },
+        {
+          "type": "prose",
+          "body": "A MinaCash demonstra como softwares concebidos originalmente para computador podem ser convertidos com sucesso para a palma da mão sem perda de usabilidade. Ao reorganizar fluxos de cadastro, segurança e transferências Pix em uma interface ergonômica, o projeto entregou um canal mobile direto, rápido e confiável para a utilização de cashback."
+        }
+      ]
+    }
+  }
 }

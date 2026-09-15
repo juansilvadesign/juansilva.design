@@ -44,5 +44,212 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for PHR Advogados, a boutique law firm specialized in Family and Succession Law (Direito de Família e Sucessões). Designed 19 responsive canvas nodes across desktop and mobile in Figma (file key BHcRPjnGD2AzDId9LBd3Y7) spanning core institutional pages (Início, Quem somos, Contato), detailed practice area subpages (Divórcio, Guarda, O que fazemos), an editorial thought-leadership blog (Blog #14), and media integration hub (Notícias & PHR Podcast), supported by a 24-node Style Guide establishing brand colors (#477891 slate blue and warm neutrals), typography hierarchies, and responsive navigation bars.",
+      "context": "Agency employment at Sagitta delivering from January 5, 2024 to February 15, 2024. Juan served as the sole website UI designer within the agency team: Kelvin Bezerra designed the firm's visual identity and logo, Juan designed the complete multi-page responsive website in Figma, and an external no-code developer implemented and published the site on WordPress. Scoped by Ramon.",
+      "outcome": "The website was implemented and published to production, and continues to operate today at phradvogados.com.br (HTTP 200, 118,089 B verified on 2026-08-21). Juan grades this project as Tier A: the live site remains closely aligned with the delivered Figma designs, with only minor CMS styling adjustments. No consultation booking or traffic metrics exist. This case study documents boutique legal portal design, editorial multimedia hubs, and sensitive family practice UX.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I designed the complete multi-page website UI, specialized family law practice pages, podcast and media hub, and responsive layouts in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress deployment (handled by a no-code developer), or client research (Ramon's). Delivery status: shipped and live today at phradvogados.com.br (Tier A production fidelity)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Boutique legal UX: empathy and authority in family law"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "19",
+              "label": "responsive layout nodes on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "Tier A",
+              "label": "production fidelity match between Figma and live website",
+              "icon": "⭐"
+            },
+            {
+              "value": "24",
+              "label": "style guide design tokens and typography specifications",
+              "icon": "🎨"
+            },
+            {
+              "value": "118 KB",
+              "label": "verified live HTML at phradvogados.com.br",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Family and Succession Law involves deeply personal, emotionally fraught life events: contentious divorces, child custody disputes, and family inheritance mediation. Potential clients searching for representation are often experiencing acute stress. The design for PHR Advogados required balancing profound human empathy with uncompromising legal authority, replacing cold legal bureaucracy with a welcoming, dignified digital experience."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Editorial thought leadership: podcast and media hub"
+        },
+        {
+          "type": "prose",
+          "body": "Unlike traditional firms that rely solely on static brochures, PHR Advogados actively produces educational legal content. On the primary Design page (node 1:15), I architected dedicated content surfaces to showcase their authority:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "PHR Podcast Hub — Dedicated media showcase featuring episode players, topic overviews, and streaming platform links to demystify complex family law issues for the public.",
+            "Press & Media Coverage (Notícias) — Curated press room showcasing television interviews, legal commentary, and newspaper citations establishing public credibility.",
+            "Detailed Practice Verticals (Divórcio & Guarda) — Focused, compassionate pages explaining the procedural differences between judicial and extrajudicial divorce, child custody arrangements, and child support calculations.",
+            "Editorial Legal Blog (Blog #14) — Clean, readable typographic article templates optimized for long-form legal guides and case law analysis.",
+            "Clear Contact Gateway (Contato & Mobile Views) — Low-friction, discreet consultation scheduling forms with direct confidential WhatsApp contact options."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan grades this project Tier A: the production site at phradvogados.com.br answers HTTP 200 with 118 KB and faithfully preserves the delivered Figma typography, practice cards, and editorial layouts. It represents one of the closest production alignments in the Sagitta agency cohort."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Visual identity tokens in the Style Guide"
+        },
+        {
+          "type": "prose",
+          "body": "The 24-node Style Guide page (node 1:16) standardized the firm's visual foundation: a calming slate blue primary tone (#477891), warm neutral backgrounds, accessible contrast ratios for sensitive reading, and elegant typographic scales reflecting Kelvin Bezerra's brand identity."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra designed the PHR Advogados logo and visual brand.",
+            "Not WordPress implementation. The website was deployed in WordPress by a no-code developer.",
+            "Not podcast recording or editorial content writing. I designed the media player UI and editorial layouts, not the audio or articles.",
+            "Not user research or discovery. Scoping and requirements were managed by Ramon.",
+            "Not supported by client acquisition analytics. No consultation booking or traffic metrics exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The power of content-driven legal design"
+        },
+        {
+          "type": "prose",
+          "body": "PHR Advogados demonstrates how a specialized legal practice can blend empathy with educational media to build client trust. By integrating podcast episodes, press appearances, and structured practice guides into an elegant responsive interface, the design established a benchmark for modern legal digital presence."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a PHR Advogados, banca de advocacia especializada em Direito de Família e Sucessões. Desenvolvi 19 nós de layout responsivo no Figma (arquivo BHcRPjnGD2AzDId9LBd3Y7) abrangendo páginas institucionais (Início, Quem somos, Contato), verticais especializadas de atendimento (Divórcio, Guarda, O que fazemos), blog editorial de autoridade jurídica (Blog #14) e central de mídia (Notícias e PHR Podcast), com suporte de um Style Guide com 24 nós estabelecendo paleta de cores (azul ardósia #477891 e tons neutros acolhedores), escalas tipográficas e navegação responsiva.",
+      "context": "Atuação na agência Sagitta de 5 de janeiro de 2024 a 15 de fevereiro de 2024. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou a identidade visual e o logotipo da banca, Juan desenhou todo o portal responsivo no Figma, e um desenvolvedor no-code implementou e publicou o site no CMS WordPress. Escopo alinhado por Ramon.",
+      "outcome": "O site foi implementado e publicado em produção, permanecendo no ar até hoje em phradvogados.com.br (HTTP 200, 118.089 B verificado em 21/08/2026). Juan classifica este projeto como Tier A: o site publicado preserva grande fidelidade com o design entregue no Figma, com apenas ajustes pontuais de montagem em CMS. Não existem métricas de agendamento de consultas ou tráfego. Este estudo de caso documenta o design para bancas especializadas, centrais de mídia editorial e UX para temas sensíveis de família.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Desenhei toda a interface web e mobile, as páginas das verticais de Direito de Família, a central de podcast e os layouts editoriais no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a publicação em WordPress (executada por um desenvolvedor no-code) nem a pesquisa de discovery (conduzida por Ramon). Status de entrega: publicado e ativo hoje em phradvogados.com.br (fidelidade Tier A com o design original)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UX para advocacia humanizada: acolhimento e autoridade no Direito de Família"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "19",
+              "label": "nós de layout responsivo na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "Tier A",
+              "label": "de fidelidade entre o arquivo Figma e o site publicado",
+              "icon": "⭐"
+            },
+            {
+              "value": "24",
+              "label": "tokens e especificações técnicas no Style Guide",
+              "icon": "🎨"
+            },
+            {
+              "value": "118 KB",
+              "label": "de HTML verificado em produção em phradvogados.com.br",
+              "icon": "🏛️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O Direito de Família e Sucessões lida com momentos delicados da vida humana: divórcios litigiosos, guarda de filhos e partilha de heranças. Pessoas que procuram um advogado nessas circunstâncias estão frequentemente sob forte estresse emocional. O design da PHR Advogados demandava equilibrar empatia e acolhimento com rigor técnico inegociável, substituindo o jargão frio dos tribunais por uma experiência digital clara e acolhedora."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Autoridade editorial: central de podcast e imprensa"
+        },
+        {
+          "type": "prose",
+          "body": "Diferente de escritórios tradicionais focados apenas em páginas estáticas, a PHR Advogados produz ativamente conteúdo educativo para desmistificar o Direito. Na prancheta de Design (nó 1:15), estruturei espaços dedicados para valorizar essa produção de conteúdo:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Central PHR Podcast — Página dedicada para episódios do podcast do escritório, com resumos temáticos e links diretos para plataformas de áudio.",
+            "Clipping e Imprensa (Notícias) — Área destacando aparições em jornais, entrevistas e artigos na grande mídia, consolidando autoridade pública.",
+            "Verticais Especializadas (Divórcio e Guarda) — Páginas explicando com clareza as diferenças entre divórcio em cartório e judicial, regimes de guarda e pensão alimentícia.",
+            "Blog Jurídico Editorial (Blog #14) — Templates tipográficos desenvolvidos para leitura confortável de artigos e esclarecimento de dúvidas frequentes.",
+            "Agendamento de Contato Discreto (Contato e Telas Mobile) — Formulários simples e botão de WhatsApp para atendimento direto e confidencial."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Juan classifica este projeto como Tier A: o site no ar em phradvogados.com.br (HTTP 200 com 118 KB) preserva com precisão a tipografia, os cards informativos e a estrutura visual entregue no Figma. É um dos casos de maior fidelidade de implementação de todo o lote da agência."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Tokens visuais no Style Guide"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 24 nós (nó 1:16) definiu a identidade visual do site: tom principal em azul ardósia (#477891), fundos em tons neutros quentes, contrastes acessíveis para leitura prolongada e escalas tipográficas elegantes alinhadas à marca criada por Kelvin Bezerra."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra criou o logotipo e a identidade visual da PHR Advogados.",
+            "Não é implementação em WordPress. O site foi montado no CMS por um desenvolvedor no-code.",
+            "Não é produção do podcast ou redação de artigos. Criei o design das interfaces e dos players, não o conteúdo em áudio ou texto.",
+            "Não é pesquisa ou discovery. O escopo foi estruturado por Ramon.",
+            "Não possui métricas de captação de clientes. Nenhum dado de consultas realizadas ou tráfego foi retido no registro do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O impacto do design com foco em conteúdo editorial"
+        },
+        {
+          "type": "prose",
+          "body": "A PHR Advogados comprova como uma banca especializada pode aliar sensibilidade e autoridade técnica para conquistar a confiança de seus clientes. Ao reunir podcast, notícias e guias práticos em um layout fluido e acolhedor, o projeto estabeleceu uma presença digital marcante no segmento do Direito de Família."
+        }
+      ]
+    }
+  }
 }

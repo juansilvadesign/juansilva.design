@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Silvana Cabral — Practice Site Showcase</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Cormorant";
+        src: url("assets/fonts/cormorant-garamond-600.woff2") format("woff2");
+        font-weight: 600 700;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #FAF8F2;
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #1A1F26;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* ⛔ Ground layer MUST stay opaque to prevent alpha capture artifacts */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 28%, rgba(20, 103, 94, 0.05) 0%, rgba(199, 100, 40, 0.035) 45%, #FAF8F2 70%, #F4EFEA 100%),
+          #FFFFFF;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      #glow-teal { top: -60px; left: 180px; width: 620px; height: 620px; background: rgba(20, 103, 94, 0.08); }
+      #glow-amber { bottom: -40px; right: 220px; width: 640px; height: 640px; background: rgba(199, 100, 40, 0.06); }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* ⛔ Camera scale and translate must remain separate elements */
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 1: Identity, Foundation & Typography
+      ------------------------------------------------------------- */
+      #scene-foundation {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        z-index: 10;
+        pointer-events: none;
+      }
+      .foundation-wrap {
+        width: 1440px;
+        height: 820px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #found-logo-card {
+        background: #FFFFFF;
+        padding: 24px 44px;
+        border-radius: 20px;
+        box-shadow: 0 24px 60px -15px rgba(20, 103, 94, 0.12), 0 0 0 1px rgba(20, 103, 94, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        opacity: 1;
+      }
+      #found-logo-card img {
+        height: 105px;
+        width: auto;
+        object-fit: contain;
+      }
+      #found-logo-sub {
+        font-family: "Cormorant", serif;
+        font-size: 26px;
+        color: #14675E;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .specimen-grid {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 28px;
+        bottom: 30px;
+      }
+      .specimen-card {
+        flex: 1;
+        background: #FFFFFF;
+        border-radius: 16px;
+        padding: 22px 26px;
+        box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.07), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 1;
+      }
+      .specimen-tag {
+        font-size: 11px;
+        font-weight: 600;
+        color: #B95D25;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .specimen-title {
+        font-family: "Cormorant", serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: #14675E;
+        line-height: 1.15;
+      }
+      .specimen-desc {
+        font-size: 13px;
+        color: #64748B;
+        line-height: 1.45;
+      }
+      .ramp-strip {
+        display: flex;
+        height: 28px;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-top: 4px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      }
+      .ramp-step {
+        flex: 1;
+        height: 100%;
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 2 & 3: Browser Window & Complete Landing Page Scroll
+      ------------------------------------------------------------- */
+      #win-main {
+        position: absolute;
+        width: 1440px;
+        height: 880px;
+        left: 240px;
+        top: 110px;
+        background: #FFFFFF;
+        border-radius: 14px;
+        box-shadow: 0 38px 95px -20px rgba(20, 40, 35, 0.22), 0 0 0 1px rgba(20, 40, 35, 0.08);
+        overflow: hidden;
+        opacity: 0;
+        z-index: 20;
+      }
+      .browser-bar {
+        height: 42px;
+        background: #F4F6F8;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        gap: 12px;
+      }
+      .traffic-lights { display: flex; gap: 7px; }
+      .light { width: 10px; height: 10px; border-radius: 50%; }
+      .light.red { background: #FF5F56; }
+      .light.yellow { background: #FFBD2E; }
+      .light.green { background: #27C93F; }
+      .url-bar {
+        flex: 1;
+        max-width: 480px;
+        margin: 0 auto;
+        height: 26px;
+        background: #FFFFFF;
+        border-radius: 6px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 500;
+        color: #556987;
+        letter-spacing: 0.01em;
+      }
+      .url-lock {
+        font-size: 10px;
+        color: #14675E;
+      }
+      .browser-viewport {
+        position: relative;
+        width: 1440px;
+        height: 838px;
+        overflow: hidden;
+        background: #FFFFFF;
+      }
+      #s-strip {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1440px;
+        will-change: transform;
+      }
+      #s-strip img {
+        display: block;
+        width: 1440px;
+        height: auto;
+      }
+
+      /* Hover glow simulation on Hero CTA */
+      #cta-highlight-ring {
+        position: absolute;
+        top: 480px;
+        left: 495px;
+        width: 250px;
+        height: 52px;
+        border-radius: 8px;
+        border: 2px solid #14675E;
+        box-shadow: 0 0 20px rgba(20, 103, 94, 0.45);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Interactive FAQ state overlay */
+      #faq-interactive-card {
+        position: absolute;
+        width: 900px;
+        left: 270px;
+        top: 260px;
+        background: #FFFFFF;
+        border-radius: 12px;
+        padding: 24px 30px;
+        box-shadow: 0 20px 50px -10px rgba(0,0,0,0.18), 0 0 0 1px rgba(20,103,94,0.15);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 25;
+      }
+      .faq-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "Cormorant", serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: #14675E;
+      }
+      .faq-card-body {
+        margin-top: 14px;
+        font-size: 15px;
+        color: #4A5568;
+        line-height: 1.6;
+        border-top: 1px solid #EDF2F7;
+        padding-top: 14px;
+      }
+
+      /* Cursor */
+      #cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        z-index: 100;
+        pointer-events: none;
+        opacity: 0;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 4: The WhatsApp Conversion Engine as Code
+      ------------------------------------------------------------- */
+      #scene-conversion {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        z-index: 30;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .conv-container {
+        width: 1500px;
+        display: flex;
+        gap: 40px;
+        align-items: center;
+      }
+      .conv-code-card {
+        flex: 1.1;
+        background: #10161A;
+        border-radius: 16px;
+        padding: 28px;
+        box-shadow: 0 30px 80px -15px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.1);
+        color: #E2E8F0;
+        font-family: "InterVar", monospace;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .code-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      .code-tag {
+        color: #2DD4BF;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+      }
+      .conv-preview-card {
+        flex: 0.9;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .wa-chat-bubble {
+        background: #FFFFFF;
+        border-radius: 14px;
+        padding: 20px 24px;
+        box-shadow: 0 15px 40px -10px rgba(0,0,0,0.12), 0 0 0 1px rgba(20,103,94,0.12);
+        border-left: 5px solid #25D366;
+      }
+      .wa-sender {
+        font-size: 11px;
+        font-weight: 700;
+        color: #25D366;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+      .wa-text {
+        font-size: 15px;
+        color: #1E293B;
+        font-style: italic;
+        line-height: 1.5;
+      }
+      .page-404-card {
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 15px 40px -10px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.08);
+      }
+      .page-404-card img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 5: Browser-First Responsiveness
+      ------------------------------------------------------------- */
+      #scene-responsive {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        z-index: 35;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+      }
+      #resp-desktop-wrap {
+        width: 1050px;
+        height: 680px;
+        background: #FFFFFF;
+        border-radius: 12px;
+        box-shadow: 0 30px 80px -20px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.08);
+        overflow: hidden;
+      }
+      #resp-desktop-wrap img {
+        width: 1050px;
+        height: auto;
+        display: block;
+      }
+      #resp-phone-wrap {
+        width: 340px;
+        height: 680px;
+        background: #000000;
+        border-radius: 40px;
+        box-shadow: 0 35px 90px -15px rgba(0,0,0,0.35), 0 0 0 8px #2A2E35;
+        overflow: hidden;
+        position: relative;
+      }
+      .phone-notch {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 20px;
+        background: #000000;
+        border-radius: 10px;
+        z-index: 5;
+      }
+      #resp-phone-strip {
+        width: 340px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      #resp-phone-strip img {
+        width: 340px;
+        height: auto;
+        display: block;
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 6: Complete Client Collateral Spread
+      ------------------------------------------------------------- */
+      #scene-collateral {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        z-index: 40;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .collateral-grid {
+        width: 1560px;
+        height: 800px;
+        position: relative;
+      }
+      .collat-item {
+        position: absolute;
+        background: #FFFFFF;
+        border-radius: 16px;
+        box-shadow: 0 25px 60px -15px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06);
+        overflow: hidden;
+      }
+      #collat-highlights {
+        width: 540px;
+        height: 340px;
+        left: 40px;
+        top: 60px;
+      }
+      #collat-highlights img { width: 100%; height: 100%; object-fit: cover; }
+      #collat-card {
+        width: 580px;
+        height: 330px;
+        left: 620px;
+        top: 60px;
+      }
+      #collat-card img { width: 100%; height: 100%; object-fit: cover; }
+      #collat-tutorial {
+        width: 680px;
+        height: 330px;
+        left: 240px;
+        top: 420px;
+      }
+      #collat-tutorial img { width: 100%; height: auto; object-fit: cover; }
+      #collat-handoff {
+        width: 540px;
+        height: 330px;
+        left: 950px;
+        top: 420px;
+      }
+      #collat-handoff img { width: 100%; height: 100%; object-fit: cover; }
+
+      /* -------------------------------------------------------------
+         PERSISTENT NARRATIVE HUD & CHIPS
+      ------------------------------------------------------------- */
+      #narrative-hud {
+        position: absolute;
+        top: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        z-index: 90;
+        pointer-events: none;
+      }
+      .hud-pill {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(20, 103, 94, 0.15);
+        border-radius: 999px;
+        padding: 6px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 10px 30px -5px rgba(20, 103, 94, 0.12);
+      }
+      .hud-phase {
+        font-size: 11px;
+        font-weight: 700;
+        color: #14675E;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .hud-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #C76428;
+      }
+      .hud-title {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1A1F26;
+      }
+      #narrative-caption {
+        font-size: 14.5px;
+        color: #4A5568;
+        font-weight: 500;
+        text-align: center;
+        max-width: 900px;
+        text-shadow: 0 1px 2px rgba(255,255,255,0.9);
+      }
+      #narrative-caption strong {
+        color: #14675E;
+        font-weight: 700;
+      }
+
+      /* Lower Tech Stack Pills */
+      #stack-pills {
+        position: absolute;
+        bottom: 30px;
+        right: 48px;
+        display: flex;
+        gap: 10px;
+        z-index: 90;
+        pointer-events: none;
+      }
+      .stack-pill {
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 6px;
+        padding: 5px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #4A5568;
+        letter-spacing: 0.04em;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60" data-fps="60" data-width="1920" data-height="1080">
+      <div id="ground"></div>
+      <div class="ambient-glow" id="glow-teal" data-layout-allow-overflow></div>
+      <div class="ambient-glow" id="glow-amber" data-layout-allow-overflow></div>
+
+      <div id="stage">
+        <div id="camera-scaler">
+          <div id="camera-track">
+
+            <!-- SCENE 1: Foundation & Tokens -->
+            <div id="scene-foundation">
+              <div class="foundation-wrap">
+                <div id="found-logo-card">
+                  <img src="assets/figma/logo-preview-v2.png" alt="Silvana Cabral Logo">
+                  <div id="found-logo-sub">Psicologia Clínica · Presencial e Online</div>
+                </div>
+
+                <div class="specimen-grid">
+                  <div class="specimen-card" id="card-type">
+                    <div class="specimen-tag">Tipografia Editorial</div>
+                    <div class="specimen-title">Cormorant Garamond + Montserrat</div>
+                    <div class="specimen-desc">Par autoral display serif e body sans estruturado para acolhimento clínico e autoridade técnica.</div>
+                  </div>
+
+                  <div class="specimen-card" id="card-tokens">
+                    <div class="specimen-tag">Rampa de Areia Quente (30 Tokens Autorais)</div>
+                    <div class="specimen-title">Colors/Brand/Support 50–950</div>
+                    <div class="ramp-strip">
+                      <div class="ramp-step" style="background:#faf8f2"></div>
+                      <div class="ramp-step" style="background:#f5efe6"></div>
+                      <div class="ramp-step" style="background:#ebdccb"></div>
+                      <div class="ramp-step" style="background:#dec3a9"></div>
+                      <div class="ramp-step" style="background:#cfa584"></div>
+                      <div class="ramp-step" style="background:#ba9255"></div>
+                      <div class="ramp-step" style="background:#a57d47"></div>
+                      <div class="ramp-step" style="background:#85643a"></div>
+                      <div class="ramp-step" style="background:#6a4e30"></div>
+                      <div class="ramp-step" style="background:#523a24"></div>
+                      <div class="ramp-step" style="background:#322218"></div>
+                    </div>
+                    <div class="specimen-desc">Escala em 12 passos com aliases semânticos resolvendo em Light e Dark.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 2 & 3: Browser Window & Complete Scroll -->
+            <div id="win-main">
+              <div class="browser-bar">
+                <div class="traffic-lights">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+                <div class="url-bar">
+                  <span class="url-lock">🔒</span>
+                  <span>backup.silvanacabral.com.br</span>
+                </div>
+              </div>
+              <div class="browser-viewport">
+                <div id="s-strip" data-layout-allow-overflow>
+                  <img src="assets/live/desktop-1280-full.png" alt="Silvana Cabral Full Landing Page">
+                </div>
+
+                <div id="cta-highlight-ring"></div>
+
+                <!-- Interactive FAQ Popout -->
+                <div id="faq-interactive-card">
+                  <div class="faq-card-header">
+                    <span>Como funciona a primeira sessão?</span>
+                    <span style="color:#14675E; font-size:20px;">−</span>
+                  </div>
+                  <div class="faq-card-body">
+                    A primeira consulta é um espaço de acolhimento e escuta ativa. Nela, alinhamos suas expectativas, compreendemos os motivos da busca e desenhamos juntos o plano terapêutico adequado.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 4: The WhatsApp Conversion Engine as Code -->
+            <div id="scene-conversion">
+              <div class="conv-container">
+                <div class="conv-code-card">
+                  <div class="code-header">
+                    <span class="code-tag">CONSTANTS/LINKS.TS · ARQUITETURA DE CONVERSÃO</span>
+                    <span style="font-size:11px; color:#94A3B8;">Next.js 14 App Router</span>
+                  </div>
+                  <pre><code style="color:#A7F3D0">// 7 deep links de WhatsApp com mensagens pré-preenchidas por seção:
+export const WHATSAPP_LINKS = {
+  about:    "Olá Silvana, li sobre sua abordagem e gostaria de conversar...",
+  feelings: "Olá, me identifiquei com o que vi no site sobre ansiedade...",
+  faq:      "Olá, fiquei com uma dúvida sobre a forma de pagamento...",
+  notFound: "Olá, não estou conseguindo acessar o site, pode me ajudar?"
+};
+// 14 instâncias ativas na página — o visitante nunca inventa a primeira frase.</code></pre>
+                </div>
+
+                <div class="conv-preview-card">
+                  <div class="wa-chat-bubble">
+                    <div class="wa-sender">WhatsApp Business Deep Link · Ponto de Entrada 404</div>
+                    <div class="wa-text">"não estou conseguindo acessar o site, pode me ajudar?"</div>
+                  </div>
+                  <div class="page-404-card">
+                    <img src="assets/live/page-404.png" alt="Silvana Cabral 404 Page">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 5: Browser-First Responsiveness -->
+            <div id="scene-responsive">
+              <div id="resp-desktop-wrap">
+                <img src="assets/live/sec-00-section-0.png" alt="Desktop Viewport">
+              </div>
+              <div id="resp-phone-wrap">
+                <div class="phone-notch"></div>
+                <div id="resp-phone-strip" data-layout-allow-overflow>
+                  <img src="assets/live/mobile-375-full.png" alt="Mobile 375 Full Page">
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 6: Complete Client Collateral -->
+            <div id="scene-collateral">
+              <div class="collateral-grid">
+                <div class="collat-item" id="collat-highlights">
+                  <img src="assets/figma/instagram-highlights.png" alt="Instagram Highlights">
+                </div>
+                <div class="collat-item" id="collat-card">
+                  <img src="assets/figma/business-card.png" alt="Business Card Design">
+                </div>
+                <div class="collat-item" id="collat-tutorial">
+                  <img src="assets/figma/tutorial-thunderbird.png" alt="Thunderbird Tutorial">
+                </div>
+                <div class="collat-item" id="collat-handoff">
+                  <img src="assets/figma/ready-to-dev-handoff.png" alt="Dev Handoff Frame">
+                </div>
+              </div>
+            </div>
+
+            <!-- SVG Mouse Cursor -->
+            <svg id="cursor" viewBox="0 0 24 24" fill="none">
+              <path d="M5.5 3.2L18.5 13.5L12.5 14.5L16 20.8L13.2 22.2L9.8 16L5.5 19.8V3.2Z" fill="#14675E" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Persistent HUD Header -->
+      <div id="narrative-hud">
+        <div class="hud-pill">
+          <span class="hud-phase" id="hud-phase">01 · FUNDAÇÃO</span>
+          <span class="hud-dot"></span>
+          <span class="hud-title" id="hud-title">Silvana Cabral · Psicologia Clínica</span>
+        </div>
+        <div id="narrative-caption">Construído e programado <strong>sozinho em uma semana</strong>: da referência visual ao deploy.</div>
+      </div>
+
+      <!-- Tech Stack Indicator Pills -->
+      <div id="stack-pills">
+        <div class="stack-pill">NEXT.JS 14</div>
+        <div class="stack-pill">TYPESCRIPT</div>
+        <div class="stack-pill">TAILWIND CSS</div>
+        <div class="stack-pill">FIGMA TOKENS</div>
+      </div>
+    </div>
+
+    <script>
+      // Register timeline for HyperFrames deterministic capture
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      // Elements
+      const scaler     = document.querySelector("#camera-scaler");
+      const track      = document.querySelector("#camera-track");
+      const hudPhase   = document.querySelector("#hud-phase");
+      const hudTitle   = document.querySelector("#hud-title");
+      const caption    = document.querySelector("#narrative-caption");
+      const cursor     = document.querySelector("#cursor");
+
+      const sceneFound = document.querySelector("#scene-foundation");
+      const foundLogo  = document.querySelector("#found-logo-card");
+      const cardType   = document.querySelector("#card-type");
+      const cardTokens = document.querySelector("#card-tokens");
+
+      const winMain    = document.querySelector("#win-main");
+      const sStrip     = document.querySelector("#s-strip");
+      const ctaRing    = document.querySelector("#cta-highlight-ring");
+      const faqCard    = document.querySelector("#faq-interactive-card");
+
+      const sceneConv  = document.querySelector("#scene-conversion");
+      const sceneResp  = document.querySelector("#scene-responsive");
+      const phoneStrip = document.querySelector("#resp-phone-strip");
+      const sceneCollat= document.querySelector("#scene-collateral");
+
+      // Strip geometry: 1440 width -> full height is ~7666px. Viewport is 838px. Max Y = -(7666 - 838) = -6828px.
+      const Y_MAX = -6820;
+
+      // =======================================================================
+      // SCENE 1: Identity & Brand Tokens (0.0s – 7.5s · f0 – f450)
+      // =======================================================================
+      // Frame 0 is already settled: subtle breathing starts at 1.5s
+      tl.to(foundLogo, { scale: 1.03, duration: 3.5, ease: "sine.inOut" }, 1.5);
+      tl.to(foundLogo, { scale: 1.0, duration: 1.5, ease: "sine.inOut" }, 5.0);
+
+      // Exit Scene 1
+      tl.to(sceneFound, { opacity: 0, scale: 0.96, duration: 0.8, ease: "power2.in" }, 6.7);
+
+      // =======================================================================
+      // SCENE 2: The Landing Page — Hero & Navigation (7.5s – 15.0s · f450 – f900)
+      // =======================================================================
+      tl.set(winMain,  { opacity: 0, scale: 0.94, y: 40 }, 7.2);
+      tl.to(winMain,   { opacity: 1, scale: 1.0, y: 0, duration: 1.0, ease: "power2.out" }, 7.5);
+
+      // HUD update
+      tl.set(hudPhase, { textContent: "02 · ARQUITETURA DA PÁGINA" }, 7.5);
+      tl.set(hudTitle, { textContent: "Landing Page de 12 Seções · Hero & Navegação" }, 7.5);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 7.3);
+      tl.set(caption,  { innerHTML: "Construção de acolhimento e clareza para converter visitas em <strong>agendamento direto</strong>." }, 7.5);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 7.5);
+
+      // Cursor enters and interacts with Hero CTA
+      tl.set(cursor,   { opacity: 1, x: 1400, y: 220 }, 8.5);
+      tl.to(cursor,    { x: 860, y: 620, duration: 1.8, ease: "power2.inOut" }, 8.7);
+      // Hover CTA
+      tl.to(ctaRing,   { opacity: 1, duration: 0.3, ease: "power2.out" }, 10.6);
+      tl.to(cursor,    { scale: 0.88, duration: 0.15, yoyo: true, repeat: 1 }, 11.2);
+      tl.to(ctaRing,   { opacity: 0, duration: 0.5, ease: "power2.out" }, 12.0);
+      tl.to(cursor,    { x: 1100, y: 400, duration: 1.2, ease: "power2.inOut" }, 12.4);
+
+      // =======================================================================
+      // SCENE 3: Complete Page Scroll & Section Pauses (15.0s – 35.0s)
+      // =======================================================================
+      // Pause 1: Sentimentos (Feelings cards with emojis) at y ≈ -720px
+      tl.set(hudPhase, { textContent: "03 · NAVEGAÇÃO COMPLETA" }, 15.0);
+      tl.set(hudTitle, { textContent: "Seção Sentimentos · Identificação Imediata" }, 15.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 14.8);
+      tl.set(caption,  { innerHTML: "Sete cards com badges emocionais: <strong>ansiedade, luto, sobrecarga e acolhimento</strong>." }, 15.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 15.0);
+
+      // Smooth scroll down to Sentimentos
+      tl.to(sStrip,    { y: -720, duration: 2.2, ease: "power2.inOut" }, 15.2);
+      // Cursor hover over Sentimentos card
+      tl.to(cursor,    { x: 620, y: 560, duration: 1.4, ease: "power2.out" }, 17.5);
+
+      // Pause 2: Planos & Abordagem TCC at y ≈ -2100px
+      tl.set(hudTitle, { textContent: "Abordagem TCC & Planos Aceitos" }, 20.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 19.8);
+      tl.set(caption,  { innerHTML: "Explicação clara da <strong>Terapia Cognitivo-Comportamental</strong> e cobertura por reembolso." }, 20.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 20.0);
+
+      // Scroll to Abordagem
+      tl.to(sStrip,    { y: -2100, duration: 2.5, ease: "power2.inOut" }, 20.2);
+      tl.to(cursor,    { x: 920, y: 500, duration: 1.5, ease: "power2.inOut" }, 22.8);
+
+      // Pause 3: Sobre Silvana Cabral at y ≈ -3100px
+      tl.set(hudTitle, { textContent: "Perfil Profissional · Autoridade e Credenciais" }, 24.5);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 24.3);
+      tl.set(caption,  { innerHTML: "Apresentação da profissional com formação clínica e <strong>registro no CRP</strong>." }, 24.5);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 24.5);
+
+      // Scroll to Sobre
+      tl.to(sStrip,    { y: -3100, duration: 2.2, ease: "power2.inOut" }, 24.8);
+
+      // Pause 4: Interactive FAQ at y ≈ -4050px
+      tl.set(hudTitle, { textContent: "Dúvidas Frequentes · Accordion Interativo" }, 27.5);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 27.3);
+      tl.set(caption,  { innerHTML: "Perguntas que eliminam a fricção antes do primeiro contato pelo <strong>WhatsApp</strong>." }, 27.5);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 27.5);
+
+      // Scroll to FAQ
+      tl.to(sStrip,    { y: -4050, duration: 2.2, ease: "power2.inOut" }, 27.8);
+      // Cursor clicks FAQ accordion
+      tl.to(cursor,    { x: 720, y: 390, duration: 1.2, ease: "power2.out" }, 29.8);
+      tl.to(cursor,    { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 31.0);
+      tl.to(faqCard,   { opacity: 1, scale: 1.0, duration: 0.4, ease: "back.out(1.5)" }, 31.2);
+      tl.to(faqCard,   { opacity: 0, scale: 0.98, duration: 0.4, ease: "power2.in" }, 33.2);
+
+      // Pause 5: Contato, Mapa & Footer down to Y_MAX
+      tl.set(hudTitle, { textContent: "Contato, Localização & Rodapé Legal" }, 33.5);
+      tl.to(sStrip,    { y: Y_MAX, duration: 2.4, ease: "power2.inOut" }, 33.5);
+      tl.to(cursor,    { opacity: 0, duration: 0.5 }, 34.5);
+
+      // =======================================================================
+      // SCENE 4: The WhatsApp Conversion Engine as Code (35.0s – 43.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "04 · CONVERSÃO EM CÓDIGO" }, 35.0);
+      tl.set(hudTitle, { textContent: "O Mecanismo de Agendamento é Código, Não Enfeite" }, 35.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 34.8);
+      tl.set(caption,  { innerHTML: "7 deep links de WhatsApp com mensagens pré-preenchidas — <strong>inclusive na página 404</strong>." }, 35.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 35.0);
+
+      // Pan/Fade browser window left and reveal conversion scene
+      tl.to(winMain,         { opacity: 0, scale: 0.95, duration: 0.7, ease: "power2.in" }, 35.0);
+      tl.to(sceneConv,       { opacity: 1, duration: 0.8, ease: "power2.out" }, 35.4);
+      tl.from(".conv-code-card", { x: -50, opacity: 0, duration: 0.8, ease: "power2.out" }, 35.5);
+      tl.from(".conv-preview-card", { x: 50, opacity: 0, duration: 0.8, ease: "power2.out" }, 35.7);
+
+      // Exit conversion
+      tl.to(sceneConv,       { opacity: 0, scale: 0.96, duration: 0.7, ease: "power2.in" }, 42.3);
+
+      // =======================================================================
+      // SCENE 5: Browser-First Responsiveness (43.0s – 50.5s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "05 · RESPONSIVIDADE NO NAVEGADOR" }, 43.0);
+      tl.set(hudTitle, { textContent: "Construído em Código · 177 Utilitários Tailwind" }, 43.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 42.8);
+      tl.set(caption,  { innerHTML: "Prancheta mobile vazia no Figma: adaptação responsiva implementada <strong>diretamente no browser</strong>." }, 43.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 43.0);
+
+      tl.to(sceneResp, { opacity: 1, duration: 0.8, ease: "power2.out" }, 43.2);
+      // Mobile scroll animation
+      tl.to(phoneStrip, { y: -3800, duration: 5.5, ease: "power1.inOut" }, 44.0);
+
+      // Exit responsive
+      tl.to(sceneResp, { opacity: 0, scale: 0.96, duration: 0.7, ease: "power2.in" }, 49.8);
+
+      // =======================================================================
+      // SCENE 6: Complete Client Collateral (50.5s – 55.5s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "06 · ENTREGA COMPLETA" }, 50.5);
+      tl.set(hudTitle, { textContent: "Papelaria, Social & Handoff Técnico" }, 50.5);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 50.3);
+      tl.set(caption,  { innerHTML: "Capas para Instagram, cartão de visitas e <strong>tutorial de e-mail em 4 páginas</strong> com mockups." }, 50.5);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 50.5);
+
+      tl.to(sceneCollat, { opacity: 1, duration: 0.8, ease: "power2.out" }, 50.8);
+      tl.from("#collat-highlights", { y: -40, opacity: 0, duration: 0.6, ease: "back.out(1.2)" }, 50.9);
+      tl.from("#collat-card",       { y: -40, opacity: 0, duration: 0.6, ease: "back.out(1.2)" }, 51.1);
+      tl.from("#collat-tutorial",   { y: 40, opacity: 0, duration: 0.6, ease: "back.out(1.2)" }, 51.3);
+      tl.from("#collat-handoff",    { y: 40, opacity: 0, duration: 0.6, ease: "back.out(1.2)" }, 51.5);
+
+      // Exit collateral
+      tl.to(sceneCollat, { opacity: 0, scale: 0.95, duration: 0.7, ease: "power2.in" }, 54.8);
+
+      // =======================================================================
+      // SCENE 7: Seam & Return to Hero Loop (55.5s – 60.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "01 · FUNDAÇÃO" }, 55.5);
+      tl.set(hudTitle, { textContent: "Silvana Cabral · Psicologia Clínica" }, 55.5);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 55.3);
+      tl.set(caption,  { innerHTML: "Construído e programado <strong>sozinho em uma semana</strong>: da referência visual ao deploy." }, 55.5);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 55.5);
+
+      // Return to foundation scene
+      tl.set(sStrip, { y: 0 }, 55.5);
+      tl.to(sceneFound, { opacity: 1, scale: 1.0, duration: 1.2, ease: "power2.out" }, 55.8);
+      tl.to(foundLogo,  { scale: 1.0, opacity: 1, duration: 1.2, ease: "power2.out" }, 55.8);
+      tl.to(cardType,   { y: 0, opacity: 1, duration: 1.2, ease: "power2.out" }, 56.0);
+      tl.to(cardTokens, { y: 0, opacity: 1, duration: 1.2, ease: "power2.out" }, 56.2);
+
+      // Hard-set every animated property back to exact frame-0 values by 59.2s
+      tl.set(scaler,     { scale: 1.0, x: 0, y: 0 }, 59.2);
+      tl.set(track,      { x: 0, y: 0 }, 59.2);
+      tl.set(winMain,    { opacity: 0, scale: 0.94, y: 40 }, 59.2);
+      tl.set(sceneFound, { opacity: 1, scale: 1.0 }, 59.2);
+      tl.set(foundLogo,  { scale: 1.0, opacity: 1 }, 59.2);
+      tl.set(cardType,   { y: 0, opacity: 1 }, 59.2);
+      tl.set(cardTokens, { y: 0, opacity: 1 }, 59.2);
+      tl.set(cursor,     { opacity: 0, x: 1200, y: 300 }, 59.2);
+      tl.set(sceneConv,  { opacity: 0 }, 59.2);
+      tl.set(sceneResp,  { opacity: 0 }, 59.2);
+      tl.set(sceneCollat,{ opacity: 0 }, 59.2);
+    </script>
+  </body>
+</html>

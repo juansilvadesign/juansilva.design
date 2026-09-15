@@ -44,5 +44,210 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole Website UI Designer for Bertelli Sportwear, an athletic activewear and fitness apparel e-commerce brand. Designed 10 responsive screen layouts on the primary Design page across desktop and mobile devices (Homepage, Produtos, Compra, Carrinho, Pagamento, Checkout - Mobile, and mobile viewports) backed by a 12-node Style Guide specifying high-impact promotional banners (Banner Destaque, Product Banner), interactive wishlist heart toggles, button component sets, and athletic typography in Figma (file key lYBgdCb9uGl9jzr4DPq7RL).",
+      "context": "Agency employment at Sagitta delivering from August 16, 2023 to August 24, 2023. Juan served as the sole website UI designer within the agency team: Kelvin Bezerra created the Bertelli Sportwear visual identity and logo, Juan designed the complete activewear e-commerce storefront and purchasing funnel in Figma, and an external no-code developer implemented and published the store on WordPress using WooCommerce and Elementor. Scoped by Ramon.",
+      "outcome": "The e-commerce storefront was implemented and published to production. The company subsequently ceased operations and the domain bertellisportwear.com.br is offline today (verified curl 000). Historical delivery is verified via an era Wayback Machine archive (2024-09-01, 244 KB on Elementor 3.23.4 / Hello Elementor with 388 references and the title 'Bertelli Sportwear - Seu corpo em movimento'), matching the audited Figma shopping suite. No sales or conversion metrics exist. This case study documents D2C activewear e-commerce UX, collection browsing, and mobile checkout flows.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer for Bertelli Sportwear's e-commerce storefront, product discovery, shopping bag, and checkout flows in Figma. I do not claim the logo or visual identity (authored by Kelvin Bezerra), the WordPress/WooCommerce implementation (handled by a no-code developer), or marketing operations. Delivery status: shipped to production in 2023; business later ceased and domain is offline. Historical delivery proven via 2024-09-01 Wayback archive."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "D2C activewear e-commerce UX: high-energy athletic fashion"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "10",
+              "label": "responsive shopping layouts on the primary Design page",
+              "icon": "📐"
+            },
+            {
+              "value": "12",
+              "label": "style guide tokens, promotional banners, and interactive states",
+              "icon": "🎨"
+            },
+            {
+              "value": "244 KB",
+              "label": "verified historical WooCommerce/Elementor build on Wayback",
+              "icon": "🏛️"
+            },
+            {
+              "value": "8 days",
+              "label": "from design kickoff to final implementation handoff",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Fitness fashion is heavily visual and lifestyle-driven. Customers purchasing activewear look for fit, fabric performance, and aesthetic motivation. Converting shoppers requires high-energy editorial imagery, effortless sizing and color selection, and a streamlined purchasing funnel that prevents cart abandonment on mobile devices."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "End-to-end shopping funnel across 10 responsive layouts"
+        },
+        {
+          "type": "prose",
+          "body": "On the primary Design page (node 1:15), I structured the complete e-commerce purchasing journey:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Brand Homepage (Homepage & Homepage - Mobile) — Full-bleed athletic hero banners (Banner Destaque), seasonal collection launches, new arrivals carousels, and customer trust badges (free returns, secure payments).",
+            "Catalog & Collections (Produtos & Produtos - Mobile) — Multi-column grid with category filters (leggings, sports bras, outerwear), interactive wishlist heart toggles, and instant quick-view triggers.",
+            "Product Detail View (Compra & Compra - Mobile) — Focused product page highlighting high-resolution fabric textures, size selector chips, color variant swatches, and prominent 'Comprar Agora' CTAs.",
+            "Bag Drawer & Checkout (Carrinho, Pagamento & Checkout - Mobile) — Slide-out shopping bag drawer with order quantity steppers, shipping fee estimation, and a streamlined mobile checkout flow with minimal input friction."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Historical deployment is verified: the 2024-09-01 Wayback snapshot (244,251 B on Elementor / Hello Elementor) proves public shipping with section sequences matching Figma. 'Shipped' evidences that the design was coded and published—not that Juan built the backend code or created the brand logo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Promotional banners and interactive UI tokens"
+        },
+        {
+          "type": "prose",
+          "body": "The 12-node Style Guide page (node 1:16) standardized Kelvin Bezerra's brand assets: dark and vibrant secondary accent colors, typography scales optimized for fashion merchandising, promotional hero banners (Product Banner), button hover states, and wishlist heart micro-components."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "What this project is and is not"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Not brand identity or logo design. Kelvin Bezerra created the Bertelli Sportwear visual identity and logo.",
+            "Not WordPress or WooCommerce development. The storefront was assembled in WordPress by an external no-code developer.",
+            "Not fashion manufacturing or logistics. I designed the digital shopping experience, not the apparel or inventory supply chain.",
+            "Not currently accessible on the live web. The business ceased operations and the domain is dead; delivery is verified via the 2024 Wayback capture.",
+            "Not supported by sales analytics. No revenue, conversion rate, or order volume metrics exist in the portfolio record."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The value of mobile-first apparel e-commerce"
+        },
+        {
+          "type": "prose",
+          "body": "Bertelli Sportwear illustrates how modern activewear brands engage mobile shoppers through visual storytelling and frictionless checkout. By combining editorial fashion photography with clean product cards and responsive layout discipline, the design delivered a complete, high-converting digital storefront."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer único de UI do site para a Bertelli Sportwear, marca de moda fitness e vestuário esportivo. Desenvolvi 10 pranchetas de e-commerce na página principal de Design abrangendo desktop e mobile (Homepage, Produtos, Compra, Carrinho, Pagamento, Checkout - Mobile e versões mobile), com suporte de um Style Guide com 12 nós especificando banners promocionais (Banner Destaque, Product Banner), botões de lista de desejos (favoritos), componentes de botão e tipografia esportiva no Figma (arquivo lYBgdCb9uGl9jzr4DPq7RL).",
+      "context": "Atuação como funcionário na agência Sagitta de 16 de agosto de 2023 a 24 de agosto de 2023. Juan atuou como designer único de UI do site na equipe da agência: Kelvin Bezerra criou a identidade visual e o logotipo da Bertelli Sportwear, Juan desenhou a loja virtual completa e o funil de checkout no Figma, e um desenvolvedor no-code implementou e publicou a loja no WordPress com WooCommerce e Elementor. Escopo alinhado por Ramon.",
+      "outcome": "A loja virtual foi implementada e publicada em produção. Posteriormente, a empresa encerrou suas atividades comerciais e o domínio bertellisportwear.com.br encontra-se inativo (curl 000 verificado). A entrega histórica é comprovada via snapshot do Wayback Machine (01/09/2024, 244 KB em Elementor 3.23.4 / Hello Elementor com 388 referências e título 'Bertelli Sportwear - Seu corpo em movimento'), coincidente com as pranchetas do Figma auditado. Não existem métricas de vendas ou pedidos. Este estudo de caso documenta o design de e-commerce D2C de moda fitness e checkout mobile.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Divisão de Atribuição e Limite de Escopo: Fui o designer único de UI do site para a loja virtual, vitrines de produtos, sacola de compras e fluxo de checkout no Figma. Não reivindico o logotipo ou identidade visual (criados por Kelvin Bezerra), a implementação em WordPress/WooCommerce (feita por um desenvolvedor no-code) nem a operação de vendas. Status de entrega: publicado em produção em 2023; a marca encerrou atividades e o site está offline. Entrega comprovada via snapshot histórico do Wayback Machine (01/09/2024)."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "UX para e-commerce D2C de moda fitness: dinamismo e conversão"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "10",
+              "label": "pranchetas de compras na página principal de Design",
+              "icon": "📐"
+            },
+            {
+              "value": "12",
+              "label": "tokens e componentes promocionais no Style Guide",
+              "icon": "🎨"
+            },
+            {
+              "value": "244 KB",
+              "label": "de build histórico em WooCommerce/Elementor no Wayback",
+              "icon": "🏛️"
+            },
+            {
+              "value": "8 dias",
+              "label": "do início do layout à entrega para implementação",
+              "icon": "⏱️"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "A moda fitness é um setor fortemente visual e motivacional. O consumidor de roupas esportivas busca caimento, conforto térmico e identificação com um estilo de vida ativo. Converter visitantes em compradores exige fotografias editoriais de alto impacto, navegação intuitiva por tamanhos e cores, e um fluxo de finalização de compra sem atritos em celulares."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Jornada de compra completa em 10 pranchetas responsivas"
+        },
+        {
+          "type": "prose",
+          "body": "Na prancheta principal de Design (nó 1:15), estruturei todas as etapas do funil de e-commerce:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Página Inicial da Marca (Homepage e Homepage - Mobile) — Banners full-bleed de impacto visual (Banner Destaque), vitrines de lançamentos sazonais, carrosséis de produtos e selos de segurança e garantia.",
+            "Catálogo e Coleções (Produtos e Produtos - Mobile) — Grade de produtos com filtros por categoria (leggings, tops, agasalhos), ícone interativo de favoritos (coração) e visualização rápida.",
+            "Página de Produto (Compra e Compra - Mobile) — Layout destacando texturas do tecido em alta resolução, seletores de tamanho, paleta de cores e botão 'Comprar Agora' em evidência.",
+            "Sacola e Checkout (Carrinho, Pagamento e Checkout - Mobile) — Gaveta lateral de sacola com controle de quantidade, cálculo de frete e checkout mobile simplificado para reduzir abandono de carrinho."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "A entrega em produção está comprovada: o snapshot de 01/09/2024 no Wayback Machine (244.251 B em Elementor / Hello Elementor) atesta o site publicado com as mesmas seções do Figma. 'Publicado' comprova que o design foi programado e foi ao ar — não que Juan desenvolveu o código de back-end ou desenhou o logotipo."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Banners promocionais e componentes interativos"
+        },
+        {
+          "type": "prose",
+          "body": "A página de Style Guide com 12 nós (nó 1:16) padronizou os ativos da marca concebidos por Kelvin Bezerra: paleta de alto contraste, tipografia atlética de forte legibilidade, banners para produtos em destaque (Product Banner), estados de botões e micro-interações de lista de desejos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O que este projeto é e o que não é"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Não é criação de marca ou logotipo. Kelvin Bezerra concebeu a identidade visual e o logotipo da Bertelli Sportwear.",
+            "Não é implementação em WordPress ou WooCommerce. A programação do site foi realizada por um desenvolvedor no-code.",
+            "Não é confecção ou logística têxtil. Projetei a experiência digital de compra, não a produção de roupas ou estoque.",
+            "Não está ativo no ar hoje. A marca encerrou atividades e o site está offline; a entrega é comprovada pelo registro histórico no Wayback Machine.",
+            "Não possui métricas de faturamento. Nenhum dado de receita ou taxa de conversão foi retido no registro do portfólio."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "O impacto de um e-commerce de moda focado em mobile"
+        },
+        {
+          "type": "prose",
+          "body": "A Bertelli Sportwear demonstra como marcas esportivas D2C conectam-se com seus clientes através de apelo visual e navegação ágil. Ao combinar fotografia editorial com cards de produto diretos e checkout mobile enxuto, o projeto entregou uma plataforma de vendas funcional e moderna."
+        }
+      ]
+    }
+  }
 }

@@ -41,5 +41,160 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Sole website UI designer for an omnichannel customer acquisition landing page and careers portal for a 44-store regional pharmacy retail network in Greater São Paulo and ABC Paulista. Designed 8 responsive core screens across desktop and mobile, structuring loyalty program capture (Clube MaisFeliz with cashback and cosmetic discounts), store locator directory (Lojas), brand institutional heritage (30-year milestone), and job application intake (Trabalhe Conosco / Sucesso candidatura).",
+      "context": "Agency engagement at Sagitta between March 15 and March 26, 2024. Designed as sole website UI designer alongside Kelvin Bezerra (visual identity) and a no-code developer (WordPress implementation). Built to modernize the digital footprint of a regional retail pharmacy network founded in 1992, creating dedicated conversion pathways for customer loyalty signups and candidate hiring.",
+      "outcome": "Implemented on WordPress by the agency's development team, but the client ultimately rejected the build and retired the landing page, replacing it with an app billboard. The current public domain serves an enterprise VTEX e-commerce storefront rather than Juan's deliverable. No metrics exist; this project stands as evidence of retail pharmacy lead-generation UX and loyalty program enrollment design.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer for the responsive retail landing page, loyalty capture funnel, and job application flows. Kelvin Bezerra designed the logo and brand identity. A no-code developer implemented the WordPress site. Delivery status: built on WordPress, but the client rejected the execution; the landing page was retired. The live domain today serves a VTEX enterprise storefront, not this design artifact."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Retail pharmacy UX: 44 physical stores meet digital loyalty capture"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "8",
+              "label": "core responsive screens across desktop and mobile",
+              "icon": "📐"
+            },
+            {
+              "value": "44",
+              "label": "physical pharmacy locations mapped across ABC Paulista",
+              "icon": "🏪"
+            },
+            {
+              "value": "1",
+              "label": "omnichannel loyalty club enrollment flow (Clube MaisFeliz)",
+              "icon": "💳"
+            },
+            {
+              "value": "2",
+              "label": "primary conversion funnels (Loyalty Capture & Job Applications)",
+              "icon": "🎯"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Brick-and-mortar pharmacy retail relies heavily on local customer retention. With 44 stores across Greater São Paulo and the ABC Paulista region, Rede Feliz Farma required a streamlined digital entry point designed to convert store foot traffic into registered loyalty members while providing a high-volume talent pipeline for pharmacy technicians and clerks."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The dual-funnel architecture: Clube MaisFeliz and talent acquisition"
+        },
+        {
+          "type": "prose",
+          "body": "I engineered the landing page around two prioritized conversion funnels benchmarked against industry standards (including Drogasil retail benchmarks):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Clube MaisFeliz Loyalty Enrollment — Clear value proposition outlining prescription discounts, cashback mechanisms, and promotional cosmetic campaigns, with high-contrast mobile registration fields.",
+            "Physical Store Locator (Lojas) — Integrated regional directory helping shoppers identify nearby branches, opening hours, and dedicated delivery WhatsApp channels.",
+            "Institutional Heritage (About) — Celebrating the brand's 30-year operational history since 1992, humanizing the pharmacy through pharmacist leadership portraits and community impact.",
+            "Careers Intake (Trabalhe Conosco / Sucesso candidatura) — Structured applicant intake form allowing pharmacists, cashiers, and stock clerks to submit qualifications directly into store hiring queues."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Responsive mobile execution: iPhone 13/14 optimization"
+        },
+        {
+          "type": "prose",
+          "body": "Because over 80% of retail pharmacy customer traffic originates on mobile devices, I designed the mobile viewport (iPhone 13 & 14 - 1) as a first-class priority rather than a compressed desktop layout. Visual touch targets were calibrated for thumb reach, form fields used single-column input patterns, and store locator buttons integrated one-tap geolocation triggers."
+        },
+        {
+          "type": "quote",
+          "text": "Retail landing pages must respect local customer habits. For a 44-store network, digital success isn't vanity traffic; it's getting customers registered for the loyalty program and directing them to their neighborhood pharmacy."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Designer de UI exclusivo da landing page de captação de clientes e portal de carreiras para uma rede regional de 44 farmácias na Grande São Paulo e ABC Paulista. Desenvolveu 8 telas responsivas entre desktop e mobile, estruturando o cadastro no clube de fidelidade (Clube MaisFeliz com descontos e cashback em cosméticos), localizador de lojas físicas (Lojas), história institucional da marca (marco de 30 anos) e captação de currículos (Trabalhe Conosco / Sucesso candidatura).",
+      "context": "Atuação na agência Sagitta entre 15 e 26 de março de 2024. Atuou como designer exclusivo da interface em conjunto com Kelvin Bezerra (identidade visual) e um desenvolvedor no-code (implementação em WordPress). Construído para modernizar a presença digital de uma rede farmacêutica fundada em 1992, criando canais dedicados para adesão a programas de fidelidade e contratação de profissionais.",
+      "outcome": "Implementado em WordPress pela equipe de desenvolvimento da agência, mas o cliente rejeitou o build técnico e descontinuou a landing page, substituindo-a por um painel de app. O domínio público atual utiliza uma plataforma corporativa VTEX e não o artefato desenhado por Juan. Não restam métricas comerciais; o projeto permanece como comprovação de UX para conversão no varejo farmacêutico e cadastros em clubes de fidelidade.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer exclusivo da interface do site, responsável pela landing page responsiva, funil de adesão ao clube de fidelidade e fluxo de envio de currículos. Kelvin Bezerra desenhou o logotipo e a identidade de marca. Um desenvolvedor no-code implementou o site em WordPress. Status de entrega: desenvolvido em WordPress, mas o cliente rejeitou a entrega da agência; a landing page foi descontinuada e o site atual opera em VTEX, não refletindo este design."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Varejo farmacêutico: 44 lojas físicas e captação digital de fidelidade"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "8",
+              "label": "telas centrais responsivas desenhadas no Figma",
+              "icon": "📐"
+            },
+            {
+              "value": "44",
+              "label": "unidades físicas mapeadas na Grande SP e ABC Paulista",
+              "icon": "🏪"
+            },
+            {
+              "value": "1",
+              "label": "funil de adesão ao programa de vantagens (Clube MaisFeliz)",
+              "icon": "💳"
+            },
+            {
+              "value": "2",
+              "label": "canais prioritários de conversão (Fidelidade e Recrutamento)",
+              "icon": "🎯"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "O varejo farmacêutico físico depende fundamentalmente da fidelização de vizinhança. Com 44 filiais na Grande São Paulo e região do ABC Paulista, a Rede Feliz Farma necessitava de um ponto de contato digital desenhado para converter o fluxo de balcão das lojas em cadastros no clube de vantagens, além de alimentar a demanda recorrente de contratação de balconistas e farmacêuticos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Arquitetura de dois funis: Clube MaisFeliz e captação de talentos"
+        },
+        {
+          "type": "prose",
+          "body": "Estruturei a landing page em torno de dois objetivos de conversão, tomando como referência boas práticas consolidadas do varejo farmacêutico (como a Drogasil):"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cadastro no Clube MaisFeliz — Proposta de valor em destaque detalhando descontos em medicamentos, cashback em perfumaria e ofertas exclusivas, com formulário de cadastro em destaque para celular.",
+            "Guia e Localizador de Lojas (Lojas) — Diretório regional com endereços, horários de funcionamento e links diretos para atendimento via WhatsApp de cada unidade.",
+            "História Institucional (About) — Apresentação da trajetória de mais de 30 anos desde a fundação em 1992, reforçando laços comunitários e equipe farmacêutica responsável.",
+            "Trabalhe Conosco (Sucesso candidatura) — Formulário direto para envio de currículos integrado à triagem de novos talentos para atendimento e suporte operacional."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Execução responsiva mobile: prioridade em iPhone 13 e 14"
+        },
+        {
+          "type": "prose",
+          "body": "Sabendo que mais de 80% dos acessos a redes de farmácia ocorrem pelo celular, projetei a versão mobile (iPhone 13 & 14 - 1) como prancha primária, e não como uma simples compressão do desktop. Áreas de toque foram calibradas para navegação com o polegar, campos de formulário seguiram coluna única e botões de contato com a farmácia integraram acionamento em um toque."
+        },
+        {
+          "type": "quote",
+          "text": "Landing pages de varejo precisam respeitar o cotidiano do consumidor local. Para uma rede de 44 farmácias, sucesso digital não é tráfego de vaidade; é cadastrar o cliente no clube e levá-lo até a loja mais próxima."
+        }
+      ]
+    }
+  }
 }

@@ -44,5 +44,234 @@
     "storeListing": false,
     "designArtifact": true
   },
-  "caseStudy": null
+  "caseStudy": {
+    "en": {
+      "brief": "Two-sided recruitment platform connecting job seekers (Candidatos) with hiring organizations (Empresas), backed by a centralized administrative operations suite (Admin). 230 screen nodes on Desktop and 16 on Mobile across eight Figma pages, including candidate discovery with edge-case handling, an employer hiring pipeline with a 3-step vacancy wizard and Kanban board, technical fit scoring (IAT) with four explanatory modals, and Brazilian checkout across Card, Pix, and Boleto.",
+      "context": "Agency employment at Sagitta; the client relationship belonged to the agency. Clear team split: Ramon (tech lead) led UX discovery workshops, client meetings, and functional requirements; Kelvin Bezerra created the brand identity and original logo. As Main UI Designer, I authored the complete interface across all three role surfaces, designed the domain component layer on an Untitled UI base, and adapted mobile onboarding flows. Documented across October and November 2024.",
+      "outcome": "Shipped to production and publicly accessible at atuavaga.com.br, serving the candidate and employer onboarding flows designed in this file. The client subsequently replaced Kelvin Bezerra's original logo with an inferior version on the live site; consequently, the live URL serves strictly as proof of shipping, while the Figma file remains the definitive benchmark for design craft. No hiring or placement volume metrics are claimed.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Attribution boundary: Ramon (tech lead) ran UX discovery and specified functional requirements; Kelvin Bezerra designed the brand identity and original logo. I was the Main UI Designer across all three role surfaces (Candidate, Employer, Admin) and author of the domain component system. The underlying IAT algorithm was defined by the client and tech lead — I designed its user interface and modal explainers."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "A three-surface recruitment marketplace"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "230",
+              "label": "desktop interface frames across three surfaces",
+              "icon": "🖥️"
+            },
+            {
+              "value": "16",
+              "label": "mobile onboarding & auth screen flows",
+              "icon": "📱"
+            },
+            {
+              "value": "3",
+              "label": "distinct user roles (Candidate, Company, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "Brazilian payment rails (Card, Pix, Boleto)",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Recruitment marketplaces require balancing two competing behavioral modes: candidates experiencing high anxiety who need effortless discovery and unambiguous status feedback, and employers needing rapid candidate triage, structured technical screening, and straightforward subscription billing."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The Candidate surface: discovery, tracking, and divergence modals"
+        },
+        {
+          "type": "prose",
+          "body": "The candidate workspace (13043:2393) provides clear, stress-free vacancy exploration and application management:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Authentication and Progressive Onboarding — Multi-step registration (cadastro stages 1–4), professional credential setup (Cadastro Profissional), and robust password recovery flows.",
+            "Job Discovery with Zero-Result Safety — Advanced search with role, salary, and location filters, full job detail sheets, empty filter states, and saved job alert configurations (Alerta de vagas).",
+            "Application Pipeline and History — Dedicated tracking (Minhas Vagas) keeping job seekers informed of their status at each hiring stage.",
+            "Comprehensive Modal and Error States — Designed edge paths including first-access notices (popupCandidatura/primeiroAcesso), application success, divergence warnings (popupCandidatura/divergência), and violation reporting (denunciar / denunciarSucesso)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The Employer surface: 3-step wizard, Kanban, and IAT scoring"
+        },
+        {
+          "type": "prose",
+          "body": "The employer environment (13014:1756) structures talent acquisition from vacancy publishing through technical assessment to paid plan checkout:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Three-Step Vacancy Creation Wizard — Structured posting flow (Nova vaga 1, 2, 3) capturing role requisites, compensation brackets, and prerequisite technical competencies.",
+            "Candidate Kanban Pipeline — Visual applicant tracking board (cardKanban) enabling recruitment teams to advance prospects through interview stages.",
+            "IAT Technical Fit Scoring Interface — UI representation of the platform's proprietary Índice de Aderência Técnica, backed by four dedicated explainer modals (aderênciaAjuda, concorrênciaAjuda, médiaAjuda, popupFitcultural) ensuring recruiters understand how composite scores are derived.",
+            "Full Brazilian Payment Checkout — Commercial subscription purchase UI supporting credit card (Cartão 1–2), instant Pix with dynamic QR codes (Pix 1–2), and bank slip (Boleto 1–2), complete with retry and confirmation states."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "The Admin back office: platform control and broadcast tools"
+        },
+        {
+          "type": "prose",
+          "body": "The administrative surface (5325:11592) equips platform operators with macro management tools:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Centralized Entity Management — Dedicated management interfaces with detail modals for registered companies (gerenciamentoEmpresa), candidates (gerenciamentoCandidato), job categories, subscription plans (gerenciamentoPlanos), and admin staff.",
+            "Mass Notification Dispatcher — Multi-channel broadcast tool allowing single selection, bulk selection, mass resend (Reenvio em massa), and historical audit logging (Histórico de notificações).",
+            "Content and Support Administration — Full modal CRUD for system-wide FAQs (FAQ - Adicionar, Editar, Deletar dúvida) with success confirmations."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Production reality: the live site and the logo swap"
+        },
+        {
+          "type": "prose",
+          "body": "The design was delivered to Sagitta's development team and shipped to production at atuavaga.com.br. Following deployment, the client swapped Kelvin Bezerra's brand mark on the live site for an unrefined logo variation. This occurrence underscores an essential portfolio standard: the live URL serves as incontrovertible proof of deployment, but the Figma file represents the authentic visual craftsmanship."
+        },
+        {
+          "type": "quote",
+          "text": "When a client alters brand assets post-handover, the live URL remains proof that the system shipped, but the design file stands as the true record of craft and architecture."
+        }
+      ]
+    },
+    "pt": {
+      "brief": "Plataforma de recrutamento de dois lados conectando profissionais (Candidatos) e empresas contratantes (Empresas), sustentada por uma suíte operacional administrativa centralizada (Admin). 230 nós de tela no Desktop e 16 no Mobile distribuídos em oito páginas no Figma, englobando descoberta de vagas com tratamento de exceções, funil de contratação com wizard de 3 etapas e Kanban, score de aderência técnica (IAT) com quatro modais explicativos e checkout com Cartão, Pix e Boleto.",
+      "context": "Atuação como designer de UI contratado pela agência Sagitta; o relacionamento comercial pertencia à agência. Divisão clara de papéis: Ramon (tech lead) liderou os workshops de discovery de UX, reuniões com o cliente e especificação funcional; Kelvin Bezerra desenhou a identidade de marca e o logotipo original. Como Designer de UI Principal, criei a interface completa nos três perfis de acesso, estruturei a camada de componentes de domínio sobre base Untitled UI e adaptei os fluxos mobile. Trabalho documentado entre outubro e novembro de 2024.",
+      "outcome": "Entregue e colocado em produção em atuavaga.com.br, servindo os fluxos de entrada de candidatos e empresas desenhados neste arquivo. Posteriormente, o cliente substituiu o logotipo original de Kelvin Bezerra por uma versão de menor refinamento no site no ar; portanto, a URL ao vivo serve estritamente como prova de publicação, enquanto o arquivo no Figma permanece como o padrão definitivo de qualidade visual. Nenhuma métrica quantitativa de contratações é reivindicada.",
+      "blocks": [
+        {
+          "type": "callout",
+          "body": "Fronteira de atribuição: Ramon (tech lead) conduziu o discovery de UX e definiu os requisitos funcionais; Kelvin Bezerra criou a identidade visual e o logotipo original. Eu atuei como Designer de UI Principal nos três perfis (Candidato, Empresa, Admin) e autor da camada de componentes de domínio. O algoritmo do IAT foi concebido pelo cliente e pelo tech lead — eu desenhei sua interface e os modais explicativos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Um ecossistema de recrutamento em três perfis"
+        },
+        {
+          "type": "statRow",
+          "items": [
+            {
+              "value": "230",
+              "label": "telas desktop desenhadas nos três perfis",
+              "icon": "🖥️"
+            },
+            {
+              "value": "16",
+              "label": "telas mobile de onboarding e autenticação",
+              "icon": "📱"
+            },
+            {
+              "value": "3",
+              "label": "perfis de acesso (Candidato, Empresa, Admin)",
+              "icon": "👥"
+            },
+            {
+              "value": "3",
+              "label": "métodos de pagamento brasileiros (Cartão, Pix, Boleto)",
+              "icon": "💳"
+            }
+          ]
+        },
+        {
+          "type": "prose",
+          "body": "Marketplaces de recrutamento exigem equilibrar dois estados emocionais opostos: candidatos que enfrentam a ansiedade da busca por emprego e demandam clareza e feedback imediato de status, e empresas que precisam de triagem ágil, avaliação técnica consistente e checkout simples para planos corporativos."
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Perfil Candidato: busca, acompanhamento e modais de divergência"
+        },
+        {
+          "type": "prose",
+          "body": "A área do candidato (13043:2393) oferece navegação fluida e acolhedora para descoberta de vagas e gestão de candidaturas:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Autenticação e Cadastro Progressivo — Fluxo de cadastro em etapas (cadastro etapas 1 a 4), preenchimento de perfil profissional (Cadastro Profissional) e recuperação de senha com código de verificação.",
+            "Descoberta de Vagas com Estados Vazios — Busca avançada com filtros de cargo, senioridade e remuneração, folha detalhada da vaga, estados de filtro sem resultado e criação de alertas (Alerta de vagas).",
+            "Gestão e Histórico de Candidaturas — Painel dedicado (Minhas Vagas) mantendo o profissional informado sobre a evolução de cada candidatura no funil.",
+            "Matriz Completa de Modais e Exceções — Tratamento de primeiro acesso (popupCandidatura/primeiroAcesso), confirmação de envio, avisos de divergência de perfil (popupCandidatura/divergência) e fluxo de denúncia de vaga irregular (denunciar / denunciarSucesso)."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Perfil Empresa: wizard de vaga, Kanban e aderência técnica (IAT)"
+        },
+        {
+          "type": "prose",
+          "body": "O ambiente da empresa contratante (13014:1756) organiza todo o ciclo de atração de talentos, desde o anúncio até a assinatura do plano:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Wizard de Publicação de Vagas em 3 Etapas — Fluxo estruturado (Nova vaga 1, 2, 3) para definição de requisitos, faixa salarial, benefícios e competências eliminatórias.",
+            "Pipeline de Candidatos em Kanban — Quadro visual de triagem (cardKanban) permitindo que equipes de RH movimentem talentos entre as etapas do processo seletivo.",
+            "Interface do Índice de Aderência Técnica (IAT) — Visualização gráfica do score de compatibilidade do candidato, acompanhada por quatro modais explicativos (aderênciaAjuda, concorrênciaAjuda, médiaAjuda, popupFitcultural) para dar transparência ao cálculo aos recrutadores.",
+            "Checkout Completo com Meios Brasileiros — Fluxo de contratação de planos corporativos com Cartão de Crédito (Cartão 1–2), Pix com QR code dinâmico (Pix 1–2) e Boleto bancário (Boleto 1–2), com telas de erro, tentativa e confirmação."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Painel Admin: gestão de plataforma e comunicação em massa"
+        },
+        {
+          "type": "prose",
+          "body": "A suíte administrativa (5325:11592) fornece aos operadores da plataforma visão global e ferramentas de sustentação:"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Gestão Centralizada de Entidades — Telas com modais de detalhe para empresas cadastradas (gerenciamentoEmpresa), candidatos (gerenciamentoCandidato), cargos, planos comerciais e administradores.",
+            "Disparador de Notificações em Massa — Ferramenta de comunicação com seleção unitária, seleção global, reenvio em massa (Reenvio em massa) e histórico auditável de disparos (Histórico de notificações).",
+            "Gerenciador de Conteúdo e Suporte — CRUD modal completo para central de ajuda (FAQ - Adicionar, Editar, Deletar dúvida) com feedback de sucesso."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Realidade de produção: o site no ar e a troca de logotipo"
+        },
+        {
+          "type": "prose",
+          "body": "O design foi entregue aos desenvolvedores da Sagitta e lançado em produção em atuavaga.com.br. Após a entrega, o cliente optou por trocar o logotipo criado por Kelvin Bezerra por uma versão alternativa no site público. Esse episódio ilustra uma premissa fundamental deste portfólio: o link em produção atesta que o software foi construído e publicado, mas o arquivo no Figma guarda o verdadeiro padrão de design e identidade."
+        },
+        {
+          "type": "quote",
+          "text": "Quando um cliente altera ativos de marca após a entrega, a URL em produção comprova que o sistema foi lançado, mas o arquivo de design permanece como o registro autêntico de arquitetura e refinamento."
+        }
+      ]
+    }
+  }
 }
