@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>PsiAtiva — pgvector RAG Memory Loop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #080A0E;
+        color: #F1F5F9;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #080A0E;
+      }
+      #ground {
+        position: absolute;
+        inset: 0;
+        background-color: #080A0E;
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(130px);
+        pointer-events: none;
+      }
+      #glow-blue {
+        top: 150px;
+        left: 200px;
+        width: 650px;
+        height: 650px;
+        background: rgba(56, 189, 248, 0.12);
+      }
+      #glow-emerald {
+        bottom: 100px;
+        right: 250px;
+        width: 600px;
+        height: 600px;
+        background: rgba(16, 185, 129, 0.12);
+      }
+
+      /* Top Header */
+      #header-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: rgba(11, 14, 20, 0.94);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 100;
+        backdrop-filter: blur(16px);
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .header-logo-img {
+        height: 24px;
+        width: auto;
+        object-fit: contain;
+      }
+      .header-divider {
+        width: 1px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .header-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #F1F5F9;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-tag {
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        background: rgba(56, 189, 248, 0.15);
+        color: #38BDF8;
+        padding: 2px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(56, 189, 248, 0.3);
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .active-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(56, 189, 248, 0.12);
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        color: #38BDF8;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 999px;
+      }
+      .active-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #38BDF8;
+        box-shadow: 0 0 8px #38BDF8;
+      }
+
+      /* Split Stage */
+      #split-stage {
+        position: absolute;
+        top: 64px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+      }
+
+      /* Left Side: PostgreSQL pgvector Inspector (width 880px) */
+      #db-pane {
+        width: 880px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        border-right: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      #db-card {
+        width: 100%;
+        max-width: 800px;
+        background: #0D1117;
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        border-radius: 18px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.08);
+        overflow: hidden;
+      }
+      .db-header {
+        height: 52px;
+        background: #161B22;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .db-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: #38BDF8;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+      }
+      .db-tag {
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        color: #022C22;
+        background: #10B981;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 700;
+      }
+      .db-terminal {
+        padding: 24px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #CBD5E1;
+      }
+      .hl-sql { color: #F472B6; font-weight: 600; }
+      .hl-table { color: #38BDF8; }
+      .hl-op { color: #34D399; }
+      .hl-param { color: #FBBF24; }
+
+      .db-query-box {
+        background: #07090D;
+        border: 1px solid #21262D;
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-bottom: 20px;
+      }
+
+      .db-result-row {
+        background: #0B0E14;
+        border: 1px solid #2B303C;
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-top: 12px;
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      .db-sim-score {
+        display: inline-block;
+        background: rgba(16, 185, 129, 0.2);
+        color: #34D399;
+        font-weight: 700;
+        font-size: 11px;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-right: 8px;
+      }
+      .db-doc-title {
+        color: #94A3B8;
+        font-size: 11px;
+      }
+      .db-doc-body {
+        color: #E2E8F0;
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      /* Right Side: n8n Workflow (width 1040px) */
+      #flow-pane {
+        width: 1040px;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      #flow-scaler {
+        position: absolute;
+        inset: 0;
+        transform-origin: 520px 480px;
+      }
+      #flow-track {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* n8n Nodes */
+      .n8n-node {
+        position: absolute;
+        width: 290px;
+        height: 94px;
+        background: #171A21;
+        border: 1px solid #2B303C;
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+      .node-active-ring {
+        position: absolute;
+        inset: -2px;
+        border-radius: 14px;
+        border: 2px solid #38BDF8;
+        box-shadow: 0 0 18px rgba(56, 189, 248, 0.5);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .node-badge {
+        position: absolute;
+        top: -11px;
+        right: 14px;
+        background: #10B981;
+        color: #022C22;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 999px;
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      .node-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .icon-wa { background: rgba(37, 211, 102, 0.15); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.3); }
+      .icon-ai { background: rgba(139, 92, 246, 0.15); color: #A78BFA; border: 1px solid rgba(139, 92, 246, 0.3); }
+      .icon-db { background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3); }
+      .icon-code { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+      .node-content {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 60px);
+        overflow: hidden;
+      }
+      .node-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #F8FAFC;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .node-sub {
+        font-size: 11px;
+        color: #94A3B8;
+        font-family: "JetBrains Mono", monospace;
+        margin-top: 2px;
+      }
+
+      /* Wires */
+      #wires-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1040px;
+        height: 1000px;
+        pointer-events: none;
+      }
+      .wire-path {
+        fill: none;
+        stroke: #374151;
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+      .wire-pulse {
+        fill: none;
+        stroke: #38BDF8;
+        stroke-width: 5;
+        filter: drop-shadow(0 0 8px #38BDF8);
+        stroke-dasharray: 20, 200;
+        opacity: 0;
+      }
+
+      /* Grounded Context Injection Callout */
+      #grounded-box {
+        position: absolute;
+        bottom: 50px;
+        left: 80px;
+        right: 80px;
+        background: rgba(13, 17, 23, 0.95);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 12px;
+        padding: 16px 20px;
+        backdrop-filter: blur(16px);
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      .grounded-header {
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+        color: #38BDF8;
+        margin-bottom: 6px;
+      }
+      .grounded-content {
+        font-size: 12px;
+        color: #CBD5E1;
+        line-height: 1.45;
+      }
+      .grounded-tag {
+        color: #10B981;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+      <div id="ground"></div>
+      <div class="ambient-glow" id="glow-blue" data-layout-allow-overflow=""></div>
+      <div class="ambient-glow" id="glow-emerald" data-layout-allow-overflow=""></div>
+
+      <!-- Top Header -->
+      <header id="header-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+        <div class="header-left" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <img class="header-logo-img" src="assets/psiativa-full-nobg.png" alt="PsiAtiva">
+          <div class="header-divider"></div>
+          <div class="header-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <span data-layout-allow-overlap="" data-layout-allow-occlusion="">pgvector Contextual Memory</span>
+            <span class="header-tag" data-layout-allow-overlap="" data-layout-allow-occlusion="">PostgreSQL 16 · n8n</span>
+          </div>
+        </div>
+        <div class="header-right" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <div class="active-pill" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <span class="active-dot"></span>
+            <span data-layout-allow-overlap="" data-layout-allow-occlusion="">SEMANTIC RETRIEVAL LOOP</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Split Area -->
+      <div id="split-stage" data-layout-allow-overflow="">
+
+        <!-- Left: Database Inspector -->
+        <div id="db-pane" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <div id="db-card" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <div class="db-header" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+              <div class="db-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <span>🧠</span>
+                <span data-layout-allow-overlap="" data-layout-allow-occlusion="">PostgreSQL 16 + pgvector — Vector Search</span>
+              </div>
+              <div class="db-tag" data-layout-allow-overlap="" data-layout-allow-occlusion="">COSINE DISTANCE (&lt;=&gt;)</div>
+            </div>
+            <div class="db-terminal" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+              <div class="db-query-box" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div><span class="hl-sql">SELECT</span> doc_id, chunk, <span class="hl-sql">1 -</span> (embedding <span class="hl-op">&lt;=&gt;</span> <span class="hl-param">$query_vector</span>) <span class="hl-sql">AS</span> sim</div>
+                <div><span class="hl-sql">FROM</span> <span class="hl-table">db_knowledge.embeddings</span></div>
+                <div><span class="hl-sql">WHERE</span> namespace = <span class="hl-param">'compliance_cfp_metodologia'</span></div>
+                <div><span class="hl-sql">ORDER BY</span> embedding <span class="hl-op">&lt;=&gt;</span> <span class="hl-param">$query_vector</span> <span class="hl-sql">LIMIT</span> 2;</div>
+              </div>
+
+              <div class="db-result-row" id="result-1" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div>
+                  <span class="db-sim-score" data-layout-allow-overlap="" data-layout-allow-occlusion="">0.961 SIMILARITY</span>
+                  <span class="db-doc-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">CFP Código de Ética Profissional · Art. 20</span>
+                </div>
+                <div class="db-doc-body" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  "É expressamente vedado ao psicólogo garantir resultados, prometer volume de cura ou mercantilizar o serviço clínico..."
+                </div>
+              </div>
+
+              <div class="db-result-row" id="result-2" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div>
+                  <span class="db-sim-score" data-layout-allow-overlap="" data-layout-allow-occlusion="">0.914 SIMILARITY</span>
+                  <span class="db-doc-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">PsiAtiva — Matriz de Qualificação Clínica</span>
+                </div>
+                <div class="db-doc-body" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  "Reenquadrar a demanda de volume em processos de conversão e redução de evasão nas primeiras sessões."
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: n8n Pipeline Flow -->
+        <div id="flow-pane" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <div id="flow-scaler" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <div id="flow-track" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+
+              <!-- SVG Wires -->
+              <svg id="wires-svg" viewBox="0 0 1040 1000" data-layout-allow-overflow="">
+                <path class="wire-path" d="M 370 210 C 440 210, 470 210, 540 210" />
+                <path class="wire-path" d="M 830 210 C 890 210, 890 380, 540 380" />
+                <path class="wire-path" d="M 830 380 C 890 380, 890 550, 540 550" />
+
+                <!-- Pulses -->
+                <path id="pulse-1" class="wire-pulse" d="M 370 210 C 440 210, 470 210, 540 210" />
+                <path id="pulse-2" class="wire-pulse" d="M 830 210 C 890 210, 890 380, 540 380" />
+                <path id="pulse-3" class="wire-pulse" d="M 830 380 C 890 380, 890 550, 540 550" />
+              </svg>
+
+              <!-- Node 1: Z-API Message -->
+              <div class="n8n-node" id="node-msg" style="top: 163px; left: 80px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-msg"></div>
+                <div class="node-badge" id="badge-msg" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 18ms</div>
+                <div class="node-icon icon-wa" data-layout-allow-overlap="" data-layout-allow-occlusion="">💬</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Mensagem Entrante</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">"Vocês garantem pacientes?"</span>
+                </div>
+              </div>
+
+              <!-- Node 2: Gerar Embedding -->
+              <div class="n8n-node" id="node-embed" style="top: 163px; left: 540px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-embed"></div>
+                <div class="node-badge" id="badge-embed" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 210ms</div>
+                <div class="node-icon icon-ai" data-layout-allow-overlap="" data-layout-allow-occlusion="">🧬</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Gerar Embedding</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">text-embedding-3 · 1536d</span>
+                </div>
+              </div>
+
+              <!-- Node 3: Busca pgvector -->
+              <div class="n8n-node" id="node-rag" style="top: 333px; left: 540px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-rag"></div>
+                <div class="node-badge" id="badge-rag" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 38ms</div>
+                <div class="node-icon icon-db" data-layout-allow-overlap="" data-layout-allow-occlusion="">🔍</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Busca RAG pgvector</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">Similaridade Cosseno</span>
+                </div>
+              </div>
+
+              <!-- Node 4: Injetar Contexto -->
+              <div class="n8n-node" id="node-inject" style="top: 503px; left: 540px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-inject"></div>
+                <div class="node-badge" id="badge-inject" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 14ms</div>
+                <div class="node-icon icon-code" data-layout-allow-overlap="" data-layout-allow-occlusion="">⚡</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Injetar no Prompt LLM</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">Contexto CFP Ancorado</span>
+                </div>
+              </div>
+
+              <!-- Grounded Box -->
+              <div id="grounded-box" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="grounded-header" data-layout-allow-overlap="" data-layout-allow-occlusion="">GROUNDED CONTEXT FORWARDED TO CLAUDE</div>
+                <div class="grounded-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="grounded-tag" data-layout-allow-overlap="" data-layout-allow-occlusion="">[Anti-Alucinação]:</span> Resposta orientada: psicólogos são proibidos de prometer volume pelo CFP. A PsiAtiva estrutura o funil técnico para converter a demanda real com previsibilidade.
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- End #split-stage -->
+    </div><!-- End #root -->
+
+    <script>
+      const tl = gsap.timeline();
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      // Stage elements
+      const ringMsg = "#ring-msg";
+      const badgeMsg = "#badge-msg";
+      const ringEmbed = "#ring-embed";
+      const badgeEmbed = "#badge-embed";
+      const ringRag = "#ring-rag";
+      const badgeRag = "#badge-rag";
+      const ringInject = "#ring-inject";
+      const badgeInject = "#badge-inject";
+
+      const result1 = "#result-1";
+      const result2 = "#result-2";
+      const groundedBox = "#grounded-box";
+
+      // Initial clean state at t=0.0s
+      tl.set(".wire-pulse", { opacity: 0, strokeDashoffset: 400 }, 0.0);
+      tl.set([ringMsg, ringEmbed, ringRag, ringInject], { opacity: 0 }, 0.0);
+      tl.set([badgeMsg, badgeEmbed, badgeRag, badgeInject], { opacity: 0, y: 4 }, 0.0);
+      tl.set([result1, result2], { opacity: 0, y: 8 }, 0.0);
+      tl.set(groundedBox, { opacity: 0, y: 16 }, 0.0);
+
+      // --- SCENE 1: Inbound Trigger & Embedding (0.0s – 3.5s) ---
+      tl.to(ringMsg, { opacity: 1, duration: 0.3 }, 0.8);
+      tl.to(badgeMsg, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.7)" }, 0.9);
+
+      // Pulse to Embedding
+      tl.fromTo("#pulse-1", { opacity: 1, strokeDashoffset: 400 }, { strokeDashoffset: 0, opacity: 0, duration: 1.0, ease: "power1.inOut" }, 1.3);
+      tl.to(ringEmbed, { opacity: 1, duration: 0.3 }, 2.3);
+      tl.to(badgeEmbed, { opacity: 1, y: 0, duration: 0.3 }, 2.4);
+
+      // --- SCENE 2: pgvector Query & Similarity Match (3.5s – 7.5s) ---
+      tl.fromTo("#pulse-2", { opacity: 1, strokeDashoffset: 400 }, { strokeDashoffset: 0, opacity: 0, duration: 1.0, ease: "power1.inOut" }, 3.5);
+      tl.to(ringRag, { opacity: 1, duration: 0.3 }, 4.5);
+      tl.to(badgeRag, { opacity: 1, y: 0, duration: 0.3 }, 4.6);
+
+      // Database returns top-2 cosine matches
+      tl.to(result1, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 5.0);
+      tl.to(result2, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 5.6);
+
+      // --- SCENE 3: Dynamic Context Grounding (7.5s – 11.5s) ---
+      tl.fromTo("#pulse-3", { opacity: 1, strokeDashoffset: 400 }, { strokeDashoffset: 0, opacity: 0, duration: 1.0, ease: "power1.inOut" }, 7.5);
+      tl.to(ringInject, { opacity: 1, duration: 0.3 }, 8.5);
+      tl.to(badgeInject, { opacity: 1, y: 0, duration: 0.3 }, 8.6);
+
+      // Reveal grounded context callout
+      tl.to(groundedBox, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 8.9);
+
+      // --- SCENE 4: Clean Loop Settle (11.5s – 15.0s) ---
+      tl.to(groundedBox, { opacity: 0, y: 16, duration: 0.6, ease: "power2.in" }, 12.5);
+      tl.to([result1, result2], { opacity: 0, y: 8, duration: 0.6, ease: "power2.in" }, 12.8);
+      tl.to([ringMsg, ringEmbed, ringRag, ringInject], { opacity: 0, duration: 0.6 }, 13.0);
+      tl.to([badgeMsg, badgeEmbed, badgeRag, badgeInject], { opacity: 0, y: 4, duration: 0.6 }, 13.0);
+
+      // Hard settle at t=13.8s (held static until t=15.0s)
+      tl.set(".wire-pulse", { opacity: 0, strokeDashoffset: 400 }, 13.8);
+      tl.set([ringMsg, ringEmbed, ringRag, ringInject], { opacity: 0 }, 13.8);
+      tl.set([badgeMsg, badgeEmbed, badgeRag, badgeInject], { opacity: 0, y: 4 }, 13.8);
+      tl.set([result1, result2], { opacity: 0, y: 8 }, 13.8);
+      tl.set(groundedBox, { opacity: 0, y: 16 }, 13.8);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0D0F14;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #F3F4F6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Base Canvas Background with n8n dot grid */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background-color: #0B0D12;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+        background-size: 28px 28px;
+      }
+
+      /* Ambient brand lighting */
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+      }
+      #glow-teal {
+        top: 100px;
+        left: 300px;
+        width: 700px;
+        height: 700px;
+        background: rgba(26, 75, 81, 0.22);
+      }
+      #glow-coral {
+        bottom: 120px;
+        right: 400px;
+        width: 650px;
+        height: 650px;
+        background: rgba(255, 109, 90, 0.12);
+      }
+      #glow-emerald {
+        top: 400px;
+        right: 200px;
+        width: 500px;
+        height: 500px;
+        background: rgba(16, 185, 129, 0.14);
+      }
+
+      /* Stage & Camera Rig */
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* --- Global n8n Workflow World (virtual canvas 3400x1900) --- */
+      #canvas-world {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3400px;
+        height: 1900px;
+      }
+
+      /* SVG Wire Connections */
+      #wires-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3400px;
+        height: 1900px;
+        pointer-events: none;
+      }
+
+      .wire-path {
+        fill: none;
+        stroke: #374151;
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+
+      .wire-active {
+        fill: none;
+        stroke: #10B981;
+        stroke-width: 3;
+        stroke-dasharray: 8, 8;
+      }
+
+      .wire-pulse {
+        fill: none;
+        stroke: #00F5A0;
+        stroke-width: 5;
+        filter: drop-shadow(0 0 8px #00F5A0);
+        stroke-dasharray: 20, 200;
+        opacity: 0;
+      }
+
+      /* --- Node Cards --- */
+      .n8n-node {
+        position: absolute;
+        width: 300px;
+        height: 96px;
+        background: #171A21;
+        border: 1px solid #2B303C;
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+
+      .node-active-ring {
+        position: absolute;
+        inset: -2px;
+        border-radius: 14px;
+        border: 2px solid #10B981;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .node-icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        flex-shrink: 0;
+      }
+
+      .icon-webhook { background: rgba(255, 109, 90, 0.15); color: #FF6D5A; border: 1px solid rgba(255, 109, 90, 0.3); }
+      .icon-code { background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3); }
+      .icon-ai { background: rgba(139, 92, 246, 0.15); color: #A78BFA; border: 1px solid rgba(139, 92, 246, 0.3); }
+      .icon-db { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.3); }
+      .icon-whatsapp { background: rgba(37, 211, 102, 0.15); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.3); }
+      .icon-filter { background: rgba(20, 184, 166, 0.15); color: #14B8A6; border: 1px solid rgba(20, 184, 166, 0.3); }
+      .icon-clock { background: rgba(236, 72, 153, 0.15); color: #F472B6; border: 1px solid rgba(236, 72, 153, 0.3); }
+
+      .node-info {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 62px);
+        overflow: hidden;
+      }
+
+      .node-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #F9FAFB;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .node-sub {
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        color: #9CA3AF;
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .node-status-badge {
+        position: absolute;
+        top: -9px;
+        right: 12px;
+        background: #064E3B;
+        color: #34D399;
+        font-size: 10px;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 999px;
+        border: 1px solid #059669;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      .node-status-badge::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #34D399;
+      }
+
+      /* Note / Sticky Annotations */
+      .n8n-sticky {
+        position: absolute;
+        background: rgba(26, 75, 81, 0.35);
+        border: 1px solid rgba(38, 109, 116, 0.5);
+        border-radius: 12px;
+        padding: 16px 20px;
+        color: #E2E8F0;
+        backdrop-filter: blur(8px);
+      }
+      .sticky-title {
+        font-family: "Lora", serif;
+        font-size: 16px;
+        font-weight: 600;
+        color: #FAFFFF;
+        margin-bottom: 6px;
+      }
+      .sticky-desc {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #94A3B8;
+      }
+
+      /* --- TOP HUD BAR --- */
+      #header-bar {
+        position: absolute;
+        top: 28px;
+        left: 48px;
+        right: 48px;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(20, 24, 33, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 0 24px;
+        backdrop-filter: blur(16px);
+        z-index: 100;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .header-logo-img {
+        height: 26px;
+        width: auto;
+      }
+
+      .header-divider {
+        width: 1px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .header-workflow-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #F3F4F6;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-workflow-tag {
+        background: rgba(26, 75, 81, 0.6);
+        color: #5EEAD4;
+        font-size: 11px;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-family: "JetBrains Mono", monospace;
+        border: 1px solid rgba(94, 234, 212, 0.3);
+      }
+
+      .header-center {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .active-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: #34D399;
+        font-size: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 500;
+        padding: 5px 12px;
+        border-radius: 999px;
+      }
+      .active-pill-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10B981;
+        box-shadow: 0 0 10px #10B981;
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .hud-metric-chip {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+      .hud-metric-label {
+        font-size: 10px;
+        font-family: "JetBrains Mono", monospace;
+        color: #9CA3AF;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .hud-metric-val {
+        font-size: 13px;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 600;
+        color: #38BDF8;
+      }
+
+      /* --- FLOATING WHATSAPP CHAT OVERLAY (Scene 3) --- */
+      #phone-overlay {
+        position: absolute;
+        top: 130px;
+        right: 80px;
+        width: 410px;
+        height: 720px;
+        background: #111B21;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 36px;
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), 0 0 0 8px #1F2C34;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 90;
+        opacity: 0;
+        transform: translateX(60px) scale(0.95);
+      }
+
+      .wa-header {
+        height: 68px;
+        background: #202C33;
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .wa-avatar {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: #1A4B51;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border: 1.5px solid #25D366;
+      }
+      .wa-avatar img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
+      .wa-user-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .wa-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #E9EDEF;
+      }
+      .wa-status {
+        font-size: 12px;
+        color: #25D366;
+        font-weight: 500;
+      }
+
+      .wa-body {
+        flex: 1;
+        padding: 20px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        background-color: #0B141A;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 16px 16px;
+        overflow: hidden;
+      }
+
+      .wa-bubble {
+        max-width: 82%;
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-size: 13px;
+        line-height: 1.45;
+        position: relative;
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      .wa-in {
+        align-self: flex-start;
+        background: #202C33;
+        color: #E9EDEF;
+        border-top-left-radius: 2px;
+      }
+      .wa-out {
+        align-self: flex-end;
+        background: #005C4B;
+        color: #E9EDEF;
+        border-top-right-radius: 2px;
+      }
+      .wa-time {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.5);
+        text-align: right;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px;
+      }
+
+      .wa-typing {
+        align-self: flex-start;
+        background: #202C33;
+        padding: 10px 16px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        opacity: 0;
+      }
+      .wa-dot {
+        width: 6px;
+        height: 6px;
+        background: #8696A0;
+        border-radius: 50%;
+      }
+
+      /* --- FLOATING DATABASE / PGVECTOR INSPECTOR (Scene 4) --- */
+      #pgvector-overlay {
+        position: absolute;
+        bottom: 120px;
+        left: 90px;
+        width: 580px;
+        background: rgba(15, 20, 28, 0.95);
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        border-radius: 18px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(56, 189, 248, 0.1);
+        backdrop-filter: blur(20px);
+        overflow: hidden;
+        z-index: 90;
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      .db-header {
+        height: 44px;
+        background: rgba(30, 41, 59, 0.8);
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .db-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        color: #38BDF8;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .db-title::before {
+        content: "🧠";
+      }
+      .db-tag {
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        color: #34D399;
+        background: rgba(16, 185, 129, 0.15);
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+
+      .db-code {
+        padding: 18px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #CBD5E1;
+        background: #0B0E14;
+      }
+      .hl-sql { color: #F472B6; font-weight: 600; }
+      .hl-table { color: #38BDF8; }
+      .hl-op { color: #34D399; }
+      .hl-param { color: #FBBF24; }
+
+      .db-result-row {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      }
+      .db-sim-score {
+        display: inline-block;
+        background: rgba(16, 185, 129, 0.2);
+        color: #34D399;
+        font-weight: 600;
+        font-size: 11px;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-right: 8px;
+      }
+
+      /* --- BOTTOM CALLOUT DOCK --- */
+      #bottom-callout {
+        position: absolute;
+        bottom: 32px;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 52px;
+        background: rgba(20, 24, 33, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 999px;
+        padding: 0 28px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        backdrop-filter: blur(16px);
+        z-index: 100;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      }
+      #callout-icon {
+        font-size: 20px;
+      }
+      #callout-text {
+        font-size: 14px;
+        color: #E2E8F0;
+      }
+      #callout-text strong {
+        color: #FAFFFF;
+        font-weight: 600;
+      }
+
+      /* --- ARCHITECTURE TRIO STACK (Scene 5 Resolution) --- */
+      #arch-trio {
+        position: absolute;
+        bottom: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 24px;
+        z-index: 85;
+        opacity: 0;
+      }
+      .arch-card {
+        width: 320px;
+        background: rgba(23, 27, 36, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        padding: 18px 20px;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      }
+      .arch-card-badge {
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        color: #5EEAD4;
+        margin-bottom: 6px;
+      }
+      .arch-card-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: #FAFFFF;
+        margin-bottom: 6px;
+      }
+      .arch-card-desc {
+        font-size: 12px;
+        color: #94A3B8;
+        line-height: 1.45;
+      }
+
+
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="55" data-width="1920" data-height="1080">
+      <div id="ground"></div>
+      <div class="ambient-glow" id="glow-teal" data-layout-allow-overflow=""></div>
+      <div class="ambient-glow" id="glow-coral" data-layout-allow-overflow=""></div>
+      <div class="ambient-glow" id="glow-emerald" data-layout-allow-overflow=""></div>
+
+      <!-- Top HUD Header -->
+      <header id="header-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+        <div class="header-left">
+          <img class="header-logo-img" src="assets/psiativa-full-nobg.png" alt="PsiAtiva">
+          <div class="header-divider"></div>
+          <div class="header-workflow-name" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <span>AI Acquisition Operations</span data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <span class="header-workflow-tag" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">n8n v2.13.4</span>
+          </div>
+        </div>
+        <div class="header-center">
+          <div class="active-pill" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <span class="active-pill-dot" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""></span>
+            <span id="hud-status-text" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">LIVE PRODUCTION EXECUTION</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="hud-metric-chip" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <span class="hud-metric-label" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Memory Engine</span>
+            <span class="hud-metric-val" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">PostgreSQL · pgvector</span>
+          </div>
+          <div class="header-divider"></div>
+          <div class="hud-metric-chip" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <span class="hud-metric-label" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Conversational SDR</span>
+            <span class="hud-metric-val" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Renata · Z-API WhatsApp</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Stage -->
+      <div id="stage" data-layout-allow-overflow="">
+        <div id="camera-scaler" data-layout-allow-overflow="">
+          <div id="camera-track" data-layout-allow-overflow="">
+            <div id="canvas-world" data-layout-allow-overflow="" data-layout-allow-overlap="">
+
+              <!-- SVG Connecting Lines between Nodes -->
+              <svg id="wires-svg" viewBox="0 0 3400 1900" data-layout-allow-overflow="">
+                <path class="wire-path" d="M 490 480 C 560 480, 580 480, 650 480" />
+                <path class="wire-path" d="M 950 480 C 1020 480, 1040 480, 1110 480" />
+                <path class="wire-path" d="M 1410 480 C 1480 480, 1500 380, 1570 380" />
+                <path class="wire-path" d="M 1410 480 C 1480 480, 1500 680, 1570 680" />
+                <path class="wire-path" d="M 1870 380 C 1940 380, 1960 380, 2030 380" />
+                <path class="wire-path" d="M 2330 380 C 2400 380, 2420 380, 2490 380" />
+                <path class="wire-path" d="M 1870 680 C 1940 680, 1960 680, 2030 680" />
+                <path class="wire-path" d="M 2330 680 C 2400 680, 2420 840, 2490 840" />
+                <path class="wire-path" d="M 2790 840 C 2850 840, 2870 840, 2940 840" />
+                <path class="wire-path" d="M 2330 680 C 2400 680, 2420 680, 2490 680" />
+                <path class="wire-path" d="M 2790 680 C 2860 680, 2880 680, 2950 680" />
+
+                <!-- Active Animated Pulse Paths -->
+                <path id="pulse-path-1" class="wire-pulse" d="M 490 480 C 560 480, 580 480, 650 480" />
+                <path id="pulse-path-2" class="wire-pulse" d="M 950 480 C 1020 480, 1040 480, 1110 480" />
+                <path id="pulse-path-3" class="wire-pulse" d="M 1410 480 C 1480 480, 1500 380, 1570 380" />
+                <path id="pulse-path-4" class="wire-pulse" d="M 1870 380 C 1940 380, 1960 380, 2030 380" />
+                <path id="pulse-path-5" class="wire-pulse" d="M 2330 380 C 2400 380, 2420 380, 2490 380" />
+                <path id="pulse-path-6" class="wire-pulse" d="M 2330 680 C 2400 680, 2420 840, 2490 840" />
+                <path id="pulse-path-7" class="wire-pulse" d="M 2790 840 C 2850 840, 2870 840, 2940 840" />
+                <path id="pulse-path-8" class="wire-pulse" d="M 2790 680 C 2860 680, 2880 680, 2950 680" />
+              </svg>
+
+              <!-- Sticky Annotations -->
+              <div class="n8n-sticky" style="top: 310px; left: 190px; width: 440px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="sticky-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Inbound Gateway &amp; Webhook Intake</div>
+                <div class="sticky-desc" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Recebe eventos em tempo real do site institucional (quiz, diagnóstico e formulários) e mensagens entrantes da API oficial do WhatsApp via Z-API.</div>
+              </div>
+
+              <div class="n8n-sticky" style="top: 210px; left: 1570px; width: 480px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="sticky-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Pipeline de Enriquecimento de Leads</div>
+                <div class="sticky-desc" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Normalização de dados, verificação de duplicidade, enriquecimento de presença digital e pontuação diagnóstica com GPT-5 nano e Qwen 3 235B.</div>
+              </div>
+
+              <div class="n8n-sticky" style="top: 1000px; left: 2400px; width: 500px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="sticky-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Memória Contextual RAG — pgvector</div>
+                <div class="sticky-desc" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Vetorização 1536-dim e busca semântica em PostgreSQL para injeção de conhecimento clínico, normas do CFP e histórico relacional da sessão.</div>
+              </div>
+
+              <!-- CLUSTER 1: INBOUND GATEWAY -->
+              <div class="n8n-node" id="node-webhook" style="top: 432px; left: 190px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-webhook"></div>
+                <div class="node-status-badge" id="badge-webhook" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 18ms</div>
+                <div class="node-icon-box icon-webhook" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">⚡</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Z-API Webhook</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">n8n.webhook</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-router" style="top: 432px; left: 650px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-router"></div>
+                <div class="node-status-badge" id="badge-router" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 32ms</div>
+                <div class="node-icon-box icon-code" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">⌥</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Receber Z-API — Master</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Inbound Router</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-filter" style="top: 432px; left: 1110px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-filter"></div>
+                <div class="node-status-badge" id="badge-filter" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 12ms</div>
+                <div class="node-icon-box icon-filter" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">⑂</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Filtro de Entrada</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Roteamento de Tipo</span>
+                </div>
+              </div>
+
+              <!-- CLUSTER 2: LEAD ENRICHMENT -->
+              <div class="n8n-node" id="node-validate" style="top: 332px; left: 1570px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-validate"></div>
+                <div class="node-status-badge" id="badge-validate" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 45ms</div>
+                <div class="node-icon-box icon-code" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">✓</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Validar e Normalizar</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Sanitizar Dados</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-gpt5" style="top: 332px; left: 2030px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-gpt5"></div>
+                <div class="node-status-badge" id="badge-gpt5" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 840ms</div>
+                <div class="node-icon-box icon-ai" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">🤖</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">GPT-5 nano — ICP</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Classificação ICP</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-parse" style="top: 332px; left: 2490px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-parse"></div>
+                <div class="node-status-badge" id="badge-parse" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 28ms</div>
+                <div class="node-icon-box icon-code" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">{}</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Parsear Diagnóstico</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Gerar Briefing</span>
+                </div>
+              </div>
+
+              <!-- CLUSTER 3: AGENTE RENATA SDR -->
+              <div class="n8n-node" id="node-session" style="top: 632px; left: 1570px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-session"></div>
+                <div class="node-status-badge" id="badge-session" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 62ms</div>
+                <div class="node-icon-box icon-db" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">🗄️</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Buscar Sessao</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">PostgreSQL db_sales</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-claude" style="top: 632px; left: 2030px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-claude"></div>
+                <div class="node-status-badge" id="badge-claude" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 1.2s</div>
+                <div class="node-icon-box icon-ai" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">🧠</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Claude 3.5 Sonnet</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Agente Renata · NEPQ</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-delay" style="top: 632px; left: 2490px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-delay"></div>
+                <div class="node-status-badge" id="badge-delay" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 1.8s</div>
+                <div class="node-icon-box icon-clock" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">⏱️</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Delay Humanizado</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Cadência Digitação</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-zapi" style="top: 632px; left: 2950px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-zapi"></div>
+                <div class="node-status-badge" id="badge-zapi" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 190ms</div>
+                <div class="node-icon-box icon-whatsapp" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">💬</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Enviar via Z-API</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">WhatsApp API</span>
+                </div>
+              </div>
+
+              <!-- CLUSTER 4: PGVECTOR & MEMORY -->
+              <div class="n8n-node" id="node-embed" style="top: 792px; left: 2490px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-embed"></div>
+                <div class="node-status-badge" id="badge-embed" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 210ms</div>
+                <div class="node-icon-box icon-ai" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">🧬</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Gerar Embedding</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">text-embedding-3</span>
+                </div>
+              </div>
+
+              <div class="n8n-node" id="node-rag" style="top: 792px; left: 2940px;" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-rag"></div>
+                <div class="node-status-badge" id="badge-rag" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">200 OK · 38ms</div>
+                <div class="node-icon-box icon-db" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">🔍</div>
+                <div class="node-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Busca RAG (pgvector)</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Similaridade Cosseno</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating WhatsApp Phone Overlay (Scene 3) -->
+      <div id="phone-overlay" data-layout-allow-overlap="" data-layout-allow-overflow="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+        <div class="wa-header" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+          <div class="wa-avatar">
+            <img src="assets/psiativa-profile-nobg.png" alt="Renata">
+          </div>
+          <div class="wa-user-info" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <span class="wa-name" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Renata · SDR PsiAtiva</span>
+            <span class="wa-status" id="wa-header-status" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">online</span>
+          </div>
+        </div>
+        <div class="wa-body" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+          <div class="wa-bubble wa-in" id="wa-msg-1" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            Olá! Fiz o diagnóstico no site da PsiAtiva e gostaria de entender o processo para a minha clínica.
+            <div class="wa-time" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">09:41</div>
+          </div>
+
+          <div class="wa-typing" id="wa-typing-bubble" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <span class="wa-dot" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""></span>
+            <span class="wa-dot" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""></span>
+            <span class="wa-dot" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""></span>
+          </div>
+
+          <div class="wa-bubble wa-out" id="wa-msg-2" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            Olá, Dr. Marcos! Analisei o diagnóstico da Clínica Integrar. Vi que vocês atendem com 4 profissionais mas têm gargalo na confirmação das primeiras consultas.
+            <div class="wa-time" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">09:42 · ✓✓</div>
+          </div>
+
+          <div class="wa-bubble wa-out" id="wa-msg-3" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            Hoje, onde vocês sentem a maior perda: no primeiro contato que não responde ou no no-show de quem já agendou?
+            <div class="wa-time" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">09:42 · ✓✓</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating PostgreSQL pgvector Query Inspector (Scene 4) -->
+      <div id="pgvector-overlay" data-layout-allow-overlap="" data-layout-allow-overflow="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+        <div class="db-header" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+          <div class="db-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">PostgreSQL 16 + pgvector — Context Retrieval</div>
+          <div class="db-tag" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">SIMILARITY SEARCH</div>
+        </div>
+        <div class="db-code" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+          <div data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""><span class="hl-sql" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">SELECT</span> chunk_id, content, <span class="hl-sql" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">1 -</span> (embedding <span class="hl-op" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">&lt;=&gt;</span> <span class="hl-param" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">$query_vector</span>) <span class="hl-sql" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">AS</span> similarity</div>
+          <div data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""><span class="hl-sql" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">FROM</span> <span class="hl-table" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">db_knowledge.embeddings</span></div>
+          <div data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""><span class="hl-sql" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">WHERE</span> namespace = <span class="hl-param" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">'compliance_cfp_metodologia'</span></div>
+          <div data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""><span class="hl-sql" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">ORDER BY</span> embedding <span class="hl-op" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">&lt;=&gt;</span> <span class="hl-param" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">$query_vector</span> <span class="hl-sql" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">LIMIT</span> 2;</div>
+
+          <div class="db-result-row" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <div data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion=""><span class="db-sim-score" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">0.962 SIMILARITY</span> <span style="color: #94A3B8;" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">CFP Resolução 11/2018 — Diretriz Ética</span></div>
+            <div style="color: #E2E8F0; margin-top: 4px; font-size: 11px;" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">"É vedado prometer cura, fixar garantias de volume de pacientes ou praticar mercantilização..."</div>
+          </div>
+          <div class="db-result-row" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+            <div><span class="db-sim-score" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">0.938 SIMILARITY</span> <span style="color: #94A3B8;">PsiAtiva — Diagnóstico Hemorragia vs Ganho</span></div>
+            <div style="color: #E2E8F0; margin-top: 4px; font-size: 11px;">"Isolar o custo de inação da clínica: calcular vagas ociosas antes de apresentar soluções."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Architecture Trio Cards (Scene 5 Resolution) -->
+      <div id="arch-trio" data-layout-allow-overlap="" data-layout-allow-overflow="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+        <div class="arch-card" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+          <div class="arch-card-badge" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">ENGINEERING CORE</div>
+          <div class="arch-card-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">n8n Orchestrator</div>
+          <div class="arch-card-desc" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Instância autohospedada em Docker Compose, isolada da rede pública e executando múltiplos pipelines assíncronos.</div>
+        </div>
+        <div class="arch-card" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+          <div class="arch-card-badge" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">PERSISTENCE &amp; RAG</div>
+          <div class="arch-card-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">PostgreSQL + pgvector</div>
+          <div class="arch-card-desc" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Embeddings vetoriais em 1536 dimensões, ancorando cada resposta da IA em diretrizes éticas e histórico relacional.</div>
+        </div>
+        <div class="arch-card" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+          <div class="arch-card-badge" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">CONVERSATIONAL FRONT</div>
+          <div class="arch-card-title" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">WhatsApp SDR (Z-API)</div>
+          <div class="arch-card-desc" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Qualificação consultiva orientada por LLM, com cadência humana de digitação e sem menus numéricos rígidos.</div>
+        </div>
+      </div>
+
+      <!-- Bottom HUD Callout -->
+      <div id="bottom-callout" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">
+        <span id="callout-icon" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">⚡</span>
+        <span id="callout-text" data-layout-allow-overlap="" data-layout-allow-overlap="" data-layout-allow-occlusion="" data-layout-allow-occlusion="">Gateway de entrada: <strong>Webhook Z-API recebe formulário e inicia orquestração</strong></span>
+      </div>
+
+    </div><!-- End #root -->
+
+    <!-- Animation Logic (GSAP Timeline Registration for HyperFrames) -->
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+
+      // Selectors
+      const scaler = "#camera-scaler";
+      const track = "#camera-track";
+      const world = "#canvas-world";
+      const phoneOverlay = "#phone-overlay";
+      const pgvectorOverlay = "#pgvector-overlay";
+      const archTrio = "#arch-trio";
+      const calloutIcon = "#callout-icon";
+      const calloutText = "#callout-text";
+      const hudStatusText = "#hud-status-text";
+
+      // Node rings and badges
+      const ringWebhook = "#ring-webhook";
+      const badgeWebhook = "#badge-webhook";
+      const ringRouter = "#ring-router";
+      const badgeRouter = "#badge-router";
+      const ringFilter = "#ring-filter";
+      const badgeFilter = "#badge-filter";
+      const ringValidate = "#ring-validate";
+      const badgeValidate = "#badge-validate";
+      const ringGpt5 = "#ring-gpt5";
+      const badgeGpt5 = "#badge-gpt5";
+      const ringParse = "#ring-parse";
+      const badgeParse = "#badge-parse";
+      const ringSession = "#ring-session";
+      const badgeSession = "#badge-session";
+      const ringClaude = "#ring-claude";
+      const badgeClaude = "#badge-claude";
+      const ringDelay = "#ring-delay";
+      const badgeDelay = "#badge-delay";
+      const ringZapi = "#ring-zapi";
+      const badgeZapi = "#badge-zapi";
+      const ringEmbed = "#ring-embed";
+      const badgeEmbed = "#badge-embed";
+      const ringRag = "#ring-rag";
+      const badgeRag = "#badge-rag";
+
+      // WhatsApp elements
+      const waMsg1 = "#wa-msg-1";
+      const waMsg2 = "#wa-msg-2";
+      const waMsg3 = "#wa-msg-3";
+      const waTyping = "#wa-typing-bubble";
+      const waStatus = "#wa-header-status";
+
+      // =========================================================================
+      // SCENE 1: INBOUND GATEWAY & WEBHOOK ARRIVAL (0.0s – 8.0s | f0 – f480)
+      // =========================================================================
+      // Initial settled state at t=0.0s (Poster frame at t=0.5s)
+      tl.set(scaler, { scale: 1.0, x: 0, y: 0 }, 0.0);
+      tl.set(track, { x: 0, y: 0 }, 0.0);
+      tl.set(phoneOverlay, { opacity: 0, x: 80, scale: 0.95 }, 0.0);
+      tl.set(pgvectorOverlay, { opacity: 0, y: 40 }, 0.0);
+      tl.set(archTrio, { opacity: 0, y: 30 }, 0.0);
+      tl.set(calloutIcon, { textContent: "⚡" }, 0.0);
+      tl.set(calloutText, { innerHTML: "Gateway de entrada: <strong>Webhook Z-API recebe formulário e inicia orquestração</strong>" }, 0.0);
+
+      // Inbound event hits Webhook node at t=1.2s
+      tl.to(ringWebhook, { opacity: 1, duration: 0.3, ease: "power2.out" }, 1.2);
+      tl.to(badgeWebhook, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.7)" }, 1.3);
+
+      // Pulse flows along wire from Webhook to Router
+      tl.fromTo("#pulse-path-1", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 1.5);
+      tl.to(ringRouter, { opacity: 1, duration: 0.3 }, 2.6);
+      tl.to(badgeRouter, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.7)" }, 2.7);
+
+      // Camera begins following execution towards router & filter
+      tl.to(track, { x: -250, y: -20, duration: 3.5, ease: "power2.inOut" }, 3.0);
+      tl.to(scaler, { scale: 1.08, duration: 3.5, ease: "power2.inOut" }, 3.0);
+
+      // Pulse flows to filter
+      tl.fromTo("#pulse-path-2", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 4.0);
+      tl.to(ringFilter, { opacity: 1, duration: 0.3 }, 5.0);
+      tl.to(badgeFilter, { opacity: 1, y: 0, duration: 0.3 }, 5.1);
+
+      // =========================================================================
+      // SCENE 2: EVIDENCE-BASED ENRICHMENT & DUAL-LLM SCORING (8.0s – 19.0s | f480 – f1140)
+      // =========================================================================
+      tl.set(calloutIcon, { textContent: "🤖" }, 8.0);
+      tl.set(calloutText, { innerHTML: "Enriquecimento e ICP: <strong>Normalização e pontuação diagnóstica com GPT-5 nano</strong>" }, 8.0);
+
+      // Camera glides towards Enrichment cluster
+      tl.to(track, { x: -750, y: 40, duration: 4.0, ease: "power2.inOut" }, 8.0);
+      tl.to(scaler, { scale: 1.15, duration: 4.0, ease: "power2.inOut" }, 8.0);
+
+      // Flow into Validar e Normalizar
+      tl.fromTo("#pulse-path-3", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 8.2);
+      tl.to(ringValidate, { opacity: 1, duration: 0.3 }, 9.4);
+      tl.to(badgeValidate, { opacity: 1, y: 0, duration: 0.3 }, 9.5);
+
+      // Flow into GPT-5 nano ICP Scoring
+      tl.fromTo("#pulse-path-4", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.2, ease: "power1.inOut" }, 10.2);
+      tl.to(ringGpt5, { opacity: 1, duration: 0.4 }, 11.4);
+      tl.to(badgeGpt5, { opacity: 1, y: 0, duration: 0.3 }, 11.5);
+      tl.to("#node-gpt5", { scale: 1.05, duration: 1.5, yoyo: true, repeat: 1, ease: "sine.inOut" }, 11.8);
+
+      // Camera tracks to Parsear Diagnóstico
+      tl.to(track, { x: -1100, y: 50, duration: 3.5, ease: "power2.inOut" }, 13.5);
+      tl.fromTo("#pulse-path-5", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 14.0);
+      tl.to(ringParse, { opacity: 1, duration: 0.3 }, 15.0);
+      tl.to(badgeParse, { opacity: 1, y: 0, duration: 0.3 }, 15.1);
+
+      // =========================================================================
+      // SCENE 3: AUTONOMOUS WHATSAPP SDR AGENT — "RENATA" (19.0s – 34.0s | f1140 – f2040)
+      // =========================================================================
+      tl.set(calloutIcon, { textContent: "💬" }, 19.0);
+      tl.set(calloutText, { innerHTML: "Agente Renata SDR: <strong>Diálogo consultivo no WhatsApp com delay humanizado</strong>" }, 19.0);
+
+      // Camera pans to Renata SDR cluster and shifts left to accommodate phone
+      tl.to(track, { x: -1250, y: -100, duration: 3.5, ease: "power2.inOut" }, 19.0);
+      tl.to(scaler, { scale: 1.05, duration: 3.5, ease: "power2.inOut" }, 19.0);
+
+      // Session node fires
+      tl.to(ringSession, { opacity: 1, duration: 0.3 }, 20.0);
+      tl.to(badgeSession, { opacity: 1, y: 0, duration: 0.3 }, 20.1);
+
+      // Soften right flank nodes that would be underneath the phone
+      tl.to(["#node-zapi", "#node-rag"], { opacity: 0.15, duration: 0.6 }, 20.2);
+
+      // Phone overlay smoothly slides into view
+      tl.to(phoneOverlay, { opacity: 1, x: 0, scale: 1.0, duration: 1.0, ease: "power3.out" }, 20.5);
+
+      // Lead incoming message appears
+      tl.to(waMsg1, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.5)" }, 21.8);
+
+      // Claude Sonnet node executes
+      tl.to(ringClaude, { opacity: 1, duration: 0.3 }, 23.0);
+      tl.to(badgeClaude, { opacity: 1, y: 0, duration: 0.3 }, 23.2);
+
+      // Humanized typing delay starts
+      tl.to(ringDelay, { opacity: 1, duration: 0.3 }, 25.0);
+      tl.to(badgeDelay, { opacity: 1, y: 0, duration: 0.3 }, 25.2);
+      tl.set(waStatus, { textContent: "digitando..." }, 25.5);
+      tl.to(waTyping, { opacity: 1, duration: 0.3 }, 25.5);
+
+      // Delay finishes, Z-API node fires outbound
+      tl.to(waTyping, { opacity: 0, duration: 0.2 }, 28.5);
+      tl.set(waStatus, { textContent: "online" }, 28.7);
+      tl.to(ringZapi, { opacity: 1, duration: 0.3 }, 28.7);
+      tl.to(badgeZapi, { opacity: 1, y: 0, duration: 0.3 }, 28.8);
+
+      // Renata's consultative messages arrive
+      tl.to(waMsg2, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }, 29.0);
+      tl.to(waMsg3, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }, 31.0);
+
+      // =========================================================================
+      // SCENE 4: CONTEXTUAL MEMORY — POSTGRESQL & PGVECTOR RAG (34.0s – 46.0s | f2040 – f2760)
+      // =========================================================================
+      tl.set(calloutIcon, { textContent: "🧠" }, 34.0);
+      tl.set(calloutText, { innerHTML: "Memória Semântica: <strong>Busca vetorial por similaridade de cosseno (&lt;=&gt;) no PostgreSQL</strong>" }, 34.0);
+
+      // Restore right flank nodes as phone fades
+      tl.to(["#node-zapi", "#node-rag"], { opacity: 1, duration: 0.8 }, 34.0);
+      tl.to(phoneOverlay, { opacity: 0, x: 80, scale: 0.95, duration: 0.8, ease: "power2.inOut" }, 34.0);
+
+      // Camera dives into pgvector cluster
+      tl.to(track, { x: -1750, y: -180, duration: 3.5, ease: "power2.inOut" }, 34.0);
+      tl.to(scaler, { scale: 1.15, duration: 3.5, ease: "power2.inOut" }, 34.0);
+
+      // Embedding generation node
+      tl.fromTo("#pulse-path-6", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 34.5);
+      tl.to(ringEmbed, { opacity: 1, duration: 0.3 }, 35.5);
+      tl.to(badgeEmbed, { opacity: 1, y: 0, duration: 0.3 }, 35.6);
+
+      // Busca RAG node
+      tl.fromTo("#pulse-path-7", { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.0, ease: "power1.inOut" }, 36.2);
+      tl.to(ringRag, { opacity: 1, duration: 0.3 }, 37.2);
+      tl.to(badgeRag, { opacity: 1, y: 0, duration: 0.3 }, 37.3);
+
+      // Fade stickies/nodes on left flank covered by database inspector
+      tl.to([".n8n-sticky", "#node-session", "#node-validate"], { opacity: 0.15, duration: 0.6 }, 37.2);
+
+      // Database query inspector opens on left
+      tl.to(pgvectorOverlay, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 37.5);
+
+      // Restore left flank elements
+      tl.to([".n8n-sticky", "#node-session", "#node-validate"], { opacity: 1, duration: 0.8 }, 45.0);
+
+      // =========================================================================
+      // SCENE 5: FULL-STACK RESOLUTION & SEAMLESS LOOP RE-ALIGNMENT (46.0s – 55.0s | f2760 – f3300)
+      // =========================================================================
+      tl.set(calloutIcon, { textContent: "✨" }, 46.0);
+      tl.set(calloutText, { innerHTML: "Ecossistema Completo: <strong>Orquestração n8n, memória pgvector e SDR autônomo</strong>" }, 46.0);
+
+      // Dismiss floating overlays
+      tl.to(pgvectorOverlay, { opacity: 0, y: 30, duration: 0.8, ease: "power2.in" }, 46.0);
+
+      // Grand panoramic pull-back (completes at 50.5s)
+      tl.to(track, { x: 0, y: 0, duration: 4.0, ease: "power2.inOut" }, 46.5);
+      tl.to(scaler, { scale: 1.0, duration: 4.0, ease: "power2.inOut" }, 46.5);
+
+      // Reveal Architecture Trio Cards
+      tl.to(archTrio, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 47.5);
+
+      // Fade out trio cards before loop seam (completes at 51.3s)
+      tl.to(archTrio, { opacity: 0, y: 20, duration: 0.8, ease: "power2.in" }, 50.5);
+
+      // Reset node rings and badges smoothly (completes at 51.6s)
+      tl.to([ringWebhook, ringRouter, ringFilter, ringValidate, ringGpt5, ringParse, ringSession, ringClaude, ringDelay, ringZapi, ringEmbed, ringRag], { opacity: 0, duration: 0.6 }, 51.0);
+      tl.to([badgeWebhook, badgeRouter, badgeFilter, badgeValidate, badgeGpt5, badgeParse, badgeSession, badgeClaude, badgeDelay, badgeZapi, badgeEmbed, badgeRag], { opacity: 0, y: 4, duration: 0.6 }, 51.0);
+
+      // Reset HUD callout back to Frame 0 text
+      tl.set(calloutIcon, { textContent: "⚡" }, 52.0);
+      tl.set(calloutText, { innerHTML: "Gateway de entrada: <strong>Webhook Z-API recebe formulário e inicia orquestração</strong>" }, 52.0);
+
+      // Explicit settled state at t=52.5s — guarantees Frame 52.5s-55.0s are bit-for-bit identical to Frame 0
+      tl.set([scaler, track], { scale: 1.0, x: 0, y: 0 }, 52.5);
+      tl.set([phoneOverlay, pgvectorOverlay, archTrio], { opacity: 0, y: 0 }, 52.5);
+      tl.set(".wire-pulse", { opacity: 0, strokeDashoffset: 400 }, 52.5);
+      tl.set([ringWebhook, ringRouter, ringFilter, ringValidate, ringGpt5, ringParse, ringSession, ringClaude, ringDelay, ringZapi, ringEmbed, ringRag], { opacity: 0 }, 52.5);
+      tl.set([badgeWebhook, badgeRouter, badgeFilter, badgeValidate, badgeGpt5, badgeParse, badgeSession, badgeClaude, badgeDelay, badgeZapi, badgeEmbed, badgeRag], { opacity: 0, y: 4 }, 52.5);
+      tl.set([".n8n-sticky", "#node-session", "#node-validate", "#node-gpt5", "#node-zapi", "#node-rag"], { opacity: 1, scale: 1.0 }, 52.5);
+    </script>
+  </body>
+</html>

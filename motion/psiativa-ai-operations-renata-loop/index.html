@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>PsiAtiva — Renata WhatsApp SDR Loop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #080A0E;
+        color: #F1F5F9;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #080A0E;
+      }
+      #ground {
+        position: absolute;
+        inset: 0;
+        background-color: #080A0E;
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+      }
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+      }
+      #glow-green {
+        top: 200px;
+        right: 250px;
+        width: 600px;
+        height: 600px;
+        background: rgba(37, 211, 102, 0.12);
+      }
+      #glow-purple {
+        top: 300px;
+        left: 200px;
+        width: 550px;
+        height: 550px;
+        background: rgba(139, 92, 246, 0.12);
+      }
+
+      /* Top Header */
+      #header-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: rgba(11, 14, 20, 0.94);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 100;
+        backdrop-filter: blur(16px);
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .header-logo-img {
+        height: 24px;
+        width: auto;
+        object-fit: contain;
+      }
+      .header-divider {
+        width: 1px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.15);
+      }
+      .header-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #F1F5F9;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-tag {
+        font-size: 11px;
+        font-family: "JetBrains Mono", monospace;
+        background: rgba(37, 211, 102, 0.15);
+        color: #34D399;
+        padding: 2px 8px;
+        border-radius: 4px;
+        border: 1px solid rgba(37, 211, 102, 0.3);
+      }
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .active-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: #34D399;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 12px;
+        border-radius: 999px;
+      }
+      .active-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10B981;
+        box-shadow: 0 0 8px #10B981;
+      }
+
+      /* Split Stage */
+      #split-stage {
+        position: absolute;
+        top: 64px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+      }
+
+      /* Left Side: n8n Flow (width 1180px) */
+      #flow-pane {
+        width: 1180px;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+      #flow-scaler {
+        position: absolute;
+        inset: 0;
+        transform-origin: 590px 480px;
+      }
+      #flow-track {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* n8n Nodes */
+      .n8n-node {
+        position: absolute;
+        width: 290px;
+        height: 94px;
+        background: #171A21;
+        border: 1px solid #2B303C;
+        border-radius: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+      .node-active-ring {
+        position: absolute;
+        inset: -2px;
+        border-radius: 14px;
+        border: 2px solid #10B981;
+        box-shadow: 0 0 18px rgba(16, 185, 129, 0.5);
+        opacity: 0;
+        pointer-events: none;
+      }
+      .node-badge {
+        position: absolute;
+        top: -11px;
+        right: 14px;
+        background: #10B981;
+        color: #022C22;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 999px;
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      .node-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .icon-wa { background: rgba(37, 211, 102, 0.15); color: #25D366; border: 1px solid rgba(37, 211, 102, 0.3); }
+      .icon-db { background: rgba(59, 130, 246, 0.15); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.3); }
+      .icon-ai { background: rgba(139, 92, 246, 0.15); color: #A78BFA; border: 1px solid rgba(139, 92, 246, 0.3); }
+      .icon-clock { background: rgba(236, 72, 153, 0.15); color: #F472B6; border: 1px solid rgba(236, 72, 153, 0.3); }
+
+      .node-content {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - 60px);
+        overflow: hidden;
+      }
+      .node-title {
+        font-size: 13px;
+        font-weight: 600;
+        color: #F8FAFC;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .node-sub {
+        font-size: 11px;
+        color: #94A3B8;
+        font-family: "JetBrains Mono", monospace;
+        margin-top: 2px;
+      }
+
+      /* Wires */
+      #wires-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1200px;
+        height: 1000px;
+        pointer-events: none;
+      }
+      .wire-path {
+        fill: none;
+        stroke: #374151;
+        stroke-width: 3;
+        stroke-linecap: round;
+      }
+      .wire-pulse {
+        fill: none;
+        stroke: #00F5A0;
+        stroke-width: 5;
+        filter: drop-shadow(0 0 8px #00F5A0);
+        stroke-dasharray: 20, 200;
+        opacity: 0;
+      }
+
+      /* Context Prompt Inspector Overlay */
+      #prompt-inspector {
+        position: absolute;
+        bottom: 40px;
+        left: 80px;
+        width: 560px;
+        background: rgba(15, 20, 28, 0.95);
+        border: 1px solid rgba(167, 139, 250, 0.3);
+        border-radius: 14px;
+        padding: 16px 20px;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      .inspector-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .inspector-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 600;
+        color: #C084FC;
+      }
+      .inspector-badge {
+        font-size: 10px;
+        font-family: "JetBrains Mono", monospace;
+        background: rgba(168, 85, 247, 0.2);
+        color: #D8B4FE;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .inspector-text {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        line-height: 1.5;
+        color: #CBD5E1;
+      }
+      .inspector-hl {
+        color: #34D399;
+        font-weight: 600;
+      }
+
+      /* Right Side: WhatsApp Phone Mockup (width 740px) */
+      #phone-pane {
+        width: 740px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(11, 14, 20, 0.4);
+        border-left: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      #phone-device {
+        width: 440px;
+        height: 760px;
+        background: #111B21;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 38px;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 0 8px #1F2C34;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .wa-header {
+        height: 70px;
+        background: #202C33;
+        padding: 0 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .wa-avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #1A4B51;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border: 1.5px solid #25D366;
+      }
+      .wa-avatar img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+      }
+      .wa-user {
+        display: flex;
+        flex-direction: column;
+      }
+      .wa-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: #E9EDEF;
+      }
+      .wa-status {
+        font-size: 12px;
+        color: #25D366;
+        font-weight: 500;
+      }
+      .wa-body {
+        flex: 1;
+        padding: 24px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        background-color: #0B141A;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 16px 16px;
+      }
+      .wa-bubble {
+        max-width: 86%;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 13px;
+        line-height: 1.45;
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      .wa-in {
+        align-self: flex-start;
+        background: #202C33;
+        color: #E9EDEF;
+        border-top-left-radius: 2px;
+      }
+      .wa-out {
+        align-self: flex-end;
+        background: #005C4B;
+        color: #E9EDEF;
+        border-top-right-radius: 2px;
+      }
+      .wa-time {
+        font-size: 10px;
+        color: #8696A0;
+        text-align: right;
+        margin-top: 4px;
+      }
+      .wa-typing {
+        align-self: flex-start;
+        background: #202C33;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border-top-left-radius: 2px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        opacity: 0;
+      }
+      .wa-dot {
+        width: 6px;
+        height: 6px;
+        background: #8696A0;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1920" data-height="1080">
+      <div id="ground"></div>
+      <div class="ambient-glow" id="glow-green" data-layout-allow-overflow=""></div>
+      <div class="ambient-glow" id="glow-purple" data-layout-allow-overflow=""></div>
+
+      <!-- Top Header -->
+      <header id="header-bar" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+        <div class="header-left" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <img class="header-logo-img" src="assets/psiativa-full-nobg.png" alt="PsiAtiva">
+          <div class="header-divider"></div>
+          <div class="header-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <span data-layout-allow-overlap="" data-layout-allow-occlusion="">Renata Conversational SDR</span>
+            <span class="header-tag" data-layout-allow-overlap="" data-layout-allow-occlusion="">WhatsApp API · n8n</span>
+          </div>
+        </div>
+        <div class="header-right" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <div class="active-pill" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <span class="active-dot"></span>
+            <span data-layout-allow-overlap="" data-layout-allow-occlusion="">AUTONOMOUS QUALIFICATION LOOP</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Split Area -->
+      <div id="split-stage" data-layout-allow-overflow="">
+
+        <!-- Left: n8n Flow -->
+        <div id="flow-pane" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <div id="flow-scaler" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <div id="flow-track" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+
+              <!-- SVG Connections -->
+              <svg id="wires-svg" viewBox="0 0 1200 1000" data-layout-allow-overflow="">
+                <path class="wire-path" d="M 370 210 C 430 210, 460 210, 520 210" />
+                <path class="wire-path" d="M 810 210 C 870 210, 870 380, 520 380" />
+                <path class="wire-path" d="M 810 380 C 860 380, 860 550, 520 550" />
+                <path class="wire-path" d="M 810 550 C 870 550, 900 550, 960 550" />
+
+                <!-- Pulse paths -->
+                <path id="pulse-1" class="wire-pulse" d="M 370 210 C 430 210, 460 210, 520 210" />
+                <path id="pulse-2" class="wire-pulse" d="M 810 210 C 870 210, 870 380, 520 380" />
+                <path id="pulse-3" class="wire-pulse" d="M 810 380 C 860 380, 860 550, 520 550" />
+                <path id="pulse-4" class="wire-pulse" d="M 810 550 C 870 550, 900 550, 960 550" />
+              </svg>
+
+              <!-- Node 1: Z-API Webhook -->
+              <div class="n8n-node" id="node-webhook" style="top: 163px; left: 80px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-webhook"></div>
+                <div class="node-badge" id="badge-webhook" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 14ms</div>
+                <div class="node-icon icon-wa" data-layout-allow-overlap="" data-layout-allow-occlusion="">💬</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Z-API Inbound Webhook</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">Mensagem Entrante</span>
+                </div>
+              </div>
+
+              <!-- Node 2: Buscar Sessão -->
+              <div class="n8n-node" id="node-session" style="top: 163px; left: 520px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-session"></div>
+                <div class="node-badge" id="badge-session" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 42ms</div>
+                <div class="node-icon icon-db" data-layout-allow-overlap="" data-layout-allow-occlusion="">🗄️</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Buscar Sessao db_sales</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">Histórico Postgres</span>
+                </div>
+              </div>
+
+              <!-- Node 3: LLM Prompt + Claude -->
+              <div class="n8n-node" id="node-claude" style="top: 333px; left: 520px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-claude"></div>
+                <div class="node-badge" id="badge-claude" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 1.1s</div>
+                <div class="node-icon icon-ai" data-layout-allow-overlap="" data-layout-allow-occlusion="">🧠</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Claude 3.5 Sonnet</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">Raciocínio Clínico NEPQ</span>
+                </div>
+              </div>
+
+              <!-- Node 4: Delay Humanizado -->
+              <div class="n8n-node" id="node-delay" style="top: 503px; left: 520px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-delay"></div>
+                <div class="node-badge" id="badge-delay" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 2.0s</div>
+                <div class="node-icon icon-clock" data-layout-allow-overlap="" data-layout-allow-occlusion="">⏱️</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Delay Humanizado</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">Simulação de Digitação</span>
+                </div>
+              </div>
+
+              <!-- Node 5: Enviar via Z-API -->
+              <div class="n8n-node" id="node-send" style="top: 503px; left: 960px;" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="node-active-ring" id="ring-send"></div>
+                <div class="node-badge" id="badge-send" data-layout-allow-overlap="" data-layout-allow-occlusion="">200 OK · 180ms</div>
+                <div class="node-icon icon-wa" data-layout-allow-overlap="" data-layout-allow-occlusion="">💬</div>
+                <div class="node-content" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="node-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">Enviar via Z-API</span>
+                  <span class="node-sub" data-layout-allow-overlap="" data-layout-allow-occlusion="">WhatsApp Dispatch</span>
+                </div>
+              </div>
+
+              <!-- Dynamic Prompt Inspector Box -->
+              <div id="prompt-inspector" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <div class="inspector-header" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <span class="inspector-title" data-layout-allow-overlap="" data-layout-allow-occlusion="">SYSTEM PROMPT CONTEXT INJECTION</span>
+                  <span class="inspector-badge" data-layout-allow-overlap="" data-layout-allow-occlusion="">CFP COMPLIANT</span>
+                </div>
+                <div class="inspector-text" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                  <div>• <span class="inspector-hl">Identidade:</span> Renata, especialista em captação ética da PsiAtiva.</div>
+                  <div>• <span class="inspector-hl">Diretriz Ética:</span> CFP Resolução 11/2018 (vedado mercantilização e cura).</div>
+                  <div>• <span class="inspector-hl">Técnica SPIN:</span> Explorar se a perda está no contato inicial ou no no-show.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: WhatsApp Phone -->
+        <div id="phone-pane" data-layout-allow-overflow="" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+          <div id="phone-device" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+            <div class="wa-header" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+              <div class="wa-avatar">
+                <img src="assets/psiativa-profile-nobg.png" alt="Renata">
+              </div>
+              <div class="wa-user" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <span class="wa-name" data-layout-allow-overlap="" data-layout-allow-occlusion="">Renata · SDR PsiAtiva</span>
+                <span class="wa-status" id="wa-status" data-layout-allow-overlap="" data-layout-allow-occlusion="">online</span>
+              </div>
+            </div>
+            <div class="wa-body" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+              <div class="wa-bubble wa-in" id="wa-msg-1" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                Olá Renata! Quero entender como funciona a qualificação da minha clínica.
+                <div class="wa-time" data-layout-allow-overlap="" data-layout-allow-occlusion="">14:22</div>
+              </div>
+
+              <div class="wa-typing" id="wa-typing" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                <span class="wa-dot"></span>
+                <span class="wa-dot"></span>
+                <span class="wa-dot"></span>
+              </div>
+
+              <div class="wa-bubble wa-out" id="wa-msg-2" data-layout-allow-overlap="" data-layout-allow-occlusion="">
+                Olá Dr. Carlos! Perfeito. Antes de falar de planos, queria entender: hoje a maior perda de vocês está no contato inicial ou na confirmação da consulta?
+                <div class="wa-time" data-layout-allow-overlap="" data-layout-allow-occlusion="">14:23 · ✓✓</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- End #split-stage -->
+    </div><!-- End #root -->
+
+    <script>
+      const tl = gsap.timeline();
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      // Stage elements
+      const ringWebhook = "#ring-webhook";
+      const badgeWebhook = "#badge-webhook";
+      const ringSession = "#ring-session";
+      const badgeSession = "#badge-session";
+      const ringClaude = "#ring-claude";
+      const badgeClaude = "#badge-claude";
+      const ringDelay = "#ring-delay";
+      const badgeDelay = "#badge-delay";
+      const ringSend = "#ring-send";
+      const badgeSend = "#badge-send";
+
+      const promptInspector = "#prompt-inspector";
+      const waMsg1 = "#wa-msg-1";
+      const waMsg2 = "#wa-msg-2";
+      const waTyping = "#wa-typing";
+      const waStatus = "#wa-status";
+
+      // Initial clean state at t=0.0s
+      tl.set(".wire-pulse", { opacity: 0, strokeDashoffset: 400 }, 0.0);
+      tl.set([ringWebhook, ringSession, ringClaude, ringDelay, ringSend], { opacity: 0 }, 0.0);
+      tl.set([badgeWebhook, badgeSession, badgeClaude, badgeDelay, badgeSend], { opacity: 0, y: 4 }, 0.0);
+      tl.set(promptInspector, { opacity: 0, y: 20 }, 0.0);
+      tl.set(waMsg1, { opacity: 0, y: 12 }, 0.0);
+      tl.set(waMsg2, { opacity: 0, y: 12 }, 0.0);
+      tl.set(waTyping, { opacity: 0 }, 0.0);
+      tl.set(waStatus, { textContent: "online" }, 0.0);
+
+      // --- SCENE 1: Inbound Message (0.0s – 4.0s) ---
+      // Message arrives on WhatsApp at t=0.8s
+      tl.to(waMsg1, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.8);
+      // Webhook fires in n8n at t=1.2s
+      tl.to(ringWebhook, { opacity: 1, duration: 0.3 }, 1.2);
+      tl.to(badgeWebhook, { opacity: 1, y: 0, duration: 0.3, ease: "back.out(1.7)" }, 1.3);
+
+      // Pulse travels to Buscar Sessao
+      tl.fromTo("#pulse-1", { opacity: 1, strokeDashoffset: 400 }, { strokeDashoffset: 0, opacity: 0, duration: 1.0, ease: "power1.inOut" }, 1.6);
+      tl.to(ringSession, { opacity: 1, duration: 0.3 }, 2.6);
+      tl.to(badgeSession, { opacity: 1, y: 0, duration: 0.3 }, 2.7);
+
+      // --- SCENE 2: Claude Reasoning & Dynamic Prompt (4.0s – 8.5s) ---
+      tl.fromTo("#pulse-2", { opacity: 1, strokeDashoffset: 400 }, { strokeDashoffset: 0, opacity: 0, duration: 1.0, ease: "power1.inOut" }, 3.8);
+      tl.to(ringClaude, { opacity: 1, duration: 0.3 }, 4.8);
+      tl.to(badgeClaude, { opacity: 1, y: 0, duration: 0.3 }, 4.9);
+      // Prompt inspector opens
+      tl.to(promptInspector, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 5.2);
+
+      // --- SCENE 3: Delay & Humanized Response (8.5s – 13.0s) ---
+      tl.fromTo("#pulse-3", { opacity: 1, strokeDashoffset: 400 }, { strokeDashoffset: 0, opacity: 0, duration: 1.0, ease: "power1.inOut" }, 7.8);
+      tl.to(ringDelay, { opacity: 1, duration: 0.3 }, 8.8);
+      tl.to(badgeDelay, { opacity: 1, y: 0, duration: 0.3 }, 8.9);
+
+      // WhatsApp shows typing indicator
+      tl.set(waStatus, { textContent: "digitando..." }, 9.0);
+      tl.to(waTyping, { opacity: 1, duration: 0.3 }, 9.2);
+
+      // Pulse to dispatch
+      tl.fromTo("#pulse-4", { opacity: 1, strokeDashoffset: 400 }, { strokeDashoffset: 0, opacity: 0, duration: 1.0, ease: "power1.inOut" }, 10.8);
+      tl.to(ringSend, { opacity: 1, duration: 0.3 }, 11.8);
+      tl.to(badgeSend, { opacity: 1, y: 0, duration: 0.3 }, 11.9);
+
+      // Hide typing and reveal sent message
+      tl.to(waTyping, { opacity: 0, duration: 0.2 }, 12.0);
+      tl.set(waStatus, { textContent: "online" }, 12.0);
+      tl.to(waMsg2, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 12.2);
+
+      // --- SCENE 4: Clean Loop Settle (13.0s – 16.0s) ---
+      tl.to(promptInspector, { opacity: 0, y: 15, duration: 0.6, ease: "power2.in" }, 13.5);
+      tl.to([ringWebhook, ringSession, ringClaude, ringDelay, ringSend], { opacity: 0, duration: 0.6 }, 13.8);
+      tl.to([badgeWebhook, badgeSession, badgeClaude, badgeDelay, badgeSend], { opacity: 0, y: 4, duration: 0.6 }, 13.8);
+      tl.to([waMsg1, waMsg2], { opacity: 0, y: 12, duration: 0.6, ease: "power2.in" }, 14.0);
+
+      // Hard settle at t=14.8s (held static until t=16.0s)
+      tl.set(".wire-pulse", { opacity: 0, strokeDashoffset: 400 }, 14.8);
+      tl.set([ringWebhook, ringSession, ringClaude, ringDelay, ringSend], { opacity: 0 }, 14.8);
+      tl.set([badgeWebhook, badgeSession, badgeClaude, badgeDelay, badgeSend], { opacity: 0, y: 4 }, 14.8);
+      tl.set(promptInspector, { opacity: 0, y: 20 }, 14.8);
+      tl.set([waMsg1, waMsg2, waTyping], { opacity: 0, y: 12 }, 14.8);
+      tl.set(waStatus, { textContent: "online" }, 14.8);
+    </script>
+  </body>
+</html>
