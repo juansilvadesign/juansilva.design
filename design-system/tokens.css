@@ -86,6 +86,38 @@
   --color-danger: var(--color-red-500);
   --color-danger-soft: var(--color-red-400);
 
+  /* ─── Color primitives — Figma "Component colors/Utility", light ──
+   *
+   * The light halves of the stack-pill ramp. Read from node 23279:241 (channel
+   * 1uurwcko, 2026-09-16), which holds the two `tags` frames side by side:
+   * 23277:213 (dark) and 23277:191 (light). Every fill, stroke and ink in the
+   * DARK frame resolves to a primitive this file already carried — blue-950 /
+   * blue-700 / blue-200, amber-950 / amber-800 / amber-200, green-950 /
+   * green-1000 / green-800 / green-300, neutral-900 / 600 / 200. That exact
+   * agreement is the evidence these are the matching light halves and not a
+   * second, unrelated palette.
+   *
+   * ⛔ Figma names them `utility-*`; keep that name. They are NOT interchangeable
+   * with the `--color-blue-*` / `--color-green-*` ramp above — `utility-gray-50`
+   * happens to equal `--color-gray-50` and the rest do not line up at all.
+   */
+  --color-utility-blue-50: #eff8ff;
+  --color-utility-blue-700: #175cd3;
+  --color-utility-blue-light-200: #b9e6fe;
+  --color-utility-yellow-50: #fefbe8;
+  --color-utility-yellow-200: #feee95;
+  --color-utility-yellow-700: #a15c07;
+  --color-utility-green-50: #edfcf2;
+  --color-utility-green-200: #aaf0c4;
+  --color-utility-green-700: #087443;
+  --color-utility-gray-200: #e9eaeb;
+  --color-utility-gray-700: #414651;
+  /* The two Tailwind-badge gradient stops are raw paints in Figma, bound to no
+   * variable, so they are named for the ramp they sit nearest rather than given
+   * a `utility-` name they do not have upstream. */
+  --color-utility-sky-50: #f0f9ff;
+  --color-utility-sky-200: #b2ddff;
+
   /* ─── Color primitives — Google Drive project gradient ──────── */
   --color-google-green-dark: #188038;
   --color-google-green: #34a853;
@@ -93,6 +125,33 @@
   --color-google-blue: #4285f3;
   --color-google-red: #e94335;
   --color-google-yellow: #fbbc05;
+
+  /* ─── Color primitives — uiverse-7 day/night scene ──────────────
+   *
+   * The theme switch's artwork, verbatim from `Galahhad/strong-squid-82`.
+   *
+   * ⛔ These are ARTWORK, not palette. The switch draws a literal sky, sun,
+   * moon and clouds, and those colours are the illustration — they are not
+   * theme roles and they do not repaint per canvas (a sun is yellow on a white
+   * page too). An earlier port mapped them onto `--color-cyan-700`,
+   * `--color-amber-200` and `--color-slate-*`, which satisfied "no raw hex in
+   * the component" while quietly redrawing the scene: a teal sky, a pale
+   * lemon sun and a moon lighter than its own highlight. Naming them as
+   * primitives keeps the rule AND the reference.
+   */
+  --color-scene-sky-day: #3d7eae;
+  --color-scene-sky-night: #1d1f2c;
+  --color-scene-sun: #ecca2f;
+  --color-scene-sun-shade: #a1872a;
+  --color-scene-moon: #c4c9d1;
+  --color-scene-moon-shade: #969696;
+  --color-scene-moon-spot: #959db1;
+  --color-scene-cloud: #f3fdff;
+  --color-scene-cloud-back: #aacadf;
+  /* A WARM white, not `--color-white-a61`. The reference lights both the sun
+   * and the moon with rgba(254,255,239,.61); the cool substitute was visible
+   * on the moon, whose own grey is cooler than the highlight. */
+  --color-scene-highlight: rgb(254 255 239 / 61%);
 
   /* ─── Translucent paints from production ────────────────────── */
   --color-transparent: rgb(255 255 255 / 0%);
@@ -164,6 +223,47 @@
   --pcard-cta-label-active: var(--on-primary);
   --linkedin-flood: var(--surface-interactive-hover);
   --linkedin-label-active: var(--text-primary);
+
+  /* Back-to-top, on the case studies. It floats over `--background`, so its
+   * rest fill must differ from the page it floats on. `--surface` does that on
+   * the dark canvas (neutral-900 on neutral-950) and does NOT on the light one:
+   * slate-50 on white measures 1.05:1, which is an invisible control, not a
+   * subtle one. The light layer therefore inverts it, the same decision
+   * `--pcard-cta-fill` already makes for the /projects card CTA. */
+  --btt-rest-fill: var(--surface);
+  --btt-rest-ink: var(--text-primary);
+  --btt-halo: var(--color-cyan-a12);
+
+  /* Stack pills — the brand-tinted badges on the case studies and the homepage
+   * cards. Three roles each, because `StackBadge.astro` used to name the
+   * primitives below directly, which is precisely why every pill went on
+   * wearing its dark-canvas navy/amber/near-black on the white page. The
+   * values here are unchanged from what that component hard-coded. */
+  --stack-typescript-fill: var(--color-blue-950);
+  --stack-typescript-border: var(--color-blue-700);
+  --stack-typescript-ink: var(--color-blue-200);
+  --stack-javascript-fill: var(--color-amber-950);
+  --stack-javascript-border: var(--color-amber-800);
+  --stack-javascript-ink: var(--color-amber-200);
+  --stack-tailwind-fill: var(--gradient-stack-tailwind);
+  --stack-tailwind-border: var(--gradient-stack-tailwind-border);
+  --stack-tailwind-ink: var(--color-green-300);
+  --stack-figma-fill: var(--surface);
+  --stack-figma-border: var(--border-default);
+  --stack-figma-ink: var(--text-primary);
+  --stack-python-fill: var(--gradient-stack-python);
+  --stack-python-border: var(--gradient-stack-python-border);
+  --stack-python-ink: var(--color-amber-200);
+  --stack-opensource-fill: var(--color-green-1000);
+  --stack-opensource-border: var(--color-green-800);
+  --stack-opensource-ink: var(--color-green-300);
+
+  /* The stack mark once the /projects filter chip's cyan disc has arrived
+   * under it. TypeScript and JavaScript are a filled brand tile with the glyph
+   * knocked out, so they get two roles where every other mark needs one. */
+  --chip-on-mark: var(--background);
+  --chip-on-tile: var(--background);
+  --chip-on-glyph: var(--primary);
 
   /* Raster/vector artwork that was authored for the dark canvas. The filter
    * is semantic rather than component-local so every consuming surface swaps
@@ -397,11 +497,19 @@
   --border-subtle: var(--color-gray-300);
   --border-default: var(--color-slate-400);
   --border-interactive: var(--color-black-a12);
-  --primary: var(--color-cyan-500);
+  /* cyan-700, not cyan-500. `--on-primary` is white on this canvas (see
+   * below) and white measures 3.13:1 on cyan-500 — under AA for the button
+   * labels that ride the fill. cyan-700 takes the same ink to 4.70:1. */
+  --primary: var(--color-cyan-700);
   --primary-ink: var(--color-cyan-800);
   --primary-light: var(--color-cyan-500);
   --primary-dark: var(--color-cyan-900);
-  --on-primary: var(--color-neutral-1000);
+  /* ⛔ WHITE here, near-black on the dark canvas. Inherited from the dark
+   * layer, this was `--color-neutral-1000`, which put dark ink on every
+   * cyan fill the light theme paints — the hover label on both case CTAs,
+   * the back-to-top pill, the pressed filter chip and the view toggle.
+   * That reads as a dark-theme button dropped onto a white page. */
+  --on-primary: var(--color-white);
   --on-inverse: var(--color-white);
   --focus-ring: var(--color-cyan-700);
   --status-success: var(--color-green-800);
@@ -418,6 +526,51 @@
   --pcard-cta-label-active: var(--on-inverse);
   --linkedin-flood: var(--color-linkedin);
   --linkedin-label-active: var(--color-white);
+  --btt-rest-fill: var(--surface-inverse);
+  --btt-rest-ink: var(--on-inverse);
+  --btt-halo: var(--color-black-a10);
+
+  /* Stack pills, light row. TypeScript, JavaScript, Tailwind and Figma are read
+   * straight off Figma 23277:191. Python and Open Source have no light artwork
+   * in that frame, so they are DERIVED here by applying the same 50 / 200 / 700
+   * mapping the four measured pills use to the ramp each already occupies on
+   * the dark canvas — Python keeps its blue→amber gradient, Open Source its
+   * green. Marked as derived so a later Figma read can correct them without
+   * having to work out which four were evidence and which two were inference.
+   * Measured: 5.57, 4.98, 5.49, 9.06 (read) and 4.83, 5.52 (derived) — all AA. */
+  --stack-typescript-fill: var(--color-utility-blue-50);
+  --stack-typescript-border: var(--color-utility-blue-light-200);
+  --stack-typescript-ink: var(--color-utility-blue-700);
+  --stack-javascript-fill: var(--color-utility-yellow-50);
+  --stack-javascript-border: var(--color-utility-yellow-200);
+  --stack-javascript-ink: var(--color-utility-yellow-700);
+  --stack-tailwind-ink: var(--color-utility-green-700);
+  --stack-figma-fill: var(--color-gray-50);
+  --stack-figma-border: var(--color-utility-gray-200);
+  --stack-figma-ink: var(--color-utility-gray-700);
+  --stack-python-ink: var(--color-utility-yellow-700);
+  --stack-opensource-fill: var(--color-utility-green-50);
+  --stack-opensource-border: var(--color-utility-green-200);
+  --stack-opensource-ink: var(--color-utility-green-700);
+
+  /* Tailwind and Python are gradients, and their `--stack-*-fill/-border` roles
+   * point at these, so redefining the gradient is what repaints those two. */
+  --gradient-stack-tailwind: linear-gradient(90deg, var(--color-utility-sky-50) 0%, var(--color-utility-green-50) 100%);
+  --gradient-stack-tailwind-border: linear-gradient(90deg, var(--color-utility-sky-200) 0%, var(--color-utility-green-200) 100%);
+  --gradient-stack-python: linear-gradient(90deg, var(--color-utility-blue-50) 0%, var(--color-utility-yellow-50) 100%);
+  --gradient-stack-python-border: linear-gradient(90deg, var(--color-utility-blue-light-200) 0%, var(--color-utility-yellow-200) 100%);
+
+  /* ⛔ The tile INVERTS on this canvas; the silhouette does not.
+   *
+   * `--chip-on-mark` paints a flat silhouette, and white-on-cyan is the right
+   * weight for one — it matches the label beside it exactly. The tile is a
+   * solid 16px square, so the same white reads as a bright block that outweighs
+   * the label: on the dark canvas a near-black tile punches a hole in the disc,
+   * on the light one a white tile sits on top of it. Blending the tile into the
+   * disc and giving the glyph the label's own ink leaves just the letters,
+   * which is what the dark canvas already reads as. */
+  --chip-on-tile: var(--primary);
+  --chip-on-glyph: var(--on-primary);
   --brand-mark-filter: invert(1);
   --decorative-art-filter: invert(1);
   --contact-background-opacity: 0.16;

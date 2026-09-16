@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import SourceCodeButton from "./SourceCodeButton.astro";
 import StackBadge from "./StackBadge.astro";
 import { localizedPath, t, type Locale } from "../i18n";
-import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, formatTimeframe, isVideoPreview, motionPreviewFor, previewFor, projectActions } from "../lib/projects";
+import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, formatTimeframe, isVideoPreview, lightPlaceholderFor, motionPreviewFor, previewFor, projectActions } from "../lib/projects";
 import "../styles/evidence-rail.css";
 import "../styles/action-row.css";
 
@@ -58,6 +58,8 @@ if (d.evidenceSignals.sourceCode && !d.evidenceLink) {
 
 const preview = previewFor(d, lang);
 const isVideo = isVideoPreview(preview);
+/* Non-null only for the device-mockup placeholders; see `lightPlaceholderFor`. */
+const lightPreview = lightPlaceholderFor(preview);
 
 /**
  * The card's moving preview, where the record ships one. It sits on the still
@@ -228,14 +230,30 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
       ) : isVideo ? (
         <video src={preview} muted loop playsinline autoplay aria-label={projectCopy.previewAlt} />
       ) : (
-        <img
-          src={preview}
-          alt={projectCopy.previewAlt}
-          width="1920"
-          height="1080"
-          loading="lazy"
-          decoding="async"
-        />
+        <>
+          <img
+            src={preview}
+            alt={projectCopy.previewAlt}
+            width="1920"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+            data-theme-art={lightPreview ? "dark" : undefined}
+          />
+          {/* Only a placeholder gets a twin — a real screenshot reads on both
+              canvases and must not ship a second, hidden copy of itself. */}
+          {lightPreview && (
+            <img
+              src={lightPreview}
+              alt={projectCopy.previewAlt}
+              width="1920"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+              data-theme-art="light"
+            />
+          )}
+        </>
       )
     }
   </div>

@@ -156,6 +156,31 @@ export function previewFor(
 }
 
 /**
+ * The light-canvas twin of a device-mockup placeholder, or null.
+ *
+ * 35 records ship no screenshot yet and stand in a device mockup instead;
+ * `public/assets/images/placeholders/` holds a `-dark-` and a `-light-` plate
+ * for each of the three devices. Those are ARTWORK, not photographs — the plate
+ * is the page's own background colour drawn as a screen — so a dark plate on
+ * the light theme reads as a black rectangle punched into a white card, which
+ * is exactly what it looked like.
+ *
+ * Returns null for every real preview. A record whose `preview` is a photograph,
+ * a video, or a CDN URL has one correct image on both canvases and must not be
+ * given a second <img> to hide.
+ *
+ * ⛔ The pairing is the filename, and it is the whole contract: `-dark-` swaps
+ * for `-light-` and nothing else changes. Adding a device means adding BOTH
+ * plates under those two names — a `-light-` file that does not exist resolves
+ * to a broken image on the light theme only, which no dark-theme review sees.
+ */
+const PLACEHOLDER_DARK = /-dark-placeholder\.svg$/;
+
+export function lightPlaceholderFor(src: string): string | null {
+  return PLACEHOLDER_DARK.test(src) ? src.replace(PLACEHOLDER_DARK, "-light-placeholder.svg") : null;
+}
+
+/**
  * The moving version of a record's preview, where one exists.
  *
  * Distinct from a `preview` that is itself a video file (`price-watcher`, whose

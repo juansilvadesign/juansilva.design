@@ -5,8 +5,16 @@
  * The original is a styled-components demo with a display:none checkbox. This
  * version remains a native checkbox so it is focusable and screen-reader
  * operable, while the decorative day/night scene stays faithful to the source.
- * Palette values resolve through the design-system tokens; there are no raw
- * colours in this component.
+ *
+ * Two departures from the first port, both restored to the reference:
+ *
+ * 1. **The scene is the reference's own palette**, via `--color-scene-*` in
+ *    tokens.css. It had been remapped onto theme roles — cyan-700 sky,
+ *    amber-200 sun, slate moon — which kept the no-raw-hex rule and repainted
+ *    the illustration. The inset rim lights also lost their 0.062em blur.
+ * 2. **State comes only from `html[data-theme]`** (plus `html.no-js`), never
+ *    from `:checked`. See the note on the night-state block for why the old
+ *    pairing made its own light-theme overrides unreachable.
  */
 import { t, type Locale } from "../i18n";
 
@@ -132,16 +140,19 @@ const copy = t(lang);
     --container-width: 5.625em;
     --container-height: 2.5em;
     --container-radius: 6.25em;
-    --container-light-bg: var(--color-cyan-700);
-    --container-night-bg: var(--background-deep);
+    /* The reference's own scene, via the `--color-scene-*` primitives. These
+       are illustration, not theme roles — see the note beside them in
+       tokens.css for why they are NOT `--primary` / `--surface` / `--amber`. */
+    --container-light-bg: var(--color-scene-sky-day);
+    --container-night-bg: var(--color-scene-sky-night);
     --circle-container-diameter: 3.375em;
     --sun-moon-diameter: 2.125em;
-    --sun-bg: var(--color-amber-200);
-    --moon-bg: var(--color-slate-200);
-    --spot-color: var(--color-slate-500);
+    --sun-bg: var(--color-scene-sun);
+    --moon-bg: var(--color-scene-moon);
+    --spot-color: var(--color-scene-moon-spot);
     --stars-color: var(--color-white);
-    --clouds-color: var(--color-slate-50);
-    --back-clouds-color: var(--color-blue-100);
+    --clouds-color: var(--color-scene-cloud);
+    --back-clouds-color: var(--color-scene-cloud-back);
     --circle-container-offset: calc((var(--circle-container-diameter) - var(--container-height)) / 2 * -1);
     --theme-switch-transition: 500ms cubic-bezier(0, -0.02, 0.4, 1.25);
     --theme-switch-circle-transition: 300ms cubic-bezier(0, -0.02, 0.35, 1.17);
@@ -219,6 +230,13 @@ const copy = t(lang);
   }
 
   .theme-switch__sun-moon-container {
+    /* ⛔ `auto`, re-enabling the pointer its parent switched off. This one
+       declaration is what the knob-only hover below is built on: the circle
+       container is `pointer-events: none`, so the knob is the only part of it
+       the pointer can reach — and :hover still matches on the ancestor. The
+       port dropped it, which is why the hover had been moved onto the whole
+       label. */
+    pointer-events: auto;
     position: relative;
     z-index: 2;
     width: var(--sun-moon-diameter);
@@ -227,23 +245,41 @@ const copy = t(lang);
     margin: auto;
     border-radius: var(--container-radius);
     background-color: var(--sun-bg);
+    /* ⛔ The third length is the BLUR and the reference sets it to 0.062em on
+       both insets. Flattening it to 0 turns the sun's soft rim light into a
+       hard 1px band — the single most visible departure in the port. */
     box-shadow:
-      inset 0.062em 0.062em 0 var(--color-white-a61),
-      inset 0 -0.062em 0 var(--color-amber-800);
+      inset 0.062em 0.062em 0.062em var(--color-scene-highlight),
+      inset 0 -0.062em 0.062em var(--color-scene-sun-shade);
     filter: drop-shadow(0.062em 0.125em 0.125em var(--color-black-a25))
       drop-shadow(0 0.062em 0.125em var(--color-black-a25));
     transition: var(--theme-switch-transition);
   }
 
   .theme-switch__moon {
+    /*
+     * ⛔ `display: block`, and it is the whole moon.
+     *
+     * The reference's moon is a <div>; this port made every scene element a
+     * <span> so the control could sit inside a <label> without invalid nesting.
+     * Every other span is saved by its own positioning — the clouds, stars,
+     * spots and circle container are `position: absolute`, and the sun/moon
+     * container is a flex item — all of which blockify. The moon is neither. It
+     * stayed an inline box, `width`/`height` do not apply to those, and it
+     * measured 0x0: the night state was the SUN wearing three grey spots, and
+     * had been since the port. Measured in Chrome at 1440px, moon 0x0 inside a
+     * 63.75x63.75 container.
+     */
+    display: block;
     position: relative;
     width: 100%;
     height: 100%;
     border-radius: inherit;
     background-color: var(--moon-bg);
+    /* Same blur restoration as the sun above. */
     box-shadow:
-      inset 0.062em 0.062em 0 var(--color-white-a61),
-      inset 0 -0.062em 0 var(--color-neutral-500);
+      inset 0.062em 0.062em 0.062em var(--color-scene-highlight),
+      inset 0 -0.062em 0.062em var(--color-scene-moon-shade);
     transform: translateX(100%);
     transition: var(--theme-switch-transition);
   }
@@ -310,69 +346,76 @@ const copy = t(lang);
     transition: var(--theme-switch-transition);
   }
 
-  /* Input state gives instant click feedback. The root selectors make the
-   * art correct as soon as the blocking head script selects a saved theme. */
-  .theme-switch__checkbox:checked + .theme-switch__container,
-  :global(html[data-theme="dark"]) .theme-switch__container {
+  /*
+   * ── Night state ─────────────────────────────────────────────────────────
+   *
+   * ONE source of truth: the root attribute. What stood here paired every rule
+   * with `.theme-switch__checkbox:checked + …` and then tried to override the
+   * pair with `:global(html[data-theme="light"]) …`. That override could never
+   * land. Astro scopes both sides, so the checked half measures (0,5,0) — two
+   * classes, `:checked`, two `data-astro-cid` attributes — against (0,3,1) for
+   * the root half. Higher specificity wins regardless of source order, so the
+   * six light rules below the fold were dead CSS, and the switch's art was
+   * decided by the checkbox alone the whole time.
+   *
+   * Dropping `:checked` from the visuals costs nothing: `apply()` writes
+   * `root.dataset.theme` synchronously inside the change handler, so the art
+   * still turns on the same tick as the click. It also removes a way for the
+   * two to disagree — a checkbox the script had not yet synced used to outrank
+   * the attribute the blocking head script had already written.
+   *
+   * ⛔ `html.no-js` is load-bearing, not belt-and-braces. With scripting off no
+   * `data-theme` is ever written, `:root` keeps the dark palette, and the
+   * markup's server-rendered `checked` no longer paints anything — so without
+   * this selector the page would be dark and the switch would show high noon.
+   * BaseLayout ships the class and removes it in its first DOM statement.
+   */
+  :global(html[data-theme="dark"]) .theme-switch__container,
+  :global(html.no-js) .theme-switch__container {
     background-color: var(--container-night-bg);
   }
 
-  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container,
-  :global(html[data-theme="dark"]) .theme-switch .theme-switch__circle-container {
+  :global(html[data-theme="dark"]) .theme-switch__circle-container,
+  :global(html.no-js) .theme-switch__circle-container {
     left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter));
   }
 
-  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__moon,
-  :global(html[data-theme="dark"]) .theme-switch .theme-switch__moon {
+  :global(html[data-theme="dark"]) .theme-switch__moon,
+  :global(html.no-js) .theme-switch__moon {
     transform: translateX(0);
   }
 
-  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__clouds,
-  :global(html[data-theme="dark"]) .theme-switch .theme-switch__clouds {
+  :global(html[data-theme="dark"]) .theme-switch__clouds,
+  :global(html.no-js) .theme-switch__clouds {
     bottom: -4.062em;
   }
 
-  .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__stars-container,
-  :global(html[data-theme="dark"]) .theme-switch .theme-switch__stars-container {
+  :global(html[data-theme="dark"]) .theme-switch__stars-container,
+  :global(html.no-js) .theme-switch__stars-container {
     top: 50%;
     transform: translateY(-50%);
   }
 
-  .theme-switch:hover .theme-switch__circle-container {
+  /*
+   * The knob's nudge toward its travel direction.
+   *
+   * ⛔ Hover on `.theme-switch__sun-moon-container`, NOT on `.theme-switch`.
+   * The reference nudges only when the pointer is on the KNOB — which is why
+   * `__circle-container` is `pointer-events: none` and `__sun-moon-container`
+   * is `pointer-events: auto`, a pairing that otherwise reads as dead code.
+   * Hovering the whole label made the knob twitch whenever the pointer crossed
+   * the 44px hit area, including on its way somewhere else.
+   *
+   * No `:has()` is involved: `:hover` matches every ancestor of the hovered
+   * element, so the knob's hover lands on the circle container that moves.
+   */
+  .theme-switch__circle-container:hover {
     left: calc(var(--circle-container-offset) + 0.187em);
   }
 
-  .theme-switch:hover .theme-switch__checkbox:checked + .theme-switch__container .theme-switch__circle-container,
-  :global(html[data-theme="dark"]) .theme-switch:hover .theme-switch__circle-container {
+  :global(html[data-theme="dark"]) .theme-switch__circle-container:hover,
+  :global(html.no-js) .theme-switch__circle-container:hover {
     left: calc(100% - var(--circle-container-offset) - var(--circle-container-diameter) - 0.187em);
-  }
-
-  /* A server-rendered checked input is the dark fallback. On a saved light
-   * visit, the root attribute wins even in the small gap before body JS syncs
-   * the checkbox property. */
-  :global(html[data-theme="light"]) .theme-switch__container {
-    background-color: var(--container-light-bg);
-  }
-
-  :global(html[data-theme="light"]) .theme-switch .theme-switch__circle-container {
-    left: var(--circle-container-offset);
-  }
-
-  :global(html[data-theme="light"]) .theme-switch:hover .theme-switch__circle-container {
-    left: calc(var(--circle-container-offset) + 0.187em);
-  }
-
-  :global(html[data-theme="light"]) .theme-switch .theme-switch__moon {
-    transform: translateX(100%);
-  }
-
-  :global(html[data-theme="light"]) .theme-switch .theme-switch__clouds {
-    bottom: -0.625em;
-  }
-
-  :global(html[data-theme="light"]) .theme-switch .theme-switch__stars-container {
-    top: -100%;
-    transform: none;
   }
 
   .theme-switch__checkbox:focus-visible + .theme-switch__container {

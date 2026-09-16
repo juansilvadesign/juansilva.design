@@ -22,11 +22,26 @@ const socialItems: Record<"linkedIn" | "github" | "x" | "figma" | "dribbble", So
     href: socialLinks.linkedIn,
     label: copy.navigation.linkedInProfile,
     icon: "/assets/icons/linkedin.svg",
+    /* `linkedin-hover.svg` has been on disk, unreferenced, the whole time —
+       the same omission as GitHub's, minus the theme half. Without it this
+       icon alone fell through to the generic `opacity: 0.7` branch. */
+    hoverIcon: "/assets/icons/linkedin-hover.svg",
   },
   github: {
     href: socialLinks.github,
     label: copy.hero.githubAriaLabel,
-    icon: "/assets/icons/github.svg",
+    /*
+     * ⛔ The OUTLINED mark, and it must carry a `hoverIcon` like its siblings.
+     * The file this replaced was a 20x20 `fill="white"` octocat with no hover
+     * twin, so GitHub was the one icon in this row that (a) painted pure white
+     * on the dark canvas where the other four paint `#94979C`, (b) vanished
+     * entirely on the light canvas, and (c) fell through to the generic
+     * `opacity: 0.7` branch below instead of the cyan swap. Both 32x32 marks
+     * are in `public/assets/icons/` — `github.svg` is the solid octocat, kept
+     * for a switch back; this is the outlined one Juan selected.
+     */
+    icon: "/assets/icons/github-outlined.svg",
+    hoverIcon: "/assets/icons/github-outlined-hover.svg",
   },
   x: {
     href: socialLinks.x,

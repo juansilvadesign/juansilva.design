@@ -8,7 +8,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { locales, defaultLocale, localizedPath, pageTitle, t } from "../../../i18n";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
-import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, byEvidence, formatTimeframe, isVideoPreview, motionPreviewFor, ogImageFor, posterFor, previewFor } from "../../../lib/projects";
+import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, byEvidence, formatTimeframe, isVideoPreview, lightPlaceholderFor, motionPreviewFor, ogImageFor, posterFor, previewFor } from "../../../lib/projects";
 import "../../../styles/evidence-rail.css";
 import "../../../styles/action-row.css";
 
@@ -55,6 +55,8 @@ const preview = previewFor(d, lang);
 const motion = motionPreviewFor(d, lang);
 
 const isVideo = isVideoPreview(preview);
+/* Non-null only for the device-mockup placeholders; see `lightPlaceholderFor`. */
+const lightPreview = lightPlaceholderFor(preview);
 const poster = isVideo ? posterFor(preview) : undefined;
 
 /**
@@ -219,7 +221,26 @@ const indexHref = localizedPath("/projects/", lang);
             aria-label={c.previewAlt}
           />
         ) : (
-          <img src={preview} alt={c.previewAlt} width="1600" height="900" decoding="async" />
+          <>
+            <img
+              src={preview}
+              alt={c.previewAlt}
+              width="1600"
+              height="900"
+              decoding="async"
+              data-theme-art={lightPreview ? "dark" : undefined}
+            />
+            {lightPreview && (
+              <img
+                src={lightPreview}
+                alt={c.previewAlt}
+                width="1600"
+                height="900"
+                decoding="async"
+                data-theme-art="light"
+              />
+            )}
+          </>
         )}
       </figure>
 
@@ -386,6 +407,9 @@ const indexHref = localizedPath("/projects/", lang);
                   b.width && b.height && b.height > b.width && "cs-figure--portrait",
                 ]}
               >
+                {/* A block can carry a device-mockup placeholder too — upos
+                    does, four times — so it takes the same paired treatment as
+                    the hero rather than a second mechanism. */}
                 <img
                   src={b.src}
                   alt={b.alt}
@@ -393,7 +417,19 @@ const indexHref = localizedPath("/projects/", lang);
                   height={b.height}
                   loading="lazy"
                   decoding="async"
+                  data-theme-art={lightPlaceholderFor(b.src) ? "dark" : undefined}
                 />
+                {lightPlaceholderFor(b.src) && (
+                  <img
+                    src={lightPlaceholderFor(b.src)}
+                    alt={b.alt}
+                    width={b.width}
+                    height={b.height}
+                    loading="lazy"
+                    decoding="async"
+                    data-theme-art="light"
+                  />
+                )}
                 {b.caption && <figcaption>{b.caption}</figcaption>}
               </figure>
             ),

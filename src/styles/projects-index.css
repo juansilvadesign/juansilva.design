@@ -225,7 +225,7 @@
  * and the paint becomes flat colour, so the two properties swap roles here.
  */
 .chip__icon[data-on]:not([data-stack]) {
-  background: var(--background);
+  background: var(--chip-on-mark);
   mask: var(--chip-icon) center / contain no-repeat;
   -webkit-mask: var(--chip-icon) center / contain no-repeat;
 }
@@ -257,10 +257,19 @@
   --stack-glyph: #000;
 }
 
-/* The inversion, from the theme rather than a second copy of the artwork. */
+/*
+ * The inversion, from the theme rather than a second copy of the artwork.
+ *
+ * ⛔ Through `--chip-on-*`, not `--background`/`--primary` directly. The two
+ * canvases need OPPOSITE treatments here and naming the palette roles hid that:
+ * a tile painted in the page colour punches a hole in the cyan disc on the dark
+ * canvas and sits on top of it as a white block on the light one. The roles let
+ * the light layer blend the tile into the disc and keep only the glyph. Dark is
+ * unchanged — its roles resolve to exactly what was written here.
+ */
 .chip__icon[data-stack][data-on] {
-  --stack-tile: var(--background);
-  --stack-glyph: var(--primary);
+  --stack-tile: var(--chip-on-tile);
+  --stack-glyph: var(--chip-on-glyph);
 }
 
 .chip__n {

@@ -59,13 +59,27 @@ const mailbox = socialLinks.mail.replace("mailto:", "");
       <details class="version-picker">
         <summary aria-label={copy.footer.versionsToggle}>
           {siteVersions.find((version) => version.active)?.label}
-          <img
-            src="/assets/icons/chevron-selector-vertical.svg"
-            alt=""
-            width="16"
-            height="16"
+          {/*
+            Inlined so the mark follows `currentColor` — the same move
+            `action-row.css` documents for `.action-primary__icon`, and for the
+            same reason. As an <img> it carried a baked `stroke="#ECECED"`,
+            authored for the dark canvas, which measures 1.1:1 on the light
+            theme's `--background-deep`. The glyph was simply not there.
+          */}
+          <svg
+            class="version-picker__chevron"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
             aria-hidden="true"
-          />
+            focusable="false"
+          >
+            <path d="M4.6665 9.99984L7.99984 13.3332L11.3332 9.99984M4.6665 5.99984L7.99984 2.6665L11.3332 5.99984"
+            ></path>
+          </svg>
         </summary>
         <nav class="version-picker__options" aria-label={copy.footer.versionsLabel}>
           {
@@ -257,9 +271,10 @@ const mailbox = socialLinks.mail.replace("mailto:", "");
     background: var(--surface-hover);
   }
 
-  .version-picker summary img {
+  .version-picker__chevron {
     width: var(--space-px-16);
     height: var(--space-px-16);
+    flex: none;
   }
 
   .version-picker__options {

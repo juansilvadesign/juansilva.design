@@ -54,39 +54,47 @@ const stack = { name: stackNames[id], icon: STACK_ICONS[id] };
     height: var(--space-px-16);
   }
 
+  /*
+   * ⛔ Roles, not primitives. Each of these named `--color-blue-950`,
+   * `--color-amber-950`, `--gradient-stack-python` and friends directly, so
+   * every pill kept its dark-canvas navy / amber / near-black fill on the white
+   * page — a row of dark chips on a light card. The three roles per stack are
+   * defined in BOTH theme layers of `design-system/tokens.css`; the dark values
+   * there are byte-for-byte what used to be written here.
+   */
   .technology--typescript {
-    --stack-background: var(--color-blue-950);
-    --stack-border-background: var(--color-blue-700);
-    --stack-foreground: var(--color-blue-200);
+    --stack-background: var(--stack-typescript-fill);
+    --stack-border-background: var(--stack-typescript-border);
+    --stack-foreground: var(--stack-typescript-ink);
   }
 
   .technology--javascript {
-    --stack-background: var(--color-amber-950);
-    --stack-border-background: var(--color-amber-800);
-    --stack-foreground: var(--color-amber-200);
+    --stack-background: var(--stack-javascript-fill);
+    --stack-border-background: var(--stack-javascript-border);
+    --stack-foreground: var(--stack-javascript-ink);
   }
 
   .technology--tailwind {
-    --stack-background: var(--gradient-stack-tailwind);
-    --stack-border-background: var(--gradient-stack-tailwind-border);
-    --stack-foreground: var(--color-green-300);
+    --stack-background: var(--stack-tailwind-fill);
+    --stack-border-background: var(--stack-tailwind-border);
+    --stack-foreground: var(--stack-tailwind-ink);
   }
 
   .technology--figma {
-    --stack-background: var(--surface);
-    --stack-border-background: var(--border-default);
-    --stack-foreground: var(--text-primary);
+    --stack-background: var(--stack-figma-fill);
+    --stack-border-background: var(--stack-figma-border);
+    --stack-foreground: var(--stack-figma-ink);
   }
 
   .technology--python {
-    --stack-background: var(--gradient-stack-python);
-    --stack-border-background: var(--gradient-stack-python-border);
-    --stack-foreground: var(--color-amber-200);
+    --stack-background: var(--stack-python-fill);
+    --stack-border-background: var(--stack-python-border);
+    --stack-foreground: var(--stack-python-ink);
   }
 
   .technology--opensource {
-    --stack-background: var(--color-green-1000);
-    --stack-border-background: var(--color-green-800);
-    --stack-foreground: var(--color-green-300);
+    --stack-background: var(--stack-opensource-fill);
+    --stack-border-background: var(--stack-opensource-border);
+    --stack-foreground: var(--stack-opensource-ink);
   }
 </style>

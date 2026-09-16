@@ -217,40 +217,67 @@ select {
   line-height: var(--type-label-leading);
 }
 
+/*
+ * ⚠️ No markup renders `.stack-badge` today — `StackBadge.astro` ships
+ * `.technology` instead. Kept, and moved onto the same `--stack-*` roles as
+ * that component, so the two cannot disagree if this one is ever revived.
+ */
 .stack-badge--typescript {
-  --stack-background: var(--color-blue-950);
-  --stack-border: var(--color-blue-700);
-  --stack-foreground: var(--color-blue-200);
+  --stack-background: var(--stack-typescript-fill);
+  --stack-border: var(--stack-typescript-border);
+  --stack-foreground: var(--stack-typescript-ink);
 }
 
 .stack-badge--javascript {
-  --stack-background: var(--color-amber-950);
-  --stack-border: var(--color-amber-800);
-  --stack-foreground: var(--color-amber-200);
+  --stack-background: var(--stack-javascript-fill);
+  --stack-border: var(--stack-javascript-border);
+  --stack-foreground: var(--stack-javascript-ink);
 }
 
 .stack-badge--tailwind {
-  --stack-background: var(--gradient-stack-tailwind);
-  --stack-border: var(--color-green-800);
-  --stack-foreground: var(--color-green-300);
+  --stack-background: var(--stack-tailwind-fill);
+  --stack-border: var(--stack-tailwind-border);
+  --stack-foreground: var(--stack-tailwind-ink);
 }
 
 .stack-badge--figma {
-  --stack-background: var(--surface);
-  --stack-border: var(--border-default);
-  --stack-foreground: var(--text-primary);
+  --stack-background: var(--stack-figma-fill);
+  --stack-border: var(--stack-figma-border);
+  --stack-foreground: var(--stack-figma-ink);
 }
 
 .stack-badge--python {
-  --stack-background: var(--gradient-stack-python);
-  --stack-border: var(--color-amber-800);
-  --stack-foreground: var(--color-amber-200);
+  --stack-background: var(--stack-python-fill);
+  --stack-border: var(--stack-python-border);
+  --stack-foreground: var(--stack-python-ink);
 }
 
 .stack-badge--opensource {
-  --stack-background: var(--color-green-1000);
-  --stack-border: var(--color-green-800);
-  --stack-foreground: var(--color-green-300);
+  --stack-background: var(--stack-opensource-fill);
+  --stack-border: var(--stack-opensource-border);
+  --stack-foreground: var(--stack-opensource-ink);
+}
+
+/*
+ * Theme-paired artwork. Both plates ship in the markup and the root attribute
+ * decides which one paints — see `lightPlaceholderFor` in `lib/projects.ts`.
+ *
+ * ⛔ These rules only ever say `display: none`. They never say `display:
+ * <something>` for the plate that stays, because the four render sites give
+ * their own images `block`, `flex` item behaviour and `object-fit` — writing a
+ * display value here would overwrite whichever of those applied. Hiding one
+ * sibling leaves the other exactly as its own component styled it.
+ *
+ * Specificity is (0,3,0), above every per-site `… img` rule, so the hidden
+ * plate stays hidden wherever it is used.
+ *
+ * ⛔ Costs ONE extra request in total, not one per card. All 35 placeholder
+ * records point at the same two files, so the light plate is fetched once and
+ * served from cache for the rest of the grid.
+ */
+:root:not([data-theme="light"]) [data-theme-art="light"],
+:root[data-theme="light"] [data-theme-art="dark"] {
+  display: none;
 }
 
 .ls-line {

@@ -76,7 +76,27 @@ const copy = t(lang);
             </svg>
           </span>
           <span class="button__label">{copy.hero.linkedInCta}</span>
-          <img src="/assets/icons/link-external-02.svg" alt="" width="16" height="16" />
+          {/*
+            Inlined for `currentColor`, same reason as the footer's version
+            chevron: the file bakes `stroke="#CECFD2"`, a dark-canvas neutral
+            that measures 1.5:1 on the light theme's white page. The label
+            beside it already resolves per theme; the glyph now follows it.
+          */}
+          <svg
+            class="button__external"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.66667"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M17.5 7.50001L17.5 2.50001M17.5 2.50001H12.5M17.5 2.50001L10 10M8.33333 2.5H6.5C5.09987 2.5 4.3998 2.5 3.86502 2.77248C3.39462 3.01217 3.01217 3.39462 2.77248 3.86502C2.5 4.3998 2.5 5.09987 2.5 6.5V13.5C2.5 14.9001 2.5 15.6002 2.77248 16.135C3.01217 16.6054 3.39462 16.9878 3.86502 17.2275C4.3998 17.5 5.09987 17.5 6.5 17.5H13.5C14.9001 17.5 15.6002 17.5 16.135 17.2275C16.6054 16.9878 16.9878 16.6054 17.2275 16.135C17.5 15.6002 17.5 14.9001 17.5 13.5V11.6667"
+            ></path>
+          </svg>
         </a>
         <ResumeButton {lang} />
       </div>
@@ -160,9 +180,14 @@ const copy = t(lang);
     width: 100%;
   }
 
-  .hero__actions img {
+  /* `.button__external` joins the `img` rule rather than getting its own: an
+     inline <svg> carries no intrinsic size, so dropping it in without this
+     would lay out at the UA's 300x150 default. */
+  .hero__actions img,
+  .button__external {
     width: var(--space-px-16);
     height: var(--space-px-16);
+    flex: none;
   }
 
   /*
