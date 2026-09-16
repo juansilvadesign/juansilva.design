@@ -17,7 +17,15 @@
   "liveUrl": "https://psiativa.com.br/",
   "evidenceLink": "/assets/images/n8n.webp",
   "featured": true,
-  "preview": "/assets/images/n8n.webp",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.jpg",
+  "previewMotion": {
+    "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.webm",
+    "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.mp4",
+    "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.webp",
+    "width": 1920,
+    "height": 1080,
+    "hoverStart": 0
+  },
   "copy": {
     "en": {
       "title": "AI Agent Orchestration & Sales Automation",
@@ -56,6 +64,16 @@
           "body": "PsiAtiva's AI operations represent my internal infrastructure, not a client project. I designed the architecture, deployed the Docker environment, wrote the vector retrieval queries, and engineered the conversational SDR agent. It serves as live proof of how I design and deploy autonomous AI pipelines that connect front-end interfaces to operational backend logic."
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Production n8n AI operations showcase demonstrating inbound webhook routing, lead enrichment, autonomous WhatsApp SDR, and pgvector RAG memory.",
+          "caption": "Fifty-five seconds, silent and looping — full production architecture: webhook ingestion, dual-LLM lead enrichment, conversational WhatsApp SDR, and pgvector semantic retrieval."
+        },
+        {
           "type": "heading",
           "level": 2,
           "text": "Architecture: The autonomous WhatsApp SDR agent"
@@ -63,6 +81,16 @@
         {
           "type": "prose",
           "body": "Modern sales automation requires far more than rigid decision trees. At the center of PsiAtiva's acquisition engine is 'Renata', an AI-powered Sales Development Representative (SDR) operating on the WhatsApp Business API. Orchestrated via n8n and powered by large language models, the agent handles asynchronous conversational qualification with potential clinic owners. Rather than forcing rigid multi-choice menus, it engages in natural clinical dialogue, isolates operational pains, and moves qualified prospects toward strategic diagnosis meetings."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-renata-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-renata-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-renata-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Renata conversational WhatsApp SDR qualification flow operating over WhatsApp Business API via n8n.",
+          "caption": "Sixteen seconds, silent and looping — asynchronous conversational qualification: message receipt, prompt assembly with CFP compliance, humanized typing delay, and response dispatch."
         },
         {
           "type": "heading",
@@ -82,6 +110,16 @@
             "Real-Time Context Injection — User queries trigger cosine similarity searches against the vector store, dynamically grounding model responses in verified facts.",
             "Lead Enrichment Pipeline — Ingests intake quiz responses, evaluates digital presence indicators, and synthesizes a structured lead dossier before the conversation opens."
           ]
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-rag-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-rag-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-rag-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "pgvector semantic retrieval and contextual memory pipeline inside n8n.",
+          "caption": "Fifteen seconds, silent and looping — query vectorization, 1536-dimensional cosine distance similarity match (<=>), and grounded context injection into LLM prompts."
         },
         {
           "type": "quote",
@@ -157,6 +195,16 @@
           "body": "As operações de IA da PsiAtiva representam minha própria infraestrutura interna, e não um projeto para clientes. Desenhei a arquitetura, implantei o ambiente Docker, formulei as consultas de recuperação vetorial e programei o agente SDR conversacional. Serve como prova ao vivo de como concebo e implemento pipelines autônomos de IA que conectam interfaces web à inteligência operacional de back-end."
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Showcase completo das operações de IA no n8n: webhook de entrada, enriquecimento de leads, SDR autônomo no WhatsApp e memória RAG com pgvector.",
+          "caption": "Cinquenta e cinco segundos, silencioso e em loop — arquitetura completa em produção: captura via webhook, enriquecimento com LLMs, SDR conversacional no WhatsApp e busca semântica em pgvector."
+        },
+        {
           "type": "heading",
           "level": 2,
           "text": "Arquitetura: O agente SDR autônomo no WhatsApp"
@@ -164,6 +212,16 @@
         {
           "type": "prose",
           "body": "A automação comercial moderna exige muito mais do que árvores rígidas de decisão. No centro da operação da PsiAtiva opera a 'Renata', uma SDR orientada por inteligência artificial conectada à API do WhatsApp Business. Orquestrada via n8n e alimentada por modelos de linguagem avançados, a agente conduz qualificações conversacionais assíncronas com donos de clínicas e psicólogos. Em vez de impor menus numéricos inflexíveis, sustenta um diálogo consultivo, identifica dores operacionais e direciona contatos qualificados para reuniões de diagnóstico."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-renata-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-renata-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-renata-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Fluxo de qualificação conversacional da SDR Renata via WhatsApp Business API e n8n.",
+          "caption": "Dezesseis segundos, silencioso e em loop — o ciclo de qualificação assíncrona: recepção de mensagens, montagem de prompt com conformidade ética do CFP, delay humanizado e envio da resposta."
         },
         {
           "type": "heading",
@@ -183,6 +241,16 @@
             "Injeção Dinâmica de Contexto — Mensagens recebidas disparam buscas por similaridade de cosseno no banco vetorial, ancorando as respostas da IA em dados factuais.",
             "Pipeline de Enriquecimento de Leads — Captura dados enviados pelo quiz do site, cruza indicadores de presença digital e gera um briefing estruturado antes do início do diálogo."
           ]
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-rag-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-rag-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-ai-operations/psiativa-ai-operations-rag-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Pipeline de recuperação semântica e memória contextual com pgvector no n8n.",
+          "caption": "Quinze segundos, silencioso e em loop — vetorização de mensagens, busca por similaridade de cosseno (<=>) em 1536 dimensões e injeção de contexto ancorado nos prompts dos LLMs."
         },
         {
           "type": "quote",
