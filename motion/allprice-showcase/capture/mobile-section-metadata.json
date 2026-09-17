@@ -1,0 +1,20 @@
+{
+  "sections": [
+    {
+      "path": "assets/live/mobile-comofunciona-full.png",
+      "y": 1072,
+      "height": 2289,
+      "width": 390,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/mobile-pricing-full.png",
+      "y": 8310,
+      "height": 2802,
+      "width": 390,
+      "scale": 2
+    }
+  ],
+  "height": 15607,
+  "decoded": true
+}

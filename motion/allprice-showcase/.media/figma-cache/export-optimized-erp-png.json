@@ -1,0 +1,35 @@
+{
+  "item": {
+    "id": "1830:1181",
+    "path": "assets/figma/optimized-erp.png",
+    "scale": 2
+  },
+  "receipt": {
+    "nodeId": "1830:1181",
+    "format": "PNG",
+    "scale": 2,
+    "mimeType": "image/png",
+    "bytes": 326817,
+    "sha256": "672da8f2d4acb14257c6b5e7993e63c9f78c1116faf6b8009b94c883628f6507",
+    "width": 2560,
+    "height": 2054,
+    "dimensionSource": "png-ihdr",
+    "delivery": "file",
+    "path": "/home/jaypy/GitHub-Projects/Notes/ai-synthesizer/workspace/juansilva.design/projects/juansilva-design/motion/allprice-showcase/assets/figma/optimized-erp.png",
+    "preflight": {
+      "nodeWidth": 1280,
+      "nodeHeight": 1027,
+      "boundsWidth": 1280,
+      "boundsHeight": 1027,
+      "boundsSource": "absoluteRenderBounds",
+      "projectedWidth": 2560,
+      "projectedHeight": 2054,
+      "projectedMegapixels": 5.25824,
+      "megapixelLimit": 16,
+      "limitApplied": true,
+      "costKnown": true,
+      "overLimit": false,
+      "overrideUsed": false
+    }
+  }
+}

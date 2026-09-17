@@ -1,0 +1,35 @@
+{
+  "item": {
+    "id": "315:975",
+    "path": "assets/figma/brand-symbol.png",
+    "scale": 1
+  },
+  "receipt": {
+    "nodeId": "315:975",
+    "format": "PNG",
+    "scale": 1,
+    "mimeType": "image/png",
+    "bytes": 241059,
+    "sha256": "beb22b4b5eb0dddac9b65524e81da8aa3a43ce630ef8f7fb70be9e39593117e6",
+    "width": 1080,
+    "height": 1080,
+    "dimensionSource": "png-ihdr",
+    "delivery": "file",
+    "path": "/home/jaypy/GitHub-Projects/Notes/ai-synthesizer/workspace/juansilva.design/projects/juansilva-design/motion/allprice-showcase/assets/figma/brand-symbol.png",
+    "preflight": {
+      "nodeWidth": 1080,
+      "nodeHeight": 1080,
+      "boundsWidth": 1080,
+      "boundsHeight": 1080,
+      "boundsSource": "absoluteRenderBounds",
+      "projectedWidth": 1080,
+      "projectedHeight": 1080,
+      "projectedMegapixels": 1.1664,
+      "megapixelLimit": 16,
+      "limitApplied": true,
+      "costKnown": true,
+      "overLimit": false,
+      "overrideUsed": false
+    }
+  }
+}

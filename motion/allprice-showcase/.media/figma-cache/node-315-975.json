@@ -1,0 +1,91 @@
+{
+  "id": "315:975",
+  "name": "1080x1080",
+  "type": "FRAME",
+  "effects": [],
+  "effectStyleId": "",
+  "clipsContent": true,
+  "absoluteRenderBounds": {
+    "x": 1512,
+    "y": 0,
+    "width": 1080,
+    "height": 1080
+  },
+  "absoluteBoundingBox": {
+    "x": 1512,
+    "y": 0,
+    "width": 1080,
+    "height": 1080
+  },
+  "children": [
+    {
+      "id": "317:2231",
+      "name": "Group 3",
+      "type": "GROUP",
+      "effects": [],
+      "clipsContent": false,
+      "absoluteRenderBounds": {
+        "x": 1632.899658203125,
+        "y": 120.8991928100586,
+        "width": 833.9638671875,
+        "height": 838.208740234375
+      },
+      "absoluteBoundingBox": {
+        "x": 1671,
+        "y": 159,
+        "width": 761.9974365234375,
+        "height": 762.007568359375
+      },
+      "children": [
+        {
+          "id": "317:2232",
+          "name": "Group 1",
+          "type": "GROUP",
+          "effects": [],
+          "clipsContent": false,
+          "absoluteRenderBounds": {
+            "x": 1632.899658203125,
+            "y": 120.8991928100586,
+            "width": 833.9638671875,
+            "height": 838.208740234375
+          },
+          "absoluteBoundingBox": {
+            "x": 1671,
+            "y": 159,
+            "width": 761.9974365234375,
+            "height": 762.007568359375
+          },
+          "children": []
+        },
+        {
+          "id": "317:2235",
+          "name": "trend-up-01",
+          "type": "INSTANCE",
+          "fills": [
+            {
+              "blendMode": "NORMAL",
+              "visible": false,
+              "type": "SOLID",
+              "color": "#ffffff"
+            }
+          ],
+          "effects": [],
+          "clipsContent": true,
+          "absoluteRenderBounds": {
+            "x": 1709.13720703125,
+            "y": 235.181396484375,
+            "width": 647.70654296875,
+            "height": 647.7064208984375
+          },
+          "absoluteBoundingBox": {
+            "x": 1709.13720703125,
+            "y": 235.181396484375,
+            "width": 647.7064208984375,
+            "height": 647.7064208984375
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

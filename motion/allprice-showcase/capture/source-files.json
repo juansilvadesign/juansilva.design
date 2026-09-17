@@ -1,0 +1,248 @@
+[
+  {
+    "path": "assets/figma/brand-symbol.png",
+    "bytes": 241059,
+    "sha256": "beb22b4b5eb0dddac9b65524e81da8aa3a43ce630ef8f7fb70be9e39593117e6",
+    "note": "brand symbol"
+  },
+  {
+    "path": "assets/figma/optimized-alerts.png",
+    "bytes": 231284,
+    "sha256": "cb17a84c06f67af6851dee8d0a83fbc177b6d683f323f091d9641399ab09eea8",
+    "note": "optimized alerts"
+  },
+  {
+    "path": "assets/figma/optimized-audiences.png",
+    "bytes": 398989,
+    "sha256": "7a90a0f85d37223785f1b6e1f9efc50fc960d59be0cb588baefc4f8c6cfed767",
+    "note": "optimized audiences"
+  },
+  {
+    "path": "assets/figma/optimized-desktop-full.png",
+    "bytes": 2331633,
+    "sha256": "fa3807dd7431b836b4865c3777a5453c377fc345ab173a287ac4b79e3b112c8a",
+    "note": "Optimized composite. Same top 0–410px comparison crop; render only bounded crops, never the full bitmap repeatedly."
+  },
+  {
+    "path": "assets/figma/optimized-erp.png",
+    "bytes": 326817,
+    "sha256": "672da8f2d4acb14257c6b5e7993e63c9f78c1116faf6b8009b94c883628f6507",
+    "note": "optimized erp"
+  },
+  {
+    "path": "assets/figma/optimized-faq.png",
+    "bytes": 247143,
+    "sha256": "36ecbbb60a10f1dcf67736b2a49f700dec579d1519bc52937587fdb8259aba8e",
+    "note": "optimized faq"
+  },
+  {
+    "path": "assets/figma/optimized-features.png",
+    "bytes": 571973,
+    "sha256": "8a299970d1291d7158eea45a31aa757de263350e0d19a5b1b307deb62da13897",
+    "note": "optimized features"
+  },
+  {
+    "path": "assets/figma/optimized-footer.png",
+    "bytes": 1326768,
+    "sha256": "cba4941d672ca2c6b5d64e4c86f754867874989854a9bf298c086acf9796584f",
+    "note": "optimized footer"
+  },
+  {
+    "path": "assets/figma/optimized-hero.png",
+    "bytes": 1672614,
+    "sha256": "75ef0a2caa34476309ed693ae55693064e44a7cdea82d7b0648a18e0db51584f",
+    "note": "optimized hero"
+  },
+  {
+    "path": "assets/figma/optimized-plans.png",
+    "bytes": 396171,
+    "sha256": "28f015701ff8934f002266c6825de029575875cd220e8f987243127b30ba00f1",
+    "note": "optimized plans"
+  },
+  {
+    "path": "assets/figma/optimized-pricing-ui.png",
+    "bytes": 1255022,
+    "sha256": "b32648d5203a119c864b8ff6c095882d36f00eff4eee720148382aec66a610ba",
+    "note": "optimized pricing ui"
+  },
+  {
+    "path": "assets/figma/original-desktop-full.png",
+    "bytes": 2314262,
+    "sha256": "343fe3ed396f56dc488218a57ff410056da5a742e022d227590444a87fa701a7",
+    "note": "Original composite. Comparison rests only in top 0–410px; other regions contain illustrative data."
+  },
+  {
+    "path": "assets/figma/original-hero.png",
+    "bytes": 2684538,
+    "sha256": "1cf4cd1c81b0340c6b36dbea2f2adc02650ce5690964c3c17f159d1d4204c53e",
+    "note": "ARCHIVE ONLY: isolated node omits sibling dashboard layers; invalid before/after plate."
+  },
+  {
+    "path": "assets/live/desktop-faq-closed.png",
+    "bytes": 195233,
+    "sha256": "df42005f2c5a036b4a38c1e4ff27a1076aab7d05fba42092ebb19886e2ac836c",
+    "note": "SUPERSEDED for readable holds: heading clipped. Use faq-framed-closed."
+  },
+  {
+    "path": "assets/live/desktop-faq-erp-open.png",
+    "bytes": 217153,
+    "sha256": "9ba7220078665146e056e72e27dae6f46e7b9d73fb1fee0d68c3cd30eddf961e",
+    "note": "SUPERSEDED for readable holds: heading clipped. Use faq-framed-open."
+  },
+  {
+    "path": "assets/live/desktop-faq-framed-closed.png",
+    "bytes": 190792,
+    "sha256": "701333eea1f80fa84abd80f3e2dcb693d234ce14f9105bf3445a6f6118dbdc30",
+    "note": "Preferred FAQ closed state; heading and first five questions visible."
+  },
+  {
+    "path": "assets/live/desktop-faq-framed-open.png",
+    "bytes": 213700,
+    "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e",
+    "note": "Same camera as closed; genuine expansion of question 2, no ERP required."
+  },
+  {
+    "path": "assets/live/desktop-faq-pricing-open.png",
+    "bytes": 190850,
+    "sha256": "66779ce7c5be3346b7adb055f22537b59e83ea15da22c352571a5d453369ffd4",
+    "note": "Archive alternate answer. Use only after framing review; not selected in current plan."
+  },
+  {
+    "path": "assets/live/desktop-features-left.png",
+    "bytes": 338220,
+    "sha256": "c7867785d017b4a84f122bdb8c8725b5794ead08c6cfa4b0c836db2111f68d76",
+    "note": "Genuine left carousel state; source section y=3927, scrollLeft=0."
+  },
+  {
+    "path": "assets/live/desktop-features-right.png",
+    "bytes": 343782,
+    "sha256": "e45a2c4a79074e56afe10b80959aa1434af314dd595f29522079867f5756119e",
+    "note": "Genuine right carousel state; scrollLeft=446, reveals Saúde e evolução."
+  },
+  {
+    "path": "assets/live/desktop-hero.png",
+    "bytes": 525858,
+    "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7",
+    "note": "desktop hero"
+  },
+  {
+    "path": "assets/live/desktop-pricing.png",
+    "bytes": 319365,
+    "sha256": "a98361b4241de569c6e2f7734fcd9a5920a40c103d883f2c4715692c1eb1c1ea",
+    "note": "desktop pricing"
+  },
+  {
+    "path": "assets/live/desktop-strip-00.png",
+    "bytes": 1146683,
+    "sha256": "c93354e523eb225bc692fc970666844aec8f03dcc78f6e4ede7d82748ab3f9e5",
+    "note": "desktop strip 00"
+  },
+  {
+    "path": "assets/live/desktop-strip-01.png",
+    "bytes": 824718,
+    "sha256": "b4694173d8d6c1c95c806a3cba645a357c188b80acfad2bedb301871745b7c7c",
+    "note": "desktop strip 01"
+  },
+  {
+    "path": "assets/live/desktop-strip-02.png",
+    "bytes": 708216,
+    "sha256": "2105e27678080ddc4acf9edeab7fae8ad029f2319ea368de5238990b9d1f3aa8",
+    "note": "desktop strip 02"
+  },
+  {
+    "path": "assets/live/desktop-strip-03.png",
+    "bytes": 1069865,
+    "sha256": "33bb5114e9f707d92224cc4c5594a949c0994ad0aa30e357c7be40ddcc6037b5",
+    "note": "desktop strip 03"
+  },
+  {
+    "path": "assets/live/desktop-strip-04.png",
+    "bytes": 949877,
+    "sha256": "b63a630985fd1db7ded6a4f4defdf587b31c473bc0e1f293ac4019f8d6856a3b",
+    "note": "desktop strip 04"
+  },
+  {
+    "path": "assets/live/desktop-strip-05.png",
+    "bytes": 957185,
+    "sha256": "ab7dc6ecb3d1d6dade7cf38e6ab8859ca4d7d074d2217a7be40d0ec0dca93a12",
+    "note": "desktop strip 05"
+  },
+  {
+    "path": "assets/live/desktop-strip-06.png",
+    "bytes": 563654,
+    "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee",
+    "note": "desktop strip 06"
+  },
+  {
+    "path": "assets/live/desktop-strip-07.png",
+    "bytes": 435951,
+    "sha256": "66d0c42a3488a2d0a8f38e0c6c55b3eb28473f9d623445b517974b3328623a8e",
+    "note": "desktop strip 07"
+  },
+  {
+    "path": "assets/live/mobile-comofunciona-full.png",
+    "bytes": 631303,
+    "sha256": "4a12943ac3a8e06b105b8e6daf6fd0a8d21750eee603750851e5f78786cc9039",
+    "note": "mobile comofunciona full"
+  },
+  {
+    "path": "assets/live/mobile-comofunciona.png",
+    "bytes": 184278,
+    "sha256": "cd169c7a8883a2181193a7a20be16bc5dad3869ded784fd176a81c53893b9bf4",
+    "note": "mobile comofunciona"
+  },
+  {
+    "path": "assets/live/mobile-faq-open.png",
+    "bytes": 159814,
+    "sha256": "77511d9ee029a2a608d0f4a69fca7e74922790c5550d5c896dd2ba09fa12c9d3",
+    "note": "mobile faq open"
+  },
+  {
+    "path": "assets/live/mobile-faq.png",
+    "bytes": 133475,
+    "sha256": "760fb67e12d3b948b5a16a89a6538f5f437c44b5d1a84c99d8c228885530c041",
+    "note": "mobile faq"
+  },
+  {
+    "path": "assets/live/mobile-features-left.png",
+    "bytes": 132453,
+    "sha256": "a365eca4ae549f7b32804f5fb4f3607eab8e5a495e08d40a0db0656271786b92",
+    "note": "Mobile pricing feature, scrollLeft=0, page y=5876."
+  },
+  {
+    "path": "assets/live/mobile-features-right.png",
+    "bytes": 156394,
+    "sha256": "cde331dc47f3a5979895e3176111ef590711e0742756fb569312042bb40039be",
+    "note": "Mobile business-health feature, scrollLeft=1256, same page position."
+  },
+  {
+    "path": "assets/live/mobile-features.png",
+    "bytes": 172648,
+    "sha256": "61092f3e85b45f83cf245a3928e33cea3cec443b4a9ab53f8c070296da2f103d",
+    "note": "mobile features"
+  },
+  {
+    "path": "assets/live/mobile-hero.png",
+    "bytes": 236014,
+    "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94",
+    "note": "mobile hero"
+  },
+  {
+    "path": "assets/live/mobile-menu-open.png",
+    "bytes": 207417,
+    "sha256": "59f66efce78d7a0e196bb33edd138015adf21c02f5358cddec73a567176e03e9",
+    "note": "Genuine mobile account/support menu; no external link was followed."
+  },
+  {
+    "path": "assets/live/mobile-pricing-full.png",
+    "bytes": 495928,
+    "sha256": "638450bd03c6a8fa8d236af4fe44a66cc75edf9fa3795355966d00d125f0580d",
+    "note": "mobile pricing full"
+  },
+  {
+    "path": "assets/live/mobile-pricing.png",
+    "bytes": 177956,
+    "sha256": "41b4ef385e93088cc0b9265c45122f446851b7137717bd6d843d6edf78f378db",
+    "note": "mobile pricing"
+  }
+]

@@ -1,0 +1,177 @@
+{
+  "date": "2026-09-17",
+  "phase": "wireframe-review",
+  "storyApproved": true,
+  "layoutApproved": false,
+  "animationBuilt": false,
+  "videoRendered": false,
+  "method": "Browser-only native Studio poster review and DOM text-fit inspection; no CLI check/snapshot/render.",
+  "galleryPostersLoaded": 21,
+  "mainStoryboard": {
+    "frames": 11,
+    "built": 11,
+    "missing": 0,
+    "warnings": 0
+  },
+  "fullPoster": {
+    "width": 1920,
+    "height": 1080
+  },
+  "notes": [
+    "Horizontal feature-rail overflow is intentionally masked and excluded from text-fit check.",
+    "Two card-heading boxes were corrected and rechecked.",
+    "Supporting film gallery does not alter the 58-second main timeline.",
+    "All planned camera, scroll, interaction and loop behavior remains unanimated."
+  ],
+  "frames": [
+    {
+      "id": "interactions-01-menu",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "interactions-02-answer",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "interactions-03-return",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-01-clarity",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-02-overview",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-03-audiences",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": [],
+      "corrected": "Heading box height increased from 100px to 120px; browser recheck passed."
+    },
+    {
+      "id": "main-04-erp",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-05-features",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-06-price",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-07-alerts",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-08-plans",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-09-page-continuity",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-10-faq",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "main-11-finish",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "remediation-01-intent",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "remediation-02-source",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "remediation-03-structure",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "remediation-04-return",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "responsive-01-hero",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    },
+    {
+      "id": "responsive-02-cards",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": [],
+      "corrected": "Heading box height increased from 100px to 120px; browser recheck passed."
+    },
+    {
+      "id": "responsive-03-plans",
+      "width": 1920,
+      "height": 1080,
+      "tweens": 0,
+      "overflow": []
+    }
+  ]
+}

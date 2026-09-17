@@ -13,14 +13,22 @@ const copy = t(lang);
 ---
 
 <section class="contact" aria-labelledby="contact-title">
-  <img
-    class="contact__background"
-    src="/assets/logo/contact-bg.png"
-    alt=""
-    width="2484"
-    height="1080"
-    aria-hidden="true"
-  />
+  {/*
+    ⛔ A CSS background, not an <img>, and the reason is bytes.
+
+    This plate is theme-paired like the hero portrait and the project
+    placeholders — but those pairs ship BOTH files and hide one, which is
+    affordable at 50 kB and 195 kB and is not affordable here: `contact-bg.png`
+    is 2.1 MB, so an <img> pair would put ~3.9 MB on this one route. A
+    background-image declared through a custom property is fetched only when
+    the rule that names it actually applies, so exactly one plate is ever
+    requested and the dark path costs precisely what it costs today.
+
+    Nothing is lost by dropping the element: it was already `alt=""` +
+    `aria-hidden`, i.e. decoration, and `object-fit: cover` with the default
+    50% 50% origin is the same framing as `cover` + `center` below.
+  */}
+  <div class="contact__background" aria-hidden="true"></div>
 
   <div class="contact__inner">
     <div class="contact__content">
@@ -177,9 +185,7 @@ const copy = t(lang);
     position: absolute;
     z-index: var(--z-background);
     inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background: var(--contact-background) center / cover no-repeat;
     opacity: var(--contact-background-opacity);
   }
 

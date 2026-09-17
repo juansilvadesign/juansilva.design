@@ -1,0 +1,199 @@
+[a] Testar grátis
+[a] Já sou cliente
+[h1] Precifique, controle seus lucros e acompanhe a saúde do seu e-commerce com praticidade e precisão.
+[p] Diga adeus às planilhas confusas, elimine erros manuais e centralize sua precificação e gestão em um só lugar.
+[p] De forma simples, automatizada e sem dor de cabeça.
+[a] Quero contratar agora
+[a] Quero testar 7 dias grátis
+[h2] Automatize gestão e precificação por menos de R$ 3,00 ao dia!
+[h2] Para quem é o All Price?
+[p] Seja você um vendedor de marketplace, um empreendedor em busca de praticidade na hora de precificar ou alguém que atua como CPF, MEI ou ME, aqui você encontra uma solução completa. Automatize processos, elimine erros manuais e tenha controle total sobre seus preços, lucros e resultados.
+[a] Quero testar grátis
+[h3] Vendedores de Marketplace
+[p] Centralizam anúncios de diferentes marketplaces em um só lugar
+[p] Automatizam a precificação com base em margem, comissão e frete
+[p] Visualizam lucro/prejuízo por pedido, anúncio ou canal de venda
+[h3] Quem busca facilidade na precificação
+[p] Automatiza o cálculo de preços com base em custos reais
+[p] Ajusta margens e preços de vários produtos em poucos cliques
+[p] Visualiza custos, impostos e lucro em tempo real
+[h3] Quem vende como CPF, MEI ou ME
+[p] Adapta a precificação e relatórios conforme o tipo de operação
+[p] Dá suporte a qualquer nível de formalização, sem complicação
+[p] Escala com o crescimento da sua empresa — do CPF ao CNPJ
+[h2] Para quem usa e para quem não usa ERP
+[p] Se você já usa um sistema como Bling, Tiny ou Olist, a integração é fluida: sincronizamos anúncios, produtos e vendas com poucos cliques. Agora, se você ainda não usa ERP, tudo bem também! Você pode operar 100% com o All Price!
+[p] Enquanto muitos sistemas obrigam o uso de um ERP para funcionar direito, o All Price entrega controle total com ou sem ele.
+[p] Outros softwares atuam como "extensões" dos ERPs — se você não tiver um, fica sem base de dados ou integração com marketplaces. O All Price inverte essa lógica: ele é completo por si só. Você consegue cadastrar, precificar, acompanhar vendas e visualizar relatórios financeiros mesmo sem nenhuma ferramenta externa.
+[p] Para quem já usa ERP, o All Price amplia o que você já tem: conecta, cruza dados e oferece relatórios financeiros e margens de lucro que muitos ERPs não entregam de forma clara.
+[p] Para quem não usa, ele já resolve tudo o que você precisa, evitando o custo e a curva de aprendizado de sistemas complexos.
+[li] Sincronização automática de anúncios, estoque e pedidos – adeus digitação dupla e retrabalho.
+[li] Operação 100% autônoma sem ERP – cadastre produtos, precifique e controle vendas direto no All Price.
+[li] Relatórios financeiros completos (DRE, margem, ponto de equilíbrio) mesmo se você não tiver ERP.
+[li] Atualização em massa de preços e margens – ajuste portfólio inteiro em poucos cliques.
+[li] Alertas de lucro/prejuízo em tempo real via painel ou WhatsApp – saiba quando agir antes que o caixa sangre.
+[li] Eliminação de erros manuais – regras claras de impostos, comissões e frete aplicadas de forma padronizada.
+[h2] Funcionalidades que você precisa!
+[p] Com o All Price você precifica de forma inteligente, recebe alertas em tempo real, acompanha vendas, faz cadastros em segundos e monitora a saúde financeira do negócio — sem planilhas, sem retrabalho e sem surpresas no caixa. Explore cada coluna abaixo e descubra como cada funcionalidade foi pensada para aumentar sua margem, cortar custos e simplificar a gestão do dia a dia.
+[h3] Precificação
+[p] Anúncios em lista com todos os custos
+[p] Precificação por margem de contribuição
+[p] Edição em massa de margem lucro e preços de venda
+[p] Precificação visualizando custos e lucro
+[p] Visualize todos os impostos na precificação (personalizável)
+[a] Testar grátis
+[h3] Avisos em tempo real
+[p] Avisos de lucro/prejuízo em pedidos de venda via WhatsApp
+[p] Avisos de lucro/prejuízo anúncios via Whatsapp
+[p] Avisos de lucro/prejuízo em pedidos de venda do painel
+[p] Avisos de lucro/prejuízo em pedidos de venda no painel
+[a] Testar grátis
+[h3] Vendas
+[p] Sem limites de importações de pedidos de venda
+[p] Informações de lucro/prejuízo em todos os pedidos
+[p] Curva ABC de produtos e anúncios
+[p] Relatórios DRE saiba tudo sobre seu mês ou período de vendas (personalizável)
+[a] Testar grátis
+[h3] Cadastro
+[p] Cadastro produtos, salve e envie ao ERP
+[p] Cadastre anúncios, salve e envie ao canal de vendas visualizando seu lucro
+[a] Testar grátis
+[h3] Saúde e evolução
+[p] Dashboard completo com informações em tempo real
+[p] Ponto de equilíbrio: saiba quanto faturar para se manter no azul
+[p] Custos e despesas: acompanhe a evolução de custos fixos e variáveis
+[p] Faturamento por canal: acompanhe a evolução de seus canais por período (personalizável)
+[p] Registros de despesas: seus custos em um só lugar
+[a] Testar grátis
+[h2] Precifique seus anúncios em um só lugar
+[p] Seja você um vendedor de marketplace, um empreendedor em busca de praticidade na hora de precificar ou alguém que atua como CPF, MEI ou ME, aqui você encontra uma solução completa. Automatize processos, elimine erros manuais e tenha controle total sobre seus preços, lucros e resultados.
+[a] Quero testar agora!
+[h2] Avisos em tempo real
+[p] Você não precisa ocupar espaço no seu
+[p] celular baixando um novo aplicativo!
+[span] Monitor de margem
+[span] Alterações de frete nos marketplaces
+[span] Faturamento
+[span] Alterações de comissão nos marketplaces
+[a] Quero testar agora!
+[h2] E tudo isso cabe no seu bolso!
+[p] Pague do seu jeito e colha o mesmo pacote completo de recursos. Se você quer testar sem compromisso, o Plano Mensal é puro "liberdade de cancelamento": use todos os recursos por R$ 99,99/mês e pare quando quiser. Agora, se a ideia é economizar de verdade, o Plano Anual vira o jogo — 20% de desconto automático, sai por menos de R$ 3 ao dia e você ainda garante preço fixo pelo ano inteiro.
+[p] Escolheu? É ativar e começar a lucrar. E, claro, se mudar de ideia você pode alternar entre mensal e anual a qualquer momento — sem burocracia, sem taxas escondidas.
+[p] Plano
+[h3] Mensal
+[p] Ideal para quem precisa de uma precificação precisa e ver a saúde do seu negócio.
+[h4] R$ 99,99/mês
+[span] Suporte via chat em minutos
+[span] Precificação automatizada
+[span] Dashboard, performance e faturamento
+[span] Funciona sem ERP
+[span] Integração ERP Bling
+[span] Integração Tiny
+[span] Integra com Shopee
+[span] Integra Mercado Livre
+[span] Visão de lucro nos pedidos de venda
+[span] Despesas da empresa
+[span] Relatório DRE completo
+[span] Avisos em tempo real por Whatsapp
+[span] Ponto de equilíbrio
+[a] Teste grátis
+[span] 20% de desconto
+[p] Plano
+[h3] Anual
+[p] Ideal para quem precisa de uma precificação precisa e ver a saúde do seu negócio.
+[p] R$ 99,99/mês → R$ 79,99/mês
+[h4] R$ 959,99/ano
+[span] Economize 3 meses do ano!
+[span] Suporte via chat em minutos
+[span] Precificação automatizada
+[span] Dashboard, performance e faturamento
+[span] Funciona sem ERP
+[span] Integração ERP Bling
+[span] Integração Tiny
+[span] Integra com Shopee
+[span] Integra Mercado Livre
+[span] Visão de lucro nos pedidos de venda
+[span] Despesas da empresa
+[span] Relatório DRE completo
+[span] Avisos em tempo real por Whatsapp
+[span] Ponto de equilíbrio
+[a] Teste grátis
+[h2] Depoimentos de quem teve a rotina melhorada
+[p] Pague do seu jeito e colha o mesmo pacote completo de recursos.
+[p] Se você quer testar sem compromisso, o Plano Mensal é puro "liberdade de cancelamento": use todos os recursos por R$ 99,99/mês e pare quando quiser. Agora, se a ideia é economizar de verdade, o Plano Anual vira o jogo — 20 % de desconto automático, sai por menos de R$ 3 ao dia e você ainda garante preço fixo pelo ano inteiro.
+[strong] Escolheu? É ativar e começar a lucrar. E, claro, se mudar de ideia você pode alternar entre mensal e anual a qualquer momento — sem burocracia, sem taxas escondidas.
+[p] Conectou muito fácil com meu Bling,
+e agora tenho todos os custos
+sincronizados com a precificação.
+
+Conectou muito fácil com meu Bling,
+e agora tenho todos os custos
+sincronizados com a precificação.
+Conectou muito fácil com meu Bling,
+e agora tenho todos os custos
+sincronizados com a precificação.
+[p] Marcos Laurentino
+[p] Usando há 15 dias
+[p] Conectou muito fácil com meu Bling,
+e agora tenho todos os custos
+sincronizados com a precificação.
+[p] Daniela Mosquera
+[p] Usando há 63 dias
+[p] Conectou muito fácil com meu Bling,
+e agora tenho todos os custos
+sincronizados com a precificação.
+
+Conectou muito fácil com meu Bling,
+e agora tenho todos os custos
+sincronizados com a precificação.
+[p] Marcos Laurentino
+[p] Usando há 15 dias
+[p] Conectou muito fácil com meu Bling,
+e agora tenho todos os custos
+sincronizados com a precificação.
+[p] Daniela Mosquera
+[p] Usando há 63 dias
+[p] Mesmo com 2500 SKUs ele cuida de me avisar e tem todos os custos visíveis e atualizados!
+[p] Marcos Laurentino
+[p] Usando há 15 dias
+[h2] Perguntas frequentes
+[p] Aqui você encontra respostas para algumas das perguntas mais comuns sobre nossos serviços e soluções.
+[p] Se ainda tiver alguma dúvida ou precisar de informações adicionais, entre em contato com os(a) nossos(as) especialistas no suporte
+[span] 1. Para quem, exatamente, é o All Price?
+[span] 2. Preciso ter um ERP para usar?
+[span] 3. Quais marketplaces e ERPs o All Price integra?
+[span] 4. Como o sistema calcula o preço de venda?
+[span] 5. Dá pra atualizar centenas de anúncios de uma só vez?
+[span] 6. Recebo alertas de lucro ou prejuízo?
+[span] 7. Há limite de pedidos ou anúncios que posso importar?
+[span] 8. E a parte de relatórios?
+[span] 9. Quanto custa?
+[span] 10. Posso testar antes de pagar?
+[span] 11. Como funciona o suporte e onboarding?
+[span] 12. Meus dados ficam seguros?
+[p] Simplificando tarefas e
+[p] otimizando processo!
+[a] Falar com o suporte
+[h3] Mapa do site
+[a] Início
+[a] Para quem é o ALlPrice?
+[a] ERP ou não
+[a] Funcionalidades
+[a] Anúncios
+[a] Planos
+[a] depoimentos
+[a] FAQs
+[h3] Social
+[a] Instagram
+[a] Facebook
+[a] Whatsapp
+[a] Youtube
+[a] Linkedin
+[h3] Legal
+[a] Termos de uso
+[a] Política de privacidade
+[h3] Atendimento
+[a] +55 (11) 98970-5048
+[a] suporte@allprice.app.br
+[a] Trabalhe conosco
+[p] ® 2025 | All Price CNPJ: 25.222.985/0001-05 | Todos os direitos reservados.

@@ -17,6 +17,22 @@ const copy = t(lang);
 
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__inner">
+    {/*
+      Theme-paired, the same `[data-theme-art]` mechanism the project
+      placeholders use (see `lightPlaceholderFor` in `lib/projects.ts` and the
+      rule in `clone.css`). Two plates rather than a JS swap so a saved-light
+      visit never paints the dark portrait first.
+
+      ⚠️ `hero-light.webp` is currently a byte-identical COPY of `hero.webp`,
+      made on request so the wiring can land before the artwork exists. Nothing
+      about the light canvas is corrected in it yet — replace the file, not the
+      markup, when the real light cut is ready.
+
+      ⛔ Both carry `fetchpriority="high"`, and only one is ever displayed. The
+      hidden plate still costs a fetch, so this is the one place in the site
+      where the pair is NOT free — it is the LCP image. Worth re-checking once
+      the light cut exists and the two files stop being identical.
+    */}
     <img
       class="hero__portrait"
       src="/assets/images/hero.webp"
@@ -26,6 +42,18 @@ const copy = t(lang);
       loading="eager"
       decoding="async"
       fetchpriority="high"
+      data-theme-art="dark"
+    />
+    <img
+      class="hero__portrait"
+      src="/assets/images/hero-light.webp"
+      alt={copy.hero.portraitAlt}
+      width="452"
+      height="651"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+      data-theme-art="light"
     />
 
     <div class="hero__content">
@@ -207,6 +235,40 @@ const copy = t(lang);
 
     position: relative;
     overflow: hidden;
+    /*
+     * Colour and shape come from `--hero-cta-*`, not from `.button`. On the
+     * dark canvas those roles resolve to exactly what `.button` gave this
+     * control before, so nothing moves there; on the light canvas they carry
+     * the homepage featured card's treatment, which is what this button was
+     * missing — it read as a pale grey chip next to the cards' cyan pills.
+     *
+     * ⛔ Scoped to `.button--send`, never to `.button`. `action-row.css` makes
+     * the same promise from the other direction, and both have to hold or the
+     * two files start fighting over one class.
+     */
+    border-color: var(--hero-cta-border);
+    border-radius: var(--hero-cta-radius);
+    background: var(--hero-cta-fill);
+    color: var(--hero-cta-ink);
+    transition:
+      background-color var(--motion-base) var(--ease-standard),
+      border-color var(--motion-base) var(--ease-standard),
+      color var(--motion-base) var(--ease-standard),
+      border-radius var(--motion-base) var(--ease-standard);
+  }
+
+  /*
+   * Full `:focus-visible` parity, unlike the fly-out below. This is a colour
+   * change that leaves the label in place, so the reasoning recorded on the
+   * plane's focus rule — never park a keyboard user on a button whose name has
+   * gone — does not apply to it.
+   */
+  .button--send:hover,
+  .button--send:focus-visible {
+    border-color: var(--hero-cta-border-hover);
+    border-radius: var(--radius-control);
+    background: var(--hero-cta-fill-hover);
+    color: var(--hero-cta-ink-hover);
   }
 
   .button__plane,

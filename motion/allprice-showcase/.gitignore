@@ -1,0 +1,8 @@
+node_modules/
+.hyperframes/
+renders/
+snapshots/
+*.master-*.mp4
+*.master-*.mov
+*.lossless.mp4
+*.log

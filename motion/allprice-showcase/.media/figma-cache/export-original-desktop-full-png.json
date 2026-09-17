@@ -1,0 +1,35 @@
+{
+  "item": {
+    "id": "1489:7245",
+    "path": "assets/figma/original-desktop-full.png",
+    "scale": 1
+  },
+  "receipt": {
+    "nodeId": "1489:7245",
+    "format": "PNG",
+    "scale": 1,
+    "mimeType": "image/png",
+    "bytes": 2314262,
+    "sha256": "343fe3ed396f56dc488218a57ff410056da5a742e022d227590444a87fa701a7",
+    "width": 1280,
+    "height": 10584,
+    "dimensionSource": "png-ihdr",
+    "delivery": "file",
+    "path": "/home/jaypy/GitHub-Projects/Notes/ai-synthesizer/workspace/juansilva.design/projects/juansilva-design/motion/allprice-showcase/assets/figma/original-desktop-full.png",
+    "preflight": {
+      "nodeWidth": 1280,
+      "nodeHeight": 10584,
+      "boundsWidth": 1280,
+      "boundsHeight": 10584,
+      "boundsSource": "absoluteRenderBounds",
+      "projectedWidth": 1280,
+      "projectedHeight": 10584,
+      "projectedMegapixels": 13.54752,
+      "megapixelLimit": 16,
+      "limitApplied": true,
+      "costKnown": true,
+      "overLimit": false,
+      "overrideUsed": false
+    }
+  }
+}

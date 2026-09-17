@@ -216,6 +216,25 @@ const copy = t(lang);
     top: var(--circle-container-offset);
     left: var(--circle-container-offset);
     display: flex;
+    /*
+     * ⛔ These two centre the sun/moon, NOT the `margin: auto` on the knob.
+     *
+     * The reference centres it with `margin: auto` on the flex item, and that
+     * declaration is still below — but it has never taken effect here. Astro
+     * rewrites the component's `.theme-switch *` reset into
+     * `.theme-switch[data-astro-cid-…] [data-astro-cid-…]`, and an attribute
+     * selector carries specificity where a bare `*` carries none: (0,3,0)
+     * against (0,2,0) for `.theme-switch__sun-moon-container[data-astro-cid-…]`.
+     * So the reset's `margin: 0` outranks `margin: auto` no matter which is
+     * written first, computed margin was `0px` on all four sides, and the knob
+     * sat flush at the container's top-left corner — measured 7.5px above the
+     * track's centre with its top 5.25px clipped by `overflow: hidden`.
+     *
+     * Flex alignment is the fix rather than a specificity duel because no reset
+     * touches it, and it centres on both axes at once.
+     */
+    align-items: center;
+    justify-content: center;
     width: var(--circle-container-diameter);
     height: var(--circle-container-diameter);
     border-radius: var(--container-radius);

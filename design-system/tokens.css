@@ -265,11 +265,30 @@
   --chip-on-tile: var(--background);
   --chip-on-glyph: var(--primary);
 
+  /* The hero's primary CTA. `.button`'s own colours, named as roles so the
+   * light layer can give it the featured card's treatment without touching
+   * `.button` itself — which `action-row.css` is explicit about never doing,
+   * since the hero shares the class. Every value here is what `.button`
+   * already resolved to on this canvas. */
+  --hero-cta-fill: var(--surface-interactive);
+  --hero-cta-border: var(--border-interactive);
+  --hero-cta-ink: var(--text-heading);
+  --hero-cta-radius: var(--radius-control);
+  --hero-cta-fill-hover: var(--surface-interactive-hover);
+  --hero-cta-border-hover: var(--border-interactive);
+  --hero-cta-ink-hover: var(--text-heading);
+
   /* Raster/vector artwork that was authored for the dark canvas. The filter
    * is semantic rather than component-local so every consuming surface swaps
    * in lockstep with the palette. */
   --brand-mark-filter: none;
   --decorative-art-filter: none;
+  /* The /contact backdrop. It is a NIGHT desk scene — a dark room lit by one
+   * warm lamp — so it is the artwork itself, not just its strength, that has a
+   * canvas baked in. Naming the file as a role lets the light layer swap the
+   * plate; because it resolves through `background-image`, only the plate whose
+   * rule applies is ever fetched. */
+  --contact-background: url("/assets/logo/contact-bg.png");
   --contact-background-opacity: 1;
 
   /* ─── Typography — families (confirmed in Figma Desktop) ─────── */
@@ -520,15 +539,27 @@
   --nav-gradient-rest: var(--color-black-a02);
   --nav-gradient-hover: var(--color-black-a06);
   --nav-scrolled-surface: var(--color-white-a92);
-  --pcard-cta-fill: var(--surface-inverse);
-  --pcard-cta-mark: var(--on-inverse);
-  --pcard-cta-label: var(--text-heading);
-  --pcard-cta-label-active: var(--on-inverse);
+  /* ⛔ NO `--pcard-cta-*` overrides on this canvas — deliberately absent.
+   *
+   * They used to invert the control to `--surface-inverse` + `--on-inverse`,
+   * i.e. a near-black pill, which made the /projects card CTA the one primary
+   * action on the site that was not cyan. Now that `--primary` is cyan-700 and
+   * `--on-primary` is white here, the base layer's mapping already resolves to
+   * the homepage featured card's treatment — cyan fill, white mark and label —
+   * so inheriting it is what keeps the two surfaces saying the same thing.
+   * Measured: white on cyan-700 4.70:1, and the rest label
+   * (`--text-secondary`, slate-600) 5.04:1 on the card's slate-50. */
   --linkedin-flood: var(--color-linkedin);
   --linkedin-label-active: var(--color-white);
-  --btt-rest-fill: var(--surface-inverse);
-  --btt-rest-ink: var(--on-inverse);
-  --btt-halo: var(--color-black-a10);
+  /* Back-to-top rests LIGHT here, so the ring is what separates it from the
+   * page rather than the fill. `--surface` alone measures 1.05:1 on white —
+   * that was the original defect — so the halo stops being a soft glow and
+   * becomes the control's actual edge, in the accent it floods to on hover.
+   * Ink is `--primary-ink`: 4.92:1 on the fill, and it names the same hover
+   * destination the ring does. */
+  --btt-rest-fill: var(--surface);
+  --btt-rest-ink: var(--primary-ink);
+  --btt-halo: var(--color-cyan-a50);
 
   /* Stack pills, light row. TypeScript, JavaScript, Tailwind and Figma are read
    * straight off Figma 23277:191. Python and Open Source have no light artwork
@@ -571,7 +602,46 @@
    * which is what the dark canvas already reads as. */
   --chip-on-tile: var(--primary);
   --chip-on-glyph: var(--on-primary);
+
+  /* Hero primary, wearing the featured card's flat treatment: accent fill and
+   * white ink at rest, inverting to an outline on hover, pill morphing to the
+   * control radius — the same four decisions `action-row.css` makes for the
+   * homepage cards. On the dark canvas the hero deliberately stays a neutral
+   * `.button`; this is a light-canvas change only, because that is where the
+   * grey fill read as a disabled control beside the cards' cyan. */
+  --hero-cta-fill: var(--primary);
+  --hero-cta-border: var(--primary);
+  --hero-cta-ink: var(--on-primary);
+  --hero-cta-radius: var(--radius-pill);
+  --hero-cta-fill-hover: var(--color-transparent);
+  --hero-cta-border-hover: var(--primary);
+  --hero-cta-ink-hover: var(--primary-ink);
   --brand-mark-filter: invert(1);
   --decorative-art-filter: invert(1);
-  --contact-background-opacity: 0.16;
+  /* ⛔ A different PLATE, not just a different opacity.
+   *
+   * 0.16 of a night scene over white is a flat grey haze: nothing in the
+   * photograph reads, and raising the number only darkens the page — the image
+   * is dark by construction, so more of it is more grey, not more picture. The
+   * light plate is the same frame tone-mapped to a daylit room, which is what
+   * lets the opacity climb far enough for the laptop, plant and books to
+   * actually appear.
+   *
+   * Derived from `contact-bg.png` by INVERTING its luminance (ffmpeg `negate`
+   * plus a desaturation, which keeps the hues plausible), NOT a second
+   * photograph — replace it if a real daylight frame is ever shot. Inversion
+   * rather than a brightening curve because the two canvases disagree about
+   * which parts are dark: in the night frame the wall is black and the laptop
+   * catches the light, and simply lifting that keeps a dark wall behind the
+   * form. Measured after the first attempt — a curve put the form's backdrop at
+   * rgb(119,119,116), still mid-grey; the inversion puts it at rgb(230,233,232).
+   *
+   * ⛔ 0.75, and the ceiling is text contrast, not taste. All copy sits in the
+   * LEFT column, over a region that composites to #eceeee here, where
+   * `--text-secondary` (the intro and every field placeholder) measures
+   * 4.52:1 — the last step that clears AA. 0.9 gives 4.39:1 and 1.0 gives
+   * 4.31:1. The laptop and plant are on the right, under no text, so they are
+   * free to read as strongly as the number allows. */
+  --contact-background: url("/assets/logo/contact-bg-light.webp");
+  --contact-background-opacity: 0.75;
 }

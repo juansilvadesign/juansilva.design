@@ -1,0 +1,41 @@
+{"id":"image_001","type":"image","path":"assets/figma/brand-symbol.png","source":"existing","description":"brand symbol","width":1080,"height":1080,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_002","type":"image","path":"assets/figma/optimized-alerts.png","source":"existing","description":"optimized alerts","width":2560,"height":1126,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_003","type":"image","path":"assets/figma/optimized-audiences.png","source":"existing","description":"optimized audiences","width":2560,"height":1986,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_004","type":"image","path":"assets/figma/optimized-desktop-full.png","source":"existing","description":"optimized desktop full","width":1280,"height":10637,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_005","type":"image","path":"assets/figma/optimized-erp.png","source":"existing","description":"optimized erp","width":2560,"height":2054,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_006","type":"image","path":"assets/figma/optimized-faq.png","source":"existing","description":"optimized faq","width":2560,"height":2926,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_007","type":"image","path":"assets/figma/optimized-features.png","source":"existing","description":"optimized features","width":2560,"height":1784,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_008","type":"image","path":"assets/figma/optimized-footer.png","source":"existing","description":"optimized footer","width":2560,"height":1176,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_009","type":"image","path":"assets/figma/optimized-hero.png","source":"existing","description":"optimized hero","width":2560,"height":2570,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_010","type":"image","path":"assets/figma/optimized-plans.png","source":"existing","description":"optimized plans","width":2560,"height":2862,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_011","type":"image","path":"assets/figma/optimized-pricing-ui.png","source":"existing","description":"optimized pricing ui","width":2560,"height":2744,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_012","type":"image","path":"assets/figma/original-desktop-full.png","source":"existing","description":"original desktop full","width":1280,"height":10584,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_013","type":"image","path":"assets/figma/original-hero.png","source":"existing","description":"original hero","width":2560,"height":2864,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_014","type":"image","path":"assets/live/desktop-faq-closed.png","source":"existing","description":"desktop faq closed","width":2880,"height":1800,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_015","type":"image","path":"assets/live/desktop-faq-erp-open.png","source":"existing","description":"desktop faq erp open","width":2880,"height":1800,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_016","type":"image","path":"assets/live/desktop-faq-pricing-open.png","source":"existing","description":"desktop faq pricing open","width":2880,"height":1800,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_017","type":"image","path":"assets/live/desktop-hero.png","source":"existing","description":"desktop hero","width":2880,"height":1800,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_018","type":"image","path":"assets/live/desktop-pricing.png","source":"existing","description":"desktop pricing","width":2880,"height":1800,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_019","type":"image","path":"assets/live/desktop-strip-00.png","source":"existing","description":"desktop strip 00","width":2880,"height":3200,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_020","type":"image","path":"assets/live/desktop-strip-01.png","source":"existing","description":"desktop strip 01","width":2880,"height":3200,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_021","type":"image","path":"assets/live/desktop-strip-02.png","source":"existing","description":"desktop strip 02","width":2880,"height":3200,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_022","type":"image","path":"assets/live/desktop-strip-03.png","source":"existing","description":"desktop strip 03","width":2880,"height":3200,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_023","type":"image","path":"assets/live/desktop-strip-04.png","source":"existing","description":"desktop strip 04","width":2880,"height":3200,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_024","type":"image","path":"assets/live/desktop-strip-05.png","source":"existing","description":"desktop strip 05","width":2880,"height":3200,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_025","type":"image","path":"assets/live/desktop-strip-06.png","source":"existing","description":"desktop strip 06","width":2880,"height":3200,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_026","type":"image","path":"assets/live/desktop-strip-07.png","source":"existing","description":"desktop strip 07","width":2880,"height":1838,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_027","type":"image","path":"assets/live/mobile-comofunciona.png","source":"existing","description":"mobile comofunciona","width":780,"height":1688,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_028","type":"image","path":"assets/live/mobile-faq-open.png","source":"existing","description":"mobile faq open","width":780,"height":1688,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_029","type":"image","path":"assets/live/mobile-faq.png","source":"existing","description":"mobile faq","width":780,"height":1688,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_030","type":"image","path":"assets/live/mobile-features.png","source":"existing","description":"mobile features","width":780,"height":1688,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_031","type":"image","path":"assets/live/mobile-hero.png","source":"existing","description":"mobile hero","width":780,"height":1688,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_032","type":"image","path":"assets/live/mobile-pricing.png","source":"existing","description":"mobile pricing","width":780,"height":1688,"provenance":{"provider":"local","adopted":true}}
+{"id":"image_033","type":"image","path":"assets/live/desktop-faq-framed-closed.png","source":"existing","description":"desktop faq framed closed","provenance":{"provider":"local","adopted":true}}
+{"id":"image_034","type":"image","path":"assets/live/desktop-faq-framed-open.png","source":"existing","description":"desktop faq framed open","provenance":{"provider":"local","adopted":true}}
+{"id":"image_035","type":"image","path":"assets/live/desktop-features-left.png","source":"existing","description":"desktop features left","provenance":{"provider":"local","adopted":true}}
+{"id":"image_036","type":"image","path":"assets/live/desktop-features-right.png","source":"existing","description":"desktop features right","provenance":{"provider":"local","adopted":true}}
+{"id":"image_037","type":"image","path":"assets/live/mobile-features-left.png","source":"existing","description":"mobile features left","provenance":{"provider":"local","adopted":true}}
+{"id":"image_038","type":"image","path":"assets/live/mobile-features-right.png","source":"existing","description":"mobile features right","provenance":{"provider":"local","adopted":true}}
+{"id":"image_039","type":"image","path":"assets/live/mobile-menu-open.png","source":"existing","description":"mobile menu open","provenance":{"provider":"local","adopted":true}}
+{"id":"image_040","type":"image","path":"assets/live/mobile-comofunciona-full.png","source":"existing","description":"mobile comofunciona full","provenance":{"provider":"local","adopted":true}}
+{"id":"image_041","type":"image","path":"assets/live/mobile-pricing-full.png","source":"existing","description":"mobile pricing full","provenance":{"provider":"local","adopted":true}}

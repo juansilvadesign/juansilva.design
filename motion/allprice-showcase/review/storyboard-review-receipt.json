@@ -1,0 +1,101 @@
+{
+  "status": 200,
+  "exists": true,
+  "globals": {
+    "extra": {
+      "duration": "58s",
+      "fps": "60",
+      "mode": "collaborative",
+      "music": "none",
+      "loop": "false",
+      "approval": "pending",
+      "style_preset": "blue-professional"
+    },
+    "format": "1920x1080",
+    "message": "AllPrice brings pricing, sales and profit visibility together; this preserved landing page explains how.",
+    "arc": "Promise → audience → connected workflow → plans → answers → design-engineering credit",
+    "audience": "Portfolio visitors evaluating Juan Silva's design-engineering work"
+  },
+  "frames": [
+    {
+      "index": 1,
+      "title": "Price with clarity",
+      "duration": "5s",
+      "durationSeconds": 5,
+      "status": "outline"
+    },
+    {
+      "index": 2,
+      "title": "One operating view",
+      "duration": "5s",
+      "durationSeconds": 5,
+      "status": "outline"
+    },
+    {
+      "index": 3,
+      "title": "Meet the sellers",
+      "duration": "5s",
+      "durationSeconds": 5,
+      "status": "outline"
+    },
+    {
+      "index": 4,
+      "title": "With an ERP, or without",
+      "duration": "6s",
+      "durationSeconds": 6,
+      "status": "outline"
+    },
+    {
+      "index": 5,
+      "title": "Explore the whole toolkit",
+      "duration": "7s",
+      "durationSeconds": 7,
+      "status": "outline"
+    },
+    {
+      "index": 6,
+      "title": "Understand the price",
+      "duration": "6s",
+      "durationSeconds": 6,
+      "status": "outline"
+    },
+    {
+      "index": 7,
+      "title": "Keep an eye on changes",
+      "duration": "4s",
+      "durationSeconds": 4,
+      "status": "outline"
+    },
+    {
+      "index": 8,
+      "title": "Choose the plan",
+      "duration": "6s",
+      "durationSeconds": 6,
+      "status": "outline"
+    },
+    {
+      "index": 9,
+      "title": "Preserve the full page",
+      "duration": "3s",
+      "durationSeconds": 3,
+      "status": "outline"
+    },
+    {
+      "index": 10,
+      "title": "Answer the key objection",
+      "duration": "6s",
+      "durationSeconds": 6,
+      "status": "outline"
+    },
+    {
+      "index": 11,
+      "title": "The finished landing page",
+      "duration": "5s",
+      "durationSeconds": 5,
+      "status": "outline"
+    }
+  ],
+  "warnings": [],
+  "url": "http://localhost:3148/?view=storyboard#project/allprice-showcase",
+  "kind": "Outline plan verification; not a rendered video"
+}

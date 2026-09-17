@@ -1,0 +1,278 @@
+{
+  "typography": [
+    {
+      "role": "display",
+      "fontFamily": "Lato",
+      "fontSize": "38px",
+      "fontWeight": "800",
+      "lineHeight": "48px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Precifique, controle seus lucros e acompanhe a saúde do seu "
+    },
+    {
+      "role": "heading",
+      "fontFamily": "Lato",
+      "fontSize": "32px",
+      "fontWeight": "700",
+      "lineHeight": "40px",
+      "letterSpacing": "normal",
+      "color": "#234DD7",
+      "sampleText": "Para quem é o All Price?"
+    },
+    {
+      "role": "heading-2",
+      "fontFamily": "Lato",
+      "fontSize": "24px",
+      "fontWeight": "700",
+      "lineHeight": "32px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Automatize gestão e precificação por menos de R$ 3,00 ao dia"
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Lato",
+      "fontSize": "20px",
+      "fontWeight": "700",
+      "lineHeight": "28px",
+      "letterSpacing": "normal",
+      "color": "#384257",
+      "sampleText": "Vendedores de Marketplace"
+    },
+    {
+      "role": "heading-3",
+      "fontFamily": "Lato",
+      "fontSize": "18px",
+      "fontWeight": "700",
+      "lineHeight": "28px",
+      "letterSpacing": "normal",
+      "color": "#234DD7",
+      "sampleText": "Precificação"
+    },
+    {
+      "role": "body",
+      "fontFamily": "Lato",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Diga adeus às planilhas confusas, elimine erros manuais e ce"
+    },
+    {
+      "role": "link",
+      "fontFamily": "Lato",
+      "fontSize": "16px",
+      "fontWeight": "700",
+      "lineHeight": "24px",
+      "letterSpacing": "normal",
+      "color": "#FFFFFF",
+      "sampleText": "Testar grátis"
+    }
+  ],
+  "spacing": {
+    "observed": [
+      4,
+      6,
+      8,
+      12,
+      15,
+      16,
+      18,
+      21,
+      24,
+      30,
+      32,
+      35,
+      36,
+      37,
+      40
+    ],
+    "baseUnit": 8
+  },
+  "radius": [
+    "16px",
+    "23px 23px 12px 12px"
+  ],
+  "shadows": [
+    {
+      "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+      "count": 2
+    },
+    {
+      "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.04) 0px 4px 16px 0px",
+      "count": 1
+    },
+    {
+      "value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.08) 8px -11px 22.2px 0px",
+      "count": 1
+    }
+  ],
+  "buttons": [
+    {
+      "label": "Testar grátis",
+      "background": "#234DD7",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#020817",
+      "padding": "8px 16px",
+      "borderRadius": "16px",
+      "border": "1px solid rgb(40, 141, 248)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "44px"
+    },
+    {
+      "label": "Já sou cliente",
+      "background": "#FFFFFF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#020817",
+      "padding": "8px 16px",
+      "borderRadius": "16px",
+      "border": "1px solid rgb(35, 77, 215)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "44px"
+    },
+    {
+      "label": "Quero contratar agora",
+      "background": "#FFFFFF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#020817",
+      "padding": "8px 16px",
+      "borderRadius": "16px",
+      "border": "1px solid rgb(40, 141, 248)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "44px"
+    },
+    {
+      "label": "Quero testar 7 dias grátis",
+      "background": "#234DD7",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#020817",
+      "padding": "8px 16px",
+      "borderRadius": "16px",
+      "border": "1px solid rgb(255, 255, 255)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "44px"
+    },
+    {
+      "label": "Teste grátis",
+      "background": "#234DD7",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#020817",
+      "padding": "8px 16px",
+      "borderRadius": "16px",
+      "border": "0px solid rgb(226, 232, 240)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "44px"
+    },
+    {
+      "label": "Teste grátis",
+      "background": "#FFFFFF",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#FFFFFF",
+      "padding": "8px 16px",
+      "borderRadius": "16px",
+      "border": "0px solid rgb(226, 232, 240)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "500",
+      "height": "44px"
+    }
+  ],
+  "cards": [
+    {
+      "label": "card",
+      "background": "transparent",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#020817",
+      "padding": "70px 56px",
+      "borderRadius": "0px",
+      "border": "0px solid rgb(226, 232, 240)",
+      "boxShadow": "none",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "1270px"
+    },
+    {
+      "label": "card",
+      "background": "#F3F3F3",
+      "backgroundImage": "",
+      "backdropFilter": "",
+      "color": "#020817",
+      "padding": "24px",
+      "borderRadius": "24px",
+      "border": "1px solid rgb(229, 231, 235)",
+      "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
+      "fontSize": "16px",
+      "fontWeight": "400",
+      "height": "1035.39px"
+    }
+  ],
+  "nav": {
+    "label": "navigation",
+    "background": "#F3F3F3",
+    "backgroundImage": "",
+    "backdropFilter": "",
+    "color": "#020817",
+    "padding": "0px",
+    "borderRadius": "0px",
+    "border": "0px solid rgb(226, 232, 240)",
+    "boxShadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.04) 0px 4px 16px 0px",
+    "fontSize": "16px",
+    "fontWeight": "400",
+    "height": "86px"
+  },
+  "chips": [
+    {
+      "label": "20% de desconto",
+      "background": "#FFFFFF",
+      "color": "#FFFFFF",
+      "padding": "4px 16px",
+      "borderRadius": "12px",
+      "border": "1px solid rgba(255, 255, 255, 0.1)",
+      "boxShadow": "none",
+      "fontSize": "14px",
+      "fontWeight": "400",
+      "height": "auto"
+    }
+  ],
+  "statCells": [],
+  "tabs": [],
+  "backgrounds": [
+    {
+      "value": "linear-gradient(to right bottom, rgb(40, 141, 248), rgb(40, 158, 252))",
+      "area": 913920
+    },
+    {
+      "value": "linear-gradient(183.468deg, rgb(40, 141, 248) 35.343%, rgb(40, 158, 252) 67.103%)",
+      "area": 184320
+    }
+  ],
+  "glass": [
+    {
+      "backdropFilter": "blur(2px)",
+      "background": "rgb(255, 255, 255)",
+      "border": "1px solid rgb(243, 243, 243)",
+      "borderRadius": "13.697px",
+      "boxShadow": "",
+      "area": 964100
+    }
+  ]
+}

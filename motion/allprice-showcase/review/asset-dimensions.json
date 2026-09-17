@@ -1,0 +1,187 @@
+[
+  {
+    "path": "assets/figma/brand-symbol.png",
+    "width": 1080,
+    "height": 1080
+  },
+  {
+    "path": "assets/figma/optimized-alerts.png",
+    "width": 2560,
+    "height": 1126
+  },
+  {
+    "path": "assets/figma/optimized-audiences.png",
+    "width": 2560,
+    "height": 1986
+  },
+  {
+    "path": "assets/figma/optimized-erp.png",
+    "width": 2560,
+    "height": 2054
+  },
+  {
+    "path": "assets/figma/optimized-faq.png",
+    "width": 2560,
+    "height": 2926
+  },
+  {
+    "path": "assets/figma/optimized-features.png",
+    "width": 2560,
+    "height": 1784
+  },
+  {
+    "path": "assets/figma/optimized-footer.png",
+    "width": 2560,
+    "height": 1176
+  },
+  {
+    "path": "assets/figma/optimized-hero.png",
+    "width": 2560,
+    "height": 2570
+  },
+  {
+    "path": "assets/figma/optimized-plans.png",
+    "width": 2560,
+    "height": 2862
+  },
+  {
+    "path": "assets/figma/optimized-pricing-ui.png",
+    "width": 2560,
+    "height": 2744
+  },
+  {
+    "path": "assets/figma/original-hero.png",
+    "width": 2560,
+    "height": 2864
+  },
+  {
+    "path": "assets/live/desktop-strip-00.png",
+    "width": 2880,
+    "height": 3200
+  },
+  {
+    "path": "assets/live/desktop-strip-01.png",
+    "width": 2880,
+    "height": 3200
+  },
+  {
+    "path": "assets/live/desktop-strip-02.png",
+    "width": 2880,
+    "height": 3200
+  },
+  {
+    "path": "assets/live/desktop-strip-03.png",
+    "width": 2880,
+    "height": 3200
+  },
+  {
+    "path": "assets/live/desktop-strip-04.png",
+    "width": 2880,
+    "height": 3200
+  },
+  {
+    "path": "assets/live/desktop-strip-05.png",
+    "width": 2880,
+    "height": 3200
+  },
+  {
+    "path": "assets/live/desktop-strip-06.png",
+    "width": 2880,
+    "height": 3200
+  },
+  {
+    "path": "assets/live/desktop-strip-07.png",
+    "width": 2880,
+    "height": 1838
+  },
+  {
+    "path": "assets/live/desktop-faq-closed.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-faq-erp-open.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-faq-framed-closed.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-faq-framed-open.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-faq-pricing-open.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-features-left.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-features-right.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-hero.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/desktop-pricing.png",
+    "width": 2880,
+    "height": 1800
+  },
+  {
+    "path": "assets/live/mobile-comofunciona.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-faq-open.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-faq.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-features-left.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-features-right.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-features.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-hero.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-menu-open.png",
+    "width": 780,
+    "height": 1688
+  },
+  {
+    "path": "assets/live/mobile-pricing.png",
+    "width": 780,
+    "height": 1688
+  }
+]

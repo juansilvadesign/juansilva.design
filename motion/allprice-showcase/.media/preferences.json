@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "website",
+      "confirmed_in": [
+        "allprice-showcase"
+      ],
+      "updated_at": "2026-09-16T22:23:39.988Z"
+    },
+    "aspect": {
+      "value": "1920x1080",
+      "confirmed_in": [
+        "allprice-showcase"
+      ],
+      "updated_at": "2026-09-16T22:23:40.035Z"
+    },
+    "language": {
+      "value": "en",
+      "confirmed_in": [
+        "allprice-showcase"
+      ],
+      "updated_at": "2026-09-16T22:23:40.092Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "allprice-showcase"
+      ],
+      "updated_at": "2026-09-16T22:23:40.152Z"
+    }
+  },
+  "sightings": {}
+}

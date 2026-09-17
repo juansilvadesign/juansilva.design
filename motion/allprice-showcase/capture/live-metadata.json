@@ -1,0 +1,385 @@
+{
+  "sourceUrl": "https://allprice-lp.juanpablosilva.com.br/",
+  "geometry": {
+    "height": 11279,
+    "width": 1440,
+    "viewport": {
+      "width": 1440,
+      "height": 900,
+      "dpr": 2
+    },
+    "images": [
+      {
+        "alt": "AllPrice Logo",
+        "decoded": true,
+        "width": 126,
+        "height": 34,
+        "url": "https://allprice-lp.juanpablosilva.com.br/assets/logo-BCMn2bQs.svg"
+      },
+      {
+        "alt": "Dashboard Preview",
+        "decoded": true,
+        "width": 3504,
+        "height": 2802,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/6ltfd6z.webp"
+      },
+      {
+        "alt": "faq-icon",
+        "decoded": true,
+        "width": 34,
+        "height": 34,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "Marketplace Vendors",
+        "decoded": true,
+        "width": 1023,
+        "height": 645,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/zAPbcsU.webp"
+      },
+      {
+        "alt": "Pricing Features",
+        "decoded": true,
+        "width": 1023,
+        "height": 645,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/jCXCiNc.webp"
+      },
+      {
+        "alt": "Business Types",
+        "decoded": true,
+        "width": 1023,
+        "height": 645,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/awGzvFf.webp"
+      },
+      {
+        "alt": "Tiny by Olist",
+        "decoded": true,
+        "width": 1482,
+        "height": 777,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/dsElLLN.webp"
+      },
+      {
+        "alt": "Bling",
+        "decoded": true,
+        "width": 1482,
+        "height": 777,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/B0QuSQZ.webp"
+      },
+      {
+        "alt": "No ERP Required",
+        "decoded": true,
+        "width": 1482,
+        "height": 777,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/Hyyk0xo.webp"
+      },
+      {
+        "alt": "diamond-icon",
+        "decoded": true,
+        "width": 42,
+        "height": 40,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "diamond-icon",
+        "decoded": true,
+        "width": 38,
+        "height": 38,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "Woman checking WhatsApp notifications",
+        "decoded": true,
+        "width": 1449,
+        "height": 1449,
+        "url": "https://cdn.sydapp.com.br/allprice.app.br/qIqGfbf.webp"
+      },
+      {
+        "alt": "diamond-icon",
+        "decoded": true,
+        "width": 46,
+        "height": 46,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "smile-icon",
+        "decoded": true,
+        "width": 44,
+        "height": 44,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "faq-icon",
+        "decoded": true,
+        "width": 42,
+        "height": 42,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "AllPrice Logo",
+        "decoded": true,
+        "width": 156,
+        "height": 43,
+        "url": "https://allprice-lp.juanpablosilva.com.br/assets/logo-white-Di3xd1Bn.svg"
+      },
+      {
+        "alt": "Instagram",
+        "decoded": true,
+        "width": 25,
+        "height": 24,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "YouTube",
+        "decoded": true,
+        "width": 24,
+        "height": 24,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "LinkedIn",
+        "decoded": true,
+        "width": 24,
+        "height": 24,
+        "url": "inline-svg"
+      },
+      {
+        "alt": "Facebook",
+        "decoded": true,
+        "width": 24,
+        "height": 24,
+        "url": "inline-svg"
+      }
+    ],
+    "sections": [
+      {
+        "id": "",
+        "tag": "HEADER",
+        "y": 10379,
+        "height": 86,
+        "heading": ""
+      },
+      {
+        "id": "inicio",
+        "tag": "SECTION",
+        "y": 86,
+        "height": 1360,
+        "heading": "Precifique, controle seus lucros e acompanhe a saúde do seu e-commerce com praticidade e precisão."
+      },
+      {
+        "id": "",
+        "tag": "SECTION",
+        "y": 1446,
+        "height": 96,
+        "heading": "Automatize gestão e precificação por menos de R$ 3,00 ao dia!"
+      },
+      {
+        "id": "comofunciona",
+        "tag": "SECTION",
+        "y": 1542,
+        "height": 1124.625,
+        "heading": "Para quem é o All Price?"
+      },
+      {
+        "id": "erp",
+        "tag": "SECTION",
+        "y": 2666.625,
+        "height": 1260,
+        "heading": "Para quem usa e para quem não usa ERP"
+      },
+      {
+        "id": "features",
+        "tag": "SECTION",
+        "y": 3926.625,
+        "height": 1013,
+        "heading": "Funcionalidades que você precisa!"
+      },
+      {
+        "id": "ads",
+        "tag": "SECTION",
+        "y": 4939.625,
+        "height": 1270,
+        "heading": "Precifique seus anúncios em um só lugar"
+      },
+      {
+        "id": "",
+        "tag": "SECTION",
+        "y": 6209.625,
+        "height": 549,
+        "heading": "Avisos em tempo real"
+      },
+      {
+        "id": "pricing",
+        "tag": "SECTION",
+        "y": 6758.625,
+        "height": 1557.375,
+        "heading": "E tudo isso cabe no seu bolso!"
+      },
+      {
+        "id": "testimonials",
+        "tag": "SECTION",
+        "y": 8316,
+        "height": 954.71875,
+        "heading": "Depoimentos de quem teve a rotina melhorada"
+      },
+      {
+        "id": "faq",
+        "tag": "SECTION",
+        "y": 9270.71875,
+        "height": 1448.40625,
+        "heading": "Perguntas frequentes"
+      }
+    ]
+  },
+  "strips": [
+    {
+      "path": "assets/live/desktop-strip-00.png",
+      "top": 0,
+      "height": 1600,
+      "width": 1440,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/desktop-strip-01.png",
+      "top": 1480,
+      "height": 1600,
+      "width": 1440,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/desktop-strip-02.png",
+      "top": 2960,
+      "height": 1600,
+      "width": 1440,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/desktop-strip-03.png",
+      "top": 4440,
+      "height": 1600,
+      "width": 1440,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/desktop-strip-04.png",
+      "top": 5920,
+      "height": 1600,
+      "width": 1440,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/desktop-strip-05.png",
+      "top": 7400,
+      "height": 1600,
+      "width": 1440,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/desktop-strip-06.png",
+      "top": 8880,
+      "height": 1600,
+      "width": 1440,
+      "scale": 2
+    },
+    {
+      "path": "assets/live/desktop-strip-07.png",
+      "top": 10360,
+      "height": 919,
+      "width": 1440,
+      "scale": 2
+    }
+  ],
+  "states": [
+    {
+      "path": "assets/live/desktop-pricing.png",
+      "scrollY": 7010,
+      "height": 11279,
+      "expanded": []
+    },
+    {
+      "path": "assets/live/desktop-faq-closed.png",
+      "scrollY": 9330,
+      "height": 11279,
+      "expanded": []
+    },
+    {
+      "path": "assets/live/desktop-faq-erp-open.png",
+      "scrollY": 9330,
+      "height": 11360,
+      "expanded": [
+        {
+          "label": "2. Preciso ter um ERP para usar?",
+          "box": {
+            "x": 199,
+            "y": 347.125,
+            "width": 1042,
+            "height": 72
+          }
+        }
+      ]
+    },
+    {
+      "path": "assets/live/desktop-faq-pricing-open.png",
+      "scrollY": 9500,
+      "height": 11360,
+      "expanded": [
+        {
+          "label": "4. Como o sistema calcula o preço de venda?",
+          "box": {
+            "x": 199,
+            "y": 353.125,
+            "width": 1042,
+            "height": 72
+          }
+        }
+      ]
+    }
+  ],
+  "mobileGeometry": {
+    "height": 15607,
+    "width": 390,
+    "sections": [
+      {
+        "id": "inicio",
+        "y": 76,
+        "height": 836.265625
+      },
+      {
+        "id": "comofunciona",
+        "y": 1072.265625,
+        "height": 2288.421875
+      },
+      {
+        "id": "erp",
+        "y": 3360.6875,
+        "height": 2215.0625
+      },
+      {
+        "id": "features",
+        "y": 5575.75,
+        "height": 1197
+      },
+      {
+        "id": "ads",
+        "y": 6772.75,
+        "height": 746
+      },
+      {
+        "id": "pricing",
+        "y": 8310.65625,
+        "height": 2801.09375
+      },
+      {
+        "id": "testimonials",
+        "y": 11111.75,
+        "height": 1186.71875
+      },
+      {
+        "id": "faq",
+        "y": 12298.46875,
+        "height": 1924.8125
+      }
+    ],
+    "brokenImages": 0
+  },
+  "errors": []
+}

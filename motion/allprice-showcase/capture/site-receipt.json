@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "projectDir": "/home/jaypy/GitHub-Projects/Notes/ai-synthesizer/workspace/juansilva.design/projects/juansilva-design/motion/allprice-showcase/capture/site",
+  "url": "https://allprice-lp.juanpablosilva.com.br/",
+  "httpStatus": 200,
+  "title": "AllPrice",
+  "screenshots": 16,
+  "assets": 43,
+  "dropped": {
+    "size-floor": 0,
+    "budget-exhausted": 0,
+    "cap-reached": 20,
+    "unavailable": 1
+  },
+  "detectedSections": 9,
+  "fonts": [
+    "Lato"
+  ],
+  "fontsDetailed": [
+    {
+      "family": "Lato",
+      "weights": [
+        400,
+        500,
+        700,
+        800
+      ],
+      "variable": false
+    }
+  ],
+  "animations": {
+    "webAnimations": 0,
+    "cssDeclarations": 50,
+    "scrollTargets": 0,
+    "cdpAnimations": 0,
+    "canvases": 0
+  },
+  "warnings": [
+    "21 referenced asset(s) are not in this capture (20 cap-reached, 1 unavailable). A thin capture with no drops is a thin page; this one was truncated."
+  ],
+  "lastPhase": {
+    "schema": "hyperframes.capture.phase.v1",
+    "phase": "complete",
+    "status": "completed",
+    "remainingMs": 76234
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "scope": "current_page_with_document_page_index",
+  "summary": true,
+  "document": {
+    "id": "0:0",
+    "name": "AllPrice-Spaceapps",
+    "type": "DOCUMENT"
+  },
+  "name": "1-Capa",
+  "id": "0:1",
+  "type": "PAGE",
+  "currentPage": {
+    "id": "0:1",
+    "name": "1-Capa",
+    "childCount": 1
+  },
+  "childrenTruncated": false,
+  "pagination": {
+    "offset": 0,
+    "limit": 100,
+    "returned": 1,
+    "hasMore": false
+  },
+  "pageCount": 8,
+  "pages": [
+    {
+      "id": "0:1",
+      "name": "1-Capa",
+      "childCount": 1,
+      "childCountStatus": "available"
+    },
+    {
+      "id": "1:2",
+      "name": "2-App",
+      "childCount": null,
+      "childCountStatus": "not_requested"
+    },
+    {
+      "id": "1:3",
+      "name": "3-web",
+      "childCount": null,
+      "childCountStatus": "not_requested"
+    },
+    {
+      "id": "313:3",
+      "name": "4-Logo",
+      "childCount": null,
+      "childCountStatus": "not_requested"
+    },
+    {
+      "id": "1:4",
+      "name": "5-backup-não aprovados",
+      "childCount": null,
+      "childCountStatus": "not_requested"
+    },
+    {
+      "id": "1121:4812",
+      "name": "6-Cronograma",
+      "childCount": null,
+      "childCountStatus": "not_requested"
+    },
+    {
+      "id": "1484:3",
+      "name": "7-LP",
+      "childCount": null,
+      "childCountStatus": "not_requested"
+    },
+    {
+      "id": "1830:6705",
+      "name": "8-Admin",
+      "childCount": null,
+      "childCountStatus": "not_requested"
+    }
+  ],
+  "childTypes": [
+    {
+      "name": "FRAME",
+      "count": 1
+    }
+  ],
+  "childFamilyCount": 1,
+  "childFamilies": [
+    {
+      "name": "Frame 1",
+      "count": 1
+    }
+  ],
+  "childFamiliesTruncated": false,
+  "familyLimit": 30,
+  "children": [
+    {
+      "id": "32:2",
+      "name": "Frame 1",
+      "type": "FRAME"
+    }
+  ]
+}

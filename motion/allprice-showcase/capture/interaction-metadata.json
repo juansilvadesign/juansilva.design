@@ -1,0 +1,122 @@
+{
+  "sourceUrl": "https://allprice-lp.juanpablosilva.com.br/",
+  "states": [
+    {
+      "path": "assets/live/desktop-features-left.png",
+      "device": "desktop",
+      "scrollY": 3927,
+      "height": 11279,
+      "expanded": [],
+      "featuresScrollLeft": 0,
+      "featureHeadings": [
+        "Precificação",
+        "Avisos em tempo real",
+        "Vendas",
+        "Cadastro",
+        "Saúde e evolução"
+      ]
+    },
+    {
+      "path": "assets/live/desktop-features-right.png",
+      "device": "desktop",
+      "scrollY": 3927,
+      "height": 11279,
+      "expanded": [],
+      "featuresScrollLeft": 446,
+      "featureHeadings": [
+        "Precificação",
+        "Avisos em tempo real",
+        "Vendas",
+        "Cadastro",
+        "Saúde e evolução"
+      ]
+    },
+    {
+      "path": "assets/live/desktop-faq-framed-closed.png",
+      "device": "desktop",
+      "scrollY": 9181,
+      "height": 11279,
+      "expanded": [],
+      "featuresScrollLeft": 446,
+      "featureHeadings": [
+        "Precificação",
+        "Avisos em tempo real",
+        "Vendas",
+        "Cadastro",
+        "Saúde e evolução"
+      ]
+    },
+    {
+      "path": "assets/live/desktop-faq-framed-open.png",
+      "device": "desktop",
+      "scrollY": 9181,
+      "height": 11360,
+      "expanded": [
+        "2. Preciso ter um ERP para usar?"
+      ],
+      "featuresScrollLeft": 446,
+      "featureHeadings": [
+        "Precificação",
+        "Avisos em tempo real",
+        "Vendas",
+        "Cadastro",
+        "Saúde e evolução"
+      ]
+    },
+    {
+      "path": "assets/live/mobile-menu-open.png",
+      "device": "mobile",
+      "scrollY": 0,
+      "height": 15607,
+      "expanded": [],
+      "featuresScrollLeft": 0,
+      "featureHeadings": [
+        "Precificação",
+        "Avisos em tempo real",
+        "Vendas",
+        "Cadastro",
+        "Saúde e evolução"
+      ],
+      "navigation": [
+        {
+          "text": "",
+          "href": "#inicio"
+        },
+        {
+          "text": "Testar grátis",
+          "href": "https://allpriceteam.com.br/cadastro"
+        }
+      ]
+    },
+    {
+      "path": "assets/live/mobile-features-left.png",
+      "device": "mobile",
+      "scrollY": 5876,
+      "height": 15607,
+      "expanded": [],
+      "featuresScrollLeft": 0,
+      "featureHeadings": [
+        "Precificação",
+        "Avisos em tempo real",
+        "Vendas",
+        "Cadastro",
+        "Saúde e evolução"
+      ]
+    },
+    {
+      "path": "assets/live/mobile-features-right.png",
+      "device": "mobile",
+      "scrollY": 5876,
+      "height": 15607,
+      "expanded": [],
+      "featuresScrollLeft": 1256,
+      "featureHeadings": [
+        "Precificação",
+        "Avisos em tempo real",
+        "Vendas",
+        "Cadastro",
+        "Saúde e evolução"
+      ]
+    }
+  ]
+}

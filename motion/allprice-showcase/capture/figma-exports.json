@@ -1,0 +1,15 @@
+[
+  { "id": "1489:7245", "path": "assets/figma/original-desktop-full.png", "scale": 1 },
+  { "id": "1830:1121", "path": "assets/figma/optimized-desktop-full.png", "scale": 1 },
+  { "id": "1489:7349", "path": "assets/figma/original-hero.png", "scale": 2 },
+  { "id": "1830:1134", "path": "assets/figma/optimized-hero.png", "scale": 2 },
+  { "id": "1830:1148", "path": "assets/figma/optimized-audiences.png", "scale": 2 },
+  { "id": "1830:1181", "path": "assets/figma/optimized-erp.png", "scale": 2 },
+  { "id": "1830:1193", "path": "assets/figma/optimized-features.png", "scale": 2 },
+  { "id": "1830:1320", "path": "assets/figma/optimized-pricing-ui.png", "scale": 2 },
+  { "id": "1830:1331", "path": "assets/figma/optimized-alerts.png", "scale": 2 },
+  { "id": "1830:1542", "path": "assets/figma/optimized-plans.png", "scale": 2 },
+  { "id": "1830:1665", "path": "assets/figma/optimized-faq.png", "scale": 2 },
+  { "id": "1830:1727", "path": "assets/figma/optimized-footer.png", "scale": 2 },
+  { "id": "315:975", "path": "assets/figma/brand-symbol.png", "scale": 1 }
+]
