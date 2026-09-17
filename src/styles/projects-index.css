@@ -961,7 +961,22 @@
 .pcard[data-view="grid"] .pcard__link {
   padding: 0;
   gap: 0;
-  align-content: start;
+  /*
+   * ⛔ Not `align-content: start`, which is what this was. The tile is a grid
+   * item stretched to its ROW's height, so a card whose title wraps to one
+   * line sits in a box sized by a two-line sibling and has space left over —
+   * and `start` parked ALL of it below the copy, leaving `.pcard__cta`'s
+   * `margin-top: auto` with no free space to push against. The CTA then
+   * landed wherever the copy happened to end: measured 22px above the card's
+   * bottom edge on the tallest card in a row and 50px on its shorter
+   * siblings, so no two buttons in a row lined up.
+   *
+   * `auto 1fr` hands that leftover to the BODY row instead. The media row
+   * stays `auto`, so the preview keeps the intrinsic height `start` was there
+   * to protect, and the body — a flex column — absorbs the rest, which is
+   * what finally gives `margin-top: auto` something to work with.
+   */
+  grid-template-rows: auto 1fr;
 }
 
 .pcard[data-view="grid"] .pcard__media img {

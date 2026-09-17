@@ -62,6 +62,7 @@ export const pt = {
     xAriaLabel: "Abrir o perfil de Juan Silva no X",
     figmaAriaLabel: "Abrir o perfil de Juan Silva no Figma",
     dribbbleAriaLabel: "Abrir o perfil de Juan Silva no Dribbble",
+    instagramAriaLabel: "Abrir o perfil de Juan Silva no Instagram",
   },
   marquee: {
     ariaLabel: "Histórico",
@@ -245,7 +246,8 @@ export const pt = {
     privacyPolicy: "Política de Privacidade",
     termsOfUse: "Termos de Uso",
     cookiesPolicy: "Política de Cookies",
-    linkedInHandle: "LinkedIn — @juansilvadesign",
+    /* Ver `en.ts` — só a arroba; o nome acessível carrega "LinkedIn". */
+    linkedInHandle: "@juansilvadesign",
     copyright: "Juan Silva. Todos os direitos reservados.",
     versionsLabel: "Versões do site",
     versionsToggle: "Escolher uma versão do site",

@@ -1,4 +1,5 @@
 ---
+import ContactIcon from "./ContactIcon.astro";
 import ProfileLink from "./ProfileLink.astro";
 import SocialLinks from "./SocialLinks.astro";
 import { siteVersions, socialLinks } from "../data/links";
@@ -43,8 +44,33 @@ const mailbox = socialLinks.mail.replace("mailto:", "");
 
         <section class="footer__menu footer__menu--contact" aria-labelledby="footer-contact">
           <h2 id="footer-contact">{copy.footer.contactHeading}</h2>
-          <a href={socialLinks.mail}>{mailbox}</a>
-          <a href={socialLinks.linkedIn} target="_blank" rel="noopener noreferrer">
+          {/*
+            `ContactIcon` rather than two more inlined paths. It already owns
+            both of these marks for the /card page, already draws them on
+            `currentColor` — the point the version chevron below and the hero's
+            external-link glyph each had to be rewritten to reach — and sharing
+            it is what stops a third copy of the LinkedIn path drifting from
+            the other two.
+          */}
+          <a class="footer__contact" href={socialLinks.mail}>
+            <ContactIcon name="email" />
+            {mailbox}
+          </a>
+          {/*
+            The word "LinkedIn" has left the visible label, so the accessible
+            name has to carry it instead — otherwise this link announces as a
+            bare handle with nothing naming where it goes. The visible text is
+            kept inside that name (WCAG 2.5.3), so voice control still reaches
+            the control by what is written on it.
+          */}
+          <a
+            class="footer__contact"
+            href={socialLinks.linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${copy.navigation.linkedInProfile} — ${copy.footer.linkedInHandle}`}
+          >
+            <ContactIcon name="linkedin" />
             {copy.footer.linkedInHandle}
           </a>
         </section>
@@ -202,6 +228,31 @@ const mailbox = socialLinks.mail.replace("mailto:", "");
 
   .footer__menu a:hover {
     color: var(--text-heading);
+  }
+
+  /*
+   * The contact column is the one menu whose rows carry a mark. `inline-flex`
+   * blockifies to `flex` here — these are flex items of `.footer__menu` — so
+   * the row still fills the column and `justify-content` is what has to echo
+   * the `text-align` the other two menus use, centred until the 1024px switch
+   * to a left-aligned footer.
+   */
+  .footer__contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-px-8);
+  }
+
+  /*
+   * `:global`, because the mark is rendered by ContactIcon and carries that
+   * component's scope, not this one's. It ships at 24px for the /card page's
+   * 48px tiles; in a text row it sizes to the label beside it.
+   */
+  .footer__contact :global(svg) {
+    width: var(--space-px-16);
+    height: var(--space-px-16);
+    flex: none;
   }
 
   .footer__divider {
@@ -424,6 +475,11 @@ const mailbox = socialLinks.mail.replace("mailto:", "");
     .footer__menu--contact {
       width: auto;
       max-width: none;
+    }
+
+    /* Follows the `text-align: left` the menus take at this breakpoint. */
+    .footer__contact {
+      justify-content: flex-start;
     }
   }
 

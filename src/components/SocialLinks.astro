@@ -17,7 +17,10 @@ interface SocialItem {
   hoverIcon?: string;
 }
 
-const socialItems: Record<"linkedIn" | "github" | "x" | "figma" | "dribbble", SocialItem> = {
+const socialItems: Record<
+  "linkedIn" | "github" | "x" | "figma" | "dribbble" | "instagram",
+  SocialItem
+> = {
   linkedIn: {
     href: socialLinks.linkedIn,
     label: copy.navigation.linkedInProfile,
@@ -61,11 +64,32 @@ const socialItems: Record<"linkedIn" | "github" | "x" | "figma" | "dribbble", So
     icon: "/assets/icons/dribbble.svg",
     hoverIcon: "/assets/icons/dribbble-hover.svg",
   },
+  /*
+   * Both marks were already on disk and already to this row's spec — 32x32,
+   * `#94979C` at rest and `#00C8FF` on hover — so this is a wiring change, not
+   * an asset one. That matters: an icon without its hover twin falls through
+   * to the generic `opacity: 0.7` branch below instead of the cyan swap, which
+   * is the omission GitHub's and LinkedIn's comments above both record.
+   */
+  instagram: {
+    href: socialLinks.instagram,
+    label: copy.hero.instagramAriaLabel,
+    icon: "/assets/icons/instagram.svg",
+    hoverIcon: "/assets/icons/instagram-hover.svg",
+  },
 };
 
+/* Appended rather than slotted in, so no existing mark changes position. */
 const items = variant === "hero"
-  ? [socialItems.github, socialItems.x, socialItems.figma, socialItems.dribbble]
-  : [socialItems.linkedIn, socialItems.x, socialItems.github, socialItems.figma, socialItems.dribbble];
+  ? [socialItems.github, socialItems.x, socialItems.figma, socialItems.dribbble, socialItems.instagram]
+  : [
+      socialItems.linkedIn,
+      socialItems.x,
+      socialItems.github,
+      socialItems.figma,
+      socialItems.dribbble,
+      socialItems.instagram,
+    ];
 ---
 
 <div class:list={["social-links", `social-links--${variant}`]}>

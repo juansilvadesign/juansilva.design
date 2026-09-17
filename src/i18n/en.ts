@@ -68,6 +68,7 @@ export const en = {
     xAriaLabel: "Open Juan Silva's X profile",
     figmaAriaLabel: "Open Juan Silva's Figma profile",
     dribbbleAriaLabel: "Open Juan Silva's Dribbble profile",
+    instagramAriaLabel: "Open Juan Silva's Instagram profile",
   },
   /**
    * The track-record strip under the hero. A plain array — reorder, add or drop
@@ -265,7 +266,10 @@ export const en = {
     privacyPolicy: "Privacy Policy",
     termsOfUse: "Terms of Use",
     cookiesPolicy: "Cookies Policy",
-    linkedInHandle: "LinkedIn — @juansilvadesign",
+    /* The word "LinkedIn" moved out of the visible label when the row gained
+     * its mark; `navigation.linkedInProfile` carries it in the accessible name
+     * instead (see Footer.astro). Keep this the handle alone. */
+    linkedInHandle: "@juansilvadesign",
     copyright: "Juan Silva. All rights reserved.",
     versionsLabel: "Site versions",
     versionsToggle: "Choose a site version",

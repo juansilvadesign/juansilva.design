@@ -93,6 +93,63 @@ const copy = t(lang);
     color: var(--primary-ink);
   }
 
+  /* ── Light canvas: the featured card's control ─────────────────────────
+   *
+   * On the dark canvas this is a ghost button and reads fine against
+   * `--background`. On the light one it had no fill, no ring and a neutral
+   * ink, so it stopped reading as a control at all beside `.button--send`'s
+   * cyan pill — the same defect `--hero-cta-*` exists to fix for that button,
+   * one slot to the left in the same row.
+   *
+   * What it takes from `.case-cta` (ProjectCard.astro) is the REST SKIN: the
+   * pill, the 2px accent ring drawn as a `box-shadow` — a border would change
+   * the box height against its siblings, which is why the note draws it this
+   * way too — and `--primary-ink`. Hover keeps THIS control's own motion (the
+   * label slides up, the icon rises, the tooltip fades in) and adds only
+   * `.case-cta`'s hover destination: the pill morphs to `--radius-control` and
+   * the accent floods with the ink inverted. Its growing disc is deliberately
+   * not ported — the disc exists to deliver that flood, and a second
+   * travelling element would cross the label that is already leaving the box.
+   *
+   * ⛔ `padding-inline` is NOT taken. `.case-cta` widens to 40px so its centred
+   * label clears the two arrows sliding through it; there are no arrows here,
+   * and 40px would make the tertiary action the widest control in the row.
+   *
+   * ⛔ Keyed to `html[data-theme="light"]`, never `prefers-color-scheme`. The
+   * attribute is what the early head script writes and what the toggle flips,
+   * and it is the only signal that stays right for a visitor who chose light
+   * against a dark OS. Same pairing ThemeToggle.astro documents.
+   */
+  :global(html[data-theme="light"]) .resume {
+    border-radius: var(--radius-pill);
+    box-shadow: 0 0 0 var(--border-width-strong) var(--primary);
+    color: var(--primary-ink);
+    transition:
+      background-color var(--motion-base) var(--ease-standard),
+      border-color var(--motion-base) var(--ease-standard),
+      color var(--motion-base) var(--ease-standard),
+      border-radius var(--motion-base) var(--ease-standard),
+      box-shadow var(--motion-base) var(--ease-standard);
+  }
+
+  /*
+   * The base hover paints `--surface-interactive-hover` on the border as well
+   * as the background; left in, that grey edge would sit inside the cyan fill.
+   * The ring keeps doing the outlining.
+   */
+  :global(html[data-theme="light"]) .resume:hover,
+  :global(html[data-theme="light"]) .resume:focus-visible {
+    border-color: var(--color-transparent);
+    border-radius: var(--radius-control);
+    background: var(--primary);
+    color: var(--on-primary);
+  }
+
+  /* `.case-cta`'s own press, so the pair reads the same on the way down too. */
+  :global(html[data-theme="light"]) .resume:active {
+    scale: 0.95;
+  }
+
   .resume__well {
     position: relative;
     display: block;
@@ -194,6 +251,21 @@ const copy = t(lang);
     .resume::before,
     .resume::after {
       transition: none;
+    }
+
+    /*
+     * Its own rule, and not a selector added to the list above: the light
+     * block outranks that list on specificity, so a bare `.resume` here would
+     * lose to it and the ring, radius and fill would go on easing. The colour
+     * change itself survives — it IS the hover affordance — exactly as
+     * `.case-cta` and the hero's LinkedIn flood settle the same question.
+     */
+    :global(html[data-theme="light"]) .resume {
+      transition: none;
+    }
+
+    :global(html[data-theme="light"]) .resume:active {
+      scale: none;
     }
   }
 </style>

@@ -49,7 +49,11 @@ export const contact = {
   socials: {
     linkedIn: "https://linkedin.com/in/juansilvadesign",
     x: "https://x.com/juansilvadesign",
-    instagram: "https://instagram.com/juansilvadesign",
+    /* ⛔ The handle carries a DOT and the others do not — `juansilva.design`,
+     * not `juansilvadesign`. This read as the latter until 2026-09-17, which
+     * is a live 404 rather than a cosmetic slip, and it is the one social in
+     * this list that does not follow the pattern the other six share. */
+    instagram: "https://instagram.com/juansilva.design",
     threads: "https://www.threads.net/@juansilvadesign",
     figma: "https://www.figma.com/@juansilvadesign",
     dribbble: "https://dribbble.com/juansilvadesign",

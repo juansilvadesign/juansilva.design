@@ -127,7 +127,16 @@ export default function FuzzyText({
 
     const computed = window.getComputedStyle(canvas);
     const family = fontFamily === "inherit" ? computed.fontFamily || "serif" : fontFamily;
-    const fill = color === "inherit" ? computed.color : color;
+    /*
+     * ⛔ Resolved at every measure, never captured once. Canvas ink is BAKED
+     * into the bitmap — it is not text, so it cannot inherit a colour change
+     * the way the `<h1>` around it does. Held as a constant, the headline kept
+     * whatever `--text-heading` resolved to when the island first hydrated,
+     * and a theme flip repainted the page around it: light → dark left
+     * `#0c0e12` glyphs sitting on `#0f1217`, measured at 1.03:1, which is a
+     * headline that is simply not there. Dark → light fails the same way.
+     */
+    const resolveFill = () => (color === "inherit" ? window.getComputedStyle(canvas).color : color);
     /** Integer, so one CSS pixel is a whole number of buffer rows. */
     const scale = Math.max(1, Math.min(MAX_SCALE, Math.round(window.devicePixelRatio || 1)));
 
@@ -195,7 +204,7 @@ export default function FuzzyText({
 
       /* Sizing a canvas resets its context, so the font and fill go back on. */
       setFont(size);
-      bufferCtx.fillStyle = fill;
+      bufferCtx.fillStyle = resolveFill();
       metrics.forEach((metric, index) => {
         bufferCtx.fillText(
           items[index],
@@ -253,6 +262,31 @@ export default function FuzzyText({
       if (measure() && reduced) paint(0);
     });
 
+    /*
+     * Re-measuring is what repaints the ink, because `measure()` is where
+     * `fillStyle` is set and the buffer redrawn — and the observer above
+     * cannot stand in for this one. It early-returns unless the host's WIDTH
+     * moved, and a theme flip changes no geometry at all.
+     *
+     * Attached synchronously rather than beside `observer.observe(host)` in
+     * `start()`, so a flip during the font load is covered too; `measure()`
+     * already refuses a host it cannot size, and the branch below is the same
+     * one `start()` uses.
+     *
+     * The attribute, not `prefers-color-scheme`: the early head script in
+     * BaseLayout writes `data-theme` for BOTH sources — a stored choice and
+     * the OS default — so this fires once either way instead of missing the
+     * visitor who picked light against a dark OS.
+     */
+    const themeObserver = new MutationObserver(() => {
+      if (cancelled) return;
+      if (measure()) paint(reduced ? 0 : baseIntensity);
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+
     const onPointerMove = (event: PointerEvent) => {
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left;
@@ -294,6 +328,7 @@ export default function FuzzyText({
       cancelled = true;
       window.cancelAnimationFrame(frame);
       observer.disconnect();
+      themeObserver.disconnect();
       canvas.removeEventListener("pointermove", onPointerMove);
       canvas.removeEventListener("pointerout", onPointerOut);
       canvas.removeEventListener("pointercancel", onPointerOut);
