@@ -16,8 +16,12 @@
 //    when this was written — and the cap refuses processes ACCOUNT-WIDE, which
 //    would take juansilva.design, psiativa and newcar down together. SSH/rsync
 //    connects fine; working is not the same as allowed. Do not "fix" this back.
-//    One FTP control connection is held for the whole run, deliberately: it costs
-//    the account ~1 process instead of one per file.
+//    ⚠️ This script used to hold ONE control connection for the whole run, for
+//    that reason. It can no longer: since some point between 2026-09-14 and
+//    09-17 the host refuses the 8th data connection on a session (see the
+//    ceiling note above `SESSION_BUDGET`), so the session is recycled every 6
+//    transfers. Still ~1 process at a time — never one per file — which is what
+//    the cap above actually cares about.
 //
 // Modes:
 //   node scripts/deploy.mjs --check     build + assert + list the remote + diff, no writes
@@ -275,8 +279,11 @@ function walkLocal(dir, prefix = "") {
   return { files, dirs };
 }
 
-async function walkRemote(client, base, rel = "", acc = { files: [], dirs: [], preserved: [], skipped: [] }) {
-  const list = await client.list(rel ? remotePath(base, rel) : base);
+// `session`, not a raw client: the walk is 130 listings and the host caps a
+// session at 7. Every path here is absolute, so a reconnect mid-walk needs no
+// working directory restored — which is why only the upload loop calls `enter`.
+async function walkRemote(session, base, rel = "", acc = { files: [], dirs: [], preserved: [], skipped: [] }) {
+  const list = await session.list(rel ? remotePath(base, rel) : base);
   for (const item of list) {
     if (item.name === "." || item.name === "..") continue;
     const r = rel ? `${rel}/${item.name}` : item.name;
@@ -286,7 +293,7 @@ async function walkRemote(client, base, rel = "", acc = { files: [], dirs: [], p
     }
     if (item.isDirectory) {
       acc.dirs.push(r);
-      await walkRemote(client, base, r, acc);
+      await walkRemote(session, base, r, acc);
     } else if (item.isFile) {
       acc.files.push({ rel: r, size: item.size });
     } else {
@@ -314,7 +321,16 @@ async function connect() {
 
   if (env.CPANEL_FTP_TLS === "false") {
     // Explicit opt-out only. Plain FTP puts this password on the wire in the clear.
-    warn("CPANEL_FTP_TLS=false — connecting WITHOUT TLS; the password crosses the network in cleartext");
+    //
+    // ⛔ Once per RUN, not once per connect. The session is recycled ~22 times in
+    // a dry run and ~65 in a deploy, and this line repeated that many times
+    // buried the mirror plan under its own warning. It must still print — it is
+    // the only notice that the password is in the clear — so it is deduplicated,
+    // never silenced.
+    if (!connect.warnedCleartext) {
+      connect.warnedCleartext = true;
+      warn("CPANEL_FTP_TLS=false — connecting WITHOUT TLS; the password crosses the network in cleartext");
+    }
     await client.access({ ...base, secure: false });
     return { client, tls: "none" };
   }
@@ -351,6 +367,131 @@ async function connect() {
     retry.ftp.verbose = VERBOSE;
     await retry.access({ ...base, secure: true, secureOptions: { rejectUnauthorized: false } });
     return { client: retry, tls: "unverified" };
+  }
+}
+
+// --- stage 2c-bis: the 7-data-connection ceiling ----------------------------
+//
+// ⛔ This host refuses the 8th data connection on a control session. Measured
+// 2026-09-17, three identical runs plus an isolating probe: listing the SAME
+// directory on one session, transfers 1-7 return in ~110ms each and the 8th
+// never opens — the server still answers `150` and `226` on the control channel,
+// but nothing ever connects to the port `EPSV` just advertised, so the client
+// sits until its own 30s timeout fires and reports `Timeout (control socket)`.
+// The error names the socket that went quiet, not the one that broke.
+//
+// ⛔ A retry around the failing call CANNOT work, and that is worth stating
+// because it is the obvious fix: basic-ftp tears the control socket down when
+// the timeout fires (`client.closed === true` immediately after), so there is no
+// session left to retry on. The budget is per CONTROL SESSION, and reconnecting
+// resets it — a fresh login listed the same directory 115ms later.
+//
+// ⚠️ This is a WORKAROUND for a host-side cap, not a fix. The same script
+// uploaded 102 files on 2026-08-15 and deployed again on 09-14, so the ceiling
+// appeared between 09-14 and 09-17. It still deserves a support ticket; this
+// only removes the block in the meantime.
+const SESSION_BUDGET = Number(env.FTP_SESSION_BUDGET || 6);
+
+// ⚠️ A full deploy is ~400 data connections (130 listings + 273 uploads), so
+// ~65 logins. cPHulk and CSF's LF_FTPD count FAILED logins, not successful ones,
+// but that is this host's default and not a verified reading of its config —
+// so the sessions are deliberately paced rather than opened as fast as possible.
+const RECYCLE_PAUSE_MS = Number(env.FTP_RECYCLE_PAUSE_MS || 750);
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * Owns the current FTP client and recycles it before the ceiling is reached.
+ *
+ * Only `list` and `uploadFrom` open a data connection and so spend budget; `cd`,
+ * `ensureDir`, `remove` and `removeEmptyDir` are control-channel commands and
+ * are free. Getting that split wrong in either direction is silent — too
+ * generous and the deploy stalls again, too strict and it logs in for nothing.
+ */
+class Session {
+  constructor(client) {
+    this.client = client;
+    this.used = 0;
+    this.recycles = 0;
+    // Where a reconnected session has to be put back. Uploads address files by
+    // BASENAME relative to the working directory, so a reconnect that did not
+    // restore it would write them to the docroot root — the one failure mode
+    // here that corrupts the site rather than stopping it.
+    this.place = null;
+  }
+
+  async spend() {
+    if (this.used < SESSION_BUDGET) {
+      this.used++;
+      return;
+    }
+    try {
+      this.client.close();
+    } catch {
+      /* already gone; the point is only that we do not leak it */
+    }
+    await sleep(RECYCLE_PAUSE_MS);
+    this.client = (await connect()).client;
+    this.recycles++;
+    this.used = 1;
+    if (this.place) await this.applyPlace();
+  }
+
+  async applyPlace() {
+    await this.client.cd(this.place.docroot);
+    if (this.place.dir) await this.client.ensureDir(this.place.dir);
+
+    // ⛔ Verified, not assumed. Uploads name their files by basename, so if a
+    // recycle ever landed somewhere other than where it left off, the remaining
+    // files of that directory would be written to whatever directory this is —
+    // quietly, with every transfer reporting success. That is the only outcome
+    // here that damages the site instead of stopping the run, so it gets a
+    // check rather than a comment. PWD is control-channel; it costs no budget.
+    const expected = (this.place.dir ? remotePath(this.place.docroot, this.place.dir) : this.place.docroot)
+      .replace(/\/+$/, "");
+    const actual = (await this.client.pwd()).replace(/\/+$/, "");
+    if (actual !== expected) {
+      // Both are trailing-slash-stripped, which turns the root docroot into ""
+      // — printed raw that reads as "expected nothing". Show it as "/".
+      const show = (p) => p || "/";
+      throw new Error(
+        `session recycle landed in "${show(actual)}" but expected "${show(expected)}" — ` +
+          `refusing to continue rather than upload into the wrong directory`
+      );
+    }
+  }
+
+  /** Sets the working directory AND records it for the next reconnect. */
+  async enter(docroot, dir) {
+    this.place = { docroot, dir };
+    await this.applyPlace();
+  }
+
+  async list(path) {
+    await this.spend();
+    return this.client.list(path);
+  }
+
+  async uploadFrom(localPath, name) {
+    await this.spend();
+    return this.client.uploadFrom(localPath, name);
+  }
+
+  /* Control-channel only — no data connection, no budget. */
+  remove(path) {
+    return this.client.remove(path);
+  }
+
+  removeEmptyDir(path) {
+    return this.client.removeEmptyDir(path);
+  }
+
+  close() {
+    try {
+      this.client.close();
+    } catch {
+      /* closing a dead session is not an error worth surfacing */
+    }
   }
 }
 
@@ -469,7 +610,7 @@ function reportPlan(local, remote, d) {
   }
 }
 
-async function uploadAll(client, docroot, local) {
+async function uploadAll(session, docroot, local) {
   const byDir = new Map();
   for (const f of local.files) {
     const dir = f.rel.includes("/") ? f.rel.slice(0, f.rel.lastIndexOf("/")) : "";
@@ -479,10 +620,16 @@ async function uploadAll(client, docroot, local) {
 
   let done = 0;
   for (const [dir, files] of [...byDir].sort(([a], [b]) => a.localeCompare(b))) {
-    await client.cd(docroot);
-    if (dir) await client.ensureDir(dir); // creates every missing segment, then enters
+    // ⛔ `session.enter`, not a bare `cd` + `ensureDir`. The uploads below name
+    // their files by BASENAME, so they land wherever the working directory
+    // happens to be — and a recycle can fire between any two of them. `enter`
+    // records this directory so the reconnected session is put back in it;
+    // without that, the files after a recycle would silently land in the
+    // docroot root. The one failure here that would corrupt the site rather
+    // than stop the run.
+    await session.enter(docroot, dir); // ensureDir creates every missing segment
     for (const f of files) {
-      await client.uploadFrom(join(DIST, f.rel), basename(f.rel));
+      await session.uploadFrom(join(DIST, f.rel), basename(f.rel));
       done++;
       if (process.stdout.isTTY) process.stdout.write(`\r  uploading… ${done}/${local.files.length}`);
     }
@@ -492,10 +639,12 @@ async function uploadAll(client, docroot, local) {
   return done;
 }
 
-async function deleteExtraneous(client, docroot, d) {
+// DELE and RMD are control-channel commands — no data connection, so this whole
+// pass spends no session budget however long the delete list is.
+async function deleteExtraneous(session, docroot, d) {
   let removed = 0;
   for (const f of d.extraneousFiles) {
-    await client.remove(remotePath(docroot, f.rel));
+    await session.remove(remotePath(docroot, f.rel));
     console.log(`    deleted ${f.rel}`);
     removed++;
   }
@@ -503,7 +652,7 @@ async function deleteExtraneous(client, docroot, d) {
     try {
       // Deliberately removeEmptyDir, never removeDir: the recursive variant would
       // happily take a preserved subtree with it.
-      await client.removeEmptyDir(remotePath(docroot, dir));
+      await session.removeEmptyDir(remotePath(docroot, dir));
       console.log(`    deleted ${dir}/`);
       removed++;
     } catch (err) {
@@ -601,7 +750,7 @@ if (mode === "status") {
   }
 
   const local = walkLocal(DIST);
-  let client = null;
+  let session = null;
   // Which side of the first written byte a failure lands on. Reporting "the
   // docroot may be PARTIALLY updated" for a refused login is a lie that costs an
   // operator a panicked manual check.
@@ -610,13 +759,17 @@ if (mode === "status") {
   try {
     head(mode === "check" ? "Connecting (read-only)" : "Connecting");
     const conn = await connect();
-    client = conn.client;
+    session = new Session(conn.client);
     // The login is often itself an user@domain, so keep the two apart visually —
     // this line is how an operator confirms WHICH account is about to write.
     info(`FTP login "${env.CPANEL_FTP_USER}" → ${env.CPANEL_FTP_HOST}:${env.CPANEL_FTP_PORT} — TLS ${conn.tls}`);
+    info(`recycling the session every ${SESSION_BUDGET} transfers (host caps one at 7)`);
 
-    const docroot = await enterDocroot(client);
-    const rootNames = (await client.list(docroot)).map((f) => f.name);
+    const docroot = await enterDocroot(session.client);
+    // Recorded BEFORE the first listing, so a recycle anywhere from here on
+    // re-enters the docroot rather than landing in the login's home.
+    session.place = { docroot, dir: "" };
+    const rootNames = (await session.list(docroot)).map((f) => f.name);
     assertDocrootIdentity(docroot, rootNames);
     if (failures) {
       console.error(`\n\x1b[31mAborted: the docroot failed identity checks. Nothing was written.\x1b[0m\n`);
@@ -624,7 +777,7 @@ if (mode === "status") {
     }
 
     head(mode === "check" ? "Mirror plan (no writes)" : "Mirror plan");
-    const remote = await walkRemote(client, docroot);
+    const remote = await walkRemote(session, docroot);
     const plan = diff(local, remote);
     reportPlan(local, remote, plan);
 
@@ -641,14 +794,15 @@ if (mode === "status") {
     // about to be replaced. FTP is not transactional either way.
     head("Uploading to docroot");
     wrote = true;
-    await uploadAll(client, docroot, local);
+    await uploadAll(session, docroot, local);
 
     head("Deleting what is not in dist/");
     info(`preserved on host: ${PRESERVE.join(" ")}`);
-    await deleteExtraneous(client, docroot, plan);
+    await deleteExtraneous(session, docroot, plan);
 
-    client.close();
-    client = null;
+    info(`FTP sessions used: ${session.recycles + 1}`);
+    session.close();
+    session = null;
 
     verifyPublic(before);
   } catch (err) {
@@ -667,7 +821,7 @@ if (mode === "status") {
   } finally {
     // A dangling FTP session is a leaked process on an account already near its
     // cap. Closing is not optional, on any path out of here.
-    if (client) client.close();
+    if (session) session.close();
   }
 }
 
