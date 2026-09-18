@@ -15,7 +15,15 @@
   ],
   "liveUrl": "https://www.figma.com/design/8n9IrDRBqZZ8V0qglFF1KL/Pro-Personal?node-id=1-2",
   "featured": false,
-  "preview": "/assets/images/pro-personal-preview.webp",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.jpg",
+  "previewMotion": {
+    "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.mp4",
+    "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.webm",
+    "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.webp",
+    "hoverStart": 0,
+    "width": 1920,
+    "height": 1080
+  },
   "copy": {
     "en": {
       "title": "Personal-Training Platform — Three Roles, 700 Frames",
@@ -47,6 +55,16 @@
       "context": "Agency engagement at Sagitta spanning eight months of sustained delivery (March to December 2024). The client, a personal trainer and PE professor at USP (Universidade de São Paulo), provided exhaustive domain rules covering PAR-Q medical screening, advanced periodization (GVT, Rest-Pause, Drop Sets, RIR), and dual-mode photo/video assessments. Juan owned the entire product, prototypes, and style system alone; marketing landing pages were authored separately by João Chagas.",
       "outcome": "Formally approved during client validation on 2024-11-08 with high praise for interface clarity and domain fidelity across seven recorded checkpoints. The project was handed off to engineering, but Bubble no-code development limitations stalled the implementation and prevented public deployment. The frustration of watching an approved, 700-frame design system fail to reach production became the definitive catalyst for Juan's transition into full-stack design engineering.",
       "blocks": [
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Pro Personal complete platform showcase: three-role architecture across Personal, Aluno, and Admin, 11 periodization methods, PAR-Q screening, fatigue alerts, and 448 bespoke components.",
+          "caption": "Sixty seconds, silent and looping — the 700-frame personal-training platform translating 500+ pages of sports science across three role surfaces."
+        },
         {
           "type": "callout",
           "body": "Attribution and Scope Boundary: I was the sole product designer for the 700-frame application, its style system, and both prototype pages. The marketing landing page was designed separately by João Chagas and is excluded from my claims. Crucial nuance: the client authored the entire 500+ page specification, so I claim the architectural translation of that dense methodology into a production interface, never the domain science or product requirements. Delivery reality: the design was fully approved, but the no-code development team failed to execute the mathematical logic and custom UI in Bubble, so it never launched publicly."
@@ -107,6 +125,16 @@
           ]
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-periodization-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-periodization-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-periodization-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Pro Personal periodization engine: dynamic workout generation across 11 strength methodologies, PAR-Q medical clearance, and DiaCansado adaptive fatigue interception.",
+          "caption": "Fourteen seconds, silent and looping — the sports science periodization engine and adaptive neuromuscular fatigue intercept."
+        },
+        {
           "type": "heading",
           "level": 2,
           "text": "Zero vendor primitives: a 448-component system built from scratch"
@@ -116,6 +144,16 @@
           "body": "Pro Personal is the sole project in Sagitta's entire agency catalog built 100% from scratch with zero Untitled UI or imported vendor templates. Across 448 components (388 variants over 60 base component sets), every single element was authored in Portuguese domain terminology: Timer Circle, input_uploadvídeo, OpçõesSelect, buttonSave, and Estado=Ativo, Tipo=Notificação. The file defines 12 semantically named color styles (Purple 1–4 Primary, Black Primary, Grey Primary, Background #FAFAFA, stroke #EBEBEB) and a named Shadow Cards elevation style, backed by a comprehensive 61-frame Style Guide page."
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-design-system-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-design-system-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-design-system-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Pro Personal bespoke design system: 448 scratch-built components, 12 semantically named color styles, and Portuguese domain primitives.",
+          "caption": "Twelve seconds, silent and looping — the 448-component design system built entirely from scratch with twelve semantic color styles and zero vendor kits."
+        },
+        {
           "type": "heading",
           "level": 2,
           "text": "Developer empathy in practice: the 119-screen Telas do Protótipo"
@@ -123,6 +161,16 @@
         {
           "type": "prose",
           "body": "To make the prototype usable across 50 functional sections, I engineered a dedicated prototype component layer (NavBarProtótipo, MenuNavBarProtótipo, NavItemProtótipo, BottomMenuProtótipo) and threaded approximately 20 sticky-note annotations with implementation logic directly into the canvas. When the assigned developer reported that Figma's fixed-height viewports hindered his ability to inspect full-page vertical layouts, I manually duplicated and unrolled all 119 screens to full height on a separate page named Telas do Protótipo. This eliminated the developer's inspection friction at personal time cost, exemplifying practical, low-friction handoff commitment."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-dev-handoff-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-dev-handoff-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-dev-handoff-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Pro Personal developer handoff: 119 unrolled full-height screens, prototype navigation components, and sticky implementation notes.",
+          "caption": "Fourteen seconds, silent and looping — the 119-screen full-height developer handoff board and implementation spec layer."
         },
         {
           "type": "quote",
@@ -144,6 +192,16 @@
       "context": "Atuação na agência Sagitta ao longo de oito meses de entrega contínua (março a dezembro de 2024). O cliente, personal trainer e professor de Educação Física da Universidade de São Paulo (USP), forneceu diretrizes minuciosas cobrindo triagem médica PAR-Q, periodização avançada (GVT, Rest-Pause, Drop Sets, RIR) e avaliação física comparativa por foto e vídeo. Juan liderou todo o produto, protótipos e style system sozinho; a landing page de marketing foi executada separadamente por João Chagas.",
       "outcome": "Aprovado formalmente na validação com o cliente em 08/11/2024 com forte reconhecimento pela clareza de interface e fidelidade metodológica ao longo de sete reuniões gravadas. O projeto foi entregue ao time técnico, mas limitações na implementação no-code em Bubble travaram a entrega e impediram o lançamento público. A frustração de ver um design system aprovado de 700 frames não alcançar produção tornou-se o catalisador decisivo para a transição de Juan para a engenharia de design full-stack.",
       "blocks": [
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Showcase completo da plataforma Pro Personal: arquitetura de três perfis (Personal, Aluno, Admin), 11 metodologias de periodização, triagem PAR-Q, alertas de fadiga e 448 componentes autorais.",
+          "caption": "Sessenta segundos, silencioso e em loop — a plataforma de 700 frames traduzindo mais de 500 páginas de ciência do esporte em três perfis de uso."
+        },
         {
           "type": "callout",
           "body": "Fronteira de Atribuição e Escopo: Fui o designer de produto solo de todo o aplicativo de 700 frames, do sistema de estilos e das duas páginas de protótipo. A landing page institucional foi desenhada separadamente por João Chagas e está excluída das minhas atribuições. Nuance crucial: o cliente redigiu integralmente a especificação de mais de 500 páginas; portanto, reivindico a tradução arquitetural dessa metodologia densa em uma interface funcional, nunca a autoria da ciência do treinamento ou dos requisitos. Realidade de entrega: o design foi formalmente aprovado, mas a equipe de desenvolvimento no-code em Bubble não conseguiu implementar a lógica matemática nem a UI, de modo que o app nunca foi lançado."
@@ -204,6 +262,16 @@
           ]
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-periodization-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-periodization-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-periodization-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Motor de periodização do Pro Personal: geração dinâmica de treinos em 11 metodologias de força, liberação médica PAR-Q e interceptação de fadiga adaptativa DiaCansado.",
+          "caption": "Quatorze segundos, silencioso e em loop — o motor de periodização esportiva e a interceptação adaptativa de fadiga neuromuscular."
+        },
+        {
           "type": "heading",
           "level": 2,
           "text": "Zero primitivos terceirizados: um sistema de 448 componentes construído do zero"
@@ -213,6 +281,16 @@
           "body": "O Pro Personal é o único projeto em todo o acervo da agência Sagitta desenvolvido 100% do zero, sem nenhum uso de Untitled UI ou templates importados. Ao longo de 448 componentes (388 variantes em 60 conjuntos de componentes base), cada elemento foi criado em português com terminologia do domínio: Timer Circle, input_uploadvídeo, OpçõesSelect, buttonSave e Estado=Ativo, Tipo=Notificação. O arquivo define 12 estilos de cor com nomes semânticos (Purple 1–4 Primary, Black Primary, Grey Primary, Background #FAFAFA, stroke #EBEBEB) e o estilo de elevação Shadow Cards, estruturados em uma página dedicada de Style Guide com 61 pranchas."
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-design-system-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-design-system-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-design-system-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Design system autoral do Pro Personal: 448 componentes feitos do zero, 12 estilos de cor nomeados semanticamente e primitivos em português.",
+          "caption": "Doze segundos, silencioso e em loop — o design system de 448 componentes construído do zero com doze estilos de cor semânticos e nenhum kit de terceiros."
+        },
+        {
           "type": "heading",
           "level": 2,
           "text": "Empatia técnica na prática: as 119 telas de Telas do Protótipo"
@@ -220,6 +298,16 @@
         {
           "type": "prose",
           "body": "Para garantir a navegabilidade do protótipo em ~50 seções funcionais, criei uma camada dedicada de componentes de prototipagem (NavBarProtótipo, MenuNavBarProtótipo, NavItemProtótipo, BottomMenuProtótipo) e distribuí cerca de 20 notas adesivas com especificações técnicas diretamente nas pranchas. Quando o desenvolvedor sinalizou que o viewport fixo do Figma dificultava inspecionar layouts verticais longos, dupliquei e abri manualmente todas as 119 telas em altura total em uma página separada chamada Telas do Protótipo. Isso removeu qualquer atrito de inspeção para a engenharia, evidenciando compromisso real com a entrega do desenvolvedor."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-dev-handoff-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-dev-handoff-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/pro-personal/pro-personal-dev-handoff-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Handoff técnico do Pro Personal: 119 telas desdobradas em altura total, componentes dedicados de navegação do protótipo e notas adesivas de implementação.",
+          "caption": "Quatorze segundos, silencioso e em loop — a prancha de 119 telas em altura total para inspeção do desenvolvedor e camada de notas técnicas."
         },
         {
           "type": "quote",

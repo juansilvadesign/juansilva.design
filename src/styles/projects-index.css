@@ -1152,13 +1152,47 @@
   color: var(--cta-label-active);
 }
 
+/* 1.5rem of clearance above the CTA (Juan, 2026-09-18), GRID ONLY.
+ *
+ * ⛔ NOT `margin-top` on `.pcard__cta`, which is the obvious spelling and would
+ * silently undo the fix documented on `.pcard[data-view="grid"] .pcard__link`
+ * above. That rule hands a row's leftover height to the BODY precisely so the
+ * CTA's `margin-top: auto` can push it to the card's bottom edge and every
+ * button in a row lines up. Any fixed top margin REPLACES that `auto`, so each
+ * CTA would again land wherever its own copy happened to end — the 22px-on-the-
+ * tallest-card vs 50px-on-its-siblings misalignment that comment records.
+ *
+ * Carried by whatever precedes the CTA instead, so `auto` survives: the button
+ * still sits on the card's bottom edge, and this is the clearance it may never
+ * drop below on the tallest card in a row, the one card that had none.
+ *
+ * ⛔ Padding on the control itself is the other spelling that does not work:
+ * `.pcard__cta-circle` is `position: absolute; top: 0`, whose containing block
+ * is the CTA's PADDING box, so a `padding-top` would leave the circle 24px above
+ * the label it is supposed to sit behind — and the control's `height` is
+ * `--cta-size` under `border-box`, which would crush the label into 16px.
+ *
+ * `:nth-last-child(2)` rather than naming `.rail`: EvidenceRail returns null for
+ * a project with no signals on, so the element above the CTA is the rail on most
+ * cards and `.pcard__tagline` on the rest.
+ */
+.pcard[data-view="grid"] .pcard__body > :nth-last-child(2) {
+  margin-bottom: var(--space-px-24);
+}
+
 /* `.pcard__body` is a flex column, so the CTA stretches to the card width. In
  * the grid that is what makes it read as a deliberate full-width control. In a
  * list row the body is ~1050px, and a cyan bar that long stops reading as a
  * button entirely — the same reason SpotlightCard and BorderGlow are grid-only.
- * Size it to its label there instead. */
+ * Size it to its label there instead.
+ *
+ * `flex-end`, not `flex-start` (Juan, 2026-09-18): this is a flex COLUMN, so
+ * `align-self` is the horizontal axis, and the row's copy column runs to the
+ * right edge. The button therefore parks at the end of that column — far from
+ * the title it used to sit under, and on the side of the row a reader's eye
+ * finishes on. */
 .pcard[data-view="list"] .pcard__cta {
-  align-self: flex-start;
+  align-self: flex-end;
 }
 
 /* The fill is a state change, not decorative travel, so it stays — it just

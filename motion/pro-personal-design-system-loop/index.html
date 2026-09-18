@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Pro Personal — Zero Vendor Primitives & Design System Loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0F0C1B;
+        font-family: "InterVar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #FAFAFA;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #ground {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 25%, rgba(102, 51, 153, 0.24) 0%, rgba(17, 0, 53, 0.65) 50%, #0F0C1B 85%),
+          #0F0C1B;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+      }
+      #glow-left {
+        top: 60px;
+        left: 200px;
+        width: 600px;
+        height: 600px;
+        background: rgba(102, 51, 153, 0.22);
+      }
+      #glow-right {
+        bottom: 40px;
+        right: 200px;
+        width: 640px;
+        height: 640px;
+        background: rgba(162, 111, 216, 0.16);
+      }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* Header HUD */
+      #hud-header {
+        position: absolute;
+        top: 40px;
+        left: 80px;
+        right: 80px;
+        height: 56px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .hud-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .hud-badge {
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: rgba(102, 51, 153, 0.45);
+        border: 1px solid rgba(162, 111, 216, 0.4);
+        font-family: "Montserrat", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #D8B4FE;
+      }
+
+      .hud-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: #FFFFFF;
+      }
+
+      .hud-stats {
+        display: flex;
+        gap: 20px;
+        font-size: 13px;
+        color: #CBD5E1;
+      }
+
+      .stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .stat-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #A26FD8;
+        box-shadow: 0 0 8px #A26FD8;
+      }
+
+      /* Left Showcase Section: 12 Color Styles & Primitives */
+      #colors-card {
+        position: absolute;
+        top: 130px;
+        left: 80px;
+        width: 860px;
+        height: 860px;
+        background: #181428;
+        border: 1px solid rgba(162, 111, 216, 0.2);
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow: hidden;
+      }
+
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .section-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #FFFFFF;
+      }
+
+      .section-chip {
+        font-size: 12px;
+        font-weight: 600;
+        color: #D8B4FE;
+        padding: 4px 10px;
+        border-radius: 8px;
+        background: rgba(102, 51, 153, 0.3);
+      }
+
+      .colors-view-wrap {
+        position: relative;
+        width: 804px;
+        height: 720px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #110D20;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .colors-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+
+      /* Right Section: Component Primitives & Board */
+      #components-card {
+        position: absolute;
+        top: 130px;
+        left: 980px;
+        width: 860px;
+        height: 860px;
+        background: #181428;
+        border: 1px solid rgba(162, 111, 216, 0.2);
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow: hidden;
+      }
+
+      .components-view-wrap {
+        position: relative;
+        width: 804px;
+        height: 480px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #110D20;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .components-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+
+      /* Floating Bespoke Components Gallery */
+      .bespoke-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        height: 220px;
+      }
+
+      .bespoke-box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .bespoke-box-name {
+        font-size: 11px;
+        font-weight: 600;
+        color: #D8B4FE;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        align-self: flex-start;
+      }
+
+      .bespoke-box-inner {
+        width: 100%;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .bespoke-box-inner img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+
+      /* Virtual Cursor */
+      #virtual-cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        z-index: 200;
+        pointer-events: none;
+      }
+      .cursor-icon {
+        width: 24px;
+        height: 24px;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+      }
+      .cursor-ripple {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(162, 111, 216, 0.6);
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="design-system-loop"
+      data-start="0"
+      data-duration="12"
+      data-fps="60"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="ground"></div>
+      <div id="glow-left" class="ambient-glow" data-layout-allow-overflow="true"></div>
+      <div id="glow-right" class="ambient-glow" data-layout-allow-overflow="true"></div>
+
+      <!-- HUD Header Pinned -->
+      <div id="hud-header" data-layout-allow-overlap="true">
+        <div class="hud-title-wrap" data-layout-allow-overlap="true">
+          <span class="hud-badge" data-layout-allow-overlap="true">Zero Kits Prontos</span>
+          <span class="hud-title" data-layout-allow-overlap="true">Pro Personal · Design System Autoral (448 Componentes)</span>
+        </div>
+        <div class="hud-stats" data-layout-allow-overlap="true">
+          <div class="stat-pill" data-layout-allow-overlap="true">
+            <span class="stat-dot"></span>
+            <span data-layout-allow-overlap="true">448 Componentes Autorais</span>
+          </div>
+          <div class="stat-pill" data-layout-allow-overlap="true">
+            <span class="stat-dot"></span>
+            <span data-layout-allow-overlap="true">60 Conjuntos de Variantes</span>
+          </div>
+          <div class="stat-pill" data-layout-allow-overlap="true">
+            <span class="stat-dot"></span>
+            <span data-layout-allow-overlap="true">12 Estilos de Cor Semânticos</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="stage" data-layout-allow-overflow="true">
+        <div id="camera-scaler" data-layout-allow-overflow="true">
+          <div id="camera-track" data-layout-allow-overflow="true">
+            <!-- Left Card: Colors & Foundations -->
+            <div id="colors-card" data-layout-allow-overflow="true">
+              <div class="section-heading">
+                <span id="title-colors" class="section-title">12 Estilos de Cor Semânticos</span>
+                <span class="section-chip">Base do Style Guide</span>
+              </div>
+              <div class="colors-view-wrap">
+                <img id="img-colors-primary" class="colors-img" src="assets/figma/styleguide-cores-primarias.png" alt="Cores Primárias" />
+                <img id="img-colors-secondary" class="colors-img" src="assets/figma/styleguide-cores-secundarias.png" alt="Cores Secundárias" style="opacity:0;" />
+                <img id="img-typography" class="colors-img" src="assets/figma/styleguide-tipografia.png" alt="Tipografia" style="opacity:0;" />
+              </div>
+            </div>
+
+            <!-- Right Card: 448 Components Board -->
+            <div id="components-card">
+              <div class="section-heading">
+                <span class="section-title">Componentes de Domínio em Português</span>
+                <span class="section-chip">388 Variantes / 60 Sets</span>
+              </div>
+              <div class="components-view-wrap">
+                <img id="img-components-board" class="components-img" src="assets/figma/styleguide-componentes.png" alt="Componentes Globais" />
+              </div>
+
+              <!-- Bespoke Component Focus Boxes -->
+              <div class="bespoke-grid">
+                <div class="bespoke-box" id="box-timer">
+                  <span class="bespoke-box-name">Timer Circle</span>
+                  <div class="bespoke-box-inner">
+                    <img src="assets/figma/component-timer-circle.png" alt="Timer Circle" />
+                  </div>
+                </div>
+
+                <div class="bespoke-box" id="box-upload">
+                  <span class="bespoke-box-name">input_uploadvídeo</span>
+                  <div class="bespoke-box-inner">
+                    <img src="assets/figma/component-upload-video.png" alt="Upload Vídeo" />
+                  </div>
+                </div>
+
+                <div class="bespoke-box" id="box-save">
+                  <span class="bespoke-box-name">buttonSave</span>
+                  <div class="bespoke-box-inner">
+                    <img src="assets/figma/component-button-save.png" alt="Button Save" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Virtual Cursor -->
+            <div id="virtual-cursor">
+              <svg class="cursor-icon" viewBox="0 0 24 24" fill="none">
+                <path d="M5.5 3.2L18.8 12.6L12.4 13.9L15.6 20.4L12.9 21.7L9.7 15.2L5.5 19.3V3.2Z" fill="#FFFFFF" stroke="#110035" stroke-width="1.8"/>
+              </svg>
+              <div id="cursor-ripple" class="cursor-ripple"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* HyperFrames GSAP Master Timeline */
+      const master = gsap.timeline({ paused: true });
+
+      // Elements
+      const cursor = document.querySelector("#virtual-cursor");
+      const ripple = document.querySelector("#cursor-ripple");
+      const imgColorsPrimary = document.querySelector("#img-colors-primary");
+      const imgColorsSecondary = document.querySelector("#img-colors-secondary");
+      const imgTypography = document.querySelector("#img-typography");
+      const imgComponentsBoard = document.querySelector("#img-components-board");
+      const titleColors = document.querySelector("#title-colors");
+
+      const boxTimer = document.querySelector("#box-timer");
+      const boxUpload = document.querySelector("#box-upload");
+      const boxSave = document.querySelector("#box-save");
+
+      const cameraTrack = document.querySelector("#camera-track");
+      const cameraScaler = document.querySelector("#camera-scaler");
+
+      // Initial State (0.0s)
+      gsap.set(cursor, { x: 500, y: 300, opacity: 0 });
+      gsap.set(imgColorsPrimary, { opacity: 1 });
+      gsap.set(imgColorsSecondary, { opacity: 0 });
+      gsap.set(imgTypography, { opacity: 0 });
+      gsap.set(cameraTrack, { x: 0, y: 0 });
+      gsap.set(cameraScaler, { scale: 1 });
+
+      /* Timeline construction across 12.0s (720 frames) */
+
+      // 0.0s - 2.5s: Overview of Primary Colors
+      master.to(cursor, { opacity: 1, duration: 0.4 }, 0.3);
+      master.to(cursor, { x: 480, y: 460, duration: 1.2, ease: "power2.inOut" }, 0.5);
+
+      // 2.5s - 4.5s: Switch to Secondary Colors & Gradients
+      master.to(cursor, { x: 350, y: 220, duration: 0.8, ease: "power2.inOut" }, 2.5);
+      master.to(ripple, { opacity: 1, scale: 2, duration: 0.2, ease: "power1.out" }, 3.2);
+      master.to(ripple, { opacity: 0, duration: 0.2, overwrite: "auto" }, 3.4);
+      master.to(imgColorsPrimary, { opacity: 0, duration: 0.4 }, 3.3);
+      master.to(imgColorsSecondary, { opacity: 1, duration: 0.4 }, 3.3);
+      master.call(() => {
+        titleColors.textContent = "Cores Secundárias & Gradientes";
+      }, null, 3.3);
+
+      // 4.5s - 8.0s: Transition camera focus to Component Board & Domain Primitives
+      master.to(cameraScaler, { scale: 1.06, duration: 1.4, ease: "power2.inOut" }, 4.5);
+      master.to(cameraTrack, { x: -240, y: -20, duration: 1.4, ease: "power2.inOut" }, 4.5);
+
+      // Cursor highlights Bespoke Portuguese Components
+      master.to(cursor, { x: 1240, y: 880, duration: 1.2, ease: "power2.inOut" }, 5.2);
+      master.to(boxUpload, { borderColor: "#A26FD8", boxShadow: "0 0 20px rgba(162, 111, 216, 0.4)", duration: 0.3 }, 6.2);
+      master.to(ripple, { opacity: 1, scale: 2, duration: 0.2, ease: "power1.out" }, 6.2);
+      master.to(ripple, { opacity: 0, duration: 0.2, overwrite: "auto" }, 6.4);
+
+      master.to(cursor, { x: 1080, y: 880, duration: 0.8, ease: "power2.inOut" }, 6.8);
+      master.to(boxTimer, { borderColor: "#A26FD8", boxShadow: "0 0 20px rgba(162, 111, 216, 0.4)", duration: 0.3 }, 7.4);
+      master.to(boxUpload, { borderColor: "rgba(255, 255, 255, 0.08)", boxShadow: "none", duration: 0.3 }, 7.4);
+
+      // 8.0s - 10.5s: Left Card transitions to Typography System
+      master.to(imgColorsSecondary, { opacity: 0, duration: 0.4 }, 8.0);
+      master.to(imgTypography, { opacity: 1, duration: 0.4 }, 8.0);
+      master.call(() => {
+        titleColors.textContent = "Hierarquia Tipográfica do Sistema";
+      }, null, 8.0);
+      master.to(boxTimer, { borderColor: "rgba(255, 255, 255, 0.08)", boxShadow: "none", duration: 0.3 }, 8.2);
+
+      // 10.5s - 12.0s: Revert all states back to frame 0 for seamless loop!
+      master.to(cameraScaler, { scale: 1, duration: 1.2, ease: "power2.inOut" }, 10.5);
+      master.to(cameraTrack, { x: 0, y: 0, duration: 1.2, ease: "power2.inOut" }, 10.5);
+      master.to(cursor, { opacity: 0, duration: 0.4 }, 11.2);
+      master.to(cursor, { x: 500, y: 300, duration: 0.1 }, 11.7);
+      master.to(imgTypography, { opacity: 0, duration: 0.3 }, 11.4);
+      master.to(imgColorsPrimary, { opacity: 1, duration: 0.3 }, 11.4);
+      master.call(() => {
+        titleColors.textContent = "12 Estilos de Cor Semânticos";
+      }, null, 11.7);
+
+      // Register master timeline for HyperFrames
+      window.__timelines = window.__timelines || {};
+      window.__timelines["design-system-loop"] = master;
+    </script>
+  </body>
+</html>

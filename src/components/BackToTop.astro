@@ -169,6 +169,12 @@ const label = copy.navigation.backToTop;
   .btt:focus-visible {
     width: 140px;
     background-color: var(--primary);
+    /* The ring has to follow the fill, and on the light canvas it did not: the
+       rest ring is `--color-cyan-a50`, an alpha of cyan-400, while `--primary`
+       resolves to cyan-700 there — so hovering left a bright cyan wash around a
+       deeper teal pill. `--btt-halo-hover` is `--primary` itself on that canvas
+       and stays the rest ring on the dark one, where cyan-400 IS the fill. */
+    box-shadow: 0 0 0 4px var(--btt-halo-hover);
     /* `--on-primary` is near-black on the dark canvas (9.66:1 on cyan-400) and
        white on the light one (4.70:1 on cyan-700). Both are the readable ink
        for the fill they sit on; neither is hard-coded here. */

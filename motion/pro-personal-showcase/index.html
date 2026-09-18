@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>Pro Personal — Three-Role Platform Showcase</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-400.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0D091A;
+        font-family: "InterVar", "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #FFFFFF;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* ⛔ Ground layer MUST stay opaque to prevent alpha capture artifacts */
+      #ground {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 35%, rgba(102, 51, 153, 0.22) 0%, rgba(17, 0, 53, 0.45) 45%, #0B0716 75%, #07040E 100%),
+          #0B0716;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+      }
+      #glow-purple { top: -80px; left: 240px; width: 680px; height: 680px; background: rgba(162, 111, 216, 0.16); }
+      #glow-blue { bottom: -60px; right: 260px; width: 700px; height: 700px; background: rgba(68, 114, 196, 0.14); }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      /* ⛔ Camera scale and translate must remain separate elements */
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 1: Identity, Foundation & Bespoke Design System
+      ------------------------------------------------------------- */
+      #scene-foundation {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        z-index: 10;
+        pointer-events: none;
+      }
+      .foundation-wrap {
+        width: 1560px;
+        height: 840px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #found-hero-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        transform-origin: center;
+      }
+      .brand-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(102, 51, 153, 0.25);
+        border: 1px solid rgba(162, 111, 216, 0.35);
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #D8B4FE;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .brand-badge span.dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #A26FD8;
+        box-shadow: 0 0 10px #A26FD8;
+      }
+      #found-logo-card {
+        background: rgba(25, 18, 42, 0.85);
+        backdrop-filter: blur(20px);
+        padding: 24px 50px;
+        border-radius: 24px;
+        box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(162, 111, 216, 0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      #found-logo-card img {
+        height: 90px;
+        width: auto;
+        object-fit: contain;
+      }
+      .found-claim {
+        font-size: 20px;
+        font-weight: 500;
+        color: #E2E8F0;
+        letter-spacing: -0.01em;
+      }
+      .found-claim strong {
+        color: #A26FD8;
+        font-weight: 600;
+      }
+
+      /* Foundation grid cards (colors + bespoke components) */
+      .foundation-grid {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        bottom: 15px;
+      }
+      .foundation-card {
+        flex: 1;
+        background: rgba(26, 20, 44, 0.7);
+        backdrop-filter: blur(16px);
+        border-radius: 18px;
+        padding: 20px 22px;
+        box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .card-label-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card-tag {
+        font-size: 11px;
+        font-weight: 600;
+        color: #A26FD8;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .card-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: #FFFFFF;
+        line-height: 1.2;
+      }
+      .card-desc {
+        font-size: 12px;
+        color: #94A3B8;
+        line-height: 1.4;
+      }
+      .swatches-row {
+        display: flex;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .swatch-pill {
+        flex: 1;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .comp-preview-strip {
+        height: 48px;
+        width: 100%;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.04);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 4px;
+      }
+      .comp-preview-strip img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+      }
+
+      /* -------------------------------------------------------------
+         CENTRAL MOBILE PHONE STAGE (iPhone 15 Pro Dark Chassis)
+      ------------------------------------------------------------- */
+      #phone-container {
+        position: absolute;
+        top: 145px;
+        left: 765px;
+        width: 390px;
+        height: 790px;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+      }
+      .phone-chassis {
+        position: relative;
+        width: 380px;
+        height: 770px;
+        background: #181324;
+        border-radius: 48px;
+        box-shadow:
+          0 35px 80px -15px rgba(0, 0, 0, 0.8),
+          0 0 0 2px rgba(162, 111, 216, 0.35),
+          0 0 0 8px #251B38,
+          0 0 40px rgba(102, 51, 153, 0.3);
+        overflow: hidden;
+      }
+      .phone-notch {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        height: 24px;
+        background: #000000;
+        border-radius: 12px;
+        z-index: 50;
+      }
+      .phone-viewport {
+        position: absolute;
+        inset: 4px;
+        border-radius: 44px;
+        background: #FAFAFA;
+        overflow: hidden;
+      }
+
+      /* Screens inside mobile viewport */
+      .phone-screen {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        overflow: hidden;
+      }
+      .phone-scroll-strip {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+      .phone-scroll-strip img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Micro-interactions & Overlays inside Phone */
+      #phone-tap-ripple {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(102, 51, 153, 0.4);
+        pointer-events: none;
+        opacity: 0;
+        z-index: 40;
+      }
+      #fatigue-overlay-modal {
+        position: absolute;
+        inset: 0;
+        background: rgba(17, 0, 53, 0.75);
+        backdrop-filter: blur(8px);
+        opacity: 0;
+        z-index: 45;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      #fatigue-overlay-modal img {
+        width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 3: Sports Science Dual Split (PAR-Q + Periodization)
+      ------------------------------------------------------------- */
+      #scene-science {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        z-index: 15;
+        pointer-events: none;
+      }
+      .science-wrap {
+        width: 1600px;
+        height: 820px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+      .science-left, .science-right {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .science-panel {
+        background: rgba(26, 20, 44, 0.85);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        padding: 24px;
+        border: 1px solid rgba(162, 111, 216, 0.25);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .panel-tag {
+        font-size: 12px;
+        font-weight: 700;
+        color: #A26FD8;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .panel-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #FFFFFF;
+      }
+      .periodization-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 4px;
+      }
+      .method-badge {
+        background: rgba(102, 51, 153, 0.35);
+        border: 1px solid rgba(162, 111, 216, 0.4);
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #E2E8F0;
+      }
+      .method-badge.active {
+        background: #663399;
+        border-color: #A26FD8;
+        color: #FFFFFF;
+        box-shadow: 0 0 14px rgba(162, 111, 216, 0.5);
+      }
+      .science-img-box {
+        width: 100%;
+        height: 480px;
+        border-radius: 14px;
+        background: #181324;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .science-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 6: Telas do Protótipo (119 Screens Panoramic Pan)
+      ------------------------------------------------------------- */
+      #scene-handoff {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        z-index: 15;
+        pointer-events: none;
+      }
+      .handoff-wrap {
+        width: 1680px;
+        height: 840px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+      }
+      .handoff-header-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .handoff-stat {
+        font-size: 32px;
+        font-weight: 800;
+        color: #A26FD8;
+        letter-spacing: -0.02em;
+      }
+      .handoff-canvas-stage {
+        position: relative;
+        width: 100%;
+        height: 580px;
+        border-radius: 20px;
+        background: #151022;
+        border: 1px solid rgba(162, 111, 216, 0.25);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+        overflow: hidden;
+      }
+      #handoff-big-strip {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        width: 4200px;
+        height: auto;
+      }
+      #handoff-big-strip img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .sticky-callout {
+        position: absolute;
+        bottom: 30px;
+        right: 40px;
+        background: rgba(25, 20, 38, 0.9);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 14px;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+      .sticky-callout img {
+        height: 70px;
+        width: auto;
+        border-radius: 6px;
+      }
+
+      /* -------------------------------------------------------------
+         SCENE 7: Career Origin Quote Card
+      ------------------------------------------------------------- */
+      #scene-quote {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        z-index: 30;
+        pointer-events: none;
+      }
+      .quote-card {
+        width: 1200px;
+        background: rgba(22, 16, 36, 0.95);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(162, 111, 216, 0.35);
+        border-radius: 32px;
+        padding: 60px 80px;
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 50px rgba(102, 51, 153, 0.25);
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      .quote-mark {
+        font-size: 64px;
+        line-height: 1;
+        color: #A26FD8;
+        font-family: serif;
+      }
+      .quote-text {
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 1.45;
+        color: #F1F5F9;
+        letter-spacing: -0.01em;
+      }
+      .quote-text strong {
+        color: #A26FD8;
+        font-weight: 700;
+      }
+      .quote-author {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 24px;
+      }
+      .author-name {
+        font-size: 18px;
+        font-weight: 700;
+        color: #FFFFFF;
+      }
+      .author-role {
+        font-size: 14px;
+        color: #94A3B8;
+      }
+
+      /* -------------------------------------------------------------
+         PERSISTENT HUD, PROGRESS & CURSOR
+      ------------------------------------------------------------- */
+      #narrative-hud {
+        position: absolute;
+        top: 40px;
+        left: 50px;
+        z-index: 100;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        pointer-events: none;
+      }
+      .hud-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(22, 16, 36, 0.8);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(162, 111, 216, 0.3);
+        padding: 8px 18px;
+        border-radius: 100px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      }
+      .hud-phase {
+        font-size: 12px;
+        font-weight: 800;
+        color: #A26FD8;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .hud-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #94A3B8;
+      }
+      .hud-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #F8FAFC;
+        letter-spacing: -0.01em;
+      }
+      #narrative-caption {
+        max-width: 620px;
+        font-size: 16px;
+        line-height: 1.4;
+        color: #CBD5E1;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      }
+      #narrative-caption strong {
+        color: #FFFFFF;
+        font-weight: 600;
+      }
+
+      #stack-pills {
+        position: absolute;
+        top: 44px;
+        right: 50px;
+        z-index: 100;
+        display: flex;
+        gap: 10px;
+        pointer-events: none;
+      }
+      .stack-pill {
+        background: rgba(25, 18, 42, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+        color: #CBD5E1;
+        letter-spacing: 0.06em;
+      }
+
+      #bottom-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        z-index: 100;
+      }
+      #progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #663399 0%, #A26FD8 50%, #4472C4 100%);
+      }
+
+      /* Animated SVG Cursor */
+      #cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        z-index: 200;
+        pointer-events: none;
+        opacity: 0;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60" data-fps="60" data-width="1920" data-height="1080">
+      <div id="ground"></div>
+      <div class="ambient-glow" id="glow-purple" data-layout-allow-overflow></div>
+      <div class="ambient-glow" id="glow-blue" data-layout-allow-overflow></div>
+
+      <div id="stage">
+        <div id="camera-scaler">
+          <div id="camera-track">
+
+            <!-- SCENE 1: Identity & Bespoke Design System Foundation -->
+            <div id="scene-foundation" data-layout-allow-overlap>
+              <div class="foundation-wrap">
+                <div id="found-hero-center" data-layout-allow-overlap>
+                  <div class="brand-badge"><span class="dot"></span> Caso de Estudo · Pro Personal</div>
+                  <div id="found-logo-card">
+                    <img src="assets/figma/logo-styleguide.png" alt="Pro Personal Logo">
+                  </div>
+                  <div class="found-claim">Especificação de <strong>500+ páginas da USP</strong> traduzida em <strong>700 telas</strong></div>
+                </div>
+
+                <div class="foundation-grid">
+                  <!-- 12 Semantic Colors Card -->
+                  <div class="foundation-card" id="card-colors">
+                    <div class="card-label-row">
+                      <span class="card-tag">Style System</span>
+                      <span style="color:#A26FD8; font-size:12px; font-weight:700;">12 Estilos</span>
+                    </div>
+                    <div class="card-title">12 Estilos de Cor Semânticos</div>
+                    <div class="card-desc">Purple 1–4, Black Primary, Grey Primary e elevação Shadow Cards aplicada em 700 telas.</div>
+                    <div class="swatches-row">
+                      <div class="swatch-pill" style="background: #231F20;"></div>
+                      <div class="swatch-pill" style="background: #663399;"></div>
+                      <div class="swatch-pill" style="background: #A26FD8;"></div>
+                      <div class="swatch-pill" style="background: #8D57AA;"></div>
+                      <div class="swatch-pill" style="background: #110035;"></div>
+                      <div class="swatch-pill" style="background: #707390;"></div>
+                      <div class="swatch-pill" style="background: #FAFAFA;"></div>
+                    </div>
+                  </div>
+
+                  <!-- Bespoke Components Card -->
+                  <div class="foundation-card" id="card-components">
+                    <div class="card-label-row">
+                      <span class="card-tag">Componentes Autorais</span>
+                      <span style="color:#A26FD8; font-size:12px; font-weight:700;">Zero Kits</span>
+                    </div>
+                    <div class="card-title">448 Componentes do Zero</div>
+                    <div class="card-desc">Construídos sem Untitled UI, com nomenclatura em português voltada à metodologia esportiva.</div>
+                    <div class="comp-preview-strip">
+                      <img src="assets/figma/component-timer-circle.png" alt="Timer Circle">
+                    </div>
+                  </div>
+
+                  <!-- 3 User Roles Card -->
+                  <div class="foundation-card" id="card-roles">
+                    <div class="card-label-row">
+                      <span class="card-tag">Arquitetura de Produto</span>
+                      <span style="color:#A26FD8; font-size:12px; font-weight:700;">3 Perfis</span>
+                    </div>
+                    <div class="card-title">Personal · Aluno · Admin</div>
+                    <div class="card-desc">Ciclo de vida completo: periodização avançada, checklist, triagem PAR-Q e assinaturas nacionais.</div>
+                    <div class="comp-preview-strip">
+                      <img src="assets/figma/component-upload-video.png" alt="Upload Vídeo">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CENTRAL MOBILE PHONE STAGE -->
+            <div id="phone-container">
+              <div class="phone-chassis">
+                <div class="phone-notch"></div>
+                <div class="phone-viewport">
+                  <!-- Screen 1: Personal Dashboard -->
+                  <div class="phone-screen" id="screen-personal-dash">
+                    <div class="phone-scroll-strip" id="strip-personal-dash">
+                      <img src="assets/figma/personal-home-dashboard.png" alt="Personal Home">
+                    </div>
+                  </div>
+
+                  <!-- Screen 2: Personal Alunos Ativos -->
+                  <div class="phone-screen" id="screen-personal-alunos">
+                    <div class="phone-scroll-strip" id="strip-personal-alunos">
+                      <img src="assets/figma/personal-alunos-ativos.png" alt="Alunos Ativos">
+                    </div>
+                  </div>
+
+                  <!-- Screen 3: Personal Perfil do Aluno -->
+                  <div class="phone-screen" id="screen-personal-perfil">
+                    <div class="phone-scroll-strip" id="strip-personal-perfil" data-layout-allow-overflow>
+                      <img src="assets/figma/personal-pagina-aluno.png" alt="Página do Aluno">
+                    </div>
+                  </div>
+
+                  <!-- Screen 4: Aluno Home / Treinos -->
+                  <div class="phone-screen" id="screen-aluno-home">
+                    <div class="phone-scroll-strip" id="strip-aluno-home" data-layout-allow-overflow>
+                      <img src="assets/figma/aluno-home-dashboard.png" alt="Aluno Home">
+                    </div>
+                  </div>
+
+                  <!-- Screen 5: Aluno Execução de Treino -->
+                  <div class="phone-screen" id="screen-aluno-treino">
+                    <div class="phone-scroll-strip" id="strip-aluno-treino" data-layout-allow-overflow>
+                      <img src="assets/figma/treino-detalhes-exercicios.png" alt="Treino Execução">
+                    </div>
+                  </div>
+
+                  <!-- Screen 6: Questionário Pré-Treino -->
+                  <div class="phone-screen" id="screen-aluno-pretreino">
+                    <div class="phone-scroll-strip" id="strip-aluno-pretreino">
+                      <img src="assets/figma/questionario-pre-treino.png" alt="Questionário Pré-Treino">
+                    </div>
+                  </div>
+
+                  <!-- Micro-interaction tap ripple -->
+                  <div id="phone-tap-ripple"></div>
+
+                  <!-- DiaCansado / AVISO Modal Overlay -->
+                  <div id="fatigue-overlay-modal">
+                    <img src="assets/figma/aluno-diacansado-aviso.png" alt="Dia Cansado Aviso">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 3: Sports Science Dual Split (PAR-Q + Periodization) -->
+            <div id="scene-science">
+              <div class="science-wrap">
+                <!-- Left: Clinical PAR-Q Review -->
+                <div class="science-left">
+                  <div class="science-panel">
+                    <div class="panel-header">
+                      <span class="panel-tag">Triagem Médica</span>
+                      <span style="color:#10B981; font-size:12px; font-weight:700;">● Aprovado</span>
+                    </div>
+                    <div class="panel-title">Questionário Clínico PAR-Q</div>
+                    <p style="font-size:13px; color:#94A3B8; line-height:1.4;">
+                      Visualização do treinador (visualiza-sim / visualiza-não) com CRUD no painel administrativo para gestão de perguntas médicas.
+                    </p>
+                    <div class="science-img-box">
+                      <img src="assets/figma/parq-trainer-evaluation.png" alt="PAR-Q Evaluation">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right: 11 Periodization Protocols -->
+                <div class="science-right">
+                  <div class="science-panel">
+                    <div class="panel-header">
+                      <span class="panel-tag">Fisiologia do Exercício</span>
+                      <span style="color:#A26FD8; font-size:12px; font-weight:700;">11 Metodologias</span>
+                    </div>
+                    <div class="panel-title">Periodização Avançada de Força</div>
+                    <div class="periodization-badges">
+                      <div class="method-badge active" id="badge-gvt">GVT 10×10</div>
+                      <div class="method-badge" id="badge-ds">Drop Set (DS)</div>
+                      <div class="method-badge" id="badge-rp">Rest-Pause (RP)</div>
+                      <div class="method-badge" id="badge-rir">Reps in Reserve (RIR)</div>
+                      <div class="method-badge" id="badge-cs">Cluster Sets (CS)</div>
+                    </div>
+                    <div class="science-img-box" id="period-img-box">
+                      <img id="period-preview-img" src="assets/figma/periodizacao-gvt.png" alt="Periodização GVT">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 6: Telas do Protótipo (119 Screens Panoramic Pan) -->
+            <div id="scene-handoff">
+              <div class="handoff-wrap">
+                <div class="handoff-header-box">
+                  <div>
+                    <div style="font-size:13px; font-weight:700; color:#A26FD8; text-transform:uppercase; letter-spacing:0.08em;">Empatia Técnica com o Dev</div>
+                    <div style="font-size:28px; font-weight:800; color:#FFFFFF;">Telas do Protótipo · 119 Telas em Altura Total</div>
+                  </div>
+                  <div class="handoff-stat">119 Telas Desdobradas</div>
+                </div>
+
+                <div class="handoff-canvas-stage">
+                  <div id="handoff-big-strip" data-layout-allow-overflow>
+                    <img src="assets/figma/telas-do-prototipo-personal.png" alt="Telas do Protótipo Strip">
+                  </div>
+                  <div class="sticky-callout">
+                    <img src="assets/figma/dev-sticky-notes-1.png" alt="Dev Sticky Notes">
+                    <div>
+                      <div style="font-size:14px; font-weight:700; color:#FFFFFF;">Documentação no Canvas</div>
+                      <div style="font-size:12px; color:#94A3B8;">~20 notas adesivas com regras de implementação e camada NavBarProtótipo.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SCENE 7: Career Origin Quote Card -->
+            <div id="scene-quote" data-layout-allow-overlap>
+              <div class="quote-card" data-layout-allow-overlap>
+                <div class="quote-mark">“</div>
+                <div class="quote-text">
+                  Passei dois anos desenhando produtos que nunca foram ao ar porque os builds no-code não conseguiam executá-los. O Pro Personal foi <strong>aprovado e elogiado pelo cliente</strong>, mas a engenharia travou. <strong>Essa frustração foi a razão exata pela qual aprendi a programar:</strong> hoje entrego designs que eu mesmo consigo implementar.
+                </div>
+                <div class="quote-author">
+                  <div>
+                    <div class="author-name">Juan Silva</div>
+                    <div class="author-role">Design Engineer | Next.js, Python & Scalable Systems</div>
+                  </div>
+                  <div class="brand-badge" style="background: rgba(162, 111, 216, 0.2);">
+                    <span class="dot"></span> Pro Personal Case Study
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /camera-track -->
+        </div><!-- /camera-scaler -->
+      </div><!-- /stage -->
+
+      <!-- Persistent HUD Header -->
+      <div id="narrative-hud">
+        <div class="hud-pill">
+          <span class="hud-phase" id="hud-phase">01 · FUNDAÇÃO</span>
+          <span class="hud-dot"></span>
+          <span class="hud-title" id="hud-title">Design System Autoral & Domínio USP</span>
+        </div>
+        <div id="narrative-caption">Especificação de <strong>500+ páginas da USP</strong> traduzida em 700 telas com <strong>448 componentes autorais</strong>.</div>
+      </div>
+
+      <!-- Tech Stack Indicator Pills -->
+      <div id="stack-pills">
+        <div class="stack-pill">FIGMA SOLE DESIGNER</div>
+        <div class="stack-pill">700 FRAMES</div>
+        <div class="stack-pill">448 BESPOKE COMPS</div>
+        <div class="stack-pill">12 COLOR STYLES</div>
+      </div>
+
+      <!-- Bottom Progress Bar -->
+      <div id="bottom-progress">
+        <div id="progress-bar"></div>
+      </div>
+
+      <!-- Virtual Cursor SVG -->
+      <div id="cursor">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4L11.5 24L15.5 15.5L24 11.5L4 4Z" fill="#A26FD8" stroke="#FFFFFF" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <script>
+      // =======================================================================
+      // HYPERFRAMES MASTER TIMELINE SETUP (60.0s · 3600 frames @ 60fps)
+      // =======================================================================
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      // Selectors
+      const scaler          = document.querySelector("#camera-scaler");
+      const track           = document.querySelector("#camera-track");
+      const hudPhase        = document.querySelector("#hud-phase");
+      const hudTitle        = document.querySelector("#hud-title");
+      const caption         = document.querySelector("#narrative-caption");
+      const progressBar     = document.querySelector("#progress-bar");
+      const cursor          = document.querySelector("#cursor");
+
+      const sceneFound      = document.querySelector("#scene-foundation");
+      const phoneBox        = document.querySelector("#phone-container");
+      const phoneChassis    = document.querySelector(".phone-chassis");
+      const tapRipple       = document.querySelector("#phone-tap-ripple");
+      const fatigueModal    = document.querySelector("#fatigue-overlay-modal");
+
+      const sPersonalDash   = document.querySelector("#screen-personal-dash");
+      const sPersonalAlunos = document.querySelector("#screen-personal-alunos");
+      const sPersonalPerfil = document.querySelector("#screen-personal-perfil");
+      const sAlunoHome      = document.querySelector("#screen-aluno-home");
+      const sAlunoTreino    = document.querySelector("#screen-aluno-treino");
+      const sAlunoPretreino = document.querySelector("#screen-aluno-pretreino");
+
+      const stripPersonalDash   = document.querySelector("#strip-personal-dash");
+      const stripPersonalAlunos = document.querySelector("#strip-personal-alunos");
+      const stripPersonalPerfil = document.querySelector("#strip-personal-perfil");
+      const stripAlunoHome      = document.querySelector("#strip-aluno-home");
+      const stripAlunoTreino    = document.querySelector("#strip-aluno-treino");
+      const stripAlunoPretreino = document.querySelector("#strip-aluno-pretreino");
+
+      const sceneScience    = document.querySelector("#scene-science");
+      const badgeGvt        = document.querySelector("#badge-gvt");
+      const badgeDs         = document.querySelector("#badge-ds");
+      const badgeRp         = document.querySelector("#badge-rp");
+      const periodImg       = document.querySelector("#period-preview-img");
+
+      const sceneHandoff    = document.querySelector("#scene-handoff");
+      const handoffStrip    = document.querySelector("#handoff-big-strip");
+      const sceneQuote      = document.querySelector("#scene-quote");
+
+      // Initial states at f0
+      gsap.set(phoneBox,        { opacity: 0, scale: 0.88, y: 40 });
+      gsap.set(sPersonalDash,   { opacity: 1 });
+      gsap.set(sPersonalAlunos, { opacity: 0 });
+      gsap.set(sPersonalPerfil, { opacity: 0 });
+      gsap.set(sAlunoHome,      { opacity: 0 });
+      gsap.set(sAlunoTreino,    { opacity: 0 });
+      gsap.set(sAlunoPretreino, { opacity: 0 });
+      gsap.set(fatigueModal,    { opacity: 0 });
+      gsap.set(sceneScience,    { opacity: 0 });
+      gsap.set(sceneHandoff,    { opacity: 0 });
+      gsap.set(sceneQuote,      { opacity: 0 });
+      gsap.set(cursor,          { opacity: 0, x: 1200, y: 400 });
+      gsap.set(sceneFound,      { opacity: 1, scale: 1.0 });
+
+      // Synchronize overall progress bar from 0.0s to 58.0s
+      tl.to(progressBar, { width: "100%", duration: 58.0, ease: "none" }, 0.0);
+      tl.to(progressBar, { opacity: 0, duration: 0.5 }, 58.5);
+
+      // =======================================================================
+      // ACT 1: Foundation & Bespoke Design System (0.0s – 8.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "01 · FUNDAÇÃO & DESIGN SYSTEM" }, 0.0);
+      tl.set(hudTitle, { textContent: "448 Componentes do Zero · Domínio Esportivo USP" }, 0.0);
+      tl.set(caption,  { innerHTML: "Especificação de <strong>500+ páginas da USP</strong> traduzida em 700 telas com <strong>448 componentes autorais</strong>." }, 0.0);
+
+      // Subtle breathing motion on foundation cards
+      tl.to("#found-hero-center", { y: -6, duration: 2.5, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.5);
+      tl.to("#card-colors",     { y: -8, duration: 2.4, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0.8);
+      tl.to("#card-components", { y: -8, duration: 2.6, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.0);
+      tl.to("#card-roles",      { y: -8, duration: 2.8, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1.2);
+
+      // Transition to Phone Chassis
+      tl.to(sceneFound, { opacity: 0, scale: 0.94, duration: 1.0, ease: "power2.in" }, 6.8);
+      tl.to(phoneBox,   { opacity: 1, scale: 1.0, y: 0, duration: 1.2, ease: "power2.out" }, 7.2);
+
+      // =======================================================================
+      // ACT 2: Personal (Trainer) Command Center (8.0s – 18.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "02 · COMANDO DO PERSONAL" }, 8.0);
+      tl.set(hudTitle, { textContent: "Dashboard, Gestão de Alunos & Agenda Clínica" }, 8.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 7.8);
+      tl.set(caption,  { innerHTML: "Superfície completa do treinador: <strong>Alunos Ativos, Finanças Pessoais</strong> e prescrição de periodização." }, 8.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 8.0);
+
+      // Cursor enters and clicks Alunos Ativos navigation
+      tl.to(cursor, { opacity: 1, x: 960, y: 460, duration: 1.0, ease: "power2.out" }, 8.6);
+      tl.to(cursor, { scale: 0.85, duration: 0.15, yoyo: true, repeat: 1 }, 9.8);
+      tl.to(tapRipple, { x: 190, y: 380, scale: 1.8, opacity: 0.8, duration: 0.25, ease: "power1.out" }, 9.8);
+      tl.to(tapRipple, { opacity: 0, scale: 2.2, duration: 0.25 }, 10.05);
+
+      // Navigate to Alunos Ativos screen
+      tl.to(sPersonalDash,   { opacity: 0, duration: 0.35 }, 10.0);
+      tl.to(sPersonalAlunos, { opacity: 1, duration: 0.35 }, 10.0);
+
+      // Scroll through students list
+      tl.to(stripPersonalAlunos, { y: -260, duration: 2.4, ease: "power1.inOut" }, 10.6);
+
+      // Click on student "Lucas Mendes"
+      tl.to(cursor, { x: 970, y: 520, duration: 0.8, ease: "power2.out" }, 13.0);
+      tl.to(cursor, { scale: 0.85, duration: 0.15, yoyo: true, repeat: 1 }, 13.8);
+      tl.to(tapRipple, { x: 190, y: 440, scale: 1.8, opacity: 0.8, duration: 0.25, ease: "power1.out" }, 13.8);
+      tl.to(tapRipple, { opacity: 0, scale: 2.2, duration: 0.25 }, 14.05);
+
+      // Navigate to Student Profile Detail
+      tl.to(sPersonalAlunos, { opacity: 0, duration: 0.35 }, 14.0);
+      tl.to(sPersonalPerfil, { opacity: 1, duration: 0.35 }, 14.0);
+      tl.to(stripPersonalPerfil, { y: -140, duration: 2.0, ease: "power1.inOut" }, 14.6);
+
+      // =======================================================================
+      // ACT 3: Sports Science: Advanced Periodization & PAR-Q (18.0s – 28.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "03 · FISIOLOGIA & PERIODIZAÇÃO" }, 18.0);
+      tl.set(hudTitle, { textContent: "11 Metodologias de Força & Triagem Médica PAR-Q" }, 18.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 17.8);
+      tl.set(caption,  { innerHTML: "Prescrição de <strong>GVT 10×10, Drop Set, Rest-Pause e RIR</strong> com avaliação de prontidão física." }, 18.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 18.0);
+
+      // Zoom out phone and reveal side science panels
+      tl.to(phoneBox,      { opacity: 0, scale: 0.88, duration: 0.8, ease: "power2.in" }, 17.8);
+      tl.to(sceneScience,  { opacity: 1, duration: 0.8, ease: "power2.out" }, 18.3);
+
+      // Cursor explores periodization methodologies
+      tl.to(cursor, { opacity: 1, x: 1280, y: 340, duration: 1.0, ease: "power2.out" }, 19.5);
+      tl.to(cursor, { scale: 0.85, duration: 0.15, yoyo: true, repeat: 1 }, 20.8);
+      // Switch active badge to Drop Set
+      tl.set(badgeGvt, { className: "method-badge" }, 21.0);
+      tl.set(badgeDs,  { className: "method-badge active" }, 21.0);
+      tl.set(periodImg,{ src: "assets/figma/periodizacao-dropset.png" }, 21.0);
+
+      // Switch active badge to Rest-Pause
+      tl.to(cursor, { x: 1390, y: 340, duration: 1.2, ease: "power2.out" }, 23.5);
+      tl.to(cursor, { scale: 0.85, duration: 0.15, yoyo: true, repeat: 1 }, 24.8);
+      tl.set(badgeDs,  { className: "method-badge" }, 25.0);
+      tl.set(badgeRp,  { className: "method-badge active" }, 25.0);
+      tl.set(periodImg,{ src: "assets/figma/periodizacao-restpause.png" }, 25.0);
+
+      // Exit science scene
+      tl.to(sceneScience,  { opacity: 0, scale: 0.95, duration: 0.8, ease: "power2.in" }, 27.5);
+
+      // =======================================================================
+      // ACT 4: Aluno Journey & Real-Time Workout Execution (28.0s – 38.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "04 · JORNADA DO ALUNO" }, 28.0);
+      tl.set(hudTitle, { textContent: "Execução de Treino, Cronômetro & Avaliação Física" }, 28.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 27.8);
+      tl.set(caption,  { innerHTML: "Treino do dia com <strong>cronômetro de descanso interativo</strong>, vídeos de movimento e comparativo de fotos." }, 28.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 28.0);
+
+      // Phone returns with Aluno Home
+      tl.set(sPersonalPerfil, { opacity: 0 }, 27.8);
+      tl.set(sAlunoHome,      { opacity: 1 }, 27.8);
+      tl.to(phoneBox,         { opacity: 1, scale: 1.0, duration: 0.8, ease: "power2.out" }, 28.2);
+
+      // Click to start workout
+      tl.to(cursor, { x: 960, y: 530, duration: 0.9, ease: "power2.out" }, 29.0);
+      tl.to(cursor, { scale: 0.85, duration: 0.15, yoyo: true, repeat: 1 }, 30.0);
+      tl.to(tapRipple, { x: 190, y: 450, scale: 1.8, opacity: 0.8, duration: 0.25, ease: "power1.out" }, 30.0);
+      tl.to(tapRipple, { opacity: 0, scale: 2.2, duration: 0.25 }, 30.25);
+
+      // Enter Workout Execution
+      tl.to(sAlunoHome,   { opacity: 0, duration: 0.35 }, 30.2);
+      tl.to(sAlunoTreino, { opacity: 1, duration: 0.35 }, 30.2);
+
+      // Scroll exercise details
+      tl.to(stripAlunoTreino, { y: -240, duration: 2.5, ease: "power1.inOut" }, 31.0);
+
+      // Complete set and checkmark
+      tl.to(cursor, { x: 1080, y: 480, duration: 0.8, ease: "power2.out" }, 34.0);
+      tl.to(cursor, { scale: 0.85, duration: 0.15, yoyo: true, repeat: 1 }, 34.8);
+      tl.to(tapRipple, { x: 310, y: 400, scale: 1.8, opacity: 0.8, duration: 0.25, ease: "power1.out" }, 34.8);
+      tl.to(tapRipple, { opacity: 0, scale: 2.2, duration: 0.25 }, 35.05);
+
+      // =======================================================================
+      // ACT 5: Adaptive Fatigue Warning — DiaCansado / AVISO (38.0s – 46.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "05 · FADIGA ADAPTATIVA" }, 38.0);
+      tl.set(hudTitle, { textContent: "DiaCansado / AVISO · Interceptação Neuromuscular" }, 38.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 37.8);
+      tl.set(caption,  { innerHTML: "Questionário pré-treino em 12 etapas: sistema <strong>intercepta o atleta</strong> com protocolo de regeneração." }, 38.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 38.0);
+
+      // Transition to Pre-Workout Questionnaire
+      tl.to(sAlunoTreino,    { opacity: 0, duration: 0.3 }, 38.0);
+      tl.to(sAlunoPretreino, { opacity: 1, duration: 0.3 }, 38.0);
+
+      // Aluno submits high fatigue score
+      tl.to(cursor, { x: 960, y: 640, duration: 1.0, ease: "power2.out" }, 38.6);
+      tl.to(cursor, { scale: 0.85, duration: 0.15, yoyo: true, repeat: 1 }, 39.8);
+      tl.to(tapRipple, { x: 190, y: 560, scale: 1.8, opacity: 0.8, duration: 0.25, ease: "power1.out" }, 39.8);
+      tl.to(tapRipple, { opacity: 0, scale: 2.2, duration: 0.25 }, 40.05);
+
+      // DiaCansado / AVISO Modal BLOOMS OVER
+      tl.to(fatigueModal, { opacity: 1, duration: 0.5, ease: "power2.out" }, 40.2);
+      tl.to(phoneChassis, { scale: 1.05, duration: 0.5, ease: "back.out(1.3)" }, 40.2);
+
+      // Hold and emphasize the adaptive logic
+      tl.to(cursor, { opacity: 0, duration: 0.4 }, 42.0);
+
+      // Exit fatigue modal & phone
+      tl.to(fatigueModal, { opacity: 0, duration: 0.4 }, 45.4);
+      tl.to(phoneBox,     { opacity: 0, scale: 0.9, duration: 0.8, ease: "power2.in" }, 45.6);
+
+      // =======================================================================
+      // ACT 6: Developer Empathy & Telas do Protótipo (46.0s – 54.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "06 · EMPATIA COM O DEV" }, 46.0);
+      tl.set(hudTitle, { textContent: "119 Telas Desdobradas em Altura Total para o Handoff" }, 46.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 45.8);
+      tl.set(caption,  { innerHTML: "O dev não conseguia inspecionar pranchetas com scroll fixo: Juan <strong>desdobrou 119 telas manualmente</strong> para destravar a engenharia." }, 46.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 46.0);
+
+      // Reveal Telas do Protótipo panoramic scene
+      tl.to(sceneHandoff, { opacity: 1, duration: 0.8, ease: "power2.out" }, 46.2);
+
+      // Cinematic slow horizontal pan across the 119 unrolled screens
+      tl.fromTo(handoffStrip, { x: 0 }, { x: -2200, duration: 7.2, ease: "power1.inOut" }, 46.4);
+
+      // Exit handoff scene
+      tl.to(sceneHandoff, { opacity: 0, scale: 0.95, duration: 0.7, ease: "power2.in" }, 53.6);
+
+      // =======================================================================
+      // ACT 7: Strategic Climax & Seamless Loop Seam (54.0s – 60.0s)
+      // =======================================================================
+      tl.set(hudPhase, { textContent: "07 · ORIGEM DO DESIGN ENGINEER" }, 54.0);
+      tl.set(hudTitle, { textContent: "Da Frustração do No-Code ao Domínio Técnico" }, 54.0);
+      tl.to(caption,   { opacity: 0, duration: 0.2 }, 53.8);
+      tl.set(caption,  { innerHTML: "O design foi <strong>aprovado pelo cliente</strong> e travou no desenvolvimento: o estopim para a transição definitiva para código." }, 54.0);
+      tl.to(caption,   { opacity: 1, duration: 0.4 }, 54.0);
+
+      // Reveal Quote Card
+      tl.to(sceneQuote, { opacity: 1, scale: 1.0, duration: 0.8, ease: "power2.out" }, 54.2);
+      tl.from(".quote-text", { y: 20, opacity: 0, duration: 0.8, ease: "power2.out" }, 54.4);
+
+      // Dissolve quote and seamlessly ease back to frame-0 foundation hero
+      tl.to(sceneQuote,  { opacity: 0, scale: 0.96, duration: 0.8, ease: "power2.in" }, 58.2);
+
+      // Re-establish frame 0 state by 59.2s
+      tl.to(sceneFound,  { opacity: 1, scale: 1.0, duration: 0.8, ease: "power2.out" }, 58.6);
+      tl.to(phoneBox,    { opacity: 0, scale: 0.88, y: 40, duration: 0.8 }, 58.6);
+
+      // Hard-reset every single animated property to guarantee byte-identical loop seam at 60.0s
+      tl.set(scaler,          { scale: 1.0, x: 0, y: 0 }, 59.5);
+      tl.set(track,           { x: 0, y: 0 }, 59.5);
+      tl.set(cursor,          { opacity: 0, x: 1200, y: 400 }, 59.5);
+      tl.set(sceneFound,      { opacity: 1, scale: 1.0 }, 59.5);
+      tl.set("#found-hero-center", { y: 0 }, 59.5);
+      tl.set("#card-colors",     { y: 0 }, 59.5);
+      tl.set("#card-components", { y: 0 }, 59.5);
+      tl.set("#card-roles",      { y: 0 }, 59.5);
+      tl.set(phoneBox,        { opacity: 0, scale: 0.88, y: 40 }, 59.5);
+      tl.set(phoneChassis,    { scale: 1.0 }, 59.5);
+      tl.set(sPersonalDash,   { opacity: 1 }, 59.5);
+      tl.set(sPersonalAlunos, { opacity: 0 }, 59.5);
+      tl.set(sPersonalPerfil, { opacity: 0 }, 59.5);
+      tl.set(sAlunoHome,      { opacity: 0 }, 59.5);
+      tl.set(sAlunoTreino,    { opacity: 0 }, 59.5);
+      tl.set(sAlunoPretreino, { opacity: 0 }, 59.5);
+      tl.set(fatigueModal,    { opacity: 0 }, 59.5);
+      tl.set(sceneScience,    { opacity: 0 }, 59.5);
+      tl.set(sceneHandoff,    { opacity: 0 }, 59.5);
+      tl.set(sceneQuote,      { opacity: 0 }, 59.5);
+      tl.set(progressBar,     { width: "0%", opacity: 1 }, 59.5);
+      tl.set(hudPhase,        { textContent: "01 · FUNDAÇÃO & DESIGN SYSTEM" }, 59.5);
+      tl.set(hudTitle,        { textContent: "448 Componentes do Zero · Domínio Esportivo USP" }, 59.5);
+      tl.set(caption,         { innerHTML: "Especificação de <strong>500+ páginas da USP</strong> traduzida em 700 telas com <strong>448 componentes autorais</strong>." }, 59.5);
+
+      // Hold settled frame 0 state through 60.0s
+      tl.to(sceneFound,       { opacity: 1, duration: 0.5 }, 59.5);
+    </script>
+  </body>
+</html>

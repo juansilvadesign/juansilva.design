@@ -7,6 +7,14 @@
  * centred composition but gains real escape routes — a second link to the work
  * and the footer, which this page never had.
  *
+ * ⛔ The footer is gone again, and so is the navbar (Juan, 2026-09-18): this is
+ * the one page in the site with no site chrome at all. That deliberately walks
+ * back half of K3's "real escape routes" — the two in-page buttons below are
+ * now the ONLY way out, so neither may be removed without restoring chrome.
+ * The theme toggle and language switch live in the navbar, so they are absent
+ * here too; the inline script in BaseLayout still resolves the saved theme, so
+ * the page renders in the visitor's theme, it just cannot change it.
+ *
  * ⛔ This is the one page in the site that deliberately hydrates an island.
  * FuzzyText is canvas-driven with no CSS equivalent (K3), and the 404 is
  * neither indexed nor performance-critical. The case-study pages and /contact
@@ -17,7 +25,6 @@
  * clip. K1's static surfaces are the legal pages and /contact.
  */
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Footer from "./Footer.astro";
 import FuzzyText from "./text/FuzzyText";
 import TypedFallback from "./text/TypedFallback.astro";
 import { localizedPath, pageTitle, t, type Locale } from "../i18n";
@@ -40,6 +47,7 @@ const notFound = copy.notFound;
   description={notFound.description}
   canonicalPath="/404"
   noindex
+  showNavigation={false}
 >
   <main id="main-content" class="not-found">
     <div class="not-found__inner">
@@ -68,32 +76,29 @@ const notFound = copy.notFound;
       <TypedFallback />
     </div>
   </main>
-
-  <Footer {lang} />
 </BaseLayout>
 
 <style>
   .not-found {
     /*
-     * J3 defect #1: the navbar is `position: fixed` and takes no space in flow,
-     * so every page reserves its own clearance. Without this the centred column
-     * slides under the navbar on a short viewport.
+     * ⛔ No navbar clearance here, unlike every other page. J3 defect #1 —
+     * the navbar is `position: fixed`, takes no space in flow, and so each page
+     * reserves its own — does not apply now that this page renders no navbar
+     * (`showNavigation={false}` above). The 104px / 140px clearance it used to
+     * carry had nothing left to clear, so it was pure dead space above a column
+     * that `justify-content: center` was already centring: the copy sat 40px
+     * (then 76px) below the true centre of the viewport.
+     *
+     * Symmetric block padding instead, so the centring is honest. It only ever
+     * applies on a viewport too short for the column, where it is the breathing
+     * room at both ends.
      */
-    --nf-clearance: var(--space-px-104);
-
     display: flex;
     min-height: var(--viewport-height);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--nf-clearance) var(--space-px-24) var(--space-px-64);
-  }
-
-  /* The navbar grows to 134px here, so the clearance has to as well. */
-  @media (min-width: 1280px) {
-    .not-found {
-      --nf-clearance: var(--space-px-140);
-    }
+    padding: var(--space-px-64) var(--space-px-24);
   }
 
   .not-found__inner {

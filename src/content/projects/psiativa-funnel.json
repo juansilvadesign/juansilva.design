@@ -17,7 +17,15 @@
   "liveUrl": "https://psiativa.com.br/",
   "evidenceLink": "https://psiativa.com.br/quiz/",
   "featured": false,
-  "preview": "/assets/images/calculadora.webp",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.jpg",
+  "previewMotion": {
+    "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.mp4",
+    "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.webm",
+    "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.webp",
+    "hoverStart": 0,
+    "width": 1920,
+    "height": 1080
+  },
   "copy": {
     "en": {
       "title": "High-Conversion Funnel Engineering",
@@ -61,6 +69,16 @@
           "text": "Engineering the patient acquisition funnel"
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Full marketing site and acquisition funnel showcase for PsiAtiva, touring hero value proposition, 5-point clinical diagnostic quiz, lost-revenue ROI calculator, and automated WhatsApp handoff.",
+          "caption": "Fifty-eight seconds, silent and looping — complete acquisition funnel: high-clarity hero positioning, interactive diagnostic quiz, client-side revenue loss calculator, and WhatsApp routing."
+        },
+        {
           "type": "prose",
           "body": "Most healthcare websites in Brazil suffer from severe digital friction: bloated WordPress templates, absent local SEO markup, unmeasurable contact forms, and agonizing response latencies. For PsiAtiva, I designed a specialized acquisition funnel that moves clinical psychologists from passive browsing to active self-diagnosis. Built from scratch on Astro 5, TypeScript, and Tailwind CSS, the platform eliminates runtime framework bloat while delivering rich client-side interactivity through lightweight vanilla islands."
         },
@@ -84,8 +102,28 @@
           ]
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-quiz-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-quiz-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-quiz-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Interactive 5-point clinical diagnostic quiz evaluating practice positioning, local SEO, mobile friction, response speed, and scheduling mechanics.",
+          "caption": "Fifteen seconds, silent and looping — the 5-point diagnostic quiz flow: practice profiling, multi-step clinical assessment, score calculation, and qualified lead routing."
+        },
+        {
           "type": "quote",
           "text": "The funnel doesn't pitch services; it diagnoses hemorrhages. By translating vague digital marketing concepts into lost patient sessions and concrete monthly revenue gaps, the interface qualifies prospects before the first conversation begins."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-calculator-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-calculator-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-calculator-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Interactive lost-revenue patient ROI calculator computing annual financial hemorrhage based on session price, monthly inquiries, and booking conversion drop-off.",
+          "caption": "Fifteen seconds, silent and looping — client-side ROI calculator: real-time session fee input, inquiry volume sliders, conversion loss modeling, and revenue leak quantification."
         },
         {
           "type": "statRow",
@@ -162,6 +200,16 @@
           "text": "Engenharia do funil de captação de pacientes"
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-showcase.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Showcase completo da landing page e funil de captação da PsiAtiva, percorrendo a proposta de valor do hero, quiz de diagnóstico clínico em 5 áreas, calculadora de ROI e integração com WhatsApp.",
+          "caption": "Cinquenta e oito segundos, silencioso e em loop — funil de captação completo: proposta de valor no hero, quiz interativo de diagnóstico, calculadora de perda de receita e passagem para WhatsApp."
+        },
+        {
           "type": "prose",
           "body": "A maior parte dos sites na área da saúde no Brasil padece de graves atritos digitais: temas lentos em WordPress, ausência de dados estruturados locais, formulários sem rastreamento e demora excessiva nas respostas. Para a PsiAtiva, arquitetei um funil de aquisição focado em conduzir psicólogos clínicos do interesse inicial ao autodiagnóstico ativo. Construído sobre Astro 5, TypeScript e Tailwind CSS, o sistema elimina runtimes pesados no cliente enquanto entrega interatividade fluida por meio de ilhas leves em JavaScript nativo."
         },
@@ -185,8 +233,28 @@
           ]
         },
         {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-quiz-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-quiz-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-quiz-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Quiz interativo de diagnóstico clínico em 5 áreas avaliando posicionamento, SEO local, atrito mobile, tempo de resposta e agendamento.",
+          "caption": "Quinze segundos, silencioso e em loop — fluxo do quiz de diagnóstico em 5 áreas: perfil do consultório, avaliação clínica, cálculo de maturidade e qualificação de leads."
+        },
+        {
           "type": "quote",
           "text": "O funil não vende serviços; ele diagnostica hemorragias. Ao traduzir conceitos abstratos de marketing em consultas perdidas e prejuízos mensais tangíveis, a interface qualifica o profissional antes mesmo do primeiro contato."
+        },
+        {
+          "type": "video",
+          "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-calculator-loop.webm",
+          "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-calculator-loop.mp4",
+          "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/cases/psiativa-funnel/psiativa-funnel-calculator-loop.webp",
+          "width": 1920,
+          "height": 1080,
+          "alt": "Calculadora interativa de perda de receita clínica calculando o prejuízo anual com base no valor da consulta, volume de contatos e taxa de perda no agendamento.",
+          "caption": "Quinze segundos, silencioso e em loop — calculadora de ROI no cliente: inputs em tempo real de valor da sessão, volume de contatos, projeção de perdas e cálculo da hemorragia anual."
         },
         {
           "type": "statRow",

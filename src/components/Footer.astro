@@ -51,6 +51,12 @@ const mailbox = socialLinks.mail.replace("mailto:", "");
             external-link glyph each had to be rewritten to reach — and sharing
             it is what stops a third copy of the LinkedIn path drifting from
             the other two.
+
+            The LinkedIn row asks for `linkedin-outlined`, not `linkedin`: the
+            bare wordmark this footer's own social row already shows, so the two
+            columns no longer disagree about which mark LinkedIn is. `linkedin`
+            — the glyph inside its container square — stays for /card's tiles,
+            which is why this is a second name rather than an edit to that one.
           */}
           <a class="footer__contact" href={socialLinks.mail}>
             <ContactIcon name="email" />
@@ -70,7 +76,7 @@ const mailbox = socialLinks.mail.replace("mailto:", "");
             rel="noopener noreferrer"
             aria-label={`${copy.navigation.linkedInProfile} — ${copy.footer.linkedInHandle}`}
           >
-            <ContactIcon name="linkedin" />
+            <ContactIcon name="linkedin-outlined" />
             {copy.footer.linkedInHandle}
           </a>
         </section>

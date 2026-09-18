@@ -233,6 +233,12 @@
   --btt-rest-fill: var(--surface);
   --btt-rest-ink: var(--text-primary);
   --btt-halo: var(--color-cyan-a12);
+  /* The ring on hover, when the fill has become `--primary`. Unchanged from the
+   * rest ring on this canvas — cyan-a12 is cyan-400 at 12%, and cyan-400 is
+   * exactly what `--primary` resolves to here, so the two already agree and the
+   * ring reads as that fill's own glow. The light layer is where they did not;
+   * see the override there. */
+  --btt-halo-hover: var(--btt-halo);
 
   /* Stack pills — the brand-tinted badges on the case studies and the homepage
    * cards. Three roles each, because `StackBadge.astro` used to name the
@@ -560,6 +566,14 @@
   --btt-rest-fill: var(--surface);
   --btt-rest-ink: var(--primary-ink);
   --btt-halo: var(--color-cyan-a50);
+  /* ⛔ The one token that cannot be `--color-cyan-a*` here (Juan, 2026-09-18).
+   * Those alphas are built on cyan-400 (#00c8ff) — the DARK canvas's accent —
+   * while `--primary` on this canvas is cyan-700 (#007cab). So on hover the
+   * fill went cyan-700 and the 4px ring around it stayed a bright cyan-400
+   * wash: two different hues on one control, with the mismatch reading as a
+   * halo the button had outgrown. `--primary` itself, fully opaque, so the ring
+   * and the fill are byte-identical and the pill simply grows by 4px. */
+  --btt-halo-hover: var(--primary);
 
   /* Stack pills, light row. TypeScript, JavaScript, Tailwind and Figma are read
    * straight off Figma 23277:191. Python and Open Source have no light artwork

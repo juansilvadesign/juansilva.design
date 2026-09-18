@@ -6,12 +6,26 @@ interface Props {
 }
 
 const { name } = Astro.props;
-const isFilled = name === "whatsapp" || name === "linkedin" || name === "github";
+const isFilled =
+  name === "whatsapp" ||
+  name === "linkedin" ||
+  name === "linkedin-outlined" ||
+  name === "github";
+
+/*
+ * Every mark here is drawn on a 24 grid except `linkedin-outlined`, which is
+ * the verbatim path from `public/assets/icons/linkedin.svg` — the mark the
+ * footer's own social row already uses — and that file is authored at 33x32.
+ * Re-drawing it onto 24 would make it a THIRD LinkedIn path to keep in sync;
+ * carrying its viewBox instead keeps it byte-identical to the asset, so the
+ * two footer columns cannot drift apart.
+ */
+const viewBox = name === "linkedin-outlined" ? "0 0 33 32" : "0 0 24 24";
 ---
 
 <svg
   aria-hidden="true"
-  viewBox="0 0 24 24"
+  viewBox={viewBox}
   fill={isFilled ? "currentColor" : "none"}
   stroke={isFilled ? undefined : "currentColor"}
   stroke-width={isFilled ? undefined : 2}
@@ -33,6 +47,18 @@ const isFilled = name === "whatsapp" || name === "linkedin" || name === "github"
   )}
   {name === "linkedin" && (
     <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z" />
+  )}
+  {/*
+    The bare wordmark — no container square — which is what tells it apart from
+    `linkedin` above, the boxed glyph the /card page's tiles use. Path copied
+    verbatim from `public/assets/icons/linkedin.svg`, minus that file's baked
+    `fill="#94979C"`: a dark-canvas neutral that measures 1.5:1 on the light
+    theme's page. Here it inherits `currentColor` from the row's label, the
+    same correction the footer's version chevron and the hero's external-link
+    glyph each already carry.
+  */}
+  {name === "linkedin-outlined" && (
+    <path d="M2.5 5.63636C2.5 4.72725 2.81532 3.97725 3.44595 3.38636C4.07657 2.79545 4.89641 2.5 5.90541 2.5C6.89641 2.5 7.69819 2.79089 8.31081 3.37273C8.94143 3.97273 9.25676 4.75453 9.25676 5.71818C9.25676 6.59091 8.95046 7.31816 8.33784 7.9C7.70722 8.5 6.87838 8.8 5.85135 8.8H5.82432C4.83332 8.8 4.03154 8.5 3.41892 7.9C2.8063 7.3 2.5 6.54545 2.5 5.63636ZM2.85135 29.5V11.2818H8.85135V29.5H2.85135ZM12.1757 29.5H18.1757V19.3273C18.1757 18.6909 18.2478 18.2 18.3919 17.8545C18.6441 17.2364 19.027 16.7136 19.5405 16.2864C20.0541 15.8591 20.6982 15.6455 21.473 15.6455C23.491 15.6455 24.5 17.0182 24.5 19.7636V29.5H30.5V19.0545C30.5 16.3636 29.8694 14.3227 28.6081 12.9318C27.3468 11.5409 25.6802 10.8455 23.6081 10.8455C21.2838 10.8455 19.473 11.8545 18.1757 13.8727V13.9273H18.1486L18.1757 13.8727V11.2818H12.1757C12.2117 11.8636 12.2297 13.6727 12.2297 16.7091C12.2297 19.7454 12.2117 24.0091 12.1757 29.5Z" />
   )}
   {name === "website" && (
     <>

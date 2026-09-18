@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Pro Personal — Domain Modeling & Adaptive Fatigue Loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0F0C1B;
+        font-family: "InterVar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #FAFAFA;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #ground {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 20%, rgba(102, 51, 153, 0.22) 0%, rgba(17, 0, 53, 0.6) 45%, #0F0C1B 80%),
+          #0F0C1B;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+      }
+      #glow-1 {
+        top: -80px;
+        left: 280px;
+        width: 640px;
+        height: 640px;
+        background: rgba(102, 51, 153, 0.25);
+      }
+      #glow-2 {
+        bottom: -60px;
+        right: 320px;
+        width: 600px;
+        height: 600px;
+        background: rgba(162, 111, 216, 0.18);
+      }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* Header HUD */
+      #hud-header {
+        position: absolute;
+        top: 40px;
+        left: 80px;
+        right: 80px;
+        height: 56px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .hud-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .hud-badge {
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: rgba(102, 51, 153, 0.45);
+        border: 1px solid rgba(162, 111, 216, 0.4);
+        font-family: "Montserrat", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #D8B4FE;
+      }
+
+      .hud-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: #FFFFFF;
+      }
+
+      .hud-stats {
+        display: flex;
+        gap: 24px;
+        font-size: 13px;
+        color: #CBD5E1;
+      }
+
+      .stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .stat-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #A26FD8;
+        box-shadow: 0 0 8px #A26FD8;
+      }
+
+      /* Scene Panels */
+      .panel {
+        position: absolute;
+        background: #181428;
+        border: 1px solid rgba(162, 111, 216, 0.2);
+        border-radius: 20px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        overflow: hidden;
+      }
+
+      /* Methodologies Bar */
+      #method-tabs {
+        position: absolute;
+        top: 130px;
+        left: 80px;
+        width: 780px;
+        height: 60px;
+        background: rgba(24, 20, 40, 0.85);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(162, 111, 216, 0.25);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        padding: 6px 10px;
+        gap: 8px;
+        z-index: 20;
+      }
+
+      .method-tab {
+        padding: 8px 16px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #94A3B8;
+        background: transparent;
+        transition: all 0.2s ease;
+      }
+
+      .method-tab.active {
+        background: #663399;
+        color: #FFFFFF;
+        box-shadow: 0 4px 16px rgba(102, 51, 153, 0.4);
+      }
+
+      /* Periodization Left Showcase Card */
+      #periodization-card {
+        position: absolute;
+        top: 210px;
+        left: 80px;
+        width: 780px;
+        height: 780px;
+        border-radius: 24px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card-header-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .card-header-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #FFFFFF;
+      }
+
+      .card-header-tag {
+        font-size: 12px;
+        font-weight: 600;
+        color: #D8B4FE;
+        padding: 4px 10px;
+        border-radius: 8px;
+        background: rgba(102, 51, 153, 0.3);
+      }
+
+      .method-preview-container {
+        position: relative;
+        width: 732px;
+        height: 660px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #110D20;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .method-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+      }
+
+      /* Right Device Showcase (Phone Frame) */
+      #phone-container {
+        position: absolute;
+        top: 130px;
+        left: 930px;
+        width: 440px;
+        height: 860px;
+        background: #161224;
+        border: 10px solid #28223D;
+        border-radius: 48px;
+        box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(162, 111, 216, 0.25);
+        overflow: hidden;
+      }
+
+      .phone-notch {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 130px;
+        height: 24px;
+        background: #0F0C1B;
+        border-radius: 14px;
+        z-index: 50;
+      }
+
+      .phone-screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 420px;
+        height: 840px;
+        overflow: hidden;
+        background: #FAFAFA;
+      }
+
+      .phone-content-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 420px;
+      }
+
+      .phone-content-layer img {
+        width: 100%;
+        display: block;
+      }
+
+      /* Right Detail Panel (Adaptive Fatigue Callout) */
+      #callout-panel {
+        position: absolute;
+        top: 130px;
+        left: 1420px;
+        width: 420px;
+        height: 860px;
+        border-radius: 24px;
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .callout-header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .callout-tag {
+        align-self: flex-start;
+        padding: 5px 12px;
+        border-radius: 8px;
+        background: rgba(239, 68, 68, 0.2);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        color: #FCA5A5;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .callout-heading {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.3;
+        color: #FFFFFF;
+      }
+
+      .callout-desc {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #94A3B8;
+      }
+
+      .callout-metrics {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .metric-item {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        padding: 16px;
+      }
+
+      .metric-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #A26FD8;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .metric-value {
+        font-size: 15px;
+        font-weight: 600;
+        color: #FFFFFF;
+      }
+
+      /* Modal Warning Overlay */
+      #diacansado-modal-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(17, 0, 53, 0.75);
+        backdrop-filter: blur(8px);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #modal-content-img {
+        width: 380px;
+        border-radius: 24px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      }
+
+      /* Virtual Cursor */
+      #virtual-cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        z-index: 200;
+        pointer-events: none;
+      }
+      .cursor-icon {
+        width: 24px;
+        height: 24px;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+      }
+      .cursor-ripple {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(162, 111, 216, 0.6);
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="periodization-loop"
+      data-start="0"
+      data-duration="14"
+      data-fps="60"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="ground"></div>
+      <div id="glow-1" class="ambient-glow" data-layout-allow-overflow="true"></div>
+      <div id="glow-2" class="ambient-glow" data-layout-allow-overflow="true"></div>
+
+      <!-- HUD Header Pinned -->
+      <div id="hud-header" data-layout-allow-overlap="true">
+        <div class="hud-title-wrap" data-layout-allow-overlap="true">
+          <span class="hud-badge" data-layout-allow-overlap="true">Sports Science Engine</span>
+          <span class="hud-title" data-layout-allow-overlap="true">Pro Personal · Periodização Clínica & Fadiga Adaptativa</span>
+        </div>
+        <div class="hud-stats" data-layout-allow-overlap="true">
+          <div class="stat-pill" data-layout-allow-overlap="true">
+            <span class="stat-dot"></span>
+            <span data-layout-allow-overlap="true">11 Metodologias de Força</span>
+          </div>
+          <div class="stat-pill" data-layout-allow-overlap="true">
+            <span class="stat-dot"></span>
+            <span data-layout-allow-overlap="true">PAR-Q Triagem Médica</span>
+          </div>
+          <div class="stat-pill" data-layout-allow-overlap="true">
+            <span class="stat-dot" style="background:#EF4444;box-shadow:0 0 8px #EF4444;"></span>
+            <span data-layout-allow-overlap="true">DiaCansado / AVISO (11 Telas)</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="stage" data-layout-allow-overflow="true">
+        <div id="camera-scaler" data-layout-allow-overflow="true">
+          <div id="camera-track" data-layout-allow-overflow="true">
+            <!-- Methodologies Tabs -->
+            <div id="method-tabs" data-layout-allow-overflow="true" data-layout-allow-overlap="true">
+              <div id="tab-gvt" class="method-tab active" data-layout-allow-overlap="true">GVT (German Volume 10×10)</div>
+              <div id="tab-ds" class="method-tab" data-layout-allow-overlap="true">Drop Set (DS)</div>
+              <div id="tab-rp" class="method-tab" data-layout-allow-overlap="true">Rest-Pause (RP)</div>
+              <div id="tab-rir" class="method-tab" data-layout-allow-overlap="true">RIR / Reps in Reserve</div>
+              <div id="tab-cs" class="method-tab" data-layout-allow-overlap="true">Cluster Sets</div>
+            </div>
+
+            <!-- Left Periodization Card -->
+            <div id="periodization-card" class="panel" data-layout-allow-overflow="true">
+              <div class="card-header-bar">
+                <span class="card-header-title">Configuração Metodológica do Treinador</span>
+                <span class="card-header-tag">Especificação USP 500+ págs</span>
+              </div>
+              <div class="method-preview-container">
+                <img id="img-gvt" class="method-img" src="assets/figma/periodizacao-gvt.png" alt="German Volume Training" />
+                <img id="img-ds" class="method-img" src="assets/figma/periodizacao-dropset.png" alt="Drop Set" style="opacity:0;" />
+                <img id="img-rp" class="method-img" src="assets/figma/periodizacao-restpause.png" alt="Rest-Pause" style="opacity:0;" />
+              </div>
+            </div>
+
+            <!-- Middle Phone Container -->
+            <div id="phone-container" data-layout-allow-overflow="true">
+              <div class="phone-notch"></div>
+              <div class="phone-screen" data-layout-allow-overflow="true">
+                <!-- Phone Surface: PAR-Q and Fatigue Questionnaire -->
+                <div id="phone-parq" class="phone-content-layer" data-layout-allow-overflow="true">
+                  <img src="assets/figma/parq-trainer-evaluation.png" alt="PAR-Q Evaluation" />
+                </div>
+                <div id="phone-questionario" class="phone-content-layer" style="opacity: 0;" data-layout-allow-overflow="true">
+                  <img src="assets/figma/questionario-pre-treino.png" alt="Questionário Pré-Treino" />
+                </div>
+
+                <!-- Modal Warning Overlay -->
+                <div id="diacansado-modal-overlay" data-layout-allow-overflow="true">
+                  <img id="modal-content-img" src="assets/figma/aluno-diacansado-aviso.png" alt="Dia Cansado Aviso" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Callout Panel -->
+            <div id="callout-panel" class="panel" data-layout-allow-overflow="true">
+              <div class="callout-header">
+                <span id="badge-callout" class="callout-tag">Fisiologia do Exercício</span>
+                <h2 id="heading-callout" class="callout-heading">Modelagem Digital de Periodização Avançada</h2>
+                <p id="desc-callout" class="callout-desc">
+                  Tradução visual direta de 11 metodologias avançadas de treinamento resistido para cálculo automático de séries, repetições e intervalos de recuperação neuromuscular.
+                </p>
+              </div>
+
+              <div class="callout-metrics">
+                <div class="metric-item">
+                  <div class="metric-label">PAR-Q Triagem Médica</div>
+                  <div class="metric-value">Avaliação do treinador com CRUD administrativo</div>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-label">Interceptação Ativa</div>
+                  <div class="metric-value">11 telas de alerta adaptativo DiaCansado</div>
+                </div>
+                <div class="metric-item">
+                  <div class="metric-label">Autoria Metodológica</div>
+                  <div class="metric-value">Pesquisador EEFE-USP (500+ páginas)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Virtual Cursor -->
+            <div id="virtual-cursor">
+              <svg class="cursor-icon" viewBox="0 0 24 24" fill="none">
+                <path d="M5.5 3.2L18.8 12.6L12.4 13.9L15.6 20.4L12.9 21.7L9.7 15.2L5.5 19.3V3.2Z" fill="#FFFFFF" stroke="#110035" stroke-width="1.8"/>
+              </svg>
+              <div id="cursor-ripple" class="cursor-ripple"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* HyperFrames GSAP Master Timeline */
+      const master = gsap.timeline({ paused: true });
+
+      // Elements
+      const cursor = document.querySelector("#virtual-cursor");
+      const ripple = document.querySelector("#cursor-ripple");
+      const tabGvt = document.querySelector("#tab-gvt");
+      const tabDs = document.querySelector("#tab-ds");
+      const tabRp = document.querySelector("#tab-rp");
+      const imgGvt = document.querySelector("#img-gvt");
+      const imgDs = document.querySelector("#img-ds");
+      const imgRp = document.querySelector("#img-rp");
+
+      const phoneParq = document.querySelector("#phone-parq");
+      const phoneQuestionario = document.querySelector("#phone-questionario");
+      const modalOverlay = document.querySelector("#diacansado-modal-overlay");
+      const modalImg = document.querySelector("#modal-content-img");
+
+      const badgeCallout = document.querySelector("#badge-callout");
+      const headingCallout = document.querySelector("#heading-callout");
+      const descCallout = document.querySelector("#desc-callout");
+
+      const cameraTrack = document.querySelector("#camera-track");
+      const cameraScaler = document.querySelector("#camera-scaler");
+
+      // Initial State (0.0s)
+      gsap.set(cursor, { x: 300, y: 160, opacity: 0 });
+      gsap.set(phoneParq, { y: 0, opacity: 1 });
+      gsap.set(phoneQuestionario, { y: 0, opacity: 0 });
+      gsap.set(modalOverlay, { opacity: 0 });
+      gsap.set(modalImg, { scale: 0.85, opacity: 0 });
+      gsap.set(cameraTrack, { x: 0, y: 0 });
+      gsap.set(cameraScaler, { scale: 1 });
+
+      /* Timeline construction across 14.0s (840 frames) */
+
+      // 0.0s - 1.2s: Cursor appears and moves towards Drop Set tab
+      master.to(cursor, { opacity: 1, duration: 0.4, ease: "power2.out" }, 0.2);
+      master.to(cursor, { x: 200, y: 160, duration: 0.8, ease: "power2.inOut" }, 0.4);
+
+      // 1.2s - 1.5s: Click Drop Set Tab
+      master.to(ripple, { opacity: 1, scale: 2, duration: 0.2, ease: "power1.out" }, 1.2);
+      master.to(ripple, { opacity: 0, duration: 0.2 }, 1.4);
+      master.call(() => {
+        tabGvt.classList.remove("active");
+        tabDs.classList.add("active");
+      }, null, 1.3);
+      master.to(imgGvt, { opacity: 0, duration: 0.3 }, 1.3);
+      master.to(imgDs, { opacity: 1, duration: 0.3 }, 1.3);
+
+      // 2.2s - 2.8s: Cursor moves to Rest-Pause tab
+      master.to(cursor, { x: 320, y: 160, duration: 0.6, ease: "power2.inOut" }, 2.2);
+      master.to(ripple, { opacity: 1, scale: 2, duration: 0.2, ease: "power1.out" }, 2.8);
+      master.to(ripple, { opacity: 0, duration: 0.2 }, 3.0);
+      master.call(() => {
+        tabDs.classList.remove("active");
+        tabRp.classList.add("active");
+      }, null, 2.9);
+      master.to(imgDs, { opacity: 0, duration: 0.3 }, 2.9);
+      master.to(imgRp, { opacity: 1, duration: 0.3 }, 2.9);
+
+      // 3.8s - 5.0s: Transition camera focus to Phone Screen (PAR-Q Medical Screening)
+      master.to(cursor, { x: 1140, y: 480, duration: 1.2, ease: "power2.inOut" }, 3.8);
+      master.to(cameraScaler, { scale: 1.08, duration: 1.5, ease: "power2.inOut" }, 4.0);
+      master.to(cameraTrack, { x: -260, y: 0, duration: 1.5, ease: "power2.inOut" }, 4.0);
+
+      // Update Callout for Act 2
+      master.call(() => {
+        badgeCallout.style.background = "rgba(102, 51, 153, 0.25)";
+        badgeCallout.style.borderColor = "rgba(162, 111, 216, 0.4)";
+        badgeCallout.style.color = "#D8B4FE";
+        badgeCallout.textContent = "Triagem Médica";
+        headingCallout.textContent = "Questionário PAR-Q & Validação Clínica";
+        descCallout.textContent = "O personal trainer avalia respostas médicas obrigatórias (visualiza-sim/não) antes de liberar cargas pesadas, com gestão de perguntas no back office.";
+      }, null, 4.8);
+
+      // 5.0s - 7.5s: Scroll PAR-Q phone document smoothly
+      master.to(phoneParq, { y: -380, duration: 2.2, ease: "power2.inOut" }, 5.0);
+
+      // Cursor clicks validation button in PAR-Q
+      master.to(cursor, { x: 1220, y: 720, duration: 0.8, ease: "power2.inOut" }, 6.8);
+      master.to(ripple, { opacity: 1, scale: 2, duration: 0.2, ease: "power1.out" }, 7.4);
+      master.to(ripple, { opacity: 0, duration: 0.2 }, 7.61);
+
+      // 7.8s - 8.8s: Switch phone to Aluno Pre-Workout Questionnaire
+      master.to(phoneParq, { opacity: 0, duration: 0.4 }, 7.8);
+      master.to(phoneQuestionario, { opacity: 1, duration: 0.4 }, 8.0);
+
+      // 8.8s - 12.0s: DiaCansado / AVISO Adaptive Fatigue Intercept
+      master.call(() => {
+        badgeCallout.style.background = "rgba(239, 68, 68, 0.25)";
+        badgeCallout.style.borderColor = "rgba(239, 68, 68, 0.5)";
+        badgeCallout.style.color = "#FCA5A5";
+        badgeCallout.textContent = "Fadiga Adaptativa";
+        headingCallout.textContent = "DiaCansado / AVISO: Proteção Ativa";
+        descCallout.textContent = "Uma arquitetura de 11 telas intercepta o treino quando índices de fadiga e sono atingem níveis críticos, acionando descarregamento automático.";
+      }, null, 8.8);
+
+      // Trigger modal overlay
+      master.to(modalOverlay, { opacity: 1, duration: 0.5, ease: "power2.out" }, 9.2);
+      master.to(modalImg, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, 9.2);
+
+      // Cursor acknowledges modal
+      master.to(cursor, { x: 1140, y: 640, duration: 0.8, ease: "power2.inOut" }, 9.8);
+      master.to(ripple, { opacity: 1, scale: 2, duration: 0.2, ease: "power1.out" }, 10.6);
+      master.to(ripple, { opacity: 0, duration: 0.2 }, 10.8);
+
+      // 11.5s - 12.5s: Modal closes smoothly
+      master.to(modalOverlay, { opacity: 0, duration: 0.4, ease: "power2.in" }, 11.5);
+      master.to(modalImg, { scale: 0.85, opacity: 0, duration: 0.4 }, 11.5);
+
+      // 12.5s - 13.5s: Revert all states back to settled frame 0 for perfect seamless loop!
+      master.to(phoneQuestionario, { opacity: 0, duration: 0.4 }, 12.5);
+      master.to(phoneParq, { opacity: 1, y: 0, duration: 0.4 }, 12.5);
+      master.to(cameraScaler, { scale: 1, duration: 0.6, ease: "power2.inOut" }, 12.5);
+      master.to(cameraTrack, { x: 0, y: 0, duration: 0.6, ease: "power2.inOut" }, 12.5);
+      master.to(cursor, { opacity: 0, duration: 0.3 }, 12.5);
+      master.to(imgRp, { opacity: 0, duration: 0.3 }, 12.5);
+      master.to(imgDs, { opacity: 0, duration: 0.3 }, 12.5);
+      master.to(imgGvt, { opacity: 1, duration: 0.3 }, 12.5);
+
+      master.call(() => {
+        gsap.set(cursor, { x: 300, y: 160, opacity: 0 });
+        tabRp.classList.remove("active");
+        tabDs.classList.remove("active");
+        tabGvt.classList.add("active");
+        badgeCallout.removeAttribute("style");
+        badgeCallout.textContent = "Fisiologia do Exercício";
+        headingCallout.textContent = "Modelagem Digital de Periodização Avançada";
+        descCallout.textContent = "Tradução visual direta de 11 metodologias avançadas de treinamento resistido para cálculo automático de séries, repetições e intervalos de recuperação neuromuscular.";
+      }, null, 13.0);
+
+      // Register master timeline for HyperFrames
+      window.__timelines = window.__timelines || {};
+      window.__timelines["periodization-loop"] = master;
+    </script>
+  </body>
+</html>

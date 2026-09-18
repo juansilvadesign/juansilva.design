@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Pro Personal — Developer Empathy & Telas do Protótipo Loop</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "InterVar";
+        src: url("assets/fonts/inter-var.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: block;
+      }
+      @font-face {
+        font-family: "Montserrat";
+        src: url("assets/fonts/montserrat-600.woff2") format("woff2");
+        font-weight: 600;
+        font-style: normal;
+        font-display: block;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0F0C1B;
+        font-family: "InterVar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #FAFAFA;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #ground {
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 50% 30%, rgba(102, 51, 153, 0.2) 0%, rgba(17, 0, 53, 0.6) 50%, #0F0C1B 80%),
+          #0F0C1B;
+      }
+
+      .ambient-glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+      }
+      #glow-1 {
+        top: -60px;
+        left: 300px;
+        width: 600px;
+        height: 600px;
+        background: rgba(102, 51, 153, 0.2);
+      }
+      #glow-2 {
+        bottom: -60px;
+        right: 300px;
+        width: 600px;
+        height: 600px;
+        background: rgba(162, 111, 216, 0.15);
+      }
+
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      #camera-scaler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+        transform-origin: 960px 540px;
+      }
+
+      #camera-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1920px;
+        height: 1080px;
+      }
+
+      /* HUD Header */
+      #hud-header {
+        position: absolute;
+        top: 40px;
+        left: 80px;
+        right: 80px;
+        height: 56px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .hud-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .hud-badge {
+        padding: 6px 14px;
+        border-radius: 20px;
+        background: rgba(102, 51, 153, 0.45);
+        border: 1px solid rgba(162, 111, 216, 0.4);
+        font-family: "Montserrat", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #D8B4FE;
+      }
+
+      .hud-title {
+        font-family: "Montserrat", sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: #FFFFFF;
+      }
+
+      .hud-stats {
+        display: flex;
+        gap: 20px;
+        font-size: 13px;
+        color: #CBD5E1;
+      }
+
+      .stat-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .stat-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #A26FD8;
+        box-shadow: 0 0 8px #A26FD8;
+      }
+
+      /* Massive Canvas Pan Layer */
+      #canvas-board-wrap {
+        position: absolute;
+        top: 130px;
+        left: 80px;
+        width: 1260px;
+        height: 860px;
+        background: #181428;
+        border: 1px solid rgba(162, 111, 216, 0.2);
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        overflow: hidden;
+      }
+
+      #canvas-inner-scroll {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2800px;
+        height: 2080px;
+      }
+
+      #img-telas-overview {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2800px;
+        height: 2080px;
+        object-fit: cover;
+      }
+
+      /* Right Detail Sidebar */
+      #handoff-sidebar {
+        position: absolute;
+        top: 130px;
+        left: 1380px;
+        width: 460px;
+        height: 860px;
+        background: #181428;
+        border: 1px solid rgba(162, 111, 216, 0.2);
+        border-radius: 24px;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .sidebar-intro {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .sidebar-tag {
+        align-self: flex-start;
+        padding: 5px 12px;
+        border-radius: 8px;
+        background: rgba(102, 51, 153, 0.35);
+        border: 1px solid rgba(162, 111, 216, 0.3);
+        color: #D8B4FE;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .sidebar-heading {
+        font-family: "Montserrat", sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.3;
+        color: #FFFFFF;
+      }
+
+      .sidebar-desc {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #94A3B8;
+      }
+
+      /* Sticky Notes Showcase Box */
+      .notes-box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .notes-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #EAB308;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .notes-label-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #EAB308;
+        box-shadow: 0 0 8px #EAB308;
+      }
+
+      .notes-img-wrap {
+        width: 100%;
+        height: 160px;
+        background: #110D20;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .notes-img-wrap img {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+
+      /* Prototype Component Box */
+      .proto-comp-box {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .proto-comp-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #A26FD8;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .proto-comp-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #A26FD8;
+        box-shadow: 0 0 8px #A26FD8;
+      }
+
+      .proto-img-wrap {
+        width: 100%;
+        height: 140px;
+        background: #110D20;
+        border-radius: 12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .proto-img-wrap img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+
+      /* Virtual Cursor */
+      #virtual-cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 24px;
+        height: 24px;
+        z-index: 200;
+        pointer-events: none;
+      }
+      .cursor-icon {
+        width: 24px;
+        height: 24px;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+      }
+      .cursor-ripple {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(162, 111, 216, 0.6);
+        opacity: 0;
+        transform: scale(0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="dev-handoff-loop"
+      data-start="0"
+      data-duration="14"
+      data-fps="60"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="ground"></div>
+      <div id="glow-1" class="ambient-glow" data-layout-allow-overflow="true"></div>
+      <div id="glow-2" class="ambient-glow" data-layout-allow-overflow="true"></div>
+
+      <!-- Pinned HUD Header (Cleanly separated from camera transforms) -->
+      <div id="hud-header" data-layout-allow-overlap="true">
+        <div class="hud-title-wrap">
+          <span class="hud-badge">Developer Empathy</span>
+          <span class="hud-title">Pro Personal · Telas do Protótipo & Camada de Handoff</span>
+        </div>
+        <div class="hud-stats">
+          <div class="stat-pill">
+            <span class="stat-dot"></span>
+            <span>119 Telas Desdobradas</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-dot"></span>
+            <span>NavBarProtótipo Dedicada</span>
+          </div>
+          <div class="stat-pill">
+            <span class="stat-dot" style="background:#EAB308;box-shadow:0 0 8px #EAB308;"></span>
+            <span>20+ Sticky Notes de Lógica</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="stage" data-layout-allow-overflow="true">
+        <div id="camera-scaler" data-layout-allow-overflow="true">
+          <div id="camera-track" data-layout-allow-overflow="true">
+            <!-- Canvas Board (119 Screens Pan) -->
+            <div id="canvas-board-wrap" data-layout-allow-overflow="true">
+              <div id="canvas-inner-scroll" data-layout-allow-overflow="true">
+                <img id="img-telas-overview" src="assets/figma/telas-do-prototipo-personal.png" alt="119 Telas do Protótipo" />
+              </div>
+            </div>
+
+            <!-- Right Sidebar: Details & Tools -->
+            <div id="handoff-sidebar">
+              <div class="sidebar-intro">
+                <span class="sidebar-tag">Handoff em Altura Total</span>
+                <h2 class="sidebar-heading">Destravando a Inspeção da Engenharia</h2>
+                <p class="sidebar-desc">
+                  Quando o desenvolvedor Bubble relatou que viewports fixos travavam a inspeção vertical, todas as 119 telas foram desdobradas manualmente em altura total em uma prancha dedicada.
+                </p>
+              </div>
+
+              <!-- Sticky Notes Box -->
+              <div class="notes-box">
+                <div class="notes-label">
+                  <span class="notes-label-dot"></span>
+                  <span>Notas Adesivas de Implementação</span>
+                </div>
+                <div class="notes-img-wrap">
+                  <img id="img-sticky-1" src="assets/figma/dev-sticky-notes-1.png" alt="Dev Sticky Notes 1" />
+                  <img id="img-sticky-2" src="assets/figma/dev-sticky-notes-2.png" alt="Dev Sticky Notes 2" />
+                </div>
+              </div>
+
+              <!-- Prototype Navigation Component Box -->
+              <div class="proto-comp-box">
+                <div class="proto-comp-label">
+                  <span class="proto-comp-dot"></span>
+                  <span>Componente NavBarProtótipo</span>
+                </div>
+                <div class="proto-img-wrap">
+                  <img src="assets/figma/component-navbar-prototipo.png" alt="NavBar Protótipo" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Virtual Cursor -->
+            <div id="virtual-cursor">
+              <svg class="cursor-icon" viewBox="0 0 24 24" fill="none">
+                <path d="M5.5 3.2L18.8 12.6L12.4 13.9L15.6 20.4L12.9 21.7L9.7 15.2L5.5 19.3V3.2Z" fill="#FFFFFF" stroke="#110035" stroke-width="1.8"/>
+              </svg>
+              <div id="cursor-ripple" class="cursor-ripple"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* HyperFrames GSAP Master Timeline */
+      const master = gsap.timeline({ paused: true });
+
+      // Elements
+      const cursor = document.querySelector("#virtual-cursor");
+      const ripple = document.querySelector("#cursor-ripple");
+      const canvasScroll = document.querySelector("#canvas-inner-scroll");
+      const imgSticky1 = document.querySelector("#img-sticky-1");
+      const imgSticky2 = document.querySelector("#img-sticky-2");
+      const cameraTrack = document.querySelector("#camera-track");
+      const cameraScaler = document.querySelector("#camera-scaler");
+
+      // Initial State (0.0s)
+      gsap.set(cursor, { x: 400, y: 300, opacity: 0 });
+      gsap.set(canvasScroll, { x: 0, y: 0 });
+      gsap.set(imgSticky1, { opacity: 1 });
+      gsap.set(imgSticky2, { opacity: 0 });
+      gsap.set(cameraTrack, { x: 0, y: 0 });
+      gsap.set(cameraScaler, { scale: 1 });
+
+      /* Timeline construction across 14.0s (840 frames) */
+
+      // 0.0s - 1.5s: Initial overview settled state
+      master.to(cursor, { opacity: 1, duration: 0.5 }, 0.4);
+      master.to(cursor, { x: 620, y: 480, duration: 1.2, ease: "power2.inOut" }, 0.6);
+
+      // 1.5s - 7.5s: Smooth diagonal camera sweep across the unrolled screens board
+      master.to(canvasScroll, { x: -1200, y: -680, duration: 6.0, ease: "power2.inOut" }, 1.5);
+      master.to(cursor, { x: 820, y: 560, duration: 3.5, ease: "power1.inOut" }, 2.0);
+
+      // 7.5s - 10.5s: Zoom focus into Sticky Notes and Developer Spec Layer
+      master.to(cameraScaler, { scale: 1.05, duration: 1.5, ease: "power2.inOut" }, 7.5);
+      master.to(cameraTrack, { x: -160, y: -20, duration: 1.5, ease: "power2.inOut" }, 7.5);
+      master.to(cursor, { x: 1540, y: 560, duration: 1.2, ease: "power2.inOut" }, 7.8);
+      master.to(ripple, { opacity: 1, scale: 2, duration: 0.2, ease: "power1.out" }, 9.0);
+      master.to(ripple, { opacity: 0, duration: 0.2, overwrite: "auto" }, 9.2);
+
+      // Switch sticky note sample to show variation
+      master.to(imgSticky1, { opacity: 0, duration: 0.3 }, 9.1);
+      master.to(imgSticky2, { opacity: 1, duration: 0.3 }, 9.1);
+
+      // 10.5s - 14.0s: Revert all states back to settled frame 0 for seamless loop!
+      master.to(canvasScroll, { x: 0, y: 0, duration: 2.5, ease: "power2.inOut" }, 10.5);
+      master.to(cameraScaler, { scale: 1, duration: 2.0, ease: "power2.inOut" }, 11.0);
+      master.to(cameraTrack, { x: 0, y: 0, duration: 2.0, ease: "power2.inOut" }, 11.0);
+      master.to(cursor, { opacity: 0, duration: 0.5 }, 12.5);
+      master.to(cursor, { x: 400, y: 300, duration: 0.1 }, 13.5);
+
+      master.to(imgSticky2, { opacity: 0, duration: 0.3 }, 13.2);
+      master.to(imgSticky1, { opacity: 1, duration: 0.3 }, 13.2);
+
+      // Register master timeline for HyperFrames
+      window.__timelines = window.__timelines || {};
+      window.__timelines["dev-handoff-loop"] = master;
+    </script>
+  </body>
+</html>

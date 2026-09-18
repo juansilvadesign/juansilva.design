@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080, initial-scale=1.0" />
+    <title>PsiAtiva Funnel · ROI Calculator Loop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body, html {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #040A09;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #root {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+      }
+
+      /* Stage Container */
+      #stage {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        background: radial-gradient(circle at 50% 38%, #0E2A27 0%, #081816 55%, #040A09 100%);
+        overflow: hidden;
+      }
+
+      /* Studio Background Ambient Grid & Radial Glow */
+      .bg-glow-center {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 900px;
+        height: 700px;
+        background: radial-gradient(ellipse at center, rgba(61, 199, 208, 0.12) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 80%);
+        pointer-events: none;
+        filter: blur(40px);
+      }
+
+      .bg-grid {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(61, 199, 208, 0.12) 1px, transparent 1px);
+        background-size: 32px 32px;
+        opacity: 0.35;
+        pointer-events: none;
+      }
+
+      /* --- Top HUD Telemetry Bar --- */
+      #header-bar {
+        position: absolute;
+        top: 24px;
+        left: 48px;
+        right: 48px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 100;
+      }
+
+      .brand-badge {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(10, 26, 24, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(61, 199, 208, 0.25);
+        border-radius: 9999px;
+        padding: 6px 18px 6px 14px;
+      }
+
+      .brand-badge .logo {
+        height: 20px;
+        width: auto;
+        opacity: 0.95;
+      }
+
+      .brand-badge .divider {
+        width: 1px;
+        height: 14px;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .brand-badge .title {
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #E2E8F0;
+      }
+
+      .brand-badge .subtitle {
+        font-size: 12px;
+        font-weight: 400;
+        color: #94A3B8;
+      }
+
+      .url-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(10, 26, 24, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(61, 199, 208, 0.25);
+        border-radius: 9999px;
+        padding: 6px 18px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12px;
+        color: #6EE7B7;
+        letter-spacing: 0.02em;
+      }
+
+      .url-badge .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #10B981;
+        box-shadow: 0 0 8px #10B981;
+      }
+
+      .hud-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .hud-pill {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(10, 26, 24, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(61, 199, 208, 0.2);
+        border-radius: 9999px;
+        padding: 6px 14px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #94A3B8;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .hud-pill.highlight {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: #6EE7B7;
+      }
+
+      .pulse-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #10B981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+      }
+
+      /* --- Bottom Floating Callout Pill --- */
+      #bottom-callout {
+        position: absolute;
+        bottom: 34px;
+        left: 50%;
+        height: 48px;
+        max-width: 1080px;
+        padding: 0 28px;
+        background: rgba(10, 26, 24, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(61, 199, 208, 0.3);
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        z-index: 100;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+        pointer-events: none;
+      }
+
+      #bottom-callout .icon {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #5EEAD4;
+      }
+
+      #bottom-callout .text {
+        font-size: 14px;
+        font-weight: 400;
+        color: #CBD5E1;
+        letter-spacing: 0.01em;
+      }
+
+      #bottom-callout .text strong {
+        font-weight: 600;
+        color: #5EEAD4;
+      }
+
+      /* --- Camera Scaler & Track --- */
+      #camera-scaler {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-origin: 50% 50%;
+      }
+
+      #camera-track {
+        position: relative;
+        width: 1920px;
+        height: 1080px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* --- Desktop Browser Chassis --- */
+      #win-desktop {
+        position: absolute;
+        top: 86px;
+        left: 160px;
+        width: 1600px;
+        height: 890px;
+        background: #050E0D;
+        border-radius: 14px;
+        border: 1px solid rgba(61, 199, 208, 0.28);
+        box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65), 0 0 1px rgba(61, 199, 208, 0.5);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .browser-bar {
+        height: 44px;
+        background: #081816;
+        border-bottom: 1px solid rgba(61, 199, 208, 0.18);
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        gap: 16px;
+        user-select: none;
+        flex-shrink: 0;
+      }
+
+      .traffic-lights {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .traffic-lights .light {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+      }
+
+      .light.red { background: #FF5F56; }
+      .light.yellow { background: #FFBD2E; }
+      .light.green { background: #27C93F; }
+
+      .browser-tabs {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .tab {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #0B2220;
+        padding: 5px 14px;
+        border-radius: 6px;
+        font-size: 11.5px;
+        font-weight: 500;
+        color: #94A3B8;
+        border: 1px solid rgba(61, 199, 208, 0.2);
+      }
+
+      .tab.active {
+        color: #E2E8F0;
+        background: #0E2926;
+        border-color: rgba(61, 199, 208, 0.35);
+      }
+
+      .tab-favicon {
+        width: 12px;
+        height: 12px;
+        object-fit: contain;
+      }
+
+      .browser-url-input {
+        flex: 1;
+        max-width: 520px;
+        height: 26px;
+        background: #050E0D;
+        border-radius: 6px;
+        border: 1px solid rgba(61, 199, 208, 0.15);
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        color: #94A3B8;
+        gap: 6px;
+      }
+
+      .browser-url-input .lock-icon {
+        font-size: 10px;
+        color: #10B981;
+      }
+
+      .browser-screen {
+        position: relative;
+        flex: 1;
+        width: 1600px;
+        height: 846px;
+        background: #FFFFFF;
+        overflow: hidden;
+      }
+
+      /* Calculator Screen Image */
+      #img-calc {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1600px;
+        height: auto;
+        display: block;
+      }
+
+      /* Live Simulation Highlight Box */
+      #calc-highlight-box {
+        position: absolute;
+        top: 640px;
+        left: 280px;
+        width: 1040px;
+        height: 120px;
+        border-radius: 12px;
+        border: 2px solid rgba(16, 185, 129, 0.6);
+        background: rgba(16, 185, 129, 0.08);
+        box-shadow: 0 0 24px rgba(16, 185, 129, 0.25);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Dynamic Value Overlay Pills */
+      .value-pill-overlay {
+        position: absolute;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        background: #FFFFFF;
+        color: #0E2926;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #val-price {
+        top: 130px;
+        left: 310px;
+        width: 120px;
+        height: 38px;
+        font-size: 18px;
+      }
+
+      #val-patients {
+        top: 130px;
+        left: 770px;
+        width: 80px;
+        height: 38px;
+        font-size: 18px;
+      }
+
+      #val-res-loss {
+        top: 318px;
+        left: 284px;
+        width: 200px;
+        height: 48px;
+        font-size: 26px;
+        color: #0F3B36;
+        letter-spacing: -0.02em;
+      }
+
+      #val-res-gain {
+        top: 318px;
+        left: 810px;
+        width: 200px;
+        height: 48px;
+        font-size: 26px;
+        color: #0F3B36;
+        letter-spacing: -0.02em;
+      }
+
+      #val-diff-total {
+        top: 686px;
+        left: 304px;
+        width: 240px;
+        height: 52px;
+        font-size: 32px;
+        color: #042F2E;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      /* Simulated Precision Cursor */
+      #cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 26px;
+        height: 26px;
+        z-index: 500;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      #cursor svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+      }
+
+      #click-ripple {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 2px solid #10B981;
+        background: rgba(16, 185, 129, 0.35);
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+      <div id="stage" data-layout-allow-overflow>
+        <div class="bg-glow-center"></div>
+        <div class="bg-grid"></div>
+
+        <!-- Top HUD Header -->
+        <header id="header-bar">
+          <div class="brand-badge">
+            <img src="assets/psiativa-full-nobg.png" alt="PsiAtiva" class="logo" />
+            <div class="divider"></div>
+            <span class="title">Calculadora de ROI</span>
+            <span class="subtitle">Simulação de Coorte</span>
+          </div>
+
+          <div class="url-badge">
+            <span class="dot"></span>
+            <span id="hud-url">psiativa.com.br/calculadora/</span>
+          </div>
+
+          <div class="hud-meta">
+            <div class="hud-pill">
+              <span class="pulse-dot"></span>
+              <span id="hud-status">ILHA INTERATIVA</span>
+            </div>
+            <div class="hud-pill highlight">
+              <span id="hud-metric">MODELAGEM DE COORTE</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- Bottom Telemetry Callout -->
+        <div id="bottom-callout">
+          <span class="icon" id="callout-icon" data-contrast-ignore>📊</span>
+          <span class="text" id="callout-text">
+            Modelagem de coorte clínica: <strong>projeção de receita retida e cálculo de hemorragia financeira</strong>
+          </span>
+        </div>
+
+        <!-- Camera Scaler & Track -->
+        <div id="camera-scaler" data-layout-allow-overflow>
+          <div id="camera-track" data-layout-allow-overflow>
+
+            <!-- Desktop Browser Window Chassis -->
+            <div id="win-desktop">
+              <div class="browser-bar">
+                <div class="traffic-lights">
+                  <div class="light red"></div>
+                  <div class="light yellow"></div>
+                  <div class="light green"></div>
+                </div>
+                <div class="browser-tabs">
+                  <div class="tab active">
+                    <img src="assets/psiativa-profile-nobg.png" alt="" class="tab-favicon" />
+                    <span data-layout-allow-occlusion>PsiAtiva — Calculadora de Retenção</span>
+                  </div>
+                </div>
+                <div class="browser-url-input">
+                  <span class="lock-icon">🔒</span>
+                  <span>https://psiativa.com.br/calculadora/</span>
+                </div>
+              </div>
+
+              <!-- Browser Screen with Calculator Page -->
+              <div class="browser-screen" id="browser-screen">
+                <img src="assets/psiativa-calculadora.png" id="img-calc" alt="Calculadora de Retenção" />
+              </div>
+            </div>
+
+            <!-- Precision Cursor -->
+            <div id="cursor">
+              <div id="click-ripple"></div>
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 2L20 12L12 14L8 22L4 2Z" fill="#0E2926" stroke="#5EEAD4" stroke-width="1.8" stroke-linejoin="round" />
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <script>
+      // DOM References
+      const scaler = document.getElementById("camera-scaler");
+      const track = document.getElementById("camera-track");
+      const winDesktop = document.getElementById("win-desktop");
+      const imgCalc = document.getElementById("img-calc");
+      const cursor = document.getElementById("cursor");
+      const clickRipple = document.getElementById("click-ripple");
+      const bottomCallout = document.getElementById("bottom-callout");
+      const calloutIcon = document.getElementById("callout-icon");
+      const calloutText = document.getElementById("callout-text");
+
+      // Master Timeline: 15.0 seconds @ 60fps = 900 frames
+      const tl = gsap.timeline({ paused: true });
+
+      // Register timeline for HyperFrames contract
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+
+      // Base resting states set at t=0
+      tl.set(winDesktop, { opacity: 1, scale: 1.0, x: 0, y: 0 }, 0);
+      tl.set(scaler, { scale: 1.0, x: 0, y: 0 }, 0);
+      tl.set(track, { x: 0, y: 0 }, 0);
+      // Position image so inputs and graph are framed centered
+      tl.set(imgCalc, { y: -880 }, 0);
+      tl.set(cursor, { opacity: 0, x: 960, y: 540, scale: 1.0 }, 0);
+      tl.set(clickRipple, { opacity: 0, scale: 0.2 }, 0);
+      tl.set(bottomCallout, { xPercent: -50 }, 0);
+
+      tl.set(calloutIcon, { textContent: "📊" }, 0);
+      tl.set(calloutText, { innerHTML: "Modelagem de coorte clínica: <strong>projeção de receita retida e cálculo de hemorragia financeira</strong>" }, 0);
+
+      // =========================================================================
+      // BEAT 1: SETTLED OPENING ON BASELINE CALCULATOR (t=0.0s to 3.5s)
+      // =========================================================================
+      tl.to(scaler, { scale: 1.02, duration: 3.0, ease: "power1.inOut" }, 0.5);
+
+      // =========================================================================
+      // BEAT 2: ANIMATED CURSOR INTERACTION ON INPUTS (t=3.5s to 7.5s)
+      // =========================================================================
+      tl.set(calloutIcon, { textContent: "🖱️" }, 3.5);
+      tl.set(calloutText, { innerHTML: "Simulação de parâmetros: <strong>ajuste de valor de consulta e volume de captação mensal</strong>" }, 3.5);
+
+      // Cursor appears and navigates to session price '+' stepper button
+      tl.to(cursor, { opacity: 1, duration: 0.3 }, 3.5);
+      tl.to(cursor, { x: 705, y: 228, duration: 1.0, ease: "power2.out" }, 3.7);
+
+      // Click 1 on '+'
+      tl.to(cursor, { scale: 0.88, duration: 0.12 }, 4.8);
+      tl.to(clickRipple, { opacity: 1, scale: 1.3, duration: 0.22 }, 4.85);
+      tl.to(clickRipple, { opacity: 0, duration: 0.12 }, 5.07);
+      tl.to(cursor, { scale: 1.0, duration: 0.15 }, 5.0);
+
+      // Cursor navigates to new patients '+' stepper button
+      tl.to(cursor, { x: 705, y: 310, duration: 0.9, ease: "power2.inOut" }, 5.4);
+
+      // Click 2 on '+'
+      tl.to(cursor, { scale: 0.88, duration: 0.12 }, 6.4);
+      tl.to(clickRipple, { opacity: 1, scale: 1.3, duration: 0.22 }, 6.45);
+      tl.to(clickRipple, { opacity: 0, duration: 0.12 }, 6.67);
+      tl.to(cursor, { scale: 1.0, duration: 0.15 }, 6.6);
+
+      // Cursor moves down smoothly and fades
+      tl.to(cursor, { x: 880, y: 480, duration: 1.0, ease: "power2.out" }, 6.8);
+      tl.to(cursor, { opacity: 0, duration: 0.4 }, 7.5);
+
+      // =========================================================================
+      // BEAT 3: HIGHLIGHT ON COHORT SPREAD & LOST REVENUE (t=7.5s to 11.5s)
+      // =========================================================================
+      tl.set(calloutIcon, { textContent: "💡" }, 7.5);
+      tl.set(calloutText, { innerHTML: "Hemorragia evitada: <strong>R$ 63.000 em consultas recuperadas no ciclo de 6 meses</strong>" }, 7.5);
+
+      // Pan image slightly up to center the cohort divergence and difference card
+      tl.to(imgCalc, { y: -1040, duration: 1.8, ease: "power2.inOut" }, 7.5);
+      tl.to(scaler, { scale: 1.05, duration: 2.2, ease: "power1.inOut" }, 7.8);
+
+      // =========================================================================
+      // BEAT 4: SEAMLESS INTERPOLATION BACK TO FRAME 0 BASELINE (t=11.5s to 15.0s)
+      // =========================================================================
+      tl.set(calloutIcon, { textContent: "📊" }, 11.5);
+      tl.set(calloutText, { innerHTML: "Modelagem de coorte clínica: <strong>projeção de receita retida e cálculo de hemorragia financeira</strong>" }, 11.5);
+
+      // Smooth return back to baseline position and scale
+      tl.to(imgCalc, { y: -880, duration: 2.0, ease: "power2.inOut" }, 11.8);
+      tl.to(scaler, { scale: 1.0, x: 0, y: 0, duration: 1.8, ease: "power2.inOut" }, 12.0);
+      tl.to(track, { x: 0, y: 0, duration: 1.8, ease: "power2.inOut" }, 12.0);
+      tl.to(winDesktop, { x: 0, y: 0, scale: 1.0, opacity: 1, duration: 1.8, ease: "power2.inOut" }, 12.0);
+
+      // Explicitly lock all properties to exact Frame 0 resting values by 14.5s
+      tl.set(scaler, { scale: 1.0, x: 0, y: 0 }, 14.5);
+      tl.set(track, { x: 0, y: 0 }, 14.5);
+      tl.set(winDesktop, { opacity: 1, scale: 1.0, x: 0, y: 0 }, 14.5);
+      tl.set(imgCalc, { y: -880 }, 14.5);
+      tl.set(cursor, { opacity: 0, x: 960, y: 540, scale: 1.0 }, 14.5);
+      tl.set(clickRipple, { opacity: 0, scale: 0.2 }, 14.5);
+    </script>
+  </body>
+</html>

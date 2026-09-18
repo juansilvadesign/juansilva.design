@@ -3,6 +3,7 @@ export type ContactIconName =
   | "phone"
   | "whatsapp"
   | "linkedin"
+  | "linkedin-outlined"
   | "website"
   | "email"
   | "github";
