@@ -153,6 +153,26 @@
    * on the moon, whose own grey is cooler than the highlight. */
   --color-scene-highlight: rgb(254 255 239 / 61%);
 
+  /* ─── Color primitives — hero portrait card ─────────────────────
+   *
+   * The card the hero portrait stands on (Figma `23015:908`). Dark is node
+   * `23015:145` flattened: `bg-primary` #0c0e12 under 40% of
+   * `fg-quaternary_hover` → `fg-quaternary` (#85888e → #61656c), which
+   * composites to the two stops below. Light was added 2026-09-19 with the
+   * suit clips: a cool slate, deep enough that the WHITE suit still separates
+   * from it — the studio backdrop the clips were shot on is #ced1db, so a
+   * paler card would swallow the jacket's edge.
+   *
+   * ⛔ ARTWORK, and baked. These stops are painted into every hero still and
+   * clip on the CDN, not just drawn here. Change a value and the media must be
+   * re-rendered with it (`scripts/hero-portrait/`), or the card will flash a
+   * different gradient the moment a clip starts.
+   */
+  --color-portrait-dark-from: #3c3f44;
+  --color-portrait-dark-to: #2e3136;
+  --color-portrait-light-from: #d9e0e8;
+  --color-portrait-light-to: #aab6c5;
+
   /* ─── Translucent paints from production ────────────────────── */
   --color-transparent: rgb(255 255 255 / 0%);
   --color-black-a02: rgb(0 0 0 / 2%);
@@ -166,6 +186,7 @@
   --color-white-a10: rgb(255 255 255 / 10%);
   --color-white-a12: rgb(255 255 255 / 12%);
   --color-white-a25: rgb(255 255 255 / 25%);
+  --color-white-a30: rgb(255 255 255 / 30%);
   --color-white-a61: rgb(255 255 255 / 61%);
   --color-white-a92: rgb(255 255 255 / 92%);
   --color-white-a94: rgb(255 255 255 / 94%);
@@ -283,6 +304,15 @@
   --hero-cta-fill-hover: var(--surface-interactive-hover);
   --hero-cta-border-hover: var(--border-interactive);
   --hero-cta-ink-hover: var(--text-heading);
+
+  /* The hero portrait's two cards and its light beam (Figma `23015:908`).
+   * Front: the card the portrait stands on — baked into the media as well, see
+   * the primitives. Back: the offset glass plate, Figma `23015:789` verbatim
+   * (white 30% → 0% toward the bottom-right, a 10% white hairline). */
+  --hero-card-fill: linear-gradient(to bottom left, var(--color-portrait-dark-from), var(--color-portrait-dark-to));
+  --hero-card-back-fill: linear-gradient(to bottom right, var(--color-white-a30), var(--color-transparent));
+  --hero-card-back-border: var(--color-white-a10);
+  --hero-beam: var(--color-cyan-400);
 
   /* Raster/vector artwork that was authored for the dark canvas. The filter
    * is semantic rather than component-local so every consuming surface swaps
@@ -467,6 +497,7 @@
   --brand-column: 210px;
   --hero-media-mobile: 300px;
   --hero-media-tablet: 400px;
+  --hero-media-desktop: 452px;
   --nav-glow-width: 240px;
   --container-content: 1440px;
   --container-production: 1400px;
@@ -630,6 +661,11 @@
   --hero-cta-fill-hover: var(--color-transparent);
   --hero-cta-border-hover: var(--primary);
   --hero-cta-ink-hover: var(--primary-ink);
+  /* The portrait's cards on white. A white-glass back plate is invisible on
+   * this canvas, so it becomes the same plate in ink: black 10% → 0%. */
+  --hero-card-fill: linear-gradient(to bottom left, var(--color-portrait-light-from), var(--color-portrait-light-to));
+  --hero-card-back-fill: linear-gradient(to bottom right, var(--color-black-a10), var(--color-transparent));
+  --hero-card-back-border: var(--color-black-a06);
   --brand-mark-filter: invert(1);
   --decorative-art-filter: invert(1);
   /* ⛔ A different PLATE, not just a different opacity.
