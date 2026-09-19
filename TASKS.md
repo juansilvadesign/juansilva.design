@@ -2677,7 +2677,7 @@ pages is worse than no toggle. Scope it as its own milestone with its own gates.
       The light semantic text pairs measured **4.70:1 or higher** (the tightest is
       `--primary-ink` on the page ground).
 
-### Hero portrait — suit clips on theme change ✅ built 2026-09-19 · 🔴 NOT DEPLOYED
+### Hero portrait — suit clips on theme change ✅ deployed 2026-09-19
 
 Closes the `hero-light.webp` placeholder (a byte copy of `hero.webp`, live since 09-07). The flat
 452×651 hero PNG is now the Figma frame `23015:908` rebuilt as layers — glass back plate, front card,
@@ -2696,10 +2696,17 @@ light beam (inline SVG, Figma `23015:147/149/148`) — with the portrait INSIDE 
       decode from WebM. ⛔ Change `--color-portrait-*` → re-render with `scripts/hero-portrait/`
       (reproduces the live set: stills + MP4 byte-identical, WebM frame-identical at SSIM 1.000000).
 - [x] **/card avatar** = 384² face crops of the same stills, theme-paired.
+- [x] **Navbar + footer profile link** (`ProfileLink.astro`) — Figma `23129:329`'s picture re-exported
+      at 3× with the new portrait, theme-paired rest + hover (`profile-link-{dark,light}[-hover].webp`,
+      5.5–8 KB each, replacing the 1× `images/profile*.webp`). All four `loading="lazy"`: measured, a
+      load fetches only the active theme's pair. Built 2026-09-19 AFTER the hero deploy — ships with the
+      next one.
 - [x] **Media on R2** under `juansilva.design/hero/` — 14 delivery files + the 4 untouched 1080×1920
       transparent masters in `hero/masters/`, all 200 / bytes / type / 206, masters sha256 round-trip.
       `src/assets/hero/final/` deleted locally after that proof (they are also in git, `185028a`).
 - [x] Figma: the two states as frames on page "🎬 • Hero · suit stills"; `23015:908` untouched.
-- [ ] 🔴 **Deploy** (`npm run deploy`) — the live site still serves `images/hero.webp` until then.
+- [x] **Deployed** 2026-09-19 — `npm run deploy` exit 0 in one pass (148/148, `Last-Modified` moved on
+      apex + `www`). Proven live in a real browser against production: dark still alone on load, both
+      directions played and parked, no CSP/media errors from the hero.
 - [ ] 🔴 **Safari** — untested (no Safari here). Opaque VP9 P0 + H.264 is the conservative pair, but it
       is still unobserved on WebKit.

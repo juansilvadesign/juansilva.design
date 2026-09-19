@@ -1,4 +1,5 @@
 ---
+import { profileLinkImages } from "../data/hero";
 import { socialLinks } from "../data/links";
 import { t, type Locale } from "../i18n";
 
@@ -18,21 +19,35 @@ const copy = t(lang);
   rel="noopener noreferrer"
   aria-label={copy.navigation.linkedInProfile}
 >
+  {/* Theme-paired through `[data-theme-art]` (clone.css), like the hero it is
+      cut from. `loading="lazy"` is what keeps the other theme's pair from
+      being fetched at all — a `display: none` lazy image never loads — while
+      the visible hover plate, which is only transparent, still preloads. */}
   <span class="profile-link__portrait" aria-hidden="true">
-    <img
-      class="profile-link__image profile-link__image--rest"
-      src="https://cdn.juanpablosilva.com.br/juansilva.design/images/profile.webp"
-      alt=""
-      width="56"
-      height="56"
-    />
-    <img
-      class="profile-link__image profile-link__image--hover"
-      src="https://cdn.juanpablosilva.com.br/juansilva.design/images/profile-hover.webp"
-      alt=""
-      width="56"
-      height="56"
-    />
+    {(["dark", "light"] as const).map((theme) => (
+      <>
+        <img
+          class="profile-link__image profile-link__image--rest"
+          src={profileLinkImages[theme].rest}
+          alt=""
+          width="56"
+          height="56"
+          loading="lazy"
+          decoding="async"
+          data-theme-art={theme}
+        />
+        <img
+          class="profile-link__image profile-link__image--hover"
+          src={profileLinkImages[theme].hover}
+          alt=""
+          width="56"
+          height="56"
+          loading="lazy"
+          decoding="async"
+          data-theme-art={theme}
+        />
+      </>
+    ))}
   </span>
 
   <span class="profile-link__identity">

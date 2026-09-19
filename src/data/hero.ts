@@ -55,3 +55,13 @@ export const profileAvatar: Record<Theme, CdnUrl> = {
   dark: `${HERO}/avatar-dark.webp`,
   light: `${HERO}/avatar-light.webp`,
 };
+
+/**
+ * The navbar + footer profile link (`ProfileLink.astro`, 56px): Figma
+ * `23129:329`'s picture re-exported at 3× with the avatars above — the rest
+ * state keeps the dark LinkedIn badge, hover swaps in the cyan ring and badge.
+ */
+export const profileLinkImages = {
+  dark: { rest: `${HERO}/profile-link-dark.webp`, hover: `${HERO}/profile-link-dark-hover.webp` },
+  light: { rest: `${HERO}/profile-link-light.webp`, hover: `${HERO}/profile-link-light-hover.webp` },
+} satisfies Record<Theme, { rest: CdnUrl; hover: CdnUrl }>;
