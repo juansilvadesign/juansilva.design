@@ -1222,8 +1222,11 @@ carries it.**
       note injected into `celus` prose → `✖ 1 validation error … Nothing was written`, celus named, site repo
       untouched; restored → green; a real export then writes byte-identical cards). Rationale in
       `_config/portfolio/README.md` §"The leak gate". Standalone: `node _config/portfolio/leak-gate.mjs`.
-  - ⚠️ **Card copy warns, it does not block** — `agenda-geek-homepage`, `allprice` and `upos` share a run with
-    a private field in their pre-J4 `publish.copy`. Juan's call whether the rule extends there.
+  - ✅ **It blocks on everything under `publish`** — case-study prose, card copy, alt text — and the message names
+    the section. Card copy was warn-only for one afternoon: the three pre-J4 strings that overlapped
+    (`agenda-geek-homepage` + `upos` descriptions, `allprice` previewAlt) were reworded on Juan's call, exported,
+    deployed and verified live (09-19). Known-bad leg for this half = re-injecting the exact pre-reword alt text →
+    `✖ allprice: card copy restates … Nothing was written`.
   - ⚠️ The gate cannot see a **paraphrase or a translation** (an EN private note vs the PT prose) — that is how
     five of the 09-19 violations got through. Reading `internalOnly` against the prose is still a human step.
 - [ ] **Still open from J4's contract for those 46:** the per-record interview, and a **claim-level review
