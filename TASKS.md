@@ -2676,3 +2676,30 @@ pages is worse than no toggle. Scope it as its own milestone with its own gates.
       case study, contact, legal, contact card, PT home and 404 with no horizontal overflow.
       The light semantic text pairs measured **4.70:1 or higher** (the tightest is
       `--primary-ink` on the page ground).
+
+### Hero portrait — suit clips on theme change ✅ built 2026-09-19 · 🔴 NOT DEPLOYED
+
+Closes the `hero-light.webp` placeholder (a byte copy of `hero.webp`, live since 09-07). The flat
+452×651 hero PNG is now the Figma frame `23015:908` rebuilt as layers — glass back plate, front card,
+light beam (inline SVG, Figma `23015:147/149/148`) — with the portrait INSIDE the front card.
+
+- [x] **Stills are theme-paired** (`portrait-{dark,light}[-420].webp`, 22 / 26 KB vs 195 KB × 2): black
+      suit on the dark card, white suit on the NEW light card (`--color-portrait-light-*`, #d9e0e8 →
+      #aab6c5). ⭐ Both ship `loading="lazy"` and `index.astro`'s head script preloads the visible one —
+      measured over CDP: **exactly one** hero fetch per load, script-initiated, High priority.
+- [x] **A clip plays on every theme change** (`to-{dark,light}-{smile,neutral}`, random take, picked
+      and preloaded when the pointer/focus reaches the switch) and parks on its last frame. Two players
+      crossfade, so a toggle mid-clip never dips through the card. Reduced motion, Save-Data, a hidden
+      tab and any play() failure fall back to the still swap. WebM (VP9 P0, `vp09.00.31.08`) with an
+      H.264 fallback — both paths played end to end in Chromium, as did both takes.
+- [x] **The card gradient is BAKED into the clips**, so they are opaque — no alpha, which Safari cannot
+      decode from WebM. ⛔ Change `--color-portrait-*` → re-render with `scripts/hero-portrait/`
+      (reproduces the live set: stills + MP4 byte-identical, WebM frame-identical at SSIM 1.000000).
+- [x] **/card avatar** = 384² face crops of the same stills, theme-paired.
+- [x] **Media on R2** under `juansilva.design/hero/` — 14 delivery files + the 4 untouched 1080×1920
+      transparent masters in `hero/masters/`, all 200 / bytes / type / 206, masters sha256 round-trip.
+      `src/assets/hero/final/` deleted locally after that proof (they are also in git, `185028a`).
+- [x] Figma: the two states as frames on page "🎬 • Hero · suit stills"; `23015:908` untouched.
+- [ ] 🔴 **Deploy** (`npm run deploy`) — the live site still serves `images/hero.webp` until then.
+- [ ] 🔴 **Safari** — untested (no Safari here). Opaque VP9 P0 + H.264 is the conservative pair, but it
+      is still unobserved on WebKit.
