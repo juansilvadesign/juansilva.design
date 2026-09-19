@@ -1216,9 +1216,18 @@ carries it.**
       that turned "WordPress 6.4.3" into "6.4.x (patch 3)" to beat the gate.
     - ✅ `spaceapps` itself was clean on its three `internalOnly` rules.
     - Deployed 09-19 and checked live: every changed field's new text present, old text gone, both locales.
+- [x] **The gate is in the repo and wired in (09-19)** — `_config/portfolio/leak-gate.mjs`, imported by
+      `export.mjs`: an overlap is a **validation error**, so the run aborts and the public repo stays
+      byte-unchanged, exactly like a schema error. Both legs re-proven *after* wiring (a real `internalOnly`
+      note injected into `celus` prose → `✖ 1 validation error … Nothing was written`, celus named, site repo
+      untouched; restored → green; a real export then writes byte-identical cards). Rationale in
+      `_config/portfolio/README.md` §"The leak gate". Standalone: `node _config/portfolio/leak-gate.mjs`.
+  - ⚠️ **Card copy warns, it does not block** — `agenda-geek-homepage`, `allprice` and `upos` share a run with
+    a private field in their pre-J4 `publish.copy`. Juan's call whether the rule extends there.
+  - ⚠️ The gate cannot see a **paraphrase or a translation** (an EN private note vs the PT prose) — that is how
+    five of the 09-19 violations got through. Reading `internalOnly` against the prose is still a human step.
 - [ ] **Still open from J4's contract for those 46:** the per-record interview, and a **claim-level review
-      against each record's `neverClaim`** — the 09-19 pass checked leaks, not overclaims. ⚠️ The gate is
-      still not in the repo; until it is, the next batch can skip it the same way.
+      against each record's `neverClaim`** — the 09-19 pass checked leaks, not overclaims.
 - [ ] **Phase 3 media** — demo/walkthrough, hyperframes, motion via talk-to-figma-fork + AEUX.
       ✅ **Runway is unblocked** — key issued 2026-09-02, cost baseline measured (500 → 344 credits;
       ~10 credits per 2s `gen4_turbo` clip, and ⛔ `cancelTask` on a live image job costs 20 **with no refund**).
