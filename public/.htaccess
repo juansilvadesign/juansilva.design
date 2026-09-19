@@ -49,7 +49,7 @@ Options -Multiviews
   #    network entry, no error page, only a console violation. Silent by design.
   # ⚠️ Milestone H must add the new domain here as well as in send.ts and on the
   #    Turnstile widget, or the form dies the moment the domain flips.
-  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self' https://form.juanpablosilva.com.br; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms https://c.bing.com; frame-src https://challenges.cloudflare.com https://www.googletagmanager.com; connect-src 'self' https://challenges.cloudflare.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://stats.g.doubleclick.net https://*.clarity.ms https://c.bing.com https://*.bing.com; img-src 'self' data: https:; media-src 'self' https://cdn.juanpablosilva.com.br; style-src 'self' 'unsafe-inline'; font-src 'self'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self' https://form.juanpablosilva.com.br; frame-ancestors 'none'; object-src 'none'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.clarity.ms https://scripts.clarity.ms https://c.bing.com; frame-src https://challenges.cloudflare.com https://www.googletagmanager.com; connect-src 'self' https://challenges.cloudflare.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://stats.g.doubleclick.net https://*.clarity.ms https://c.bing.com https://*.bing.com; img-src 'self' data: https:; media-src 'self' https://cdn.juanpablosilva.com.br; style-src 'self' 'unsafe-inline'; font-src 'self' https://cdn.juanpablosilva.com.br; upgrade-insecure-requests"
 </IfModule>
 
 # Enable compression
@@ -68,6 +68,20 @@ Options -Multiviews
 
 RewriteEngine On
 RewriteBase /
+
+# Origin Firewall — Cloudflare edge secret header verification.
+# LiteSpeed restores the visitor IP into REMOTE_ADDR, so IP allowlists match
+# the visitor and 403 the site. This shared secret header injected by a
+# Cloudflare Transform Rule enforces that requests came through Cloudflare.
+# ⛔ MUST exempt /.well-known/ — AutoSSL renewal hits this directly.
+# Using THE_REQUEST ensures internal subrequests (like 404 ErrorDocument) don't override the exemption.
+RewriteCond %{THE_REQUEST} !^[A-Z]+\s+/\.well-known/ [NC]
+RewriteCond %{REQUEST_URI} !^/\.well-known/ [NC]
+RewriteCond %{HTTP:X-Origin-Verification} !^a7cf7183000d0ee2213a76989c69293da2a9f8e7e8d16cbd1be4af5b6f5e5921$
+RewriteRule ^ - [F,L]
+
+# Assets offloaded to Cloudflare R2 CDN
+RewriteRule ^assets/(.*)$ https://cdn.juanpablosilva.com.br/juansilva.design/$1 [R=301,L]
 
 # Root -> index.html
 RewriteRule ^$ index.html [L]

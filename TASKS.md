@@ -820,6 +820,9 @@ deferred cost stays visible.
 - [ ] `astro.config.mjs` → `site: "https://juansilva.design"`. Canonical, OG,
       `hreflang` and sitemap all follow.
 - [ ] Redirects from `juanpablosilva.com.br`; keep `dev.` on the v1 site.
+- [ ] Create matching Cloudflare Transform Rule ("Modify Request Header") on the new `juansilva.design` zone:
+      inject `X-Origin-Verification: a7cf7183000d0ee2213a76989c69293da2a9f8e7e8d16cbd1be4af5b6f5e5921` (or rotate secret
+      and update `public/.htaccess`). ⛔ Must be active on Cloudflare BEFORE traffic hits origin, or origin firewall 403s all traffic.
 - [ ] Unblocks the master plan's **Phase 4** (cold email), which explicitly waits
       on an authenticated `.design`.
 - [ ] Verify: both hosts resolve, redirects land, OG re-scrapes clean, and — the

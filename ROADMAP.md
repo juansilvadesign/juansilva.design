@@ -286,6 +286,9 @@ here so the decision can be revisited with the real number:
 - **`contact@juansilva.design` still cannot exist**, so the footer keeps showing a
   mailbox that does not receive mail. Until the domain lands, every address the
   site shows must be one that actually works.
+- **Origin Firewall Transform Rule must be created on the new zone**: When traffic flips to
+  `juansilva.design`, Cloudflare must inject `X-Origin-Verification` before hits reach the origin,
+  or `.htaccess` will 403 all requests to the new domain.
 
 ---
 

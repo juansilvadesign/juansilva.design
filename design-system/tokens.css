@@ -294,7 +294,7 @@
    * canvas baked in. Naming the file as a role lets the light layer swap the
    * plate; because it resolves through `background-image`, only the plate whose
    * rule applies is ever fetched. */
-  --contact-background: url("/assets/logo/contact-bg.png");
+  --contact-background: url("https://cdn.juanpablosilva.com.br/juansilva.design/logo/contact-bg.png");
   --contact-background-opacity: 1;
 
   /* ─── Typography — families (confirmed in Figma Desktop) ─────── */
@@ -656,6 +656,6 @@
    * 4.52:1 — the last step that clears AA. 0.9 gives 4.39:1 and 1.0 gives
    * 4.31:1. The laptop and plant are on the right, under no text, so they are
    * free to read as strongly as the number allows. */
-  --contact-background: url("/assets/logo/contact-bg-light.webp");
+  --contact-background: url("https://cdn.juanpablosilva.com.br/juansilva.design/logo/contact-bg-light.webp");
   --contact-background-opacity: 0.75;
 }
