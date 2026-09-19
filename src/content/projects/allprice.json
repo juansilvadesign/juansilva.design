@@ -53,16 +53,16 @@
       "blocks": [
         {
           "type": "callout",
-          "body": "AllPrice is the store's cleanest attribution evidence: a dated 15-phase project schedule in Figma proves the product design was completed before I joined Spaceapps. I did not design the multi-ERP software, and I did not build its Bubble backend or integrations. Thiago designed the initial landing page. My contribution is the design-engineering bridge: remediating an unbuildable design into the \"LP otimizada\" frame directly in Figma, then programming sixty-one components in React and TypeScript."
+          "body": "AllPrice is a design-engineering credit, not a product-design one: the product design was complete before I joined Spaceapps. I did not design the multi-ERP software, and I did not build its Bubble backend or integrations. Thiago designed the initial landing page. My contribution is the design-engineering bridge: remediating an unbuildable design into the \"LP otimizada\" frame directly in Figma, then programming sixty-one components in React and TypeScript."
         },
         {
           "type": "heading",
           "level": 2,
-          "text": "The receipt: Dated attribution and design-file remediation"
+          "text": "The boundary: Attribution and design-file remediation"
         },
         {
           "type": "prose",
-          "body": "Most portfolio claims rely on personal recollection. AllPrice provides concrete chronological receipts. The project's Figma document contains a \"6-Cronograma\" phase plan tracking discovery, client validation, wireframing, and prototype sign-off from 12/12/2024 to 01/05/2025, culminating in \"Fase 8 — Passagem para o time de desenvolvimento\". My first repository commit occurred on 2025-07-18 — two and a half months after design handoff. The app and admin interfaces were completely finished before my arrival."
+          "body": "Most portfolio claims rely on personal recollection. Here the boundary is simple: my work in the codebase began only after the product design had been handed off to development. The app and admin interfaces were completely finished before my arrival."
         },
         {
           "type": "prose",
@@ -84,16 +84,6 @@
               "value": "61",
               "label": "React & shadcn components",
               "icon": "🧩"
-            },
-            {
-              "value": "7 months",
-              "label": "active codebase maintenance",
-              "icon": "⏱️"
-            },
-            {
-              "value": "15 phases",
-              "label": "dated agency delivery timeline",
-              "icon": "📅"
             }
           ]
         },
@@ -145,9 +135,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "Not product design. The multi-ERP app and admin interfaces were completed between Dec 2024 and May 2025 before I arrived at Spaceapps, as verified by dated project plans.",
+            "Not product design. The multi-ERP app and admin interfaces were complete before I arrived at Spaceapps.",
             "Not backend engineering or ERP APIs. The landing page advertises integrations with Tiny, Bling, Mercado Livre, and Shopee; these were delivered across 13 Bubble sprints by another developer. The repository contains no server directory.",
-            "Not Spaceapps' proprietary methodology. The 15-phase delivery framework belonged to the agency; I delivered as staff within its development phases.",
+            "Not Spaceapps' proprietary methodology. The delivery framework belonged to the agency; I delivered as staff within its development phases.",
             "Not a Next.js application. The stack is a client-side React 18 + Vite SPA; next-themes was merely a theme management utility.",
             "Not domain expertise in e-commerce operations. My exposure was strictly front-end and design engineering for the marketing surface.",
             "Not a design portfolio piece. This is a front-end build and design-remediation credit, demonstrating technical implementation and handoff correction.",
@@ -162,7 +152,7 @@
         },
         {
           "type": "prose",
-          "body": "AllPrice captures the operational reality of high-volume digital delivery. When unbuildable design files reach development, projects stall, budgets escalate, and friction develops between disciplines. A design engineer resolves that friction at the boundary — fixing layout structures directly in Figma before a single line of code is written, then translating that structure into clean, maintainable, and type-safe TypeScript. AllPrice proves that capability with dated receipts, inspectable artifacts, and durable code."
+          "body": "AllPrice captures the operational reality of high-volume digital delivery. When unbuildable design files reach development, projects stall, budgets escalate, and friction develops between disciplines. A design engineer resolves that friction at the boundary — fixing layout structures directly in Figma before a single line of code is written, then translating that structure into clean, maintainable, and type-safe TypeScript. AllPrice proves that capability with inspectable artifacts and durable code."
         }
       ]
     },
@@ -173,16 +163,16 @@
       "blocks": [
         {
           "type": "callout",
-          "body": "O AllPrice é a evidência de atribuição mais sólida do portfólio: um cronograma datado de 15 fases no Figma prova que o design do produto foi concluído antes da minha entrada na Spaceapps. Não desenhei o software multi-ERP e não construí o back-end ou as integrações em Bubble. O Thiago criou o design visual inicial da landing page. Minha contribuição foi a ponte de design engineering: remediar um design inconstruível no frame \"LP otimizada\" diretamente no Figma e programar 61 componentes em React e TypeScript."
+          "body": "O AllPrice é um crédito de design engineering, não de design de produto: o design do produto já estava concluído antes da minha entrada na Spaceapps. Não desenhei o software multi-ERP e não construí o back-end ou as integrações em Bubble. O Thiago criou o design visual inicial da landing page. Minha contribuição foi a ponte de design engineering: remediar um design inconstruível no frame \"LP otimizada\" diretamente no Figma e programar 61 componentes em React e TypeScript."
         },
         {
           "type": "heading",
           "level": 2,
-          "text": "O recibo: Atribuição cronológica e remediação de design"
+          "text": "A fronteira: Atribuição e remediação de design"
         },
         {
           "type": "prose",
-          "body": "Muitas narrativas de portfólio dependem de memória pessoal. O AllPrice fornece recibos cronológicos irrefutáveis. O arquivo Figma do projeto traz uma página chamada \"6-Cronograma\" com um plano de 15 fases registrando discovery, validação com o cliente, wireframes e aprovação de protótipos de 12/12/2024 a 01/05/2025, finalizando na \"Fase 8 — Passagem para o time de desenvolvimento\". Meu primeiro commit no repositório ocorreu em 18/07/2025 — dois meses e meio após a entrega do design. O aplicativo e os painéis administrativos já estavam completamente prontos quando cheguei."
+          "body": "Muitas narrativas de portfólio dependem de memória pessoal. Aqui a fronteira é simples: meu trabalho no código só começou depois que o design do produto já tinha sido entregue para desenvolvimento. O aplicativo e os painéis administrativos já estavam completamente prontos quando cheguei."
         },
         {
           "type": "prose",
@@ -204,16 +194,6 @@
               "value": "61",
               "label": "componentes React e shadcn",
               "icon": "🧩"
-            },
-            {
-              "value": "7 meses",
-              "label": "de manutenção ativa do repositório",
-              "icon": "⏱️"
-            },
-            {
-              "value": "15 fases",
-              "label": "no cronograma de entrega da agência",
-              "icon": "📅"
             }
           ]
         },
@@ -265,9 +245,9 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "Não é o design do produto. O software multi-ERP e seus painéis foram concebidos entre dezembro de 2024 e maio de 2025 antes da minha entrada na Spaceapps, como comprovam os cronogramas datados.",
+            "Não é o design do produto. O software multi-ERP e seus painéis já estavam concebidos antes da minha entrada na Spaceapps.",
             "Não é a engenharia de APIs ou back-end do ERP. A landing page promove a integração com Tiny, Bling, Mercado Livre e Shopee; essas rotinas foram entregues em 13 sprints de Bubble por outro desenvolvedor. O repositório não possui pasta de servidor.",
-            "Não é a metodologia da agência. O fluxo de 15 fases pertencia à Spaceapps; participei como executor técnico em sua fase de desenvolvimento.",
+            "Não é a metodologia da agência. O fluxo de entrega pertencia à Spaceapps; participei como executor técnico em sua fase de desenvolvimento.",
             "Não é uma aplicação Next.js. Trata-se de uma SPA em React 18 e Vite no cliente; next-themes foi apenas uma dependência de temas.",
             "Não é especialização em e-commerce. Minha exposição ao segmento foi restrita à engenharia front-end da página de marketing.",
             "Não é um item de portfólio de design. É um crédito de build e de remediação estrutural, atestando rigor técnico e capacidade de destravar handoffs.",
