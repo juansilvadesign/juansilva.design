@@ -10,7 +10,9 @@ import {
   SIGNAL_FILTER_FACETS,
   applyFilters,
   facetCounts,
+  isVideoPreview,
   lightPlaceholderFor,
+  posterFor,
   recommend,
   stackFacets,
   type Filters,
@@ -210,6 +212,23 @@ function Thumb({
   // `alt=""` throughout: the card's own title carries the meaning, and the
   // whole tile is one link. That is why the video is aria-hidden too.
   if (!motion) {
+    if (isVideoPreview(p.preview)) {
+      const poster = posterFor(p.preview);
+      return (
+        <video
+          src={p.preview}
+          poster={poster}
+          muted
+          loop
+          playsInline
+          autoPlay
+          width={800}
+          height={450}
+          aria-hidden="true"
+          tabIndex={-1}
+        />
+      );
+    }
     // A device-mockup placeholder ships both plates and lets `[data-theme-art]`
     // pick; every real preview returns null here and stays a single <img>.
     const light = lightPlaceholderFor(p.preview);

@@ -16,7 +16,7 @@
   "liveUrl": "https://play.google.com/store/apps/details?id=com.mycompany.indicaz",
   "evidenceLink": "https://www.figma.com/design/BGncD9DIfrWDMxnHDTXuDd/IndicAZ?node-id=9-19106",
   "featured": false,
-  "preview": "/assets/images/indicaz-preview.webp",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/images/indicaz-preview.webp",
   "copy": {
     "en": {
       "title": "Neighbourhood Referral Marketplace — Two Shipped Apps",

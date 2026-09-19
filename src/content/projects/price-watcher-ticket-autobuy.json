@@ -17,7 +17,15 @@
   "liveUrl": "https://github.com/juansilvadesign/price-watcher",
   "evidenceLink": "https://github.com/juansilvadesign/ticket-autobuy",
   "featured": false,
-  "preview": "/assets/images/price-watcher-ticket-autobuy-preview.mp4",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/images/price-watcher-ticket-autobuy-preview.jpg",
+  "previewMotion": {
+    "mp4": "https://cdn.juanpablosilva.com.br/juansilva.design/images/price-watcher-ticket-autobuy-preview.mp4",
+    "webm": "https://cdn.juanpablosilva.com.br/juansilva.design/images/price-watcher-ticket-autobuy-preview.webm",
+    "poster": "https://cdn.juanpablosilva.com.br/juansilva.design/images/price-watcher-ticket-autobuy-preview-poster.webp",
+    "hoverStart": 0,
+    "width": 1280,
+    "height": 720
+  },
   "copy": {
     "en": {
       "title": "A Price Watcher That Cannot Buy, and the Buyer Beside It",

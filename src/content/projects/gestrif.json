@@ -17,7 +17,7 @@
   "liveUrl": "https://gestrif.juanpablosilva.com.br/",
   "evidenceLink": "https://github.com/zokuWebDesign/Gestrif",
   "featured": false,
-  "preview": "/assets/images/gestrif-preview.webp",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/images/gestrif-preview.webp",
   "copy": {
     "en": {
       "title": "Complaint-Management Platform — Landing Page Build",

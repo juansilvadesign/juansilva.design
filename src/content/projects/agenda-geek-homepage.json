@@ -16,7 +16,7 @@
   "liveUrl": "https://agendageek.juanpablosilva.com.br/",
   "evidenceLink": "https://juansilvadesign.github.io/Agenda-Geek-homepage/",
   "featured": false,
-  "preview": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+  "preview": "https://cdn.juanpablosilva.com.br/juansilva.design/images/placeholders/desktop-fullhd-dark-placeholder.svg",
   "copy": {
     "en": {
       "title": "NGO Homepage — Self-Taught HTML/CSS Rebuild",

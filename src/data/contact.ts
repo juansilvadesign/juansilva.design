@@ -15,7 +15,7 @@ interface ContactProfile {
   };
   email: `${string}@${string}`;
   website: `https://${string}`;
-  avatar: `/${string}`;
+  avatar: `/${string}` | `https://${string}`;
   vcardPath: `/${string}.vcf`;
   cardPath: `/${string}/`;
   socials: {
@@ -43,7 +43,7 @@ export const contact = {
   },
   email: "jaypy.uxdesign@gmail.com",
   website: "https://juanpablosilva.com.br",
-  avatar: "/assets/images/hero.webp",
+  avatar: "https://cdn.juanpablosilva.com.br/juansilva.design/images/hero.webp",
   vcardPath: "/juan-silva.vcf",
   cardPath: "/card/",
   socials: {

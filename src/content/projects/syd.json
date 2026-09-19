@@ -119,7 +119,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/syd-profissional-lp.webp",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/syd-profissional-lp.webp",
           "alt": "The practitioner landing page",
           "caption": "The practitioner landing page — supply-side recruitment with clear per-minute remuneration.",
           "width": 1280,
@@ -154,7 +154,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/syd-rh-mobile-lp.webp",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/syd-rh-mobile-lp.webp",
           "alt": "The corporate HR landing page at 375px",
           "caption": "The corporate HR landing page at 375px — ergonomics and layout continuity on the narrowest breakpoint.",
           "width": 375,
@@ -253,7 +253,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/syd-profissional-lp.webp",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/syd-profissional-lp.webp",
           "alt": "A landing page do profissional",
           "caption": "A landing page do profissional — recrutamento do lado da oferta com remuneração clara por minuto.",
           "width": 1280,
@@ -288,7 +288,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/syd-rh-mobile-lp.webp",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/syd-rh-mobile-lp.webp",
           "alt": "A landing page de RH em 375px",
           "caption": "A landing page de RH corporativo em 375px — ergonomia e continuidade de layout no menor breakpoint.",
           "width": 375,

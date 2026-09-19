@@ -58,10 +58,10 @@ export const STACK_ICONS = {
   // Bundler-resolved: these two are imported, not served from `public/`.
   typescript: typescriptUrl,
   javascript: javascriptUrl,
-  tailwind: "/assets/icons/tailwind.svg",
-  figma: "/assets/icons/figma.svg",
-  python: "/assets/icons/python.svg",
-  opensource: "/assets/icons/open-source.svg",
+  tailwind: "https://cdn.juanpablosilva.com.br/juansilva.design/icons/tailwind.svg",
+  figma: "https://cdn.juanpablosilva.com.br/juansilva.design/icons/figma.svg",
+  python: "https://cdn.juanpablosilva.com.br/juansilva.design/icons/python.svg",
+  opensource: "https://cdn.juanpablosilva.com.br/juansilva.design/icons/open-source.svg",
 } as const satisfies Record<StackId, string>;
 
 /**

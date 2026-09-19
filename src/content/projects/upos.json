@@ -132,7 +132,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/placeholders/desktop-fullhd-dark-placeholder.svg",
           "alt": "Service intake on the mobile surface",
           "caption": "Placeholder — service intake on mobile, one of only two modules that exist there.",
           "width": 800,
@@ -167,7 +167,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/placeholders/macbook-air-dark-placeholder.svg",
           "alt": "The how-it-works section of the marketing site",
           "caption": "Placeholder — the how-it-works section of the landing page.",
           "width": 800,
@@ -280,7 +280,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/placeholders/desktop-fullhd-dark-placeholder.svg",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/placeholders/desktop-fullhd-dark-placeholder.svg",
           "alt": "Recepção de serviço na superfície mobile",
           "caption": "Placeholder — recepção de serviço no mobile, um dos dois únicos módulos que existem ali.",
           "width": 800,
@@ -315,7 +315,7 @@
         },
         {
           "type": "image",
-          "src": "/assets/images/placeholders/macbook-air-dark-placeholder.svg",
+          "src": "https://cdn.juanpablosilva.com.br/juansilva.design/images/placeholders/macbook-air-dark-placeholder.svg",
           "alt": "A seção de como funciona do site",
           "caption": "Placeholder — a seção de como funciona da landing page.",
           "width": 800,

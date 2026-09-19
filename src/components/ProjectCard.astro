@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import SourceCodeButton from "./SourceCodeButton.astro";
 import StackBadge from "./StackBadge.astro";
 import { localizedPath, t, type Locale } from "../i18n";
-import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, formatTimeframe, isVideoPreview, lightPlaceholderFor, motionPreviewFor, previewFor, projectActions } from "../lib/projects";
+import { PREVIEW_MOTION_TYPES, SIGNAL_FACETS, formatTimeframe, isVideoPreview, lightPlaceholderFor, motionPreviewFor, posterFor, previewFor, projectActions } from "../lib/projects";
 import "../styles/evidence-rail.css";
 import "../styles/action-row.css";
 
@@ -228,7 +228,7 @@ const timeframe = formatTimeframe(d.dates, lang, copy.projects.detail);
           </video>
         </div>
       ) : isVideo ? (
-        <video src={preview} muted loop playsinline autoplay aria-label={projectCopy.previewAlt} />
+        <video src={preview} poster={posterFor(preview)} muted loop playsinline autoplay aria-label={projectCopy.previewAlt} />
       ) : (
         <>
           <img
