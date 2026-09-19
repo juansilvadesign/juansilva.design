@@ -3,7 +3,7 @@
 
 @font-face {
   font-family: "Spectral";
-  src: url("/assets/fonts/spectral/regular.ttf") format("truetype");
+  src: url("https://cdn.juanpablosilva.com.br/juansilva.design/fonts/spectral/regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Spectral";
-  src: url("/assets/fonts/spectral/medium.ttf") format("truetype");
+  src: url("https://cdn.juanpablosilva.com.br/juansilva.design/fonts/spectral/medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: "Lora";
-  src: url("/assets/fonts/lora/regular.ttf") format("truetype");
+  src: url("https://cdn.juanpablosilva.com.br/juansilva.design/fonts/lora/regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: "Lora";
-  src: url("/assets/fonts/lora/bold.ttf") format("truetype");
+  src: url("https://cdn.juanpablosilva.com.br/juansilva.design/fonts/lora/bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
