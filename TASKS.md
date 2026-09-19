@@ -1138,7 +1138,11 @@ evidence-free — they carry a live Figma file and nothing else. ⛔ **Excluding
 common signal from a display list silently blanks exactly the population that only
 carries it.**
 
-### J4 — Case-study prose 🟡 **3 of the top 3 written 2026-09-07** · ⛔ **NOT DEPLOYED** · Phase 3 media open
+### J4 — Case-study prose ✅ **51 of 51 written and LIVE** (46 in one batch, `4e99538` 2026-09-15) · 🔎 **batch reviewed + fixed 2026-09-19** · Phase 3 media open
+
+> ✅ **Superseded 2026-09-19 — all 51 case studies are live.** Re-probed: `cs-figure` on the live `upos`/`syd`/
+> `psi-silvanacabral` pages, plus a field-level live check (new text present, old text gone, both locales) on the
+> 23 records edited 09-19. The block below is the 09-09 history.
 
 > ⛔🔴 **"Shipped" was true of the REPO, not of the SITE — verified 2026-09-09.** All three case studies are
 > committed, pushed (`main` in sync with `origin/main`) and present in the local `dist/`, and production
@@ -1163,7 +1167,7 @@ carries it.**
 > and `knowledge/projects/media-engine/ROADMAP.md` marks Phase 1 ✅ COMPLETE. ⛔ **A recorded blocker needs a
 > re-probe before it is quoted as current.**
 
-**Coverage: 4 of 50 records carry a case study; 46 still render the "coming soon" aside.**
+**Coverage: 51 of 51 publishable records carry a case study (2026-09-19).** (The 09-07 line read 4 of 50.)
 
 - [x] **Case-study prose — top 3 by evidence weight**, EN + PT, long form with blocks — `psi-silvanacabral`
       (21/21), `syd` (18/18), `upos` (20/20). Written from the store's confirmed `summary`/`contribution`/
@@ -1196,10 +1200,25 @@ carries it.**
         `neverClaim` was **revised, not deleted** — *built* is still false. New source:
         [`sources/portfolio/figma/upos.md`](../../sources/portfolio/figma/upos.md).
         ⛔ Discovery's actors (`Cliente · Técnico · Vendedor`) are **not** the shipped profiles.
-- [ ] **Case-study prose — the remaining 46.** ⛔ Not a batch job: each is written from its own record and
-      interviewed for the gaps the store cannot hold (the decisions, the constraints, the why). Next by
-      evidence weight: `spaceapps` (9) — ⚠️ the record previously wrong in *both* directions, so handle with
-      the most care — then `allprice` (8), `celus` (8), `gestrif` (8).
+- [x] **Case-study prose — the remaining 46** — ⛔ written anyway as ONE batch, commit `4e99538` (2026-09-15,
+      48 files, +9,841 lines), with **no per-record interview and no leak gate** (the 09-07 gate was never
+      committed to the repo, so nothing ran it). It went live without a review.
+  - 🔎 **Reviewed 2026-09-19.** Gate re-created with both legs proven (51/51 planted leaks caught); it failed
+    **21 of 51** live case studies. A second pass read every record's `internalOnly` rules against its prose.
+    - 🔴 `allprice` published Spaceapps' internal Figma schedule (`6-Cronograma`, 15 phases, dated) in EN+PT,
+      plus a "7 months" stat built on the known-inflated date range → cut, deployed and verified live 09-19.
+    - 🔴 `minacash` published that the client hired an agency developer directly · 🟠 `rpn` criticised the
+      client's and the developer's changes (case study **and** card copy) · 🟠 `jobsjoy` "internal initiative,
+      later shelved" · 🟠 `celus` the empty 0-of-28 handoff checklist + the leftover purple token · 🟠 `gestrif`
+      presented shared boilerplate as a dedicated service → each rewritten per its record's `internalOnly` rule.
+    - 🟡 21 records reused `impact`/`attribution` text verbatim → Juan kept the rule; reworded until the gate
+      reads **0/0/0**. Every pair was read for meaning drift and 12 were corrected, including a delegate hack
+      that turned "WordPress 6.4.3" into "6.4.x (patch 3)" to beat the gate.
+    - ✅ `spaceapps` itself was clean on its three `internalOnly` rules.
+    - Deployed 09-19 and checked live: every changed field's new text present, old text gone, both locales.
+- [ ] **Still open from J4's contract for those 46:** the per-record interview, and a **claim-level review
+      against each record's `neverClaim`** — the 09-19 pass checked leaks, not overclaims. ⚠️ The gate is
+      still not in the repo; until it is, the next batch can skip it the same way.
 - [ ] **Phase 3 media** — demo/walkthrough, hyperframes, motion via talk-to-figma-fork + AEUX.
       ✅ **Runway is unblocked** — key issued 2026-09-02, cost baseline measured (500 → 344 credits;
       ~10 credits per 2s `gen4_turbo` clip, and ⛔ `cancelTask` on a live image job costs 20 **with no refund**).
