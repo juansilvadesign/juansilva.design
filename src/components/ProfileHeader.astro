@@ -12,15 +12,22 @@ const copy = t(lang).card;
 
 <header class="profile-header">
   <div class="profile-header__avatar-wrap">
-    <img
-      class="profile-header__avatar"
-      src={contact.avatar}
-      alt={copy.portraitAlt}
-      width="128"
-      height="128"
-      loading="eager"
-      decoding="async"
-    />
+    {/* Theme-paired like the hero it is cropped from: black suit on the dark
+        card, white suit on the light one (`[data-theme-art]`, clone.css).
+        Both eager — at ~20 KB the second fetch costs less than a lazy load's
+        wait on the one image above the fold. */}
+    {(["dark", "light"] as const).map((theme) => (
+      <img
+        class="profile-header__avatar"
+        src={contact.avatar[theme]}
+        alt={copy.portraitAlt}
+        width="128"
+        height="128"
+        loading="eager"
+        decoding="async"
+        data-theme-art={theme}
+      />
+    ))}
   </div>
   <h1>{contact.name.display}</h1>
   <p class="profile-header__role">{contact.title}</p>
@@ -51,7 +58,6 @@ const copy = t(lang).card;
     border-radius: var(--radius-pill);
     background: var(--surface);
     object-fit: cover;
-    object-position: 50% 52%;
   }
 
   h1 {

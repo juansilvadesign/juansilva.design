@@ -5,6 +5,7 @@ import Marquee from "../../components/Marquee.astro";
 import Projects from "../../components/Projects.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Splash from "../../components/Splash.astro";
+import { heroPortrait } from "../../data/hero";
 import { localeStaticPaths, t, type Locale } from "../../i18n";
 
 export function getStaticPaths() {
@@ -17,6 +18,20 @@ interface Props {
 
 const { lang } = Astro.props;
 const copy = t(lang);
+
+// Built here rather than with `define:vars`, which `astro check` cannot see
+// through (it reports the injected names as missing).
+const heroPreload = `(function () {
+  var stills = ${JSON.stringify(heroPortrait.stills)};
+  var still = stills[document.documentElement.dataset.theme === "light" ? "light" : "dark"];
+  var link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "image";
+  link.setAttribute("imagesrcset", still.srcset);
+  link.setAttribute("imagesizes", ${JSON.stringify(heroPortrait.sizes)});
+  link.setAttribute("fetchpriority", "high");
+  document.head.appendChild(link);
+})();`;
 ---
 
 <BaseLayout {lang} title={copy.meta.defaultTitle} description={copy.meta.description} canonicalPath="/">
@@ -62,6 +77,18 @@ const copy = t(lang);
         setTimeout(done, 6000);
       })();
     </script>
+    {/*
+      The hero still for THIS visit's theme, preloaded before the stylesheets
+      are requested. Both stills ship `loading="lazy"` so the hidden one is
+      never fetched; this is what keeps the visible one — the LCP image — off
+      the lazy path. It can only run here: the theme is known after the
+      BaseLayout head script, and a body script would wait on the CSS.
+
+      ⛔ `imagesrcset` + `imagesizes` must match the <img> exactly (both read
+      `heroPortrait`), or the browser picks a different candidate and the
+      preload is a second download rather than a head start.
+    */}
+    <script is:inline set:html={heroPreload}></script>
   </Fragment>
 
   <Splash {lang} />

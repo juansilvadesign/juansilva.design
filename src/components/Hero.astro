@@ -4,6 +4,7 @@ import TypedFallback from "./text/TypedFallback.astro";
 import SocialLinks from "./SocialLinks.astro";
 import ResumeButton from "./ResumeButton.astro";
 import { socialLinks } from "../data/links";
+import { heroPortrait } from "../data/hero";
 import { t, type Locale } from "../i18n";
 import "../styles/text-type.css";
 
@@ -18,43 +19,98 @@ const copy = t(lang);
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero__inner">
     {/*
-      Theme-paired, the same `[data-theme-art]` mechanism the project
-      placeholders use (see `lightPlaceholderFor` in `lib/projects.ts` and the
-      rule in `clone.css`). Two plates rather than a JS swap so a saved-light
-      visit never paints the dark portrait first.
+      The Figma frame `23015:908`, rebuilt as layers instead of one flattened
+      PNG so the portrait can move: the glass back plate, the front card with
+      the portrait inside it, and the light beam over the card's top edge.
 
-      ⚠️ `hero-light.webp` is currently a byte-identical COPY of `hero.webp`,
-      made on request so the wiring can land before the artwork exists. Nothing
-      about the light canvas is corrected in it yet — replace the file, not the
-      markup, when the real light cut is ready.
+      Stills are theme-paired through `[data-theme-art]` (the rule in
+      `clone.css`), so a saved-light visit never paints the dark portrait
+      first. On a theme CHANGE the controller below plays a clip of the suit
+      turning — white → black into dark, black → white into light — and leaves
+      it parked on its last frame.
 
-      ⛔ Both carry `fetchpriority="high"`, and only one is ever displayed. The
-      hidden plate still costs a fetch, so this is the one place in the site
-      where the pair is NOT free — it is the LCP image. Worth re-checking once
-      the light cut exists and the two files stop being identical.
+      ⛔ Both stills are `loading="lazy"`, which is what keeps the hidden one
+      from being fetched at all (a `display: none` lazy image never loads). The
+      visible one is not slowed by it: the head script in `index.astro`
+      preloads exactly that candidate at high priority before the stylesheets
+      are even requested. This used to be the one place the pair was not free —
+      two eager 195 KB plates for one LCP image.
     */}
-    <img
+    <div
       class="hero__portrait"
-      src="https://cdn.juanpablosilva.com.br/juansilva.design/images/hero.webp"
-      alt={copy.hero.portraitAlt}
-      width="452"
-      height="651"
-      loading="eager"
-      decoding="async"
-      fetchpriority="high"
-      data-theme-art="dark"
-    />
-    <img
-      class="hero__portrait"
-      src="https://cdn.juanpablosilva.com.br/juansilva.design/images/hero-light.webp"
-      alt={copy.hero.portraitAlt}
-      width="452"
-      height="651"
-      loading="eager"
-      decoding="async"
-      fetchpriority="high"
-      data-theme-art="light"
-    />
+      data-hero-portrait
+      data-clip-base={heroPortrait.clipBase}
+      data-clip-takes={heroPortrait.takes.join(" ")}
+      data-webm-type={heroPortrait.webmType}
+    >
+      <span class="hero__card hero__card--back" aria-hidden="true"></span>
+      <div class="hero__card hero__card--front">
+        {(["dark", "light"] as const).map((theme) => (
+          <img
+            class="hero__still"
+            src={heroPortrait.stills[theme].src}
+            srcset={heroPortrait.stills[theme].srcset}
+            sizes={heroPortrait.sizes}
+            alt={copy.hero.portraitAlt}
+            width={heroPortrait.width}
+            height={heroPortrait.height}
+            loading="lazy"
+            decoding="async"
+            fetchpriority="high"
+            data-theme-art={theme}
+          />
+        ))}
+        {/* Two players so a new clip can fade in over the last frame of the
+            previous one instead of cutting through the still. Decorative: the
+            still underneath carries the name. */}
+        <video class="hero__clip" data-hero-clip muted playsinline preload="none" disablepictureinpicture disableRemotePlayback aria-hidden="true" tabindex="-1"></video>
+        <video class="hero__clip" data-hero-clip muted playsinline preload="none" disablepictureinpicture disableRemotePlayback aria-hidden="true" tabindex="-1"></video>
+      </div>
+      {/*
+        Figma `23015:147` + `23015:149` (two blurred beams) and `23015:148`
+        (the lit edge), exported as SVG and placed in the frame's 452×651 space.
+        The beams sit UNDER the card in Figma, so here they are clipped at its
+        top edge (y 139) instead — the card is opaque, so the two are the same
+        picture, and one overlay can carry the edge line, which sits ON it.
+      */}
+      <svg class="hero__beam" viewBox="0 0 452 145" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="hero-beam-clip"><rect width="452" height="139"></rect></clipPath>
+          <filter id="hero-beam-blur-wide" x="0" y="0" width="210" height="191" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="13.5"></feGaussianBlur>
+          </filter>
+          <filter id="hero-beam-blur-core" x="0" y="0" width="208" height="130" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="8"></feGaussianBlur>
+          </filter>
+          <filter id="hero-beam-blur-edge" x="0" y="0" width="294" height="5.5" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+          </filter>
+          <linearGradient id="hero-beam-wide" x1="105" y1="40.8791" x2="105" y2="164" gradientUnits="userSpaceOnUse">
+            <stop style="stop-color: var(--hero-beam)" stop-opacity="0"></stop>
+            <stop offset="1" style="stop-color: var(--hero-beam)"></stop>
+          </linearGradient>
+          <linearGradient id="hero-beam-core" x1="96.8824" y1="56.0092" x2="100.331" y2="114.217" gradientUnits="userSpaceOnUse">
+            <stop style="stop-color: var(--hero-beam)" stop-opacity="0"></stop>
+            <stop offset="1" style="stop-color: var(--hero-beam)"></stop>
+          </linearGradient>
+          <radialGradient id="hero-beam-edge" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(147 3.25) scale(145 46.4182)">
+            <stop style="stop-color: var(--hero-beam)"></stop>
+            <stop offset="1" style="stop-color: var(--hero-beam)" stop-opacity="0"></stop>
+          </radialGradient>
+        </defs>
+        <g clip-path="url(#hero-beam-clip)">
+          <g transform="translate(106 0)" opacity="0.8" filter="url(#hero-beam-blur-wide)">
+            <path d="M92.9819 117.42V27H114.19V117.42L183 164H27L92.9819 117.42Z" fill="url(#hero-beam-wide)"></path>
+          </g>
+          <g transform="translate(107 50)" opacity="0.8" filter="url(#hero-beam-blur-core)">
+            <path d="M90.4411 80.68V16H114.369V80.68L192 114H16L90.4411 80.68Z" fill="url(#hero-beam-core)"></path>
+          </g>
+        </g>
+        <g transform="translate(63 136.25)" opacity="0.8" filter="url(#hero-beam-blur-edge)">
+          <path d="M2 2.75H292" stroke="url(#hero-beam-edge)" stroke-width="1.5"></path>
+        </g>
+      </svg>
+    </div>
 
     <div class="hero__content">
       <div class="hero__copy">
@@ -134,6 +190,130 @@ const copy = t(lang);
   </div>
 </section>
 
+{/*
+  The portrait's theme-change controller. Inline and dependency-free, like the
+  switch it listens to: `ThemeToggle` fires `themechange` from every path that
+  repaints the page (click, another tab, the OS preference), and this plays the
+  clip that lands on the new theme.
+
+  - The take is random per change (`data-clip-takes`), chosen when the pointer
+    or focus first reaches a switch, so the clip it will play is already
+    downloading by the time the click lands.
+  - Reduced motion, Save-Data and a hidden tab get the still swap instead —
+    which is also the no-JS behaviour, since the stills are plain CSS.
+  - A clip that cannot play (blocked, 404, decode error) falls back the same
+    way; there is no state in which the card is left empty.
+*/}
+<script is:inline>
+  (function () {
+    var host = document.querySelector("[data-hero-portrait]");
+    if (!host) return;
+    var clips = host.querySelectorAll("[data-hero-clip]");
+    if (clips.length !== 2 || typeof clips[0].play !== "function") return;
+
+    var root = document.documentElement;
+    var base = host.getAttribute("data-clip-base") || "";
+    var takes = (host.getAttribute("data-clip-takes") || "smile").split(" ");
+    var webmType = host.getAttribute("data-webm-type") || "";
+    var ext = webmType && clips[0].canPlayType(webmType) ? ".webm" : ".mp4";
+    var motion = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    var theme = root.dataset.theme === "light" ? "light" : "dark";
+    var front = null; // the player on top, or null while the still shows
+    var planned = null; // { theme, url } chosen on intent, spent by the next change
+
+    var still = function (name) {
+      return host.querySelector('[data-theme-art="' + name + '"]');
+    };
+    // The visible still loads now; the other waits for intent (see `prime`).
+    if (still(theme)) still(theme).loading = "eager";
+
+    var clipFor = function (name) {
+      return base + "to-" + name + "-" + takes[Math.floor(Math.random() * takes.length)] + ext;
+    };
+    var spare = function () {
+      return front === clips[0] ? clips[1] : clips[0];
+    };
+    var stillOnly = function () {
+      var saver = navigator.connection && navigator.connection.saveData;
+      return document.hidden || saver || (motion && motion.matches);
+    };
+    var load = function (clip, url) {
+      if (clip.getAttribute("src") === url) return;
+      // `preload` first: the markup's `none` would otherwise govern the load
+      // that assigning `src` starts.
+      clip.preload = "auto";
+      clip.setAttribute("src", url);
+    };
+
+    var prime = function () {
+      var next = theme === "dark" ? "light" : "dark";
+      if (!planned || planned.theme !== next) planned = { theme: next, url: clipFor(next) };
+      if (still(next)) still(next).loading = "eager";
+      if (!stillOnly()) load(spare(), planned.url);
+    };
+
+    var raise = function (clip) {
+      var previous = front;
+      front = clip;
+      clip.classList.remove("is-leaving");
+      clip.classList.add("is-front");
+      if (!previous || previous === clip) return;
+      previous.classList.remove("is-front");
+      previous.classList.add("is-leaving");
+      window.setTimeout(function () {
+        if (previous === front) return;
+        previous.classList.remove("is-leaving");
+        previous.pause();
+      }, 400);
+    };
+
+    var drop = function () {
+      if (!front) return;
+      front.classList.remove("is-front");
+      front.pause();
+      front = null;
+    };
+
+    document.addEventListener("themechange", function (event) {
+      var next = event.detail && event.detail.theme === "light" ? "light" : "dark";
+      if (next === theme) return; // the switch's own first sync, or a repeat
+      theme = next;
+      if (still(next)) still(next).loading = "eager";
+      var url = planned && planned.theme === next ? planned.url : clipFor(next);
+      planned = null;
+      if (stillOnly()) {
+        drop();
+        return;
+      }
+
+      var clip = spare();
+      load(clip, url);
+      var onPlaying = function () {
+        clip.removeEventListener("playing", onPlaying);
+        if (theme === next) raise(clip);
+      };
+      clip.addEventListener("playing", onPlaying);
+      clip.currentTime = 0;
+      // Called inside the change handler on purpose: it is still the click's
+      // task, which is what lets strict autoplay policies (iOS Low Power
+      // Mode) treat this as user-initiated playback.
+      var attempt = clip.play();
+      if (attempt && typeof attempt.catch === "function") {
+        attempt.catch(function () {
+          clip.removeEventListener("playing", onPlaying);
+          if (theme === next) drop();
+        });
+      }
+    });
+
+    document.querySelectorAll("[data-theme-switch]").forEach(function (switcher) {
+      switcher.addEventListener("pointerenter", prime);
+      switcher.addEventListener("focusin", prime);
+      switcher.addEventListener("touchstart", prime, { passive: true });
+    });
+  })();
+</script>
+
 <style>
   .hero {
     padding: var(--space-px-24) var(--space-px-16);
@@ -148,9 +328,82 @@ const copy = t(lang);
     margin: 0 auto;
   }
 
+  /*
+   * Every length below is the Figma frame's own, as a fraction of its 452×651
+   * render box (the beam's blur reaches 27px above the 452×624 frame), so the
+   * composition scales as one piece across the three `--hero-media-*` widths.
+   */
   .hero__portrait {
+    position: relative;
+    flex: none;
     width: var(--hero-media-mobile);
+    aspect-ratio: 452 / 651;
+  }
+
+  .hero__card {
+    position: absolute;
+    left: 0;
+    width: calc(420 / 452 * 100%);
+    height: calc(479 / 651 * 100%);
+    /* 16px on the 420×479 card, scaled with it and kept circular. */
+    border-radius: calc(16 / 420 * 100%) / calc(16 / 479 * 100%);
+  }
+
+  .hero__card--back {
+    top: calc(172 / 651 * 100%);
+    left: calc(32 / 452 * 100%);
+    border: var(--border-width) solid var(--hero-card-back-border);
+    background: var(--hero-card-back-fill);
+  }
+
+  /* `isolation` keeps the players' z-index inside the card, under the beam. */
+  .hero__card--front {
+    top: calc(139 / 651 * 100%);
+    overflow: hidden;
+    isolation: isolate;
+    background: var(--hero-card-fill);
+  }
+
+  .hero__still,
+  .hero__clip {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /*
+   * A player is invisible until the controller hands it `is-front` on its
+   * first `playing` event, so a clip that has not decoded a frame yet never
+   * covers the still with an empty box. The outgoing one holds at full
+   * opacity UNDER the fade (`is-leaving`), which is what makes the handover a
+   * crossfade between two pictures rather than a dip through the card.
+   */
+  .hero__clip {
+    opacity: 0;
+    transition: opacity var(--motion-base) var(--ease-standard);
+  }
+
+  .hero__clip.is-front {
+    z-index: 2;
+    opacity: 1;
+  }
+
+  .hero__clip.is-leaving {
+    z-index: 1;
+    opacity: 1;
+    transition: none;
+  }
+
+  .hero__beam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: auto;
+    overflow: visible;
+    pointer-events: none;
   }
 
   .hero__content,
@@ -512,7 +765,7 @@ const copy = t(lang);
     }
 
     .hero__portrait {
-      width: auto;
+      width: var(--hero-media-desktop);
     }
   }
 

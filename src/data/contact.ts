@@ -1,4 +1,5 @@
 import { localizedPath, t, type Locale } from "../i18n";
+import { profileAvatar } from "./hero";
 import type { ContactAction } from "../types/contact";
 
 interface ContactProfile {
@@ -15,7 +16,7 @@ interface ContactProfile {
   };
   email: `${string}@${string}`;
   website: `https://${string}`;
-  avatar: `/${string}` | `https://${string}`;
+  avatar: Record<"dark" | "light", `https://${string}`>;
   vcardPath: `/${string}.vcf`;
   cardPath: `/${string}/`;
   socials: {
@@ -43,7 +44,7 @@ export const contact = {
   },
   email: "jaypy.uxdesign@gmail.com",
   website: "https://juanpablosilva.com.br",
-  avatar: "https://cdn.juanpablosilva.com.br/juansilva.design/images/hero.webp",
+  avatar: profileAvatar,
   vcardPath: "/juan-silva.vcf",
   cardPath: "/card/",
   socials: {
