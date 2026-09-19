@@ -21,7 +21,7 @@
     "en": {
       "title": "NGO Homepage — Self-Taught HTML/CSS Rebuild",
       "tagline": "The first code I ever wrote: one screen, hand-built to learn front-end.",
-      "description": "An NGO's winning competition design had no path to existing — nobody would build it for free — so I taught myself enough front-end to build its front door. One screen, rebuilt by hand in HTML and CSS from the team's Figma and deployed: five breakpoints from 320px to beyond 1700px, so both ends of the range actually hold. This is the first code I ever wrote, kept here for what it is; the screen was designed by the team, not by me, and the NGO's product was never built.",
+      "description": "An NGO's winning competition design had no path to existing — nobody would build it for free. I taught myself enough front-end to build its front door. One screen, rebuilt by hand in HTML and CSS from the team's Figma and deployed: five breakpoints from 320px to beyond 1700px, so both ends of the range actually hold. This is the first code I ever wrote, kept here for what it is; the screen was designed by the team, not by me, and the NGO's product was never built.",
       "previewAlt": "Homepage rebuild for an e-waste NGO, hand-coded in HTML and CSS",
       "liveLabel": "View the page",
       "evidenceLabel": "The original 2023 deploy"

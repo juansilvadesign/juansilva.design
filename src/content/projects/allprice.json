@@ -23,7 +23,7 @@
       "title": "Multi-ERP Control Panel — Landing Page Remediation & Build",
       "tagline": "An unbuildable design file remediated, then implemented as the landing page.",
       "description": "Received a landing-page design built from groups with no frames and no auto-layout — a file that cannot survive contact with responsive code. Rebuilt it into something buildable before writing a line, then implemented it: hero, four feature variants, pricing, testimonials, FAQ and CTA on a sixty-one-component React and shadcn base, plus the legal pages, maintained for about seven months. A build and remediation credit — the product design was finished before I arrived.",
-      "previewAlt": "Landing page for a multi-ERP and multi-marketplace control panel",
+      "previewAlt": "Landing page for a control panel that unifies multiple ERPs and marketplaces",
       "liveLabel": "View the build (self-hosted copy)",
       "evidenceLabel": "Source code"
     },

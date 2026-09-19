@@ -31,7 +31,7 @@
     "en": {
       "title": "Field-Service Operations Product & Marketing Site",
       "tagline": "Eight-module field-service operations product, plus its Next.js marketing site.",
-      "description": "Designed an eight-module operations product for a technical-assistance business — service desk, quoting, a work-order kanban, catalogues, customers and finance — then designed and coded its marketing site in Next.js. The product is live in production, and a later team rebuilt the app on a different stack and kept the design.",
+      "description": "Designed an eight-module operations product for a technical-assistance business — service desk, quoting, a work-order kanban, catalogues, customers and finance — then designed and coded its marketing site in Next.js. The product is live in production; a later team rebuilt it on a different stack, keeping the design.",
       "previewAlt": "upOS field-service operations marketing site, with the product dashboard in the hero",
       "liveLabel": "View the build (self-hosted copy)",
       "evidenceLabel": "Source code"
