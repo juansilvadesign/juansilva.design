@@ -49,7 +49,7 @@
       "blocks": [
         {
           "type": "callout",
-          "body": "Attribution and Scope Boundary: I was the sole website UI designer for the responsive retail landing page, loyalty capture funnel, and job application flows. Kelvin Bezerra designed the logo and brand identity. A no-code developer implemented the WordPress site. Delivery status: built on WordPress, but the client rejected the execution; the landing page was retired. The live domain today serves a VTEX enterprise storefront, not this design artifact."
+          "body": "Attribution and Scope Boundary: I was the sole website UI designer for the responsive retail landing page, loyalty capture funnel, and job application flows. Kelvin Bezerra designed the logo and brand identity. A no-code developer implemented the WordPress site. Delivery status: the landing page was built on WordPress, but the client turned down the execution and it was retired. The live domain today serves a VTEX enterprise storefront, not this design artifact."
         },
         {
           "type": "heading",

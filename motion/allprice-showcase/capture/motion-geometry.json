@@ -1,0 +1,1665 @@
+{
+  "desktop": {
+    "height": 11279,
+    "fonts": [],
+    "sections": [
+      {
+        "id": "",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 1440,
+          "h": 0
+        }
+      },
+      {
+        "id": "",
+        "tag": "HEADER",
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 1440,
+          "h": 86
+        }
+      },
+      {
+        "id": "inicio",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 86,
+          "w": 1440,
+          "h": 1360
+        }
+      },
+      {
+        "id": "",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 1446,
+          "w": 1440,
+          "h": 96
+        }
+      },
+      {
+        "id": "comofunciona",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 1542,
+          "w": 1440,
+          "h": 1124.625
+        }
+      },
+      {
+        "id": "erp",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 2666.625,
+          "w": 1440,
+          "h": 1260
+        }
+      },
+      {
+        "id": "features",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 3926.625,
+          "w": 1440,
+          "h": 1013
+        }
+      },
+      {
+        "id": "ads",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 4939.625,
+          "w": 1440,
+          "h": 1270
+        }
+      },
+      {
+        "id": "",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 6209.625,
+          "w": 1440,
+          "h": 549
+        }
+      },
+      {
+        "id": "pricing",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 6758.625,
+          "w": 1440,
+          "h": 1557.375
+        }
+      },
+      {
+        "id": "testimonials",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 8316,
+          "w": 1440,
+          "h": 954.71875
+        }
+      },
+      {
+        "id": "faq",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 9270.71875,
+          "w": 1440,
+          "h": 1448.40625
+        }
+      }
+    ],
+    "headings": [
+      {
+        "text": "Precifique, controle seus lucros e acompanhe a saúde do seu e-commerce com praticidade e precisão.",
+        "box": {
+          "x": 145.5,
+          "y": 176,
+          "w": 1149,
+          "h": 144
+        }
+      },
+      {
+        "text": "Automatize gestão e precificação por menos de R$ 3,00 ao dia!",
+        "box": {
+          "x": 291,
+          "y": 1478,
+          "w": 857.984375,
+          "h": 32
+        }
+      },
+      {
+        "text": "Para quem é o All Price?",
+        "box": {
+          "x": 501.078125,
+          "y": 1659,
+          "w": 437.828125,
+          "h": 40
+        }
+      },
+      {
+        "text": "Vendedores de Marketplace",
+        "box": {
+          "x": 181,
+          "y": 2172.625,
+          "w": 306,
+          "h": 56
+        }
+      },
+      {
+        "text": "Quem busca facilidade na precificação",
+        "box": {
+          "x": 567,
+          "y": 2172.625,
+          "w": 306,
+          "h": 56
+        }
+      },
+      {
+        "text": "Quem vende como CPF, MEI ou ME",
+        "box": {
+          "x": 953,
+          "y": 2172.625,
+          "w": 306,
+          "h": 56
+        }
+      },
+      {
+        "text": "Para quem usa e para quem não usa ERP",
+        "box": {
+          "x": 184,
+          "y": 2770.625,
+          "w": 1072,
+          "h": 40
+        }
+      },
+      {
+        "text": "Funcionalidades que você precisa!",
+        "box": {
+          "x": 136,
+          "y": 4048.625,
+          "w": 1168,
+          "h": 40
+        }
+      },
+      {
+        "text": "Precificação",
+        "box": {
+          "x": 161,
+          "y": 4290.625,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Avisos em tempo real",
+        "box": {
+          "x": 487,
+          "y": 4290.625,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Vendas",
+        "box": {
+          "x": 813,
+          "y": 4290.625,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Cadastro",
+        "box": {
+          "x": 1139,
+          "y": 4290.625,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Saúde e evolução",
+        "box": {
+          "x": 1465,
+          "y": 4290.625,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Precifique seus anúncios em um só lugar",
+        "box": {
+          "x": 157,
+          "y": 5063.625,
+          "w": 1126,
+          "h": 40
+        }
+      },
+      {
+        "text": "Avisos em tempo real",
+        "box": {
+          "x": 745,
+          "y": 6321.515625,
+          "w": 469,
+          "h": 38.40625
+        }
+      },
+      {
+        "text": "E tudo isso cabe no seu bolso!",
+        "box": {
+          "x": 272,
+          "y": 6890.625,
+          "w": 896,
+          "h": 38.40625
+        }
+      },
+      {
+        "text": "Mensal",
+        "box": {
+          "x": 391,
+          "y": 7276.40625,
+          "w": 296,
+          "h": 44.796875
+        }
+      },
+      {
+        "text": "Anual",
+        "box": {
+          "x": 752,
+          "y": 7275.40625,
+          "w": 298,
+          "h": 44.796875
+        }
+      },
+      {
+        "text": "Depoimentos de quem teve a rotina melhorada",
+        "box": {
+          "x": 336,
+          "y": 8376,
+          "w": 768,
+          "h": 80
+        }
+      },
+      {
+        "text": "Perguntas frequentes",
+        "box": {
+          "x": 336,
+          "y": 9390.71875,
+          "w": 768,
+          "h": 38.40625
+        }
+      },
+      {
+        "text": "1. Para quem, exatamente, é o All Price?",
+        "box": {
+          "x": 199,
+          "y": 9589.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "2. Preciso ter um ERP para usar?",
+        "box": {
+          "x": 199,
+          "y": 9677.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "3. Quais marketplaces e ERPs o All Price integra?",
+        "box": {
+          "x": 199,
+          "y": 9765.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "4. Como o sistema calcula o preço de venda?",
+        "box": {
+          "x": 199,
+          "y": 9853.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "5. Dá pra atualizar centenas de anúncios de uma só vez?",
+        "box": {
+          "x": 199,
+          "y": 9941.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "6. Recebo alertas de lucro ou prejuízo?",
+        "box": {
+          "x": 199,
+          "y": 10029.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "7. Há limite de pedidos ou anúncios que posso importar?",
+        "box": {
+          "x": 199,
+          "y": 10117.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "8. E a parte de relatórios?",
+        "box": {
+          "x": 199,
+          "y": 10205.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "9. Quanto custa?",
+        "box": {
+          "x": 199,
+          "y": 10293.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "10. Posso testar antes de pagar?",
+        "box": {
+          "x": 199,
+          "y": 10381.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "11. Como funciona o suporte e onboarding?",
+        "box": {
+          "x": 199,
+          "y": 10469.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "12. Meus dados ficam seguros?",
+        "box": {
+          "x": 199,
+          "y": 10557.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "Mapa do site",
+        "box": {
+          "x": 484.375,
+          "y": 10789.125,
+          "w": 165.15625,
+          "h": 20
+        }
+      },
+      {
+        "text": "Social",
+        "box": {
+          "x": 702.53125,
+          "y": 10789.125,
+          "w": 165.15625,
+          "h": 20
+        }
+      },
+      {
+        "text": "Legal",
+        "box": {
+          "x": 920.6875,
+          "y": 10789.125,
+          "w": 165.15625,
+          "h": 20
+        }
+      },
+      {
+        "text": "Atendimento",
+        "box": {
+          "x": 1138.84375,
+          "y": 10789.125,
+          "w": 165.15625,
+          "h": 20
+        }
+      }
+    ],
+    "buttons": [
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 991,
+          "y": 21,
+          "w": 153,
+          "h": 44
+        }
+      },
+      {
+        "text": "Já sou cliente",
+        "aria": null,
+        "box": {
+          "x": 1160,
+          "y": 21,
+          "w": 144,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero contratar agora",
+        "aria": null,
+        "box": {
+          "x": 462,
+          "y": 428,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar 7 dias grátis",
+        "aria": null,
+        "box": {
+          "x": 728,
+          "y": 428,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar grátis",
+        "aria": null,
+        "box": {
+          "x": 595,
+          "y": 1847,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 176,
+          "y": 4790.625,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 502,
+          "y": 4790.625,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 828,
+          "y": 4790.625,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 1154,
+          "y": 4790.625,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 1480,
+          "y": 4790.625,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar agora!",
+        "aria": null,
+        "box": {
+          "x": 595,
+          "y": 5223.625,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar agora!",
+        "aria": null,
+        "box": {
+          "x": 745,
+          "y": 6602.734375,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Teste grátis",
+        "aria": null,
+        "box": {
+          "x": 391,
+          "y": 8177,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Teste grátis",
+        "aria": null,
+        "box": {
+          "x": 776,
+          "y": 8178,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "1. Para quem, exatamente, é o All Price?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 9589.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "2. Preciso ter um ERP para usar?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 9677.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "3. Quais marketplaces e ERPs o All Price integra?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 9765.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "4. Como o sistema calcula o preço de venda?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 9853.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "5. Dá pra atualizar centenas de anúncios de uma só vez?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 9941.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "6. Recebo alertas de lucro ou prejuízo?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 10029.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "7. Há limite de pedidos ou anúncios que posso importar?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 10117.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "8. E a parte de relatórios?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 10205.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "9. Quanto custa?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 10293.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "10. Posso testar antes de pagar?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 10381.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "11. Como funciona o suporte e onboarding?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 10469.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "12. Meus dados ficam seguros?",
+        "aria": null,
+        "box": {
+          "x": 199,
+          "y": 10557.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "Falar com o suporte",
+        "aria": null,
+        "box": {
+          "x": 136,
+          "y": 10932.125,
+          "w": 250,
+          "h": 44
+        }
+      }
+    ],
+    "scrollers": [
+      {
+        "tag": "DIV",
+        "classes": "overflow-x-auto pb-4 cursor-grab active:cursor-grabbing scrollbar-hide",
+        "box": {
+          "x": 136,
+          "y": 4237.625,
+          "w": 1168,
+          "h": 638
+        },
+        "scrollWidth": 1614,
+        "inner": [
+          {
+            "text": "PrecificaçãoAnúncios em lista com todos os custosPrecificação por margem de cont",
+            "box": {
+              "x": 136,
+              "y": 4237.625,
+              "w": 1614,
+              "h": 622
+            }
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "classes": "w-full overflow-x-auto pb-4 cursor-grab active:cursor-grabbing scrollbar-hide",
+        "box": {
+          "x": 136,
+          "y": 8704,
+          "w": 1168,
+          "h": 566.71875
+        },
+        "scrollWidth": 1589,
+        "inner": [
+          {
+            "text": "Conectou muito fácil com meu Bling,\ne agora tenho todos os custos\nsincronizados ",
+            "box": {
+              "x": 136,
+              "y": 8704,
+              "w": 1589,
+              "h": 550.71875
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "faqOpen": {
+    "question": {
+      "x": 199,
+      "y": 9677.125,
+      "w": 1042,
+      "h": 72
+    },
+    "answer": {
+      "box": {
+        "x": 199,
+        "y": 9749.125,
+        "w": 1042,
+        "h": 81
+      },
+      "text": "Não, você não precisa ter um ERP para usar o All Price. Nossa plataforma foi desenvolvida para funcionar de forma independente, permitindo que você gerencie seus preços e margens mesmo sem um sistema ERP."
+    },
+    "following": [
+      {
+        "text": "3. Quais marketplaces e ERPs o All Price integra?",
+        "box": {
+          "x": 199,
+          "y": 9846.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "4. Como o sistema calcula o preço de venda?",
+        "box": {
+          "x": 199,
+          "y": 9934.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "5. Dá pra atualizar centenas de anúncios de uma só vez?",
+        "box": {
+          "x": 199,
+          "y": 10022.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "6. Recebo alertas de lucro ou prejuízo?",
+        "box": {
+          "x": 199,
+          "y": 10110.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "7. Há limite de pedidos ou anúncios que posso importar?",
+        "box": {
+          "x": 199,
+          "y": 10198.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "8. E a parte de relatórios?",
+        "box": {
+          "x": 199,
+          "y": 10286.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "9. Quanto custa?",
+        "box": {
+          "x": 199,
+          "y": 10374.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "10. Posso testar antes de pagar?",
+        "box": {
+          "x": 199,
+          "y": 10462.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "11. Como funciona o suporte e onboarding?",
+        "box": {
+          "x": 199,
+          "y": 10550.125,
+          "w": 1042,
+          "h": 72
+        }
+      },
+      {
+        "text": "12. Meus dados ficam seguros?",
+        "box": {
+          "x": 199,
+          "y": 10638.125,
+          "w": 1042,
+          "h": 72
+        }
+      }
+    ]
+  },
+  "mobile": {
+    "height": 15607,
+    "fonts": [],
+    "sections": [
+      {
+        "id": "",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 390,
+          "h": 0
+        }
+      },
+      {
+        "id": "",
+        "tag": "HEADER",
+        "box": {
+          "x": 0,
+          "y": 0,
+          "w": 390,
+          "h": 76
+        }
+      },
+      {
+        "id": "inicio",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 76,
+          "w": 390,
+          "h": 836.265625
+        }
+      },
+      {
+        "id": "",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 912.265625,
+          "w": 390,
+          "h": 160
+        }
+      },
+      {
+        "id": "comofunciona",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 1072.265625,
+          "w": 390,
+          "h": 2288.421875
+        }
+      },
+      {
+        "id": "erp",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 3360.6875,
+          "w": 390,
+          "h": 2215.0625
+        }
+      },
+      {
+        "id": "features",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 5575.75,
+          "w": 390,
+          "h": 1197
+        }
+      },
+      {
+        "id": "ads",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 6772.75,
+          "w": 390,
+          "h": 746
+        }
+      },
+      {
+        "id": "",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 7518.75,
+          "w": 390,
+          "h": 791.90625
+        }
+      },
+      {
+        "id": "pricing",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 8310.65625,
+          "w": 390,
+          "h": 2801.09375
+        }
+      },
+      {
+        "id": "testimonials",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 11111.75,
+          "w": 390,
+          "h": 1186.71875
+        }
+      },
+      {
+        "id": "faq",
+        "tag": "SECTION",
+        "box": {
+          "x": 0,
+          "y": 12298.46875,
+          "w": 390,
+          "h": 1924.8125
+        }
+      }
+    ],
+    "headings": [
+      {
+        "text": "Precifique, controle seus lucros e acompanhe a saúde do seu e-commerce com praticidade e precisão.",
+        "box": {
+          "x": 16,
+          "y": 166,
+          "w": 358,
+          "h": 160
+        }
+      },
+      {
+        "text": "Automatize gestão e precificação por menos de R$ 3,00 ao dia!",
+        "box": {
+          "x": 0,
+          "y": 944.265625,
+          "w": 390,
+          "h": 96
+        }
+      },
+      {
+        "text": "Para quem é o All Price?",
+        "box": {
+          "x": 16,
+          "y": 1189.265625,
+          "w": 358,
+          "h": 80
+        }
+      },
+      {
+        "text": "Vendedores de Marketplace",
+        "box": {
+          "x": 38,
+          "y": 1817.40625,
+          "w": 314,
+          "h": 56
+        }
+      },
+      {
+        "text": "Quem busca facilidade na precificação",
+        "box": {
+          "x": 38,
+          "y": 2447.546875,
+          "w": 314,
+          "h": 56
+        }
+      },
+      {
+        "text": "Quem vende como CPF, MEI ou ME",
+        "box": {
+          "x": 38,
+          "y": 3005.6875,
+          "w": 314,
+          "h": 56
+        }
+      },
+      {
+        "text": "Para quem usa e para quem não usa ERP",
+        "box": {
+          "x": 16,
+          "y": 3432.6875,
+          "w": 358,
+          "h": 120
+        }
+      },
+      {
+        "text": "Funcionalidades que você precisa!",
+        "box": {
+          "x": 16,
+          "y": 5697.75,
+          "w": 358,
+          "h": 80
+        }
+      },
+      {
+        "text": "Precificação",
+        "box": {
+          "x": 41,
+          "y": 6123.75,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Avisos em tempo real",
+        "box": {
+          "x": 367,
+          "y": 6123.75,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Vendas",
+        "box": {
+          "x": 693,
+          "y": 6123.75,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Cadastro",
+        "box": {
+          "x": 1019,
+          "y": 6123.75,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Saúde e evolução",
+        "box": {
+          "x": 1345,
+          "y": 6123.75,
+          "w": 260,
+          "h": 28
+        }
+      },
+      {
+        "text": "Precifique seus anúncios em um só lugar",
+        "box": {
+          "x": 16,
+          "y": 6826.75,
+          "w": 358,
+          "h": 80
+        }
+      },
+      {
+        "text": "Avisos em tempo real",
+        "box": {
+          "x": 44,
+          "y": 7846.75,
+          "w": 302,
+          "h": 67.1875
+        }
+      },
+      {
+        "text": "E tudo isso cabe no seu bolso!",
+        "box": {
+          "x": 16,
+          "y": 8442.65625,
+          "w": 358,
+          "h": 76.8125
+        }
+      },
+      {
+        "text": "Mensal",
+        "box": {
+          "x": 41,
+          "y": 9045.96875,
+          "w": 308,
+          "h": 44.796875
+        }
+      },
+      {
+        "text": "Anual",
+        "box": {
+          "x": 40,
+          "y": 10071.15625,
+          "w": 310,
+          "h": 44.796875
+        }
+      },
+      {
+        "text": "Depoimentos de quem teve a rotina melhorada",
+        "box": {
+          "x": 16,
+          "y": 11171.75,
+          "w": 358,
+          "h": 120
+        }
+      },
+      {
+        "text": "Perguntas frequentes",
+        "box": {
+          "x": 16,
+          "y": 12418.46875,
+          "w": 358,
+          "h": 76.8125
+        }
+      },
+      {
+        "text": "1. Para quem, exatamente, é o All Price?",
+        "box": {
+          "x": 40,
+          "y": 12727.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "2. Preciso ter um ERP para usar?",
+        "box": {
+          "x": 40,
+          "y": 12867.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "3. Quais marketplaces e ERPs o All Price integra?",
+        "box": {
+          "x": 40,
+          "y": 12979.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "4. Como o sistema calcula o preço de venda?",
+        "box": {
+          "x": 40,
+          "y": 13091.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "5. Dá pra atualizar centenas de anúncios de uma só vez?",
+        "box": {
+          "x": 40,
+          "y": 13231.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "6. Recebo alertas de lucro ou prejuízo?",
+        "box": {
+          "x": 40,
+          "y": 13371.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "7. Há limite de pedidos ou anúncios que posso importar?",
+        "box": {
+          "x": 40,
+          "y": 13483.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "8. E a parte de relatórios?",
+        "box": {
+          "x": 40,
+          "y": 13623.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "9. Quanto custa?",
+        "box": {
+          "x": 40,
+          "y": 13735.28125,
+          "w": 310,
+          "h": 72
+        }
+      },
+      {
+        "text": "10. Posso testar antes de pagar?",
+        "box": {
+          "x": 40,
+          "y": 13823.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "11. Como funciona o suporte e onboarding?",
+        "box": {
+          "x": 40,
+          "y": 13935.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "12. Meus dados ficam seguros?",
+        "box": {
+          "x": 40,
+          "y": 14047.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "Mapa do site",
+        "box": {
+          "x": 16,
+          "y": 14522.28125,
+          "w": 358,
+          "h": 20
+        }
+      },
+      {
+        "text": "Social",
+        "box": {
+          "x": 16,
+          "y": 14866.28125,
+          "w": 358,
+          "h": 20
+        }
+      },
+      {
+        "text": "Legal",
+        "box": {
+          "x": 16,
+          "y": 15102.28125,
+          "w": 358,
+          "h": 20
+        }
+      },
+      {
+        "text": "Atendimento",
+        "box": {
+          "x": 16,
+          "y": 15230.28125,
+          "w": 358,
+          "h": 20
+        }
+      }
+    ],
+    "buttons": [
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 200.359375,
+          "y": 21,
+          "w": 133.640625,
+          "h": 34
+        }
+      },
+      {
+        "text": "",
+        "aria": null,
+        "box": {
+          "x": 350,
+          "y": 26,
+          "w": 24,
+          "h": 24
+        }
+      },
+      {
+        "text": "Quero contratar agora",
+        "aria": null,
+        "box": {
+          "x": 70,
+          "y": 482,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar 7 dias grátis",
+        "aria": null,
+        "box": {
+          "x": 70,
+          "y": 542,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar grátis",
+        "aria": null,
+        "box": {
+          "x": 70,
+          "y": 1489.265625,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 56,
+          "y": 6623.75,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 382,
+          "y": 6623.75,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 708,
+          "y": 6623.75,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 1034,
+          "y": 6623.75,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Testar grátis",
+        "aria": null,
+        "box": {
+          "x": 1360,
+          "y": 6623.75,
+          "w": 230,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar agora!",
+        "aria": null,
+        "box": {
+          "x": 70,
+          "y": 7122.75,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Quero testar agora!",
+        "aria": null,
+        "box": {
+          "x": 44,
+          "y": 8226.65625,
+          "w": 302,
+          "h": 44
+        }
+      },
+      {
+        "text": "Teste grátis",
+        "aria": null,
+        "box": {
+          "x": 41,
+          "y": 9924.5625,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "Teste grátis",
+        "aria": null,
+        "box": {
+          "x": 70,
+          "y": 10973.75,
+          "w": 250,
+          "h": 44
+        }
+      },
+      {
+        "text": "1. Para quem, exatamente, é o All Price?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 12727.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "2. Preciso ter um ERP para usar?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 12867.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "3. Quais marketplaces e ERPs o All Price integra?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 12979.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "4. Como o sistema calcula o preço de venda?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13091.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "5. Dá pra atualizar centenas de anúncios de uma só vez?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13231.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "6. Recebo alertas de lucro ou prejuízo?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13371.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "7. Há limite de pedidos ou anúncios que posso importar?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13483.28125,
+          "w": 310,
+          "h": 124
+        }
+      },
+      {
+        "text": "8. E a parte de relatórios?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13623.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "9. Quanto custa?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13735.28125,
+          "w": 310,
+          "h": 72
+        }
+      },
+      {
+        "text": "10. Posso testar antes de pagar?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13823.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "11. Como funciona o suporte e onboarding?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 13935.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "12. Meus dados ficam seguros?",
+        "aria": null,
+        "box": {
+          "x": 40,
+          "y": 14047.28125,
+          "w": 310,
+          "h": 96
+        }
+      },
+      {
+        "text": "Falar com o suporte",
+        "aria": null,
+        "box": {
+          "x": 70,
+          "y": 14436.28125,
+          "w": 250,
+          "h": 44
+        }
+      }
+    ],
+    "scrollers": [
+      {
+        "tag": "DIV",
+        "classes": "overflow-x-auto pb-4 cursor-grab active:cursor-grabbing scrollbar-hide",
+        "box": {
+          "x": 16,
+          "y": 6070.75,
+          "w": 358,
+          "h": 638
+        },
+        "scrollWidth": 1614,
+        "inner": [
+          {
+            "text": "PrecificaçãoAnúncios em lista com todos os custosPrecificação por margem de cont",
+            "box": {
+              "x": 16,
+              "y": 6070.75,
+              "w": 1614,
+              "h": 622
+            }
+          }
+        ]
+      },
+      {
+        "tag": "DIV",
+        "classes": "w-full overflow-x-auto pb-4 cursor-grab active:cursor-grabbing scrollbar-hide",
+        "box": {
+          "x": 16,
+          "y": 11731.75,
+          "w": 358,
+          "h": 566.71875
+        },
+        "scrollWidth": 1589,
+        "inner": [
+          {
+            "text": "Conectou muito fácil com meu Bling,\ne agora tenho todos os custos\nsincronizados ",
+            "box": {
+              "x": 16,
+              "y": 11731.75,
+              "w": 1589,
+              "h": 550.71875
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "fontFiles": [
+    {
+      "path": "assets/fonts/lato-400-latin.woff2",
+      "url": "https://fonts.gstatic.com/s/lato/v25/S6uyw4BMUTPHjx4wXg.woff2",
+      "weight": 400,
+      "bytes": 23580
+    },
+    {
+      "path": "assets/fonts/lato-700-latin.woff2",
+      "url": "https://fonts.gstatic.com/s/lato/v25/S6u9w4BMUTPHh6UVSwiPGQ.woff2",
+      "weight": 700,
+      "bytes": 23040
+    }
+  ]
+}

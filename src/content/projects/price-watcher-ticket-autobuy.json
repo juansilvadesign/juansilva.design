@@ -57,7 +57,7 @@
     "en": {
       "brief": "I wanted one ticket. What I built instead was a pair of tools that hold a line between watching a market and acting on it — and then spent eleven days learning, from my own running system, how many ways a program can fail while telling you it is fine.",
       "context": "A personal project with no client and no deadline but a real one: a seven-night concert whose secondary market moved every minute. The generic price trackers do not cover a site like this, because they only integrate with marketplaces they have deals with. So the question was never \"can I scrape it\" — it was what shape a thing should take when it has to run unattended, every minute, against a site that owes me nothing.",
-      "outcome": "424 tests green offline, seven nights read end to end, and one order completed against the live site — deliberately left unpaid, because the tool's whole design is that a human pays. It also did not do what I built it for: two tickets were bought by hand at over R$ 300 because the automation never closed in time. Both numbers belong in the same paragraph. What I would actually put in front of a client is neither — it is the three sections above, where a system I wrote reported success while doing nothing, and instrumentation rather than guesswork is what found it.",
+      "outcome": "424 tests green offline, seven nights read end to end, and one order completed against the live site — deliberately left unpaid, because the tool's whole design is that a human pays. It also missed the job I built it for: I ended up buying two tickets manually, at prices above R$ 300, because the automation never completed a purchase in time. Both numbers belong in the same paragraph. What I would actually put in front of a client is neither — it is the three sections above, where a system I wrote reported success while doing nothing, and instrumentation rather than guesswork is what found it.",
       "blocks": [
         {
           "type": "callout",
@@ -174,7 +174,7 @@
         },
         {
           "type": "prose",
-          "body": "The honest summary is that the system worked and the operation did not. Two of the seven nights were bought by hand at over R$ 300 because the automation never closed a purchase in time, and the night everything was finally pointed at came and went unattended. The end-to-end proof arrived on the last evening, on a target armed specifically to test it: a real order, a real Pix code in 5.49 seconds, deliberately left unpaid and verified lapsed thirteen minutes later. Then the whole thing was shut down — zero active scheduled jobs, all eight targets disarmed."
+          "body": "The honest summary is that the system worked and the operation did not. On two of the seven nights I bought tickets manually, at prices above R$ 300, because the automation never completed a purchase in time — and the night everything was finally aimed at came and went unattended. The end-to-end proof arrived on the last evening, on a target armed specifically to test it: a real order, a real Pix code in 5.49 seconds, deliberately left unpaid and verified lapsed thirteen minutes later. Then the whole thing was shut down — zero active scheduled jobs, all eight targets disarmed."
         },
         {
           "type": "callout",

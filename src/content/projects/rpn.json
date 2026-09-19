@@ -20,14 +20,14 @@
     "en": {
       "title": "Nutraceuticals Brand — Product Landing & Institutional Platform",
       "tagline": "A conversion landing in phase one, then a 226-node institutional portal.",
-      "description": "A two-part digital presence for a nutraceuticals brand. In the first phase I led the design of one product line's landing page — desktop and mobile, its thirty-day challenge capture form and the checkout. In the second I designed the entire 226-node institutional platform: the reseller flow, the white-label outsourcing offer and the surrounding institutional pages. The companion landing page for the other product line is another designer's, as is the affiliate flow, which a no-code developer built without a mockup.",
+      "description": "A two-part digital presence for a nutraceuticals brand. In the first phase I led the design of one product line's landing page — desktop and mobile, its thirty-day challenge capture form and the checkout. In the second I designed the entire 226-node institutional platform: the reseller flow, the white-label outsourcing offer and the surrounding institutional pages. The companion landing page for the other product line is another designer's, as is the affiliate flow.",
       "previewAlt": "Landing page and institutional platform design for a nutraceuticals brand",
       "liveLabel": "Open the design file"
     },
     "pt": {
       "title": "Marca de nutracêuticos — landing de produto e plataforma institucional",
       "tagline": "Uma landing de conversão na fase um, depois um portal institucional de 226 nós.",
-      "description": "Uma presença digital em duas partes para uma marca de nutracêuticos. Na primeira fase, liderei o design da landing page de uma linha de produto — desktop e mobile, o formulário de captação do desafio de trinta dias e seu checkout. Na segunda, desenhei toda a plataforma institucional de 226 nós: o fluxo de revenda, a oferta de terceirização white-label e as páginas institucionais em volta. A landing da outra linha de produto é de outra designer, assim como o fluxo de afiliados, que um desenvolvedor no-code construiu sem mockup.",
+      "description": "Uma presença digital em duas partes para uma marca de nutracêuticos. Na primeira fase, liderei o design da landing page de uma linha de produto — desktop e mobile, o formulário de captação do desafio de trinta dias e seu checkout. Na segunda, desenhei toda a plataforma institucional de 226 nós: o fluxo de revenda, a oferta de terceirização white-label e as páginas institucionais em volta. A landing da outra linha de produto é de outra designer, assim como o fluxo de afiliados.",
       "previewAlt": "Design de landing page e plataforma institucional de uma marca de nutracêuticos",
       "liveLabel": "Abrir o arquivo de design"
     }
@@ -45,11 +45,11 @@
     "en": {
       "brief": "Lead UI designer on a two-phase digital ecosystem for nutraceuticals manufacturer RPN: in Phase 1, led design of the direct-to-consumer CapNutry Homem landing page (1:2, desktop/mobile, Desafio 30 Dias capture form, checkout); in Phase 2, authored the entire 226-node institutional platform (Site Institucional 628:2046) covering reseller onboarding (Revenda), white-label contract manufacturing (Terceirização), product catalogs, service presentation, and editorial blog templates.",
       "context": "Agency engagement at Sagitta between July 2023 and February 2024. Phase 1 direct-to-consumer landing pages were divided between designers: Juan led CapNutry Homem, Esther designed CapNutry Mulher, and Viviane Batista assisted both. In Phase 2, Juan was sole UI designer for the entire 226-node institutional web platform — the second-largest single-owner surface in the Sagitta agency corpus after Pro Personal.",
-      "outcome": "The website was developed and went live in production during Juan's tenure at Sagitta Digital and continued in active operation after his departure. The client subsequently altered the live build and cancelled the contract with Sagitta; current live pages no longer reflect Juan's original Figma design. No business metrics exist; this project stands as verified evidence of high-conversion D2C landing pages and large-scale B2B institutional platform design.",
+      "outcome": "The site launched to production while Juan worked at Sagitta Digital, remaining operational following his departure. The live site has since changed and no longer reflects the original Figma design. No business metrics exist; this project stands as verified evidence of high-conversion D2C landing pages and large-scale B2B institutional platform design.",
       "blocks": [
         {
           "type": "callout",
-          "body": "Attribution and Phase Split Boundary: In Phase 1, I was the sole designer of the CapNutry Homem landing page (node 1:2); Esther designed the companion CapNutry Mulher landing page (node 1:1499). In Phase 2, I was the sole UI designer for the entire 226-node institutional platform (node 628:2046). I do not claim the Mulher landing page or the Afiliados flow, which the developer built without a mockup. Delivery status: launched live to production; the client later diverged from the design and cancelled the contract."
+          "body": "Attribution and Phase Split Boundary: In Phase 1, I was the sole designer of the CapNutry Homem landing page (node 1:2); Esther designed the companion CapNutry Mulher landing page (node 1:1499). In Phase 2, I was the sole UI designer for the entire 226-node institutional platform (node 628:2046). I do not claim the Mulher landing page or the Afiliados flow. Delivery status: launched live to production."
         },
         {
           "type": "heading",
@@ -124,18 +124,18 @@
         },
         {
           "type": "prose",
-          "body": "The project was launched into live production during my tenure at Sagitta and operated actively for months. Over time, the client made uncontrolled modifications — importing low-resolution banners and arbitrary AI graphics — and the no-code developer created an unmocked 'Afiliados' flow that I later screenshotted into the file solely for documentation. While client divergence is common in fast-moving consumer goods, the Figma artifact preserves the disciplined, high-density architecture of the original delivered system."
+          "body": "The project was launched into live production during my tenure at Sagitta and operated actively for months. The Figma file preserves the disciplined, high-density architecture of the original delivered system."
         }
       ]
     },
     "pt": {
       "brief": "Designer de UI líder no ecossistema digital em duas fases da fabricante de nutracêuticos RPN: na Fase 1, liderou o design da landing page de conversão direta CapNutry Homem (1:2, desktop/mobile, formulário do Desafio 30 Dias, checkout); na Fase 2, desenhou com exclusividade toda a plataforma institucional de 226 nós (Site Institucional 628:2046), cobrindo credenciamento de revendedores (Revenda), fabricação white-label (Terceirização), catálogo corporativo, serviços e templates de blog.",
       "context": "Atuação na agência Sagitta entre julho de 2023 e fevereiro de 2024. A Fase 1 de landing pages de produto foi dividida entre designers: Juan liderou CapNutry Homem, Esther desenhou CapNutry Mulher e Viviane Batista prestou suporte. Na Fase 2, Juan atuou como designer de UI exclusivo de toda a plataforma web institucional de 226 nós — a segunda maior superfície de autoria solo em todo o acervo da Sagitta após o Pro Personal.",
-      "outcome": "O site foi desenvolvido e entrou em produção durante o período de Juan na Sagitta Digital, permanecendo ativo após sua saída. O cliente posteriormente alterou a implementação e encerrou o contrato com a agência; as páginas atuais não refletem mais o design original do Figma. Não existem métricas de negócio públicas; o projeto permanece como comprovação de design para landing pages de alta conversão D2C e portais institucionais B2B em grande escala.",
+      "outcome": "O site foi desenvolvido e entrou em produção durante o período de Juan na Sagitta Digital, permanecendo ativo após sua saída. O site mudou desde então e as páginas atuais não refletem mais o design original do Figma. Não existem métricas de negócio públicas; o projeto permanece como comprovação de design para landing pages de alta conversão D2C e portais institucionais B2B em grande escala.",
       "blocks": [
         {
           "type": "callout",
-          "body": "Fronteira de Atribuição e Divisão de Fases: Na Fase 1, fui o designer exclusivo da landing page CapNutry Homem (nó 1:2); Esther desenhou a landing page CapNutry Mulher (nó 1:1499). Na Fase 2, fui o designer de UI exclusivo de toda a plataforma institucional de 226 nós (nó 628:2046). Não reivindico a landing Mulher nem o fluxo de Afiliados, implementado pelo desenvolvedor sem mockup. Status de entrega: colocado em produção; o cliente posteriormente divergiu do design e cancelou o contrato."
+          "body": "Fronteira de Atribuição e Divisão de Fases: Na Fase 1, fui o designer exclusivo da landing page CapNutry Homem (nó 1:2); Esther desenhou a landing page CapNutry Mulher (nó 1:1499). Na Fase 2, fui o designer de UI exclusivo de toda a plataforma institucional de 226 nós (nó 628:2046). Não reivindico a landing Mulher nem o fluxo de Afiliados. Status de entrega: colocado em produção."
         },
         {
           "type": "heading",
@@ -210,7 +210,7 @@
         },
         {
           "type": "prose",
-          "body": "O projeto foi colocado no ar durante minha atuação na agência e operou em produção por meses. Com o tempo, o cliente realizou modificações visuais não planejadas — inserindo banners de baixa resolução e imagens de IA — e o programador improvisou uma área de afiliados sem layout prévio. Embora divergências pós-entrega aconteçam no varejo físico, o arquivo Figma preserva o padrão técnico e a hierarquia rigorosa do sistema originalmente entregue."
+          "body": "O projeto foi colocado no ar durante minha atuação na agência e operou em produção por meses. O arquivo Figma preserva o padrão técnico e a hierarquia rigorosa do sistema originalmente entregue."
         }
       ]
     }

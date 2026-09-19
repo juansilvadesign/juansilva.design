@@ -131,7 +131,7 @@
         },
         {
           "type": "prose",
-          "body": "Many marketing sites treat form submission as an afterthought — embedding unauthenticated third-party webhooks or bare mailto scripts that invite spam floods and downtime. For Gestrif, I engineered a dedicated Express service deployed on Render (server/start.js and server/index.js) and applied production-grade defensive hardening:"
+          "body": "Many marketing sites treat form submission as an afterthought — embedding unauthenticated third-party webhooks or bare mailto scripts that invite spam floods and downtime. For Gestrif, I deployed an Express service on Render: the core server (server/index.js) is shared boilerplate, and what is Gestrif's own is the entry point, server/start.js, where I applied production-grade defensive hardening:"
         },
         {
           "type": "list",
@@ -268,7 +268,7 @@
         },
         {
           "type": "prose",
-          "body": "Muitas landing pages tratam o envio de formulários de forma descuidada — utilizando webhooks de terceiros desprotegidos ou links mailto que atraem robôs de spam e geram instabilidade. Para o Gestrif, programei um serviço dedicado em Express hospedado no Render (server/start.js e server/index.js), aplicando camadas reais de segurança:"
+          "body": "Muitas landing pages tratam o envio de formulários de forma descuidada — utilizando webhooks de terceiros desprotegidos ou links mailto que atraem robôs de spam e geram instabilidade. Para o Gestrif, publiquei um serviço Express no Render: o núcleo do servidor (server/index.js) é um boilerplate compartilhado, e o que é próprio do Gestrif é o ponto de entrada, server/start.js, onde apliquei camadas reais de segurança:"
         },
         {
           "type": "list",

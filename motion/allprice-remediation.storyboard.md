@@ -151,7 +151,7 @@ source pixels as the UI; layered crops may isolate only the measured interaction
 
 Scene 1 (0.00–0.70s): The original source crop takes its approved left position; the editorial hierarchy occupies the right.
 
-Scene 2 (0.70–2.80s): Reveal four exact sampled node rows sequentially (dynamic-content-sequencing); keep the 32-direct-children count and the aggregate remainder.
+Scene 2 (0.70–2.80s): Reveal four exact sampled node rows sequentially at authored absolute beat times; keep the 32-direct-children count and the aggregate remainder.
 
 Scene 3 (2.80–4.00s): Hold the complete source-derived diagram; no pretend Figma editing.
 
@@ -202,7 +202,7 @@ source pixels as the UI; layered crops may isolate only the measured interaction
 
 Scene 1 (0.00–0.70s): The optimized crop occupies the approved left position, with the real hierarchy label on the right.
 
-Scene 2 (0.70–2.75s): Reveal the twelve direct FRAME names in ordered groups (dynamic-content-sequencing), preserving repeated section names and disambiguating IDs.
+Scene 2 (0.70–2.75s): Reveal the twelve direct FRAME names in ordered groups at authored absolute beat times, preserving repeated section names and disambiguating IDs.
 
 Scene 3 (2.75–4.00s): Hold the complete hierarchy and persistent attribution, front-on.
 

@@ -61,7 +61,7 @@
         },
         {
           "type": "prose",
-          "body": "The opening sentence of my design-engineer positioning is: 'I spent two years designing products that never shipped because no-code tools and dev handoffs couldn't execute them. So I learned to build.' Agenda Geek is the timestamped receipt for that statement. In 2022, our design won 1st place out of 14 teams in a national NGO competition, complete with a gamified e-waste collection system, school rankings, and an extensive token system. But like dozens of student and junior concepts, it stalled because the organization could not find developers willing to code an 8-screen platform for free."
+          "body": "My design-engineer positioning starts from a simple premise: I spent two years on products that never shipped, because no-code tools and dev handoffs could not execute the designs, so I learned to build. Agenda Geek is the timestamped receipt for that statement. In 2022, our design won 1st place out of 14 teams in a national NGO competition, complete with a gamified e-waste collection system, school rankings, and an extensive token system. But like dozens of student and junior concepts, it stalled because the organization could not find developers willing to code an 8-screen platform for free."
         },
         {
           "type": "prose",
@@ -134,7 +134,7 @@
           "type": "list",
           "ordered": false,
           "items": [
-            "Not the NGO's official product. The Agenda Geek platform was never built; this is a personal reconstruction of a single screen.",
+            "Not the NGO's official product. The Agenda Geek platform was never built; this is my own recreation of one screen.",
             "Not my sole design. The Home screen was designed collaboratively by three team members during the hackathon. My contribution was coding it alone.",
             "Not client or paid work. It was a self-directed educational project undertaken a year after the competition ended.",
             "Not advanced software engineering. It contains beginner markup patterns (href='#' navigation, div-heavy containers) and no modern component frameworks.",

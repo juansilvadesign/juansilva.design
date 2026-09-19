@@ -69,8 +69,10 @@ The user's “Storyboard approved” approved the four story plans. The recommen
 wireframe pass followed immediately; the later “continue” kept that pass moving.
 It was not interpreted as approval of unseen layouts or final rendering.
 
-All 21 static sketches are in `compositions/frames/`. The current checkpoint is
-layout approval, before real source pixels, finished styling and animation.
+All 21 static sketches are in `compositions/frames/`. The user's subsequent
+“approved, proceed” approved their layouts and authorized the animation build.
+The later “continue” follows the proposed parallel frame-building approach.
+The next approval checkpoint is the finished motion preview, before rendering.
 Review all four films at `review/sketch-board.html` through the running Studio
 server; the main film's 11 frames also appear on Studio's storyboard board.
 No finished video has been rendered, uploaded or connected to the live case page.

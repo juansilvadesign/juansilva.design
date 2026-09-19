@@ -1,36 +1,184 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Answer the key objection — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-60o5" id="root" data-composition-id="main-10-faq" data-width="1920" data-height="1080" data-duration="6">
-<div data-hf-id="hf-y081" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:83.3333cqh">
-</div>
-<div data-hf-id="hf-uzo1" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:7.9630cqh">
-</div>
-<div data-hf-id="hf-89ce" class="text" style="left:14.2708cqw;top:5.2778cqh;width:26.2500cqw;height:4.6296cqh;font-size:1.8750cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-cizw" class="text" style="left:63.0208cqw;top:6.0185cqh;width:22.9167cqw;height:3.8889cqh;font-size:1.3021cqw;text-align:right">Testar grátis     Já sou cliente</div>
-<div data-hf-id="hf-9ebk" class="text" style="left:19.0625cqw;top:14.5370cqh;width:61.8750cqw;height:6.8519cqh;font-size:2.3958cqw;text-align:center;font-weight:650">Perguntas frequentes</div>
-<div data-hf-id="hf-ky62" class="line" style="left:28.3438cqw;top:23.0556cqh;width:43.3125cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-jh7q" class="line" style="left:28.3438cqw;top:25.2778cqh;width:30.3187cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-vgq1" class="text" style="left:19.0625cqw;top:32.8704cqh;width:61.8750cqw;height:5.7407cqh;font-size:1.6667cqw;font-weight:600">1. Para quem, exatamente, é o All Price?     +</div>
-<div data-hf-id="hf-g6p6" class="block focal" style="left:18.1250cqw;top:39.2593cqh;width:63.7500cqw;height:20.8333cqh">
-</div>
-<div data-hf-id="hf-niam" class="text" style="left:19.0625cqw;top:41.0185cqh;width:61.8750cqw;height:5.0000cqh;font-size:1.6667cqw;font-weight:650">2. Preciso ter um ERP para usar?     ×</div>
-<div data-hf-id="hf-a2lu" class="text" style="left:19.0625cqw;top:47.4074cqh;width:61.8750cqw;height:12.1296cqh;font-size:1.5104cqw;">Não, você não precisa ter um ERP para usar o All Price. Nossa plataforma foi desenvolvida para funcionar de forma independente, permitindo que você gerencie seus preços e margens mesmo sem um sistema ERP.</div>
-<div data-hf-id="hf-zoxy" class="text" style="left:19.0625cqw;top:62.5000cqh;width:61.8750cqw;height:6.2963cqh;font-size:1.6667cqw;font-weight:600">3. Quais marketplaces e ERPs o All Price integra?     +</div>
-<div data-hf-id="hf-dcal" class="text" style="left:19.0625cqw;top:71.9444cqh;width:61.8750cqw;height:6.2963cqh;font-size:1.6667cqw;font-weight:600">4. Como o sistema calcula o preço de venda?     +</div>
-<div data-hf-id="hf-3ki3" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">No ERP? You can still get started.</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["main-10-faq"] = tl;
-</script>
-</template>
-</body></html>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #020817;
+      font-family: "Lato";
+    }
+    .main-10-faq-ground { position: absolute; inset: 0; background: #FFFFFF; }
+    .main-10-faq-stage { position: absolute; inset: 0; perspective: 2400px; }
+    .main-10-faq-positioner {
+      position: absolute;
+      left: 12.5cqw;
+      top: 3.3333333333cqh;
+      width: 75cqw;
+      height: 83.3333333333cqh;
+    }
+    .main-10-faq-rig,
+    .main-10-faq-scale {
+      position: absolute;
+      inset: 0;
+      transform-origin: 50% 0%;
+      transform-style: preserve-3d;
+    }
+    .main-10-faq-viewport {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .main-10-faq-track {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 1899px;
+      will-change: transform;
+    }
+    .main-10-faq-raster {
+      position: absolute;
+      display: block;
+      left: 0;
+      width: 1440px;
+      max-width: none;
+      pointer-events: none;
+    }
+    .main-10-faq-top { top: 0; height: 568px; }
+    .main-10-faq-answer { top: 568px; height: 81px; }
+    .main-10-faq-tail { top: 568px; height: 1331px; will-change: transform; }
+    .main-10-faq-icon {
+      position: absolute;
+      left: 1211px;
+      top: 514px;
+      display: block;
+      width: 36px;
+      height: 36px;
+      pointer-events: none;
+    }
+    .main-10-faq-header { top: 0; height: 86px; z-index: 3; }
+    .main-10-faq-cursor {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 28px;
+      height: 40px;
+      z-index: 6;
+      transform-origin: 0 0;
+      pointer-events: none;
+    }
+    .main-10-faq-cursor svg { display: block; overflow: visible; }
+    .main-10-faq-pulse {
+      position: absolute;
+      left: 1217px;
+      top: 520px;
+      width: 24px;
+      height: 24px;
+      box-sizing: border-box;
+      border: 2px solid #234DD7;
+      border-radius: 50%;
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .main-10-faq-caption {
+      position: absolute;
+      left: 5cqw;
+      top: 88.8888888889cqh;
+      width: 90cqw;
+      height: 5.9259259259cqh;
+      color: #234DD7;
+      font-family: "Lato";
+      font-weight: 700;
+      font-size: 44px;
+      line-height: 1.2;
+      text-align: center;
+    }
+  </style>
+  <div id="root" data-composition-id="main-10-faq" data-width="1920" data-height="1080" data-duration="6">
+    <div class="clip main-10-faq-ground" data-start="0" data-duration="6" data-track-index="0"></div>
+    <div class="clip main-10-faq-stage" data-start="0" data-duration="6" data-track-index="1">
+      <div id="main-10-faq-positioner" class="main-10-faq-positioner">
+        <div id="main-10-faq-rig" class="main-10-faq-rig">
+          <div id="main-10-faq-scale" class="main-10-faq-scale">
+            <div class="main-10-faq-viewport" data-layout-allow-overflow>
+              <div id="main-10-faq-track" class="main-10-faq-track" data-layout-allow-overflow>
+                <img class="main-10-faq-raster main-10-faq-top" src="assets/motion/main-10-faq/faq-top.png" width="1440" height="568" alt="AllPrice frequently asked questions">
+                <img id="main-10-faq-answer" class="main-10-faq-raster main-10-faq-answer" src="assets/motion/main-10-faq/answer.png" width="1440" height="81" alt="Captured answer explaining that an ERP is not required">
+                <img id="main-10-faq-tail" class="main-10-faq-raster main-10-faq-tail" src="assets/motion/main-10-faq/faq-tail.png" width="1440" height="1331" alt="The remaining AllPrice questions">
+                <img id="main-10-faq-icon" class="main-10-faq-icon" src="assets/motion/main-10-faq/open-icon.png" width="36" height="36" alt="">
+              </div>
+              <img class="main-10-faq-raster main-10-faq-header" src="assets/motion/main-10-faq/header.png" width="1440" height="86" alt="AllPrice navigation">
+              <div id="main-10-faq-pulse-open" class="main-10-faq-pulse" aria-hidden="true"></div>
+              <div id="main-10-faq-pulse-close" class="main-10-faq-pulse" aria-hidden="true"></div>
+              <div id="main-10-faq-cursor" class="main-10-faq-cursor" aria-hidden="true">
+                <svg width="28" height="40" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 0 L0 29 L7.6 22.2 L14.3 37 L20 34.3 L13.2 20 L25 19 Z" fill="#FFFFFF" stroke="#020817" stroke-width="1.7" stroke-linejoin="round"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clip main-10-faq-caption" data-start="0" data-duration="6" data-track-index="2">No ERP? You can still get started.</div>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const parts = ["#main-10-faq-answer", "#main-10-faq-tail", "#main-10-faq-icon"];
+      const closedClip = index => index === 0 ? "inset(0% 0% 100% 0%)" : "inset(0% 0% 0% 0%)";
+      const closedOpacity = index => index === 2 ? 0 : 1;
+      const expandedY = index => index === 1 ? 81 : 0;
 
+      tl.set("#main-10-faq-positioner", { x: 0, y: 0, opacity: 1 }, 0);
+      tl.set("#main-10-faq-rig", { rotationX: 0, rotationY: 0, z: 0 }, 0);
+      tl.set("#main-10-faq-scale", { scale: 1 }, 0);
+      tl.set(parts, { y: 0, clipPath: closedClip, opacity: closedOpacity }, 0);
+      tl.set(["#main-10-faq-pulse-open", "#main-10-faq-pulse-close"], { scale: 0, opacity: 0 }, 0);
+
+      // Absolute document scroll: 9181 throughout the interaction, then 10180.
+      tl.fromTo("#main-10-faq-track", { y: 0 }, { y: 0, duration: 4, ease: "none" }, 0);
+      tl.fromTo("#main-10-faq-track", { y: 0 }, { y: -999, duration: 2, ease: "power2.inOut", immediateRender: false }, 4);
+
+      // Cursor tip targets the captured Q2 plus center: document [1229, 9713].
+      tl.fromTo("#main-10-faq-cursor", { x: 1324, y: 666, opacity: 0, scale: 1 }, { x: 1229, y: 532, opacity: 1, scale: 1, duration: 0.72, ease: "power2.inOut" }, 0.08);
+      tl.fromTo("#main-10-faq-cursor", { scale: 1 }, { scale: 0.86, duration: 0.08, ease: "power2.in", immediateRender: false }, 0.82);
+      tl.fromTo("#main-10-faq-cursor", { scale: 0.86 }, { scale: 1, duration: 0.10, ease: "power2.out", immediateRender: false }, 0.90);
+      tl.fromTo("#main-10-faq-pulse-open", { scale: 0.35, opacity: 0.48 }, { scale: 2.4, opacity: 0, duration: 0.50, ease: "power2.out", immediateRender: false }, 0.90);
+
+      // One tween drives the exact 81px reveal, tail displacement, and real open icon.
+      tl.fromTo(parts, { y: 0, clipPath: closedClip, opacity: closedOpacity }, { y: expandedY, clipPath: "inset(0% 0% 0% 0%)", opacity: 1, duration: 0.50, ease: "power3.out", immediateRender: false }, 0.90);
+
+      // The opened answer holds from 1.40 until the close interaction at 3.50.
+      tl.fromTo("#main-10-faq-cursor", { scale: 1 }, { scale: 0.86, duration: 0.08, ease: "power2.in", immediateRender: false }, 3.50);
+      tl.fromTo("#main-10-faq-cursor", { scale: 0.86 }, { scale: 1, duration: 0.10, ease: "power2.out", immediateRender: false }, 3.58);
+      tl.fromTo("#main-10-faq-pulse-close", { scale: 0.35, opacity: 0.48 }, { scale: 2.4, opacity: 0, duration: 0.42, ease: "power2.out", immediateRender: false }, 3.56);
+      tl.fromTo(parts, { y: expandedY, clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }, { y: 0, clipPath: closedClip, opacity: closedOpacity, duration: 0.35, ease: "power3.in", immediateRender: false }, 3.55);
+      tl.fromTo("#main-10-faq-cursor", { opacity: 1 }, { opacity: 0, duration: 0.10, ease: "power2.out", immediateRender: false }, 3.90);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main-10-faq"] = tl;
+    })();
+  </script>
+</template>

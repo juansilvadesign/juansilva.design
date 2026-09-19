@@ -174,7 +174,7 @@ matched continuous downward travel.
 Compose: preserve the approved key-pose framing and caption placement. Use the
 source pixels as the UI; layered crops may isolate only the measured interaction.
 
-Scene 1 (0.00–4.10s): Traverse the full dashboard illustration continuously inside the browser viewport (3d-page-scroll mechanics adapted to immutable raster evidence); keep numbers contextual, never a numeric hold. The page reaches the banner.
+Scene 1 (0.00–4.10s): Traverse the full dashboard illustration continuously inside the browser viewport (coordinate-target-zoom nested wrappers, with independent scale and scroll); keep numbers contextual, never a numeric hold. The page reaches the banner.
 
 Scene 2 (4.10–5.00s): Settle on the banner-to-audience handoff; the operating-view caption stays below the page.
 
@@ -291,7 +291,9 @@ Scene 4 (4.70–6.00s): Continue into the feature heading, finishing at the shar
 - handoff_out: page: x=0, y=-3770, scale=1, opacity=1, direction=down, speed=0 CSS px/s; browser: x=240, y=36, width=1440, height=900, scale=1, rotationX=0, rotationY=0, z=0, opacity=1; featuresScrollLeft=0; FAQ=closed
 
 Scroll timing contract (local seconds → absolute document CSS Y):
-`0 → 2500; 1 → 2720; 2.4 → 2720; 3.6 → 3060; 4.7 → 3060; 6 → 3770`.
+`0 → 2500; 1 → 2640; 2.4 → 2640; 3.6 → 3060; 4.7 → 3060; 6 → 3770`.
+Measured refinement: the first ERP hold is 2640, keeping its heading below the
+86px sticky header; camera handoffs and shot duration remain unchanged.
 
 
 ## Frame 5 — Explore the whole toolkit

@@ -1,0 +1,1922 @@
+{
+  "version": 1,
+  "policy": "Immutable source pixels, bounded crops, lossless outputs, unique per-frame media URLs. All coordinates are CSS pixels unless pixelCrop is named.",
+  "frames": {
+    "main-01-clarity": {
+      "kind": "main",
+      "duration": 5,
+      "stops": [
+        [
+          0,
+          0
+        ],
+        [
+          4.2,
+          0
+        ],
+        [
+          5,
+          0
+        ]
+      ],
+      "cropTop": 0,
+      "cropBottom": 900,
+      "pageHeight": 900,
+      "page": "assets/motion/main-01-clarity/page.png",
+      "header": "assets/motion/main-01-clarity/header.png"
+    },
+    "main-02-overview": {
+      "kind": "main",
+      "duration": 5,
+      "stops": [
+        [
+          0,
+          0
+        ],
+        [
+          4.1,
+          1250
+        ],
+        [
+          5,
+          1250
+        ]
+      ],
+      "cropTop": 0,
+      "cropBottom": 2150,
+      "pageHeight": 2150,
+      "page": "assets/motion/main-02-overview/page.png",
+      "header": "assets/motion/main-02-overview/header.png"
+    },
+    "main-03-audiences": {
+      "kind": "main",
+      "duration": 5,
+      "stops": [
+        [
+          0,
+          1250
+        ],
+        [
+          1.3,
+          1745
+        ],
+        [
+          3.25,
+          1745
+        ],
+        [
+          5,
+          2500
+        ]
+      ],
+      "cropTop": 1250,
+      "cropBottom": 3400,
+      "pageHeight": 2150,
+      "page": "assets/motion/main-03-audiences/page.png",
+      "header": "assets/motion/main-03-audiences/header.png"
+    },
+    "main-04-erp": {
+      "kind": "main",
+      "duration": 6,
+      "stops": [
+        [
+          0,
+          2500
+        ],
+        [
+          1,
+          2640
+        ],
+        [
+          2.4,
+          2640
+        ],
+        [
+          3.6,
+          3060
+        ],
+        [
+          4.7,
+          3060
+        ],
+        [
+          6,
+          3770
+        ]
+      ],
+      "cropTop": 2500,
+      "cropBottom": 4670,
+      "pageHeight": 2170,
+      "page": "assets/motion/main-04-erp/page.png",
+      "header": "assets/motion/main-04-erp/header.png"
+    },
+    "main-05-features": {
+      "kind": "main",
+      "duration": 7,
+      "stops": [
+        [
+          0,
+          3770
+        ],
+        [
+          0.45,
+          3927
+        ],
+        [
+          4.8,
+          3927
+        ],
+        [
+          7,
+          4790
+        ]
+      ],
+      "cropTop": 3770,
+      "cropBottom": 5690,
+      "pageHeight": 1920,
+      "page": "assets/motion/main-05-features/page.png",
+      "header": "assets/motion/main-05-features/header.png",
+      "rail": "assets/motion/main-05-features/rail-complete.png",
+      "railBox": {
+        "x": 136,
+        "documentY": 4237.5,
+        "width": 1168,
+        "height": 638,
+        "contentWidth": 1614
+      },
+      "drag": {
+        "start": 1.45,
+        "end": 3.05,
+        "fromX": 0,
+        "toX": -446,
+        "returnStart": 4.15,
+        "returnEnd": 4.8,
+        "cursorFrom": [
+          1030,
+          458
+        ],
+        "cursorTo": [
+          584,
+          458
+        ]
+      }
+    },
+    "main-06-price": {
+      "kind": "main",
+      "duration": 6,
+      "stops": [
+        [
+          0,
+          4790
+        ],
+        [
+          0.5,
+          4840
+        ],
+        [
+          2,
+          4840
+        ],
+        [
+          6,
+          6060
+        ]
+      ],
+      "cropTop": 4790,
+      "cropBottom": 6960,
+      "pageHeight": 2170,
+      "page": "assets/motion/main-06-price/page.png",
+      "header": "assets/motion/main-06-price/header.png"
+    },
+    "main-07-alerts": {
+      "kind": "main",
+      "duration": 4,
+      "stops": [
+        [
+          0,
+          6060
+        ],
+        [
+          0.65,
+          6120
+        ],
+        [
+          2.7,
+          6120
+        ],
+        [
+          4,
+          6590
+        ]
+      ],
+      "cropTop": 6060,
+      "cropBottom": 7490,
+      "pageHeight": 1430,
+      "page": "assets/motion/main-07-alerts/page.png",
+      "header": "assets/motion/main-07-alerts/header.png"
+    },
+    "main-08-plans": {
+      "kind": "main",
+      "duration": 6,
+      "stops": [
+        [
+          0,
+          6590
+        ],
+        [
+          1.55,
+          7010
+        ],
+        [
+          3.2,
+          7010
+        ],
+        [
+          6,
+          8080
+        ]
+      ],
+      "cropTop": 6590,
+      "cropBottom": 8980,
+      "pageHeight": 2390,
+      "page": "assets/motion/main-08-plans/page.png",
+      "header": "assets/motion/main-08-plans/header.png"
+    },
+    "main-09-page-continuity": {
+      "kind": "main",
+      "duration": 3,
+      "stops": [
+        [
+          0,
+          8080
+        ],
+        [
+          3,
+          9181
+        ]
+      ],
+      "cropTop": 8080,
+      "cropBottom": 10081,
+      "pageHeight": 2001,
+      "page": "assets/motion/main-09-page-continuity/page.png",
+      "header": "assets/motion/main-09-page-continuity/header.png"
+    },
+    "main-10-faq": {
+      "kind": "main",
+      "duration": 6,
+      "stops": [
+        [
+          0,
+          9181
+        ],
+        [
+          4,
+          9181
+        ],
+        [
+          6,
+          10180
+        ]
+      ],
+      "cropTop": 9181,
+      "cropBottom": 11080,
+      "pageHeight": 1899,
+      "page": "assets/motion/main-10-faq/page.png",
+      "header": "assets/motion/main-10-faq/header.png",
+      "faqTop": "assets/motion/main-10-faq/faq-top.png",
+      "faqTail": "assets/motion/main-10-faq/faq-tail.png",
+      "answer": "assets/motion/main-10-faq/answer.png",
+      "openIcon": "assets/motion/main-10-faq/open-icon.png",
+      "splitDocY": 9749,
+      "answerHeight": 81,
+      "icon": {
+        "x": 1211,
+        "documentY": 9695,
+        "width": 36,
+        "height": 36
+      },
+      "clickDocument": [
+        1229,
+        9713
+      ]
+    },
+    "main-11-finish": {
+      "kind": "main",
+      "duration": 5,
+      "stops": [
+        [
+          0,
+          10180
+        ],
+        [
+          1,
+          10379
+        ],
+        [
+          5,
+          10379
+        ]
+      ],
+      "cropTop": 10180,
+      "cropBottom": 11279,
+      "pageHeight": 1099,
+      "page": "assets/motion/main-11-finish/page.png",
+      "header": "assets/motion/main-11-finish/header.png"
+    },
+    "remediation-01-intent": {
+      "kind": "remediation",
+      "duration": 4,
+      "original": "assets/motion/remediation-01-intent/original.png",
+      "optimized": "assets/motion/remediation-01-intent/optimized.png"
+    },
+    "remediation-02-source": {
+      "kind": "remediation",
+      "duration": 4,
+      "original": "assets/motion/remediation-02-source/original.png",
+      "optimized": "assets/motion/remediation-02-source/optimized.png"
+    },
+    "remediation-03-structure": {
+      "kind": "remediation",
+      "duration": 4,
+      "original": "assets/motion/remediation-03-structure/original.png",
+      "optimized": "assets/motion/remediation-03-structure/optimized.png"
+    },
+    "remediation-04-return": {
+      "kind": "remediation",
+      "duration": 4,
+      "original": "assets/motion/remediation-04-return/original.png",
+      "optimized": "assets/motion/remediation-04-return/optimized.png"
+    },
+    "responsive-01-hero": {
+      "kind": "responsive",
+      "duration": 6,
+      "heroDesktop": "assets/motion/responsive-01-hero/hero-desktop.png",
+      "heroMobile": "assets/motion/responsive-01-hero/hero-mobile.png",
+      "mobileHeader": "assets/motion/responsive-01-hero/mobile-header.png"
+    },
+    "responsive-02-cards": {
+      "kind": "responsive",
+      "duration": 6,
+      "heroDesktop": "assets/motion/responsive-02-cards/hero-desktop.png",
+      "heroMobile": "assets/motion/responsive-02-cards/hero-mobile.png",
+      "mobileHeader": "assets/motion/responsive-02-cards/mobile-header.png",
+      "desktop": "assets/motion/responsive-02-cards/audience-desktop.png",
+      "desktopSourceHeight": 1097,
+      "mobile": "assets/motion/responsive-02-cards/audience-mobile.png",
+      "mobileSourceHeight": 2289,
+      "mobileScrollStops": [
+        [
+          0,
+          0
+        ],
+        [
+          1.1,
+          275
+        ],
+        [
+          2.1,
+          275
+        ],
+        [
+          4.7,
+          1478
+        ],
+        [
+          6,
+          1478
+        ]
+      ]
+    },
+    "responsive-03-plans": {
+      "kind": "responsive",
+      "duration": 6,
+      "heroDesktop": "assets/motion/responsive-03-plans/hero-desktop.png",
+      "heroMobile": "assets/motion/responsive-03-plans/hero-mobile.png",
+      "mobileHeader": "assets/motion/responsive-03-plans/mobile-header.png",
+      "desktop": "assets/motion/responsive-03-plans/plans-desktop.png",
+      "desktopSourceHeight": 1186,
+      "mobile": "assets/motion/responsive-03-plans/plans-mobile.png",
+      "mobileSourceHeight": 2802,
+      "mobileScrollStops": [
+        [
+          0,
+          465
+        ],
+        [
+          1,
+          550
+        ],
+        [
+          2.2,
+          550
+        ],
+        [
+          4.75,
+          1575
+        ],
+        [
+          6,
+          1575
+        ]
+      ]
+    },
+    "interactions-01-menu": {
+      "kind": "interactions",
+      "duration": 6,
+      "mobile": "assets/motion/interactions-01-menu/mobile-closed.png",
+      "menu": "assets/motion/interactions-01-menu/mobile-open.png",
+      "header": "assets/motion/interactions-01-menu/header.png",
+      "faq": "assets/motion/interactions-01-menu/faq-closed.png",
+      "faqTop": "assets/motion/interactions-01-menu/faq-top.png",
+      "faqTail": "assets/motion/interactions-01-menu/faq-tail.png",
+      "answer": "assets/motion/interactions-01-menu/answer.png",
+      "openIcon": "assets/motion/interactions-01-menu/open-icon.png",
+      "splitDocY": 9749,
+      "answerHeight": 81,
+      "icon": {
+        "x": 1211,
+        "documentY": 9695,
+        "width": 36,
+        "height": 36
+      },
+      "clickDocument": [
+        1229,
+        9713
+      ]
+    },
+    "interactions-02-answer": {
+      "kind": "interactions",
+      "duration": 6,
+      "mobile": "assets/motion/interactions-02-answer/mobile-closed.png",
+      "menu": "assets/motion/interactions-02-answer/mobile-open.png",
+      "header": "assets/motion/interactions-02-answer/header.png",
+      "faq": "assets/motion/interactions-02-answer/faq-closed.png",
+      "faqTop": "assets/motion/interactions-02-answer/faq-top.png",
+      "faqTail": "assets/motion/interactions-02-answer/faq-tail.png",
+      "answer": "assets/motion/interactions-02-answer/answer.png",
+      "openIcon": "assets/motion/interactions-02-answer/open-icon.png",
+      "splitDocY": 9749,
+      "answerHeight": 81,
+      "icon": {
+        "x": 1211,
+        "documentY": 9695,
+        "width": 36,
+        "height": 36
+      },
+      "clickDocument": [
+        1229,
+        9713
+      ]
+    },
+    "interactions-03-return": {
+      "kind": "interactions",
+      "duration": 4,
+      "mobile": "assets/motion/interactions-03-return/mobile-closed.png",
+      "menu": "assets/motion/interactions-03-return/mobile-open.png",
+      "header": "assets/motion/interactions-03-return/header.png",
+      "faq": "assets/motion/interactions-03-return/faq-closed.png",
+      "faqTop": "assets/motion/interactions-03-return/faq-top.png",
+      "faqTail": "assets/motion/interactions-03-return/faq-tail.png",
+      "answer": "assets/motion/interactions-03-return/answer.png",
+      "openIcon": "assets/motion/interactions-03-return/open-icon.png",
+      "splitDocY": 9749,
+      "answerHeight": 81,
+      "icon": {
+        "x": 1211,
+        "documentY": 9695,
+        "width": 36,
+        "height": 36
+      },
+      "clickDocument": [
+        1229,
+        9713
+      ]
+    }
+  },
+  "derivatives": [
+    {
+      "path": "assets/motion/main-01-clarity/page.png",
+      "sha256": "669192d4b8fcfd9e7badefe50e9fcef10ab1e1faeda234aefb93773de38f497d",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-00.png",
+          "sha256": "c93354e523eb225bc692fc970666844aec8f03dcc78f6e4ede7d82748ab3f9e5"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 900
+      },
+      "outputScale": 2,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-01-clarity/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-02-overview/page.png",
+      "sha256": "58b515e45bd6eb7f67cc16f3f913c9a7bdceb2ae32e7111d1fc1ced5e69ddf4b",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-00.png",
+          "sha256": "c93354e523eb225bc692fc970666844aec8f03dcc78f6e4ede7d82748ab3f9e5"
+        },
+        {
+          "path": "assets/live/desktop-strip-01.png",
+          "sha256": "b4694173d8d6c1c95c806a3cba645a357c188b80acfad2bedb301871745b7c7c"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 2150
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-02-overview/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-03-audiences/page.png",
+      "sha256": "665e8a64e40d30ad901503f932d08c9fbc5ee94d9772866c962e24057dcf79eb",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-00.png",
+          "sha256": "c93354e523eb225bc692fc970666844aec8f03dcc78f6e4ede7d82748ab3f9e5"
+        },
+        {
+          "path": "assets/live/desktop-strip-01.png",
+          "sha256": "b4694173d8d6c1c95c806a3cba645a357c188b80acfad2bedb301871745b7c7c"
+        },
+        {
+          "path": "assets/live/desktop-strip-02.png",
+          "sha256": "2105e27678080ddc4acf9edeab7fae8ad029f2319ea368de5238990b9d1f3aa8"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 1250,
+        "w": 1440,
+        "h": 2150
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-03-audiences/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-04-erp/page.png",
+      "sha256": "972c4436df1c88aa74db9d0ae7e8da7ccc9b31b2eba35159c8628a80cc9b9892",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-01.png",
+          "sha256": "b4694173d8d6c1c95c806a3cba645a357c188b80acfad2bedb301871745b7c7c"
+        },
+        {
+          "path": "assets/live/desktop-strip-02.png",
+          "sha256": "2105e27678080ddc4acf9edeab7fae8ad029f2319ea368de5238990b9d1f3aa8"
+        },
+        {
+          "path": "assets/live/desktop-strip-03.png",
+          "sha256": "33bb5114e9f707d92224cc4c5594a949c0994ad0aa30e357c7be40ddcc6037b5"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 2500,
+        "w": 1440,
+        "h": 2170
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-04-erp/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-05-features/page.png",
+      "sha256": "c3d7f1979ad0e1fc5372f8bcff7309ffe1757e7f1f0155d62c11bc58171fbc93",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-02.png",
+          "sha256": "2105e27678080ddc4acf9edeab7fae8ad029f2319ea368de5238990b9d1f3aa8"
+        },
+        {
+          "path": "assets/live/desktop-strip-03.png",
+          "sha256": "33bb5114e9f707d92224cc4c5594a949c0994ad0aa30e357c7be40ddcc6037b5"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 3770,
+        "w": 1440,
+        "h": 1920
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-05-features/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-06-price/page.png",
+      "sha256": "e38a184e320631adb4411bb336c96594a6979717e0a7e7495b1f203429053c31",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-03.png",
+          "sha256": "33bb5114e9f707d92224cc4c5594a949c0994ad0aa30e357c7be40ddcc6037b5"
+        },
+        {
+          "path": "assets/live/desktop-strip-04.png",
+          "sha256": "b63a630985fd1db7ded6a4f4defdf587b31c473bc0e1f293ac4019f8d6856a3b"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 4790,
+        "w": 1440,
+        "h": 2170
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-06-price/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-07-alerts/page.png",
+      "sha256": "33af6b3eab6c24bd7fbed98db686012c79ca1ac79818c8d5c57a0e386155730e",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-04.png",
+          "sha256": "b63a630985fd1db7ded6a4f4defdf587b31c473bc0e1f293ac4019f8d6856a3b"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 6060,
+        "w": 1440,
+        "h": 1430
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-07-alerts/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-08-plans/page.png",
+      "sha256": "00ae76a25cede2501d80c2896cfa4f48faa68e0718090f962300c3915765e037",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-04.png",
+          "sha256": "b63a630985fd1db7ded6a4f4defdf587b31c473bc0e1f293ac4019f8d6856a3b"
+        },
+        {
+          "path": "assets/live/desktop-strip-05.png",
+          "sha256": "ab7dc6ecb3d1d6dade7cf38e6ab8859ca4d7d074d2217a7be40d0ec0dca93a12"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 6590,
+        "w": 1440,
+        "h": 2390
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-08-plans/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-09-page-continuity/page.png",
+      "sha256": "29860845615d2add0f572ae44181cf7a434c9dcb61eac9600c5359f1da7f624b",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-05.png",
+          "sha256": "ab7dc6ecb3d1d6dade7cf38e6ab8859ca4d7d074d2217a7be40d0ec0dca93a12"
+        },
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 8080,
+        "w": 1440,
+        "h": 2001
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-09-page-continuity/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-10-faq/page.png",
+      "sha256": "dc49943ef14ba7087742e243c9ca74525111120b43b26adefe106ff7d9ec9535",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        },
+        {
+          "path": "assets/live/desktop-strip-07.png",
+          "sha256": "66d0c42a3488a2d0a8f38e0c6c55b3eb28473f9d623445b517974b3328623a8e"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 1899
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-10-faq/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-11-finish/page.png",
+      "sha256": "d69f7c5aa966ae46c932d1dfd3f83209a5daf4cbdd45f023f6968351dae1fbf1",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        },
+        {
+          "path": "assets/live/desktop-strip-07.png",
+          "sha256": "66d0c42a3488a2d0a8f38e0c6c55b3eb28473f9d623445b517974b3328623a8e"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 10180,
+        "w": 1440,
+        "h": 1099
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-11-finish/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/main-05-features/rail-complete.png",
+      "sha256": "58b79ab90f1f8d0141391461fe3f0c317c610b3dd213448a3a8736c4f94ac49f",
+      "sources": [
+        {
+          "path": "assets/live/desktop-feature-track-left-complete.png",
+          "sha256": "8d25d9ed444d934e44e053a909ae30313284d3caf7ed69f7bbbff50059e27afa"
+        },
+        {
+          "path": "assets/live/desktop-feature-track-right-complete.png",
+          "sha256": "25cfe504cec8d117faf89f81d14318f25cd87bcfd6b4b1befb30f8fece815c81"
+        }
+      ],
+      "operation": "append last 446 CSS pixels from genuine right-scroll state",
+      "cssSize": [
+        1614,
+        638
+      ]
+    },
+    {
+      "path": "assets/motion/main-10-faq/faq-top.png",
+      "sha256": "0991fec098525e1810888d0c13bc05f958077f8cc878682d0cd66a5b0db6b3d3",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 568
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-10-faq/faq-tail.png",
+      "sha256": "cfd8a59aa535b07dc8f94805caeb9194a4593e0cc42a563530cdc47bdde2cc4c",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        },
+        {
+          "path": "assets/live/desktop-strip-07.png",
+          "sha256": "66d0c42a3488a2d0a8f38e0c6c55b3eb28473f9d623445b517974b3328623a8e"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9749,
+        "w": 1440,
+        "h": 1331
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/main-10-faq/answer.png",
+      "sha256": "a2b970ecf511bc7fa3ebac508a81fd7c21467474e97f1ec1fe37e072c7e91771",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 568,
+        "w": 1440,
+        "h": 81
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        162
+      ]
+    },
+    {
+      "path": "assets/motion/main-10-faq/open-icon.png",
+      "sha256": "8dd5863b4815c9410ec2314616aad9f97a9cfedf1f213bdb8749d8f2602df0bb",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 1211,
+        "y": 514,
+        "w": 36,
+        "h": 36
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        72,
+        72
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-01-intent/original.png",
+      "sha256": "afb1b63e55dd8045c338362a7f680f854ffc0e9c4d3e25390b8eee3d5b105df4",
+      "sources": [
+        {
+          "path": "assets/figma/original-desktop-full.png",
+          "sha256": "343fe3ed396f56dc488218a57ff410056da5a742e022d227590444a87fa701a7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-01-intent/optimized.png",
+      "sha256": "147e9cef0976ccf9f82c483a5ecef9c6cedaee2072703a2eced3d78b114831e3",
+      "sources": [
+        {
+          "path": "assets/figma/optimized-desktop-full.png",
+          "sha256": "fa3807dd7431b836b4865c3777a5453c377fc345ab173a287ac4b79e3b112c8a"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-02-source/original.png",
+      "sha256": "afb1b63e55dd8045c338362a7f680f854ffc0e9c4d3e25390b8eee3d5b105df4",
+      "sources": [
+        {
+          "path": "assets/figma/original-desktop-full.png",
+          "sha256": "343fe3ed396f56dc488218a57ff410056da5a742e022d227590444a87fa701a7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-02-source/optimized.png",
+      "sha256": "147e9cef0976ccf9f82c483a5ecef9c6cedaee2072703a2eced3d78b114831e3",
+      "sources": [
+        {
+          "path": "assets/figma/optimized-desktop-full.png",
+          "sha256": "fa3807dd7431b836b4865c3777a5453c377fc345ab173a287ac4b79e3b112c8a"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-03-structure/original.png",
+      "sha256": "afb1b63e55dd8045c338362a7f680f854ffc0e9c4d3e25390b8eee3d5b105df4",
+      "sources": [
+        {
+          "path": "assets/figma/original-desktop-full.png",
+          "sha256": "343fe3ed396f56dc488218a57ff410056da5a742e022d227590444a87fa701a7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-03-structure/optimized.png",
+      "sha256": "147e9cef0976ccf9f82c483a5ecef9c6cedaee2072703a2eced3d78b114831e3",
+      "sources": [
+        {
+          "path": "assets/figma/optimized-desktop-full.png",
+          "sha256": "fa3807dd7431b836b4865c3777a5453c377fc345ab173a287ac4b79e3b112c8a"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-04-return/original.png",
+      "sha256": "afb1b63e55dd8045c338362a7f680f854ffc0e9c4d3e25390b8eee3d5b105df4",
+      "sources": [
+        {
+          "path": "assets/figma/original-desktop-full.png",
+          "sha256": "343fe3ed396f56dc488218a57ff410056da5a742e022d227590444a87fa701a7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/remediation-04-return/optimized.png",
+      "sha256": "147e9cef0976ccf9f82c483a5ecef9c6cedaee2072703a2eced3d78b114831e3",
+      "sources": [
+        {
+          "path": "assets/figma/optimized-desktop-full.png",
+          "sha256": "fa3807dd7431b836b4865c3777a5453c377fc345ab173a287ac4b79e3b112c8a"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1280,
+        "h": 410
+      },
+      "sourceScale": 1,
+      "pixelSize": [
+        1280,
+        410
+      ]
+    },
+    {
+      "path": "assets/motion/responsive-01-hero/hero-desktop.png",
+      "sha256": "e6b0b3b30bdaf699972b1c44957d7e0ce069a57f79c8f4ecbdf43af3b5062994",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 520
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        1040
+      ]
+    },
+    {
+      "path": "assets/motion/responsive-01-hero/hero-mobile.png",
+      "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/responsive-01-hero/mobile-header.png",
+      "sha256": "a9d35360619eea64985a1321af95796a834747a215b9a5bdf0813f3e8947bdf9",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 76
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        780,
+        152
+      ]
+    },
+    {
+      "path": "assets/motion/responsive-02-cards/hero-desktop.png",
+      "sha256": "e6b0b3b30bdaf699972b1c44957d7e0ce069a57f79c8f4ecbdf43af3b5062994",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 520
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        1040
+      ]
+    },
+    {
+      "path": "assets/motion/responsive-02-cards/hero-mobile.png",
+      "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/responsive-02-cards/mobile-header.png",
+      "sha256": "a9d35360619eea64985a1321af95796a834747a215b9a5bdf0813f3e8947bdf9",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 76
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        780,
+        152
+      ]
+    },
+    {
+      "path": "assets/motion/responsive-02-cards/audience-desktop.png",
+      "sha256": "10a3609aafbd1fcf23f24e921bc585f7e1115ded820c5d54fdbc1b91f56adb18",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-01.png",
+          "sha256": "b4694173d8d6c1c95c806a3cba645a357c188b80acfad2bedb301871745b7c7c"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 1570,
+        "w": 1440,
+        "h": 1097
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/responsive-02-cards/audience-mobile.png",
+      "sha256": "4a12943ac3a8e06b105b8e6daf6fd0a8d21750eee603750851e5f78786cc9039",
+      "sources": [
+        {
+          "path": "assets/live/mobile-comofunciona-full.png",
+          "sha256": "4a12943ac3a8e06b105b8e6daf6fd0a8d21750eee603750851e5f78786cc9039"
+        }
+      ],
+      "pixelSize": [
+        780,
+        4578
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/responsive-03-plans/hero-desktop.png",
+      "sha256": "e6b0b3b30bdaf699972b1c44957d7e0ce069a57f79c8f4ecbdf43af3b5062994",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 520
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        1040
+      ]
+    },
+    {
+      "path": "assets/motion/responsive-03-plans/hero-mobile.png",
+      "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/responsive-03-plans/mobile-header.png",
+      "sha256": "a9d35360619eea64985a1321af95796a834747a215b9a5bdf0813f3e8947bdf9",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 390,
+        "h": 76
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        780,
+        152
+      ]
+    },
+    {
+      "path": "assets/motion/responsive-03-plans/plans-desktop.png",
+      "sha256": "89af13012d77e4d287cd9925dc94a5ba68a8765a09384f71af7000e870ef2cb7",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-04.png",
+          "sha256": "b63a630985fd1db7ded6a4f4defdf587b31c473bc0e1f293ac4019f8d6856a3b"
+        },
+        {
+          "path": "assets/live/desktop-strip-05.png",
+          "sha256": "ab7dc6ecb3d1d6dade7cf38e6ab8859ca4d7d074d2217a7be40d0ec0dca93a12"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 7130,
+        "w": 1440,
+        "h": 1186
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/responsive-03-plans/plans-mobile.png",
+      "sha256": "638450bd03c6a8fa8d236af4fe44a66cc75edf9fa3795355966d00d125f0580d",
+      "sources": [
+        {
+          "path": "assets/live/mobile-pricing-full.png",
+          "sha256": "638450bd03c6a8fa8d236af4fe44a66cc75edf9fa3795355966d00d125f0580d"
+        }
+      ],
+      "pixelSize": [
+        780,
+        5604
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/mobile-closed.png",
+      "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/mobile-open.png",
+      "sha256": "59f66efce78d7a0e196bb33edd138015adf21c02f5358cddec73a567176e03e9",
+      "sources": [
+        {
+          "path": "assets/live/mobile-menu-open.png",
+          "sha256": "59f66efce78d7a0e196bb33edd138015adf21c02f5358cddec73a567176e03e9"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/faq-closed.png",
+      "sha256": "831f2e9301ed8f4e4cfa80c85fd984ae02a681728c05348b152d7f9d4bfa88b8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 979
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/faq-top.png",
+      "sha256": "0991fec098525e1810888d0c13bc05f958077f8cc878682d0cd66a5b0db6b3d3",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 568
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/faq-tail.png",
+      "sha256": "87dbd168c05a63b85bc69788a30caa48efe4f8e9db13e4c5dafa68d17039a6fa",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9749,
+        "w": 1440,
+        "h": 411
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/answer.png",
+      "sha256": "a2b970ecf511bc7fa3ebac508a81fd7c21467474e97f1ec1fe37e072c7e91771",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 568,
+        "w": 1440,
+        "h": 81
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        162
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-01-menu/open-icon.png",
+      "sha256": "8dd5863b4815c9410ec2314616aad9f97a9cfedf1f213bdb8749d8f2602df0bb",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 1211,
+        "y": 514,
+        "w": 36,
+        "h": 36
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        72,
+        72
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/mobile-closed.png",
+      "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/mobile-open.png",
+      "sha256": "59f66efce78d7a0e196bb33edd138015adf21c02f5358cddec73a567176e03e9",
+      "sources": [
+        {
+          "path": "assets/live/mobile-menu-open.png",
+          "sha256": "59f66efce78d7a0e196bb33edd138015adf21c02f5358cddec73a567176e03e9"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/faq-closed.png",
+      "sha256": "831f2e9301ed8f4e4cfa80c85fd984ae02a681728c05348b152d7f9d4bfa88b8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 979
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/faq-top.png",
+      "sha256": "0991fec098525e1810888d0c13bc05f958077f8cc878682d0cd66a5b0db6b3d3",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 568
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/faq-tail.png",
+      "sha256": "87dbd168c05a63b85bc69788a30caa48efe4f8e9db13e4c5dafa68d17039a6fa",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9749,
+        "w": 1440,
+        "h": 411
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/answer.png",
+      "sha256": "a2b970ecf511bc7fa3ebac508a81fd7c21467474e97f1ec1fe37e072c7e91771",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 568,
+        "w": 1440,
+        "h": 81
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        162
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-02-answer/open-icon.png",
+      "sha256": "8dd5863b4815c9410ec2314616aad9f97a9cfedf1f213bdb8749d8f2602df0bb",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 1211,
+        "y": 514,
+        "w": 36,
+        "h": 36
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        72,
+        72
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-03-return/mobile-closed.png",
+      "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94",
+      "sources": [
+        {
+          "path": "assets/live/mobile-hero.png",
+          "sha256": "850d15c953dd3e8bd7e27cc187f7730a4276267ba2e1d28d4e85500c9f90df94"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/interactions-03-return/mobile-open.png",
+      "sha256": "59f66efce78d7a0e196bb33edd138015adf21c02f5358cddec73a567176e03e9",
+      "sources": [
+        {
+          "path": "assets/live/mobile-menu-open.png",
+          "sha256": "59f66efce78d7a0e196bb33edd138015adf21c02f5358cddec73a567176e03e9"
+        }
+      ],
+      "pixelSize": [
+        780,
+        1688
+      ],
+      "operation": "byte-for-byte copy"
+    },
+    {
+      "path": "assets/motion/interactions-03-return/header.png",
+      "sha256": "5db754628103f74410f17b69f2e184e5ae66f715f43c15d10694562d6a281bd8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-hero.png",
+          "sha256": "8b440d73d0dcf871e1087513e050161a2cad7f97de0c68830b1d9d5eb85831c7"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 86
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        172
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-03-return/faq-closed.png",
+      "sha256": "831f2e9301ed8f4e4cfa80c85fd984ae02a681728c05348b152d7f9d4bfa88b8",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 979
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-03-return/faq-top.png",
+      "sha256": "0991fec098525e1810888d0c13bc05f958077f8cc878682d0cd66a5b0db6b3d3",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9181,
+        "w": 1440,
+        "h": 568
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-03-return/faq-tail.png",
+      "sha256": "87dbd168c05a63b85bc69788a30caa48efe4f8e9db13e4c5dafa68d17039a6fa",
+      "sources": [
+        {
+          "path": "assets/live/desktop-strip-06.png",
+          "sha256": "351654050f11614ae08017b3eedc7c25a8e709e77b85b451f0614dfa69278bee"
+        }
+      ],
+      "documentCrop": {
+        "x": 0,
+        "y": 9749,
+        "w": 1440,
+        "h": 411
+      },
+      "outputScale": 1.5,
+      "operation": "overlapping-strip crop assembly; bounded decode"
+    },
+    {
+      "path": "assets/motion/interactions-03-return/answer.png",
+      "sha256": "a2b970ecf511bc7fa3ebac508a81fd7c21467474e97f1ec1fe37e072c7e91771",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 0,
+        "y": 568,
+        "w": 1440,
+        "h": 81
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        2880,
+        162
+      ]
+    },
+    {
+      "path": "assets/motion/interactions-03-return/open-icon.png",
+      "sha256": "8dd5863b4815c9410ec2314616aad9f97a9cfedf1f213bdb8749d8f2602df0bb",
+      "sources": [
+        {
+          "path": "assets/live/desktop-faq-framed-open.png",
+          "sha256": "8cd59e03acdfd332a3f5e455581272ee76412ec8041d7feb298801c898343e1e"
+        }
+      ],
+      "cssCrop": {
+        "x": 1211,
+        "y": 514,
+        "w": 36,
+        "h": 36
+      },
+      "sourceScale": 2,
+      "pixelSize": [
+        72,
+        72
+      ]
+    }
+  ]
+}

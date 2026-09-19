@@ -1,0 +1,28 @@
+[
+  {
+    "path": "assets/live/desktop-feature-track-left-complete.png",
+    "source": "https://allprice-lp.juanpablosilva.com.br/",
+    "clip": {
+      "x": 136,
+      "y": 4237.5,
+      "width": 1168,
+      "height": 638
+    },
+    "scrollLeft": 0,
+    "deviceScaleFactor": 2,
+    "height": 11279
+  },
+  {
+    "path": "assets/live/desktop-feature-track-right-complete.png",
+    "source": "https://allprice-lp.juanpablosilva.com.br/",
+    "clip": {
+      "x": 136,
+      "y": 4237.5,
+      "width": 1168,
+      "height": 638
+    },
+    "scrollLeft": 446,
+    "deviceScaleFactor": 2,
+    "height": 11279
+  }
+]

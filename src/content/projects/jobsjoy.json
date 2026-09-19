@@ -44,12 +44,12 @@
   "caseStudy": {
     "en": {
       "brief": "UI/UX designer for a two-sided talent acquisition platform and job board connecting candidates with hiring companies. Designed the 96-child core design page and 51 component sets across a 76-child design system, engineering a 5-step structured candidate résumé wizard, multi-device candidate onboarding, recruiter job administration, and a dedicated AI-assisted vacancy creation flow (Minhas-vagas/vaga/ia).",
-      "context": "Agency engagement at Sagitta between July 11 and November 5, 2024. Designed as an internal initiative for agency leadership, adapting and refining proven recruitment patterns from earlier Sagitta projects (Seu Portal de Emprego and Jobs.bet) into a standalone HR-tech platform with AI-assisted authoring capabilities. Juan authored all candidate, recruiter, and design system interfaces; base UI primitives extended Sagitta's licensed Untitled UI kit.",
-      "outcome": "Completed all candidate and recruiter user flows, desktop and mobile responsive viewports, and the 51-component-set design system. The initiative was subsequently retired and shelved internally by agency leadership without a public production launch. No business metrics exist; this project stands as evidence of AI-feature interface design and structured multi-step intake wizards.",
+      "context": "Agency engagement at Sagitta between July 11 and November 5, 2024. Designed by adapting and refining proven recruitment patterns from earlier Sagitta projects (Seu Portal de Emprego and Jobs.bet) into a standalone HR-tech platform with AI-assisted authoring capabilities. Juan authored all candidate, recruiter, and design system interfaces; base UI primitives extended Sagitta's licensed Untitled UI kit.",
+      "outcome": "Completed all candidate and recruiter user flows, desktop and mobile responsive viewports, and the 51-component-set design system. The project did not reach a public production launch. No business metrics exist; this project stands as evidence of AI-feature interface design and structured multi-step intake wizards.",
       "blocks": [
         {
           "type": "callout",
-          "body": "Attribution and Scope Boundary: I was the UI/UX designer for the candidate and recruiter portals, the résumé builder wizard, and the AI-assisted job authoring interface. I do not claim building, training, or fine-tuning any machine learning models; my contribution is the interface design for an AI-assisted feature. Delivery status: this was an internal Sagitta Digital initiative that was subsequently shelved; no production launch or user metrics are claimed."
+          "body": "Attribution and Scope Boundary: I was the UI/UX designer for the candidate and recruiter portals, the résumé builder wizard, and the AI-assisted job authoring interface. I do not claim building, training, or fine-tuning any machine learning models; my contribution is the interface design for an AI-assisted feature. Delivery status: no production launch or user metrics are claimed."
         },
         {
           "type": "heading",
@@ -130,22 +130,22 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Internal product evolution and design patterns"
+          "text": "Product evolution and design patterns"
         },
         {
           "type": "prose",
-          "body": "JobsJoy was developed as an internal initiative for Sagitta's leadership to synthesize recruitment patterns previously deployed on Seu Portal de Emprego and Jobs.bet. Although the agency subsequently decided to shelve the project, the file represents a refined synthesis of multi-role marketplace workflows, structured onboarding wizards, and AI-assisted enterprise tooling."
+          "body": "JobsJoy brought together recruitment patterns first deployed on Jobs.bet and Seu Portal de Emprego. The file represents a refined synthesis of multi-role marketplace workflows, structured onboarding wizards, and AI-assisted enterprise tooling."
         }
       ]
     },
     "pt": {
       "brief": "Designer de UI/UX de uma plataforma bilateral de atração de talentos e mural de empregos conectando candidatos a empresas contratantes. Desenhou a página principal com 96 pranchas e 51 conjuntos de componentes em um design system de 76 pranchas, estruturando um wizard de currículo em cinco etapas, onboarding multidispositivo para candidatos, gestão de vagas para recrutadores e um fluxo de criação de vagas assistido por IA (Minhas-vagas/vaga/ia).",
-      "context": "Atuação na agência Sagitta entre 11 de julho e 5 de novembro de 2024. Desenvolvido como uma iniciativa interna da liderança da agência, adaptando e aprimorando padrões consolidados de projetos anteriores (Seu Portal de Emprego e Jobs.bet) em uma plataforma de HR-tech independente com suporte a criação assistida por IA. Juan desenhou todas as interfaces de candidato, recrutador e design system; os primitivos de interface estenderam a base licenciada de Untitled UI.",
-      "outcome": "Concluiu todos os fluxos de candidatos e recrutadores, pranchas responsivas para desktop e mobile e o design system com 51 conjuntos de componentes. A iniciativa foi posteriormente descontinuada internamente pela agência sem lançamento público. Não existem métricas de negócio; o projeto permanece como comprovação de design de interface para recursos de inteligência artificial e wizards estruturados de qualificação.",
+      "context": "Atuação na agência Sagitta entre 11 de julho e 5 de novembro de 2024. Desenvolvido adaptando e aprimorando padrões consolidados de projetos anteriores (Seu Portal de Emprego e Jobs.bet) em uma plataforma de HR-tech independente com suporte a criação assistida por IA. Juan desenhou todas as interfaces de candidato, recrutador e design system; os primitivos de interface estenderam a base licenciada de Untitled UI.",
+      "outcome": "Concluiu todos os fluxos de candidatos e recrutadores, pranchas responsivas para desktop e mobile e o design system com 51 conjuntos de componentes. O projeto não chegou a um lançamento público. Não existem métricas de negócio; o projeto permanece como comprovação de design de interface para recursos de inteligência artificial e wizards estruturados de qualificação.",
       "blocks": [
         {
           "type": "callout",
-          "body": "Fronteira de Atribuição e Escopo: Fui o designer de UI/UX responsável pelos portais de candidato e recrutador, pelo wizard de currículo e pela interface de criação de vagas com IA. Não reivindico criação ou treino de modelos de inteligência artificial; minha contribuição restringe-se ao design da interface. Status de entrega: tratou-se de uma iniciativa interna da Sagitta posteriormente arquivada; nenhum lançamento público ou métrica de adoção é alegada."
+          "body": "Fronteira de Atribuição e Escopo: Fui o designer de UI/UX responsável pelos portais de candidato e recrutador, pelo wizard de currículo e pela interface de criação de vagas com IA. Não reivindico criação ou treino de modelos de inteligência artificial; minha contribuição restringe-se ao design da interface. Status de entrega: nenhum lançamento público ou métrica de adoção é alegada."
         },
         {
           "type": "heading",
@@ -226,11 +226,11 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Evolução de produto interno e padrões de mercado"
+          "text": "Evolução de produto e padrões de mercado"
         },
         {
           "type": "prose",
-          "body": "O JobsJoy nasceu como uma evolução interna da Sagitta para sintetizar e refinar padrões testados anteriormente no Seu Portal de Emprego e no Jobs.bet. Embora a liderança da agência tenha decidido arquivar o produto posteriormente, o projeto reflete uma modelagem madura de marketplaces bilaterais, wizards de qualificação e ferramentas corporativas com suporte de IA."
+          "body": "O JobsJoy reuniu e refinou padrões testados anteriormente no Seu Portal de Emprego e no Jobs.bet. O projeto reflete uma modelagem madura de marketplaces bilaterais, wizards de qualificação e ferramentas corporativas com suporte de IA."
         }
       ]
     }

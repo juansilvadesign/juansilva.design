@@ -48,7 +48,7 @@
     "en": {
       "brief": "Sole Website UI Designer for Click da Beleza, a high-volume cosmetics, beauty, and personal care online retail store transitioning from marketplace operations (2,500+ monthly sales milestone) to a standalone Direct-to-Consumer (D2C) brand. Designed 11 responsive screens on the primary Design page across desktop and mobile devices (Página Inicial, Produtos, Compra, Carrinho, Pagamento, Checkout - Mobile, and mobile views) supported by a 27-node Style Guide specifying e-commerce utility components (NavBar, SearchBox, TopBanner, Sacola bag, Favoritos wishlist, Ajuda chat) in Figma (file key tQvGNS1f5VAefdMxHHKtZe).",
       "context": "Agency employment at Sagitta delivering from September 13, 2023 to September 26, 2023. Juan served as sole website UI designer within the agency team: Kelvin Bezerra created the brand identity and logo, Juan designed the complete D2C cosmetics e-commerce storefront and purchasing funnel in Figma, and an external no-code developer implemented and published the store on WordPress using WooCommerce and Elementor. Scoped by Ramon.",
-      "outcome": "The e-commerce storefront was implemented and published to production. The website serving clickdabeleza.com.br today was later redesigned and rebuilt from scratch by another company, with only scattered original assets surviving. Historical delivery is verified via an era Wayback Machine archive (2024-09-29, 175 KB on Hello Elementor with 311 Elementor references) whose page hierarchy and 'Ofertas do Dia' catalog match the audited Figma file. No commercial conversion metrics exist. This case study documents marketplace-to-D2C e-commerce migration UX, product discovery, and promotional mechanics.",
+      "outcome": "The e-commerce storefront was implemented and published to production. The website serving clickdabeleza.com.br today was later redesigned and rebuilt from scratch by another company, with only scattered original assets surviving. Historical delivery is verified via an era Wayback Machine archive (2024-09-29, 175 KB using the Hello Elementor theme, showing 311 Elementor references) in which the page structure and 'Ofertas do Dia' catalog align with the audited Figma file. No commercial conversion metrics exist. This case study documents marketplace-to-D2C e-commerce migration UX, product discovery, and promotional mechanics.",
       "blocks": [
         {
           "type": "callout",
@@ -132,7 +132,7 @@
           "items": [
             "Not brand identity or logo design. Kelvin Bezerra created the Click da Beleza logo and brand styling.",
             "Not WordPress or WooCommerce development. Implementation was handled by an external no-code developer.",
-            "Not the current live website. The site serving clickdabeleza.com.br today was designed and built from scratch by another firm; historical shipping is proven via the 2024-09-29 Wayback capture.",
+            "Not the current live website. The site serving clickdabeleza.com.br currently online represents a complete rebuild created from the ground up by a different firm; historical shipping is proven via the 2024-09-29 Wayback capture.",
             "Not responsible for the 2,500+ monthly orders. That was the client's pre-existing marketplace baseline before hiring the agency.",
             "Not supported by D2C conversion metrics. No revenue or order volume metrics were retained."
           ]

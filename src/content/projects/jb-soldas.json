@@ -109,7 +109,7 @@
         },
         {
           "type": "quote",
-          "text": "Shipping is evidenced: the 2024-03-20 Wayback snapshot (222,969 B on WordPress 6.4.3 / Hello Elementor) verifies public deployment with section runs matching Figma. But 'shipped' means the design was implemented and made public—never that Juan built the code, hosted the server, or created the brand logo."
+          "text": "Shipping is evidenced: the 2024-03-20 Wayback snapshot (WordPress 6.4.3 with the Hello Elementor theme, 222,969 B) confirms the public launch, with layout sections that match the Figma file. However, the 'shipped' label denotes only that the UI went live publicly; it does not indicate that Juan wrote the code, managed the hosting, or authored the brand logo."
         },
         {
           "type": "heading",

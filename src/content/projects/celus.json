@@ -58,7 +58,7 @@
     "en": {
       "brief": "Point-of-care ultrasound (POCUS) clinical decision-support suite for medical practitioners — bridging diagnostic protocols, biometry reference tables, and multi-step risk scoring into a high-utility bedside tool. Nineteen modules designed across two surfaces (an 11-module clinical app and an 8-module administrative back office), built on a two-layer design token system, plus the marketing landing page coded in Next.js.",
       "context": "Agency employment at Spaceapps; the commercial client relationship belonged to the agency and I delivered as staff. The discovery workshop was run by Thiago, our tech lead, in FigJam and handed to me as a completed board. From that board onward, the product design across every module was mine alone — and the marketing landing page was mine to design and build.",
-      "outcome": "The product was delivered and went live with real medical practitioners before the agency's hosting lapsed. The original domain (salus-celus.com.br) is dead and was never archived, making the self-hosted mirror on my domain and its Wayback Machine snapshot the only surviving proof of the coded landing page. The application itself was built in Bubble by another developer, evidencing my product design rather than my engineering. No quantitative clinical conversion or engagement metrics exist — a confirmed absence across this corpus, not an uncollected one.",
+      "outcome": "The product was delivered and went live with real medical practitioners before the agency's hosting lapsed. The original domain (salus-celus.com.br) is dead and was never archived, making the self-hosted mirror on my domain and its Wayback Machine snapshot the only surviving proof of the coded landing page. Another developer built the application itself using Bubble, evidencing my product design rather than my engineering. No quantitative clinical conversion or engagement metrics exist — a confirmed absence across this corpus, not an uncollected one.",
       "blocks": [
         {
           "type": "video",
@@ -205,10 +205,6 @@
           ]
         },
         {
-          "type": "quote",
-          "text": "A single leftover variable — alpha/primary/8 = #7f56d914, an Untitled UI purple token that was never repointed to Celus green — remains in the Figma file. A sharp design reviewer will spot it immediately. Disclosing the template origin openly costs nothing and validates every other claim of craft."
-        },
-        {
           "type": "heading",
           "level": 2,
           "text": "The marketing surface and form capture"
@@ -224,11 +220,11 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Developer handoff in practice: The empty checklist"
+          "text": "Developer handoff, fitted to the builder"
         },
         {
           "type": "prose",
-          "body": "Page 👨‍💻 • Passagem para os devs in the Figma file contains a handoff checklist widget sitting at Completed 0 of 28. This was not an oversight or incomplete delivery. The Bubble developer explicitly stated that the Figma dev mode tab, auto-layout structure, and token inspector provided all the specification they needed, requesting that we skip formal documentation. Adapting to the builder's actual workflow rather than manufacturing unread 30-page spec documents is practical collaboration."
+          "body": "The Bubble developer worked straight from Figma's dev mode, auto-layout structure and token inspector, and asked to skip a separate handoff document, so I didn't build one."
         },
         {
           "type": "heading",
@@ -409,10 +405,6 @@
           ]
         },
         {
-          "type": "quote",
-          "text": "Uma variável remanescente — alpha/primary/8 = #7f56d914, um token roxo da Untitled UI que nunca foi remapeado para o verde do Celus — continua no arquivo do Figma. Um avaliador atento perceberá imediatamente. Reconhecer abertamente a origem do template não custa nada e chancela a credibilidade de todo o restante do trabalho."
-        },
-        {
           "type": "heading",
           "level": 2,
           "text": "A superfície de marketing e captura de formulário"
@@ -428,11 +420,11 @@
         {
           "type": "heading",
           "level": 2,
-          "text": "Passagem para os devs na prática: O checklist vazio"
+          "text": "Handoff ajustado a quem construiu"
         },
         {
           "type": "prose",
-          "body": "Na página 👨‍💻 • Passagem para os devs do Figma, o widget de checklist de entrega está em Completed 0 of 28. Isso não foi um esquecimento ou entrega incompleta. O desenvolvedor Bubble declarou expressamente que a aba de Dev Mode do Figma, a organização do auto-layout e o inspetor de tokens eram suficientes para a montagem, dispensando documentações externas. Adaptar-se ao fluxo de trabalho real de quem constrói o código, em vez de produzir PDFs de especificação de 30 páginas que ninguém lê, é maturidade de colaboração."
+          "body": "O desenvolvedor Bubble trabalhou direto no Dev Mode do Figma, na estrutura de auto-layout e no inspetor de tokens, e pediu para dispensar um documento de handoff separado; por isso, não o produzi."
         },
         {
           "type": "heading",

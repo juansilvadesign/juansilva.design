@@ -1,30 +1,148 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>One operating view — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-zeto" id="root" data-composition-id="main-02-overview" data-width="1920" data-height="1080" data-duration="5">
-<div data-hf-id="hf-y081" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:83.3333cqh">
-</div>
-<div data-hf-id="hf-uzo1" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:7.9630cqh">
-</div>
-<div data-hf-id="hf-89ce" class="text" style="left:14.2708cqw;top:5.2778cqh;width:26.2500cqw;height:4.6296cqh;font-size:1.8750cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-cizw" class="text" style="left:63.0208cqw;top:6.0185cqh;width:22.9167cqw;height:3.8889cqh;font-size:1.3021cqw;text-align:right">Testar grátis     Já sou cliente</div>
-<div data-hf-id="hf-2wc0" class="block" style="left:17.8125cqw;top:15.7407cqh;width:64.3750cqw;height:51.2963cqh">
-<span data-hf-id="hf-2vpb">Dashboard illustration · preserved source</span>
-</div>
-<div data-hf-id="hf-gmka" class="block focal" style="left:12.5000cqw;top:71.4815cqh;width:75.0000cqw;height:11.2963cqh">
-<span data-hf-id="hf-5tdz">Automatize gestão e precificação por menos de R$ 3,00 ao dia!</span>
-</div>
-<div data-hf-id="hf-oyuf" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">Pricing, sales and profit. In one place.</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["main-02-overview"] = tl;
-</script>
-</template>
-</body></html>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #020817;
+      font-family: "Lato";
+    }
+    .main-02-overview-background {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+    .main-02-overview-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 2400px;
+      perspective-origin: 50% 50%;
+    }
+    .main-02-overview-positioner {
+      position: absolute;
+      left: 240px;
+      top: 36px;
+      width: 1440px;
+      height: 900px;
+      transform-style: preserve-3d;
+    }
+    .main-02-overview-rotation-rig,
+    .main-02-overview-scale-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0%;
+    }
+    .main-02-overview-viewport {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .main-02-overview-scroll-track {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 2150px;
+      will-change: transform;
+    }
+    .main-02-overview-page {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 1440px;
+      height: 2150px;
+    }
+    .main-02-overview-header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 3;
+      display: block;
+      width: 1440px;
+      height: 86px;
+    }
+    .main-02-overview-caption {
+      position: absolute;
+      left: 96px;
+      top: 960px;
+      width: 1728px;
+      height: 64px;
+      margin: 0;
+      color: #234DD7;
+      font-family: "Lato";
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+    }
+  </style>
 
+  <div id="root" data-hf-id="hf-zeto" data-composition-id="main-02-overview" data-width="1920" data-height="1080" data-duration="5">
+    <div class="clip main-02-overview-background" data-start="0" data-duration="5" data-track-index="0"></div>
+    <div class="clip main-02-overview-stage" data-start="0" data-duration="5" data-track-index="1">
+      <div class="main-02-overview-positioner">
+        <div class="main-02-overview-rotation-rig">
+          <div class="main-02-overview-scale-wrapper">
+            <div class="main-02-overview-viewport">
+              <div id="main-02-overview-scroll-track" class="main-02-overview-scroll-track" data-layout-allow-overflow>
+                <img class="main-02-overview-page" src="assets/motion/main-02-overview/page.png" width="1440" height="2150" alt="Captured AllPrice page, from its hero through the illustrated dashboard and blue banner" draggable="false">
+              </div>
+              <img class="main-02-overview-header" src="assets/motion/main-02-overview/header.png" width="1440" height="86" alt="" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p data-hf-id="hf-oyuf" class="clip main-02-overview-caption" data-start="0" data-duration="5" data-track-index="2">Pricing, sales and profit. In one place.</p>
+  </div>
+
+  <script>
+    (() => {
+      const scrollTrack = document.getElementById("main-02-overview-scroll-track");
+      const tl = gsap.timeline({ paused: true });
+
+      // The browser remains neutral. Only the captured document scrolls;
+      // its illustration and numbers pass continuously beneath the fixed header.
+      tl.fromTo(scrollTrack, { y: 0 }, {
+        y: -1250,
+        duration: 4.1,
+        ease: "power2.inOut"
+      }, 0);
+
+      // The final hold is the exact, stationary page handoff to the next frame.
+      tl.fromTo(scrollTrack, { y: -1250 }, {
+        y: -1250,
+        duration: 0.9,
+        ease: "power2.inOut",
+        immediateRender: false
+      }, 4.1);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main-02-overview"] = tl;
+    })();
+  </script>
+</template>
