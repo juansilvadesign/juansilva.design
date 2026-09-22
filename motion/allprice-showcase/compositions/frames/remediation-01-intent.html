@@ -1,27 +1,183 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Preserve the intent — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-aasb" id="root" data-composition-id="remediation-01-intent" data-width="1920" data-height="1080" data-duration="4">
-<div data-hf-id="hf-xiuo" class="text" style="left:5.0000cqw;top:29.0741cqh;width:43.2292cqw;height:3.8889cqh;font-size:1.4583cqw;font-weight:600">Original · Thiago</div>
-<div data-hf-id="hf-umo0" class="text" style="left:51.7708cqw;top:29.0741cqh;width:43.2292cqw;height:3.8889cqh;font-size:1.4583cqw;font-weight:600">LP otimizada · Juan</div>
-<div data-hf-id="hf-whif" class="block" style="left:5.0000cqw;top:35.0000cqh;width:43.2292cqw;height:24.6296cqh">
-<span data-hf-id="hf-ggul">Original composite · matching hero crop</span>
-</div>
-<div data-hf-id="hf-omd1" class="block focal" style="left:51.7708cqw;top:35.0000cqh;width:43.2292cqw;height:24.6296cqh">
-<span data-hf-id="hf-921l">Optimized composite · matching hero crop</span>
-</div>
-<div data-hf-id="hf-81yu" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">Preserve the design. Repair the structure.</div>
-<div data-hf-id="hf-vsam" class="text" style="left:5.0000cqw;top:93.5185cqh;width:90.0000cqw;height:4.0741cqh;font-size:1.4583cqw;text-align:center">Original landing-page design: Thiago · Remediation: Juan Silva</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["remediation-01-intent"] = tl;
-</script>
-</template>
-</body></html>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      font-family: "Lato";
+      color: #020817;
+    }
+    #remediation-01-intent-background {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+    #remediation-01-intent-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 2400px;
+      perspective-origin: 50% 50%;
+      transform-style: preserve-3d;
+    }
+    #remediation-01-intent-original-position,
+    #remediation-01-intent-optimized-position {
+      position: absolute;
+      top: 378px;
+      width: 830px;
+      height: 265.859375px;
+      transform-origin: 0 0;
+      transform-style: preserve-3d;
+    }
+    #remediation-01-intent-original-position { left: 96px; }
+    #remediation-01-intent-optimized-position { left: 994px; }
+    #remediation-01-intent-original-angle,
+    #remediation-01-intent-optimized-angle {
+      position: absolute;
+      inset: 0;
+      width: 830px;
+      height: 265.859375px;
+      transform-origin: 50% 50%;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .remediation-01-intent-mask {
+      width: 830px;
+      height: 265.859375px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .remediation-01-intent-raster {
+      display: block;
+      width: 830px;
+      height: 265.859375px;
+    }
+    #remediation-01-intent-original-label,
+    #remediation-01-intent-optimized-label {
+      position: absolute;
+      top: 314px;
+      width: 830px;
+      height: 42px;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #020817;
+    }
+    #remediation-01-intent-original-label { left: 96px; }
+    #remediation-01-intent-optimized-label { left: 994px; }
+    #remediation-01-intent-caption {
+      position: absolute;
+      left: 96px;
+      top: 960px;
+      width: 1728px;
+      height: 64px;
+      margin: 0;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      color: #234DD7;
+    }
+    #remediation-01-intent-credit {
+      position: absolute;
+      left: 96px;
+      top: 1010px;
+      width: 1728px;
+      height: 44px;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      text-align: center;
+      color: #384257;
+    }
+  </style>
+  <div id="root" data-composition-id="remediation-01-intent" data-width="1920" data-height="1080" data-duration="4">
+    <div id="remediation-01-intent-background" class="clip" data-start="0" data-duration="4" data-track-index="0"></div>
+    <div id="remediation-01-intent-stage" class="clip" data-start="0" data-duration="4" data-track-index="1">
+      <div id="remediation-01-intent-original-position" data-layout-allow-overflow>
+        <div id="remediation-01-intent-original-angle" data-layout-allow-overflow>
+          <div id="remediation-01-intent-original-mask" class="remediation-01-intent-mask">
+            <img id="remediation-01-intent-original-raster" class="remediation-01-intent-raster" src="assets/motion/remediation-01-intent/original.png" width="1280" height="410" alt="Original complete-composite hero crop" draggable="false">
+          </div>
+        </div>
+      </div>
+      <div id="remediation-01-intent-optimized-position" data-layout-allow-overflow>
+        <div id="remediation-01-intent-optimized-angle" data-layout-allow-overflow>
+          <div id="remediation-01-intent-optimized-mask" class="remediation-01-intent-mask">
+            <img id="remediation-01-intent-optimized-raster" class="remediation-01-intent-raster" src="assets/motion/remediation-01-intent/optimized.png" width="1280" height="410" alt="Optimized complete-composite hero crop" draggable="false">
+          </div>
+        </div>
+      </div>
+    </div>
+    <p id="remediation-01-intent-original-label" class="clip" data-start="0" data-duration="4" data-track-index="2">Original · Thiago</p>
+    <p id="remediation-01-intent-optimized-label" class="clip" data-start="0" data-duration="4" data-track-index="3">LP otimizada · Juan</p>
+    <p id="remediation-01-intent-caption" class="clip" data-start="0" data-duration="4" data-track-index="4">Preserve the design. Repair the structure.</p>
+    <p id="remediation-01-intent-credit" class="clip" data-start="0" data-duration="4" data-track-index="5">Original landing-page design: Thiago · Remediation: Juan Silva</p>
+  </div>
+  <script>
+    (() => {
+      const originalAngle = document.getElementById("remediation-01-intent-original-angle");
+      const optimizedAngle = document.getElementById("remediation-01-intent-optimized-angle");
+      const originalPosition = document.getElementById("remediation-01-intent-original-position");
+      const originalLabel = document.getElementById("remediation-01-intent-original-label");
+      const tl = gsap.timeline({ paused: true });
 
+      // Loop opening: both complete crops and all copy are fully visible.
+      tl.fromTo(originalAngle,
+        { x: 0, y: 0, rotationY: 6, scale: 1, opacity: 1 },
+        { x: 0, y: 0, rotationY: 0, scale: 1, opacity: 1, duration: 0.8, ease: "power2.inOut" },
+        0
+      );
+      tl.fromTo(optimizedAngle,
+        { x: 0, y: 0, rotationY: -6, scale: 1, opacity: 1 },
+        { x: 0, y: 0, rotationY: 0, scale: 1, opacity: 1, duration: 0.8, ease: "power2.inOut" },
+        0
+      );
+
+      // Front-on reading hold; no drift or independent floating.
+      tl.fromTo(originalAngle,
+        { rotationY: 0 },
+        { rotationY: 0, duration: 3.2, ease: "none", immediateRender: false },
+        0.8
+      );
+      tl.fromTo(optimizedAngle,
+        { rotationY: 0 },
+        { rotationY: 0, duration: 3.2, ease: "none", immediateRender: false },
+        0.8
+      );
+
+      // Prepare the approved original-source geometry for the structure view.
+      tl.fromTo(originalPosition,
+        { x: 0, y: 0, scale: 1 },
+        { x: 0, y: -11, scale: 810 / 830, duration: 1.1, ease: "power2.inOut", immediateRender: false },
+        2.9
+      );
+      tl.fromTo(originalLabel,
+        { y: 0 },
+        { y: -15, duration: 1.1, ease: "power2.inOut", immediateRender: false },
+        2.9
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["remediation-01-intent"] = tl;
+    })();
+  </script>
+</template>

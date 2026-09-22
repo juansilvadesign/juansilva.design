@@ -1,33 +1,154 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Keep an eye on changes — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-6lcq" id="root" data-composition-id="main-07-alerts" data-width="1920" data-height="1080" data-duration="4">
-<div data-hf-id="hf-y081" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:83.3333cqh">
-</div>
-<div data-hf-id="hf-uzo1" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:7.9630cqh">
-</div>
-<div data-hf-id="hf-89ce" class="text" style="left:14.2708cqw;top:5.2778cqh;width:26.2500cqw;height:4.6296cqh;font-size:1.8750cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-cizw" class="text" style="left:63.0208cqw;top:6.0185cqh;width:22.9167cqw;height:3.8889cqh;font-size:1.3021cqw;text-align:right">Testar grátis     Já sou cliente</div>
-<div data-hf-id="hf-e9rm" class="text" style="left:17.3958cqw;top:16.4815cqh;width:39.0625cqw;height:7.4074cqh;font-size:2.5521cqw;font-weight:650">Avisos em tempo real</div>
-<div data-hf-id="hf-phuy" class="text" style="left:17.3958cqw;top:27.2222cqh;width:35.9375cqw;height:13.3333cqh;font-size:1.8229cqw;">Você não precisa ocupar espaço no seu celular baixando um novo aplicativo!</div>
-<div data-hf-id="hf-g725" class="text" style="left:17.3958cqw;top:45.8333cqh;width:35.9375cqw;height:5.9259cqh;font-size:1.7188cqw;font-weight:600">Monitor de margem</div>
-<div data-hf-id="hf-egx1" class="text" style="left:17.3958cqw;top:53.8889cqh;width:35.9375cqw;height:7.4074cqh;font-size:1.6146cqw;">Alterações de frete nos marketplaces</div>
-<div data-hf-id="hf-ayt0" class="text" style="left:17.3958cqw;top:63.4259cqh;width:35.9375cqw;height:5.9259cqh;font-size:1.7188cqw;">Faturamento</div>
-<div data-hf-id="hf-gp9a" class="text" style="left:17.3958cqw;top:70.7407cqh;width:35.9375cqw;height:8.5185cqh;font-size:1.6146cqw;">Alterações de comissão nos marketplaces</div>
-<div data-hf-id="hf-4lex" class="block focal" style="left:56.7708cqw;top:25.0926cqh;width:25.5208cqw;height:52.4074cqh">
-<span data-hf-id="hf-wg31">Source phone / WhatsApp artwork</span>
-</div>
-<div data-hf-id="hf-wedd" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">Keep track with WhatsApp alerts.</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["main-07-alerts"] = tl;
-</script>
-</template>
-</body></html>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+    }
+    .main-07-alerts-background {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+    .main-07-alerts-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 2400px;
+    }
+    .main-07-alerts-positioner {
+      position: absolute;
+      left: 240px;
+      top: 36px;
+      width: 1440px;
+      height: 900px;
+    }
+    .main-07-alerts-rotation-rig,
+    .main-07-alerts-scale-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      transform-origin: 50% 0%;
+    }
+    .main-07-alerts-viewport {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    .main-07-alerts-scroll-track {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 1430px;
+    }
+    .main-07-alerts-page {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 1440px;
+      height: 1430px;
+    }
+    .main-07-alerts-header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 1440px;
+      height: 86px;
+      z-index: 3;
+    }
+    .main-07-alerts-caption {
+      position: absolute;
+      left: 96px;
+      top: 960px;
+      width: 1728px;
+      height: 64px;
+      margin: 0;
+      color: #234DD7;
+      font-family: "Lato";
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+    }
+  </style>
+  <div data-hf-id="hf-6lcq" id="root" data-composition-id="main-07-alerts" data-width="1920" data-height="1080" data-duration="4">
+    <div data-hf-id="hf-gwy0" id="main-07-alerts-background" class="clip main-07-alerts-background" data-start="0" data-duration="4" data-track-index="0"></div>
+    <div data-hf-id="hf-ge99" id="main-07-alerts-stage" class="clip main-07-alerts-stage" data-start="0" data-duration="4" data-track-index="1">
+      <div data-hf-id="hf-eyxm" id="main-07-alerts-positioner" class="main-07-alerts-positioner">
+        <div data-hf-id="hf-vzcc" id="main-07-alerts-rotation-rig" class="main-07-alerts-rotation-rig">
+          <div data-hf-id="hf-tttu" id="main-07-alerts-scale-wrapper" class="main-07-alerts-scale-wrapper">
+            <div data-hf-id="hf-stvm" id="main-07-alerts-viewport" class="main-07-alerts-viewport">
+              <div data-hf-id="hf-15qo" id="main-07-alerts-scroll-track" class="main-07-alerts-scroll-track">
+                <img data-hf-id="hf-figm" id="main-07-alerts-page" class="main-07-alerts-page" src="assets/motion/main-07-alerts/page.png" width="1440" height="1430" alt="Captured AllPrice alert section and plan introduction" draggable="false">
+              </div>
+              <img data-hf-id="hf-s7tv" id="main-07-alerts-header" class="main-07-alerts-header" src="assets/motion/main-07-alerts/header.png" width="1440" height="86" alt="Captured AllPrice navigation" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p data-hf-id="hf-yq7k" id="main-07-alerts-caption" class="clip main-07-alerts-caption" data-start="0" data-duration="4" data-track-index="2">Keep track with WhatsApp alerts.</p>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      const positioner = "#main-07-alerts-positioner";
+      const track = "#main-07-alerts-scroll-track";
 
+      tl.set(positioner, { x: 0, y: 0, opacity: 1 }, 0);
+      tl.set("#main-07-alerts-rotation-rig", { rotationX: 0, rotationY: 0, z: 0 }, 0);
+      tl.set("#main-07-alerts-scale-wrapper", { scale: 1 }, 0);
+      tl.set("#main-07-alerts-caption", { opacity: 1 }, 0);
+
+      // A shallow lateral reframe settles before the source-label reading hold.
+      tl.fromTo(positioner,
+        { x: 0 },
+        { x: -8, duration: 0.25, ease: "power2.inOut", immediateRender: false },
+        0);
+      tl.fromTo(positioner,
+        { x: -8 },
+        { x: 0, duration: 0.4, ease: "power2.inOut", immediateRender: false },
+        0.25);
+
+      // Crop-relative y = 6060 minus absolute document scrollY.
+      tl.fromTo(track,
+        { x: 0, y: 0 },
+        { x: 0, y: -60, duration: 0.65, ease: "power2.inOut", immediateRender: false },
+        0);
+      tl.fromTo(track,
+        { x: 0, y: -60 },
+        { x: 0, y: -60, duration: 2.05, ease: "power2.inOut", immediateRender: false },
+        0.65);
+      tl.fromTo(track,
+        { x: 0, y: -60 },
+        { x: 0, y: -530, duration: 1.3, ease: "power2.inOut", immediateRender: false },
+        2.7);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main-07-alerts"] = tl;
+    })();
+  </script>
+</template>

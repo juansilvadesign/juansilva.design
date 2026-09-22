@@ -39,7 +39,7 @@ recommended guided tour, English captions, and silent autoplay on 2026-09-16.
 ## Notes
 
 - The user requires a question before each main step. Initial direction, source
-  inspection and all four storyboards are approved. Layout, animation preview,
+  inspection, all four storyboards and 21 layouts are approved. Animation preview,
   final rendering and publication remain checkpoints. Do not interpret approval
   of one as all stages.
 - Intended workflow is agent-driven execution with collaborative review gates.

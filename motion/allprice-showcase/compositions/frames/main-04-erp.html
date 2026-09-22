@@ -1,49 +1,164 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>With an ERP, or without — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-s5j9" id="root" data-composition-id="main-04-erp" data-width="1920" data-height="1080" data-duration="6">
-<div data-hf-id="hf-y081" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:83.3333cqh">
-</div>
-<div data-hf-id="hf-uzo1" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:7.9630cqh">
-</div>
-<div data-hf-id="hf-89ce" class="text" style="left:14.2708cqw;top:5.2778cqh;width:26.2500cqw;height:4.6296cqh;font-size:1.8750cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-cizw" class="text" style="left:63.0208cqw;top:6.0185cqh;width:22.9167cqw;height:3.8889cqh;font-size:1.3021cqw;text-align:right">Testar grátis     Já sou cliente</div>
-<div data-hf-id="hf-vd6q" class="text" style="left:17.7083cqw;top:14.4444cqh;width:64.5833cqw;height:11.2963cqh;font-size:2.5000cqw;font-weight:650;text-align:center">Para quem usa e para quem não usa ERP</div>
-<div data-hf-id="hf-f5zm" class="block" style="left:17.3958cqw;top:30.7407cqh;width:30.2083cqw;height:12.0370cqh">
-<span data-hf-id="hf-fert">Bling</span>
-</div>
-<div data-hf-id="hf-xvk8" class="block" style="left:17.3958cqw;top:45.0000cqh;width:30.2083cqw;height:12.0370cqh">
-<span data-hf-id="hf-ksh1">Tiny by Olist</span>
-</div>
-<div data-hf-id="hf-alpo" class="block focal" style="left:17.3958cqw;top:59.2593cqh;width:30.2083cqw;height:17.5926cqh">
-<span data-hf-id="hf-rmr2">No ERP required · source artwork</span>
-</div>
-<div data-hf-id="hf-lygt" class="text" style="left:50.5208cqw;top:30.5556cqh;width:31.4583cqw;height:17.7778cqh;font-size:1.8750cqw;font-weight:600">Agora, se você ainda não usa ERP, tudo bem também! Você pode operar 100% com o All Price!</div>
-<div data-hf-id="hf-x790" class="line" style="left:50.5208cqw;top:53.1481cqh;width:30.7292cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-wqds" class="line" style="left:50.5208cqw;top:56.6667cqh;width:30.7292cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-wkoi" class="line" style="left:50.5208cqw;top:60.1852cqh;width:30.7292cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-39l2" class="line" style="left:50.5208cqw;top:63.7037cqh;width:30.7292cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-uz9b" class="line" style="left:50.5208cqw;top:67.2222cqh;width:30.7292cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-mqbh" class="line" style="left:50.5208cqw;top:70.7407cqh;width:30.7292cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-vdbw" class="line" style="left:50.5208cqw;top:74.2593cqh;width:21.5104cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-peqs" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">Connect your ERP. Or work without one.</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["main-04-erp"] = tl;
-</script>
-</template>
-</body></html>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #020817;
+      font-family: "Lato";
+    }
+    #main-04-erp-background {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+    }
+    #main-04-erp-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 2400px;
+    }
+    #main-04-erp-positioner {
+      position: absolute;
+      left: 240px;
+      top: 36px;
+      width: 1440px;
+      height: 900px;
+      transform-style: preserve-3d;
+    }
+    #main-04-erp-rotation,
+    #main-04-erp-scale {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      transform-style: preserve-3d;
+      transform-origin: 50% 0%;
+    }
+    #main-04-erp-rotation {
+      will-change: transform;
+    }
+    #main-04-erp-viewport {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+    #main-04-erp-scroll {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 2170px;
+      will-change: transform;
+    }
+    #main-04-erp-page {
+      display: block;
+      width: 1440px;
+      height: 2170px;
+    }
+    #main-04-erp-header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 3;
+      display: block;
+      width: 1440px;
+      height: 86px;
+    }
+    #main-04-erp-caption {
+      position: absolute;
+      left: 96px;
+      top: 960px;
+      width: 1728px;
+      height: 64px;
+      margin: 0;
+      color: #234DD7;
+      font-family: "Lato";
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+    }
+  </style>
+  <div id="root" data-hf-id="hf-s5j9" data-composition-id="main-04-erp" data-width="1920" data-height="1080" data-duration="6">
+    <div data-hf-id="hf-708r" id="main-04-erp-background" class="clip" data-start="0" data-duration="6" data-track-index="0"></div>
+    <div data-hf-id="hf-771g" id="main-04-erp-stage" class="clip" data-start="0" data-duration="6" data-track-index="1">
+      <div data-hf-id="hf-kfbt" id="main-04-erp-positioner" data-layout-allow-overflow="">
+        <div data-hf-id="hf-wl3v" id="main-04-erp-rotation" data-layout-allow-overflow="">
+          <div data-hf-id="hf-pfhp" id="main-04-erp-scale" data-layout-allow-overflow="">
+            <div id="main-04-erp-viewport" data-hf-id="hf-y081">
+              <div data-hf-id="hf-11e2" id="main-04-erp-scroll" data-layout-allow-overflow="">
+                <img data-hf-id="hf-95lg" id="main-04-erp-page" src="assets/motion/main-04-erp/page.png" width="1440" height="2170" alt="Captured AllPrice ERP explanation and artwork" draggable="false">
+              </div>
+              <img id="main-04-erp-header" data-hf-id="hf-uzo1" src="assets/motion/main-04-erp/header.png" width="1440" height="86" alt="AllPrice website header" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p id="main-04-erp-caption" data-hf-id="hf-peqs" class="clip" data-start="0" data-duration="6" data-track-index="2">Connect your ERP. Or work without one.</p>
+  </div>
+  <script>
+    (() => {
+      const rotation = document.getElementById("main-04-erp-rotation");
+      const scroll = document.getElementById("main-04-erp-scroll");
+      const camera = { x: 0, y: 0, z: 0, rx: 0, ry: 0 };
+      function applyCamera() {
+        rotation.style.transform = "translate3d(" + camera.x + "px, " + camera.y + "px, " + camera.z + "px) rotateX(" + camera.rx + "deg) rotateY(" + camera.ry + "deg)";
+      }
+      applyCamera();
+      const tl = gsap.timeline({ paused: true });
 
+      // One shallow side reframe; both handoffs and all reading holds stay neutral.
+      tl.fromTo(camera,
+        { x: 0, y: 0, z: 0, rx: 0, ry: 0 },
+        { x: 0, y: 0, z: 0, rx: 0, ry: 4, duration: 0.4, ease: "power2.inOut", immediateRender: false, onUpdate: applyCamera },
+        0.05
+      );
+      tl.fromTo(camera,
+        { x: 0, y: 0, z: 0, rx: 0, ry: 4 },
+        { x: 0, y: 0, z: 0, rx: 0, ry: 0, duration: 0.55, ease: "power2.inOut", immediateRender: false, onUpdate: applyCamera },
+        0.45
+      );
+
+      // Cropped raster origin = document Y 2500. Track Y = 2500 - scrollY.
+      tl.fromTo(scroll, { y: 0 },
+        { y: -140, duration: 1, ease: "power2.inOut" }, 0);
+      tl.fromTo(scroll, { y: -140 },
+        { y: -140, duration: 1.4, ease: "power2.inOut", immediateRender: false }, 1);
+      tl.fromTo(scroll, { y: -140 },
+        { y: -560, duration: 1.2, ease: "power2.inOut", immediateRender: false }, 2.4);
+      tl.fromTo(scroll, { y: -560 },
+        { y: -560, duration: 1.1, ease: "power2.inOut", immediateRender: false }, 3.6);
+
+      // Land on the exact outgoing page pixels by the last sampled frame.
+      const lastSample = 6 - 1 / 60;
+      tl.fromTo(scroll, { y: -560 },
+        { y: -1270, duration: lastSample - 4.7, ease: "power2.inOut", immediateRender: false }, 4.7);
+      tl.fromTo(scroll, { y: -1270 },
+        { y: -1270, duration: 1 / 60, ease: "power2.inOut", immediateRender: false }, lastSample);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main-04-erp"] = tl;
+    })();
+  </script>
+</template>

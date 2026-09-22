@@ -1,0 +1,252 @@
+[
+  {
+    "id": "main-01-clarity",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-01-clarity-0.0000.png"
+      },
+      {
+        "time": 2.5,
+        "path": "review/frames/main-01-clarity-2.5000.png"
+      },
+      {
+        "time": 4.983333333333333,
+        "path": "review/frames/main-01-clarity-4.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-01-clarity",
+        "duration": 5,
+        "children": 6
+      }
+    ]
+  },
+  {
+    "id": "main-02-overview",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-02-overview-0.0000.png"
+      },
+      {
+        "time": 2.5,
+        "path": "review/frames/main-02-overview-2.5000.png"
+      },
+      {
+        "time": 4.983333333333333,
+        "path": "review/frames/main-02-overview-4.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-02-overview",
+        "duration": 5,
+        "children": 2
+      }
+    ]
+  },
+  {
+    "id": "main-03-audiences",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-03-audiences-0.0000.png"
+      },
+      {
+        "time": 2.5,
+        "path": "review/frames/main-03-audiences-2.5000.png"
+      },
+      {
+        "time": 4.983333333333333,
+        "path": "review/frames/main-03-audiences-4.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-03-audiences",
+        "duration": 5,
+        "children": 9
+      }
+    ]
+  },
+  {
+    "id": "main-04-erp",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-04-erp-0.0000.png"
+      },
+      {
+        "time": 3,
+        "path": "review/frames/main-04-erp-3.0000.png"
+      },
+      {
+        "time": 5.983333333333333,
+        "path": "review/frames/main-04-erp-5.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-04-erp",
+        "duration": 6,
+        "children": 8
+      }
+    ]
+  },
+  {
+    "id": "main-05-features",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-05-features-0.0000.png"
+      },
+      {
+        "time": 3.4,
+        "path": "review/frames/main-05-features-3.4000.png"
+      },
+      {
+        "time": 6.983333333333333,
+        "path": "review/frames/main-05-features-6.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-05-features",
+        "duration": 7,
+        "children": 22
+      }
+    ]
+  },
+  {
+    "id": "main-06-price",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-06-price-0.0000.png"
+      },
+      {
+        "time": 3,
+        "path": "review/frames/main-06-price-3.0000.png"
+      },
+      {
+        "time": 5.983333333333333,
+        "path": "review/frames/main-06-price-5.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-06-price",
+        "duration": 6,
+        "children": 3
+      }
+    ]
+  },
+  {
+    "id": "main-07-alerts",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-07-alerts-0.0000.png"
+      },
+      {
+        "time": 2,
+        "path": "review/frames/main-07-alerts-2.0000.png"
+      },
+      {
+        "time": 3.9833333333333334,
+        "path": "review/frames/main-07-alerts-3.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-07-alerts",
+        "duration": 4,
+        "children": 9
+      }
+    ]
+  },
+  {
+    "id": "main-08-plans",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-08-plans-0.0000.png"
+      },
+      {
+        "time": 3,
+        "path": "review/frames/main-08-plans-3.0000.png"
+      },
+      {
+        "time": 5.983333333333333,
+        "path": "review/frames/main-08-plans-5.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-08-plans",
+        "duration": 6,
+        "children": 4
+      }
+    ]
+  },
+  {
+    "id": "main-09-page-continuity",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-09-page-continuity-0.0000.png"
+      },
+      {
+        "time": 1.5,
+        "path": "review/frames/main-09-page-continuity-1.5000.png"
+      },
+      {
+        "time": 2.9833333333333334,
+        "path": "review/frames/main-09-page-continuity-2.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-09-page-continuity",
+        "duration": 3,
+        "children": 1
+      }
+    ]
+  },
+  {
+    "id": "main-10-faq",
+    "errors": [],
+    "samples": [
+      {
+        "time": 0,
+        "path": "review/frames/main-10-faq-0.0000.png"
+      },
+      {
+        "time": 2.2,
+        "path": "review/frames/main-10-faq-2.2000.png"
+      },
+      {
+        "time": 5.983333333333333,
+        "path": "review/frames/main-10-faq-5.9833.png"
+      }
+    ],
+    "timelines": [
+      {
+        "id": "main-10-faq",
+        "duration": 6,
+        "children": 17
+      }
+    ]
+  }
+]

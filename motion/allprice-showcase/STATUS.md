@@ -1,76 +1,66 @@
 # AllPrice showcase — current state
 
-## Checkpoint: layout approval
+Updated 2026-09-22. Phase: approved animation build in progress.
 
-Updated 2026-09-17. User: “Storyboard approved”, followed by “continue” while the
-wireframe pass was underway. All four stories are approved. All 21 frames are
-now built as static wireframes. No layout approval, animation or render yet.
+## Approvals
 
-- Main: 11 scenes / 58 seconds.
-- Remediation: 4 scenes / 16 seconds, seamless-loop target.
-- Responsive: 3 scenes / 18 seconds, seamless-loop target.
-- Interactions: 3 scenes / 16 seconds, seamless-loop target.
-- All: silent, 1920×1080, 60fps target; English captions, Portuguese source UI.
-- Source inventory: 41 inspected Figma/browser images plus raw catalog assets.
-- Story verification from the previous pass: 54 valid asset references,
-  94 unique planned motion-layer names.
+Direction, four storyboards and all 21 static layouts are approved. The user's
+“approved, proceed” authorized animation; subsequent “continue” messages resumed
+that work and accepted the recommended parallel frame-building approach.
+The next gate is motion-preview approval, BEFORE rendering. No upload, site
+integration, deployment or external publication is authorized.
 
-## Review surface
+## Deliverables
 
-All 21 wireframes:
-http://localhost:3148/api/projects/allprice-showcase/preview/review/sketch-board.html
+- Main: 11 scenes / 58 seconds, complete landing-page tour.
+- Remediation: 4 scenes / 16 seconds, seamless loop.
+- Responsive: 3 scenes / 18 seconds, seamless loop.
+- Interactions: 3 scenes / 16 seconds, seamless loop.
+- All silent, 1920×1080, target 60fps; English captions, unchanged Portuguese UI.
 
-Main film's native Studio board:
-http://localhost:3148/?view=storyboard#project/allprice-showcase
+## Build state
 
-Managed preview remains serving. The main board parses 11 built frames, every
-composition exists, and there are zero parser warnings. The gallery presents all
-four films using native Studio posters, without modifying the 58-second main
-timeline or duplicating the supporting story plans. All 21 posters loaded.
+Five completed animation files survived the earlier usage-limit interruption:
+main-01-clarity, main-02-overview, main-03-audiences, main-05-features,
+main-10-faq. The remaining scenes are being built from bounded per-frame packets
+under .hyperframes/frame-packets/, one scene per worker. Completion means the
+file exists without the SKETCH ONLY marker, not merely an agent notification.
 
-`STORYBOARD.md` is the canonical main plan. The adjacent
-`../allprice-showcase.storyboard.md` is a relative symlink to it. Supporting plans
-are the three adjacent named storyboards. Every frame status is `built`, meaning
-wireframe, not `animated`. Composition filenames match the approved plans.
+Real source pixels and local Lato fonts are staged. capture/motion-assets.json
+records 72 bounded derivatives with source hashes and crop geometry. The complete
+feature rail uses two additional verified browser captures. No whole tall page
+is mounted into an animation; scale and scroll have separate wrappers.
 
-## Awaiting the user
+STORYBOARD.md is canonical for the main film; the adjacent showcase storyboard
+is its relative symlink. Three adjacent supporting storyboards remain separate.
+The orchestrator marks completed frames animated. No frame comments were present
+on resume. index.html is still the initialization placeholder until assembly.
 
-Does the framing and text placement look right, or which scenes should change
-before source pixels, finished styling and animation are added?
+## Verification and review
 
-On reply, inspect `.hyperframes/frame-comments.json` first. It was absent at the
-start and during this pass. Revise only named frames when feedback is specific.
-Do not infer layout approval from the earlier “continue” sent before this review
-was presented. Keep separate questions before final rendering and publication.
+Earlier first-pass lint found no errors and missing timed-layer IDs; those IDs
+are being repaired. Main-01's browser probe confirmed decoded assets, 1920×1080
+root, one 5-second timeline and no page errors. Full assembled checks, visual
+snapshots, cut continuity and byte-identical loop joins remain pending.
 
-## Resume instructions
+The managed preview at port 3148 stopped during the interruption; it is being
+restarted. Do not offer the placeholder timeline as a completed showcase.
 
-Use `knowledge/skills/case-study-showcase-pipeline/SKILL.md`, then the current
-HyperFrames/product-launch workflow and its review loop. No subagents were used
-for this sketch pass, as required. After layout approval, the product workflow's
-build-stage delegation may apply; read its dispatch instructions before use.
+After assembly and clean checks, share the four playable motion previews and ask
+for approval before rendering. Main Studio: http://localhost:3148/#project/allprice-showcase
+The old review/sketch-board.html is a layout gallery, not a finished-film preview.
 
-Read BRIEF.md, SOURCE_AUDIT.md, ASSET_MANIFEST.md, frame.md and approved plans.
-Retain the approved composition, hierarchy and copy while replacing wireframe
-stand-ins with real captured pixels. Do not turn these wireframes into invented
-UI. Keep the continuous main-browser surface and separate scale/scroll wrappers.
+## Tooling and source guardrails
 
-The sketch-pass exception forbids CLI check/snapshot/render, so none was run.
-Browser-only review confirmed all 21 composition roots at 1920×1080 and zero
-animation children. Two card-title text boxes needed more height and were fixed.
-Full runtime/layout/motion/contrast checks are still required after animation.
-`index.html` remains the unassembled init placeholder; never offer its timeline
-view as a completed showcase. Gallery and storyboard views are the review links.
+HyperFrames remains pinned to 0.8.43. An attempted 0.8.46 upgrade was reverted
+because validation failed on the unfinished initialization timeline. Recheck
+compatibility after full assembly before adopting a newer version.
 
-Source guardrails remain unchanged: Figma read/export only via local fork
-`--channel=4hj86qf7`; use complete original composite for matched crops; preserve
-source defects without highlighting dummy figures or repeated testimonials; no
-fake billing toggle, commercial metrics, backend flow or broad design credit.
+Source Figma was read/exported through channel 4hj86qf7. Do not mutate it.
+Use complete matched original/optimized hero composites; avoid resting on dummy
+dashboard figures or repeated testimonials. No invented billing toggle, backend
+flow, commercial metric or broad app-design credit. Credit Juan for landing-page
+remediation and React implementation; original landing-page design was Thiago's.
 
-Toolchain is pinned to HyperFrames 0.8.43. Four deliverables are silent. Record the
-approved blue-professional style preference when entering the next production
-phase; its captured ink correction is documented in frame.md.
-
-Final assembly, animation, full production checks, master render, encode quality
-comparisons, posters, CDN upload and site wiring have not run. No uploads,
-commits, deployments or edits to existing portfolio components were made.
+No MP4 master or delivery encode exists yet. No assets were uploaded and no
+portfolio records, live components, commits or deployments were changed.

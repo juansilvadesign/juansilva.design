@@ -1,29 +1,137 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Preserve the full page — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-hhxc" id="root" data-composition-id="main-09-page-continuity" data-width="1920" data-height="1080" data-duration="3">
-<div data-hf-id="hf-y081" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:83.3333cqh">
-</div>
-<div data-hf-id="hf-uzo1" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:7.9630cqh">
-</div>
-<div data-hf-id="hf-89ce" class="text" style="left:14.2708cqw;top:5.2778cqh;width:26.2500cqw;height:4.6296cqh;font-size:1.8750cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-cizw" class="text" style="left:63.0208cqw;top:6.0185cqh;width:22.9167cqw;height:3.8889cqh;font-size:1.3021cqw;text-align:right">Testar grátis     Já sou cliente</div>
-<div data-hf-id="hf-w05z" class="text" style="left:17.7083cqw;top:14.5370cqh;width:64.5833cqw;height:11.8519cqh;font-size:2.3958cqw;text-align:center;font-weight:650">Depoimentos de quem teve a rotina melhorada</div>
-<div data-hf-id="hf-ckhg" class="block" style="left:17.1875cqw;top:32.0370cqh;width:65.6250cqw;height:36.0185cqh">
-<span data-hf-id="hf-i4sb">Source testimonial section · continuous scroll, no quote hold</span>
-</div>
-<div data-hf-id="hf-sll2" class="text" style="left:17.1875cqw;top:74.9074cqh;width:65.6250cqw;height:6.5741cqh;font-size:2.3958cqw;text-align:center;font-weight:650">Perguntas frequentes</div>
-<div data-hf-id="hf-dg7z" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:1.5625cqw;font-weight:650;text-align:center;color:#234DD7">Preserved landing-page build</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["main-09-page-continuity"] = tl;
-</script>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #020817;
+      font-family: "Lato";
+    }
+    #root * { box-sizing: border-box; }
+    #main-09-page-continuity-background {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+      z-index: 0;
+    }
+    #main-09-page-continuity-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 2400px;
+      z-index: 1;
+    }
+    #main-09-page-continuity-positioner {
+      position: absolute;
+      left: 240px;
+      top: 36px;
+      width: 1440px;
+      height: 900px;
+    }
+    #main-09-page-continuity-rotation,
+    #main-09-page-continuity-scale {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      transform-origin: 50% 0%;
+    }
+    #main-09-page-continuity-viewport {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #FFFFFF;
+    }
+    #main-09-page-continuity-scroll-track {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 2001px;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+    #main-09-page-continuity-page {
+      display: block;
+      width: 1440px;
+      height: 2001px;
+      max-width: none;
+    }
+    #main-09-page-continuity-header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 1440px;
+      height: 86px;
+      max-width: none;
+      z-index: 3;
+    }
+    #main-09-page-continuity-caption {
+      position: absolute;
+      left: 96px;
+      top: 960px;
+      width: 1728px;
+      height: 64px;
+      margin: 0;
+      color: #234DD7;
+      font-family: "Lato";
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      z-index: 2;
+    }
+  </style>
+  <div data-hf-id="hf-hhxc" id="root" data-composition-id="main-09-page-continuity" data-width="1920" data-height="1080" data-duration="3">
+    <div data-hf-id="hf-flro" id="main-09-page-continuity-background" class="clip" data-start="0" data-duration="3" data-track-index="0"></div>
+    <div data-hf-id="hf-exm1" id="main-09-page-continuity-stage" class="clip" data-start="0" data-duration="3" data-track-index="1">
+      <div data-hf-id="hf-2h86" id="main-09-page-continuity-positioner">
+        <div data-hf-id="hf-4yec" id="main-09-page-continuity-rotation">
+          <div data-hf-id="hf-uljg" id="main-09-page-continuity-scale">
+            <div data-hf-id="hf-zms8" id="main-09-page-continuity-viewport">
+              <div data-hf-id="hf-l9sn" id="main-09-page-continuity-scroll-track">
+                <img data-hf-id="hf-5rlx" id="main-09-page-continuity-page" src="assets/motion/main-09-page-continuity/page.png" width="1440" height="2001" alt="Preserved AllPrice page with testimonial and FAQ sections" draggable="false">
+              </div>
+              <img data-hf-id="hf-t3ox" id="main-09-page-continuity-header" src="assets/motion/main-09-page-continuity/header.png" width="1440" height="86" alt="AllPrice navigation" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p data-hf-id="hf-3o2w" id="main-09-page-continuity-caption" class="clip" data-start="0" data-duration="3" data-track-index="2">Preserved landing-page build</p>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
+      // One continuous traversal: cropTop 8080 minus document scrollY 8080→9181.
+      // The fixed header and level context label stay visible throughout.
+      tl.fromTo("#main-09-page-continuity-scroll-track",
+        { x: 0, y: 0, scale: 1 },
+        { x: 0, y: -1101, scale: 1, duration: 3, ease: "power2.inOut" },
+        0
+      );
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main-09-page-continuity"] = tl;
+    })();
+  </script>
 </template>
-</body></html>
-

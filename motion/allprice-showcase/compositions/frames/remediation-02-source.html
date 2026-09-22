@@ -1,42 +1,270 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Inspect the source — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-juw3" id="root" data-composition-id="remediation-02-source" data-width="1920" data-height="1080" data-duration="4">
-<div data-hf-id="hf-56ch" class="text" style="left:5.0000cqw;top:27.6852cqh;width:42.1875cqw;height:3.8889cqh;font-size:1.4583cqw;font-weight:600">Original · 1-home</div>
-<div data-hf-id="hf-4wp8" class="block" style="left:5.0000cqw;top:33.9815cqh;width:42.1875cqw;height:23.9815cqh">
-<span data-hf-id="hf-ggul">Original composite · matching hero crop</span>
-</div>
-<div data-hf-id="hf-njpk" class="text" style="left:51.9792cqw;top:11.0185cqh;width:43.7500cqw;height:3.8889cqh;font-size:1.4583cqw;font-weight:600">Editorial hierarchy · captured metadata</div>
-<div data-hf-id="hf-4okd" class="text" style="left:51.9792cqw;top:16.7593cqh;width:42.7083cqw;height:6.7593cqh;font-size:2.3958cqw;font-weight:650;color:#234DD7">32 direct children</div>
-<div data-hf-id="hf-5nlz" class="block" style="left:51.9792cqw;top:27.5000cqh;width:43.0208cqw;height:9.6296cqh">
-</div>
-<div data-hf-id="hf-xt0k" class="text" style="left:53.2292cqw;top:28.4259cqh;width:39.7917cqw;height:4.1667cqh;font-size:1.5625cqw;font-weight:600">Group 1000003930</div>
-<div data-hf-id="hf-lu1v" class="text" style="left:53.2292cqw;top:32.8704cqh;width:39.7917cqw;height:3.1481cqh;font-size:1.3021cqw;">GROUP · 1489:7246</div>
-<div data-hf-id="hf-p2ja" class="block" style="left:51.9792cqw;top:39.2593cqh;width:43.0208cqw;height:9.6296cqh">
-</div>
-<div data-hf-id="hf-p39z" class="text" style="left:53.2292cqw;top:40.1852cqh;width:39.7917cqw;height:4.1667cqh;font-size:1.5625cqw;font-weight:600">Frame 1000003094</div>
-<div data-hf-id="hf-o02x" class="text" style="left:53.2292cqw;top:44.6296cqh;width:39.7917cqw;height:3.1481cqh;font-size:1.3021cqw;">FRAME · 1489:7249</div>
-<div data-hf-id="hf-670h" class="block" style="left:51.9792cqw;top:51.0185cqh;width:43.0208cqw;height:9.6296cqh">
-</div>
-<div data-hf-id="hf-0ne7" class="text" style="left:53.2292cqw;top:51.9444cqh;width:39.7917cqw;height:4.1667cqh;font-size:1.5625cqw;font-weight:600">Perguntas frequentes</div>
-<div data-hf-id="hf-54zv" class="text" style="left:53.2292cqw;top:56.3889cqh;width:39.7917cqw;height:3.1481cqh;font-size:1.3021cqw;">TEXT · 1489:8019</div>
-<div data-hf-id="hf-298a" class="block" style="left:51.9792cqw;top:62.7778cqh;width:43.0208cqw;height:9.6296cqh">
-</div>
-<div data-hf-id="hf-fj2m" class="text" style="left:53.2292cqw;top:63.7037cqh;width:39.7917cqw;height:4.1667cqh;font-size:1.5625cqw;font-weight:600">package-check</div>
-<div data-hf-id="hf-1gue" class="text" style="left:53.2292cqw;top:68.1481cqh;width:39.7917cqw;height:3.1481cqh;font-size:1.3021cqw;">INSTANCE · 1490:231</div>
-<div data-hf-id="hf-v3wv" class="text" style="left:51.9792cqw;top:76.3889cqh;width:43.0208cqw;height:4.4444cqh;font-size:1.4063cqw;">4 sampled nodes · 28 more direct children</div>
-<div data-hf-id="hf-exsl" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">A mixed hierarchy, before the build.</div>
-<div data-hf-id="hf-vsam" class="text" style="left:5.0000cqw;top:93.5185cqh;width:90.0000cqw;height:4.0741cqh;font-size:1.4583cqw;text-align:center">Original landing-page design: Thiago · Remediation: Juan Silva</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["remediation-02-source"] = tl;
-</script>
-</template>
-</body></html>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #020817;
+      font-family: "Lato";
+    }
+    #root * { box-sizing: border-box; }
+    #remediation-02-source-background {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+      z-index: 0;
+    }
+    #remediation-02-source-content {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    #remediation-02-source-original {
+      position: absolute;
+      left: 96px;
+      top: 299px;
+      width: 810px;
+      height: 327.453125px;
+    }
+    #remediation-02-source-original-label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 810px;
+      height: 42px;
+      margin: 0;
+      color: #384257;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    #remediation-02-source-original-image {
+      position: absolute;
+      left: 0;
+      top: 68px;
+      display: block;
+      width: 810px;
+      height: 259.453125px;
+      max-width: none;
+      border-radius: 12px;
+    }
+    #remediation-02-source-diagram {
+      position: absolute;
+      left: 998px;
+      top: 119px;
+      width: 826px;
+      height: 754px;
+    }
+    #remediation-02-source-diagram-label {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 826px;
+      height: 42px;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #384257;
+    }
+    #remediation-02-source-count {
+      position: absolute;
+      left: 0;
+      top: 62px;
+      width: 820px;
+      height: 73px;
+      margin: 0;
+      color: #234DD7;
+      font-size: 46px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .remediation-02-source-node {
+      position: absolute;
+      left: 0;
+      width: 826px;
+      height: 104px;
+      background: rgba(35, 77, 215, 0.04);
+      border: 1.5px solid rgba(35, 77, 215, 0.2);
+      border-radius: 12px;
+    }
+    #remediation-02-source-node-group { top: 178px; }
+    #remediation-02-source-node-frame { top: 305px; }
+    #remediation-02-source-node-text { top: 432px; }
+    #remediation-02-source-node-instance { top: 559px; }
+    .remediation-02-source-node-name {
+      position: absolute;
+      left: 22.5px;
+      top: 8.5px;
+      width: 764px;
+      height: 45px;
+      margin: 0;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #020817;
+    }
+    .remediation-02-source-node-type {
+      position: absolute;
+      left: 22.5px;
+      top: 56.5px;
+      width: 764px;
+      height: 34px;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: #384257;
+    }
+    #remediation-02-source-remainder-markers {
+      position: absolute;
+      left: 0;
+      top: 685px;
+      display: grid;
+      grid-template-columns: repeat(28, 1fr);
+      gap: 6px;
+      width: 826px;
+      height: 6px;
+    }
+    #remediation-02-source-remainder-markers span {
+      background: rgba(35, 77, 215, 0.15);
+      border-radius: 6px;
+    }
+    #remediation-02-source-remainder-label {
+      position: absolute;
+      left: 0;
+      top: 706px;
+      width: 826px;
+      height: 48px;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      color: #384257;
+    }
+    #remediation-02-source-caption {
+      position: absolute;
+      left: 96px;
+      top: 960px;
+      width: 1728px;
+      height: 64px;
+      margin: 0;
+      color: #234DD7;
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      z-index: 2;
+    }
+    #remediation-02-source-credit {
+      position: absolute;
+      left: 96px;
+      top: 1010px;
+      width: 1728px;
+      height: 44px;
+      margin: 0;
+      color: #384257;
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 1.2;
+      text-align: center;
+      z-index: 2;
+    }
+  </style>
+  <div id="root" data-composition-id="remediation-02-source" data-width="1920" data-height="1080" data-duration="4">
+    <div id="remediation-02-source-background" class="clip" data-start="0" data-duration="4" data-track-index="0"></div>
+    <div id="remediation-02-source-content" class="clip" data-start="0" data-duration="4" data-track-index="1">
+      <div id="remediation-02-source-original">
+        <p id="remediation-02-source-original-label">Original · 1-home</p>
+        <img id="remediation-02-source-original-image" src="assets/motion/remediation-02-source/original.png" width="1280" height="410" alt="Original AllPrice landing-page hero crop" draggable="false">
+      </div>
+      <div id="remediation-02-source-diagram">
+        <p id="remediation-02-source-diagram-label">Editorial hierarchy · captured metadata</p>
+        <p id="remediation-02-source-count">32 direct children</p>
+        <div id="remediation-02-source-node-group" class="remediation-02-source-node">
+          <p class="remediation-02-source-node-name">Group 1000003930</p>
+          <p class="remediation-02-source-node-type">GROUP · 1489:7246</p>
+        </div>
+        <div id="remediation-02-source-node-frame" class="remediation-02-source-node">
+          <p class="remediation-02-source-node-name">Frame 1000003094</p>
+          <p class="remediation-02-source-node-type">FRAME · 1489:7249</p>
+        </div>
+        <div id="remediation-02-source-node-text" class="remediation-02-source-node">
+          <p class="remediation-02-source-node-name">Perguntas frequentes</p>
+          <p class="remediation-02-source-node-type">TEXT · 1489:8019</p>
+        </div>
+        <div id="remediation-02-source-node-instance" class="remediation-02-source-node">
+          <p class="remediation-02-source-node-name">package-check</p>
+          <p class="remediation-02-source-node-type">INSTANCE · 1490:231</p>
+        </div>
+        <div id="remediation-02-source-remainder-markers" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <p id="remediation-02-source-remainder-label">4 sampled nodes · 28 more direct children</p>
+      </div>
+    </div>
+    <p id="remediation-02-source-caption" class="clip" data-start="0" data-duration="4" data-track-index="2">A mixed hierarchy, before the build.</p>
+    <p id="remediation-02-source-credit" class="clip" data-start="0" data-duration="4" data-track-index="3">Original landing-page design: Thiago · Remediation: Juan Silva</p>
+  </div>
+  <script>
+    (() => {
+      const tl = gsap.timeline({ paused: true });
 
+      // 0.00–0.70: the original crop settles into its approved position.
+      tl.fromTo("#remediation-02-source-original",
+        { x: -16, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.7, ease: "power2.out" },
+        0
+      );
+      tl.fromTo("#remediation-02-source-diagram",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.7, ease: "power2.out" },
+        0
+      );
+
+      // 0.70–2.80: sampled source metadata appears at fixed, absolute beats.
+      tl.fromTo("#remediation-02-source-node-group",
+        { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 0.7
+      );
+      tl.fromTo("#remediation-02-source-node-frame",
+        { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 1.25
+      );
+      tl.fromTo("#remediation-02-source-node-text",
+        { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 1.8
+      );
+      tl.fromTo("#remediation-02-source-node-instance",
+        { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, 2.35
+      );
+
+      // 2.80–4.00: locked camera holds the complete diagram for reading.
+      tl.fromTo("#remediation-02-source-content",
+        { x: 0, y: 0 },
+        { x: 0, y: 0, duration: 1.2, ease: "none", immediateRender: false },
+        2.8
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["remediation-02-source"] = tl;
+    })();
+  </script>
+</template>

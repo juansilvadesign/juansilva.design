@@ -1,35 +1,160 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Understand the price — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
-<style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
-</style>
-<div data-hf-id="hf-qltb" id="root" data-composition-id="main-06-price" data-width="1920" data-height="1080" data-duration="6">
-<div data-hf-id="hf-y081" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:83.3333cqh">
-</div>
-<div data-hf-id="hf-uzo1" class="surface" style="left:12.5000cqw;top:3.3333cqh;width:75.0000cqw;height:7.9630cqh">
-</div>
-<div data-hf-id="hf-89ce" class="text" style="left:14.2708cqw;top:5.2778cqh;width:26.2500cqw;height:4.6296cqh;font-size:1.8750cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-cizw" class="text" style="left:63.0208cqw;top:6.0185cqh;width:22.9167cqw;height:3.8889cqh;font-size:1.3021cqw;text-align:right">Testar grátis     Já sou cliente</div>
-<div data-hf-id="hf-ma4j" class="text" style="left:17.1875cqw;top:16.4815cqh;width:65.6250cqw;height:11.7593cqh;font-size:2.5000cqw;text-align:center;font-weight:650">Precifique seus anúncios em um só lugar</div>
-<div data-hf-id="hf-wog1" class="line" style="left:24.0625cqw;top:31.6667cqh;width:51.8750cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-sdnm" class="line" style="left:24.0625cqw;top:34.2593cqh;width:36.3125cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-v0q3" class="block focal" style="left:37.6042cqw;top:40.9259cqh;width:24.7917cqw;height:6.1111cqh">
-<span data-hf-id="hf-dq8j">Quero testar agora!</span>
-</div>
-<div data-hf-id="hf-dlb3" class="block" style="left:17.5521cqw;top:52.3148cqh;width:64.8958cqw;height:30.5556cqh">
-<span data-hf-id="hf-s8q3">Pricing interface illustration · no numeric close-up</span>
-</div>
-<div data-hf-id="hf-twks" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">See costs and margins before setting a price.</div>
-</div>
-<script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["main-06-price"] = tl;
-</script>
-</template>
-</body></html>
+  <style>
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-400-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: block;
+    }
+    @font-face {
+      font-family: "Lato";
+      src: url("assets/fonts/lato-700-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 700;
+      font-display: block;
+    }
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      color: #020817;
+      font-family: "Lato";
+    }
+    #root * { box-sizing: border-box; }
+    #main-06-price-background {
+      position: absolute;
+      inset: 0;
+      background: #FFFFFF;
+      z-index: 0;
+    }
+    #main-06-price-stage {
+      position: absolute;
+      inset: 0;
+      perspective: 2400px;
+      z-index: 1;
+    }
+    #main-06-price-positioner {
+      position: absolute;
+      left: 240px;
+      top: 36px;
+      width: 1440px;
+      height: 900px;
+    }
+    #main-06-price-rotation,
+    #main-06-price-scale {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      transform-origin: 50% 0%;
+    }
+    #main-06-price-viewport {
+      position: absolute;
+      inset: 0;
+      width: 1440px;
+      height: 900px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #FFFFFF;
+    }
+    #main-06-price-scroll-track {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1440px;
+      height: 2170px;
+      transform-origin: 50% 50%;
+      will-change: transform;
+    }
+    #main-06-price-page {
+      display: block;
+      width: 1440px;
+      height: 2170px;
+      max-width: none;
+    }
+    #main-06-price-header {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 1440px;
+      height: 86px;
+      max-width: none;
+      z-index: 3;
+    }
+    #main-06-price-caption {
+      position: absolute;
+      left: 96px;
+      top: 960px;
+      width: 1728px;
+      height: 64px;
+      margin: 0;
+      color: #234DD7;
+      font-family: "Lato";
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      z-index: 2;
+    }
+  </style>
+  <div data-hf-id="hf-qltb" id="root" data-composition-id="main-06-price" data-width="1920" data-height="1080" data-duration="6">
+    <div data-hf-id="hf-rmc1" id="main-06-price-background" class="clip" data-start="0" data-duration="6" data-track-index="0"></div>
+    <div data-hf-id="hf-j8ka" id="main-06-price-stage" class="clip" data-start="0" data-duration="6" data-track-index="1">
+      <div data-hf-id="hf-k0na" id="main-06-price-positioner">
+        <div data-hf-id="hf-nvbo" id="main-06-price-rotation">
+          <div data-hf-id="hf-0fj0" id="main-06-price-scale">
+            <div data-hf-id="hf-yf48" id="main-06-price-viewport">
+              <div data-hf-id="hf-tqcn" id="main-06-price-scroll-track">
+                <img data-hf-id="hf-2qng" id="main-06-price-page" src="assets/motion/main-06-price/page.png" width="1440" height="2170" alt="AllPrice pricing workflow illustration" draggable="false">
+              </div>
+              <img data-hf-id="hf-9xy9" id="main-06-price-header" src="assets/motion/main-06-price/header.png" width="1440" height="86" alt="AllPrice navigation" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p data-hf-id="hf-hea8" id="main-06-price-caption" class="clip" data-start="0" data-duration="6" data-track-index="2">See costs and margins before setting a price.</p>
+  </div>
+  <script>
+    (() => {
+      const track = document.getElementById("main-06-price-scroll-track");
+      const cam = { x: 0, y: 0, scale: 1 };
+      const applyCamera = () => {
+        track.style.transform = `translate(${cam.x}px, ${cam.y}px) scale(${cam.scale})`;
+      };
+      applyCamera();
 
+      const tl = gsap.timeline({ paused: true });
+
+      // The crop begins at document Y=4790; track Y is cropTop minus scrollY.
+      // 0.00–0.50: settle the headline at document Y=4840.
+      tl.fromTo(cam,
+        { x: 0, y: 0, scale: 1 },
+        { x: 0, y: -50, scale: 1, duration: 0.5, ease: "power2.inOut", onUpdate: applyCamera },
+        0
+      );
+
+      // 0.50–2.00: approved still reading window for the headline and source CTA.
+      tl.fromTo(cam,
+        { x: 0, y: -50, scale: 1 },
+        { x: 0, y: -50, scale: 1, duration: 1.5, ease: "power2.inOut", immediateRender: false, onUpdate: applyCamera },
+        0.5
+      );
+
+      // 2.00–6.00: traverse the complete illustration and land at document Y=6060.
+      tl.fromTo(cam,
+        { x: 0, y: -50, scale: 1 },
+        { x: 0, y: -1270, scale: 1, duration: 4, ease: "power2.inOut", immediateRender: false, onUpdate: applyCamera },
+        2
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main-06-price"] = tl;
+    })();
+  </script>
+</template>
