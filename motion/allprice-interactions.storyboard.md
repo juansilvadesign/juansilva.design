@@ -60,7 +60,7 @@ wireframes. Dress those layouts; do not redesign them.
 - time: 0–6s
 - poster: 2.7s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/interactions-01-menu.html
 - type: feature_showcase
 - persuasion: Demonstrate an observable response
@@ -115,7 +115,7 @@ Loop continuity: beginning and final sampled frame of this film must be pixel-id
 - time: 6–12s
 - poster: 3.0s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/interactions-02-answer.html
 - type: benefit_highlight
 - persuasion: Remove a specific uncertainty with real interface feedback
@@ -168,7 +168,7 @@ Loop continuity: beginning and final sampled frame of this film must be pixel-id
 - time: 12–16s
 - poster: 1.5s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/interactions-03-return.html
 - blueprint: compose
 - type: branding

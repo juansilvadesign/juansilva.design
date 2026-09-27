@@ -1,41 +1,42 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>One page, two layouts — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
 <style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
+@font-face{font-family:"Lato";src:url("assets/fonts/lato-400-latin.woff2") format("woff2");font-style:normal;font-weight:400;font-display:block}
+@font-face{font-family:"Lato";src:url("assets/fonts/lato-700-latin.woff2") format("woff2");font-style:normal;font-weight:700;font-display:block}
+#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;font-family:"Lato";color:#020817}
+#responsive-01-hero-background{position:absolute;inset:0;background:#fff}
+#responsive-01-hero-stage{position:absolute;inset:0;perspective:2400px;perspective-origin:50% 50%;transform-style:preserve-3d}
+#responsive-01-hero-desktop-position{position:absolute;left:96px;top:291px;width:1215px;height:438.75px;transform-style:preserve-3d}
+#responsive-01-hero-mobile-position{position:absolute;left:1426px;top:98px;width:390px;height:811px;transform-style:preserve-3d}
+.responsive-01-hero-angle{position:absolute;inset:0;transform-origin:50% 50%;transform-style:preserve-3d}
+.responsive-01-hero-mask{position:absolute;inset:0;overflow:hidden;border-radius:12px}
+#responsive-01-hero-desktop-image{display:block;width:1215px;height:438.75px}
+#responsive-01-hero-mobile-image{display:block;width:390px;height:844px}
+.responsive-01-hero-label{position:absolute;height:42px;margin:0;font-size:28px;font-weight:700;line-height:1.2}
+#responsive-01-hero-desktop-label{left:96px;top:183px;width:1215px}
+#responsive-01-hero-mobile-label{left:1426px;top:36px;width:390px}
+#responsive-01-hero-caption{position:absolute;left:96px;top:960px;width:1728px;height:64px;margin:0;color:#234DD7;font-weight:700;font-size:44px;line-height:1.2;text-align:center}
 </style>
-<div data-hf-id="hf-bse6" id="root" data-composition-id="responsive-01-hero" data-width="1920" data-height="1080" data-duration="6">
-<div data-hf-id="hf-6dnx" class="text" style="left:5.0000cqw;top:21.2963cqh;width:63.2813cqw;height:3.8889cqh;font-size:1.4583cqw;font-weight:600">Desktop · 1440px</div>
-<div data-hf-id="hf-gpzd" class="surface" style="left:5.0000cqw;top:26.9444cqh;width:63.2813cqw;height:40.6481cqh">
+<div data-hf-id="hf-bse6" id="root" data-composition-id="responsive-01-hero" data-width="1920" data-height="1080" data-duration="6.3">
+<div data-hf-id="hf-znea" id="responsive-01-hero-background" class="clip" data-start="0" data-duration="6.3" data-track-index="0"></div>
+<div data-hf-id="hf-24lh" id="responsive-01-hero-stage" class="clip" data-start="0" data-duration="6.3" data-track-index="1">
+<div data-hf-id="hf-7abj" id="responsive-01-hero-desktop-position"><div data-hf-id="hf-rkdc" id="responsive-01-hero-desktop-angle" class="responsive-01-hero-angle" data-layout-allow-overflow=""><div data-hf-id="hf-a7k0" class="responsive-01-hero-mask"><img data-hf-id="hf-jxv3" id="responsive-01-hero-desktop-image" src="assets/motion/responsive-01-hero/hero-desktop.png" width="1440" height="520" alt="AllPrice real desktop hero" draggable="false"></div></div></div>
+<div data-hf-id="hf-b24b" id="responsive-01-hero-mobile-position"><div data-hf-id="hf-4p1i" id="responsive-01-hero-mobile-angle" class="responsive-01-hero-angle" data-layout-allow-overflow=""><div data-hf-id="hf-vdmg" class="responsive-01-hero-mask"><img data-hf-id="hf-0fa9" id="responsive-01-hero-mobile-image" src="assets/motion/responsive-01-hero/hero-mobile.png" width="390" height="844" alt="AllPrice real mobile hero" draggable="false"></div></div></div>
 </div>
-<div data-hf-id="hf-9usr" class="text" style="left:6.4583cqw;top:29.2593cqh;width:20.8333cqw;height:4.2593cqh;font-size:1.5625cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-aeqt" class="text" style="left:10.9896cqw;top:37.6852cqh;width:51.4063cqw;height:17.4074cqh;font-size:2.2917cqw;font-weight:650;text-align:center">Precifique, controle seus lucros e acompanhe a saúde do seu e-commerce com praticidade e precisão.</div>
-<div data-hf-id="hf-ntbk" class="block" style="left:14.2188cqw;top:59.6296cqh;width:19.0104cqw;height:5.0000cqh">
-<span data-hf-id="hf-aa75">Quero contratar agora</span>
-</div>
-<div data-hf-id="hf-zyap" class="block" style="left:34.4792cqw;top:59.6296cqh;width:21.0938cqw;height:5.0000cqh">
-<span data-hf-id="hf-3trs">Quero testar 7 dias grátis</span>
-</div>
-<div data-hf-id="hf-ffhh" class="text" style="left:74.2708cqw;top:3.3333cqh;width:20.3125cqw;height:3.8889cqh;font-size:1.4583cqw;font-weight:600">Mobile · 390px</div>
-<div data-hf-id="hf-xbek" class="surface" style="left:74.2708cqw;top:9.0741cqh;width:20.3125cqw;height:75.0926cqh">
-</div>
-<div data-hf-id="hf-1143" class="text" style="left:75.5208cqw;top:11.3889cqh;width:14.0625cqw;height:4.6296cqh;font-size:1.5104cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-1geh" class="text" style="left:91.1979cqw;top:11.3889cqh;width:2.0833cqw;height:4.6296cqh;font-size:1.5625cqw;">☰</div>
-<div data-hf-id="hf-3gp1" class="text" style="left:75.6771cqw;top:20.4630cqh;width:17.5000cqw;height:34.2593cqh;font-size:1.8229cqw;font-weight:650;text-align:center">Precifique, controle seus lucros e acompanhe a saúde do seu e-commerce com praticidade e precisão.</div>
-<div data-hf-id="hf-1cei" class="block" style="left:75.4688cqw;top:60.7407cqh;width:17.9167cqw;height:6.7593cqh">
-<span data-hf-id="hf-ghf9">Quero contratar agora</span>
-</div>
-<div data-hf-id="hf-lcpm" class="block" style="left:75.4688cqw;top:69.3519cqh;width:17.9167cqw;height:9.3519cqh">
-<span data-hf-id="hf-466o">Quero testar 7 dias grátis</span>
-</div>
-<div data-hf-id="hf-uef4" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">One page. Two real layouts.</div>
+<p data-hf-id="hf-fdtg" id="responsive-01-hero-desktop-label" class="clip responsive-01-hero-label" data-start="0" data-duration="6.3" data-track-index="2">Desktop · 1440px</p>
+<p data-hf-id="hf-ihu2" id="responsive-01-hero-mobile-label" class="clip responsive-01-hero-label" data-start="0" data-duration="6.3" data-track-index="3">Mobile · 390px</p>
+<p data-hf-id="hf-egwb" id="responsive-01-hero-caption" class="clip" data-start="0" data-duration="6.3" data-track-index="4">One page. Two real layouts.</p>
 </div>
 <script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["responsive-01-hero"] = tl;
+(()=>{
+const tl=gsap.timeline({paused:true});
+for(const [device,sign] of [['desktop',1],['mobile',-1]]){
+ const angle="#responsive-01-hero-"+device+"-angle";
+ tl.fromTo(angle,{x:0,y:0,z:0,rotationY:4*sign,scale:1,opacity:1},{x:0,y:0,z:0,rotationY:0,scale:1,opacity:1,duration:.9,ease:"power2.inOut"},0);
+ tl.fromTo(angle,{rotationY:0},{rotationY:0,duration:5.1,ease:"none",immediateRender:false},.9);
+}
+tl.fromTo("#responsive-01-hero-desktop-position",{y:0},{y:-47,duration:1.4,ease:"power2.inOut",immediateRender:false},4.6);
+tl.fromTo("#responsive-01-hero-mobile-image",{y:0},{y:-24,duration:1.4,ease:"power2.inOut",immediateRender:false},4.6);
+window.__timelines=window.__timelines||{};window.__timelines["responsive-01-hero"]=tl;
+})();
 </script>
 </template>
-</body></html>
-

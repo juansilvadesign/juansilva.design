@@ -1,0 +1,13 @@
+{
+  "duration": 16,
+  "assertions": [
+    {"kind":"appearsBy","selector":"#remediation-01-intent-caption","bySec":1},
+    {"kind":"appearsBy","selector":"#remediation-02-source-node-instance","bySec":6.9},
+    {"kind":"before","a":"#remediation-02-source-node-group","b":"#remediation-02-source-node-instance"},
+    {"kind":"appearsBy","selector":"#remediation-03-structure-group-4","bySec":10.9},
+    {"kind":"before","a":"#remediation-03-structure-group-1","b":"#remediation-03-structure-group-4"},
+    {"kind":"staysInFrame","selector":"#remediation-03-structure-diagram"},
+    {"kind":"appearsBy","selector":"#remediation-04-return-opening-caption","bySec":15.6},
+    {"kind":"keepsMoving","maxStaticSec":3}
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "original": {
+    "id": "1489:7245",
+    "name": "1-home",
+    "directChildCount": 32,
+    "children": [
+      {
+        "id": "1489:7246",
+        "name": "Group 1000003930",
+        "type": "GROUP"
+      },
+      {
+        "id": "1491:5426",
+        "name": "Group 1000003987",
+        "type": "GROUP"
+      },
+      {
+        "id": "1492:347",
+        "name": "Group 1000003989",
+        "type": "GROUP"
+      },
+      {
+        "id": "1490:221",
+        "name": "Group 1000003985",
+        "type": "GROUP"
+      },
+      {
+        "id": "1489:7249",
+        "name": "Frame 1000003094",
+        "type": "FRAME"
+      },
+      {
+        "id": "1489:7263",
+        "name": "Group 1000003966",
+        "type": "GROUP"
+      },
+      {
+        "id": "1491:5429",
+        "name": "Group 1000003988",
+        "type": "GROUP"
+      },
+      {
+        "id": "1492:350",
+        "name": "Group 1000003990",
+        "type": "GROUP"
+      },
+      {
+        "id": "1495:485",
+        "name": "Group 1000003991",
+        "type": "GROUP"
+      },
+      {
+        "id": "1490:224",
+        "name": "Group 1000003986",
+        "type": "GROUP"
+      },
+      {
+        "id": "1489:7349",
+        "name": "Frame 1",
+        "type": "FRAME"
+      },
+      {
+        "id": "1491:5433",
+        "name": "Frame 13",
+        "type": "FRAME"
+      },
+      {
+        "id": "1542:864",
+        "name": "Frame 1000004472",
+        "type": "FRAME"
+      },
+      {
+        "id": "1489:7432",
+        "name": "Group 1000003918",
+        "type": "GROUP"
+      },
+      {
+        "id": "1489:8019",
+        "name": "Perguntas frequentes",
+        "type": "TEXT"
+      },
+      {
+        "id": "1489:8020",
+        "name": "Aqui você encontra respostas para algumas das perguntas mais comuns sobre nossos serviços e soluções.  Se ainda tiver alguma dúvida ou precisar de informações adicionais, entre em contato com os(a) nossos(as) especialistas no suporte",
+        "type": "TEXT"
+      },
+      {
+        "id": "1489:8087",
+        "name": "Group 1000003984",
+        "type": "GROUP"
+      },
+      {
+        "id": "1489:8090",
+        "name": "Frame 59169",
+        "type": "FRAME"
+      },
+      {
+        "id": "1489:16527",
+        "name": "5-1-dash-dev",
+        "type": "FRAME"
+      },
+      {
+        "id": "1489:8067",
+        "name": "Frame 2",
+        "type": "FRAME"
+      },
+      {
+        "id": "1489:20386",
+        "name": "Frame 1000004468",
+        "type": "FRAME"
+      },
+      {
+        "id": "1492:2390",
+        "name": "Frame 1000004471",
+        "type": "FRAME"
+      },
+      {
+        "id": "1490:231",
+        "name": "package-check",
+        "type": "INSTANCE"
+      },
+      {
+        "id": "1490:246",
+        "name": "Frame 1000003137",
+        "type": "FRAME"
+      },
+      {
+        "id": "1491:4293",
+        "name": "12-0-anuncios",
+        "type": "FRAME"
+      },
+      {
+        "id": "1494:3093",
+        "name": "Group 1000003937",
+        "type": "GROUP"
+      },
+      {
+        "id": "1495:461",
+        "name": "Frame 1000003221",
+        "type": "FRAME"
+      },
+      {
+        "id": "1497:607",
+        "name": "Frame 1000003207",
+        "type": "FRAME"
+      },
+      {
+        "id": "1497:898",
+        "name": "bank-note-03",
+        "type": "INSTANCE"
+      },
+      {
+        "id": "1497:899",
+        "name": "face-wink",
+        "type": "INSTANCE"
+      },
+      {
+        "id": "1497:903",
+        "name": "diamond-01",
+        "type": "INSTANCE"
+      },
+      {
+        "id": "1489:8234",
+        "name": "Group 1000003916",
+        "type": "GROUP"
+      }
+    ]
+  },
+  "optimized": {
+    "id": "1830:1121",
+    "name": "desktop - 1280x832",
+    "directChildCount": 12,
+    "children": [
+      {
+        "id": "1830:1122",
+        "name": "navbar",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1134",
+        "name": "hero",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1146",
+        "name": "banner",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1148",
+        "name": "about",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1181",
+        "name": "section",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1193",
+        "name": "features",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1320",
+        "name": "section",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1331",
+        "name": "section",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1542",
+        "name": "pricing",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1622",
+        "name": "testimonials",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1665",
+        "name": "section",
+        "type": "FRAME"
+      },
+      {
+        "id": "1830:1727",
+        "name": "footer",
+        "type": "FRAME"
+      }
+    ]
+  }
+}

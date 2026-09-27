@@ -4,7 +4,9 @@ const browser=await require('puppeteer-core').launch({headless:true,executablePa
 try{
  const page=await browser.newPage();await page.setViewport({width:1920,height:1080,deviceScaleFactor:1});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto('http://127.0.0.1:3148/api/projects/allprice-showcase/preview/comp/'+(process.argv[2]||'compositions/frames/main-01-clarity.html'),{waitUntil:'networkidle0'});
+ const pending=new Set();page.on('request',r=>pending.add(r.url()));page.on('requestfinished',r=>pending.delete(r.url()));page.on('requestfailed',r=>{pending.delete(r.url());console.log('REQUEST FAILED',r.url(),r.failure()?.errorText);});
+ page.on('console',m=>{if(['error','warning'].includes(m.type()))console.log(m.type(),m.text());});
+ try{await page.goto('http://127.0.0.1:3148/api/projects/allprice-showcase/preview/comp/'+(process.argv[2]||'compositions/frames/main-01-clarity.html'),{waitUntil:'networkidle0',timeout:15000});}catch(e){console.log('NAVIGATION',e.message,'PENDING',[...pending]);}
  console.log(JSON.stringify(await page.evaluate(()=>({title:document.title,roots:[...document.querySelectorAll('[data-composition-id]')].map(e=>({id:e.dataset.compositionId,w:e.getBoundingClientRect().width,h:e.getBoundingClientRect().height})),timelines:Object.entries(window.__timelines||{}).map(([k,v])=>({id:k,duration:v.duration(),children:v.getChildren().length})),runtime:Object.keys(window.__hyperframes||{}),globals:Object.keys(window).filter(k=>/hyper|seek|render|timeline/i.test(k)),images:[...document.images].map(i=>({src:i.getAttribute('src'),decoded:i.complete&&i.naturalWidth>0}))})),null,2));
  console.log(JSON.stringify(await page.evaluate(()=>[...document.scripts].filter(s=>s.textContent.includes('addEventListener')&&s.textContent.includes('message')).map(s=>{const t=s.textContent;return [...t.matchAll(/.{0,100}(?:case .seek.|seekTo|setCurrentTime|data\.type|message\.type|hf-seek|producer:seek).{0,230}/g)].slice(0,28).map(m=>m[0]);})),null,2));
  console.log({errors});

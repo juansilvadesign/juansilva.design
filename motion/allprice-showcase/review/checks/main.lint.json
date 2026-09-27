@@ -1,0 +1,35 @@
+{
+  "film": "main",
+  "mode": "lint",
+  "entry": "./index.html",
+  "sourceHashes": {
+    "index.html": "574c4433b4e9da0140efadf651c3993e5d27eb905f599555e5cf0b00e3062ea5",
+    "index.motion.json": "88b30ce7b4d9bae100c66c5f15e11254d16612a96e065955b0354d205fa99c1a",
+    "compositions/frames/main-01-clarity.html": "6354a5759e7157c378284c57d1119bc41a5e38c8b4c1e5849923cf3d8268793d",
+    "compositions/frames/main-02-overview.html": "f37726d802364ab4726910be122f836b37befac137f2f6c9df183318d8412083",
+    "compositions/frames/main-03-audiences.html": "67d6693077fbc84526cde92ca25472710249e1d454ec4f628b5e81db6260e30a",
+    "compositions/frames/main-04-erp.html": "56893968472b26e15341ccee3c462acbe8353ae62aa453443f351196b2d94615",
+    "compositions/frames/main-05-features.html": "e26a1921838daf5342c45630d2d9e2c7bd0757b0d5f89d8db8e1ed6145076a98",
+    "compositions/frames/main-06-price.html": "b99d98e2d6cb1c0bfe0383884d5a2fe8754c45d300559733cdee3689a424f193",
+    "compositions/frames/main-07-alerts.html": "0fadadb2d347245692bdc91edbd625633b7dfd309d01e732ab6f412db9591034",
+    "compositions/frames/main-08-plans.html": "3d598c5959ce3a7cf576d3c631c0d68a74eb9e83e008ad2a7dd5f62cf05dc4dd",
+    "compositions/frames/main-09-page-continuity.html": "93a2eb06a35f17c4a8a8af4f59270a89098cbe5ef7931b84a57ecf1f95bed3ac",
+    "compositions/frames/main-10-faq.html": "ebac3dacab474f32c82cba469cf6744cbde16401ffdd5f839916ebd3f961d2c0",
+    "compositions/frames/main-11-finish.html": "ea9633b64842a3330059c4e15cc89ab0f259ff51f1f7569cb90b176805af96e7"
+  },
+  "exitCode": 0,
+  "auditMethod": "lint stage of direct full check; browser blocked",
+  "report": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 22,
+    "_meta": {
+      "version": "0.8.43",
+      "latestVersion": "0.8.60",
+      "updateAvailable": true
+    }
+  }
+}

@@ -61,7 +61,7 @@ wireframes. Dress those layouts; do not redesign them.
 - time: 0–6s
 - poster: 2.5s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/responsive-01-hero.html
 - type: hook
 - persuasion: Demonstrate the actual output
@@ -111,7 +111,7 @@ Loop continuity: beginning and final sampled frame of this film must be pixel-id
 - time: 6–12s
 - poster: 3.0s
 - transition_in: crossfade 0.3s
-- status: built
+- status: animated
 - src: compositions/frames/responsive-02-cards.html
 - type: feature_showcase
 - persuasion: Compare the same content at two breakpoints
@@ -164,7 +164,7 @@ Loop continuity: beginning and final sampled frame of this film must be pixel-id
 - time: 12–18s
 - poster: 2.2s
 - transition_in: crossfade 0.3s
-- status: built
+- status: animated
 - src: compositions/frames/responsive-03-plans.html
 - type: benefit_highlight
 - persuasion: Show adaptation in a decision-critical section

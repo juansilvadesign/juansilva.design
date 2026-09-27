@@ -1,0 +1,12 @@
+{
+  "duration": 16,
+  "assertions": [
+    {"kind":"appearsBy","selector":"#interactions-01-menu-mobile-open","bySec":1.3},
+    {"kind":"appearsBy","selector":"#interactions-02-answer-open-icon","bySec":7.5},
+    {"kind":"appearsBy","selector":"#interactions-03-return-opening-caption","bySec":15.3},
+    {"kind":"staysInFrame","selector":"#interactions-01-menu-caption"},
+    {"kind":"staysInFrame","selector":"#interactions-02-answer-caption"},
+    {"kind":"staysInFrame","selector":"#interactions-03-return-opening-caption"},
+    {"kind":"keepsMoving","maxStaticSec":4.8}
+  ]
+}

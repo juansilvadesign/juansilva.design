@@ -1,0 +1,27 @@
+{
+  "film": "interactions",
+  "mode": "lint",
+  "entry": "films/interactions/index.html",
+  "sourceHashes": {
+    "index.html": "041c6d727d898c2e85a51083c50283934a4f54cdccba629df17c1bdd869d012d",
+    "index.motion.json": "41bec4838a80a38311e12f059a195d8b4d72cb8ceffaa148123cba10b7f515f9",
+    "compositions/frames/interactions-01-menu.html": "6f4ad7f45d808bc0ff10c8d29d65aaef6c59e2b15b12e3059043bebdfb22a893",
+    "compositions/frames/interactions-02-answer.html": "961e317499246c9fb8827fe14a78f5cb59170d958bef4883db91b52e4de5c1dc",
+    "compositions/frames/interactions-03-return.html": "9ec81df02c6468f6ab609377755eda361c29b7295de7d2dd8d11802730e7cd01"
+  },
+  "exitCode": 0,
+  "auditMethod": "direct CLI lint",
+  "report": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 22,
+    "_meta": {
+      "version": "0.8.43",
+      "latestVersion": "0.8.60",
+      "updateAvailable": true
+    }
+  }
+}

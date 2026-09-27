@@ -86,7 +86,7 @@ wireframes. Dress those layouts; do not redesign them.
 - time: 0–5s
 - poster: 2.6s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-01-clarity.html
 - blueprint: compose
 - type: hook
@@ -140,7 +140,7 @@ Opening key pose: browser crop 1440×520, positioned at x=96/y=158 by scale=1.2;
 - time: 5–10s
 - poster: 2.0s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-02-overview.html
 - type: product_intro
 - persuasion: Feature-to-value translation
@@ -192,7 +192,7 @@ Scroll timing contract (local seconds → absolute document CSS Y):
 - time: 10–15s
 - poster: 2.0s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-03-audiences.html
 - type: benefit_highlight
 - persuasion: Audience recognition
@@ -245,7 +245,7 @@ Scroll timing contract (local seconds → absolute document CSS Y):
 - time: 15–21s
 - poster: 2.0s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-04-erp.html
 - type: feature_showcase
 - persuasion: Remove a setup objection
@@ -303,7 +303,7 @@ Measured refinement: the first ERP hold is 2640, keeping its heading below the
 - time: 21–28s
 - poster: 4.0s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-05-features.html
 - type: feature_showcase
 - persuasion: Show the breadth through an actual interaction
@@ -363,7 +363,7 @@ Rail timing: x=0 through 1.45; x=-446 at 3.05; hold through 4.15; x=0 at 4.80. O
 - time: 28–34s
 - poster: 1.2s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-06-price.html
 - type: feature_showcase
 - persuasion: Explain the mechanism in the seller's language
@@ -417,7 +417,7 @@ Scroll timing contract (local seconds → absolute document CSS Y):
 - time: 34–38s
 - poster: 1.8s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-07-alerts.html
 - type: benefit_highlight
 - persuasion: Translate monitoring into awareness
@@ -469,7 +469,7 @@ Scroll timing contract (local seconds → absolute document CSS Y):
 - time: 38–44s
 - poster: 2.5s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-08-plans.html
 - type: feature_showcase
 - persuasion: Clarify the choice
@@ -523,7 +523,7 @@ Scroll timing contract (local seconds → absolute document CSS Y):
 - time: 44–47s
 - poster: 1.5s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-09-page-continuity.html
 - blueprint: compose
 - type: feature_showcase
@@ -572,7 +572,7 @@ Scroll timing contract (local seconds → absolute document CSS Y):
 - time: 47–53s
 - poster: 2.7s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-10-faq.html
 - type: benefit_highlight
 - persuasion: Answer a concrete adoption question
@@ -632,7 +632,7 @@ FAQ expansion: 81 CSS px, following rows move by the same amount; close before l
 - time: 53–58s
 - poster: 2.5s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/main-11-finish.html
 - type: branding
 - persuasion: Attribute the visible work precisely

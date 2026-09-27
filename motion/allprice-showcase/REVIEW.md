@@ -1,7 +1,8 @@
-# AllPrice — animation build
+# AllPrice — assembled motion, QA pending
 
-The four storyboards and 21 wireframe layouts are approved. The animation build
-is in progress; the next review will show the assembled, verified motion.
+The four storyboards and 21 wireframe layouts are approved. All 21 scenes are now
+animated and all four timelines are assembled. Static checks pass with no errors
+or warnings. The next review will show the verified assembled motion.
 
 | Film | Length | Scenes |
 | --- | --- | --- |
@@ -16,9 +17,10 @@ The old [sketch gallery](http://localhost:3148/api/projects/allprice-showcase/pr
 documents approved layouts. It is not a completed-video preview; native posters
 may update as real animated scenes replace their sketches.
 
-Final motion review requires clean runtime/layout/motion checks, visual inspection
-of every scene and cut, and matching first/last loop snapshots. Those checks are
-not complete yet. No final video has been rendered.
+Final motion review requires fresh runtime/layout/motion checks, assembled cut
+inspection and matching first/last loop snapshots. These checks are not complete:
+the environment blocks the browser server and approval review has hit a usage
+limit. See [QA notes](QA.md) and [current state](STATUS.md). No video is rendered.
 
 At the next checkpoint: approve the four motion previews for rendering, or name
 the scenes to revise. Rendering approval does not authorize uploads, website

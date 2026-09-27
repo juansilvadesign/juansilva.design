@@ -1,0 +1,27 @@
+{
+  "film": "responsive",
+  "mode": "lint",
+  "entry": "films/responsive/index.html",
+  "sourceHashes": {
+    "index.html": "29f4c259a1ad5684f5babdace07720500fb193d15bbb99423f7c6e05b57de6b0",
+    "index.motion.json": "d639ceca625cea27d4c953fb95290bb25e77c3eebff1ab0e2beed56d29d5a545",
+    "compositions/frames/responsive-01-hero.html": "52569d80ad9ccc581ed1db6f30027818f48416dc09413b1fb9e13ec78adc3b7a",
+    "compositions/frames/responsive-02-cards.html": "c2129ba29a185040b46145fff307d10cb97bc5158ce22723a469480556d4ee64",
+    "compositions/frames/responsive-03-plans.html": "2c755d6d1e6fcd5262f34599e112285ef6153f580d16396ab901db69da141a0b"
+  },
+  "exitCode": 0,
+  "auditMethod": "direct CLI lint",
+  "report": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 22,
+    "_meta": {
+      "version": "0.8.43",
+      "latestVersion": "0.8.60",
+      "updateAvailable": true
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "duration": 18,
+  "assertions": [
+    {"kind":"appearsBy","selector":"#responsive-01-hero-caption","bySec":1},
+    {"kind":"appearsBy","selector":"#responsive-02-cards-caption","bySec":7},
+    {"kind":"appearsBy","selector":"#responsive-03-plans-caption","bySec":13},
+    {"kind":"appearsBy","selector":"#responsive-03-plans-opening-caption","bySec":17.5},
+    {"kind":"staysInFrame","selector":"#responsive-01-hero-caption"},
+    {"kind":"staysInFrame","selector":"#responsive-02-cards-caption"},
+    {"kind":"staysInFrame","selector":"#responsive-03-plans-caption"},
+    {"kind":"keepsMoving","maxStaticSec":4}
+  ]
+}

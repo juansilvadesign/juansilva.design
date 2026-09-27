@@ -1,0 +1,28 @@
+{
+  "film": "remediation",
+  "mode": "lint",
+  "entry": "films/remediation/index.html",
+  "sourceHashes": {
+    "index.html": "924697c3be3bb3c82ba9c13abae4c1c2e972e5bdf3cd742a6f9c05312cf7adba",
+    "index.motion.json": "263d1a34bcab1d090f182a148f9eece4aee8f2fcbe223c49afa379c9216ac60b",
+    "compositions/frames/remediation-01-intent.html": "e30a69de43c6ce4a7ecd5d85be86111019a76910b420870d9eb693545fcf4e76",
+    "compositions/frames/remediation-02-source.html": "96c6ab03e0daeb37a6f1124fd1fe3fbc0995e0b3b4ec7d1eebb11469a866f755",
+    "compositions/frames/remediation-03-structure.html": "df8a7b95821f995ed7ed55b1042eac7373aabd28002e4a740dced6135273ecdd",
+    "compositions/frames/remediation-04-return.html": "39aa6b4864fc724edf283ca001817ee385b8fdaaf66ad95c9f53f87d31bec195"
+  },
+  "exitCode": 0,
+  "auditMethod": "direct CLI lint",
+  "report": {
+    "ok": true,
+    "errorCount": 0,
+    "warningCount": 0,
+    "infoCount": 0,
+    "findings": [],
+    "filesScanned": 22,
+    "_meta": {
+      "version": "0.8.43",
+      "latestVersion": "0.8.60",
+      "updateAvailable": true
+    }
+  }
+}

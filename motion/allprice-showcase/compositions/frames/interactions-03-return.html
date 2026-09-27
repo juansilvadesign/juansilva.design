@@ -1,42 +1,73 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><title>Restore the resting state — wireframe</title></head><body>
 <template>
-<!-- SKETCH ONLY: approved story, layout awaiting review. Plain stand-ins; no motion. -->
 <style>
-#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;background:#FFFFFF;color:#020817;font-family:ui-sans-serif,system-ui,sans-serif}
-*{box-sizing:border-box}.text,.block,.surface,.line,.rail{position:absolute}.text{line-height:1.23;overflow-wrap:normal}.surface{border:1px solid rgba(2,8,23,.28)}.block{display:flex;align-items:center;justify-content:center;text-align:center;padding:1cqw;background:rgba(2,8,23,.035);border:1px solid rgba(2,8,23,.22);font-size:1.5cqw;line-height:1.25}.focal{border:2px solid #234DD7}.line{background:rgba(2,8,23,.18)}.rail{overflow:hidden}
+@font-face{font-family:"Lato";src:url("assets/fonts/lato-400-latin.woff2") format("woff2");font-style:normal;font-weight:400;font-display:block}
+@font-face{font-family:"Lato";src:url("assets/fonts/lato-700-latin.woff2") format("woff2");font-style:normal;font-weight:700;font-display:block}
+#root{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;container-type:size;font-family:"Lato";color:#020817}
+#interactions-03-return-background{position:absolute;inset:0;background:#fff}
+#interactions-03-return-stage{position:absolute;inset:0}
+#interactions-03-return-mobile-viewport{position:absolute;left:104px;top:93px;width:390px;height:811px;overflow:hidden;border-radius:12px}
+.interactions-03-return-mobile{position:absolute;left:0;top:0;display:block;width:390px;height:844px}
+#interactions-03-return-desktop-viewport{position:absolute;left:622px;top:93px;width:1194px;height:811px;overflow:hidden;border-radius:12px}
+#interactions-03-return-desktop-scale{position:absolute;left:0;top:0;width:1440px;height:978.0904522613px;transform-origin:0 0}
+.interactions-03-return-faq{position:absolute;left:0;display:block;width:1440px}
+#interactions-03-return-faq-top{top:0;height:568px} #interactions-03-return-answer{top:568px;height:81px} #interactions-03-return-faq-tail{top:568px;height:411px}
+#interactions-03-return-open-icon{position:absolute;left:1211px;top:514px;display:block;width:36px;height:36px}
+#interactions-03-return-header{top:0;height:86px;z-index:3}
+#interactions-03-return-cursor{position:absolute;left:0;top:0;width:28px;height:40px;transform-origin:0 0;pointer-events:none;z-index:10}
+#interactions-03-return-cursor svg{display:block;overflow:visible}
+.interactions-03-return-pulse{position:absolute;width:24px;height:24px;box-sizing:border-box;border:2px solid #234DD7;border-radius:50%;pointer-events:none;z-index:9}
+#interactions-03-return-open-pulse{left:448px;top:119px} #interactions-03-return-close-pulse{left:448px;top:195px}
+#interactions-03-return-faq-pulse{left:1629.0458333333px;top:522.1166666667px}
+.interactions-03-return-caption{position:absolute;left:96px;top:960px;width:1728px;height:64px;margin:0;color:#234DD7;font-weight:700;font-size:44px;line-height:1.2;text-align:center}
+#interactions-03-return-opening-caption{opacity:0}
+.interactions-03-return-pulse{opacity:0}
 </style>
 <div data-hf-id="hf-w2wr" id="root" data-composition-id="interactions-03-return" data-width="1920" data-height="1080" data-duration="4">
-<div data-hf-id="hf-kw7x" class="surface" style="left:5.4167cqw;top:8.6111cqh;width:20.3125cqw;height:75.0926cqh">
+<div data-hf-id="hf-rl87" id="interactions-03-return-background" class="clip" data-start="0" data-duration="4" data-track-index="0"></div>
+<div data-hf-id="hf-ipfm" id="interactions-03-return-stage" class="clip" data-start="0" data-duration="4" data-track-index="1">
+<div data-hf-id="hf-0xy5" id="interactions-03-return-mobile-viewport"><img data-hf-id="hf-9v2g" id="interactions-03-return-mobile-closed" class="interactions-03-return-mobile" src="assets/motion/interactions-03-return/mobile-closed.png" width="390" height="844" alt="Captured mobile landing page" draggable="false"></div>
+<div data-hf-id="hf-rl7f" id="interactions-03-return-desktop-viewport"><div data-hf-id="hf-aipl" id="interactions-03-return-desktop-scale">
+<img data-hf-id="hf-8g4y" id="interactions-03-return-faq-top" class="interactions-03-return-faq" src="assets/motion/interactions-03-return/faq-top.png" width="1440" height="568" alt="Real AllPrice FAQ" draggable="false">
+<img data-hf-id="hf-6umq" id="interactions-03-return-answer" class="interactions-03-return-faq" src="assets/motion/interactions-03-return/answer.png" width="1440" height="81" alt="Actual answer explaining no ERP is required" draggable="false">
+<img data-hf-id="hf-otn4" id="interactions-03-return-faq-tail" class="interactions-03-return-faq" src="assets/motion/interactions-03-return/faq-tail.png" width="1440" height="411" alt="Remaining real questions" draggable="false">
+<img data-hf-id="hf-tywy" id="interactions-03-return-open-icon" src="assets/motion/interactions-03-return/open-icon.png" width="36" height="36" alt="" draggable="false">
+<img data-hf-id="hf-b08r" id="interactions-03-return-header" class="interactions-03-return-faq" src="assets/motion/interactions-03-return/header.png" width="1440" height="86" alt="AllPrice navigation" draggable="false">
+</div></div>
+<div data-hf-id="hf-3i98" id="interactions-03-return-open-pulse" class="interactions-03-return-pulse" aria-hidden="true"></div>
+<div data-hf-id="hf-9b8o" id="interactions-03-return-close-pulse" class="interactions-03-return-pulse" aria-hidden="true"></div>
+<div data-hf-id="hf-5xak" id="interactions-03-return-faq-pulse" class="interactions-03-return-pulse" aria-hidden="true"></div>
+<div data-hf-id="hf-5gn7" id="interactions-03-return-cursor" aria-hidden="true"><svg data-hf-id="hf-458a" width="28" height="40" viewBox="0 0 28 40" xmlns="http://www.w3.org/2000/svg"><path data-hf-id="hf-gzot" d="M0 0 L0 29 L7.6 22.2 L14.3 37 L20 34.3 L13.2 20 L25 19 Z" fill="#FFFFFF" stroke="#020817" stroke-width="1.7" stroke-linejoin="round" /></svg></div>
 </div>
-<div data-hf-id="hf-icml" class="text" style="left:6.6667cqw;top:10.9259cqh;width:14.0625cqw;height:4.6296cqh;font-size:1.5104cqw;font-weight:650">allprice</div>
-<div data-hf-id="hf-8v81" class="text" style="left:22.3438cqw;top:10.9259cqh;width:2.0833cqw;height:4.6296cqh;font-size:1.5625cqw;">☰</div>
-<div data-hf-id="hf-ww9w" class="text" style="left:6.8229cqw;top:20.0000cqh;width:17.5000cqw;height:34.2593cqh;font-size:1.8229cqw;font-weight:650;text-align:center">Precifique, controle seus lucros e acompanhe a saúde do seu e-commerce com praticidade e precisão.</div>
-<div data-hf-id="hf-2c75" class="block" style="left:6.6146cqw;top:60.2778cqh;width:17.9167cqw;height:6.7593cqh">
-<span data-hf-id="hf-aa75">Quero contratar agora</span>
+<div data-hf-id="hf-sfv2" id="interactions-03-return-copy" class="clip" data-start="0" data-duration="4" data-track-index="2">
+<p data-hf-id="hf-2nal" id="interactions-03-return-caption" class="interactions-03-return-caption" data-layout-allow-overlap="">Built to explore.</p><p data-hf-id="hf-1fpy" id="interactions-03-return-opening-caption" class="interactions-03-return-caption" data-layout-allow-overlap="">Navigation, when you need it.</p>
 </div>
-<div data-hf-id="hf-moof" class="block" style="left:6.6146cqw;top:68.8889cqh;width:17.9167cqw;height:9.3519cqh">
-<span data-hf-id="hf-3trs">Quero testar 7 dias grátis</span>
-</div>
-<div data-hf-id="hf-wty2" class="surface" style="left:32.3958cqw;top:8.6111cqh;width:62.1875cqw;height:75.0926cqh">
-</div>
-<div data-hf-id="hf-ook3" class="text" style="left:35.8333cqw;top:11.7593cqh;width:55.3125cqw;height:6.8519cqh;font-size:2.0833cqw;text-align:center;font-weight:650">Perguntas frequentes</div>
-<div data-hf-id="hf-3948" class="line" style="left:44.1302cqw;top:20.2778cqh;width:38.7188cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-s5fc" class="line" style="left:44.1302cqw;top:22.5000cqh;width:27.1031cqw;height:0.4630cqh">
-</div>
-<div data-hf-id="hf-9yrm" class="text" style="left:35.8333cqw;top:30.0926cqh;width:55.3125cqw;height:5.7407cqh;font-size:1.3542cqw;font-weight:600">1. Para quem, exatamente, é o All Price?     +</div>
-<div data-hf-id="hf-koyz" class="block" style="left:34.8958cqw;top:36.4815cqh;width:57.1875cqw;height:7.0370cqh">
-</div>
-<div data-hf-id="hf-jc2a" class="text" style="left:35.8333cqw;top:38.2407cqh;width:55.3125cqw;height:5.0000cqh;font-size:1.3542cqw;font-weight:650">2. Preciso ter um ERP para usar?     +</div>
-<div data-hf-id="hf-3dk5" class="text" style="left:35.8333cqw;top:48.2407cqh;width:55.3125cqw;height:6.2963cqh;font-size:1.3542cqw;font-weight:600">3. Quais marketplaces e ERPs o All Price integra?     +</div>
-<div data-hf-id="hf-kiv0" class="text" style="left:35.8333cqw;top:57.6852cqh;width:55.3125cqw;height:6.2963cqh;font-size:1.3542cqw;font-weight:600">4. Como o sistema calcula o preço de venda?     +</div>
-<div data-hf-id="hf-cwwq" class="text" style="left:5.0000cqw;top:88.8889cqh;width:90.0000cqw;height:5.9259cqh;font-size:2.2917cqw;font-weight:650;text-align:center;color:#234DD7">Built to explore.</div>
 </div>
 <script>
-const tl = gsap.timeline({ paused: true });
-window.__timelines["interactions-03-return"] = tl;
+(()=>{
+const tl=gsap.timeline({paused:true}),cursor="#interactions-03-return-cursor";
+tl.set("#interactions-03-return-desktop-scale",{scale:1194/1440},0);
+tl.set(["#interactions-03-return-open-pulse","#interactions-03-return-close-pulse","#interactions-03-return-faq-pulse"],{opacity:0,scale:0},0);
+function click(at,ring){
+ tl.fromTo(cursor,{scale:1},{scale:.86,duration:.08,ease:"power2.in",immediateRender:false},at-.08);
+ tl.fromTo(cursor,{scale:.86},{scale:1,duration:.1,ease:"power2.out",immediateRender:false},at);
+ tl.fromTo(ring,{scale:.35,opacity:.48},{scale:2.4,opacity:0,duration:.45,ease:"power2.out",immediateRender:false},at);
+}
+
+const parts=["#interactions-03-return-answer","#interactions-03-return-faq-tail","#interactions-03-return-open-icon"];
+const closedClip=i=>i===0?"inset(0% 0% 100% 0%)":"inset(0% 0% 0% 0%)";
+const closedOpacity=i=>i===2?0:1,expandedY=i=>i===1?81:0;
+tl.set(parts,{y:expandedY,clipPath:"inset(0% 0% 0% 0%)",opacity:1},0);
+tl.set(cursor,{x:1641.0458333333,y:534.1166666667,opacity:1,scale:1},0);
+tl.set("#interactions-03-return-opening-caption",{opacity:0},0);
+click(.2,"#interactions-03-return-faq-pulse");
+tl.fromTo(parts,{y:expandedY,clipPath:"inset(0% 0% 0% 0%)",opacity:1},{y:0,clipPath:closedClip,opacity:closedOpacity,duration:.35,ease:"power3.in",immediateRender:false},.25);
+tl.fromTo("#interactions-03-return-faq-tail",{y:0},{y:0,duration:3.4,ease:"none",immediateRender:false},.6);
+tl.fromTo(cursor,{opacity:1},{opacity:0,duration:.2,ease:"power2.out",immediateRender:false},.65);
+tl.fromTo(cursor,{x:1641.0458333333,y:534.1166666667},{x:350,y:270,duration:4-1/60-2.65,ease:"power2.inOut",immediateRender:false},2.65);
+tl.fromTo("#interactions-03-return-caption",{opacity:1},{opacity:0,duration:.55,ease:"power2.inOut",immediateRender:false},2.65);
+tl.fromTo("#interactions-03-return-opening-caption",{opacity:0},{opacity:1,duration:.55,ease:"power2.inOut",immediateRender:false},2.65);
+
+window.__timelines=window.__timelines||{};window.__timelines["interactions-03-return"]=tl;
+})();
 </script>
 </template>
-</body></html>
-

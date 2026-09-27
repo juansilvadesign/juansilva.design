@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "npx --yes hyperframes@0.8.43 preview",
     "check": "npx --yes hyperframes@0.8.43 check",
+    "check:all": "node scripts/check-films.mjs",
+    "lint:all": "node scripts/check-films.mjs --lint",
     "render": "npx --yes hyperframes@0.8.43 render",
     "publish": "npx --yes hyperframes@0.8.43 publish"
   }

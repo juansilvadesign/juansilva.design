@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" data-resolution="landscape">
+<!doctype html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=1920, height=1080">
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
     <style>
       * {
         margin: 0;
@@ -12,37 +12,151 @@
       }
       html,
       body {
-        margin: 0;
         width: 1920px;
         height: 1080px;
         overflow: hidden;
-        background: #0a0a0a;
+        background: #000;
       }
       #root {
+        position: relative;
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        overflow: hidden;
+        background: #FFFFFF;
       }
-      #title {
-        color: #f4f4f5;
-        font-size: 72px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
+      .scene {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
   <body>
-    <div data-hf-id="hf-199x" id="root" data-composition-id="main" data-start="0" data-duration="10" data-width="1920" data-height="1080">
-      <h1 data-hf-id="hf-v7pl" id="title" class="clip" data-start="0" data-duration="10" data-track-index="0">Title</h1>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="58"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div
+        id="el-main-01-clarity"
+        class="scene"
+        data-composition-id="main-01-clarity"
+        data-composition-src="compositions/frames/main-01-clarity.html"
+        data-start="0"
+        data-duration="5"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-02-overview"
+        class="scene"
+        data-composition-id="main-02-overview"
+        data-composition-src="compositions/frames/main-02-overview.html"
+        data-start="5"
+        data-duration="5"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-03-audiences"
+        class="scene"
+        data-composition-id="main-03-audiences"
+        data-composition-src="compositions/frames/main-03-audiences.html"
+        data-start="10"
+        data-duration="5"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-04-erp"
+        class="scene"
+        data-composition-id="main-04-erp"
+        data-composition-src="compositions/frames/main-04-erp.html"
+        data-start="15"
+        data-duration="6"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-05-features"
+        class="scene"
+        data-composition-id="main-05-features"
+        data-composition-src="compositions/frames/main-05-features.html"
+        data-start="21"
+        data-duration="7"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-06-price"
+        class="scene"
+        data-composition-id="main-06-price"
+        data-composition-src="compositions/frames/main-06-price.html"
+        data-start="28"
+        data-duration="6"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-07-alerts"
+        class="scene"
+        data-composition-id="main-07-alerts"
+        data-composition-src="compositions/frames/main-07-alerts.html"
+        data-start="34"
+        data-duration="4"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-08-plans"
+        class="scene"
+        data-composition-id="main-08-plans"
+        data-composition-src="compositions/frames/main-08-plans.html"
+        data-start="38"
+        data-duration="6"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-09-page-continuity"
+        class="scene"
+        data-composition-id="main-09-page-continuity"
+        data-composition-src="compositions/frames/main-09-page-continuity.html"
+        data-start="44"
+        data-duration="3"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-10-faq"
+        class="scene"
+        data-composition-id="main-10-faq"
+        data-composition-src="compositions/frames/main-10-faq.html"
+        data-start="47"
+        data-duration="6"
+        data-track-index="1"
+      ></div>
+
+      <div
+        id="el-main-11-finish"
+        class="scene"
+        data-composition-id="main-11-finish"
+        data-composition-src="compositions/frames/main-11-finish.html"
+        data-start="53"
+        data-duration="5"
+        data-track-index="1"
+      ></div>
+
     </div>
+
     <script>
-      const tl = gsap.timeline({ paused: true });
-      // Example: tl.fromTo("#title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0);
-      window.__timelines["main"] = tl;
-      tl.seek(0);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+      window.__timelines["main"].to({}, {duration:58}, 0); // master clock; child timelines own visual motion
     </script>
   </body>
 </html>

@@ -1,0 +1,28 @@
+{
+  "duration": 58,
+  "assertions": [
+    {"kind":"appearsBy","selector":"#main-01-clarity-caption","bySec":1},
+    {"kind":"appearsBy","selector":"#main-02-overview-caption","bySec":6},
+    {"kind":"appearsBy","selector":"#main-03-audiences-caption","bySec":11},
+    {"kind":"appearsBy","selector":"#main-04-erp-caption","bySec":16},
+    {"kind":"appearsBy","selector":"#main-05-features-caption","bySec":22},
+    {"kind":"appearsBy","selector":"#main-06-price-caption","bySec":29},
+    {"kind":"appearsBy","selector":"#main-07-alerts-caption","bySec":35},
+    {"kind":"appearsBy","selector":"#main-08-plans-caption","bySec":39},
+    {"kind":"appearsBy","selector":"#main-09-page-continuity-caption","bySec":45},
+    {"kind":"appearsBy","selector":"#main-10-faq-caption","bySec":48},
+    {"kind":"appearsBy","selector":"#main-11-finish-caption","bySec":54},
+    {"kind":"staysInFrame","selector":"#main-01-clarity-caption"},
+    {"kind":"staysInFrame","selector":"#main-02-overview-caption"},
+    {"kind":"staysInFrame","selector":"#main-03-audiences-caption"},
+    {"kind":"staysInFrame","selector":"#main-04-erp-caption"},
+    {"kind":"staysInFrame","selector":"#main-05-features-caption"},
+    {"kind":"staysInFrame","selector":"#main-06-price-caption"},
+    {"kind":"staysInFrame","selector":"#main-07-alerts-caption"},
+    {"kind":"staysInFrame","selector":"#main-08-plans-caption"},
+    {"kind":"staysInFrame","selector":"#main-09-page-continuity-caption"},
+    {"kind":"staysInFrame","selector":"#main-10-faq-caption"},
+    {"kind":"staysInFrame","selector":"#main-11-finish-caption"},
+    {"kind":"keepsMoving","maxStaticSec":4}
+  ]
+}

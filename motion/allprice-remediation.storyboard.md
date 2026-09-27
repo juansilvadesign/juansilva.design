@@ -64,7 +64,7 @@ wireframes. Dress those layouts; do not redesign them.
 - time: 0–4s
 - poster: 2.0s
 - transition_in: cut
-- status: built
+- status: animated
 - src: compositions/frames/remediation-01-intent.html
 - type: hook
 - persuasion: Show continuity instead of exaggerating a visual makeover
@@ -114,7 +114,7 @@ Loop continuity: beginning and final sampled frame of this film must be pixel-id
 - time: 4–8s
 - poster: 2.0s
 - transition_in: crossfade 0.25s
-- status: built
+- status: animated
 - src: compositions/frames/remediation-02-source.html
 - blueprint: compose
 - type: feature_showcase
@@ -165,7 +165,7 @@ Loop continuity: beginning and final sampled frame of this film must be pixel-id
 - time: 8–12s
 - poster: 2.0s
 - transition_in: crossfade 0.25s
-- status: built
+- status: animated
 - src: compositions/frames/remediation-03-structure.html
 - type: benefit_highlight
 - persuasion: Make the remediation observable
@@ -216,7 +216,7 @@ Loop continuity: beginning and final sampled frame of this film must be pixel-id
 - time: 12–16s
 - poster: 1.5s
 - transition_in: crossfade 0.25s
-- status: built
+- status: animated
 - src: compositions/frames/remediation-04-return.html
 - type: branding
 - persuasion: Connect structural work to the delivered frontend
