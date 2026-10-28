@@ -53,7 +53,7 @@ export const en = {
     typeLead: "Design Engineer.",
     typeRotating: ["Next.js", "Python", "scalable growth automations"],
     introduction:
-      "Available for US agency overflow and contract engineering. Rio runs one hour ahead of US Eastern — 100% synchronous overlap.",
+      "Available for US agency overflow and contract engineering. Rio runs one to two hours ahead of US Eastern, all year — 100% synchronous overlap.",
     emailCta: "Get in Touch",
     emailAriaLabel: "Get in Touch, send Juan Silva an email",
     linkedInCta: "LinkedIn",

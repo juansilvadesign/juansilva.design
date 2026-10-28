@@ -50,7 +50,7 @@ export const pt = {
     typeLead: "Engenheiro de Design.",
     typeRotating: ["Next.js", "Python", "automação de crescimento"],
     introduction:
-      "Disponível para apoiar agências dos EUA e projetos por contrato. O Rio está uma hora à frente do horário do leste dos EUA — 100% de sobreposição síncrona.",
+      "Disponível para apoiar agências dos EUA e projetos por contrato. O Rio está de uma a duas horas à frente do horário do leste dos EUA, o ano todo — 100% de sobreposição síncrona.",
     emailCta: "Entre em contato",
     emailAriaLabel: "Entre em contato, envie um e-mail para Juan Silva",
     linkedInCta: "LinkedIn",
