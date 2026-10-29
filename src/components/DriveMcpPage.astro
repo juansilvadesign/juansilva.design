@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contact } from "../data/contact";
+import { driveMcpCopy } from "../data/drive-mcp";
+import { localizedPath, pageTitle, t, type Locale } from "../i18n";
+
+interface Props {
+  lang: Locale;
+  kind: "home" | "privacy";
+}
+
+const { lang, kind } = Astro.props;
+const copy = driveMcpCopy[lang];
+const page = copy[kind];
+const canonicalPath = kind === "home" ? "/apps/drive-mcp/" : "/apps/drive-mcp/privacy/";
+---
+
+<BaseLayout
+  {lang}
+  title={pageTitle(page.title, lang)}
+  description={page.description}
+  {canonicalPath}
+>
+  <main id="main-content" class="legal-page">
+    <article class="legal-page__document">
+      <h1><span class="shiny-text">{page.title}</span></h1>
+      <p class="legal-page__updated">
+        {t(lang).legal.lastUpdated}: <time datetime="2026-10-29">{copy.updated}</time>
+      </p>
+
+      <div class="legal-page__content">
+        {page.sections.map((section) => (
+          <section>
+            <h2>{section.title}</h2>
+            {section.blocks.map((block) =>
+              block.type === "paragraph" ? (
+                <p>
+                  {block.parts.map((part) =>
+                    typeof part === "string" ? part
+                    : "code" in part ? <code>{part.code}</code>
+                    : "strong" in part ? <strong>{part.strong}</strong>
+                    : "link" in part ? <a href={localizedPath(part.path, lang)}>{part.link}</a>
+                    : "external" in part ? <a href={part.href} target="_blank" rel="noopener noreferrer">{part.external}</a>
+                    : <a href={`mailto:${contact.email}`}>{contact.email}</a>,
+                  )}
+                </p>
+              ) : (
+                <ul>
+                  {block.items.map((item) => (
+                    <li>
+                      {item.map((part) =>
+                        typeof part === "string" ? part
+                        : "code" in part ? <code>{part.code}</code>
+                        : "strong" in part ? <strong>{part.strong}</strong>
+                        : "link" in part ? <a href={localizedPath(part.path, lang)}>{part.link}</a>
+                        : "external" in part ? <a href={part.href} target="_blank" rel="noopener noreferrer">{part.external}</a>
+                        : <a href={`mailto:${contact.email}`}>{contact.email}</a>,
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              ),
+            )}
+          </section>
+        ))}
+        {page.closing && <p><small>{page.closing}</small></p>}
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    min-height: var(--viewport-height);
+    padding: var(--space-px-128) var(--space-px-24) var(--space-px-64);
+  }
+
+  .legal-page__document {
+    max-width: var(--content-legal);
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin-bottom: var(--space-px-32);
+    font-size: var(--text-36);
+    line-height: var(--leading-48);
+  }
+
+  .legal-page__updated {
+    margin-bottom: var(--space-px-24);
+    color: var(--text-secondary);
+  }
+
+  .legal-page__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-px-24);
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-px-12);
+  }
+
+  h2 {
+    font-size: var(--text-24);
+    line-height: var(--leading-32);
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-px-8);
+    padding-left: var(--space-px-24);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-leading);
+  }
+
+  @media (min-width: 768px) {
+    .legal-page {
+      padding-right: var(--space-px-96);
+      padding-left: var(--space-px-96);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .legal-page {
+      padding-right: var(--space-px-128);
+      padding-left: var(--space-px-128);
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .legal-page {
+      padding-right: var(--section-padding-wide);
+      padding-left: var(--section-padding-wide);
+    }
+  }
+</style>
