@@ -1,6 +1,14 @@
 # Safer defaults
 Options -Multiviews
 
+# No directory listings (2026-10-29). A folder without an index.html answered
+# with LiteSpeed's "Index of" page: /_astro/, /apps/, /pt/apps/, /.well-known/
+# and /.well-known/acme-challenge/. They answer 403 now; files inside them,
+# AutoSSL's challenge files included, are served as before. Options merge down
+# the tree, so /pt/ is covered too (its .htaccess sets no Options). Proven on
+# this server before shipping: another docroot here serves with the same line.
+Options -Indexes
+
 # Performance Headers
 <IfModule mod_headers.c>
   # Enable GZIP compression
