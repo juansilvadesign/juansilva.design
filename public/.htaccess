@@ -85,7 +85,7 @@ RewriteBase /
 # Using THE_REQUEST ensures internal subrequests (like 404 ErrorDocument) don't override the exemption.
 RewriteCond %{THE_REQUEST} !^[A-Z]+\s+/\.well-known/ [NC]
 RewriteCond %{REQUEST_URI} !^/\.well-known/ [NC]
-RewriteCond %{HTTP:X-Origin-Verification} !^a7cf7183000d0ee2213a76989c69293da2a9f8e7e8d16cbd1be4af5b6f5e5921$
+RewriteCond %{HTTP:X-Origin-Verification} !^__ORIGIN_HEADER_SECRET__$
 RewriteRule ^ - [F,L]
 
 # Assets offloaded to Cloudflare R2 CDN

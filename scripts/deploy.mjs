@@ -31,13 +31,13 @@
 // Flags: --verbose (log the FTP protocol)  --force (ignore the process-quota gate)
 
 import { execFileSync } from "node:child_process";
-import { createHash } from "node:crypto";
-import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, dirname, resolve, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
+const ORIGIN_HEADER_PLACEHOLDER = "__ORIGIN_HEADER_SECRET__";
 
 // --- config -----------------------------------------------------------------
 // Lives in .env.deploy (gitignored). The repo is public; nothing here is inlined.
@@ -62,6 +62,8 @@ const FTP_PASS = env.CPANEL_FTP_PASSWORD || env.CPANEL_FTP_PASS || "";
 const required = ["CPANEL_FTP_HOST", "CPANEL_FTP_PORT", "CPANEL_FTP_USER", "CPANEL_DOCROOT"];
 const missing = required.filter((k) => !env[k]);
 if (!FTP_PASS) missing.push("CPANEL_FTP_PASSWORD");
+const ORIGIN_HEADER_SECRET = env.ORIGIN_HEADER_SECRET || "";
+if (!ORIGIN_HEADER_SECRET.trim()) missing.push("ORIGIN_HEADER_SECRET");
 
 const SITE = env.SITE_ORIGIN || "https://juanpablosilva.com.br";
 const WWW = env.SITE_WWW_ORIGIN || "https://www.juanpablosilva.com.br";
@@ -111,14 +113,37 @@ function curl(url, args = []) {
   }
 }
 
-const sha256 = (path) => createHash("sha256").update(readFileSync(path)).digest("hex");
-
 function countFiles(dir) {
   let n = 0;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     n += entry.isDirectory() ? countFiles(join(dir, entry.name)) : 1;
   }
   return n;
+}
+
+function renderOriginHeaderSecret() {
+  const srcHt = join(ROOT, "public", ".htaccess");
+  const distHt = join(DIST, ".htaccess");
+  if (!existsSync(distHt)) return; // assertDist reports the missing build artifact.
+
+  const source = readFileSync(srcHt, "utf8");
+  const built = readFileSync(distHt, "utf8");
+  if (!check(source.split(ORIGIN_HEADER_PLACEHOLDER).length === 2,
+    "source .htaccess has exactly one origin header placeholder")) return;
+  if (!check(built === source, "build copied .htaccess byte-for-byte before secret substitution")) return;
+
+  writeFileSync(distHt, source.replace(ORIGIN_HEADER_PLACEHOLDER, ORIGIN_HEADER_SECRET));
+}
+
+function findUnrenderedPlaceholders(dir, prefix = "") {
+  const found = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) found.push(...findUnrenderedPlaceholders(path, rel));
+    else if (entry.isFile() && readFileSync(path).includes(ORIGIN_HEADER_PLACEHOLDER)) found.push(rel);
+  }
+  return found;
 }
 
 // --- stage 1: assert the artifact before it goes anywhere -------------------
@@ -139,9 +164,9 @@ function assertDist() {
   const srcHt = join(ROOT, "public", ".htaccess");
   if (check(existsSync(distHt), ".htaccess present in dist/", ".htaccess MISSING from dist/ — production loses CSP + security headers + 404")) {
     check(
-      sha256(distHt) === sha256(srcHt),
-      ".htaccess byte-identical to public/.htaccess",
-      ".htaccess DIFFERS from public/.htaccess"
+      readFileSync(distHt, "utf8") === readFileSync(srcHt, "utf8").replace(ORIGIN_HEADER_PLACEHOLDER, ORIGIN_HEADER_SECRET),
+      ".htaccess matches public/.htaccess with the origin header secret substituted",
+      ".htaccess does NOT match the rendered public/.htaccess"
     );
     const ht = readFileSync(distHt, "utf8");
     // Old CSP + new form action = every submit silently blocked. They ship together.
@@ -153,6 +178,10 @@ function assertDist() {
     check(ht.includes("ErrorDocument 404 /404.html"), "ErrorDocument 404 wired to the Astro 404 page");
     check(!/^\s*<\/IfModule>\s*$/m.test(ht.split("<IfModule")[0] ?? ""), "no orphan </IfModule> before the first block");
   }
+
+  const unrendered = findUnrenderedPlaceholders(DIST);
+  check(unrendered.length === 0, "no origin header placeholder in dist/",
+    `origin header placeholder remains in dist/: ${unrendered.join(", ")}`);
 
   // The contact form, on both locales. A rebuild without the gitignored .env
   // silently produces a page with a DISABLED submit button.
@@ -723,7 +752,12 @@ const mode = process.argv.includes("--status") ? "status" : process.argv.include
 
 if (mode !== "status" && missing.length) {
   console.error(`\nMissing deploy config: ${missing.join(", ")}`);
-  console.error("Copy .env.deploy.example to .env.deploy and fill it in (gitignored).\n");
+  console.error("Copy .env.deploy.example to .env.deploy and fill it in (gitignored). Nothing was uploaded.\n");
+  process.exit(1);
+}
+
+if (mode !== "status" && !/^[A-Za-z0-9_-]{32,}$/.test(ORIGIN_HEADER_SECRET)) {
+  console.error("\nInvalid ORIGIN_HEADER_SECRET: use at least 32 URL-safe letters, digits, _ or -. Nothing was uploaded.\n");
   process.exit(1);
 }
 
@@ -732,12 +766,15 @@ if (mode === "status") {
   verifyPublic(null);
 } else {
   head("Building");
+  const buildEnv = { ...process.env, ...env };
+  delete buildEnv.ORIGIN_HEADER_SECRET; // Only the deployment renderer needs this value.
   execFileSync("npx", ["astro", "build"], {
     cwd: ROOT,
     stdio: "inherit",
-    env: { ...process.env, ...env },
+    env: buildEnv,
   });
 
+  renderOriginHeaderSecret();
   assertDist();
   if (failures) {
     console.error(`\n\x1b[31mAborted: ${failures} assertion(s) failed. Nothing was uploaded.\x1b[0m\n`);
