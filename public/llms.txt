@@ -1,0 +1,23 @@
+# Juan Silva — Design Engineer
+
+> Design Engineer for US agency overflow and contract engineering — Next.js/TypeScript frontends, Python/FastAPI backends, and n8n growth automation. Based in Rio de Janeiro, working US Eastern hours.
+
+## Pages
+
+- [Home](https://juanpablosilva.com.br/)
+- [Projects](https://juanpablosilva.com.br/projects/): case studies
+- [Contact](https://juanpablosilva.com.br/contact/)
+- [Resume (PDF)](https://juanpablosilva.com.br/juan-silva-resume.pdf)
+- [Português](https://juanpablosilva.com.br/pt/): Portuguese version
+
+## Case studies
+
+- [PsiAtiva AI operations](https://juanpablosilva.com.br/projects/psiativa-ai-operations/)
+- [SYD](https://juanpablosilva.com.br/projects/syd/)
+- [UPOS](https://juanpablosilva.com.br/projects/upos/)
+
+## Optional
+
+- [Privacy policy](https://juanpablosilva.com.br/privacy-policy/)
+- [Terms of use](https://juanpablosilva.com.br/terms-of-use/)
+- [Cookies](https://juanpablosilva.com.br/cookies/)
